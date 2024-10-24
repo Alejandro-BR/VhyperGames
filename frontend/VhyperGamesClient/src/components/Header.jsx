@@ -6,7 +6,7 @@ function Header() {
     return (
         <>
             <div class="Header">
-                <img class="logo" src="logo" alt="Logo" />
+                <img class="logo" src="..\assets\react.svg" alt="Logo" />
             </div>
         </>
     );
