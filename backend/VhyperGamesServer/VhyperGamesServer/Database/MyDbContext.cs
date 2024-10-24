@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using VhyperGamesServer.Entities;
 
 namespace VhyperGamesServer.Database;
 

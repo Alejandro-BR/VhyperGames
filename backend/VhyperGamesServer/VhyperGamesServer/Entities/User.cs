@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace VhyperGamesServer.Database;
+namespace VhyperGamesServer.Entities;
 
 public class User
 {
@@ -19,7 +19,7 @@ public class User
     public string Password { get; set; }
 
     [Required]
-    public string Rol {  get; set; }
+    public string Rol { get; set; }
 
     [Required]
     [MaxLength(250)]
