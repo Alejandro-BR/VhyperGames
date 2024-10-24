@@ -1,7 +1,36 @@
-.logo{
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.header {
+    height: 75px;
+    position: sticky;
+    background-color: grey;
+    display: grid;
+    grid-template-columns: repeat(3, 2fr);
+    padding: 10px;
+}
+
+.logo {
+    width: 20%;
+    /* margin: 0.5%; */
+    padding: 1%;
 
 }
 
-.header{
-    
+.logo-img{
+    width: 100%;
+}
+
+
+
+.search-bar {
+    margin:1%;
+    float: center;
+    padding: 2%;
+    width: 75%;
+    height: 75%;
+    font-size: large;
 }
