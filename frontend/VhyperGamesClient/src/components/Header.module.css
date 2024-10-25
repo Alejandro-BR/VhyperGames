@@ -1,8 +1,4 @@
-@property --header-footer-color {
-    /* syntax: "<color>";
-    inherits: false; */
-    initial-value: #131A26;
-}
+
 
 @property --bg-color {
     initial-value: #192233;
@@ -18,7 +14,7 @@
 }
 
 .header {
-    height: 75px;
+    height: 60%;
     position: sticky;
     background-color: var(--header-footer-color);
     display: grid;
@@ -33,13 +29,13 @@
 
 }
 
-.logo-img {
+.logoImg {
     width: 100%;
 }
 
 
 
-.search-bar {
+.searchBar {
     margin: 1%;
     float: center;
     padding: 2%;

@@ -1,0 +1,31 @@
+@property --header-footer-color {
+  syntax: "<color>";
+  initial-value: #131A26;
+  inherits: false; 
+}
+
+.footer{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  background-color: var(--header-footer-color);
+  width: 100%;
+  height: 210px;
+  padding: 1%;
+
+}
+
+.leftFooter{
+  display: flex;
+  flex-direction: column; /* O "row" si los div deben estar en fila */
+}
+
+.text{
+   color: white;
+}
+
+.imgFooter {
+  width: 10%;
+  margin-bottom: 30px;
+}
+
