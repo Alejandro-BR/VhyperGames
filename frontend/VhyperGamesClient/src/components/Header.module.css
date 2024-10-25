@@ -1,0 +1,63 @@
+@property --header-footer-color {
+    syntax: '<color>';
+    initial-value: #131A26;
+    inherits: false;
+}
+
+@property --bg-color {
+    syntax: '<color>';
+    initial-value: #192233;
+    inherits: false;
+}
+
+
+/*PARA LOS FLEX SE USA GAP, NO MARGIN!!!!!!*/
+
+* {
+    /* margin: 0; */
+    /* padding: 0; */
+    /* box-sizing: border-box; */
+    /* background-color: var(--bg-color); */
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-color);
+    color: white;
+}
+
+header {
+    height: 50px;
+    align-items: center;
+    position: sticky;
+    background-color: var(--header-footer-color);
+    display: grid;
+    grid-template-columns: repeat(3, 2fr);
+    padding: 10px;
+}
+
+.logo {
+    width: 20%;
+    background-color: var(--header-footer-color);
+
+}
+
+.logo-img {
+    width: 20vh;
+    /* margin: 10px; */
+    background-color: green;
+    background-color: var(--header-footer-color);
+}
+
+
+
+.searchBar {
+    /* margin: 1%; */
+    /* float: center; */
+    padding: 2%;
+    width: 75%;
+    height: 80%;
+    font-size: large;
+    background-color: var(--header-footer-color); 
+}

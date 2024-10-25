@@ -1,15 +1,16 @@
 // import './Button.jsx'
-import './Header.css';
+import classes from './Header.module.css';
 
 function Header() {
 
     return (
-        <div class="header">
-            <img class="logo-img" src="/img/LogoVG.png" alt="Logo" />
+        <header>
+            
+            <img class={classes.logo} src="/img/LogoVG.png" alt="Logo" />
+            
+            <input class={classes.searchBar} type="text" placeholder="Juegardos" />
 
-
-            <input class="search-bar" type="text" placeholder="Juegardos" />
-        </div>
+        </header>
     );
 
 
