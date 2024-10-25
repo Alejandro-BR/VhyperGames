@@ -12,6 +12,10 @@ public class User
 
     [Required]
     [MaxLength(100)]
+    public string Surname { get; set; }
+
+    [Required]
+    [MaxLength(100)]
     public string Email { get; set; }
 
     [Required]
