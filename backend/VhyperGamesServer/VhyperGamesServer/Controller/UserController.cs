@@ -1,19 +1,19 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using VhyperGamesServer.Database;
-using VhyperGamesServer.Entities;
-using VhyperGamesServer.Repositories;
+using VhyperGamesServer.Models.Database;
+using VhyperGamesServer.Models.Database.Entities;
+using VhyperGamesServer.Models.Database.Repositories;
 
 namespace VhyperGamesServer.Controller;
 
 [Route("api/[controller]")]
 [ApiController]
-public class UsersController : ControllerBase
+public class UserController : ControllerBase
 {
-    private UserRepository _userRepositories;
+    private readonly UnitOfWork _unitOfWork;
 
-    public UsersController(UserRepository userRepositories)
+    public UserController(UnitOfWork unitOfWork)
     {
-        _userRepositories = userRepositories;
+        _unitOfWork = unitOfWork;
     }
 
     /**
@@ -23,7 +23,7 @@ public class UsersController : ControllerBase
     [HttpGet("GetUsers")]
     public async Task<IEnumerable<User>> GetUsers()
     {
-        return await _userRepositories.GetAllAsync();
+        return await _unitOfWork.UserRepository.GetAllAsync();
     }
 
     /**
@@ -33,7 +33,7 @@ public class UsersController : ControllerBase
     [HttpGet("GetByEmail")]
     public async Task<User> GetByEmail(string email)
     {
-        return await _userRepositories.GetByEmail(email);
+        return await _unitOfWork.UserRepository.GetByEmail(email);
     }
 
 

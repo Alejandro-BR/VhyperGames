@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace VhyperGamesServer.Entities;
+namespace VhyperGamesServer.Models.Database.Entities;
 
 public class User
 {

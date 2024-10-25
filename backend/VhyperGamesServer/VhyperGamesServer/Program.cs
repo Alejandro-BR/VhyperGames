@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
-using VhyperGamesServer.Database;
-using VhyperGamesServer.Repositories;
+using VhyperGamesServer.Models.Database;
+using VhyperGamesServer.Models.Database.Repositories;
 
 namespace VhyperGamesServer;
 

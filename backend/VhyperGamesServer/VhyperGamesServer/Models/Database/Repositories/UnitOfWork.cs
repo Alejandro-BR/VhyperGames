@@ -1,6 +1,6 @@
-﻿using VhyperGamesServer.Database;
+﻿using VhyperGamesServer.Models.Database;
 
-namespace VhyperGamesServer.Repositories;
+namespace VhyperGamesServer.Models.Database.Repositories;
 
 
 public class UnitOfWork

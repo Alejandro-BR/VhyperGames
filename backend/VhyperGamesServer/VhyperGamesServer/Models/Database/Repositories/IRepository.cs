@@ -1,4 +1,4 @@
-﻿namespace VhyperGamesServer.Repositories;
+﻿namespace VhyperGamesServer.Models.Database.Repositories;
 public interface IRepository<TEntity, TId> where TEntity : class
 {
     Task<ICollection<TEntity>> GetAllAsync();

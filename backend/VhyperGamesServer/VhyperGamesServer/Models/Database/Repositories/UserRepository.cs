@@ -1,8 +1,8 @@
-﻿using VhyperGamesServer.Entities;
-using VhyperGamesServer.Database;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using VhyperGamesServer.Models.Database;
+using VhyperGamesServer.Models.Database.Entities;
 
-namespace VhyperGamesServer.Repositories;
+namespace VhyperGamesServer.Models.Database.Repositories;
 
 public class UserRepository : Repository<User, int>
 {
