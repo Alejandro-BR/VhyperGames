@@ -10,6 +10,10 @@ public class MyDbContext : DbContext
     //Tablas
     public DbSet<User> Users { get; set; }
 
+    public MyDbContext() { }
+
+    public MyDbContext(DbContextOptions<MyDbContext> options) : base(options) { }
+
 
     //Configurar el proveedor de base de datos Sqlite
 
