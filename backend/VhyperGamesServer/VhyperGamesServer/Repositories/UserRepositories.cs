@@ -1,28 +1,20 @@
 ﻿using VhyperGamesServer.Entities;
-using Microsoft.EntityFrameworkCore;
 using VhyperGamesServer.Database;
+using Microsoft.EntityFrameworkCore;
 
 namespace VhyperGamesServer.Repositories;
 
 public class UserRepositories : Repository<User, int>
 {
-    public UserRepositories(MyDbMasterContext context) : base(context)
+    public UserRepositories(MyDbContext context) : base(context)
     {
 
     }
 
-    public Task<ICollection<User>> GetAllAsync()
+    public async Task<User> GetByEmail(string email)
     {
-        throw new NotImplementedException();
+        return await GetQueryable()
+            .FirstOrDefaultAsync(user => user.Email == email);
     }
 
-    public IQueryable<User> GetQueryable(bool asNoTracking = true)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task<User> InsertAsync(User entity)
-    {
-        throw new NotImplementedException();
-    }
 }

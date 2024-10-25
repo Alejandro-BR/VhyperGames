@@ -1,14 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
-using VhyperGamesServer.Entities;
+using VhyperGamesServer.Database;
 
 namespace VhyperGamesServer.Repositories;
 
 public abstract class Repository<TEntity, TId> : IRepository<TEntity, TEntity> where TEntity : class
 {
-    protected MyDbMasterContext Context { get; init; }
+    protected MyDbContext Context { get; init; }
 
-    public Repository(MyDbMasterContext context)
+    public Repository(MyDbContext context)
     {
         Context = context;
     }
@@ -28,14 +28,20 @@ public abstract class Repository<TEntity, TId> : IRepository<TEntity, TEntity> w
     public async Task<TEntity> InsertAsync(TEntity entity)
     {
         EntityEntry<TEntity> entry = await Context.Set<TEntity>().AddAsync(entity);
-        //await Context.SaveChangesAsync();
 
         return entry.Entity;
     }
 
-    /*public async Task<bool> SaveAsync()
+    public async Task<TEntity> GetByIdAsync(object id)
     {
-        return await Context.SaveChangesAsync() > 0;
-    }*/
+        return await Context.Set<TEntity>().FindAsync(id);
+    }
+
+    public async Task<bool> ExistsAsync(object id)
+    {
+        return await GetByIdAsync(id) != null;
+    }
+
+
 }
 
