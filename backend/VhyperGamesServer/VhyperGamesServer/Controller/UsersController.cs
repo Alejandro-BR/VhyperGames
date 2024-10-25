@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using VhyperGamesServer.Database;
 using VhyperGamesServer.Entities;
+using VhyperGamesServer.Repositories;
 
 namespace VhyperGamesServer.Controller;
 
@@ -8,20 +9,31 @@ namespace VhyperGamesServer.Controller;
 [ApiController]
 public class UsersController : ControllerBase
 {
-    private MyDbContext _dbContext;
+    private UserRepositories _userRepositories;
 
-    public UsersController(MyDbContext dbContext)
+    public UsersController(UserRepositories userRepositories)
     {
-        _dbContext = dbContext;
+        _userRepositories = userRepositories;
     }
 
     /**
      * GetUsers
      * Devuelve todos los usuarios
      */
-    [HttpGet]
-    public IEnumerable<User> GetUsers()
+    [HttpGet("GetUsers")]
+    public async Task<IEnumerable<User>> GetUsers()
     {
-        return _dbContext.Users;
+        return await _userRepositories.GetAllAsync();
     }
+
+    /**
+     * GetByEmail
+     * Devuelve el usuario que coincida con el email
+     */
+    [HttpGet("GetByEmail")]
+    public async Task<User> GetByEmail(string email)
+    {
+        return await _userRepositories.GetByEmail(email);
+    }
+    
 }
