@@ -1,0 +1,56 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+.buttonShort {
+  color: white;
+  margin-top: 10px;
+  margin-left: 10px;
+  width: 90px;
+  height: 30px;
+  border-radius: 8px;
+  border: none;
+  background: linear-gradient(45deg, #a440d2, #5c74e1);
+  transition: background 0.3s ease;  
+  cursor: pointer;
+  box-shadow: 0 3px 0 rgba(60, 50, 150, 0.9);
+}
+
+/* Efecto al presionar el botón */
+.buttonShort:active {
+  /* Cambiar la sombra para simular que se hunde */
+  box-shadow: 0 1px 0 rgba(60, 50, 150, 0.9); 
+  transform: translateY(3px);
+}
+
+.buttonLarge {
+  color: white;
+  margin-top: 10px;
+  margin-left: 10px;
+  width: 200px;
+  height: 30px;
+  border-radius: 8px;
+  border: none;
+  /* background: linear-gradient(45deg, #a440d2, #5c74e1); */
+  transition: background 0.3s ease;  
+  cursor: pointer;
+  box-shadow: 0 3px 0 rgba(60, 50, 150, 0.9);
+}
+
+/* Efecto al presionar el botón */
+.buttonLarge:active {
+  /* Cambiar la sombra para simular que se hunde */
+  box-shadow: 0 1px 0 rgba(60, 50, 150, 0.9); 
+  transform: translateY(3px);
+}
+
+.buttonLarge.azul {
+  background: linear-gradient(45deg, #1e0ad3, #5c74e1); 
+}
+
+.buttonLarge.azul:active {
+  box-shadow: 0 1px 0 rgba(39, 18, 222, 0.9); 
+}
+
+
