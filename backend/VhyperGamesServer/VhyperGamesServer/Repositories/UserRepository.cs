@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace VhyperGamesServer.Repositories;
 
-public class UserRepositories : Repository<User, int>
+public class UserRepository : Repository<User, int>
 {
-    public UserRepositories(MyDbContext context) : base(context)
+    public UserRepository(MyDbContext context) : base(context)
     {
 
     }

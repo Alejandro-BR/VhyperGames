@@ -1,11 +1,22 @@
-﻿namespace VhyperGamesServer.Repositories;
+﻿using VhyperGamesServer.Database;
+
+namespace VhyperGamesServer.Repositories;
+
 
 public class UnitOfWork
 {
+    private readonly MyDbContext _myDbContext;
+    private UserRepository _userRepository;
 
-    private readonly UserRepositories _userRepository;
-    //private readonly MyDbContext _myDbContext;
+    public UserRepository UserRepository => _userRepository ??= new UserRepository(_myDbContext);
 
+    public UnitOfWork(MyDbContext myDbContext)
+    {
+        _myDbContext = myDbContext;
+    }
 
-
+    public async Task<bool> SaveAsync()
+    {
+        return await _myDbContext.SaveChangesAsync() > 0;
+    }
 }

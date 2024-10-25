@@ -9,9 +9,9 @@ namespace VhyperGamesServer.Controller;
 [ApiController]
 public class UsersController : ControllerBase
 {
-    private UserRepositories _userRepositories;
+    private UserRepository _userRepositories;
 
-    public UsersController(UserRepositories userRepositories)
+    public UsersController(UserRepository userRepositories)
     {
         _userRepositories = userRepositories;
     }
@@ -35,5 +35,9 @@ public class UsersController : ControllerBase
     {
         return await _userRepositories.GetByEmail(email);
     }
+
+
+
+
     
 }
