@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
-using VhyperGamesServer.Database;
+using VhyperGamesServer.Models.Database;
+using VhyperGamesServer.Models.Database.Repositories;
 
 namespace VhyperGamesServer;
 
@@ -23,6 +24,9 @@ public class Program
 
         // Inyectar la dependencia del contexto de base de datos
         builder.Services.AddScoped<MyDbContext>();
+
+        // Inyectar el unit of work que contiene todos los repositorios
+        builder.Services.AddScoped<UnitOfWork>();
 
         // Crear la aplicación web utilizando la configuración del builder
         var app = builder.Build();

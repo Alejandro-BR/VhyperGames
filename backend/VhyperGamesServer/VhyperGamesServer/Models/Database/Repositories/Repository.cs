@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
-using VhyperGamesServer.Database;
+using VhyperGamesServer.Models.Database;
 
-namespace VhyperGamesServer.Repositories;
+namespace VhyperGamesServer.Models.Database.Repositories;
 
 public abstract class Repository<TEntity, TId> : IRepository<TEntity, TEntity> where TEntity : class
 {

@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using VhyperGamesServer.Entities;
+using VhyperGamesServer.Models.Database.Entities;
 
-namespace VhyperGamesServer.Database;
+namespace VhyperGamesServer.Models.Database;
 
 public class MyDbContext : DbContext
 {
@@ -27,3 +27,4 @@ public class MyDbContext : DbContext
     }
 
 }
+

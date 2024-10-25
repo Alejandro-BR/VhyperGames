@@ -1,0 +1,49 @@
+@property --header-footer-color {
+    /* syntax: "<color>";
+    inherits: false; */
+    initial-value: #131A26;
+}
+
+@property --bg-color {
+    initial-value: #192233;
+}
+
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: var(--bg-color);
+}
+
+.header {
+    height: 75px;
+    position: sticky;
+    background-color: var(--header-footer-color);
+    display: grid;
+    grid-template-columns: repeat(3, 2fr);
+    padding: 10px;
+}
+
+.logo {
+    width: 20%;
+    /* margin: 0.5%; */
+    padding: 1%;
+
+}
+
+.logo-img {
+    width: 100%;
+}
+
+
+
+.search-bar {
+    margin: 1%;
+    float: center;
+    padding: 2%;
+    width: 75%;
+    height: 75%;
+    font-size: large;
+}
