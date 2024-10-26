@@ -25,14 +25,4 @@ public class UserController : ControllerBase
     {
         return await _unitOfWork.UserRepository.GetAllAsync();
     }
-
-    /**
-     * GetByEmail
-     * Devuelve el usuario que coincida con el email
-     */
-    [HttpGet("GetByEmail")]
-    public async Task<User> GetByEmail(string email)
-    {
-        return await _unitOfWork.UserRepository.GetByEmail(email);
-    }
 }
