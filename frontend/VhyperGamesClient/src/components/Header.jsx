@@ -1,14 +1,24 @@
-// import './Button.jsx'
 import classes from './Header.module.css';
-import Button from './placeHolders/buttonPlaceHolder';
+import Button from './Button';
+// import Button from './placeHolders/buttonPlaceHolder';
 
 function Header() {
+
+    function hola() {
+        alert("hola");
+    }
 
     return (
         <div className={classes.header}>
             <img className={classes.logoImg} src="/img/LogoVG.png" alt="Logo" />
             <div className={classes.headerButton}>
-                <Button />
+                <Button
+                    variant={"short"}
+                    color={"morado-azul"}
+                    onClick={hola}
+                >
+                    Catálogo
+                </Button>
             </div>
 
             <div className={classes.searchBar}>
@@ -19,8 +29,8 @@ function Header() {
 
             <div className={classes.icons}>
                 <img className={classes.icon} src='/img/admin.PNG' alt='admin' />
-                <img className={classes.icon} src='/img/cart.PNG' alt='cart'/> 
-                <img className={classes.icon} src='/img/user.PNG' alt='user'/> 
+                <img className={classes.icon} src='/img/cart.PNG' alt='cart' />
+                <img className={classes.icon} src='/img/user.PNG' alt='user' />
             </div>
 
         </div>

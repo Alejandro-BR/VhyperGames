@@ -8,6 +8,7 @@
 /* Generico */
 
 button {
+  font-weight: bold;
   color: white;
   margin: 10px;
   border-radius: 8px;
