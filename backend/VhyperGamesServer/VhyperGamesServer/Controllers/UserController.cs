@@ -35,9 +35,4 @@ public class UserController : ControllerBase
     {
         return await _unitOfWork.UserRepository.GetByEmail(email);
     }
-
-
-
-
-    
 }
