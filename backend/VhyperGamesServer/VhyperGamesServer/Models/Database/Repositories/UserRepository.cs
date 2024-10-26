@@ -19,7 +19,7 @@ public class UserRepository : Repository<User, int>
         email = email.ToLower();
 
         return await GetQueryable()
-            .FirstOrDefaultAsync(user => user.Email == email && user.Password == hashPassword);
+            .FirstOrDefaultAsync(user => user.Email == email && user.HashPassword == hashPassword);
     }
 
     public async Task<User> UserValidate(string email, string password)
@@ -32,4 +32,15 @@ public class UserRepository : Repository<User, int>
         return await GetDataRegister(email, password);
 
     }
+
+    public async Task<bool> ExistEmail(string email)
+    {
+        email = email.ToLower();
+        User user = await GetQueryable().FirstOrDefaultAsync(user => user.Email == email);
+        if (user == null) {
+            return false;
+        }
+        return true;
+    }
+
 }
