@@ -2,6 +2,7 @@
 using VhyperGamesServer.Models.Database;
 using VhyperGamesServer.Models.Database.Entities;
 using VhyperGamesServer.Models.Dtos;
+using VhyperGamesServer.Resources;
 
 namespace VhyperGamesServer.Models.Database.Repositories;
 
@@ -12,33 +13,23 @@ public class UserRepository : Repository<User, int>
 
     }
 
-    public async Task<User> GetByEmail(string email)
+    public async Task<User> GetDataRegister(string email, string password)
     {
+        string hashPassword = PasswordHelper.Hash(password);
+        email = email.ToLower();
+
         return await GetQueryable()
-            .FirstOrDefaultAsync(user => user.Email == email);
+            .FirstOrDefaultAsync(user => user.Email == email && user.Password == hashPassword);
     }
 
     public async Task<User> UserValidate(string email, string password)
     {
-        
-        // Esto no esta terminado
-
-        email = email.ToLower();
-
-        if (email == null || password == null) {
-            return null;
-        } else
+        if (email == null || password == null)
         {
-            User user = await GetByEmail(email);
-            if (user.Password == password)
-            {
-                return user;
-            }
-
             return null;
-
         } 
+        
+        return await GetDataRegister(email, password);
 
     }
-
 }
