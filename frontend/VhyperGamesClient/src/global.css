@@ -1,0 +1,58 @@
+/* VARIABLES GLOBALES :D */
+@property --header-footer-color {
+  syntax: "<color>";
+  initial-value: #131A26;
+  inherits: false; 
+}
+
+@property --body-color {
+  syntax: "<color>";
+  initial-value: #192233;
+  inherits: false; 
+}
+
+@property --principal-purple {
+  syntax: "<color>";
+  initial-value: #a440d2;
+  inherits: false; 
+}
+
+@property --principal-blue {
+  syntax: "<color>";
+  initial-value: #5c74E1;
+  inherits: false; 
+}
+
+@property --gradient-blue {
+  syntax: "<color>";
+  initial-value: linear-gradient(0deg, #5c74E1, #2B3B86);
+  inherits: false; 
+}
+
+@property --gradient-purple {
+  syntax: "<color>";
+  initial-value: linear-gradient(0deg, #a440d2, #39164A);
+  inherits: false; 
+}
+
+@property --gradient-purple-blue {
+  syntax: "<color>";
+  initial-value: linear-gradient(0deg, #a440d2, #5c74E1);
+  inherits: false; 
+}
+
+@property --gradient-blue-purple {
+  syntax: "<color>";
+  initial-value: linear-gradient(0deg, #5c74E1, #a440d2);
+  inherits: false; 
+}
+
+
+/* ESTILO QUE SE APLICARA GENERAL A TODOS LOS COMPONETES POR DEFECTO*/
+body{
+  min-height: 100vh;
+  min-width:  100vh;
+  background-color: var(--body-color);
+  margin: 0;
+
+}

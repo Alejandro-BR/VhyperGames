@@ -1,0 +1,75 @@
+/* CSS del componente Button */
+
+* {
+  padding: 0;
+  margin: 0;
+}
+
+/* Generico */
+
+button {
+  font-weight: bold;
+  color: white;
+  margin: 10px;
+  border-radius: 8px;
+  border: none;
+  transition: background 0.3s ease;  
+  cursor: pointer;
+}
+
+button:active {
+  transform: translateY(3px);
+}
+
+/* Variantes de tamaños */
+
+button.short {
+  width: 90px;
+  height: 30px;
+}
+
+button.large {
+  width: 200px;
+  height: 30px;
+}
+
+button.medium {
+  width: 90px;
+  height: 40px;
+}
+
+/* Variantes de Colores */
+
+button.morado {
+  background: linear-gradient(45deg, #a440d2, #39164a); 
+  box-shadow: 0 3px 0 rgba(57, 22, 74, 0.6);
+}
+
+button.morado:active {
+  box-shadow: 0 1px 0 rgba(57, 22, 74, 0.6); 
+}
+
+button.azul {
+  background: linear-gradient(45deg, #5c74e1, #1e0ad3); 
+  box-shadow: 0 3px 0 rgba(30, 10, 211, 0.6)
+}
+
+button.azul:active {
+  box-shadow: 0 1px 0 rgba(30, 10, 211, 0.6); 
+}
+
+button.morado-azul {
+  background: linear-gradient(45deg, #a440d2, #5c74e1);
+  box-shadow: 0 3px 0 rgba(60, 50, 150, 0.9);
+}
+
+button.azul-morado {
+  background: linear-gradient(45deg, #5c74e1, #a440d2);
+  box-shadow: 0 3px 0 rgba(60, 50, 150, 0.9);
+}
+
+button.morado-azul:active,
+button.azul-morado:active {
+  box-shadow: 0 1px 0 rgba(60, 50, 150, 0.9); 
+}
+
