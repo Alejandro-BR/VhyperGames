@@ -31,6 +31,20 @@ public class Program
         builder.Services.AddScoped<UnitOfWork>();
 
 
+        //Permite CORS
+        if (builder.Environment.IsDevelopment())
+        {
+            builder.Services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(builder =>
+                {
+                    builder.SetIsOriginAllowed(origin => new Uri(origin).Host == "localhost")
+                    .AllowAnyHeader()
+                    .AllowAnyMethod();
+                });
+            });
+        }
+
         builder.Services.AddAuthentication()
             .AddJwtBearer(options =>
             {
@@ -64,6 +78,10 @@ public class Program
         {
             app.UseSwagger();        // Usar Swagger para generar documentación
             app.UseSwaggerUI();      // Usar la interfaz de usuario de Swagger
+
+
+            
+            app.UseCors();          //Permite CORS
         }
 
         // Redirigir automáticamente las solicitudes HTTP a HTTPS

@@ -2,13 +2,9 @@
 import classes from './Header.module.css';
 // import classes from './Header.module.css';
 import Button from './Button';
-// import Button from './placeHolders/buttonPlaceHolder';
+import { messageCatalog } from '../helpers/Messages';;
 
 function Header() {
-
-    function hola() {
-        alert("hola");
-    }
 
     return (
         <div className={classes.header}>
@@ -17,7 +13,7 @@ function Header() {
                 <Button
                     variant={"short"}
                     color={"morado-azul"}
-                    onClick={hola}
+                    onClick={messageCatalog}
                 >
                     Catálogo
                 </Button>
