@@ -1,0 +1,67 @@
+@property --header-footer-color {
+  syntax: "<color>";
+  initial-value: #131A26;
+  inherits: false; 
+}
+
+.footer{
+  position:static;
+  width: auto;
+  height: 210px;
+  display: flex;
+  flex-direction: row;
+
+  background-color: var(--header-footer-color);
+  
+  padding: 1%;
+}
+
+.leftFooter{
+  display: flex;
+  flex-direction: column; /* O "row" si los div deben estar en fila */
+  margin-right: auto;
+}
+
+
+.text{
+  position: relative;
+  bottom: 5%;
+   color: white;
+   
+}
+
+.imgFooter {
+  width: 20%;
+  margin-bottom: 10px;
+}
+
+.rightFooter {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  bottom: 0;
+  right: 0;
+}
+
+.icons{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 5%;
+}
+
+.icon{
+  width: 56%;
+  margin-bottom: 12%;
+}
+
+.footerButtons{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10%;
+  margin-right: 4%;
+  gap: 5%; 
+}
