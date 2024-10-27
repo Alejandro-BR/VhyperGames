@@ -70,6 +70,30 @@ public class Program
         app.UseHttpsRedirection();
 
 
+        //Permite CORS
+        if (builder.Environment.IsDevelopment())
+        {
+            builder.Services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(builder =>
+                {
+                    builder.SetIsOriginAllowed(origin => new Uri(origin).Host == "localhost")
+                    .AllowAnyHeader()
+                    .AllowAnyMethod();
+                });
+            });
+        }
+
+        //Configura HTTP request pipeline
+        if (app.Environment.IsDevelopment())
+        {
+            app.UseSwagger();
+            app.UseSwaggerUI();
+
+            //Permite CORS
+            app.UseCors();
+        }
+
         app.UseAuthentication();
 
         // Usar middleware de autorización (configurado en los controladores)
