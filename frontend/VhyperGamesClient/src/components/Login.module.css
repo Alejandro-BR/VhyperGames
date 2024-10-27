@@ -57,6 +57,7 @@
   font-size: 1.5em;
   color: transparent; 
   z-index: 1; 
+  
 }
 
 /* Pseudo-elemento para el color degradado del botón "X" */
@@ -72,6 +73,7 @@
   background-clip: text; 
   color: transparent; 
   z-index: -1;
+  transform: scaleY(0.8); /* Hacer que la X sea más delgada */
 }
 
 /* Estilos de los inputs */
