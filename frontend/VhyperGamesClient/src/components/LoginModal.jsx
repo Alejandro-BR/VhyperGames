@@ -22,7 +22,7 @@ function LoginModal() {
             });
 
             if (!response.ok) {
-                // Si la respuesta no es 2xx, lanza un error
+                // Si la respuesta no es 2, lanza un error
                 const errorData = await response.json();
                 throw new Error(errorData.message || "Error al iniciar sesión.");
             }
