@@ -1,16 +1,14 @@
-import Header from './components/Header';
-import Footer from './components/footer';
-import Carousel  from './components/Carousel';
-// import Body from './components/placeHolders/bodyPlaceHolder'
+import Header from "./components/Header";
+import Footer from "./components/footer";
+import Body from "./components/placeHolders/bodyPlaceHolder";
 function App() {
-
   return (
-      <>
+    <>
       <Header />
-      <Carousel  />
+      <Body />
       <Footer />
-      </>
-  )
+    </>
+  );
 }
 
-export default App
+export default App;
