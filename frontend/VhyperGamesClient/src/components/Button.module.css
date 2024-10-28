@@ -15,6 +15,9 @@ button {
   border: none;
   transition: background 0.3s ease;  
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 button:active {

@@ -19,15 +19,14 @@ function Header() {
         alt="Logo"
         onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
       />
-      <div className={classes.headerButton}>
+
         <Button
           variant={"short"}
           color={"morado-azul"}
           onClick={messageCatalog}
         >
-          Catálogo
+          <span><img src="/icon/mando-icon.svg" alt="Mando" /></span><p className='buttonText'>Catálogo</p>
         </Button>
-      </div>
 
       <div className={classes.searchBar}>
         <img
