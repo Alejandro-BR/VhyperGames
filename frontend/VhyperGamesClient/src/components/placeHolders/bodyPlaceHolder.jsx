@@ -1,3 +1,5 @@
+import Carousel from './BodyComponents/Carousel';
+
 import OfertasNuevos from "../BodyComponents/OfertasNuevo";
 function Body() {
   return(
