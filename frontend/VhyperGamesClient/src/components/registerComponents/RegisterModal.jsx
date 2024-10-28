@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import styles from '../loginComponents';
+import styles from '../loginComponents/Login.module.css';
 //import { decode as jwt_decode } from 'jwt-decode';
 
 
@@ -12,6 +12,7 @@ function RegisterModal({ onClose }) {
     const addressRef = useRef();
     const [errorMessage, setErrorMessage] = useState('');
     const [passwordError, setPasswordError] = useState('');
+    
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -147,7 +148,9 @@ function RegisterModal({ onClose }) {
                         />
                     </div>
 
-                    <button type="submit" className={`${styles.submitButton} ${styles.iniciarSesion}`}>Registrarse</button>
+                    <button type="submit" className={`${styles.submitButton} ${styles.iniciarSesion}`}
+                    
+                    >Registrarse</button>
                 </form>
             </div>
         </div>
