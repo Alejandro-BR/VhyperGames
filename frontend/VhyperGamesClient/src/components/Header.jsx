@@ -2,7 +2,7 @@ import classes from './Header.module.css';
 import Button from './Button';
 import { messageCart, messageCatalog } from '../helpers/messages';
 import { useState } from 'react';
-import LoginModal from './LoginModal'; 
+import LoginModal from './LoginModal';
 
 function Header() {
   const [mostrarLogin, setMostrarLogin] = useState(false);
@@ -19,7 +19,7 @@ function Header() {
         alt="Logo"
         onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
       />
-
+      <div className='button-margin'>
         <Button
           variant={"short"}
           color={"morado-azul"}
@@ -27,6 +27,7 @@ function Header() {
         >
           <span><img src="/icon/mando-icon.svg" alt="Mando" /></span><p className='buttonText'>Catálogo</p>
         </Button>
+      </div>
 
       <div className={classes.searchBar}>
         <img

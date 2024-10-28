@@ -47,7 +47,7 @@ function Footer() {
               variant={"large"}
               color={"azul"}
             >
-              GitHub
+              <span><img src="/icon/cib_github.svg" alt="GitHub" /></span>GitHub
             </Button>
           </a>
         </div>

@@ -10,7 +10,7 @@
 button {
   font-weight: bold;
   color: white;
-  margin: 10px;
+  /* margin: 10px; */
   border-radius: 8px;
   border: none;
   transition: background 0.3s ease;  
@@ -27,18 +27,20 @@ button:active {
 /* Variantes de tamaños */
 
 button.short {
-  width: 90px;
-  height: 30px;
+  width: 12vh; 
+  height: 4vh;
+  font-size: 1.6vh; 
 }
 
 button.large {
-  width: 200px;
-  height: 30px;
+  width: 21vh; 
+  height: 5vh;   
+  font-size: 2vh;
 }
 
 button.medium {
-  width: 90px;
-  height: 40px;
+  width: 11vh; 
+  height: 6vh;  
 }
 
 /* Variantes de Colores */
