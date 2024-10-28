@@ -46,35 +46,35 @@ button.medium {
 /* Variantes de Colores */
 
 button.morado {
-  background: linear-gradient(45deg, #a440d2, #39164a); 
-  box-shadow: 0 3px 0 rgba(57, 22, 74, 0.6);
+  background: var(--gradient-purple);
+  box-shadow: var(--shadow-purple);
 }
 
 button.morado:active {
-  box-shadow: 0 1px 0 rgba(57, 22, 74, 0.6); 
+  box-shadow: var(--shadow-purple);
 }
 
 button.azul {
-  background: linear-gradient(45deg, #5c74e1, #1e0ad3); 
-  box-shadow: 0 3px 0 rgba(30, 10, 211, 0.6)
+  background: var(--gradient-blue);
+  box-shadow: var(--shadow-blue);
 }
 
 button.azul:active {
-  box-shadow: 0 1px 0 rgba(30, 10, 211, 0.6); 
+  box-shadow: var(--shadow-blue);
 }
 
 button.morado-azul {
-  background: linear-gradient(45deg, #a440d2, #5c74e1);
-  box-shadow: 0 3px 0 rgba(60, 50, 150, 0.9);
+  background: var(--gradient-purple-blue);
+  box-shadow: var(--shadow-gradient-blue-purple);
 }
 
 button.azul-morado {
-  background: linear-gradient(45deg, #5c74e1, #a440d2);
-  box-shadow: 0 3px 0 rgba(60, 50, 150, 0.9);
+  background: var(--gradient-blue-purple);
+  box-shadow: var(--shadow-gradient-blue-purple);
 }
 
-button.morado-azul:active,
+button.morado-azul:active,s
 button.azul-morado:active {
-  box-shadow: 0 1px 0 rgba(60, 50, 150, 0.9); 
+  box-shadow: var(--shadow-gradient-blue-purple);
 }
 
