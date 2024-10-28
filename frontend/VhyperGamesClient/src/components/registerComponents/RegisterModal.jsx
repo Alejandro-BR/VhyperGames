@@ -32,34 +32,42 @@ function RegisterModal({ onClose }) {
             setPasswordError(""); 
         }
 
+        // Crear objeto de datos
+        const data = { 
+            name, 
+            surname, 
+            email, 
+            password: password1, 
+            address 
+        };
+
+        // Llamar a la función fetchingData
+        await fetchingData('https://localhost:7207/api/auth/register', data);
+    };
+
+    async function fetchingData(url, data) {
         try {
-            const response = await fetch('https://localhost:7207/api/auth/register', { 
+            const response = await fetch(url, { 
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ 
-                  name, 
-                  surname, 
-                  email, 
-                  password: password1, 
-                  address }),
+                body: JSON.stringify(data),
             });
 
             if (!response.ok) {
-              const errorText = await response.text(); // Obtener el texto de error
-              throw new Error(errorText || "Error al registrarse.");
-          }
+                const errorText = await response.text(); // Obtener el texto de error
+                throw new Error(errorText || "Error al registrarse.");
+            }
 
-          
-            //Instalacion obligatoria JWD_DECODE
-
-
-            const data = await response.json();
-            const { accessToken } = data;
+            const responseData = await response.json();
+            const { accessToken } = responseData;
             localStorage.setItem('accessToken', accessToken);
-            // const decodedToken = jwt_decode(accessToken); // Decodifica el token que acabas de recibir
+
+            // Aquí podrías decodificar el token si es necesario
+            // const decodedToken = jwt_decode(accessToken);
             // console.log(decodedToken);
+
             onClose(); // Cerrar modal después del registro exitoso
             window.location.href = 'http://localhost:5173/';
 
@@ -67,7 +75,7 @@ function RegisterModal({ onClose }) {
             setErrorMessage(error.message);
             console.error('Error en el registro:', error);
         }
-    };
+    }
 
     return (
         <div className={styles.modalOverlay}>
