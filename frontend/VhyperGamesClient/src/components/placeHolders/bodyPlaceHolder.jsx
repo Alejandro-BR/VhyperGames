@@ -1,32 +1,10 @@
+import OfertasNuevos from "../BodyComponents/OfertasNuevo";
 function Body() {
   return(
     <body>
-    <h1>Inicio de la Página</h1>
-    <p>Contenido de prueba...</p>
-    <p>Contenido de prueba...</p>
-    <p>Contenido de prueba...</p>
-    <p>Contenido de prueba...</p>
-    <p>Contenido de prueba...</p>
-    <p>Contenido de prueba...</p>
-    <p>Contenido de prueba...</p>
-    <p>Contenido de prueba...</p>
-    <p>Contenido de prueba...</p>
-    <p>Contenido de prueba...</p>
-    <p>Contenido de prueba...</p>
-    <p>Contenido de prueba...</p>
-    <p>Contenido de prueba...</p>
-    <p>Contenido de prueba...</p>
-    <p>Contenido de prueba...</p>
-    <p>Contenido de prueba...</p>
-    <p>Contenido de prueba...</p>
-    <p>Contenido de prueba...</p>
-    <p>Contenido de prueba...</p>
-    <p>Contenido de prueba...</p>
-    <p>Contenido de prueba...</p>
-    <p>Contenido de prueba...</p>
-    <p>Contenido de prueba...</p>
-    <p>Contenido de prueba...</p>
-    <h1>Fin de la Página</h1>
+
+    <OfertasNuevos/>
+
   </body>
   )
 }

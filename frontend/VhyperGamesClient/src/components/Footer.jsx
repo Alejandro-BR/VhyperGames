@@ -1,14 +1,16 @@
 // import './Button.jsx'
 import classes from './Footer.module.css';
 import Button from './Button';
-import { messageAboutUs, messageCompany } from '../helpers/Messages';
+import { messageAboutUs, messageCompany } from '../helpers/messages';
+
 
 function Footer() {
   return (
     <div className={classes.footer}>
 
       <div className={classes.leftFooter}>
-        <img className={classes.imgFooter} src="/img/LogoVG.png" alt="Logo" />
+        <img className={classes.imgFooter} src="/img/LogoVG.png" alt="Logo" 
+        onClick={() =>  window.scrollTo({ top: 0, behavior: 'smooth' })}/>
         <div className={classes.text} >
           <h1>VHYPER GAMES</h1>
           <p>© 2024 | VHYPER GAMES | All rights reserverd</p>
