@@ -1,14 +1,9 @@
-import Header from './components/Header';
-import Footer from './components/footer';
-import Body from './components/body';
-// import LoginModal from './components/LoginModal';
+import Home from './pages/Home';
+
 function App() {
   return (
     <>
-      <Header />
-      <Body/>
-      {/* <LoginModal/> */}
-      <Footer />
+      <Home />
     </>
   );
 }

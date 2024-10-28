@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import styles from './Login.module.css';
+import styles from '../loginComponents';
 //import { decode as jwt_decode } from 'jwt-decode';
 
 

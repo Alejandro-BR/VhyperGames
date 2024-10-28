@@ -1,8 +1,8 @@
 import classes from './Header.module.css';
-import Button from './Button';
-import { messageCart, messageCatalog } from '../helpers/messages';
+import Button from '../buttonComponent/Button';
+import { messageCart, messageCatalog } from '../../helpers/messages';
 import { useState } from 'react';
-import LoginModal from './LoginModal';
+import LoginModal from '../loginComponents/LoginModal';
 
 function Header() {
   const [mostrarLogin, setMostrarLogin] = useState(false);

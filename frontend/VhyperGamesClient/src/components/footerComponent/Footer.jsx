@@ -1,7 +1,7 @@
 // import './Button.jsx'
 import classes from './Footer.module.css';
-import Button from './Button';
-import { messageAboutUs, messageCompany } from '../helpers/messages';
+import Button from '../buttonComponent/Button';
+import { messageAboutUs, messageCompany } from '../../helpers/messages';
 
 
 function Footer() {
