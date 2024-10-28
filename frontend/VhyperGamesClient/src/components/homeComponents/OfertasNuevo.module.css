@@ -1,0 +1,31 @@
+.buttons{
+  margin-top: 10vh;
+  display: flex;
+  width: auto;
+  justify-content: center;
+}
+
+.title{
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  color: white;
+  margin-left: 10%;
+  gap: 5%;
+}
+
+.palito{
+  position: relative;
+  color: var(--principal-purple);
+  top: -10px;
+  font-size: 2.5rem;
+  
+}
+
+.text{
+  color: white;
+  margin-top: 5%;
+  margin-left: 10%;
+  margin-bottom: 30vh;
+}
+

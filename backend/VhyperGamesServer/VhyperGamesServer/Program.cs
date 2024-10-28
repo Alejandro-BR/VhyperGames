@@ -1,4 +1,6 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 using VhyperGamesServer.Models.Database;
 using VhyperGamesServer.Models.Database.Repositories;
 
@@ -11,7 +13,7 @@ public class Program
         // Crear un builder para configurar la aplicación web ASP.NET Core
         var builder = WebApplication.CreateBuilder(args);
 
-        // Agregar servicios al contenedor de inyección de dependencias.
+    
 
         // Habilitar el uso de controladores en la aplicación
         builder.Services.AddControllers();
@@ -27,6 +29,34 @@ public class Program
 
         // Inyectar el unit of work que contiene todos los repositorios
         builder.Services.AddScoped<UnitOfWork>();
+
+
+        //Permite CORS
+        if (builder.Environment.IsDevelopment())
+        {
+            builder.Services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(builder =>
+                {
+                    builder.SetIsOriginAllowed(origin => new Uri(origin).Host == "localhost")
+                    .AllowAnyHeader()
+                    .AllowAnyMethod();
+                });
+            });
+        }
+
+        builder.Services.AddAuthentication()
+            .AddJwtBearer(options =>
+            {
+                string key = Environment.GetEnvironmentVariable("JWT_KEY");
+
+                options.TokenValidationParameters = new TokenValidationParameters()
+                {
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key))
+                };
+            });
 
         // Crear la aplicación web utilizando la configuración del builder
         var app = builder.Build();
@@ -48,10 +78,17 @@ public class Program
         {
             app.UseSwagger();        // Usar Swagger para generar documentación
             app.UseSwaggerUI();      // Usar la interfaz de usuario de Swagger
+
+
+            
+            app.UseCors();          //Permite CORS
         }
 
         // Redirigir automáticamente las solicitudes HTTP a HTTPS
         app.UseHttpsRedirection();
+
+
+        app.UseAuthentication();
 
         // Usar middleware de autorización (configurado en los controladores)
         app.UseAuthorization();

@@ -1,16 +1,9 @@
-import Header from './components/Header';
-import Footer from './components/footer';
-import Body from './components/placeHolders/bodyPlaceHolder'
+import Home from './pages/Home';
+
 function App() {
-
-
   return (
-      <>
-      <Header />
-      <Body/>
-      <Footer />
-      </>
-  )
+      <Home />
+  );
 }
 
-export default App
+export default App;
