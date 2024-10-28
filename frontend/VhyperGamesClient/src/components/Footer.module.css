@@ -65,3 +65,11 @@
   margin-right: 4%;
   gap: 5%; 
 }
+
+a {
+  text-decoration: none;
+}
+
+a.no-underline {
+  text-decoration: none;
+}
