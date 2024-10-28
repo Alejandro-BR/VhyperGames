@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react';
 import styles from './Login.module.css';
 
-function LoginModal({ onClose }) { // Asegúrate de desestructurar las props
+function LoginModal({ onClose, onRegister }) {
     const emailRef = useRef();
     const passwordRef = useRef();
     const [errorMessage, setErrorMessage] = useState('');
@@ -12,7 +12,7 @@ function LoginModal({ onClose }) { // Asegúrate de desestructurar las props
         const password = passwordRef.current.value;
 
         try {
-            const response = await fetch('https://localhost:7207/api/auth/login', { 
+            const response = await fetch('https://localhost:7207/api/auth/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -29,7 +29,6 @@ function LoginModal({ onClose }) { // Asegúrate de desestructurar las props
             const { accessToken } = data;
             console.log('Inicio de sesión exitoso:', accessToken);
             localStorage.setItem('accessToken', accessToken);
-
             onClose(); // Cierra el modal al iniciar sesión exitosamente
 
         } catch (error) {
@@ -48,7 +47,7 @@ function LoginModal({ onClose }) { // Asegúrate de desestructurar las props
                 </div>
 
                 <form className={styles.formContainer} onSubmit={handleSubmit}>
-                    {errorMessage && <div className={styles.error}>{errorMessage}</div>} {/* Mostrar mensaje de error */}
+                    {errorMessage && <div className={styles.error}>{errorMessage}</div>}
 
                     <div className={styles.inputGroup}>
                         <input 
@@ -78,7 +77,13 @@ function LoginModal({ onClose }) { // Asegúrate de desestructurar las props
                     </div>
 
                     <button type="submit" className={`${styles.submitButton} ${styles.iniciarSesion}`}>Iniciar sesión</button>
-                    <button type="button" className={`${styles.submitButton} ${styles.nuevoUsuario}`}>Nuevo Usuario</button>
+                    <button 
+                        type="button" 
+                        className={`${styles.submitButton} ${styles.nuevoUsuario}`} 
+                        onClick={onRegister} // Cambia al modal de registro
+                    >
+                        Nuevo Usuario
+                    </button>
                 </form>
             </div>
         </div>
