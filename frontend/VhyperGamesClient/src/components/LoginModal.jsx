@@ -1,8 +1,7 @@
-import React, { useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import styles from './Login.module.css';
 
-function LoginModal() {
-    const [isOpen, setIsOpen] = useState(true);
+function LoginModal({ onClose }) { // Asegúrate de desestructurar las props
     const emailRef = useRef();
     const passwordRef = useRef();
     const [errorMessage, setErrorMessage] = useState('');
@@ -22,36 +21,27 @@ function LoginModal() {
             });
 
             if (!response.ok) {
-                // Si la respuesta no es 2, lanza un error
                 const errorData = await response.json();
                 throw new Error(errorData.message || "Error al iniciar sesión.");
             }
 
-            // Si la respuesta es exitosa, procesa el resultado
             const data = await response.json();
-            const { accessToken } = data; // Asume que el token está en esta estructura
+            const { accessToken } = data;
             console.log('Inicio de sesión exitoso:', accessToken);
-            // Aquí puedes guardar el token en el localStorage o context para su uso posterior
             localStorage.setItem('accessToken', accessToken);
 
-            // Puedes cerrar el modal o redirigir a otra página aquí
-            closeModal();
+            onClose(); // Cierra el modal al iniciar sesión exitosamente
 
         } catch (error) {
-            // Manejo de errores
-            setErrorMessage(error.message); // Mostrar mensaje de error
+            setErrorMessage(error.message);
             console.error('Error en el login:', error);
         }
     };
 
-    const closeModal = () => setIsOpen(false);
-
-    if (!isOpen) return null;
-
     return (
         <div className={styles.modalOverlay}>
             <div className={styles.loginModule}>
-                <button className={styles.logoCerrar} onClick={closeModal}>✖</button>
+                <button className={styles.logoCerrar} onClick={onClose}>✖</button>
 
                 <div className={styles.imagenUser}>
                     <img src="./public/icon/user-grande-icon.svg" alt="Logo usuario" />
