@@ -1,4 +1,4 @@
-/* Pseudo-elemento con borde degradado */
+/* Overlay del modal */
 .modalOverlay {
   position: fixed;
   top: 0;
@@ -12,22 +12,22 @@
   z-index: 1000;
 }
 
+/* Estilos del módulo de inicio de sesión */
 .loginModule {
   background-color: #192233;
   padding: 2em;
   border-radius: 8px;
   width: 350px;
   max-width: 80%;
-  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   color: #f0f0f0;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5); /* Sombra para efecto de profundidad */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
   position: relative;
 }
 
-/* Pseudo-elemento con borde degradado */
+/* Degradado en el borde del módulo */
 .loginModule::before {
   content: '';
   position: absolute;
@@ -35,19 +35,19 @@
   left: -2px;
   right: -2px;  
   bottom: -2px; 
-  border-radius: 8px; /* Debe coincidir con el border-radius del contenedor */
+  border-radius: 8px; 
   background: linear-gradient(45deg, #a440d2, #5c74e1); 
-  z-index: -1; /* Detrás del degradado */
+  z-index: -1; 
 }
 
-
-/* Icono de usuario */
+/* Imagen del usuario */
 .imagenUser img {
   width: 180px;  
   height: 180px; 
   margin-bottom: 1em;
 }
 
+/* Botón de cerrar */
 .logoCerrar {
   position: absolute;
   top: 15px;
@@ -55,27 +55,17 @@
   cursor: pointer;
   background: none;
   border: none;
-  font-size: 1.5em;
-  color: transparent; 
-  z-index: 1; 
-  
+  z-index: 1;
 }
 
-/* Pseudo-elemento para el color degradado del botón "X" */
-.logoCerrar::after {
-  content: 'x';
-  position: absolute;
-  inset: 0; /* Combina top, left, right y bottom en una sola propiedad */
+
+/* Separación inputs */
+.buttonContainer {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.5em;
-  background: linear-gradient(45deg, #a440d2, #5c74e1); 
-  background-clip: text; 
-  color: transparent; 
-  z-index: -1;
-  transform: scaleY(0.8); /* Hacer que la X sea más delgada */
+  flex-direction: column; 
+  gap: 1em; 
 }
+
 
 /* Estilos de los inputs */
 .inputGroup input {
@@ -102,12 +92,12 @@
   margin-right: 0.5em;
 }
 
-/* Estilo del botón "Iniciar sesión" con gradiente */
+/* Estilo del botón "Iniciar sesión" */
 .iniciarSesion {
   background: linear-gradient(90deg, #a440d2, #39164A);
 }
 
-/* Estilo del botón "Nuevo Usuario" con color diferente */
+/* Estilo del botón "Nuevo Usuario" */
 .nuevoUsuario {
   background: linear-gradient(90deg, #5c74e1, #2b3b86);
   margin-top: 0.5em;

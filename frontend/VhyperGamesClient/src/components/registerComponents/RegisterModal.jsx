@@ -72,7 +72,9 @@ function RegisterModal({ onClose }) {
     return (
         <div className={styles.modalOverlay}>
             <div className={styles.loginModule}>
-                <button className={styles.logoCerrar} onClick={onClose}>✖</button>
+            <button className={styles.logoCerrar} onClick={onClose}>
+                    <img src="./public/icon/cerrar-icon.svg" alt="icono cerrar" />
+                </button>
 
                 <div className={styles.imagenUser}>
                     <img src="./public/icon/user-grande-icon.svg" alt="Logo usuario" />

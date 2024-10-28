@@ -11,14 +11,14 @@ function LoginModal({ onClose }) {
 
     const handleRegister = () => {
         setMostrarRegister(true);
-      };
-    
+    };
+
 
     const handleSubmit = async (event) => {
         event.preventDefault();
         const email = emailRef.current.value;
         const password = passwordRef.current.value;
-       
+
 
         try {
             const response = await fetch('https://localhost:7207/api/auth/login', {
@@ -49,7 +49,9 @@ function LoginModal({ onClose }) {
     return (
         <div className={styles.modalOverlay}>
             <div className={styles.loginModule}>
-                <button className={styles.logoCerrar} onClick={onClose}>X</button>
+            <button className={styles.logoCerrar} onClick={onClose}>
+                    <img src="./public/icon/cerrar-icon.svg" alt="icono cerrar" />
+                </button>
 
                 <div className={styles.imagenUser}>
                     <img src="./public/icon/user-grande-icon.svg" alt="Logo usuario" />
@@ -59,7 +61,7 @@ function LoginModal({ onClose }) {
                     {errorMessage && <div className={styles.error}>{errorMessage}</div>}
 
                     <div className={styles.inputGroup}>
-                        <input 
+                        <input
                             id="email"
                             name="email"
                             ref={emailRef}
@@ -70,7 +72,7 @@ function LoginModal({ onClose }) {
                     </div>
 
                     <div className={styles.inputGroup}>
-                        <input 
+                        <input
                             id="password"
                             name="password"
                             ref={passwordRef}
@@ -86,13 +88,15 @@ function LoginModal({ onClose }) {
                     </div>
 
 
-                    <Button type="submit" variant='large' color='morado'>
-                        Iniciar Sesión
-                    </Button>
+                    <div className={styles.buttonContainer}> 
+                        <Button type="submit" variant='large' color='morado'>
+                            Iniciar Sesión
+                        </Button>
 
-                    <Button variant='large' color='azul' onClick={handleRegister}>
-                        Nuevo Usuario
-                    </Button>
+                        <Button variant='large' color='azul' onClick={handleRegister}>
+                            Nuevo Usuario
+                        </Button>
+                    </div>
                 </form>
                 {mostrarRegister && <RegisterModal onClose={() => setMostrarRegister(false)} />}
             </div>
