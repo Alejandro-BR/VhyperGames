@@ -93,3 +93,14 @@ span {
   align-items: center;
   gap: 8px;
 }
+
+.buttonHeader {
+  /* align-items: center; */
+  margin-top: 0.8%;
+  display:flex;
+}
+
+.catalogIcon{
+  max-width: fit-content;
+  max-height: fit-content;
+}

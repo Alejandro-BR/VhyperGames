@@ -1,8 +1,8 @@
-import classes from './Header.module.css';
-import Button from '../buttonComponent/Button';
-import { messageCart, messageCatalog } from '../../helpers/messages';
-import { useState } from 'react';
-import LoginModal from '../loginComponents/LoginModal';
+import classes from "./Header.module.css";
+import Button from "../buttonComponent/Button";
+import { messageCart, messageCatalog } from "../../helpers/messages";
+import { useState } from "react";
+import LoginModal from "../loginComponents/LoginModal";
 
 function Header() {
   const [mostrarLogin, setMostrarLogin] = useState(false);
@@ -17,23 +17,25 @@ function Header() {
         className={classes.logoImg}
         src="/img/LogoVG.png"
         alt="Logo"
-        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
       />
-      <div className='button-margin'>
+      <div className={classes.buttonHeader}>
         <Button
           variant={"short"}
           color={"morado-azul"}
           onClick={messageCatalog}
         >
-          <span><img src="/icon/mando-icon.svg" alt="Mando" /></span><p className='buttonText'>Catálogo</p>
+          <img className={classes.catalogIcon} src="/icon/mando-icon.svg" alt="Mando" />
+
+          <p className="buttonText">Catálogo</p>
         </Button>
       </div>
 
       <div className={classes.searchBar}>
         <img
           className={classes.menu}
-          src='/img/menu.PNG'
-          alt='menu'
+          src="/img/menu.PNG"
+          alt="menu"
           onClick={messageCatalog}
         />
         <input
@@ -43,8 +45,8 @@ function Header() {
         />
         <img
           className={classes.search}
-          src='/img/lupa.PNG'
-          alt='search'
+          src="/img/lupa.PNG"
+          alt="search"
           onClick={messageCatalog}
         />
       </div>
@@ -52,14 +54,14 @@ function Header() {
       <div className={classes.icons}>
         <img
           className={classes.icon}
-          src='/img/cart.PNG'
-          alt='cart'
+          src="/img/cart.PNG"
+          alt="cart"
           onClick={messageCart}
         />
         <img
           className={classes.icon}
-          src='/img/user.PNG'
-          alt='user'
+          src="/img/user.PNG"
+          alt="user"
           onClick={handleImageClick} // Cambiado a la función sin paréntesis
         />
       </div>
