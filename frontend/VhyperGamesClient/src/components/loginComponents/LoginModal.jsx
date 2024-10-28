@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react';
 import styles from './Login.module.css';
+import Button from '../buttonComponent/Button';
 import RegisterModal from '../registerComponents/RegisterModal';
 
 function LoginModal({ onClose }) {
@@ -48,7 +49,7 @@ function LoginModal({ onClose }) {
     return (
         <div className={styles.modalOverlay}>
             <div className={styles.loginModule}>
-                <button className={styles.logoCerrar} onClick={onClose}>✖</button>
+                <button className={styles.logoCerrar} onClick={onClose}>X</button>
 
                 <div className={styles.imagenUser}>
                     <img src="./public/icon/user-grande-icon.svg" alt="Logo usuario" />
@@ -84,15 +85,14 @@ function LoginModal({ onClose }) {
                         <label htmlFor="rememberMe">Recuérdame</label>
                     </div>
 
-                    <button type="submit" className={`${styles.submitButton} ${styles.iniciarSesion}`}>Iniciar sesión</button>
-                    <button 
-                        type="button" 
-                        className={`${styles.submitButton} ${styles.nuevoUsuario}`} 
-                        onClick={handleRegister}// Cambia al modal de registro
-                    >
+
+                    <Button type="submit" variant='large' color='morado'>
+                        Iniciar Sesión
+                    </Button>
+
+                    <Button variant='large' color='azul' onClick={handleRegister}>
                         Nuevo Usuario
-                    </button>
-                    
+                    </Button>
                 </form>
                 {mostrarRegister && <RegisterModal onClose={() => setMostrarRegister(false)} />}
             </div>
