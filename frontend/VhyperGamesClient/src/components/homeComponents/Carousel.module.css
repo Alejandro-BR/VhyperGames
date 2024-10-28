@@ -1,14 +1,15 @@
 .bannerCard {
-    width: 100%;
-    /* margin-left: 5%;
-    margin-top: 2.5%; */
-    /* border-radius: 20px; */
+    width: 90%;
+    margin-left: 5%;
+    margin-top: 2.5%;
+    border-radius: 20px;
 
 }
 
 .bannerImg {
-    border-bottom-left-radius: 20px;
-    border-bottom-right-radius: 20px;
+    border-radius: 20px;
+    /* border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px; */
     width: 100%;
 }
 

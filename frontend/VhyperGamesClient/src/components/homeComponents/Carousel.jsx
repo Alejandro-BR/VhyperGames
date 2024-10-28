@@ -2,21 +2,21 @@ import classes from "./Carousel.module.css";
 import CarouselPack from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
-const CustomLeftArrow = ({ onClick }) => {
-  return (
-    <button onClick={onClick} className={classes.customArrow}>
-      &lt; {/* Flecha hacia la izquierda */}
-    </button>
-  );
-};
+// const CustomLeftArrow = ({ onClick }) => {
+//   return (
+//     <button onClick={onClick} className={classes.customArrow}>
+//       &lt; {/* Flecha hacia la izquierda */}
+//     </button>
+//   );
+// };
 
-const CustomRightArrow = ({ onClick }) => {
-  return (
-    <button onClick={onClick} className={classes.customArrow}>
-      &gt; {/* Flecha hacia la derecha */}
-    </button>
-  );
-};
+// const CustomRightArrow = ({ onClick }) => {
+//   return (
+//     <button onClick={onClick} className={classes.customArrow}>
+//       &gt; {/* Flecha hacia la derecha */}
+//     </button>
+//   );
+// };
 
 function Carousel() {
   const responsive = {
@@ -45,20 +45,24 @@ function Carousel() {
       autoPlay={true}
       autoPlaySpeed={5000} // 5 segundos
       showDots={true}
-      customLeftArrow={<CustomLeftArrow />}
-      customRightArrow={<CustomRightArrow />}
+      arrows={false}
+      // customLeftArrow={<CustomLeftArrow />}
+      // customRightArrow={<CustomRightArrow />}
     >
       <div className={classes.bannerCard}>
-        <img className={classes.bannerImg} src="/img/banner-figma.png" />
+        <img className={classes.bannerImg} src="/img/marca2.png" />
       </div>
       <div className={classes.bannerCard}>
-        <img className={classes.bannerImg} src="/img/banner.png" />
+        <img className={classes.bannerImg} src="/img/dragon-ball.png" />
       </div>
       <div className={classes.bannerCard}>
-        <img className={classes.bannerImg} src="/img/banner-figma.png" />
+        <img className={classes.bannerImg} src="/img/gow.png" />
       </div>
       <div className={classes.bannerCard}>
-        <img className={classes.bannerImg} src="/img/banner.png" />
+        <img className={classes.bannerImg} src="/img/minecraft.png" />
+      </div>
+      <div className={classes.bannerCard}>
+        <img className={classes.bannerImg} src="/img/witcher3.png" />
       </div>
     </CarouselPack>
   );
