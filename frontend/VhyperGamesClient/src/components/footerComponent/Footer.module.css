@@ -1,69 +1,72 @@
-@property --header-footer-color {
-  syntax: "<color>";
-  initial-value: #131A26;
-  inherits: false; 
-}
 
-.footer{
-  position:static;
+footer {
+  position: static;
   width: auto;
-  height: 210px;
+  height: 210px; 
   display: flex;
   flex-direction: row;
-
+  justify-content: space-between;
   background-color: var(--header-footer-color);
-  
   padding: 1%;
+  color: white;
 }
 
-.leftFooter{
+.leftFooter {
   display: flex;
-  flex-direction: column; /* O "row" si los div deben estar en fila */
+  flex-direction: column;
+  align-items: flex-start;
   margin-right: auto;
 }
 
-
-.text{
+.text {
   position: relative;
   bottom: 5%;
-   color: white;
-   
+  color: white;
 }
 
 .imgFooter {
   width: 20%;
   margin-bottom: 10px;
+  cursor: pointer;
 }
 
 .rightFooter {
   display: flex;
-  flex-direction: row;
-  position: relative;
-  bottom: 0;
-  right: 0;
+  flex-direction: column; 
 }
 
-.icons{
-  display: flex;
-  flex-direction: column;
+.filas {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); 
+  gap: 20px;
   align-items: center;
-  justify-content: center;
-  margin-bottom: 5%;
 }
 
-.icon{
-  width: 56%;
-  margin-bottom: 12%;
+.fila {
+  display: flex;
+  align-items: center; 
+  justify-content: center; 
+  max-width: 100%;
+  overflow: hidden; 
+  padding: 0;
+  margin: 0; 
+  grid-column: span 2; 
 }
 
-.footerButtons{
+.icon {
+  width: 56px;
+  cursor: pointer;
+  margin-right: 10px; 
+}
+
+.footerButtons {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   margin-bottom: 10%;
   margin-right: 4%;
-  gap: 5%; 
+  gap: 5%;
 }
 
 a {
@@ -72,4 +75,8 @@ a {
 
 a.no-underline {
   text-decoration: none;
+}
+
+.logoGit {
+  margin: 1vh;
 }

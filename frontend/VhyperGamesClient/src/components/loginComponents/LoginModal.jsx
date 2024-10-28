@@ -1,15 +1,23 @@
 import { useRef, useState } from 'react';
 import styles from './Login.module.css';
+import RegisterModal from '../registerComponents/RegisterModal';
 
-function LoginModal({ onClose, onRegister }) {
+function LoginModal({ onClose }) {
     const emailRef = useRef();
     const passwordRef = useRef();
     const [errorMessage, setErrorMessage] = useState('');
+    const [mostrarRegister, setMostrarRegister] = useState(false)
+
+    const handleRegister = () => {
+        setMostrarRegister(true);
+      };
+    
 
     const handleSubmit = async (event) => {
         event.preventDefault();
         const email = emailRef.current.value;
         const password = passwordRef.current.value;
+       
 
         try {
             const response = await fetch('https://localhost:7207/api/auth/login', {
@@ -80,11 +88,13 @@ function LoginModal({ onClose, onRegister }) {
                     <button 
                         type="button" 
                         className={`${styles.submitButton} ${styles.nuevoUsuario}`} 
-                        onClick={onRegister} // Cambia al modal de registro
+                        onClick={handleRegister}// Cambia al modal de registro
                     >
                         Nuevo Usuario
                     </button>
+                    
                 </form>
+                {mostrarRegister && <RegisterModal onClose={() => setMostrarRegister(false)} />}
             </div>
         </div>
     );
