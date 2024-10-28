@@ -1,50 +1,49 @@
 /* VARIABLES GLOBALES :D */
-@property --header-footer-color {
-  syntax: "<color>";
-  initial-value: #131A26;
-  inherits: false; 
+
+/* FUENTES */
+@font-face {
+  font-family: 'UniversCnBold'; 
+  src: url('./fonts/UniverseCnBold.ttf') format('truetype'); 
+  font-weight: bold;
+  font-style: normal;
 }
 
-@property --body-color {
-  syntax: "<color>";
-  initial-value: #192233;
-  inherits: false; 
+@font-face {
+  font-family: 'UniversCnRg'; 
+  src: url('./fonts/UniverseCnRg.ttf') format('truetype'); 
+  font-weight: normal; 
+  font-style: normal; 
 }
 
-@property --principal-purple {
-  syntax: "<color>";
-  initial-value: #a440d2;
-  inherits: false; 
+@font-face {
+  font-family: 'UniversLight'; 
+  src: url('./fonts/UniverseLight.ttf') format('truetype'); 
+  font-weight: 300; 
+  font-style: normal; 
 }
 
-@property --principal-blue {
-  syntax: "<color>";
-  initial-value: #5c74E1;
-  inherits: false; 
-}
+@font-face {
+  font-family: 'UniversRegular';
+  src: url('./fonts/UniverseRegular.ttf') format('truetype'); 
+  font-weight: normal; 
+  font-style: normal; 
+} 
 
-@property --gradient-blue {
-  syntax: "<color>";
-  initial-value: linear-gradient(0deg, #5c74E1, #2B3B86);
-  inherits: false; 
-}
+/* ROOT */
+:root {
+  --header-footer-color: #131A26;
+  --body-color: #192233;
+  --principal-purple: #a440d2;
+  --principal-blue: #5c74E1;
 
-@property --gradient-purple {
-  syntax: "<color>";
-  initial-value: linear-gradient(0deg, #a440d2, #39164A);
-  inherits: false; 
-}
+  --gradient-blue: linear-gradient(90deg, #5c74E1, #2B3B86);
+  --gradient-purple: linear-gradient(90deg, #a440d2, #39164A);
+  --gradient-purple-blue: linear-gradient(90deg, #a440d2, #5c74E1);
+  --gradient-blue-purple: linear-gradient(90deg, #5c74E1, #a440d2);
 
-@property --gradient-purple-blue {
-  syntax: "<color>";
-  initial-value: linear-gradient(0deg, #a440d2, #5c74E1);
-  inherits: false; 
-}
-
-@property --gradient-blue-purple {
-  syntax: "<color>";
-  initial-value: linear-gradient(0deg, #5c74E1, #a440d2);
-  inherits: false; 
+  --shadow-blue: box-shadow: 0 3px 0 rgba(30, 10, 211, 0.6);
+  --shadow-purple: box-shadow: 0 1px 0 rgba(57, 22, 74, 0.6); 
+  --shadow-gradient-blue-purple: box-shadow: 0 3px 0 rgba(60, 50, 150, 0.9);
 }
 
 
