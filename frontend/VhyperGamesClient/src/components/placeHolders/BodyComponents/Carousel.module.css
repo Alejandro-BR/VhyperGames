@@ -1,15 +1,18 @@
 .bannerCard {
-    width: 90%;
-    margin-left: 5%;
-    margin-top: 2.5%;
-    border-radius: 20px;
+    width: 100%;
+    /* margin-left: 5%;
+    margin-top: 2.5%; */
+    /* border-radius: 20px; */
 
 }
 
 .bannerImg {
-    border-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
     width: 100%;
 }
+
+
 
 .customArrow {
     background: linear-gradient(0deg, #a440d2, #5c74e1);

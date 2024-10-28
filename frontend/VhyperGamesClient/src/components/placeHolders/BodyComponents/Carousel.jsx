@@ -39,11 +39,11 @@ function Carousel() {
 
   return (
     <CarouselPack
-      partialVisible={true}
+      // partialVisible={true}
       responsive={responsive}
       infinite={true}
       autoPlay={true}
-      autoPlaySpeed={2500}
+      autoPlaySpeed={5000} // 5 segundos
       showDots={true}
       customLeftArrow={<CustomLeftArrow />}
       customRightArrow={<CustomRightArrow />}
