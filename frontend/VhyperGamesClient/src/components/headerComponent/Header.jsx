@@ -47,7 +47,7 @@ function Header() {
         <input
           className={classes.intoSearchBar}
           type="text"
-          placeholder="Juegardos pa buscar uwu"
+          placeholder="Buscar juegos"
         />
         <img
           className={classes.search}
@@ -60,13 +60,13 @@ function Header() {
       <div className={classes.icons}>
         <img
           className={classes.icon}
-          src="/img/cart.PNG"
+          src="./icon/carrito_header.svg"
           alt="cart"
           onClick={messageCart}
         />
         <img
           className={classes.icon}
-          src="/img/user.PNG"
+          src="./icon/user_header.svg"
           alt="user"
           onClick={handleImageClick} // Cambiado a la función sin paréntesis
         />
