@@ -75,7 +75,7 @@
 .icons {
   display: flex;
   flex-direction: row;
-  gap: 20%;
+  gap: 60%;
   height: 50%;
   margin-top: 1%;
   margin-left: auto;
@@ -103,4 +103,5 @@ span {
 .catalogIcon{
   max-width: fit-content;
   max-height: fit-content;
+  margin-right: 6px;
 }
