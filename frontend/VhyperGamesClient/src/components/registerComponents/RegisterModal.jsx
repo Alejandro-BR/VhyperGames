@@ -1,4 +1,5 @@
 import { useRef, useState } from 'react';
+import Button from '../buttonComponent/Button'
 import styles from '../loginComponents/Login.module.css';
 //import { decode as jwt_decode } from 'jwt-decode';
 
@@ -157,10 +158,10 @@ function RegisterModal({ onClose }) {
                             required
                         />
                     </div>
+                    <Button type="submit" variant='large' color='morado-azul'>
+                        Registrarse
+                    </Button>
 
-                    <button type="submit" className={`${styles.submitButton} ${styles.iniciarSesion}`}
-                    
-                    >Registrarse</button>
                 </form>
             </div>
         </div>
