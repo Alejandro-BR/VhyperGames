@@ -3,12 +3,18 @@ import Button from "../buttonComponent/Button";
 import { messageCart, messageCatalog } from "../../helpers/messages";
 import { useState } from "react";
 import LoginModal from "../loginComponents/LoginModal";
+import RegisterModal from "../registerComponents/RegisterModal";
 
 function Header() {
   const [mostrarLogin, setMostrarLogin] = useState(false);
+  const [mostrarRegister, setMostrarRegister] = useState(false);
 
   const handleImageClick = () => {
     setMostrarLogin(true);
+  };
+  const handleRegisterClick = () => {
+    setMostrarLogin(false);
+    setMostrarRegister(true);
   };
 
   return (
@@ -67,7 +73,12 @@ function Header() {
       </div>
 
       {/* Renderizar el LoginModal si mostrarLogin es true */}
-      {mostrarLogin && <LoginModal onClose={() => setMostrarLogin(false)} />}
+      {mostrarLogin && (
+        <LoginModal onClose={() => setMostrarLogin(false)} onRegisterClick={handleRegisterClick} />
+      )}
+
+      {/* Renderizar el RegisterModal si mostrarRegister es true */}
+      {mostrarRegister && <RegisterModal onClose={() => setMostrarRegister(false)} />}
     </div>
   );
 }

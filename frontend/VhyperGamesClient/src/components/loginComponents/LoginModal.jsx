@@ -5,16 +5,12 @@ import RegisterModal from '../registerComponents/RegisterModal';
 import * as jwt_decode from 'jwt-decode';
 
 
-function LoginModal({ onClose }) {
+function LoginModal({ onClose, onRegisterClick}) {
     const emailRef = useRef(null);
     const passwordRef = useRef(null);
     const [promesaError, setPromesaError] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     const [mostrarRegister, setMostrarRegister] = useState(false);
-
-    const handleRegister = () => {
-        setMostrarRegister(true);
-    };
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -120,7 +116,7 @@ function LoginModal({ onClose }) {
                             {isLoading ? "Cargando..." : "Iniciar Sesión"}
                         </Button>
 
-                        <Button variant='large' color='azul' onClick={handleRegister}>
+                        <Button variant="large" color="azul" onClick={onRegisterClick}>
                             Nuevo Usuario
                         </Button>
                     </div>
