@@ -5,7 +5,7 @@ import RegisterModal from '../registerComponents/RegisterModal';
 import * as jwt_decode from 'jwt-decode';
 
 
-function LoginModal({ onClose, onRegisterClick}) {
+function LoginModal({ onClose, onRegisterClick }) {
     const emailRef = useRef(null);
     const passwordRef = useRef(null);
     const [promesaError, setPromesaError] = useState(null);
@@ -39,7 +39,7 @@ function LoginModal({ onClose, onRegisterClick}) {
 
             if (response.ok) {
                 const datosPromesa = await response.json();
-                const token = datosPromesa.accessToken; // Ajusta esto según el formato de tu respuesta
+                const token = datosPromesa.accessToken;
                 console.log('Token recibido:', token)
 
 
@@ -56,12 +56,13 @@ function LoginModal({ onClose, onRegisterClick}) {
                 // console.log('Inicio de sesión exitoso:', decodedToken);
 
                 onClose(); // Cierra el modal al iniciar sesión exitosamente
-            } else {
-                setPromesaError("Error en el servidor");
+            } else if(response.status === 401){
+                setPromesaError("Email o contraseña inválidos");
             }
         } catch (error) {
             console.log(error);
-            setPromesaError(`Error en el servidor: ${error.message}`);
+            setPromesaError(`${error.message}`);
+
         } finally {
             setIsLoading(false);
         }
@@ -80,7 +81,7 @@ function LoginModal({ onClose, onRegisterClick}) {
                 </div>
 
                 <form className={styles.formContainer} onSubmit={handleSubmit}>
-                    
+
 
                     <div className={styles.inputGroup}>
                         <input
@@ -103,7 +104,7 @@ function LoginModal({ onClose, onRegisterClick}) {
                             required
                         />
                     </div>
-                    
+
                     <div className={styles.rememberMe}>
                         <input type="checkbox" id="rememberMe" />
                         <label htmlFor="rememberMe">Recuérdame</label>
