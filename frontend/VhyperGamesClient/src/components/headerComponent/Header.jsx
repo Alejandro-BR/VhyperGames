@@ -33,7 +33,7 @@ function Header() {
         >
           <img className={classes.catalogIcon} src="/icon/mando-icon.svg" alt="Mando" />
 
-          <p className="buttonText">Catálogo</p>
+          Catálogo
         </Button>
       </div>
 

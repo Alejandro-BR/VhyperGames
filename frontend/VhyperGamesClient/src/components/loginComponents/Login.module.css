@@ -36,7 +36,7 @@
   right: -2px;  
   bottom: -2px; 
   border-radius: 8px; 
-  background: linear-gradient(45deg, #a440d2, #5c74e1); 
+  background: var(--gradient-purple-blue); 
   z-index: -1; 
 }
 
@@ -94,11 +94,11 @@
 
 /* Estilo del botón "Iniciar sesión" */
 .iniciarSesion {
-  background: linear-gradient(90deg, #a440d2, #39164A);
+  background: var(--gradient-purple);
 }
 
 /* Estilo del botón "Nuevo Usuario" */
 .nuevoUsuario {
-  background: linear-gradient(90deg, #5c74e1, #2b3b86);
+  background: var(--gradient-blue);
   margin-top: 0.5em;
 }

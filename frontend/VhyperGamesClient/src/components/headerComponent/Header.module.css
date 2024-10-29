@@ -62,16 +62,6 @@
   margin-left: 1%;
 }
 
-.headerButton {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 1%;
-  height: 50%;
-  margin-right: 5%;
-}
-
-
 .icons {
   display: flex;
   flex-direction: row;
@@ -86,12 +76,6 @@ span {
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.buttonText {
-  display: flex;
-  align-items: center;
-  gap: 8px;
 }
 
 .buttonHeader {

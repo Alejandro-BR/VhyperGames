@@ -3,31 +3,37 @@
 /* FUENTES */
 @font-face {
   font-family: 'UniversCnBold'; 
-  src: url('./fonts/UniverseCnBold.ttf') format('truetype'); 
+  src: url('./fonts/UniversCnBold.ttf') format('truetype'); 
   font-weight: bold;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'UniversCnRg'; 
-  src: url('./fonts/UniverseCnRg.ttf') format('truetype'); 
+  src: url('./fonts/UniversCnRg.ttf') format('truetype'); 
   font-weight: normal; 
   font-style: normal; 
 }
 
 @font-face {
   font-family: 'UniversLight'; 
-  src: url('./fonts/UniverseLight.ttf') format('truetype'); 
+  src: url('./fonts/UniversLight.ttf') format('truetype'); 
   font-weight: 300; 
   font-style: normal; 
 }
 
 @font-face {
   font-family: 'UniversRegular';
-  src: url('./fonts/UniverseRegular.ttf') format('truetype'); 
+  src: url('./fonts/UniversRegular.ttf') format('truetype'); 
   font-weight: normal; 
   font-style: normal; 
 } 
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: 'UniversCnBold', sans-serif;
+}
 
 /* ROOT */
 :root {
@@ -48,10 +54,8 @@
 
 
 /* ESTILO QUE SE APLICARA GENERAL A TODOS LOS COMPONETES POR DEFECTO*/
-body{
+body {
   min-height: 100vh;
   min-width:  100vh;
   background-color: var(--body-color);
-  margin: 0;
-
 }

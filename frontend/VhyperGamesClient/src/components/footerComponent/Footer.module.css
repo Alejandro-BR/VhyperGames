@@ -19,7 +19,15 @@ footer {
   margin-left: 2.5vh;
 }
 
-.text {
+h1 {
+  font-family: 'UniversCnBold', sans-serif;
+}
+
+p {
+  font-family: 'UniversCnBold', sans-serif;
+}
+
+.text {  
   position: relative;
   bottom: 5%;
   color: white;

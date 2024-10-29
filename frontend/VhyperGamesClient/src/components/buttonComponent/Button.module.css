@@ -8,7 +8,7 @@
 /* Generico */
 
 button {
-  font-weight: bold;
+  font-family: 'UniversCnBold', sans-serif;
   color: white;
   /* margin: 10px; */
   border-radius: 8px;
@@ -73,7 +73,7 @@ button.azul-morado {
   box-shadow: var(--shadow-gradient-blue-purple);
 }
 
-button.morado-azul:active,s
+button.morado-azul:active,
 button.azul-morado:active {
   box-shadow: var(--shadow-gradient-blue-purple);
 }
