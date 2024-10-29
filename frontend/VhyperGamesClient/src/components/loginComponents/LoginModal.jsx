@@ -122,7 +122,6 @@ function LoginModal({ onClose, onRegisterClick}) {
                     </div>
                 </form>
                 {mostrarRegister && <RegisterModal onClose={() => setMostrarRegister(false)} />}
-                {mostrarRegister && <RegisterModal onClose={() => setMostrarRegister(false)} />}
             </div>
         </div>
     );
