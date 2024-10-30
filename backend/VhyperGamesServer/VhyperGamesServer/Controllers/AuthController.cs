@@ -61,6 +61,7 @@ public class AuthController : ControllerBase
                 Claims = new Dictionary<string, object>
                 {
                     { "id", newUser.Id.ToString() },
+                    { "name", newUser.Name.ToString() },
                     { ClaimTypes.Role, newUser.Rol }               
                 },
 
@@ -107,6 +108,7 @@ public class AuthController : ControllerBase
                 Claims = new Dictionary<string, object>
                 {
                     { "id", user.Id.ToString() },
+                    { "name", user.Name.ToString() },
                     { ClaimTypes.Role, user.Rol }
                 },
 
