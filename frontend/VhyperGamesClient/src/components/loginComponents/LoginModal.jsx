@@ -48,14 +48,18 @@ function LoginModal({ onClose, onRegisterClick }) {
                 if (decodedToken) {
                     const userInfo = {
                         id: decodedToken.id,  
-                        role: decodedToken.role,  
+                        role: decodedToken.role,
+                        name: decodedToken.name  
                     };
                     console.log("userInfo", userInfo);
+                    
                 }
+                onClose(); 
 
-                console.log('Inicio de sesión exitoso:', decodedToken);
+                setTimeout(() => {
+                    alert(`Bienvenido, ${decodedToken.name}`);
+                }, 500); 
 
-                onClose(); // Cierra el modal al iniciar sesión exitosamente
             } else if(response.status === 401){
                 setPromesaError("Email o contraseña inválidos");
             }
