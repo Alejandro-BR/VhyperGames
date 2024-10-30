@@ -2,7 +2,7 @@ import { useRef, useState } from 'react';
 import styles from './Login.module.css';
 import Button from '../buttonComponent/Button';
 import RegisterModal from '../registerComponents/RegisterModal';
-import * as jwt_decode from 'jwt-decode';
+import {jwtDecode} from 'jwt-decode';
 
 
 function LoginModal({ onClose, onRegisterClick}) {
@@ -42,18 +42,18 @@ function LoginModal({ onClose, onRegisterClick}) {
                 const token = datosPromesa.accessToken; // Ajusta esto según el formato de tu respuesta
                 console.log('Token recibido:', token)
 
+                //Decodificar el código
+                const decodedToken = jwtDecode(token);
 
-                // const decodedToken = jwt_decode(token);
+                if (decodedToken) {
+                    const userInfo = {
+                        id: decodedToken.id,  
+                        role: decodedToken.role,  
+                    };
+                    console.log("userInfo", userInfo);
+                }
 
-                // if (decodedToken) {
-                //     const userInfo = {
-                //         id: decodedToken.id,  // Asegúrate de que 'id' existe
-                //         role: decodedToken.role,  // Asegúrate de que 'role' existe
-                //     };
-                //     console.log("userInfo", userInfo);
-                // }
-
-                // console.log('Inicio de sesión exitoso:', decodedToken);
+                console.log('Inicio de sesión exitoso:', decodedToken);
 
                 onClose(); // Cierra el modal al iniciar sesión exitosamente
             } else {
