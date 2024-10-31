@@ -10,6 +10,7 @@ function RegisterModal({ onClose }) {
     const passwordRef1 = useRef();
     const passwordRef2 = useRef();
     const addressRef = useRef();
+    const [emailError, setEmailError] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
     const [passwordError, setPasswordError] = useState("");
@@ -79,8 +80,8 @@ function RegisterModal({ onClose }) {
                     alert(`Bienvenido, ${decodedToken.name}`);
                 }, 500);
 
-            } else if (response.status === 401) {
-                setPromesaError("Email o contraseña inválidos");
+            } else if (response.status === 400) {
+                setEmailError("Email en uso.");
             }
         } catch (error) {
             setErrorMessage(error.message);
@@ -104,6 +105,7 @@ function RegisterModal({ onClose }) {
                 <form className={styles.formContainer} onSubmit={handleSubmit}>
                     {errorMessage && <div className={styles.error}>{errorMessage}</div>}
                     {passwordError && <div className={styles.error}>{passwordError}</div>}
+                    {emailError && <div className={styles.error}>{emailError}</div>}
 
                     <div className={styles.inputGroup}>
                         <input

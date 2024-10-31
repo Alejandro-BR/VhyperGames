@@ -2,7 +2,7 @@ import { useRef, useState } from 'react';
 import styles from './Login.module.css';
 import Button from '../buttonComponent/Button';
 import RegisterModal from '../registerComponents/RegisterModal';
-import {jwtDecode} from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode';
 
 
 function LoginModal({ onClose, onRegisterClick }) {
@@ -47,20 +47,20 @@ function LoginModal({ onClose, onRegisterClick }) {
 
                 if (decodedToken) {
                     const userInfo = {
-                        id: decodedToken.id,  
+                        id: decodedToken.id,
                         role: decodedToken.role,
-                        name: decodedToken.name  
+                        name: decodedToken.name
                     };
                     console.log("userInfo", userInfo);
-                    
+
                 }
-                onClose(); 
+                onClose();
 
                 setTimeout(() => {
                     alert(`Bienvenido, ${decodedToken.name}`);
-                }, 500); 
+                }, 500);
 
-            } else if(response.status === 401){
+            } else if (response.status === 401) {
                 setPromesaError("Email o contraseña inválidos");
             }
         } catch (error) {
@@ -109,7 +109,7 @@ function LoginModal({ onClose, onRegisterClick }) {
                         />
                     </div>
 
-                    <div className={styles.rememberMe}>
+                    <div className={`${styles.rememberMe} ${styles.rememberGroup}`}>
                         <input type="checkbox" id="rememberMe" />
                         <label htmlFor="rememberMe">Recuérdame</label>
                     </div>

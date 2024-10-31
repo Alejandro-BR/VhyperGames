@@ -92,7 +92,7 @@
 /* Checkbox de "Recuérdame" */
 .rememberMe {
   color: #ccc;
-  font-size: 0.9em;
+  width: 100%;
 }
 
 /* Separación inputs */
