@@ -1,8 +1,9 @@
-import { useRef, useState } from "react";
-import styles from "./Login.module.css";
-import Button from "../buttonComponent/Button";
-import RegisterModal from "../registerComponents/RegisterModal";
-import * as jwt_decode from "jwt-decode";
+import { useRef, useState } from 'react';
+import styles from './Login.module.css';
+import Button from '../buttonComponent/Button';
+import RegisterModal from '../registerComponents/RegisterModal';
+import {jwtDecode} from 'jwt-decode';
+
 
 function LoginModal({ onClose, onRegisterClick }) {
     const emailRef = useRef(null);
@@ -22,16 +23,16 @@ function LoginModal({ onClose, onRegisterClick }) {
             password: passwordValue,
         };
 
-        await fetchingData("https://localhost:7207/api/auth/login", objetoBackend);
+        await fetchingData('https://localhost:7207/api/auth/login', objetoBackend);
     };
 
     async function fetchingData(url, data) {
         try {
             setIsLoading(true);
             const response = await fetch(url, {
-                method: "POST",
+                method: 'POST',
                 headers: {
-                    "Content-Type": "application/json",
+                    'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(data),
             });
@@ -39,31 +40,38 @@ function LoginModal({ onClose, onRegisterClick }) {
             if (response.ok) {
                 const datosPromesa = await response.json();
                 const token = datosPromesa.accessToken;
-                console.log("Token recibido:", token);
+                console.log('Token recibido:', token)
 
-                // const decodedToken = jwt_decode(token);
+                //Decodificar el código
+                const decodedToken = jwtDecode(token);
 
-                // if (decodedToken) {
-                //     const userInfo = {
-                //         id: decodedToken.id,  // Asegúrate de que 'id' existe
-                //         role: decodedToken.role,  // Asegúrate de que 'role' existe
-                //     };
-                //     console.log("userInfo", userInfo);
-                // }
+                if (decodedToken) {
+                    const userInfo = {
+                        id: decodedToken.id,  
+                        role: decodedToken.role,
+                        name: decodedToken.name  
+                    };
+                    console.log("userInfo", userInfo);
+                    
+                }
+                onClose(); 
 
-                // console.log('Inicio de sesión exitoso:', decodedToken);
+                setTimeout(() => {
+                    alert(`Bienvenido, ${decodedToken.name}`);
+                }, 500); 
 
-                onClose(); // Cierra el modal al iniciar sesión exitosamente
-            } else if (response.status === 401) {
+            } else if(response.status === 401){
                 setPromesaError("Email o contraseña inválidos");
             }
         } catch (error) {
             console.log(error);
             setPromesaError(`${error.message}`);
+
         } finally {
             setIsLoading(false);
         }
     }
+
 
     return (
         <div className={styles.modalOverlay}>
@@ -77,6 +85,8 @@ function LoginModal({ onClose, onRegisterClick }) {
                 </div>
 
                 <form className={styles.formContainer} onSubmit={handleSubmit}>
+
+
                     <div className={styles.inputGroup}>
                         <input
                             id="email"
@@ -99,7 +109,7 @@ function LoginModal({ onClose, onRegisterClick }) {
                         />
                     </div>
 
-                    <div className={`${styles.rememberMe} ${styles.rememberGroup}`}>
+                    <div className={styles.rememberMe}>
                         <input type="checkbox" id="rememberMe" />
                         <label htmlFor="rememberMe">Recuérdame</label>
                     </div>
@@ -107,12 +117,7 @@ function LoginModal({ onClose, onRegisterClick }) {
                     {promesaError && <div className={styles.error}>{promesaError}</div>}
 
                     <div className={styles.buttonContainer}>
-                        <Button
-                            type="submit"
-                            variant="large"
-                            color="morado"
-                            disabled={isLoading}
-                        >
+                        <Button type="submit" variant='large' color='morado' disabled={isLoading}>
                             {isLoading ? "Cargando..." : "Iniciar Sesión"}
                         </Button>
 
@@ -121,9 +126,7 @@ function LoginModal({ onClose, onRegisterClick }) {
                         </Button>
                     </div>
                 </form>
-                {mostrarRegister && (
-                    <RegisterModal onClose={() => setMostrarRegister(false)} />
-                )}
+                {mostrarRegister && <RegisterModal onClose={() => setMostrarRegister(false)} />}
             </div>
         </div>
     );

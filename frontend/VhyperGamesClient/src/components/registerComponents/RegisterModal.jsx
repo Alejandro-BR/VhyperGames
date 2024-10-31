@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import Button from "../buttonComponent/Button";
 import styles from "../loginComponents/Login.module.css";
-//import { decode as jwt_decode } from 'jwt-decode';
+import {jwtDecode} from 'jwt-decode';
 
 function RegisterModal({ onClose }) {
     const nameRef = useRef();
@@ -10,6 +10,7 @@ function RegisterModal({ onClose }) {
     const passwordRef1 = useRef();
     const passwordRef2 = useRef();
     const addressRef = useRef();
+    const [isLoading, setIsLoading] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
     const [passwordError, setPasswordError] = useState("");
 
@@ -46,6 +47,7 @@ function RegisterModal({ onClose }) {
 
     async function fetchingData(url, data) {
         try {
+            setIsLoading(true);
             const response = await fetch(url, {
                 method: "POST",
                 headers: {
@@ -54,24 +56,37 @@ function RegisterModal({ onClose }) {
                 body: JSON.stringify(data),
             });
 
-            if (!response.ok) {
-                const errorText = await response.text(); // Obtener el texto de error
-                throw new Error(errorText || "Error al registrarse.");
+            if (response.ok) {
+                const datosPromesa = await response.json();
+                const token = datosPromesa.accessToken;
+                console.log('Token recibido:', token)
+
+                //Decodificar el código
+                const decodedToken = jwtDecode(token);
+
+                if (decodedToken) {
+                    const userInfo = {
+                        id: decodedToken.id,
+                        role: decodedToken.role,
+                        name: decodedToken.name
+                    };
+                    console.log("userInfo", userInfo);
+
+                }
+                onClose();
+
+                setTimeout(() => {
+                    alert(`Bienvenido, ${decodedToken.name}`);
+                }, 500);
+
+            } else if (response.status === 401) {
+                setPromesaError("Email o contraseña inválidos");
             }
-
-            const responseData = await response.json();
-            const { accessToken } = responseData;
-            localStorage.setItem("accessToken", accessToken);
-
-            // Aquí podrías decodificar el token si es necesario
-            // const decodedToken = jwt_decode(accessToken);
-            // console.log(decodedToken);
-
-            onClose(); // Cerrar modal después del registro exitoso
-            //window.location.href = 'http://localhost:5173/';
         } catch (error) {
             setErrorMessage(error.message);
             console.error("Error en el registro:", error);
+        } finally {
+            setIsLoading(false);
         }
     }
 
@@ -155,8 +170,8 @@ function RegisterModal({ onClose }) {
                             required
                         />
                     </div>
-                    <Button type="submit" variant="large" color="morado-azul">
-                        Registrarse
+                    <Button type="submit" variant="large" color="morado-azul" disabled={isLoading}>
+                    {isLoading ? "Cargando..." : "Registrase"}
                     </Button>
                 </form>
             </div>
