@@ -29,8 +29,8 @@ function LoginRegister() {
                         <button type="button" className={`${styles.submitButton} ${styles.iniciarSesion}`}>
                             Iniciar sesión
                         </button>
-                        <button 
-                            type="button" 
+                        <button
+                            type="button"
                             className={`${styles.submitButton} ${styles.nuevoUsuario}`}
                             onClick={openRegisterModal} // Abrir el modal de registro
                         >

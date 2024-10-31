@@ -19,24 +19,28 @@ function Header() {
 
   return (
     <div className={classes.header}>
-      <img
-        className={classes.logoImg}
-        src="/img/LogoVG.png"
-        alt="Logo"
-        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-      />
-      <div className={classes.buttonHeader}>
-        <Button
-          variant={"short"}
-          color={"morado-azul"}
-          onClick={messageCatalog}
-        >
-          <img className={classes.catalogIcon} src="/icon/mando-icon.svg" alt="Mando" />
-
-          Catálogo
-        </Button>
+      <div className={classes.left}>
+        <img
+          className={classes.logoImg}
+          src="/img/LogoVG.png"
+          alt="Logo"
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+        />
+        <div className={classes.buttonHeader}>
+          <Button
+            variant={"short"}
+            color={"morado-azul"}
+            onClick={messageCatalog}
+          >
+            <img
+              className={classes.catalogIcon}
+              src="/icon/mando-icon.svg"
+              alt="Mando"
+            />
+            Catálogo
+          </Button>
+        </div>
       </div>
-
       <div className={classes.searchBar}>
         <img
           className={classes.menu}
@@ -74,11 +78,16 @@ function Header() {
 
       {/* Renderizar el LoginModal si mostrarLogin es true */}
       {mostrarLogin && (
-        <LoginModal onClose={() => setMostrarLogin(false)} onRegisterClick={handleRegisterClick} />
+        <LoginModal
+          onClose={() => setMostrarLogin(false)}
+          onRegisterClick={handleRegisterClick}
+        />
       )}
 
       {/* Renderizar el RegisterModal si mostrarRegister es true */}
-      {mostrarRegister && <RegisterModal onClose={() => setMostrarRegister(false)} />}
+      {mostrarRegister && (
+        <RegisterModal onClose={() => setMostrarRegister(false)} />
+      )}
     </div>
   );
 }

@@ -1,70 +1,11 @@
-.bannerCard {
-    width: 90%;
-    margin-left: 5%;
-    margin-top: 2.5%;
+.carrousel {
+    margin-top: 40px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 85%;
     border-radius: 20px;
-
 }
 
 .bannerImg {
-    border-radius: 20px;
-    /* border-bottom-left-radius: 20px;
-    border-bottom-right-radius: 20px; */
     width: 100%;
-}
-
-
-
-.customArrow {
-    background: linear-gradient(0deg, #a440d2, #5c74e1);
-    /* Color de fondo */
-    color: white;
-    /* Color de la flecha */
-    border: none;
-    /* Sin borde */
-    padding: 10px;
-    /* Espaciado */
-    cursor: pointer;
-    /* Cambia el cursor al pasar sobre el botón */
-    font-size: 24px;
-    /* Tamaño de la fuente */
-    border-radius: 50%;
-    /* Bordes redondeados para hacerlos circulares */
-    width: 40px;
-    /* Ancho */
-    height: 40px;
-    /* Alto */
-    display: flex;
-    /* Para centrar el contenido */
-    align-items: center;
-    /* Centrado vertical */
-    justify-content: center;
-    /* Centrado horizontal */
-    position: absolute;
-    /* Para posicionarlos */
-    z-index: 10;
-    /* Asegúrate de que estén por encima de otros elementos */
-}
-
-.customArrow:hover {
-    opacity: 0.8;
-    /* Efecto al pasar el ratón */
-}
-
-.customArrow:first-of-type {
-    left: 10px;
-    /* Posición del botón izquierdo */
-    top: 50%;
-    /* Centrado vertical */
-    transform: translateY(-50%);
-    /* Ajuste para centrar */
-}
-
-.customArrow:last-of-type {
-    right: 10px;
-    /* Posición del botón derecho */
-    top: 50%;
-    /* Centrado vertical */
-    transform: translateY(-50%);
-    /* Ajuste para centrar */
 }

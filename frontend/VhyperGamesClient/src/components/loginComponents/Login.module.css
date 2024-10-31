@@ -1,8 +1,3 @@
-*{
-  margin: 0;
-  padding: 0;
-}
-
 /* Overlay del modal */
 .modalOverlay {
   position: fixed;
@@ -17,16 +12,11 @@
   z-index: 1000;
 }
 
-.formContainer{
-  display: flex;
-  flex-direction: column; 
-  align-items: center;
-}
-
 /* Estilos del módulo de inicio de sesión */
 .loginModule {
-  background-color: #192233;
-  padding: 2em;
+  /*z-index: 1001;*/
+  background-color: var(--body-color);
+  padding: 32px;
   border-radius: 8px;
   width: 350px;
   max-width: 80%;
@@ -34,29 +24,22 @@
   flex-direction: column;
   align-items: center;
   color: #f0f0f0;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  box-shadow: 0px 0px 50px rgba(82, 29, 226, 0.507);
   position: relative;
+  gap: 16px;
 }
 
 /* Degradado en el borde del módulo */
 .loginModule::before {
-  content: '';
+  content: "";
   position: absolute;
-  top: -2px;    
+  top: -2px;
   left: -2px;
-  right: -2px;  
-  bottom: -2px; 
-  border-radius: 8px; 
-  background: var(--gradient-purple-blue); 
-  z-index: -1; 
-}
-
-/* Imagen del usuario */
-.imagenUser img {
-  align-items: center;
-  width: 180px;  
-  height: 180px; 
-  margin-bottom: 1em;
+  right: -2px;
+  bottom: -2px;
+  border-radius: 8px;
+  background: var(--gradient-purple-blue);
+  z-index: -1;
 }
 
 /* Botón de cerrar */
@@ -67,63 +50,60 @@
   cursor: pointer;
   background: none;
   border: none;
-  z-index: 1;
+  /*  z-index: 1; */
 }
 
+/* Imagen del usuario */
+.imagenUser img {
+  width: 180px;
+}
 
-/* Separación inputs */
-.buttonContainer {
+.formContainer {
   display: flex;
-  flex-direction: column; 
+  flex-direction: column;
   align-items: center;
-  gap: 1em; 
+  gap: 16px;
 }
 
-.inputGroup{
+.inputGroup {
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
-  max-width: 400px; 
-  margin: 0 auto; 
+  max-width: 400px;
 }
 
 /* Estilos de los inputs */
 .inputGroup input {
-  width: 100%;
-  padding: 0.8em;
-  margin-bottom: 1em;
+  padding: 12px;
   border: 1px solid #ccc;
   border-radius: 4px;
   background-color: #e8e8e8;
   color: #333;
-  font-size: 1em;
-  align-items: center;
+  font-size: 16px;
+}
+
+.rememberGroup {
+  display: flex;
+  width: 100%;
+  gap: 16px;
 }
 
 /* Checkbox de "Recuérdame" */
 .rememberMe {
   color: #ccc;
   font-size: 0.9em;
-  margin-bottom: 1em;
 }
 
-.rememberMe input {
-  margin-right: 0.5em;
+/* Separación inputs */
+.buttonContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
 }
 
-/* Estilo del botón "Iniciar sesión" */
-.iniciarSesion {
-  background: var(--gradient-purple);
-}
-
-/* Estilo del botón "Nuevo Usuario" */
-.nuevoUsuario {
-  background: var(--gradient-blue);
-  margin-top: 0.5em;
-}
-
-.error{
+.error {
   color: var(--principal-purple);
-  margin-bottom: 1rem;
+  margin-bottom: 16px;
 }

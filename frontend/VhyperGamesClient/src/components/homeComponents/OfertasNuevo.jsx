@@ -28,9 +28,9 @@ function OfertasNuevos() {
         <h1 className={style.palito}>❙</h1>
         <h1>{isOfertas ? "OFERTAS" : "NUEVOS"}</h1>
       </div>
-       
+
       <h2 className={style.text}>{isOfertas ? "Ahora mismo no hay juegos de oferta en la página vuelve pronto ;)"
-          : "Ahora mismo no hay juegos nuevos en la página vuelve pronto ;)"}</h2>
+        : "Ahora mismo no hay juegos nuevos en la página vuelve pronto ;)"}</h2>
 
     </>
 

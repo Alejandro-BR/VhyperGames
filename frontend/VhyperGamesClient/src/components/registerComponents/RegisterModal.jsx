@@ -1,8 +1,7 @@
-import { useRef, useState } from 'react';
-import Button from '../buttonComponent/Button'
-import styles from '../loginComponents/Login.module.css';
+import { useRef, useState } from "react";
+import Button from "../buttonComponent/Button";
+import styles from "../loginComponents/Login.module.css";
 //import { decode as jwt_decode } from 'jwt-decode';
-
 
 function RegisterModal({ onClose }) {
     const nameRef = useRef();
@@ -11,9 +10,8 @@ function RegisterModal({ onClose }) {
     const passwordRef1 = useRef();
     const passwordRef2 = useRef();
     const addressRef = useRef();
-    const [errorMessage, setErrorMessage] = useState('');
-    const [passwordError, setPasswordError] = useState('');
-    
+    const [errorMessage, setErrorMessage] = useState("");
+    const [passwordError, setPasswordError] = useState("");
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -28,30 +26,30 @@ function RegisterModal({ onClose }) {
         // Verificar si las contraseñas coinciden
         if (password1 !== password2) {
             setPasswordError("Las contraseñas introducidas no coinciden.");
-            return; 
+            return;
         } else {
-            setPasswordError(""); 
+            setPasswordError("");
         }
 
         // Crear objeto de datos
-        const data = { 
-            name, 
-            surname, 
-            email, 
-            password: password1, 
-            address 
+        const data = {
+            name,
+            surname,
+            email,
+            password: password1,
+            address,
         };
 
         // Llamar a la función fetchingData
-        await fetchingData('https://localhost:7207/api/auth/register', data);
+        await fetchingData("https://localhost:7207/api/auth/register", data);
     };
 
     async function fetchingData(url, data) {
         try {
-            const response = await fetch(url, { 
-                method: 'POST',
+            const response = await fetch(url, {
+                method: "POST",
                 headers: {
-                    'Content-Type': 'application/json',
+                    "Content-Type": "application/json",
                 },
                 body: JSON.stringify(data),
             });
@@ -63,25 +61,24 @@ function RegisterModal({ onClose }) {
 
             const responseData = await response.json();
             const { accessToken } = responseData;
-            localStorage.setItem('accessToken', accessToken);
+            localStorage.setItem("accessToken", accessToken);
 
             // Aquí podrías decodificar el token si es necesario
             // const decodedToken = jwt_decode(accessToken);
             // console.log(decodedToken);
 
             onClose(); // Cerrar modal después del registro exitoso
-            window.location.href = 'http://localhost:5173/';
-
+            //window.location.href = 'http://localhost:5173/';
         } catch (error) {
             setErrorMessage(error.message);
-            console.error('Error en el registro:', error);
+            console.error("Error en el registro:", error);
         }
     }
 
     return (
         <div className={styles.modalOverlay}>
             <div className={styles.loginModule}>
-            <button className={styles.logoCerrar} onClick={onClose}>
+                <button className={styles.logoCerrar} onClick={onClose}>
                     <img src="./public/icon/cerrar-icon.svg" alt="icono cerrar" />
                 </button>
 
@@ -94,7 +91,7 @@ function RegisterModal({ onClose }) {
                     {passwordError && <div className={styles.error}>{passwordError}</div>}
 
                     <div className={styles.inputGroup}>
-                        <input 
+                        <input
                             id="nombre"
                             name="nombre"
                             ref={nameRef}
@@ -105,7 +102,7 @@ function RegisterModal({ onClose }) {
                     </div>
 
                     <div className={styles.inputGroup}>
-                        <input 
+                        <input
                             id="surname"
                             name="surname"
                             ref={surnameRef}
@@ -116,7 +113,7 @@ function RegisterModal({ onClose }) {
                     </div>
 
                     <div className={styles.inputGroup}>
-                        <input 
+                        <input
                             id="email"
                             name="email"
                             ref={emailRef}
@@ -127,7 +124,7 @@ function RegisterModal({ onClose }) {
                     </div>
 
                     <div className={styles.inputGroup}>
-                        <input 
+                        <input
                             id="password1"
                             name="password1"
                             ref={passwordRef1}
@@ -138,7 +135,7 @@ function RegisterModal({ onClose }) {
                     </div>
 
                     <div className={styles.inputGroup}>
-                        <input 
+                        <input
                             id="password2"
                             name="password2"
                             ref={passwordRef2}
@@ -149,7 +146,7 @@ function RegisterModal({ onClose }) {
                     </div>
 
                     <div className={styles.inputGroup}>
-                        <input 
+                        <input
                             id="address"
                             name="address"
                             ref={addressRef}
@@ -158,10 +155,9 @@ function RegisterModal({ onClose }) {
                             required
                         />
                     </div>
-                    <Button type="submit" variant='large' color='morado-azul'>
+                    <Button type="submit" variant="large" color="morado-azul">
                         Registrarse
                     </Button>
-
                 </form>
             </div>
         </div>
