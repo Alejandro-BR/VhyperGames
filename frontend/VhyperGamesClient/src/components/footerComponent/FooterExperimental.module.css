@@ -1,0 +1,36 @@
+.footer{
+  display: flex;
+  justify-content: space-around;
+  background-color: var(--header-footer-color);
+  color: white;
+}
+
+.leftFooter{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+}
+
+.imgFooter{
+  max-width: 80px;
+  cursor: pointer;
+}
+
+.rightFooter{
+  display: flex;
+  gap: 40px;
+  align-items: center;
+}
+
+.fila{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+}
+
+.icon{
+  max-width: 50px;
+  cursor: pointer;
+}

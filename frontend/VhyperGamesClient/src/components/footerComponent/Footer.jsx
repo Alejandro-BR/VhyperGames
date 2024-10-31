@@ -1,10 +1,11 @@
-import classes from './Footer.module.css';
+/*import classes from './Footer.module.css';*/
+import classes from './FooterExperimental.module.css'
 import Button from '../buttonComponent/Button';
 import { messageAboutUs, messageCompany } from '../../helpers/messages';
 
 function Footer() {
   return (
-    <footer>
+    <footer className={classes.footer}>
       <div className={classes.leftFooter}>
         <img
           className={classes.imgFooter}
@@ -19,7 +20,7 @@ function Footer() {
       </div>
 
       <div className={classes.rightFooter}>
-        <div className={classes.filas}>
+
           <div className={classes.fila}>
             <img
               className={classes.icon}
@@ -55,7 +56,7 @@ function Footer() {
               </Button>
             </a>
           </div>
-        </div>
+
       </div>
     </footer>
   );
