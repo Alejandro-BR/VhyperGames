@@ -47,6 +47,8 @@
   --gradient-purple-blue: linear-gradient(90deg, #a440d2, #5c74E1);
   --gradient-blue-purple: linear-gradient(90deg, #5c74E1, #a440d2);
 
+  --led-purple: #a440d2a5;
+
   --shadow-blue: box-shadow: 0 3px 0 rgba(30, 10, 211, 0.6);
   --shadow-purple: box-shadow: 0 1px 0 rgba(57, 22, 74, 0.6); 
   --shadow-gradient-blue-purple: box-shadow: 0 3px 0 rgba(60, 50, 150, 0.9);

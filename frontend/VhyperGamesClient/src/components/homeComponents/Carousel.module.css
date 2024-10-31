@@ -4,7 +4,7 @@
     margin-right: auto;
     width: 75%;
     border-radius: 20px;
-    box-shadow: 0 0px 35px  #a440d28b;
+    box-shadow: 0 0px 35px  var(--led-purple);
 }
 
 .bannerImg {
