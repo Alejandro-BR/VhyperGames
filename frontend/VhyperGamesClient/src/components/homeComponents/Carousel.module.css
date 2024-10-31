@@ -2,10 +2,12 @@
     margin-top: 40px;
     margin-left: auto;
     margin-right: auto;
-    width: 85%;
+    width: 75%;
     border-radius: 20px;
+    box-shadow: 0 0px 35px  #a440d28b;
 }
 
 .bannerImg {
+    margin-bottom: -5px;
     width: 100%;
 }
