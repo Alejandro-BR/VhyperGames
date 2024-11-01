@@ -2,6 +2,7 @@
 using VhyperGamesServer.Models.Database;
 using VhyperGamesServer.Models.Database.Entities;
 using VhyperGamesServer.Models.Database.Repositories;
+using VhyperGamesServer.Services;
 
 namespace VhyperGamesServer.Controller;
 
@@ -9,11 +10,11 @@ namespace VhyperGamesServer.Controller;
 [ApiController]
 public class UserController : ControllerBase
 {
-    private readonly UnitOfWork _unitOfWork;
+    private readonly UserService _service;
 
-    public UserController(UnitOfWork unitOfWork)
+    public UserController(UserService service)
     {
-        _unitOfWork = unitOfWork;
+        _service = service;
     }
 
     /**
@@ -23,6 +24,6 @@ public class UserController : ControllerBase
     [HttpGet("GetUsers")]
     public async Task<IEnumerable<User>> GetUsers()
     {
-        return await _unitOfWork.UserRepository.GetAllAsync();
+        return await _service.GetUsers();
     }
 }

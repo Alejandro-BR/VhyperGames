@@ -3,6 +3,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using VhyperGamesServer.Models.Database;
 using VhyperGamesServer.Models.Database.Repositories;
+using VhyperGamesServer.Services;
 
 namespace VhyperGamesServer;
 
@@ -29,6 +30,8 @@ public class Program
 
         // Inyectar el unit of work que contiene todos los repositorios
         builder.Services.AddScoped<UnitOfWork>();
+
+        builder.Services.AddTransient<UserService>();
 
 
         //Permite CORS
