@@ -109,10 +109,12 @@ public class MyDbContext : DbContext
 
             entity.Property(e => e.DrmFree)
                 .HasColumnName("drm_free")
+                .HasColumnType("boolean")
                 .IsRequired();
 
             entity.Property(e => e.ReleaseDate)
                 .HasColumnName("release_date")
+                .HasColumnType("date")
                 .IsRequired();
 
             entity.Property(e => e.Price)
@@ -141,19 +143,22 @@ public class MyDbContext : DbContext
                 .IsRequired()
                 .ValueGeneratedOnAdd();
 
+            entity.Property(e => e.GameId)
+                .HasColumnName("game_id");
+
             entity.HasOne(e => e.Game)
-            .WithMany(g => g.ImageGames)
-            .HasForeignKey(e => e.GameId);
+                .WithMany(g => g.ImageGames)
+                .HasForeignKey(e => e.GameId);
 
             entity.Property(e => e.ImageUrl)
-            .HasColumnName("image_url")
-            .HasMaxLength(255)
-            .IsRequired();
+                .HasColumnName("image_url")
+                .HasMaxLength(255)
+                .IsRequired();
 
             entity.Property(e => e.AltText)
-            .HasColumnName("alt_text")
-            .HasMaxLength(100)
-            .IsRequired();
+                .HasColumnName("alt_text")
+                .HasMaxLength(100)
+                .IsRequired();
         });
 
     }
