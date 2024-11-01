@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
+using System.Linq.Expressions;
 using VhyperGamesServer.Models.Database;
 
 namespace VhyperGamesServer.Models.Database.Repositories;
@@ -42,6 +43,9 @@ public abstract class Repository<TEntity, TId> : IRepository<TEntity, TEntity> w
         return await GetByIdAsync(id) != null;
     }
 
-
+    public async Task<List<TEntity>> FindAsync(Expression<Func<TEntity, bool>> predicate)
+    {
+        return await Context.Set<TEntity>().Where(predicate).ToListAsync();
+    }
 }
 
