@@ -7,8 +7,10 @@ public class UnitOfWork
 {
     private readonly MyDbContext _myDbContext;
     private UserRepository _userRepository;
+    private GameRepository _gameRepository;
 
     public UserRepository UserRepository => _userRepository ??= new UserRepository(_myDbContext);
+    public GameRepository GameRepository => _gameRepository ??= new GameRepository(_myDbContext);
 
     public UnitOfWork(MyDbContext myDbContext)
     {
