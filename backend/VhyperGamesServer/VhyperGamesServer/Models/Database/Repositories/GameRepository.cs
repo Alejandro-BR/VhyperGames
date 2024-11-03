@@ -9,7 +9,6 @@ namespace VhyperGamesServer.Models.Database.Repositories;
 public class GameRepository : Repository<Game, int>
 {
     private readonly MyDbContext _context;
-    private readonly SmartSearchService _smartSearchService;
     public GameRepository(MyDbContext context) : base(context)
     {
         _context = context;
@@ -23,14 +22,14 @@ public class GameRepository : Repository<Game, int>
             .FirstOrDefaultAsync(game => game.Title.ToLower() == title);
     }
 
-    public async Task<List<Game>> FilterAndSortGamesAsync(GameFilterDto filter)
+    public async Task<List<Game>> FilterAndSortGamesAsync(GameFilterDto filter, SmartSearchService smartSearchService)
     {
         IQueryable<Game> query = _context.Games;
 
         if (!string.IsNullOrEmpty(filter.SearchText))
         {
             // Usar SmartSearchService para realizar la búsqueda inteligente ???????? MODIFICAR
-            var matchedTitles = _smartSearchService.Search(filter.SearchText);
+            var matchedTitles = smartSearchService.Search(filter.SearchText);
 
             // Si hay coincidencias, aplicamos un filtro sobre el título de los juegos ???????? MODIFICAR
             if (matchedTitles != null && matchedTitles.Any())

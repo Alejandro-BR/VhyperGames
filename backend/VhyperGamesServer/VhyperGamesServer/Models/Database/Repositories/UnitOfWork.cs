@@ -1,4 +1,5 @@
 ﻿using VhyperGamesServer.Models.Database;
+using VhyperGamesServer.Services;
 
 namespace VhyperGamesServer.Models.Database.Repositories;
 
@@ -11,7 +12,6 @@ public class UnitOfWork
 
     public UserRepository UserRepository => _userRepository ??= new UserRepository(_myDbContext);
     public GameRepository GameRepository => _gameRepository ??= new GameRepository(_myDbContext);
-
     public UnitOfWork(MyDbContext myDbContext)
     {
         _myDbContext = myDbContext;
