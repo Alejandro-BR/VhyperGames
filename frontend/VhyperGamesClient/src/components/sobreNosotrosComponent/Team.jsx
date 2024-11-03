@@ -1,48 +1,35 @@
-import classes from "./Team.module.css";
+import styles from "./Team.module.css";
+import TeamMember from "./TeamMember";
 
 function Team() {
+  const members = [
+    { name: 'Alejandro Barrionuevo', role: 'Full Stack Developer', urlImage: '/img/ale.svg' },
+    { name: 'Pablo Ruiz', role: 'Full Stack Developer', urlImage: '/img/pablo.svg' },
+    { name: 'Raquel Lopez', role: 'Team Leader', urlImage: '/img/raquel.svg' },
+    { name: 'José Molina', role: 'Backend Developer', urlImage: '/img/jose.svg' },
+    { name: 'Fernando Jafet', role: 'Full Stack Developer', urlImage: '/img/fernando.svg' },
+  ];
+
   return (
     <>
-      <hr className={classes.hr} />
-
-      <div className={classes.title}>
-        <h3 className={classes.palito}>❙</h3>
-        <h3>Equipo</h3>
-      </div>
-
-      <section className={classes.team}>
-        <div className="card">
-          <img src="/img/ale.svg" alt="photo-user" />
-          <p>Alejandro Barrionuevo</p>
-          <p>Minecraft CEO</p>
+      <hr className={styles.hr} />
+      <section className={styles.team}>
+        <div className={styles.title}>
+          <span className={styles.item}>❙</span>
+          <h3>Equipo</h3>
         </div>
-
-        <div className="card">
-          <img src="/img/pablo.svg" alt="photo-user" />
-          <p>Pablo Ruiz</p>
-          <p>Full Stack Developer</p>
-        </div>
-
-        <div className="card">
-          <img src="/img/raquel.svg" alt="photo-user" />
-          <p>Raquel Lopez</p>
-          <p>Team Leaders</p>
-        </div>
-
-        <div className="card">
-          <img src="/img/jose.svg" alt="photo-user" />
-          <p>José Molina</p>
-          <p>Backend Developer</p>
-        </div>
-
-        <div className="card">
-          <img src="/img/fernando.svg" alt="photo-user" />
-          <p>Fernando Jafet</p>
-          <p>Full Stack Developer</p>
+        <div className={styles.membersContainer}>
+          {members.map((member) => (
+            <TeamMember
+              key={member.name}
+              name={member.name}
+              role={member.role}
+              urlImage={member.urlImage}
+            />
+          ))};
         </div>
       </section>
-
-      <hr className={classes.hr} />
+      <hr className={styles.hr} />
     </>
   );
 }

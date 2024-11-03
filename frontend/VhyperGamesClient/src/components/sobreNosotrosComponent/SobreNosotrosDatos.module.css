@@ -1,0 +1,54 @@
+.container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+  margin: 16px;
+}
+
+.content{
+  display: flex;
+  width: 100%;
+  gap: 16px;
+}
+
+.imageContainer {
+  max-width: 300px; 
+  width: 100%;
+}
+
+.imageContainer img{
+  width: 100%;
+  height: auto;
+}
+
+.textContainer{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.text{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.iconoShip{
+  width: 24px;
+  height: 24px;
+}
+
+.title{
+  margin: 0;
+  font-size: 18px;
+  font-weight: bold;
+  color: var(--principal-purple);
+}
+
+.text p{
+  margin: 4px 0 0;
+  color: white;
+}
