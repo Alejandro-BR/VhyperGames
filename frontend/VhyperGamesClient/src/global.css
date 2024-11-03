@@ -52,6 +52,9 @@
   --shadow-blue: box-shadow: 0 3px 0 rgba(30, 10, 211, 0.6);
   --shadow-purple: box-shadow: 0 1px 0 rgba(57, 22, 74, 0.6); 
   --shadow-gradient-blue-purple: box-shadow: 0 3px 0 rgba(60, 50, 150, 0.9);
+
+  /*FUENTES */
+  --font-univers: 'UniversCnBold', sans-serif;
 }
 
 
