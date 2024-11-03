@@ -51,11 +51,11 @@ namespace VhyperGamesServer.Controllers
             return Ok(saleGames);
         }
 
-        [HttpGet("titles")]
-        public async Task<ActionResult<List<string>>> GetAllTitles()
-        {
-            var titles = await _gameService.GetAllTitles();
-            return Ok(titles);
-        }
+        //[HttpGet("titles")]
+        //public async Task<ActionResult<List<string>>> GetAllTitles()
+        //{
+        //    var titles = await _gameService.GetAllTitles();
+        //    return Ok(titles);
+        //}
     }
 }

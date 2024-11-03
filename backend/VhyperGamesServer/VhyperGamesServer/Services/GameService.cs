@@ -5,22 +5,25 @@ using VhyperGamesServer.Models.Database.Repositories;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using VhyperGamesServer.Models.Mappers;
 
 namespace VhyperGamesServer.Services
 {
     public class GameService
     {
-        private readonly GameRepository _gameRepository;
+        private readonly UnitOfWork _unitOfWork;
+        private readonly GameCardMapper _gameCardMapper;
 
-        public GameService(GameRepository gameRepository)
+        public GameService(UnitOfWork unitOfWork, GameCardMapper gameCardMapper)
         {
-            _gameRepository = gameRepository;
+            _unitOfWork = unitOfWork;
+            _gameCardMapper = gameCardMapper;
         }
 
         public async Task<List<GameCardDto>> FilterAndSortGamesAsync(GameFilterDto filter)
         {
             // Obtiene la lista de juegos filtrados y ordenados
-            var games = await _gameRepository.FilterAndSortGamesAsync(filter);
+            var games = await _unitOfWork.GameRepository.FilterAndSortGamesAsync(filter);
 
             // Mapea los juegos a GameCardDto
             var gameCardDtos = games.Select(game => new GameCardDto
@@ -37,26 +40,21 @@ namespace VhyperGamesServer.Services
 
         public async Task<List<GameCardDto>> GetNewGamesRelease()
         {
-            // const int QUANTITY = 5;
 
-            var games = await _gameRepository.GetNewGamesRelease();
+           List<Game> games = await _unitOfWork.GameRepository.GetNewGamesRelease();
+            List<GameCardDto> gameCards = [];
 
-            // Mapea los nuevos juegos a GameCardDto
-            var gameCardDtos = games.Select(game => new GameCardDto
+            foreach (var game in games)
             {
-                Id = game.Id,
-                Title = game.Title,
-                Stock = game.Stock,
-                Price = game.Price,
-                // ImageUrl = game.ImageUrl
-            }).ToList();
+               gameCards.Add(_gameCardMapper.ToDto(game));
+            }
 
-            return gameCardDtos;
+            return gameCards;
         }
 
         public async Task<List<GameCardDto>> GetSaleGames()
         {
-            var games = await _gameRepository.GetSaleGames();
+            var games = await _unitOfWork.GameRepository.GetSaleGames();
 
             // Mapea los juegos en oferta a GameCardDto
             var gameCardDtos = games.Select(game => new GameCardDto
@@ -65,23 +63,21 @@ namespace VhyperGamesServer.Services
                 Title = game.Title,
                 Stock = game.Stock,
                 Price = game.Price,
-                // ImageUrl = game.ImageUrl
+                 //ImageUrl = game.ImageUrl
             }).ToList();
 
             return gameCardDtos;
         }
 
-        public async Task<List<string>> GetAllTitles()
+        public async Task<List<string>> FilterAndSortGamesAsync()
         {
-            return await _gameRepository.GetAllTitles();
+            return await _unitOfWork.GameRepository.GetAllTitles();
         }
 
-        internal async Task<Game> GetAsync(int id)
+        public async Task<Game> GetAsync(int id)
         {
-            // Aquí llamas al método del repositorio que obtiene el juego por ID
-            var game = await _gameRepository.GetByIdAsync(id);
+            var game = await _unitOfWork.GameRepository.GetByIdAsync(id);
 
-            // Si el juego no se encuentra, puedes manejarlo como desees
             if (game == null)
             {
                 throw new KeyNotFoundException("El juego no se encontró.");
@@ -103,8 +99,8 @@ namespace VhyperGamesServer.Services
                 Stock = newGameDto.Stock
             };
 
-            await _gameRepository.InsertAsync(game);
-            await _gameRepository.SaveAsync(); // Esto ahora funcionará correctamente
+            await _unitOfWork.GameRepository.InsertAsync(game);
+            await _unitOfWork.SaveAsync(); // Esto ahora funcionará correctamente
 
             return new GameCardDto
             {

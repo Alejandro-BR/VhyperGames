@@ -7,7 +7,9 @@ namespace VhyperGamesServer.Models.Mappers;
 public class GameCardMapper
 {
     //Mapper para imagen Catalogo
-    public GameCardDto ToDto(Game game, HttpRequest httpRequest = null)
+    public GameCardDto ToDto(Game game
+        //HttpRequest httpRequest = null
+        )
     {
         return new GameCardDto
         {
@@ -21,8 +23,12 @@ public class GameCardMapper
         };
     }
     //Convierte coleccion de objetos Game a objetos GameCardDto
-    public IEnumerable<GameCardDto> ToDto(IEnumerable<Game> games, HttpRequest httpRequest = null)
+    public IEnumerable<GameCardDto> ToDto(IEnumerable<Game> games
+        //HttpRequest httpRequest = null
+        )
     {
-        return games.Select(game => ToDto(game, httpRequest));
+        return games.Select(game => ToDto(game
+            //httpRequest
+            ));
     }
 }

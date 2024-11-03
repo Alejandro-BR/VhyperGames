@@ -1,8 +1,10 @@
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using VhyperGamesServer.Models.Database;
 using VhyperGamesServer.Models.Database.Repositories;
+using VhyperGamesServer.Models.Mappers;
 using VhyperGamesServer.Models.Seeder;
 using VhyperGamesServer.Services;
 
@@ -33,6 +35,12 @@ public class Program
         builder.Services.AddScoped<UnitOfWork>();
 
         builder.Services.AddTransient<UserService>();
+
+        builder.Services.AddTransient<GameService>();
+
+        builder.Services.AddTransient<SmartSearchService>();
+
+        builder.Services.AddScoped<GameCardMapper>();
 
         //Método para utilizar el Seeder
         static void SeedDatabase(IServiceProvider serviceProvider)
