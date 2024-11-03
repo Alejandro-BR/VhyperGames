@@ -3,6 +3,7 @@ import styles from './Login.module.css';
 import Button from '../buttonComponent/Button';
 import RegisterModal from '../registerComponents/RegisterModal';
 import { jwtDecode } from 'jwt-decode';
+import { LOGIN_ENDPOINT } from '../../config'; 
 
 
 function LoginModal({ onClose, onRegisterClick }) {
@@ -23,7 +24,7 @@ function LoginModal({ onClose, onRegisterClick }) {
             password: passwordValue,
         };
 
-        await fetchingData('https://localhost:7207/api/auth/login', objetoBackend);
+        await fetchingData(LOGIN_ENDPOINT, objetoBackend);
     };
 
     async function fetchingData(url, data) {
