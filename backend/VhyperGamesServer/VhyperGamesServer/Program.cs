@@ -27,7 +27,7 @@ public class Program
 
         // Agregar Swagger para la documentación interactiva de la API
         builder.Services.AddSwaggerGen();
-
+        
         // Inyectar la dependencia del contexto de base de datos
         builder.Services.AddScoped<MyDbContext>();
 
@@ -36,7 +36,7 @@ public class Program
 
         builder.Services.AddTransient<UserService>();
 
-        builder.Services.AddTransient<GameService>();
+        builder.Services.AddTransient<CatalogService>();
 
         builder.Services.AddScoped<SmartSearchService>();
 

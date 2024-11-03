@@ -1,21 +1,17 @@
-using Microsoft.EntityFrameworkCore;
 using VhyperGamesServer.Models.Database.Entities;
 using VhyperGamesServer.Models.Dtos;
 using VhyperGamesServer.Models.Database.Repositories;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using VhyperGamesServer.Models.Mappers;
 
 namespace VhyperGamesServer.Services
 {
-    public class GameService
+    public class CatalogService
     {
         private readonly UnitOfWork _unitOfWork;
         private readonly GameCardMapper _gameCardMapper;
         private readonly SmartSearchService _smartSearchService;
 
-        public GameService(UnitOfWork unitOfWork, GameCardMapper gameCardMapper, SmartSearchService smartSearchService)
+        public CatalogService(UnitOfWork unitOfWork, GameCardMapper gameCardMapper, SmartSearchService smartSearchService)
         {
             _unitOfWork = unitOfWork;
             _gameCardMapper = gameCardMapper;
@@ -35,16 +31,16 @@ namespace VhyperGamesServer.Services
 
             List<Game> games = await _unitOfWork.GameRepository.GetNewGamesRelease();
 
-            return (List<GameCardDto>)_gameCardMapper.ListToDto(games);
+            return _gameCardMapper.ListToDto(games).ToList();
         }
+
 
         public async Task<List<GameCardDto>> GetSaleGames()
         {
 
             List<Game> games = await _unitOfWork.GameRepository.GetSaleGames();
-            List<GameCardDto> gameCardDtos = (List<GameCardDto>)_gameCardMapper.ListToDto(games);
 
-            return gameCardDtos;
+            return _gameCardMapper.ListToDto(games).ToList();
         }
 
         public async Task<List<string>> FilterAndSortGamesAsync()

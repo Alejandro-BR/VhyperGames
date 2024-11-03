@@ -85,7 +85,7 @@ public class GameRepository : Repository<Game, int>
 
     public async Task<List<Game>> GetSaleGames()
     {
-        string[] titles = { "The Witcher 3", "Overcooked", "ES V: Skyrim" };
+        string[] titles = { "The Witcher III" };
         List<Game> games = new List<Game>();
 
         foreach (var title in titles)
