@@ -1,8 +1,12 @@
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using VhyperGamesServer.Models.Database;
 using VhyperGamesServer.Models.Database.Repositories;
+using VhyperGamesServer.Models.Mappers;
+using VhyperGamesServer.Models.Seeder;
+using VhyperGamesServer.Services;
 
 namespace VhyperGamesServer;
 
@@ -30,6 +34,26 @@ public class Program
         // Inyectar el unit of work que contiene todos los repositorios
         builder.Services.AddScoped<UnitOfWork>();
 
+        builder.Services.AddTransient<UserService>();
+
+        builder.Services.AddTransient<GameService>();
+
+        builder.Services.AddTransient<SmartSearchService>();
+
+        builder.Services.AddScoped<GameCardMapper>();
+
+        //Método para utilizar el Seeder
+        static void SeedDatabase(IServiceProvider serviceProvider)
+        {
+            using IServiceScope scope = serviceProvider.CreateScope();
+            using MyDbContext myDbContext = scope.ServiceProvider.GetService<MyDbContext>();
+
+            if (myDbContext.Database.EnsureCreated())
+            {
+                Seeder seeder = new Seeder(myDbContext);
+                seeder.Seed();
+            }
+        }
 
         //Permite CORS
         if (builder.Environment.IsDevelopment())
@@ -60,6 +84,9 @@ public class Program
 
         // Crear la aplicación web utilizando la configuración del builder
         var app = builder.Build();
+
+        //Creación del seeder
+        SeedDatabase(app.Services);
 
         // Creación de la base de datos si no existe usando MyDbContext
         using (IServiceScope scope = app.Services.CreateScope())
