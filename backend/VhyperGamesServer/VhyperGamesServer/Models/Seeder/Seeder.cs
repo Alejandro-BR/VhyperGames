@@ -1,5 +1,6 @@
 ﻿using VhyperGamesServer.Models.Database;
 using VhyperGamesServer.Models.Database.Entities;
+using static System.Net.WebRequestMethods;
 
 namespace VhyperGamesServer.Models.Seeder;
 
@@ -25,7 +26,15 @@ public class Seeder
                     ReleaseDate = new DateTime (2015, 05, 19),
                     Price = 18,
                     Stock = 100,
-                },
+                    ImageGames = new List<ImageGame> 
+                    {
+                        new ImageGame
+                        {
+                            ImageUrl = "https://raw.githubusercontent.com/VhyperGames/Resources/refs/heads/main/ImagesGame/TheWitcher3/thewitcher3.png",
+                            AltText = "Imagen 1 de The Witcher III"
+                        }
+                    }
+                },  
 
                 new Game {
                     GameCode = Guid.NewGuid (),
@@ -36,6 +45,14 @@ public class Seeder
                     ReleaseDate = new DateTime (2011, 11, 11),
                     Price = 30,
                     Stock = 100,
+                    ImageGames = new List<ImageGame>
+                    {
+                        new ImageGame
+                        {
+                            ImageUrl = "https://raw.githubusercontent.com/VhyperGames/Resources/refs/heads/main/ImagesGame/Skyrim/skyrim.png",
+                            AltText = "Imagen 1 de Skyrim"
+                        }
+                    }
                 },
 
                 new Game {
@@ -47,6 +64,14 @@ public class Seeder
                     ReleaseDate = new DateTime (2019, 01, 25),
                     Price = 19,
                     Stock = 100,
+                    ImageGames = new List<ImageGame>
+                    {
+                        new ImageGame
+                        {
+                            ImageUrl = "https://raw.githubusercontent.com/VhyperGames/Resources/refs/heads/main/ImagesGame/ResidentEvil2/residentevil2.png",
+                            AltText = "Imagen 1 de Resident Evil 2"
+                        }
+                    }
                 },
 
                 new Game {
@@ -58,6 +83,14 @@ public class Seeder
                     ReleaseDate = new DateTime (2018, 04, 20),
                     Price = 48,
                     Stock = 100,
+                    ImageGames = new List<ImageGame>
+                    {
+                        new ImageGame
+                        {
+                            ImageUrl = "https://raw.githubusercontent.com/VhyperGames/Resources/refs/heads/main/ImagesGame/GodOfWar/godofwar.png",
+                            AltText = "Imagen 1 de God of War"
+                        }
+                    }
                 },
 
                 new Game {
@@ -69,6 +102,14 @@ public class Seeder
                     ReleaseDate = new DateTime (2024, 09, 20),
                     Price = 40,
                     Stock = 100,
+                    ImageGames = new List<ImageGame>
+                    {
+                        new ImageGame
+                        {
+                            ImageUrl = "https://raw.githubusercontent.com/VhyperGames/Resources/refs/heads/main/ImagesGame/Frostpunk2/frostpunk2.png",
+                            AltText = "Imagen 1 de Frostpunk2"
+                        }
+                    }
                 },
 
                 new Game {
@@ -80,6 +121,14 @@ public class Seeder
                     ReleaseDate = new DateTime (2011, 05, 16),
                     Price = 8.8m,
                     Stock = 100,
+                    ImageGames = new List<ImageGame>
+                    {
+                        new ImageGame
+                        {
+                            ImageUrl = "https://raw.githubusercontent.com/VhyperGames/Resources/refs/heads/main/ImagesGame/Terraria/terraria.png",
+                            AltText = "Imagen 1 de Terraria"
+                        }
+                    }
                 },
 
                 new Game {
@@ -91,6 +140,14 @@ public class Seeder
                     ReleaseDate = new DateTime (2008, 09, 07),
                     Price = 15,
                     Stock = 100,
+                    ImageGames = new List<ImageGame>
+                    {
+                        new ImageGame
+                        {
+                            ImageUrl = "https://raw.githubusercontent.com/VhyperGames/Resources/refs/heads/main/ImagesGame/Spore/spore.png",
+                            AltText = "Imagen 1 de Spore"
+                        }
+                    }
                 },
 
                 new Game {
@@ -102,6 +159,14 @@ public class Seeder
                     ReleaseDate = new DateTime (2018, 10, 13),
                     Price = 2.65m,
                     Stock = 100,
+                    ImageGames = new List<ImageGame>
+                    {
+                        new ImageGame
+                        {
+                            ImageUrl = "https://raw.githubusercontent.com/VhyperGames/Resources/refs/heads/main/ImagesGame/GRIS/gris.png",
+                            AltText = "Imagen 1 de GRIS"
+                        }
+                    }
                 },
 
                 new Game {
@@ -113,6 +178,14 @@ public class Seeder
                     ReleaseDate = new DateTime (2020, 12, 10),
                     Price = 57,
                     Stock = 100,
+                    ImageGames = new List<ImageGame>
+                    {
+                        new ImageGame
+                        {
+                            ImageUrl = "https://raw.githubusercontent.com/VhyperGames/Resources/refs/heads/main/ImagesGame/Cyberpunk/cyberpunk.png",
+                            AltText = "Imagen 1 de Cyberpunk"
+                        }
+                    }
                 },
 
                 new Game {
@@ -124,6 +197,14 @@ public class Seeder
                     ReleaseDate = new DateTime (2010, 11, 25),
                     Price = 51,
                     Stock = 100,
+                    ImageGames = new List<ImageGame>
+                    {
+                        new ImageGame
+                        {
+                            ImageUrl = "https://raw.githubusercontent.com/VhyperGames/Resources/refs/heads/main/ImagesGame/EpicMickey/epicmickey.png",
+                            AltText = "Imagen 1 de Epic Mickey"
+                        }
+                    }
                 }
             ];
 
