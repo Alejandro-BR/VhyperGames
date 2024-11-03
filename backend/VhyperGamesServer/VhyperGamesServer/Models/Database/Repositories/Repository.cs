@@ -47,5 +47,10 @@ public abstract class Repository<TEntity, TId> : IRepository<TEntity, TEntity> w
     {
         return await Context.Set<TEntity>().Where(predicate).ToListAsync();
     }
+
+    public virtual async Task SaveAsync()
+    {
+        await Context.SaveChangesAsync();
+    }
 }
 

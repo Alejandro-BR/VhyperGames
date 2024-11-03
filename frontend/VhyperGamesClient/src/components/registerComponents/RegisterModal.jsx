@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import Button from "../buttonComponent/Button";
 import styles from "../loginComponents/Login.module.css";
 import {jwtDecode} from 'jwt-decode';
+import { REGISTER_ENDPOINT } from '../../config'; 
 
 function RegisterModal({ onClose }) {
     const nameRef = useRef();
@@ -43,7 +44,7 @@ function RegisterModal({ onClose }) {
         };
 
         // Llamar a la función fetchingData
-        await fetchingData("https://localhost:7207/api/auth/register", data);
+        await fetchingData(REGISTER_ENDPOINT, data);
     };
 
     async function fetchingData(url, data) {

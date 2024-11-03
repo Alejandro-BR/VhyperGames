@@ -18,6 +18,7 @@ public class Game
     {
         GameCode = Guid.NewGuid();
         DrmFree = false;
+        AvgRating = 0;
         //ImageGames = new List<ImageGame>();
         ImageGames = [];
     }
