@@ -2,6 +2,7 @@ import classes from "./Header.module.css";
 import Button from "../buttonComponent/Button";
 import { messageCart, messageCatalog } from "../../helpers/messages";
 import { useState } from "react";
+import { NavLink } from "react-router-dom";
 import LoginModal from "../loginComponents/LoginModal";
 import RegisterModal from "../registerComponents/RegisterModal";
 
@@ -20,12 +21,15 @@ function Header() {
   return (
     <div className={classes.header}>
       <div className={classes.left}>
-        <img
-          className={classes.logoImg}
-          src="/img/LogoVG.png"
-          alt="Logo"
-          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-        />
+        <NavLink
+          to="/">
+          <img
+            className={classes.logoImg}
+            src="/img/LogoVG.png"
+            alt="Logo"
+            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          />
+        </NavLink>
         <div className={classes.buttonHeader}>
           <Button
             variant={"short"}
