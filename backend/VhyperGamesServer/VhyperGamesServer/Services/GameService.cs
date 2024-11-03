@@ -34,23 +34,15 @@ namespace VhyperGamesServer.Services
         {
 
             List<Game> games = await _unitOfWork.GameRepository.GetNewGamesRelease();
-            
+
             return (List<GameCardDto>)_gameCardMapper.ListToDto(games);
         }
 
         public async Task<List<GameCardDto>> GetSaleGames()
         {
-            var games = await _unitOfWork.GameRepository.GetSaleGames();
 
-            // Mapea los juegos en oferta a GameCardDto
-            var gameCardDtos = games.Select(game => new GameCardDto
-            {
-                Id = game.Id,
-                Title = game.Title,
-                Stock = game.Stock,
-                Price = game.Price,
-                 //ImageUrl = game.ImageUrl
-            }).ToList();
+            List<Game> games = await _unitOfWork.GameRepository.GetSaleGames();
+            List<GameCardDto> gameCardDtos = (List<GameCardDto>)_gameCardMapper.ListToDto(games);
 
             return gameCardDtos;
         }
