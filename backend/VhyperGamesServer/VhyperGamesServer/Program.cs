@@ -38,7 +38,7 @@ public class Program
 
         builder.Services.AddTransient<GameService>();
 
-        builder.Services.AddTransient<SmartSearchService>();
+        builder.Services.AddScoped<SmartSearchService>();
 
         builder.Services.AddScoped<GameCardMapper>();
 
