@@ -2,13 +2,15 @@ import classes from "./Header.module.css";
 import Button from "../buttonComponent/Button";
 import { messageCart, messageCatalog } from "../../helpers/messages";
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import LoginModal from "../loginComponents/LoginModal";
 import RegisterModal from "../registerComponents/RegisterModal";
 
 function Header() {
   const [mostrarLogin, setMostrarLogin] = useState(false);
   const [mostrarRegister, setMostrarRegister] = useState(false);
+
+  const navigate = useNavigate();
 
   const handleImageClick = () => {
     setMostrarLogin(true);
@@ -21,15 +23,12 @@ function Header() {
   return (
     <div className={classes.header}>
       <div className={classes.left}>
-        <NavLink
-          to="/">
           <img
             className={classes.logoImg}
             src="/img/LogoVG.png"
             alt="Logo"
-            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+            onClick={() => navigate("/")}
           />
-        </NavLink>
         <div className={classes.buttonHeader}>
           <Button
             variant={"short"}

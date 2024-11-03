@@ -1,21 +1,22 @@
 /*import classes from './Footer.module.css';*/
 import classes from './FooterExperimental.module.css'
 import Button from '../buttonComponent/Button';
-import { messageAboutUs, messageCompany } from '../../helpers/messages';
-import { NavLink } from "react-router-dom";
+import { messageCompany } from '../../helpers/messages';
+import { useNavigate } from "react-router-dom";
 
 function Footer() {
+
+  const navigate = useNavigate();
+
   return (
     <footer className={classes.footer}>
       <div className={classes.leftFooter}>
-        <NavLink
-          to="/">
           <img
             className={classes.imgFooter}
             src="/img/LogoVG.png"
             alt="Logo"
+            onClick={() => navigate("/")}
           />
-        </NavLink>
         <div className={classes.text}>
           <h1>VHYPER GAMES</h1>
           <p>© 2024 | VHYPER GAMES | All rights reserved</p>
@@ -31,7 +32,7 @@ function Footer() {
             alt="X"
             onClick={() => window.open("https://x.com/", "_blank")}
           />
-          <Button variant="large" color="morado" onClick={messageAboutUs}>
+          <Button variant="large" color="morado" onClick={() => navigate("/sobre-nosotros")}>
             Sobre nosotros
           </Button>
         </div>

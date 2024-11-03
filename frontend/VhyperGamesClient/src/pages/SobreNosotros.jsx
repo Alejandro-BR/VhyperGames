@@ -1,14 +1,15 @@
-import React from 'react';
-import styles from './SobreNosotros.module.css';
+// import React from 'react';
+import styles from "../components/sobreNosotrosComponent/SobreNosotros.module.css";
+
 
 //Sin implementar por ahora
-const teamMembers = [
-  { name: 'Alejandro Barrionuevo', role: 'Minecraft CEO', img: '/img/ale.svg' },
-  { name: 'Pablo Ruiz', role: 'Full Stack Developer', img: '/img/pablo.svg' },
-  { name: 'Raquel Lopez', role: 'Team Leader', img: '/img/raquel.svg' },
-  { name: 'José Molina', role: 'Backend Developer', img: '/img/jose.svg' },
-  { name: 'Fernando Jafet', role: 'Full Stack Developer', img: '/img/fernando.svg' },
-];
+// const teamMembers = [
+//   { name: 'Alejandro Barrionuevo', role: 'Minecraft CEO', img: '/img/ale.svg' },
+//   { name: 'Pablo Ruiz', role: 'Full Stack Developer', img: '/img/pablo.svg' },
+//   { name: 'Raquel Lopez', role: 'Team Leader', img: '/img/raquel.svg' },
+//   { name: 'José Molina', role: 'Backend Developer', img: '/img/jose.svg' },
+//   { name: 'Fernando Jafet', role: 'Full Stack Developer', img: '/img/fernando.svg' },
+// ];
 //Sin implementar por ahora
 
 function SobreNosotros() {

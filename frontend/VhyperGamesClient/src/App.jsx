@@ -1,6 +1,7 @@
 import RootLayout from './pages/RootLayout';
 import Home from './pages/Home';
 import Error from './pages/Error';
+import SobreNosotros from './pages/SobreNosotros'
 
 import {
   createBrowserRouter,
@@ -14,6 +15,7 @@ const routeDefinition = createRoutesFromElements(
   <Route path="/" element={<RootLayout/>} errorElement={<Error />}>
     <Route index element={<Home />} />
     <Route path="error" element={<Error />} />
+    <Route path="sobre-nosotros" element={<SobreNosotros/>}/>
   </Route>
 );
 
