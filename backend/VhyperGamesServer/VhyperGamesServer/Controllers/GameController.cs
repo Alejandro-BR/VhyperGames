@@ -18,7 +18,7 @@ namespace VhyperGamesServer.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<GameCardDto>>> GetAllGames([FromQuery] GameFilterDto filter)
+        public async Task<ActionResult<List<GameCardDto>>> Filter([FromQuery] GameFilterDto filter)
         {
             var games = await _gameService.FilterAndSortGamesAsync(filter);
             return Ok(games);

@@ -13,43 +13,29 @@ namespace VhyperGamesServer.Services
     {
         private readonly UnitOfWork _unitOfWork;
         private readonly GameCardMapper _gameCardMapper;
+        private readonly SmartSearchService _smartSearchService;
 
-        public GameService(UnitOfWork unitOfWork, GameCardMapper gameCardMapper)
+        public GameService(UnitOfWork unitOfWork, GameCardMapper gameCardMapper, SmartSearchService smartSearchService)
         {
             _unitOfWork = unitOfWork;
             _gameCardMapper = gameCardMapper;
+            _smartSearchService = smartSearchService;
         }
 
         public async Task<List<GameCardDto>> FilterAndSortGamesAsync(GameFilterDto filter)
         {
             // Obtiene la lista de juegos filtrados y ordenados
-            var games = await _unitOfWork.GameRepository.FilterAndSortGamesAsync(filter);
+            List<Game> games = await _unitOfWork.GameRepository.FilterAndSortGamesAsync(filter, _smartSearchService);
 
-            // Mapea los juegos a GameCardDto
-            var gameCardDtos = games.Select(game => new GameCardDto
-            {
-                Id = game.Id,
-                Title = game.Title,
-                Stock = game.Stock,
-                Price = game.Price,
-                // ImageUrl = game.ImageUrl
-            }).ToList();
-
-            return gameCardDtos;
+            return _gameCardMapper.ListToDto(games).ToList();
         }
 
         public async Task<List<GameCardDto>> GetNewGamesRelease()
         {
 
-           List<Game> games = await _unitOfWork.GameRepository.GetNewGamesRelease();
-            List<GameCardDto> gameCards = [];
-
-            foreach (var game in games)
-            {
-               gameCards.Add(_gameCardMapper.ToDto(game));
-            }
-
-            return gameCards;
+            List<Game> games = await _unitOfWork.GameRepository.GetNewGamesRelease();
+            
+            return (List<GameCardDto>)_gameCardMapper.ListToDto(games);
         }
 
         public async Task<List<GameCardDto>> GetSaleGames()
@@ -111,8 +97,6 @@ namespace VhyperGamesServer.Services
                 ImageUrl = game.ImageGames?.FirstOrDefault()?.ImageUrl // Asumiendo que tendrás imágenes en el futuro
             };
         }
-
-
 
     }
 }
