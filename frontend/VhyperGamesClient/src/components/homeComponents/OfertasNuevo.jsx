@@ -1,10 +1,13 @@
 import { useState } from 'react';
 import Button from '../buttonComponent/Button';
+import BlockGame from './BlockGame';
 import style from './OfertasNuevo.module.css';
-
 
 function OfertasNuevos() {
   const [isOfertas, setIsOfertas] = useState(true);
+  const JUEGOS1 = ["gta5", "theWither", "god of war"];
+  const JUEGOS2 = ["MINECRAFT", "the wither 3"];
+
   return (
     <>
       <div className={style.buttons}>
@@ -31,6 +34,8 @@ function OfertasNuevos() {
 
       <h2 className={style.text}>{isOfertas ? "Ahora mismo no hay juegos de oferta en la página vuelve pronto ;)"
         : "Ahora mismo no hay juegos nuevos en la página vuelve pronto ;)"}</h2>
+
+      <BlockGame games={isOfertas ? JUEGOS1 : JUEGOS2} />
 
     </>
 
