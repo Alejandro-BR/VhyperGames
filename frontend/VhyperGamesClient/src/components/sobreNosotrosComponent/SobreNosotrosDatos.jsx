@@ -3,7 +3,6 @@ import styles from "./SobreNosotrosDatos.module.css";
 function SobreNosotrosDatos() {
   return (
     <section className={styles.container}>
-      <h2>Sobre Nosotros</h2>
       <div className={styles.content}>
         <div className={styles.imageContainer}>
           <img src="/img/Foto-oficina.svg" alt="office" />
