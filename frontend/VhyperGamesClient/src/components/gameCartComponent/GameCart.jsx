@@ -13,12 +13,9 @@ function GameCart({ title, stock, price, imgUrl }) {
     }
   }
 
-
-
   useEffect(() => {
     comprobarStock();
   }, []);
-
 
   return (
     <>
