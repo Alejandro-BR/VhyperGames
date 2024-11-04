@@ -28,7 +28,7 @@ function Contacto() {
         </div>
         <div className={styles.location}>
           <iframe 
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.835434509234!2d144.95373631511655!3d-37.81627957975199!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad642af0f0bafc1%3A0x5045675218ceed0!2sC%2F%20Frederick%20Terman%2C%203%20%7C%20Google!5e0!3m2!1sen!2sus!4v1614027070742!5m2!1sen!2sus" 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d25582.218531475766!2d-4.55213745!3d36.727909!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd72f02ca2c5b6a9%3A0x50f43244f6e8bb5!2sCESUR%20M%C3%A1laga%20PTA%20Formaci%C3%B3n%20Profesional!5e0!3m2!1ses!2ses!4v1730742795149!5m2!1ses!2ses" 
             width="600" 
             height="450" 
             style={{ border: 0 }} 
