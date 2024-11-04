@@ -18,7 +18,6 @@
   vertical-align: middle; /* Alinea img y p*/
 }
 
-
 .data {
   display: flex;
   align-items: center; 
@@ -28,7 +27,7 @@
 
 .item {
   color: var(--principal-purple);
-  font-size: 22px;
+  font-size: 20px;
 }
 
 .box {
@@ -39,6 +38,12 @@
   border: 1px solid white;
   padding: 10px;
   height: 14vh;
+}
+
+.boxData {
+  display: flex;
+  gap: 5px;
+  align-items: center;
 }
 
 .location {

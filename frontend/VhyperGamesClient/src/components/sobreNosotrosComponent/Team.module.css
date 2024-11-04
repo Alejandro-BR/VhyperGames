@@ -10,14 +10,14 @@
     display: flex;
     align-items: center; 
     color: white;
-    gap: 5px; 
-    margin-bottom: 16px; 
+    gap: 5px;
+    padding: 10px 0px;  
     width: 90%; 
 }
 
 .item {
     color: var(--principal-purple);
-    font-size: 22px;
+    font-size: 20px;
 }
 
 .membersContainer {

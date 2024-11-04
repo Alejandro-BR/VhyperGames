@@ -26,7 +26,7 @@ function Team() {
               role={member.role}
               urlImage={member.urlImage}
             />
-          ))};
+          ))}
         </div>
       </section>
       <hr className={styles.hr} />
