@@ -7,13 +7,12 @@ function Error404Message() {
 
       <img
         className={styles.gif}
-        src="/img/goku.gif"
+        src="/gif/goku.gif"
         alt="gif de kirby andando"
       />
 
       <div className={styles.errorText}>
-        <h2>Nuestro equipo se dirige a resolver el problema</h2>
-        <h2>Por favor ten paciencia</h2>
+        <h2>Página no encontrada</h2>
       </div>
     </div>
   );
