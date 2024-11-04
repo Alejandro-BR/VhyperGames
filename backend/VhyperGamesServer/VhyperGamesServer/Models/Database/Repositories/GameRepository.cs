@@ -19,12 +19,13 @@ public class GameRepository : Repository<Game, int>
         title = title.ToLower();
 
         return await GetQueryable()
+            .Include(g => g.ImageGames)
             .FirstOrDefaultAsync(game => game.Title.ToLower() == title);
     }
 
     public async Task<List<Game>> FilterAndSortGamesAsync(GameFilterDto filter, SmartSearchService smartSearchService)
     {
-        IQueryable<Game> query = _context.Games;
+        IQueryable<Game> query = _context.Games.Include(g => g.ImageGames);
 
         if (!string.IsNullOrEmpty(filter.SearchText))
         {
@@ -80,6 +81,7 @@ public class GameRepository : Repository<Game, int>
         return await GetQueryable()
             .OrderByDescending(g => g.ReleaseDate)
             .Take(QUANTITY)
+            .Include(g => g.ImageGames)
             .ToListAsync();
     }
 
