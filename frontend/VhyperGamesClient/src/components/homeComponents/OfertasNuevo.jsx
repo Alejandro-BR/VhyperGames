@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import Button from '../buttonComponent/Button';
-import BlockGame from './BlockGame';
+import BlockGame from '../blockgameComponent/BlockGame';
 import style from './OfertasNuevo.module.css';
 import { CATALOG_NEW_RELEASES, CATALOG_SALES } from '../../config';
 

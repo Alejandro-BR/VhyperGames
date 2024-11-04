@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import classes from "./CatalogFilters.module.css";
 
-function CatalogFilters() {
+function CatalogFilters({ onFilterChange }) {
   const [search, setSearch] = useState("");
   const [orderBy, setOrderBy] = useState("");
   const [license, setLicense] = useState("");
@@ -17,6 +17,12 @@ function CatalogFilters() {
     setItemsPerPage(10); 
     setPage(1); 
   };
+
+  const applyFilters = () => {
+    const filters = { search, orderBy, license, genero, itemsPerPage, page };
+    console.log("Filtros enviados desde CatalogFilters:", filters);
+    onFilterChange(filters);
+};
 
   const handleItemsPerPageChange = (newItemsPerPage) => {
     setItemsPerPage(newItemsPerPage);
