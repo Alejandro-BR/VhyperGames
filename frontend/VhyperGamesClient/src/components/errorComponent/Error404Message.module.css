@@ -1,0 +1,30 @@
+.errorBody {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 730px;
+    width: 100vw;
+    gap: 25px;
+}
+
+h1 {
+    font-size: 100px;
+    color: white;
+}
+
+h2 {
+    color: white;
+    font-size: large;
+}
+
+.gif {
+    display: block;
+    height: 50vh;
+    width: auto;
+    position: absolute;
+    bottom: 0;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 225px;
+}
