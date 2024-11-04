@@ -1,13 +1,36 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Button from '../buttonComponent/Button';
-import GameCart from '../gameCartComponent/GameCart';
 import BlockGame from './BlockGame';
 import style from './OfertasNuevo.module.css';
+import { CATALOG_NEW_RELEASES, CATALOG_SALES } from '../../config';
 
 function OfertasNuevos() {
   const [isOfertas, setIsOfertas] = useState(true);
-  const JUEGOS1 = ["gta5", "theWither", "god of war"];
-  const JUEGOS2 = ["MINECRAFT", "the wither 3"];
+  const [juegos, setJuegos] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setLoading(true);
+    setJuegos([]); 
+
+    const url = isOfertas ? CATALOG_SALES : CATALOG_NEW_RELEASES;
+
+    fetch(url)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Error al obtener los datos de la API');
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setJuegos(data);
+        setLoading(false);
+      })
+      .catch(() => {
+        setJuegos([]);
+        setLoading(false);
+      });
+  }, [isOfertas]);
 
   return (
     <>
@@ -33,16 +56,19 @@ function OfertasNuevos() {
         <h1>{isOfertas ? "OFERTAS" : "NUEVOS"}</h1>
       </div>
 
-      <h2 className={style.text}>{isOfertas ? "Ahora mismo no hay juegos de oferta en la página vuelve pronto ;)"
-        : "Ahora mismo no hay juegos nuevos en la página vuelve pronto ;)"}</h2>
-
-      <BlockGame games={isOfertas ? JUEGOS1 : JUEGOS2} />
-      
-
+      {loading ? (
+        <h2 className={style.text}>Cargando juegos...</h2>
+      ) : juegos.length === 0 ? (
+        <h2 className={style.text}>
+          {isOfertas
+            ? "Ahora mismo no hay juegos de oferta en la página, vuelve pronto ;)"
+            : "Ahora mismo no hay juegos nuevos en la página, vuelve pronto ;)"}
+        </h2>
+      ) : (
+        <BlockGame games={juegos} />
+      )}
     </>
-
-  )
-
+  );
 }
 
 export default OfertasNuevos;
