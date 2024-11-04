@@ -56,13 +56,14 @@ function BodyCatalog() {
     if (loading) return <p>Cargando juegos...</p>;
 
     return (
-        <>
+        <div style={{ height: '80vh' }}>
+
             <CatalogFilters onFilterChange={handleSearchFilterChange} />
             <div>
                 <BlockGame games={juegos} /> 
             </div>
             <Pagination />
-        </>
+        </div>
     );
 }
 

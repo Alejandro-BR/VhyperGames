@@ -1,5 +1,5 @@
-.bodyHome{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.bodyHome {
+  width: 80%;
+  padding-bottom: 40px;
+  margin: 0 auto;
 }

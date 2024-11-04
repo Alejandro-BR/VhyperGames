@@ -1,6 +1,6 @@
 .carrousel {
     margin-top: 40px;
-    width: 75%;
+    width: 100%;
     border-radius: 20px;
     box-shadow: 0 0px 35px  var(--led-purple);
 }
