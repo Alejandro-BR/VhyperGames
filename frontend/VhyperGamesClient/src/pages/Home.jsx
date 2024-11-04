@@ -5,12 +5,12 @@ import Footer from "../components/footerComponent/Footer";
 
 function Home() {
   return (
-    <div>
+    < >
       <Header />
       <Carousel />
       <OfertasNuevos />
       <Footer />
-    </div>
+    </>
   );
 }
 

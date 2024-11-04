@@ -1,33 +1,35 @@
+.contenedor {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  padding: 40px;
+}
+
 .buttons {
   margin-top: 10vh;
   display: flex;
   width: auto;
   justify-content: center;
-  gap: 3%;
+  gap: 30px;
 }
 
 .title {
   font-family: 'UniversCnBold', sans-serif;
-  position: absolute;
   display: flex;
-  flex-direction: row;
+  align-items: center;
   color: white;
-  margin-left: 10%;
-  gap: 5%;
+  gap: 10px; 
 }
 
 .palito {
-  position: relative;
   color: var(--principal-purple);
-  top: -10px;
   font-size: 2.5rem;
-
 }
 
-.text {
-  font-family: 'UniversCnRg', sans-serif;
+.juegos {
+  justify-content: left;
+}
+
+h2 {
   color: white;
-  margin-top: 5%;
-  margin-left: 10%;
-  margin-bottom: 30vh;
 }
