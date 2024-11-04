@@ -1,10 +1,9 @@
 .container {
   display: flex; 
   justify-content: space-between; 
-  padding-top: 26px;
-  width: 90%; 
-  padding-left: 80px;
-  margin-bottom: 20px;
+  width: 100%; 
+  padding: 30px 0px;
+  justify-content: center;
 }
 
 .contact, .whoAreWe {
@@ -16,7 +15,6 @@
 }
 
 .box p img {
-  margin-right: 10px; 
   vertical-align: middle; /* Alinea img y p*/
 }
 
@@ -24,13 +22,13 @@
 .data {
   display: flex;
   align-items: center; 
-  margin-bottom: 10px; 
+  padding: 10px 0px;
+  gap: 5px;
 }
 
 .item {
   color: var(--principal-purple);
   font-size: 22px;
-  margin-right: 10px; 
 }
 
 .box {
@@ -40,16 +38,15 @@
   gap: 10px; 
   border: 1px solid white;
   padding: 10px;
-  height: 16vh;
+  height: 14vh;
 }
 
 .location {
-  margin-top: 2px; 
   width: 100%; 
 }
 
 .location iframe {
   width: 90%; 
-  height: 18vh; 
+  height: 16vh; 
 }
 
