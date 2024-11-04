@@ -14,8 +14,8 @@ function CatalogFilters() {
     setOrderBy("");
     setLicense("");
     setGenero("");
-    setItemsPerPage(10); // Reset items per page to default
-    setPage(1); // Reset page to 1
+    setItemsPerPage(10); 
+    setPage(1); 
   };
 
   const handleItemsPerPageChange = (newItemsPerPage) => {
