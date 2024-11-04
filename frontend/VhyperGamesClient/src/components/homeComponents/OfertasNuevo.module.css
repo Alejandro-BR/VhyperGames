@@ -1,7 +1,8 @@
 .contenedor {
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 40px;
+  padding: 40px;
 }
 
 .buttons {
@@ -9,40 +10,22 @@
   display: flex;
   width: auto;
   justify-content: center;
-  gap: 3%;
+  gap: 30px;
 }
-
-/* .data {
-  display: flex;
-  gap: 10px;
-} */
 
 .title {
   font-family: 'UniversCnBold', sans-serif;
-  position: absolute;
   display: flex;
-  flex-direction: row;
+  align-items: center;
   color: white;
-  margin-left: 10%;
-  gap: 5%;
+  gap: 10px; 
 }
 
 .palito {
-  position: relative;
   color: var(--principal-purple);
-  top: -10px;
   font-size: 2.5rem;
-
-}
-
-.text {
-  font-family: 'UniversCnRg', sans-serif;
-  color: white;
-  margin-top: 5%;
-  margin-left: 10%;
-  margin-bottom: 30vh;
 }
 
 .juegos {
-  align-items: center;
+  justify-content: left;
 }

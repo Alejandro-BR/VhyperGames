@@ -33,7 +33,8 @@ function OfertasNuevos() {
   }, [isOfertas]);
 
   return (
-    <div className={style.contenedor}>
+    <>
+
       <div className={style.buttons}>
         <Button
           variant={"short"}
@@ -50,27 +51,30 @@ function OfertasNuevos() {
           Nuevos
         </Button>
       </div>
+      <div className={style.contenedor}>
 
-      <div className={style.title}>
-        <h1 className={style.palito}>❙</h1>
-        <h1>{isOfertas ? "OFERTAS" : "NUEVOS"}</h1>
+        <div className={style.title}>
+          <h1 className={style.palito}>❙</h1>
+          <h1>{isOfertas ? "OFERTAS" : "NUEVOS"}</h1>
+        </div>
+
+        <div className={style.juegos}>
+          {loading ? (
+            <h2 className={style.text}>Cargando juegos...</h2>
+          ) : juegos.length === 0 ? (
+            <h2 className={style.text}>
+              {isOfertas
+                ? "Ahora mismo no hay juegos de oferta en la página, vuelve pronto ;)"
+                : "Ahora mismo no hay juegos nuevos en la página, vuelve pronto ;)"}
+            </h2>
+          ) : (
+            <BlockGame games={juegos} />
+          )}
+        </div>
+
       </div>
 
-      <div className={style.juegos}>
-        {loading ? (
-          <h2 className={style.text}>Cargando juegos...</h2>
-        ) : juegos.length === 0 ? (
-          <h2 className={style.text}>
-            {isOfertas
-              ? "Ahora mismo no hay juegos de oferta en la página, vuelve pronto ;)"
-              : "Ahora mismo no hay juegos nuevos en la página, vuelve pronto ;)"}
-          </h2>
-        ) : (
-          <BlockGame games={juegos} />
-        )}
-      </div>
-
-    </div>
+    </>
   );
 }
 
