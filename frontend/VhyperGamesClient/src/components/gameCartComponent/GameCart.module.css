@@ -23,9 +23,9 @@
 }
 
 .stock{
-  color: green;
+  color: var(--principal-green);
 }
 
 .noStock{
-  color: red;
+  color: var(--principal-red);
 }
