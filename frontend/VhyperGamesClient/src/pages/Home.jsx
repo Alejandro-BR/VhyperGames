@@ -1,14 +1,12 @@
 import Header from "../components/headerComponent/Header";
-import Carousel from "../components/homeComponents/Carousel";
-import OfertasNuevos from "../components/homeComponents/OfertasNuevo";
 import Footer from "../components/footerComponent/Footer";
+import BodyHome from "../components/homeComponents/BodyHome";
 
 function Home() {
   return (
     < >
       <Header />
-      <Carousel />
-      <OfertasNuevos />
+      <BodyHome/> 
       <Footer />
     </>
   );

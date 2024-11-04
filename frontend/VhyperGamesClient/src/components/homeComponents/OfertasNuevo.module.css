@@ -3,6 +3,7 @@
   flex-direction: column;
   gap: 40px;
   padding: 40px;
+  width: 90%;
 }
 
 .buttons {
@@ -30,6 +31,6 @@
   justify-content: left;
 }
 
-h2 {
+.text {
   color: white;
 }
