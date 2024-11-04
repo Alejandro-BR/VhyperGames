@@ -13,6 +13,14 @@ function GameCart({ title, stock, price, imgUrl }) {
     }
   }
 
+  function truncateText(text) {
+    if (text.length > 15) {
+      return text.slice(0, 15) + " ...";
+    }
+    return text;
+  }
+  
+
   useEffect(() => {
     comprobarStock();
   }, []);
@@ -22,7 +30,7 @@ function GameCart({ title, stock, price, imgUrl }) {
       <div className={clasess.container}>
         <img src={imgUrl} className={clasess.gameCardImg} />
         <div className={clasess.cartTitle}>
-          <h2>{title}</h2>
+          <h2>{truncateText(title)}</h2>
           <img src="/icon/carrito_header.svg" alt="carrito" className={clasess.carritoIcon} />
         </div>
         <div className={clasess.cartPrice}>
