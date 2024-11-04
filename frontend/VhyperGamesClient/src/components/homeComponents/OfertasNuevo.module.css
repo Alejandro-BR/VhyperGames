@@ -1,3 +1,9 @@
+.contenedor {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
 .buttons {
   margin-top: 10vh;
   display: flex;
@@ -5,6 +11,11 @@
   justify-content: center;
   gap: 3%;
 }
+
+/* .data {
+  display: flex;
+  gap: 10px;
+} */
 
 .title {
   font-family: 'UniversCnBold', sans-serif;
@@ -30,4 +41,8 @@
   margin-top: 5%;
   margin-left: 10%;
   margin-bottom: 30vh;
+}
+
+.juegos {
+  align-items: center;
 }

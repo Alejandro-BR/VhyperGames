@@ -11,7 +11,7 @@ function OfertasNuevos() {
 
   useEffect(() => {
     setLoading(true);
-    setJuegos([]); 
+    setJuegos([]);
 
     const url = isOfertas ? CATALOG_SALES : CATALOG_NEW_RELEASES;
 
@@ -33,7 +33,7 @@ function OfertasNuevos() {
   }, [isOfertas]);
 
   return (
-    <>
+    <div className={style.contenedor}>
       <div className={style.buttons}>
         <Button
           variant={"short"}
@@ -56,18 +56,21 @@ function OfertasNuevos() {
         <h1>{isOfertas ? "OFERTAS" : "NUEVOS"}</h1>
       </div>
 
-      {loading ? (
-        <h2 className={style.text}>Cargando juegos...</h2>
-      ) : juegos.length === 0 ? (
-        <h2 className={style.text}>
-          {isOfertas
-            ? "Ahora mismo no hay juegos de oferta en la página, vuelve pronto ;)"
-            : "Ahora mismo no hay juegos nuevos en la página, vuelve pronto ;)"}
-        </h2>
-      ) : (
-        <BlockGame games={juegos} />
-      )}
-    </>
+      <div className={style.juegos}>
+        {loading ? (
+          <h2 className={style.text}>Cargando juegos...</h2>
+        ) : juegos.length === 0 ? (
+          <h2 className={style.text}>
+            {isOfertas
+              ? "Ahora mismo no hay juegos de oferta en la página, vuelve pronto ;)"
+              : "Ahora mismo no hay juegos nuevos en la página, vuelve pronto ;)"}
+          </h2>
+        ) : (
+          <BlockGame games={juegos} />
+        )}
+      </div>
+
+    </div>
   );
 }
 
