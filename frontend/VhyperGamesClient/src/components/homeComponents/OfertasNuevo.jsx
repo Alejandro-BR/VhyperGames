@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import Button from '../buttonComponent/Button';
+import GameCart from '../gameCartComponent/GameCart';
 import BlockGame from './BlockGame';
 import style from './OfertasNuevo.module.css';
 
@@ -36,6 +37,7 @@ function OfertasNuevos() {
         : "Ahora mismo no hay juegos nuevos en la página vuelve pronto ;)"}</h2>
 
       <BlockGame games={isOfertas ? JUEGOS1 : JUEGOS2} />
+      
 
     </>
 

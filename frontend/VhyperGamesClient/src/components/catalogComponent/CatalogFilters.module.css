@@ -1,0 +1,12 @@
+.filters{
+  color: white;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.filter{
+  background-color: var(--header-footer-color);
+  display: flex;
+  gap: 10px;
+  border-radius: 20px;
+}

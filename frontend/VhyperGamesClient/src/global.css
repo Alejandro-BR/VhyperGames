@@ -61,6 +61,6 @@
 /* ESTILO QUE SE APLICARA GENERAL A TODOS LOS COMPONETES POR DEFECTO*/
 body {
   min-height: 100vh;
-  min-width:  100vh;
+  min-width:  100vw;
   background-color: var(--body-color);
 }

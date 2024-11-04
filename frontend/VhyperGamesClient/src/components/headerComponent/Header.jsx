@@ -33,7 +33,7 @@ function Header() {
           <Button
             variant={"short"}
             color={"morado-azul"}
-            onClick={messageCatalog}
+            onClick={() => navigate("/catalogo")}
           >
             <img
               className={classes.catalogIcon}

@@ -1,0 +1,31 @@
+.container{
+  display: flex;
+  flex-direction: column;
+  color: white;
+  max-width: fit-content;
+  gap: 10px;
+}
+.cartTitle{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: auto;
+}
+.carritoIcon{
+  max-height: 20px;
+}
+
+.cartPrice{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: auto;
+}
+
+.stock{
+  color: green;
+}
+
+.noStock{
+  color: red;
+}
