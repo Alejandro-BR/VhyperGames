@@ -1,4 +1,6 @@
-﻿namespace VhyperGamesServer.Models.Database.Entities;
+﻿using VhyperGamesServer.Models.Database.Entities.Enum;
+
+namespace VhyperGamesServer.Models.Database.Entities;
 
 public class Game
 {
@@ -6,10 +8,10 @@ public class Game
     public Guid GameCode {  get; set; }
     public string Title { get; set; }
     public string Description { get; set; }
-    public string Genre { get; set; }
+    public Genre Genre { get; set; }
     public bool DrmFree {  get; set; }
     public DateTime ReleaseDate {  get; set; }
-    public double Price { get; set; }
+    public int Price { get; set; }
     public int Stock {  get; set; }
     public int AvgRating { get; set; }
     public List<ImageGame> ImageGames { get; set; }

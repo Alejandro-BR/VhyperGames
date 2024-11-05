@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using VhyperGamesServer.Models.Database.Entities;
+using VhyperGamesServer.Models.Database.Entities.Enum;
 
 namespace VhyperGamesServer.Models.Database;
 
@@ -103,9 +104,8 @@ public class MyDbContext : DbContext
                 .IsRequired();
 
             entity.Property(e => e.Genre)
-                .HasColumnName("genre")
-                .HasMaxLength(15)
-                .IsRequired();
+             .HasColumnName("genre")
+             .IsRequired();
 
             entity.Property(e => e.DrmFree)
                 .HasColumnName("drm_free")

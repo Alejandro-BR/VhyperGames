@@ -8,7 +8,7 @@ public class GameCardDto
 
     public int Stock {  get; set; }
 
-    public double Price { get; set; }
+    public int Price { get; set; }
 
     public string ImageUrl { get; set; }
 

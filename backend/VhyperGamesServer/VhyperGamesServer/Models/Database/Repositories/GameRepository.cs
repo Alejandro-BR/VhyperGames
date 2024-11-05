@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using VhyperGamesServer.Models.Database.Entities;
+using VhyperGamesServer.Models.Database.Entities.Enum;
 using VhyperGamesServer.Models.Dtos;
 using VhyperGamesServer.Services;
 
@@ -44,29 +45,44 @@ public class GameRepository : Repository<Game, int>
             query = query.Where(g => g.DrmFree == filter.DrmFree.Value);
         }
 
-        if (!string.IsNullOrEmpty(filter.Genre))
+        int genreValue = (int)filter.Genre; 
+        if (genreValue == -1) 
+        {}
+        else if (Enum.IsDefined(typeof(Genre), genreValue))
         {
-            query = query.Where(g => g.Genre == filter.Genre);
+            Genre genreEnum = (Genre)genreValue;
+            query = query.Where(g => g.Genre == genreEnum);
         }
 
-        switch (filter.SortCriteria?.ToLower())
+
+        // Asumiendo que filter.SortCriteria es un entero
+        int sortCriteriaValue = (int)filter.SortCriteria; // Por ejemplo, 0 para HighestPrice
+        if (Enum.IsDefined(typeof(SortCriteria), sortCriteriaValue))
         {
-            case "highest price":
-                query = query.OrderByDescending(g => g.Price);
-                break;
-            case "lowest price":
-                query = query.OrderBy(g => g.Price);
-                break;
-            case "a-z":
-                query = query.OrderBy(g => g.Title);
-                break;
-            case "z-a":
-                query = query.OrderByDescending(g => g.Title);
-                break;
-            default:
-                query = query.OrderBy(g => g.Title);
-                break;
+            SortCriteria sortCriteriaEnum = (SortCriteria)sortCriteriaValue;
+
+            switch (sortCriteriaEnum)
+            {
+                case SortCriteria.HighestPrice:
+                    query = query.OrderByDescending(g => g.Price);
+                    break;
+                case SortCriteria.LowestPrice:
+                    query = query.OrderBy(g => g.Price);
+                    break;
+                case SortCriteria.ZToA:
+                    query = query.OrderByDescending(g => g.Title);
+                    break;
+                default:
+                    query = query.OrderBy(g => g.Title);
+                    break;
+            }
         }
+        else
+        {
+            // Manejo de valor no válido
+            query = query.OrderBy(g => g.Title); // Orden por defecto
+        }
+
 
         return await query
             .Skip((filter.Page - 1) * filter.ResultsPerPage)

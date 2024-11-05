@@ -2,6 +2,8 @@ using VhyperGamesServer.Models.Database.Entities;
 using VhyperGamesServer.Models.Dtos;
 using VhyperGamesServer.Models.Database.Repositories;
 using VhyperGamesServer.Models.Mappers;
+using Microsoft.EntityFrameworkCore;
+using VhyperGamesServer.Models.Database.Entities.Enum;
 
 namespace VhyperGamesServer.Services
 {
