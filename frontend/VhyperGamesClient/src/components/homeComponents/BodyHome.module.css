@@ -1,4 +1,7 @@
 .bodyHome {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
   width: 80%;
   padding-bottom: 40px;
   margin: 0 auto;

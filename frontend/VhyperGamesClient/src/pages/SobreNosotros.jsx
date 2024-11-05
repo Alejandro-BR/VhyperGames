@@ -9,10 +9,12 @@ function SobreNosotros() {
   return (
     <>
       <Header />
-      <Title text="SOBRE NOSOTROS" size="3em" color="#fff" align="center"/>
-      <SobreNosotrosDatos />
-      <Team />
-      <Contacto />
+      <div className="generalContainer">
+        <Title text="SOBRE NOSOTROS" size="3em" color="#fff" align="center" />
+        <SobreNosotrosDatos />
+        <Team />
+        <Contacto />
+      </div>
       <Footer />
     </>
   );
