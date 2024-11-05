@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import CatalogFilters from "./CatalogFilters";
 import BlockGame from "../blockgameComponent/BlockGame";
 import Pagination from "./Pagination"; 
@@ -6,14 +6,20 @@ import { CATALOG_FILTER } from "../../config";
 
 function BodyCatalog() {
     const [juegos, setJuegos] = useState([]); 
-    const [loading, setLoading] = useState(true); 
-    const [searchFilter, setSearchFilter] = useState({}); 
+    const [loading, setLoading] = useState(true);
+    const [searchFilter, setSearchFilter] = useState({
+        searchText: "",
+        sortCriteria: null,
+        drmFree: null,
+        genre: null,
+        resultsPerPage: 10, // Valor inicial en 10
+        page: 1
+    }); 
 
-    
     const fetchJuegos = async (filter) => {
         setLoading(true); 
         try {
-            console.log("Enviando filtros a la API:", JSON.stringify(filter, null, 2)); // Agrega este console.log
+            console.log("Enviando filtros a la API:", JSON.stringify(filter, null, 2));
             const response = await fetch(CATALOG_FILTER, {
                 method: 'POST',
                 headers: {
@@ -35,35 +41,27 @@ function BodyCatalog() {
         }
     };
     
-
     useEffect(() => {
         fetchJuegos(searchFilter); 
     }, [searchFilter]);
     
     const handleSearchFilterChange = (newFilter) => {
-        const formattedFilter = {
-            searchText: newFilter.search || "",
-            sortCriteria: newFilter.orderBy || null,
-            drmFree: newFilter.license === "DRM-FREE" ? true : null,
-            genre: newFilter.genero || null,
-            resultsPerPage: newFilter.itemsPerPage || 10,
-            page: newFilter.page || 1
-        };
-        console.log("handleSearchFilterChange configurando searchFilter con:", formattedFilter);
-        setSearchFilter(formattedFilter);
+        setSearchFilter(prevFilter => ({
+            ...prevFilter,
+            ...newFilter
+        }));
     };
 
     if (loading) return <p>Cargando juegos...</p>;
 
     return (
-        <div style={{ height: '80vh' }}>
-
-            <CatalogFilters onFilterChange={handleSearchFilterChange} />
+        <>
+            <CatalogFilters filters={searchFilter} onFilterChange={handleSearchFilterChange} />
             <div>
                 <BlockGame games={juegos} /> 
             </div>
             <Pagination />
-        </div>
+        </>
     );
 }
 

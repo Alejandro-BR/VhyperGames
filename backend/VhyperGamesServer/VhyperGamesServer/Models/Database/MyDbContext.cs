@@ -119,7 +119,7 @@ public class MyDbContext : DbContext
 
             entity.Property(e => e.Price)
                 .HasColumnName("price")
-                .HasColumnType("decimal(5,2)")
+                .HasColumnType("REAL")
                 .IsRequired();
 
             entity.Property(e => e.Stock)
