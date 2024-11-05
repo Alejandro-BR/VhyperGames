@@ -119,7 +119,7 @@ public class Seeder
                     Genre = "Sandbox",
                     DrmFree = true,
                     ReleaseDate = new DateTime (2011, 05, 16),
-                    Price = 8.8m,
+                    Price = 8.8,
                     Stock = 100,
                     ImageGames = new List<ImageGame>
                     {
@@ -157,7 +157,7 @@ public class Seeder
                     Genre = "Plataforma",
                     DrmFree = true,
                     ReleaseDate = new DateTime (2018, 10, 13),
-                    Price = 2.65m,
+                    Price = 2.65,
                     Stock = 100,
                     ImageGames = new List<ImageGame>
                     {
