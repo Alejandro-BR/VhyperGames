@@ -1,115 +1,94 @@
-import { useState, useEffect } from "react";
 import classes from "./CatalogFilters.module.css";
 
-function CatalogFilters({ onFilterChange }) {
-  const [search, setSearch] = useState("");
-  const [orderBy, setOrderBy] = useState("");
-  const [license, setLicense] = useState("");
-  const [genero, setGenero] = useState("");
-  const [itemsPerPage, setItemsPerPage] = useState(10);
-  const [page, setPage] = useState(1);
+function CatalogFilters({ filters, onFilterChange }) {
+    const { searchText, sortCriteria, drmFree, genre, resultsPerPage, page } = filters;
 
-  const resetSelections = () => {
-    setSearch("");
-    setOrderBy("");
-    setLicense("");
-    setGenero("");
-    setItemsPerPage(10); 
-    setPage(1); 
-  };
+    const handleInputChange = (key, value) => {
+        console.log(`handleInputChange - ${key}:`, value);
+        onFilterChange({ [key]: value });
+    };
 
-  const applyFilters = () => {
-    const filters = { search, orderBy, license, genero, itemsPerPage, page };
-    console.log("Filtros enviados desde CatalogFilters:", filters);
-    onFilterChange(filters);
-};
+    return (
+        <div className={classes.container}>
+            <div className={classes.filters}>
+                <div className={classes.filterItem}>
+                    <input
+                        id="Search"
+                        type="text"
+                        placeholder="Buscar"
+                        value={searchText || ""}
+                        onChange={(e) => handleInputChange("searchText", e.target.value)}
+                        className={classes.filter}
+                    />
+                </div>
 
-  const handleItemsPerPageChange = (newItemsPerPage) => {
-    setItemsPerPage(newItemsPerPage);
-  };
+                <div className={classes.filterItem}>
+                    <select
+                        id="orderBy"
+                        value={sortCriteria || ""}
+                        onChange={(e) => handleInputChange("sortCriteria", e.target.value)}
+                        className={classes.filter}
+                    >
+                        <option value="">Ordenar por:</option>
+                        <option value="lowest price">Precio Asc.</option>
+                        <option value="highest price">Precio Desc.</option>
+                        <option value="a-z">Alfabetico A-Z.</option>
+                        <option value="z-a">Alfabetico Z-A.</option>
+                    </select>
+                </div>
 
-  return (
-    <div className={classes.container}>
-      <div className={classes.filters}>
-        <div className={classes.filterItem}>
-          <input
-            id="Search"
-            type="text"
-            placeholder="Buscar"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            className={classes.filter}
-          />
+                <div className={classes.filterItem}>
+                    <select
+                        id="license"
+                        value={drmFree ? "DRM-FREE" : "Todos"}
+                        onChange={(e) => handleInputChange("drmFree", e.target.value === "DRM-FREE")}
+                        className={classes.filter}
+                    >
+                        <option value="Todos">Todos</option>
+                        <option value="DRM">DRM</option>
+                        <option value="DRM-FREE">DRM-FREE</option>
+                    </select>
+                </div>
+
+                <div className={classes.filterItem}>
+                    <select
+                        id="genero"
+                        value={genre || ""}
+                        onChange={(e) => handleInputChange("genre", e.target.value)}
+                        className={classes.filter}
+                    >
+                        <option value="">Genero:</option>
+                        <option value="RPG de Acción">RPG de Acción</option>
+                        <option value="Survival horror">Survival horror</option>
+                        <option value="Aventura-Acción">Aventura-Acción</option>
+                        <option value="Estrategia">Estrategia</option>
+                        <option value="Sandbox">Sandbox</option>
+                        <option value="Simulación">Simulación</option>
+                        <option value="Plataforma">Plataforma</option>
+                    </select>
+                </div>
+
+                <div className={classes.filterItem}>
+                    <select
+                        value={resultsPerPage || 10} // Usa 10 como valor predeterminado si resultsPerPage es null o undefined
+                        onChange={(e) => handleInputChange("resultsPerPage", parseInt(e.target.value, 10))}
+                        className={classes.filter}
+                    >
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                        <option value="20">20</option>
+                        <option value="50">50</option>
+                    </select>
+                </div>
+
+                <div className={classes.filterItem}>
+                    <button onClick={() => onFilterChange({ searchText: "", sortCriteria: null, drmFree: null, genre: null, resultsPerPage: 10, page: 1 })} className={classes.resetButton}>
+                        Reiniciar selección
+                    </button>
+                </div>
+            </div>
         </div>
-
-        <div className={classes.filterItem}>
-          <select
-            id="orderBy"
-            value={orderBy}
-            onChange={(e) => setOrderBy(e.target.value)}
-            className={classes.filter}
-          >
-            <option value="">Ordenar por:</option>
-            <option value="Precio Asc.">Precio Asc.</option>
-            <option value="Precio Desc.">Precio Desc.</option>
-            <option value="Alfabetico A-Z.">Alfabetico A-Z.</option>
-            <option value="Alfabetico Z-A.">Alfabetico Z-A.</option>
-          </select>
-        </div>
-
-        <div className={classes.filterItem}>
-          <select
-            id="license"
-            value={license}
-            onChange={(e) => setLicense(e.target.value)}
-            className={classes.filter}
-          >
-            <option value="">Licencia:</option>
-            <option value="Todos">Todos</option>
-            <option value="DRM">DRM</option>
-            <option value="DRM-FREE">DRM-FREE</option>
-          </select>
-        </div>
-
-        <div className={classes.filterItem}>
-          <select
-            id="genero"
-            value={genero}
-            onChange={(e) => setGenero(e.target.value)}
-            className={classes.filter}
-          >
-            <option value="">Genero:</option>
-            <option value="RPG de Acción">RPG de Acción</option>
-            <option value="Survival horror">Survival horror</option>
-            <option value="Aventura-Acción">Aventura-Acción</option>
-            <option value="Estrategia">Estrategia</option>
-            <option value="Sandbox">Sandbox</option>
-            <option value="Simulación">Simulación</option>
-            <option value="Plataforma">Plataforma</option>
-          </select>
-        </div>
-
-        <div className={classes.filterItem}>
-          <select
-            value={itemsPerPage}
-            onChange={(e) => handleItemsPerPageChange(parseInt(e.target.value, 10))}
-            className={classes.filter}
-          >
-            <option value="5">5</option>
-            <option value="10">10</option>
-            <option value="20">20</option>
-            <option value="50">50</option>
-          </select>
-        </div>
-
-        <div className={classes.filterItem}>
-          <button onClick={resetSelections} className={classes.resetButton}>
-            Reiniciar selección
-          </button>
-        </div>
-      </div>
-    </div>
-  );
+    );
 }
 
 export default CatalogFilters;
