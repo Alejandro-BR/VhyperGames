@@ -1,3 +1,7 @@
+*{
+  color: white;
+}
+
 .filters {
   display: flex;
   align-items: center;

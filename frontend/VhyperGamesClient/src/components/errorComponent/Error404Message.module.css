@@ -1,16 +1,8 @@
 .errorBody {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     align-items: center;
-    height: 730px;
-    width: 100vw;
-    gap: 25px;
-}
-
-.errorTitle {
-    font-size: 100px;
-    color: white;
+    gap: 50px;
 }
 
 .errorText {
@@ -22,6 +14,6 @@
 }
 
 .gif {
-    height: 50vh;
+    height: 300px;
     width: auto;
 }

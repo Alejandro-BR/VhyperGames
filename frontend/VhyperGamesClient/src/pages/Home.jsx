@@ -4,9 +4,11 @@ import BodyHome from "../components/homeComponents/BodyHome";
 
 function Home() {
   return (
-    < >
+    <>
       <Header />
-      <BodyHome/> 
+      <div className="generalContainer">
+        <BodyHome />
+      </div>
       <Footer />
     </>
   );

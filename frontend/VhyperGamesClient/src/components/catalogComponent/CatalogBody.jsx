@@ -4,7 +4,7 @@ import BlockGame from "../blockgameComponent/BlockGame";
 import Pagination from "./Pagination"; 
 import { CATALOG_FILTER } from "../../config";
 
-function BodyCatalog() {
+function CatalogBody() {
     const [juegos, setJuegos] = useState([]); 
     const [loading, setLoading] = useState(true);
     const [searchFilter, setSearchFilter] = useState({
@@ -65,4 +65,4 @@ function BodyCatalog() {
     );
 }
 
-export default BodyCatalog;
+export default CatalogBody;

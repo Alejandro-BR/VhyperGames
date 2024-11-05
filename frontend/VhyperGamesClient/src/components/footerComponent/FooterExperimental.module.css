@@ -4,6 +4,8 @@
   background-color: var(--header-footer-color);
   color: white;
   padding: 20px;
+  /* margin-top: 100vh; */
+  /* bottom: 0; */
 }
 
 .leftFooter {
