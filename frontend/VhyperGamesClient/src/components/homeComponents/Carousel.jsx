@@ -19,36 +19,39 @@ function Carousel() {
       items: 1,
       partialVisibilityGutter: 20,
     },
-  };
+  }
 
   return (
-    <CarouselPack
-      className={classes.carrousel}
-      responsive={responsive}
-      infinite={true}
-      autoPlay={true}
-      autoPlaySpeed={5000}
-      showDots={true}
-      arrows={false}
-    >
-      <img className={classes.bannerImg} src="/img/marca2.png" alt="Marca 2" />
-      <img
-        className={classes.bannerImg}
-        src="/img/dragon-ball.png"
-        alt="Dragon Ball"
-      />
-      <img className={classes.bannerImg} src="/img/gow.png" alt="GOW" />
-      <img
-        className={classes.bannerImg}
-        src="/img/minecraft.png"
-        alt="Minecraft"
-      />
-      <img
-        className={classes.bannerImg}
-        src="/img/witcher3.png"
-        alt="Witcher 3"
-      />
-    </CarouselPack>
+    <div className={classes.carrouselContainer}>
+      <CarouselPack
+        className={classes.carrousel}
+        responsive={responsive}
+        infinite={true}
+        autoPlay={true}
+        autoPlaySpeed={5000}
+        showDots={true}
+        arrows={false}
+      >
+        <img className={classes.bannerImg} src="/img/marca2.png" alt="Marca 2" />
+        <img
+          className={classes.bannerImg}
+          src="/img/dragon-ball.png"
+          alt="Dragon Ball"
+        />
+        <img className={classes.bannerImg} src="/img/gow.png" alt="GOW" />
+        <img
+          className={classes.bannerImg}
+          src="/img/minecraft.png"
+          alt="Minecraft"
+        />
+        <img
+          className={classes.bannerImg}
+          src="/img/witcher3.png"
+          alt="Witcher 3"
+        />
+      </CarouselPack>
+    </div>
+
   );
 }
 

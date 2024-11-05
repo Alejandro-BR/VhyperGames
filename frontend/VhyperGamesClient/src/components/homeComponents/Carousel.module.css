@@ -1,8 +1,11 @@
-.carrousel {
+.carrouselContainer {
+    width: 90%;
     margin-top: 40px;
-    width: 100%;
+}
+
+.carrousel {
     border-radius: 20px;
-    box-shadow: 0 0px 35px  var(--led-purple);
+    box-shadow: 0 0px 35px var(--led-purple);
 }
 
 .bannerImg {
