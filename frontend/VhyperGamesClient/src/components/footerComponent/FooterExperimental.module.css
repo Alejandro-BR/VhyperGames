@@ -1,11 +1,10 @@
 .footer {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   background-color: var(--header-footer-color);
   color: white;
-  padding: 20px;
-  /* margin-top: 100vh; */
-  /* bottom: 0; */
+  padding: 10px;
+ 
 }
 
 .leftFooter {
@@ -13,10 +12,11 @@
   flex-direction: column;
   justify-content: center;
   gap: 5px;
+  padding-left: 30px;
 }
 
 .imgFooter {
-  max-width: 80px;
+  max-width: 60px;
   cursor: pointer;
 }
 
@@ -24,16 +24,39 @@
   display: flex;
   gap: 40px;
   align-items: center;
+  padding: 0 20px;
 }
-
-.fila {
+.buttons{
   display: flex;
   flex-direction: column;
-  gap: 20px;
   align-items: center;
+  padding-top: 20px;
+}
+.onlyButtons{
+  display: flex;
+  gap: 30px;
+  padding: 20px;
+}
+
+
+.iconsFooter{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  padding-bottom: 10px;
+}
+
+.onlyIcons{
+  display: flex;
+  gap: 20px;
 }
 
 .icon {
-  max-width: 50px;
+  max-width: 40px;
   cursor: pointer;
+}
+
+a {
+  text-decoration: none;
 }
