@@ -42,9 +42,13 @@ public class GameRepository : Repository<Game, int>
             }
         }
 
-        if (filter.DrmFree.HasValue)
+        int drmValue = (int)filter.DrmFree;
+        if (drmValue == -1)
+        { }
+        else if (Enum.IsDefined(typeof(Drm), drmValue))
         {
-            query = query.Where(g => g.DrmFree == filter.DrmFree.Value);
+            Drm drmEnum = (Drm)drmValue;
+            query = query.Where(g => g.DrmFree == drmEnum);
         }
 
         int genreValue = (int)filter.Genre; 

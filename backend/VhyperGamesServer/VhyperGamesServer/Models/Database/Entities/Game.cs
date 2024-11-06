@@ -9,7 +9,7 @@ public class Game
     public string Title { get; set; }
     public string Description { get; set; }
     public Genre Genre { get; set; }
-    public bool DrmFree {  get; set; }
+    public Drm DrmFree {  get; set; }
     public DateTime ReleaseDate {  get; set; }
     public int Price { get; set; }
     public int Stock {  get; set; }
@@ -19,7 +19,6 @@ public class Game
     public Game()
     {
         GameCode = Guid.NewGuid();
-        DrmFree = false;
         AvgRating = 0;
         ImageGames = new List<ImageGame>();
     }
