@@ -14,8 +14,8 @@ function GameCard({ title, stock, price, imgUrl }) {
   }
 
   function truncateText(text) {
-    if (text.length > 15) {
-      return text.slice(0, 15) + " ...";
+    if (text.length > 19) {
+      return text.slice(0, 19) + "...";
     }
     return text;
   }
@@ -25,16 +25,19 @@ function GameCard({ title, stock, price, imgUrl }) {
     comprobarStock();
   }, []);
 
+  function precio() {
+    return (price / 100).toFixed(2);
+  }
+
   return (
     <>
       <div className={clasess.container}>
         <img src={imgUrl} className={clasess.gameCardImg} />
         <div className={clasess.cardTitle}>
           <h2>{truncateText(title)}</h2>
-          {/* <img src="/icon/carrito_header.svg" alt="carrito" className={clasess.carritoIcon} /> */}
         </div>
         <div className={clasess.cardPrice}>
-          <p>{(price / 100).toFixed(2)}  €</p>
+          <p>{precio()}  €</p>
           <p className={isStock ? clasess.stock : clasess.noStock}>{isStock ? "EN STOCK" : "SIN STOCK"}</p>
         </div>
       </div>
