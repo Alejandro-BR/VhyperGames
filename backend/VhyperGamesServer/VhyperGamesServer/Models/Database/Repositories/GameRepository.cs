@@ -1,7 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 using VhyperGamesServer.Models.Database.Entities;
 using VhyperGamesServer.Models.Database.Entities.Enum;
 using VhyperGamesServer.Models.Dtos;
+using VhyperGamesServer.Models.Mappers;
 using VhyperGamesServer.Services;
 
 
@@ -24,7 +26,7 @@ public class GameRepository : Repository<Game, int>
             .FirstOrDefaultAsync(game => game.Title.ToLower() == title);
     }
 
-    public async Task<List<Game>> FilterAndSortGamesAsync(GameFilterDto filter, SmartSearchService smartSearchService)
+    public async Task<CatalogDto> FilterAndSortGamesAsync(GameFilterDto filter, SmartSearchService smartSearchService)
     {
         IQueryable<Game> query = _context.Games.Include(g => g.ImageGames);
 
@@ -79,16 +81,37 @@ public class GameRepository : Repository<Game, int>
         }
         else
         {
-            // Manejo de valor no válido
             query = query.OrderBy(g => g.Title); // Orden por defecto
         }
 
+        int page = filter.Page > 0 ? filter.Page : 1;
+        int resultsPerPage = filter.ResultsPerPage > 0 ? filter.ResultsPerPage : 10;
 
-        return await query
-            .Skip((filter.Page - 1) * filter.ResultsPerPage)
-            .Take(filter.ResultsPerPage)
+        // Calcular el total de juegos antes de la paginación
+        int totalGames = await query.CountAsync();
+
+        // Calcular el número total de páginas
+        int totalPages = (int)Math.Ceiling(totalGames / (double)resultsPerPage);
+
+
+        List<Game> games = await query
+            .Skip((page - 1) * resultsPerPage)
+            .Take(resultsPerPage)
             .ToListAsync();
-    }
+
+        // Mapear la lista de juegos a GameCardDto
+        GameCardMapper gameCardMapper = new GameCardMapper();
+        List<GameCardDto> cards = gameCardMapper.ListToDto(games).ToList();
+
+        CatalogDto catalogoDto = new CatalogDto
+        {
+            Games = cards,
+            TotalPages = totalPages
+        };
+
+        return catalogoDto;
+    
+}
 
     public async Task<List<Game>> GetNewGamesRelease()
     {

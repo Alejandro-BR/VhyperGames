@@ -20,12 +20,10 @@ namespace VhyperGamesServer.Services
             _smartSearchService = smartSearchService;
         }
 
-        public async Task<List<GameCardDto>> FilterAndSortGamesAsync(GameFilterDto filter)
+        public async Task<CatalogDto> FilterAndSortGamesAsync(GameFilterDto filter)
         {
             // Obtiene la lista de juegos filtrados y ordenados
-            List<Game> games = await _unitOfWork.GameRepository.FilterAndSortGamesAsync(filter, _smartSearchService);
-
-            return _gameCardMapper.ListToDto(games).ToList();
+            return await _unitOfWork.GameRepository.FilterAndSortGamesAsync(filter, _smartSearchService);
         }
 
         public async Task<List<GameCardDto>> GetNewGamesRelease()
