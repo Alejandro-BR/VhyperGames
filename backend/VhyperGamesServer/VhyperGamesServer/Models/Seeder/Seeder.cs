@@ -31,7 +31,7 @@ public class Seeder
                     {
                         new ImageGame
                         {
-                            ImageUrl = "https://raw.githubusercontent.com/VhyperGames/Resources/refs/heads/main/ImagesGame/TheWitcher3/thewitcher3.png",
+                            ImageUrl = "images/TheWitcher3/thewitcher3.png",
                             AltText = "Imagen 1 de The Witcher III"
                         }
                     }
@@ -50,7 +50,7 @@ public class Seeder
                     {
                         new ImageGame
                         {
-                            ImageUrl = "https://raw.githubusercontent.com/VhyperGames/Resources/refs/heads/main/ImagesGame/Skyrim/skyrim.png",
+                            ImageUrl = "images/Skyrim/skyrim.png",
                             AltText = "Imagen 1 de Skyrim"
                         }
                     }
@@ -69,7 +69,7 @@ public class Seeder
                     {
                         new ImageGame
                         {
-                            ImageUrl = "https://raw.githubusercontent.com/VhyperGames/Resources/refs/heads/main/ImagesGame/ResidentEvil2/residentevil2.png",
+                            ImageUrl = "images/ResidentEvil2/residentevil2.png",
                             AltText = "Imagen 1 de Resident Evil 2"
                         }
                     }
@@ -88,7 +88,7 @@ public class Seeder
                     {
                         new ImageGame
                         {
-                            ImageUrl = "https://raw.githubusercontent.com/VhyperGames/Resources/refs/heads/main/ImagesGame/GodOfWar/godofwar.png",
+                            ImageUrl = "images/GodOfWar/godofwar.png",
                             AltText = "Imagen 1 de God of War"
                         }
                     }
@@ -107,7 +107,7 @@ public class Seeder
                     {
                         new ImageGame
                         {
-                            ImageUrl = "https://raw.githubusercontent.com/VhyperGames/Resources/refs/heads/main/ImagesGame/Frostpunk2/frostpunk2.png",
+                            ImageUrl = "images/Frostpunk2/frostpunk2.png",
                             AltText = "Imagen 1 de Frostpunk2"
                         }
                     }
@@ -126,7 +126,7 @@ public class Seeder
                     {
                         new ImageGame
                         {
-                            ImageUrl = "https://raw.githubusercontent.com/VhyperGames/Resources/refs/heads/main/ImagesGame/Terraria/terraria.png",
+                            ImageUrl = "images/Terraria/terraria.png",
                             AltText = "Imagen 1 de Terraria"
                         }
                     }
@@ -145,7 +145,7 @@ public class Seeder
                     {
                         new ImageGame
                         {
-                            ImageUrl = "https://raw.githubusercontent.com/VhyperGames/Resources/refs/heads/main/ImagesGame/Spore/spore.png",
+                            ImageUrl = "images/Spore/spore.png",
                             AltText = "Imagen 1 de Spore"
                         }
                     }
@@ -164,7 +164,7 @@ public class Seeder
                     {
                         new ImageGame
                         {
-                            ImageUrl = "https://raw.githubusercontent.com/VhyperGames/Resources/refs/heads/main/ImagesGame/GRIS/gris.png",
+                            ImageUrl = "images/GRIS/gris.png",
                             AltText = "Imagen 1 de GRIS"
                         }
                     }
@@ -183,7 +183,7 @@ public class Seeder
                     {
                         new ImageGame
                         {
-                            ImageUrl = "https://raw.githubusercontent.com/VhyperGames/Resources/refs/heads/main/ImagesGame/Cyberpunk/cyberpunk.png",
+                            ImageUrl = "images/Cyberpunk/cyberpunk.png",
                             AltText = "Imagen 1 de Cyberpunk"
                         }
                     }
@@ -202,7 +202,7 @@ public class Seeder
                     {
                         new ImageGame
                         {
-                            ImageUrl = "https://raw.githubusercontent.com/VhyperGames/Resources/refs/heads/main/ImagesGame/EpicMickey/epicmickey.png",
+                            ImageUrl = "images/EpicMickey/epicmickey.png",
                             AltText = "Imagen 1 de Epic Mickey"
                         }
                     }
