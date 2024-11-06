@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import clasess from "./GameCart.module.css";
+import clasess from "./GameCard.module.css";
 
-function GameCart({ title, stock, price, imgUrl }) {
+function GameCard({ title, stock, price, imgUrl }) {
 
   const [isStock, setIsStock] = useState()
 
@@ -19,7 +19,7 @@ function GameCart({ title, stock, price, imgUrl }) {
     }
     return text;
   }
-  
+
 
   useEffect(() => {
     comprobarStock();
@@ -29,12 +29,12 @@ function GameCart({ title, stock, price, imgUrl }) {
     <>
       <div className={clasess.container}>
         <img src={imgUrl} className={clasess.gameCardImg} />
-        <div className={clasess.cartTitle}>
+        <div className={clasess.cardTitle}>
           <h2>{truncateText(title)}</h2>
-          <img src="/icon/carrito_header.svg" alt="carrito" className={clasess.carritoIcon} />
+          {/* <img src="/icon/carrito_header.svg" alt="carrito" className={clasess.carritoIcon} /> */}
         </div>
-        <div className={clasess.cartPrice}>
-          <p>{price}  €</p>
+        <div className={clasess.cardPrice}>
+          <p>{(price / 100).toFixed(2)}  €</p>
           <p className={isStock ? clasess.stock : clasess.noStock}>{isStock ? "EN STOCK" : "SIN STOCK"}</p>
         </div>
       </div>
@@ -46,4 +46,4 @@ function GameCart({ title, stock, price, imgUrl }) {
 
 }
 
-export default GameCart;
+export default GameCard;
