@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import clasess from "./GameCard.module.css";
+import { BASE_URL } from "../../config";
 
 function GameCard({ title, stock, price, imgUrl }) {
 
@@ -32,7 +33,7 @@ function GameCard({ title, stock, price, imgUrl }) {
   return (
     <>
       <div className={clasess.container}>
-        <img src={imgUrl} className={clasess.gameCardImg} />
+        <img src={`${BASE_URL}${imgUrl}`} className={clasess.gameCardImg} />
         <div className={clasess.cardTitle}>
           <h2>{truncateText(title)}</h2>
         </div>
@@ -43,10 +44,6 @@ function GameCard({ title, stock, price, imgUrl }) {
       </div>
     </>
   )
-
-
-
-
 }
 
 export default GameCard;
