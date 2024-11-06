@@ -6,26 +6,35 @@ import { CATALOG_FILTER } from "../../config";
 
 function CatalogBody() {
     const [juegos, setJuegos] = useState([]); 
+    const [totalPages, setTotalPages] = useState(0);
     const [loading, setLoading] = useState(true);
+    const [searchText, setSearchText] = useState("");
     const [searchFilter, setSearchFilter] = useState({
         searchText: "",
-        sortCriteria: null,
-        drmFree: null,
-        genre: null,
-        resultsPerPage: 10, // Valor inicial en 10
+        sortCriteria: 0,
+        drmFree: -1,
+        genre: -1,
+        resultsPerPage: 10,
         page: 1
-    }); 
-
+    });
+ 
     const fetchJuegos = async (filter) => {
         setLoading(true); 
         try {
-            console.log("Enviando filtros a la API:", JSON.stringify(filter, null, 2));
-            const response = await fetch(CATALOG_FILTER, {
-                method: 'POST',
+            const queryParams = new URLSearchParams({
+                searchText: filter.searchText,
+                sortCriteria: filter.sortCriteria,
+                drmFree: filter.drmFree,
+                genre: filter.genre,
+                resultsPerPage: filter.resultsPerPage,
+                page: filter.page
+            }).toString();
+
+            const response = await fetch(`${CATALOG_FILTER}?${queryParams}`, {
+                method: 'GET',
                 headers: {
                     'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(filter)
+                }
             });
     
             if (!response.ok) {
@@ -33,22 +42,59 @@ function CatalogBody() {
             }
     
             const data = await response.json();
-            setJuegos(data); 
+            setJuegos(Array.isArray(data.games) ? data.games : []);
+            setTotalPages(data.totalPages);
         } catch (error) {
             console.error('Error al cargar los juegos:', error);
+            setJuegos([]);
         } finally {
             setLoading(false); 
         }
     };
-    
+
+    // Debounce para searchText
+    useEffect(() => {
+        const delayDebounceFn = setTimeout(() => {
+            setSearchFilter(prevFilter => ({
+                ...prevFilter,
+                searchText: searchText
+            }));
+        }, 300);
+
+        return () => clearTimeout(delayDebounceFn);
+    }, [searchText]);
+
     useEffect(() => {
         fetchJuegos(searchFilter); 
     }, [searchFilter]);
-    
+
     const handleSearchFilterChange = (newFilter) => {
+        if (newFilter.searchText !== undefined && newFilter.sortCriteria !== undefined) {
+            // Si todos los valores están presentes en `newFilter`, es un reinicio
+            setSearchText("");
+            setSearchFilter({
+                searchText: "",
+                sortCriteria: 0,
+                drmFree: -1,
+                genre: -1,
+                resultsPerPage: 10,
+                page: 1
+            });
+        } else if (newFilter.searchText !== undefined) {
+            setSearchText(newFilter.searchText);
+        } else {
+            setSearchFilter(prevFilter => ({
+                ...prevFilter,
+                ...newFilter
+            }));
+        }
+    };
+    
+
+    const handlePageChange = (newPage) => {
         setSearchFilter(prevFilter => ({
             ...prevFilter,
-            ...newFilter
+            page: newPage
         }));
     };
 
@@ -56,11 +102,15 @@ function CatalogBody() {
 
     return (
         <>
-            <CatalogFilters filters={searchFilter} onFilterChange={handleSearchFilterChange} />
+            <CatalogFilters filters={{ ...searchFilter, searchText }} onFilterChange={handleSearchFilterChange} />
             <div>
                 <BlockGame games={juegos} /> 
             </div>
-            <Pagination />
+            <Pagination 
+                currentPage={searchFilter.page}
+                totalPages={totalPages}
+                onPageChange={handlePageChange}
+            />
         </>
     );
 }

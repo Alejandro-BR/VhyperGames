@@ -29,24 +29,24 @@ function CatalogFilters({ filters, onFilterChange }) {
                         onChange={(e) => handleInputChange("sortCriteria", e.target.value)}
                         className={classes.filter}
                     >
-                        <option value="">Ordenar por:</option>
-                        <option value="lowest price">Precio Asc.</option>
-                        <option value="highest price">Precio Desc.</option>
-                        <option value="a-z">Alfabetico A-Z.</option>
-                        <option value="z-a">Alfabetico Z-A.</option>
+                        <option value="" disabled defaultValue>Ordenar por:</option>
+                        <option value="2">Precio Asc.</option>
+                        <option value="3">Precio Desc.</option>
+                        <option value="0">Alfabetico A-Z.</option>
+                        <option value="1">Alfabetico Z-A.</option>
                     </select>
                 </div>
 
                 <div className={classes.filterItem}>
                     <select
                         id="license"
-                        value={drmFree ? "DRM-FREE" : "Todos"}
-                        onChange={(e) => handleInputChange("drmFree", e.target.value === "DRM-FREE")}
+                        value={drmFree || ""}
+                        onChange={(e) => handleInputChange("drmFree", e.target.value)}
                         className={classes.filter}
                     >
-                        <option value="Todos">Todos</option>
-                        <option value="DRM">DRM</option>
-                        <option value="DRM-FREE">DRM-FREE</option>
+                        <option value="-1">Todos</option>
+                        <option value="0">DRM</option>
+                        <option value="1">DRM-FREE</option>
                     </select>
                 </div>
 
@@ -57,14 +57,14 @@ function CatalogFilters({ filters, onFilterChange }) {
                         onChange={(e) => handleInputChange("genre", e.target.value)}
                         className={classes.filter}
                     >
-                        <option value="">Genero:</option>
-                        <option value="RPG de Acción">RPG de Acción</option>
-                        <option value="Survival horror">Survival horror</option>
-                        <option value="Aventura-Acción">Aventura-Acción</option>
-                        <option value="Estrategia">Estrategia</option>
-                        <option value="Sandbox">Sandbox</option>
-                        <option value="Simulación">Simulación</option>
-                        <option value="Plataforma">Plataforma</option>
+                        <option value="-1" disabled defaultValue>Genero:</option>
+                        <option value="0">RPG de Acción</option>
+                        <option value="1">Survival horror</option>
+                        <option value="2">Aventura-Acción</option>
+                        <option value="3">Estrategia</option>
+                        <option value="4">Sandbox</option>
+                        <option value="5">Simulación</option>
+                        <option value="6">Plataforma</option>
                     </select>
                 </div>
 
@@ -82,7 +82,7 @@ function CatalogFilters({ filters, onFilterChange }) {
                 </div>
 
                 <div className={classes.filterItem}>
-                    <button onClick={() => onFilterChange({ searchText: "", sortCriteria: null, drmFree: null, genre: null, resultsPerPage: 10, page: 1 })} className={classes.resetButton}>
+                    <button onClick={() => onFilterChange({ searchText: "", sortCriteria: 0, drmFree: -1, genre: -1, resultsPerPage: 10, page: 1 })} className={classes.resetButton}>
                         Reiniciar selección
                     </button>
                 </div>
