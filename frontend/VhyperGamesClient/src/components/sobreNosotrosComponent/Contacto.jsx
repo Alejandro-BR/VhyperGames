@@ -31,7 +31,7 @@ function Contacto() {
       </div>
 
       <div className={styles.whoAreWe}>
-        <div className={styles.data}>
+        <div className={styles.dataMap}>
           <span className={styles.item}>|</span>
           <h3>¿Quiénes somos?</h3>
         </div>
