@@ -1,7 +1,7 @@
 import classes from "./BlockGame.module.css";
 import GameCard from '../gameCardComponent/GameCard';
 
-function BlockGame({ games, variant }) {
+function BlockGame({ games }) {
   return (
     <div className={`${classes.container} ${[classes.variant]}`} >
       {games.map((game) => (
