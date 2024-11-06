@@ -16,12 +16,13 @@ namespace VhyperGamesServer.Controllers
         }
 
 
-        [HttpPost("catalog-search")]
-        public async Task<ActionResult<CatalogDto>> Filter([FromBody] GameFilterDto filter)
+        [HttpGet("catalog-search")]
+        public async Task<ActionResult<CatalogDto>> Filter([FromQuery] GameFilterDto filter)
         {
             CatalogDto games = await _gameService.FilterAndSortGamesAsync(filter);
             return Ok(games);
         }
+
 
         [HttpGet("new-releases")]
         public async Task<ActionResult<List<GameCardDto>>> GetNewGamesRelease()
