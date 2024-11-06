@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import CatalogFilters from "./CatalogFilters";
+import classes from "./CatalogStyle.module.css";
 import BlockGame from "../blockgameComponent/BlockGame";
 import Pagination from "./Pagination"; 
 import { CATALOG_FILTER } from "../../config";
@@ -103,8 +104,8 @@ function CatalogBody() {
     return (
         <>
             <CatalogFilters filters={{ ...searchFilter, searchText }} onFilterChange={handleSearchFilterChange} />
-            <div>
-                <BlockGame games={juegos} /> 
+            <div className={classes.juegardos}>
+                <BlockGame games={juegos} variant="catalogo" /> 
             </div>
             <Pagination 
                 currentPage={searchFilter.page}

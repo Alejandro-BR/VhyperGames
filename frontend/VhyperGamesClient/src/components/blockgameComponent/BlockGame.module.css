@@ -3,3 +3,11 @@
   gap: 40px;
   align-items: left;
 }
+
+.catalogo {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 40px;
+  align-items: center;
+  justify-content: center;
+}
