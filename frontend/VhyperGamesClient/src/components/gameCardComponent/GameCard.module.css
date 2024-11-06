@@ -4,11 +4,16 @@
   color: white;
   max-width: 200px; 
   gap: 10px;
+  padding-bottom: 10px;
+  background-color: var( --header-footer-color);
+}
+.container:hover{
+  box-shadow: 0px 0px 50px var(--led-purple);
 }
 .cardTitle{
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
   width: auto;
 }
 .carritoIcon{
@@ -18,7 +23,7 @@
 .cardPrice{
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
   width: auto;
 }
 
