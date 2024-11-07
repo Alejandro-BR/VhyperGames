@@ -362,7 +362,7 @@ public class Seeder
 
                 new Game {
                     GameCode = Guid.NewGuid (),
-                    Title = "FIVE NIGHTS AT FREDDY'S: HELP WANTED",
+                    Title = "Five Nights at Freddy's: Help Wanted",
                     Description = "FIVE NIGHTS AT FREDDY'S: HELP WANTED es una colección de minijuegos clásicos y originales ambientados en el universo Five Nights.",
                     Genre = Genre.SurvivalHorror,
                     DrmFree = Drm.Drm,
@@ -432,6 +432,215 @@ public class Seeder
                         {
                             ImageUrl = "images/FiveNightsAtFreddysIntoThePit/FreddyIntoThePit.png",
                             AltText = "Imagen 1 de fnaf Into the pit"
+                        }
+                    }
+                },
+
+                new Game {
+                    GameCode = Guid.NewGuid(),
+                    Title = "Resident Evil: Biohazard",
+                    Description = "Enfrenta horrores y misterios en la mansión de los Baker en este clásico survival horror.",
+                    Genre = Genre.SurvivalHorror,
+                    DrmFree = Drm.DrmFree,
+                    ReleaseDate = new DateTime(2023, 3, 15),
+                    Price = 2990,
+                    Stock = 150,
+                    ImageGames = new List<ImageGame>
+                    {
+                        new ImageGame
+                        {
+                            ImageUrl = "images/ResidentEvilBiohazard/Biohazard.png",
+                            AltText = "Imagen 1 de Resident Evil Biohazard"
+                        }
+                    }
+                },
+
+                new Game {
+                    GameCode = Guid.NewGuid(),
+                    Title = "Hades",
+                    Description = "Escapa del inframundo en este galardonado roguelike cargado de acción y mitología griega.",
+                    Genre = Genre.AventuraAccion,
+                    DrmFree = Drm.DrmFree,
+                    ReleaseDate = new DateTime(2020, 9, 17),
+                    Price = 1790,
+                    Stock = 200,
+                    ImageGames = new List<ImageGame>
+                    {
+                        new ImageGame
+                        {
+                            ImageUrl = "images/Hades/Hades.png",
+                            AltText = "Imagen 1 de Hades"
+                        }
+                    }
+                },
+
+                new Game {
+                    GameCode = Guid.NewGuid(),
+                    Title = "Celeste",
+                    Description = "Una aventura de plataformas que te desafía a superar obstáculos mientras ayudas a Madeline a escalar la montaña.",
+                    Genre = Genre.Plataforma,
+                    DrmFree = Drm.DrmFree,
+                    ReleaseDate = new DateTime(2018, 1, 25),
+                    Price = 1590,
+                    Stock = 0,
+                    ImageGames = new List<ImageGame>
+                    {
+                        new ImageGame
+                        {
+                            ImageUrl = "images/Celeste/Celeste.png",
+                            AltText = "Imagen 1 de Celeste"
+                        }
+                    }
+                },
+
+                new Game {
+                    GameCode = Guid.NewGuid(),
+                    Title = "Dark Souls III",
+                    Description = "Enfrenta enemigos desafiantes y jefes épicos en este oscuro juego de rol de acción.",
+                    Genre = Genre.RPGDeAccion,
+                    DrmFree = Drm.Drm,
+                    ReleaseDate = new DateTime(2016, 4, 12),
+                    Price = 2790,
+                    Stock = 80,
+                    ImageGames = new List<ImageGame>
+                    {
+                        new ImageGame
+                        {
+                            ImageUrl = "images/DarkSoulsIII/DarkSoulsIII.png",
+                            AltText = "Imagen 1 de Dark Souls III"
+                        }
+                    }
+                },
+
+                new Game {
+                    GameCode = Guid.NewGuid(),
+                    Title = "Stardew Valley",
+                    Description = "Construye tu granja y conéctate con los personajes en este relajante juego de simulación.",
+                    Genre = Genre.Simulacion,
+                    DrmFree = Drm.DrmFree,
+                    ReleaseDate = new DateTime(2016, 2, 26),
+                    Price = 1490,
+                    Stock = 220,
+                    ImageGames = new List<ImageGame>
+                    {
+                        new ImageGame
+                        {
+                            ImageUrl = "images/StardewValley/StardewValley.png",
+                            AltText = "Imagen 1 de Stardew Valley"
+                        }
+                    }
+                },
+
+                new Game {
+                    GameCode = Guid.NewGuid(),
+                    Title = "DOOM Eternal",
+                    Description = "Ábrete camino a través del infierno en este frenético y brutal shooter en primera persona.",
+                    Genre = Genre.AventuraAccion,
+                    DrmFree = Drm.Drm,
+                    ReleaseDate = new DateTime(2020, 3, 20),
+                    Price = 3590,
+                    Stock = 110,
+                    ImageGames = new List<ImageGame>
+                    {
+                        new ImageGame
+                        {
+                            ImageUrl = "images/DOOMEternal/DOOMEternal.png",
+                            AltText = "Imagen 1 de DOOM Eternal"
+                        }
+                    }
+                },
+
+                new Game {
+                    GameCode = Guid.NewGuid(),
+                    Title = "Hollow Knight",
+                    Description = "Explora un vasto mundo subterráneo lleno de desafíos y criaturas en este aclamado juego de plataformas y aventuras.",
+                    Genre = Genre.Plataforma,
+                    DrmFree = Drm.DrmFree,
+                    ReleaseDate = new DateTime(2017, 2, 24),
+                    Price = 1250,
+                    Stock = 180,
+                    ImageGames = new List<ImageGame>
+                    {
+                        new ImageGame
+                        {
+                            ImageUrl = "images/HollowKnight/HollowKnight.png",
+                            AltText = "Imagen 1 de Hollow Knight"
+                        }
+                    }
+                },
+
+                new Game {
+                    GameCode = Guid.NewGuid(),
+                    Title = "Minecraft",
+                    Description = "Explora y construye en un vasto mundo de bloques, lleno de aventuras y creatividad sin límites.",
+                    Genre = Genre.Sandbox,
+                    DrmFree = Drm.DrmFree,
+                    ReleaseDate = new DateTime(2011, 11, 18),
+                    Price = 2490,
+                    Stock = 500,
+                    ImageGames = new List<ImageGame>
+                    {
+                        new ImageGame
+                        {
+                            ImageUrl = "images/Minecraft/Minecraft.png",
+                            AltText = "Imagen 1 de Minecraft"
+                        }
+                    }
+                },
+
+                new Game {
+                    GameCode = Guid.NewGuid(),
+                    Title = "God of War: Ragnarok",
+                    Description = "Acompaña a Kratos y Atreus en su épica aventura para enfrentar el fin de los dioses nórdicos.",
+                    Genre = Genre.AventuraAccion,
+                    DrmFree = Drm.Drm,
+                    ReleaseDate = new DateTime(2024, 09, 19),
+                    Price = 5990,
+                    Stock = 150,
+                    ImageGames = new List<ImageGame>
+                    {
+                        new ImageGame
+                        {
+                            ImageUrl = "images/GodOfWarRagnarok/Ragnarok.png",
+                            AltText = "Imagen 1 de God of War Ragnarok"
+                        }
+                    }
+                },
+
+                new Game {
+                    GameCode = Guid.NewGuid(),
+                    Title = "Dragon Ball Sparking Zero",
+                    Description = "Experimenta combates épicos en el universo de Dragon Ball, con gráficos mejorados y acción intensa.",
+                    Genre = Genre.AventuraAccion,
+                    DrmFree = Drm.Drm,
+                    ReleaseDate = new DateTime(2024, 10, 15),
+                    Price = 6999,
+                    Stock = 200,
+                    ImageGames = new List<ImageGame>
+                    {
+                        new ImageGame
+                        {
+                            ImageUrl = "images/DragonBallSparkingZero/SparkingZero.png",
+                            AltText = "Imagen 1 de Dragon Ball Sparking Zero"
+                        }
+                    }
+                },
+
+                new Game {
+                    GameCode = Guid.NewGuid(),
+                    Title = "Baldur's Gate 3",
+                    Description = "Embárcate en una épica aventura de rol en un mundo de fantasía donde tus decisiones influyen en el destino del mundo y en el de tus compañeros.",
+                    Genre = Genre.RPGDeAccion,
+                    DrmFree = Drm.Drm,
+                    ReleaseDate = new DateTime(2023, 8, 3),
+                    Price = 6999,
+                    Stock = 120,
+                    ImageGames = new List<ImageGame>
+                    {
+                        new ImageGame
+                        {
+                            ImageUrl = "images/BaldursGate3/BaldursGate3.png",
+                            AltText = "Imagen de Baldur's Gate 3"
                         }
                     }
                 },
