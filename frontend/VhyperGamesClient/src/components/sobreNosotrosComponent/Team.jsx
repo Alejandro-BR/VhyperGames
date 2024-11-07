@@ -1,4 +1,4 @@
-import styles from "./Team.module.css";
+import classes from "./Team.module.css";
 import TeamMember from "./TeamMember";
 
 function Team() {
@@ -12,13 +12,13 @@ function Team() {
 
   return (
     <>
-      <hr className={styles.hr} />
-      <section className={styles.team}>
-        <div className={styles.title}>
-          <span className={styles.item}>❙</span>
+      <hr className={classes.hr} />
+      <section className={classes.team}>
+        <div className={classes.title}>
+          <span className={classes.item}>❙</span>
           <h3>Equipo</h3>
         </div>
-        <div className={styles.membersContainer}>
+        <div className={classes.membersContainer}>
           {members.map((member) => (
             <TeamMember
               key={member.name}
@@ -29,7 +29,7 @@ function Team() {
           ))}
         </div>
       </section>
-      <hr className={styles.hr} />
+      <hr className={classes.hr} />
     </>
   );
 }

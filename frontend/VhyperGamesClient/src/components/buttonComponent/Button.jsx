@@ -1,4 +1,4 @@
-import styles from './Button.module.css';
+import classes from './Button.module.css';
 
 /**
  * Button Component
@@ -19,7 +19,7 @@ import styles from './Button.module.css';
 function Button({ children, onClick, variant, color}) {
   return (
     <button 
-      className={`${styles[variant]} ${styles[color]}` }
+      className={`${classes[variant]} ${classes[color]}` }
       onClick={onClick}
     >
       {children}

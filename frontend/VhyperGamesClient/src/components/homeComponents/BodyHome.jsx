@@ -1,10 +1,10 @@
 import Carousel from "./Carousel";
 import OfertasNuevos from "./OfertasNuevo";
-import styles from "./BodyHome.module.css";
+import classes from "./BodyHome.module.css";
 
 function BodyHome() {
   return (
-    <div className={styles.bodyHome}>
+    <div className={classes.bodyHome}>
       <Carousel />
       <OfertasNuevos />
     </div>

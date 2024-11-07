@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import Button from '../buttonComponent/Button';
 import BlockGame from '../blockgameComponent/BlockGame';
-import style from './OfertasNuevo.module.css';
+import classes from './OfertasNuevo.module.css';
 import { CATALOG_NEW_RELEASES, CATALOG_SALES } from '../../config';
 
 function OfertasNuevos() {
@@ -35,7 +35,7 @@ function OfertasNuevos() {
   return (
     <>
 
-      <div className={style.buttons}>
+      <div className={classes.buttons}>
         <Button
           variant={"short"}
           color={"morado-azul"}
@@ -51,18 +51,18 @@ function OfertasNuevos() {
           Nuevos
         </Button>
       </div>
-      <div className={style.contenedor}>
+      <div className={classes.contenedor}>
 
-        <div className={style.title}>
-          <h1 className={style.palito}>❙</h1>
+        <div className={classes.title}>
+          <h1 className={classes.palito}>❙</h1>
           <h1>{isOfertas ? "OFERTAS" : "NUEVOS"}</h1>
         </div>
 
-        <div className={style.juegos}>
+        <div className={classes.juegos}>
           {loading ? (
-            <h2 className={style.text}>Cargando juegos...</h2>
+            <h2 className={classes.text}>Cargando juegos...</h2>
           ) : juegos.length === 0 ? (
-            <h2 className={style.text}>
+            <h2 className={classes.text}>
               {isOfertas
                 ? "Ahora mismo no hay juegos de oferta en la página, vuelve pronto ;)"
                 : "Ahora mismo no hay juegos nuevos en la página, vuelve pronto ;)"}

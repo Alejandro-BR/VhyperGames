@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import styles from './Login.module.css';
+import classes from './Login.module.css';
 import Button from '../buttonComponent/Button';
 import RegisterModal from '../registerComponents/RegisterModal';
 import { jwtDecode } from 'jwt-decode';
@@ -75,20 +75,20 @@ function LoginModal({ onClose, onRegisterClick }) {
 
 
     return (
-        <div className={styles.modalOverlay}>
-            <div className={styles.loginModule}>
-                <button className={styles.logoCerrar} onClick={onClose}>
+        <div className={classes.modalOverlay}>
+            <div className={classes.loginModule}>
+                <button className={classes.logoCerrar} onClick={onClose}>
                     <img src="/icon/cerrar-icon.svg" alt="icono cerrar" />
                 </button>
 
-                <div className={styles.imagenUser}>
+                <div className={classes.imagenUser}>
                     <img src="/icon/user-grande-icon.svg" alt="Logo usuario" />
                 </div>
 
-                <form className={styles.formContainer} onSubmit={handleSubmit}>
+                <form className={classes.formContainer} onSubmit={handleSubmit}>
 
 
-                    <div className={styles.inputGroup}>
+                    <div className={classes.inputGroup}>
                         <input
                             id="email"
                             name="email"
@@ -99,7 +99,7 @@ function LoginModal({ onClose, onRegisterClick }) {
                         />
                     </div>
 
-                    <div className={styles.inputGroup}>
+                    <div className={classes.inputGroup}>
                         <input
                             id="password"
                             name="password"
@@ -110,14 +110,14 @@ function LoginModal({ onClose, onRegisterClick }) {
                         />
                     </div>
 
-                    <div className={`${styles.rememberMe} ${styles.rememberGroup}`}>
+                    <div className={`${classes.rememberMe} ${classes.rememberGroup}`}>
                         <input type="checkbox" id="rememberMe" />
                         <label htmlFor="rememberMe">Recuérdame</label>
                     </div>
 
-                    {promesaError && <div className={styles.error}>{promesaError}</div>}
+                    {promesaError && <div className={classes.error}>{promesaError}</div>}
 
-                    <div className={styles.buttonContainer}>
+                    <div className={classes.buttonContainer}>
                         <Button type="submit" variant='large' color='morado' disabled={isLoading}>
                             {isLoading ? "Cargando..." : "Iniciar Sesión"}
                         </Button>

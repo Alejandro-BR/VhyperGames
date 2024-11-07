@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './Pagination.module.css';
+import classes from './Pagination.module.css';
 
 const Pagination = ({ currentPage, totalPages, onPageChange }) => {
 
@@ -9,7 +9,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
       pageNumbers.push(
         <button
           key={i}
-          className={`${styles.pageNumber} ${currentPage === i ? styles.active : ''}`}
+          className={`${classes.pageNumber} ${currentPage === i ? classes.active : ''}`}
           onClick={() => onPageChange(i)}
         >
           {i}
@@ -20,9 +20,9 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
   };
 
   return (
-    <div className={styles.paginationContainer}>
+    <div className={classes.paginationContainer}>
       <button
-        className={styles.paginationButton}
+        className={classes.paginationButton}
         onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage === 1}
       >
@@ -32,7 +32,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
       {renderPageNumbers()}
 
       <button
-        className={styles.paginationButton}
+        className={classes.paginationButton}
         onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
       >

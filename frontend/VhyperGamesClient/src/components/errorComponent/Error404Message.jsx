@@ -1,15 +1,15 @@
-import styles from "./Error404Message.module.css";
+import classes from "./Error404Message.module.css";
 
 function Error404Message() {
   return (
-    <div className={styles.errorBody}>
+    <div className={classes.errorBody}>
 
-      <div className={styles.errorText}>
+      <div className={classes.errorText}>
         <h2>Página no encontrada</h2>
       </div>
 
       <img
-        className={styles.gif}
+        className={classes.gif}
         src="/gif/goku.gif"
         alt="gif de kirby andando"
       />

@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import Button from "../buttonComponent/Button";
-import styles from "../loginComponents/Login.module.css";
+import classes from "../loginComponents/Login.module.css";
 import {jwtDecode} from 'jwt-decode';
 import { REGISTER_ENDPOINT } from '../../config'; 
 
@@ -93,22 +93,22 @@ function RegisterModal({ onClose }) {
     }
 
     return (
-        <div className={styles.modalOverlay}>
-            <div className={styles.loginModule}>
-                <button className={styles.logoCerrar} onClick={onClose}>
+        <div className={classes.modalOverlay}>
+            <div className={classes.loginModule}>
+                <button className={classes.logoCerrar} onClick={onClose}>
                     <img src="/icon/cerrar-icon.svg" alt="icono cerrar" />
                 </button>
 
-                <div className={styles.imagenUser}>
+                <div className={classes.imagenUser}>
                     <img src="/icon/user-grande-icon.svg" alt="Logo usuario" />
                 </div>
 
-                <form className={styles.formContainer} onSubmit={handleSubmit}>
-                    {errorMessage && <div className={styles.error}>{errorMessage}</div>}
-                    {passwordError && <div className={styles.error}>{passwordError}</div>}
-                    {emailError && <div className={styles.error}>{emailError}</div>}
+                <form className={classes.formContainer} onSubmit={handleSubmit}>
+                    {errorMessage && <div className={classes.error}>{errorMessage}</div>}
+                    {passwordError && <div className={classes.error}>{passwordError}</div>}
+                    {emailError && <div className={classes.error}>{emailError}</div>}
 
-                    <div className={styles.inputGroup}>
+                    <div className={classes.inputGroup}>
                         <input
                             id="nombre"
                             name="nombre"
@@ -119,7 +119,7 @@ function RegisterModal({ onClose }) {
                         />
                     </div>
 
-                    <div className={styles.inputGroup}>
+                    <div className={classes.inputGroup}>
                         <input
                             id="surname"
                             name="surname"
@@ -130,7 +130,7 @@ function RegisterModal({ onClose }) {
                         />
                     </div>
 
-                    <div className={styles.inputGroup}>
+                    <div className={classes.inputGroup}>
                         <input
                             id="email"
                             name="email"
@@ -141,7 +141,7 @@ function RegisterModal({ onClose }) {
                         />
                     </div>
 
-                    <div className={styles.inputGroup}>
+                    <div className={classes.inputGroup}>
                         <input
                             id="password1"
                             name="password1"
@@ -152,7 +152,7 @@ function RegisterModal({ onClose }) {
                         />
                     </div>
 
-                    <div className={styles.inputGroup}>
+                    <div className={classes.inputGroup}>
                         <input
                             id="password2"
                             name="password2"
@@ -163,7 +163,7 @@ function RegisterModal({ onClose }) {
                         />
                     </div>
 
-                    <div className={styles.inputGroup}>
+                    <div className={classes.inputGroup}>
                         <input
                             id="address"
                             name="address"
