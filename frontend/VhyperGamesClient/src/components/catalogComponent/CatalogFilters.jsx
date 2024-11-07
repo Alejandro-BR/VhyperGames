@@ -83,7 +83,7 @@ function CatalogFilters({ filters, onFilterChange }) {
 
                 <div className={classes.filterItem}>
                     <button onClick={() => onFilterChange({ searchText: "", sortCriteria: 0, drmFree: -1, genre: -1, resultsPerPage: 10, page: 1 })} className={classes.resetButton}>
-                        Reiniciar selección
+                        Limpiar selección
                     </button>
                 </div>
             </div>

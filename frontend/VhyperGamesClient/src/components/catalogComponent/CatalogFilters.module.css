@@ -35,7 +35,7 @@
 .resetButton {
   color: #fff;
   cursor: pointer;
-  background-color: var(--header-footer-color);
+  background-color: var(--body-color);
   border: none;
   border-radius: 24px;
 }
