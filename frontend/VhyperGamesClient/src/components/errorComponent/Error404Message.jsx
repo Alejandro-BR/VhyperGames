@@ -13,7 +13,6 @@ function Error404Message() {
         src="/gif/goku.gif"
         alt="gif de kirby andando"
       />
-      
     </div>
   );
 }
