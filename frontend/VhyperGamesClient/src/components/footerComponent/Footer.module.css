@@ -1,93 +1,61 @@
-
-footer {
-  position: static;
-  width: auto;
-  height: 210px; 
+.footer {
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
   background-color: var(--header-footer-color);
-  padding: 1%;
   color: white;
+  padding: 10px;
 }
 
 .leftFooter {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  margin-right: auto;
-  margin-left: 2.5vh;
-}
-
-h1 {
-  font-family: 'UniversCnBold', sans-serif;
-}
-
-p {
-  font-family: 'UniversCnBold', sans-serif;
-}
-
-.text {  
-  position: relative;
-  bottom: 5%;
-  color: white;
+  justify-content: center;
+  padding-left: 6px;
 }
 
 .imgFooter {
-  width: 20%;
-  margin-top: auto;
-  margin-bottom: 2vh;
+  max-width: 80px;
+  margin-bottom: -6px;
   cursor: pointer;
 }
 
 .rightFooter {
   display: flex;
-  flex-direction: column; 
-  margin-right: 2.5vh;
-}
-
-.filas {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr); 
   gap: 20px;
   align-items: center;
+  padding: 0 20px;
 }
 
-.fila {
-  display: flex;
-  align-items: center; 
-  justify-content: center; 
-  max-width: 100%;
-  overflow: hidden; 
-  padding: 0;
-  margin: 0; 
-  grid-column: span 2; 
-}
-
-.icon {
-  width: 56px;
-  cursor: pointer;
-  margin-right: 10px; 
-}
-
-.footerButtons {
+.buttons {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  margin-bottom: 10%;
-  margin-right: 4%;
-  gap: 5%;
+}
+
+.onlyButtons {
+  display: flex;
+  gap: 30px;
+  padding: 20px;
+}
+
+.iconsFooter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding-bottom: 32px;
+}
+
+.onlyIcons {
+  display: flex;
+  gap: 10px;
+}
+
+.icon {
+  max-width: 40px;
+  cursor: pointer;
 }
 
 a {
   text-decoration: none;
-}
-
-a.no-underline {
-  text-decoration: none;
-}
-
-.logoGit {
-  margin: 1vh;
 }

@@ -1,36 +1,43 @@
-.container{
+.container {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   color: white;
-  max-width: 200px; 
+  max-width: 200px;
   gap: 10px;
   padding-bottom: 10px;
-  background-color: var( --header-footer-color);
+  background-color: var(--header-footer-color);
+  height: 320px;
 }
-.container:hover{
+
+.container:hover {
   box-shadow: 0px 0px 50px var(--led-purple);
 }
-.cardTitle{
+
+.cardTitle {
   display: flex;
-  align-items: center;
-  justify-content: space-around;
+  justify-content: baseline;
   width: auto;
+  font-size: 10px;
+  margin: 0 10px 0 10px;
 }
-.carritoIcon{
+
+.carritoIcon {
   max-height: 20px;
 }
 
-.cardPrice{
+.cardPrice {
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
   width: auto;
+  margin: 0 10px 0 10px;
 }
 
-.stock{
+.stock {
   color: var(--principal-green);
 }
 
-.noStock{
+.noStock {
   color: var(--principal-red);
 }

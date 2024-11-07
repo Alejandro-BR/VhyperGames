@@ -15,8 +15,8 @@ function GameCard({ title, stock, price, imgUrl }) {
   }
 
   function truncateText(text) {
-    if (text.length > 17) {
-      return text.slice(0, 17) + "...";
+    if (text.length > 30) {
+      return text.slice(0, 30) + "...";
     }
     return text;
   }
@@ -35,7 +35,7 @@ function GameCard({ title, stock, price, imgUrl }) {
       <div className={clasess.container}>
         <img src={`${BASE_URL}${imgUrl}`} className={clasess.gameCardImg} />
         <div className={clasess.cardTitle}>
-          <h2>{truncateText(title)}</h2>
+          <h2>{title}</h2>
         </div>
         <div className={clasess.cardPrice}>
           <p>{precio()}  €</p>

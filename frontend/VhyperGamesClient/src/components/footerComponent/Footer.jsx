@@ -1,5 +1,4 @@
-/*import classes from './Footer.module.css';*/
-import classes from './FooterExperimental.module.css'
+import classes from './Footer.module.css';
 import Button from '../buttonComponent/Button';
 import { messageCompany } from '../../helpers/messages';
 import { useNavigate } from "react-router-dom";
@@ -26,28 +25,27 @@ function Footer() {
       <div className={classes.rightFooter}>
 
         <div className={classes.buttons}>
-       
 
-        <div className={classes.onlyButtons}>
-        <Button variant="large" color="morado" onClick={messageCompany}>
-            Empresa
-          </Button>
-
-          <Button variant="large" color="morado" onClick={() => navigate("/sobre-nosotros")}>
-            Sobre nosotros
-          </Button>
-
-          <a href="https://github.com/VhyperGames" target="_blank" rel="noopener noreferrer">
-            <Button variant="large" color="azul">
-              <span className={classes.logoGit}>< img src="/icon/cib_github.svg" alt="GitHub" /></span>‎ ‎ ‎ GitHub
+          <div className={classes.onlyButtons}>
+            <Button variant="large" color="morado" onClick={messageCompany}>
+              Empresa
             </Button>
-          </a>
-        </div>
-         
+
+            <Button variant="large" color="morado" onClick={() => navigate("/sobre-nosotros")}>
+              Sobre nosotros
+            </Button>
+
+            <a href="https://github.com/VhyperGames" target="_blank" rel="noopener noreferrer">
+              <Button variant="large" color="azul">
+                <span className={classes.logoGit}>< img src="/icon/cib_github.svg" alt="GitHub" /></span>‎ ‎ ‎ GitHub
+              </Button>
+            </a>
+          </div>
+
         </div>
 
         <div className={classes.iconsFooter}>
-          <p>Siguenos </p>
+          <p>Síguenos </p>
           <div className={classes.onlyIcons}>
             <img
               className={classes.icon}
