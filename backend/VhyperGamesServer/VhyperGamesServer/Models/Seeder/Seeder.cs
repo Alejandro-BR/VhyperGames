@@ -206,7 +206,235 @@ public class Seeder
                             AltText = "Imagen 1 de Epic Mickey"
                         }
                     }
-                }
+                },
+
+                new Game {
+                    GameCode = Guid.NewGuid (),
+                    Title = "Five Nights at Freddy's",
+                    Description = "¡Bienvenido a su nuevo trabajo de verano en Freddy Fazbear's Pizza, donde los niños y los padres vienen para el entretenimiento y la comida hasta donde alcanza la vista! ",
+                    Genre = Genre.SurvivalHorror,
+                    DrmFree = Drm.DrmFree,
+                    ReleaseDate = new DateTime (2014, 8, 8),
+                    Price = 399,
+                    Stock = 100,
+                    ImageGames = new List<ImageGame>
+                    {
+                        new ImageGame
+                        {
+                            ImageUrl = "images/FiveNightsAtFreddys/Freddy1.png",
+                            AltText = "Imagen 1 de fnaf1"
+                        }
+                    }
+                },
+
+                new Game {
+                    GameCode = Guid.NewGuid (),
+                    Title = "Five Nights at Freddy's 2",
+                    Description = "¡Bienvenido de nuevo a la nueva y mejorada pizza de Freddy Fazbear!",
+                    Genre = Genre.SurvivalHorror,
+                    DrmFree = Drm.DrmFree,
+                    ReleaseDate = new DateTime (2014, 11, 10),
+                    Price = 799,
+                    Stock = 100,
+                    ImageGames = new List<ImageGame>
+                    {
+                        new ImageGame
+                        {
+                            ImageUrl = "images/FiveNightsAtFreddys2/Freddy2.png",
+                            AltText = "Imagen 1 de fnaf2"
+                        }
+                    }
+                },
+
+                new Game {
+                    GameCode = Guid.NewGuid (),
+                    Title = "Five Nights at Freddy's 3",
+                    Description = "Treinta años después de que Freddy Fazbear's Pizza cerrara sus puertas, los eventos que tuvieron lugar allí se han convertido en nada más que un rumor y un recuerdo de la infancia, pero los propietarios de \"Fazbear's Fright: The Horror Attraction\"",
+                    Genre = Genre.SurvivalHorror,
+                    DrmFree = Drm.DrmFree,
+                    ReleaseDate = new DateTime (2015, 3, 2),
+                    Price = 799,
+                    Stock = 100,
+                    ImageGames = new List<ImageGame>
+                    {
+                        new ImageGame
+                        {
+                            ImageUrl = "images/FiveNightsAtFreddys3/Freddy3.png",
+                            AltText = "Imagen 1 de fnaf3"
+                        }
+                    }
+                },
+
+                new Game {
+                    GameCode = Guid.NewGuid (),
+                    Title = "Five Nights at Freddy's 4",
+                    Description = "Esta vez, el terror te ha seguido a casa.",
+                    Genre = Genre.SurvivalHorror,
+                    DrmFree = Drm.DrmFree,
+                    ReleaseDate = new DateTime (2015, 7, 23),
+                    Price = 799,
+                    Stock = 10,
+                    ImageGames = new List<ImageGame>
+                    {
+                        new ImageGame
+                        {
+                            ImageUrl = "images/FiveNightsAtFreddys4/Freddy4.png",
+                            AltText = "Imagen 1 de fnaf4"
+                        }
+                    }
+                },
+
+                new Game {
+                    GameCode = Guid.NewGuid (),
+                    Title = "Five Nights at Freddy's: Sister Location",
+                    Description = "¡Bienvenido a Circus Baby's Pizza World, donde la diversión familiar y la interactividad van más allá de todo lo que has visto en esas *otras* pizzerías!",
+                    Genre = Genre.SurvivalHorror,
+                    DrmFree = Drm.DrmFree,
+                    ReleaseDate = new DateTime (2016, 10, 7),
+                    Price = 799,
+                    Stock = 10,
+                    ImageGames = new List<ImageGame>
+                    {
+                        new ImageGame
+                        {
+                            ImageUrl = "images/FiveNightsAtFreddys5/Freddy5.png",
+                            AltText = "Imagen 1 de fnaf5"
+                        }
+                    }
+                },
+
+                new Game {
+                    GameCode = Guid.NewGuid (),
+                    Title = "Five Nights at Freddy's: World",
+                    Description = "¡Con todo el elenco de la serie Five Nights at Freddy's, este RPG de fantasía permitirá a los jugadores controlar sus animatrónicos favoritos en una aventura animada épica!",
+                    Genre = Genre.RPGDeAccion,
+                    DrmFree = Drm.DrmFree,
+                    ReleaseDate = new DateTime (2016, 1, 21),
+                    Price = 1,
+                    Stock = 999999,
+                    ImageGames = new List<ImageGame>
+                    {
+                        new ImageGame
+                        {
+                            ImageUrl = "images/FiveNightsAtFreddysWorld/FreddyWorld.png",
+                            AltText = "Imagen 1 de fnaf World"
+                        }
+                    }
+                },
+
+                 new Game {
+                    GameCode = Guid.NewGuid (),
+                    Title = "Freddy Fazbear's Pizzeria Simulator",
+                    Description = "¡Presentando un divertido Five Nights en la aventura de Freddy con un toque más ligero para las vacaciones, Freddy Fazbear's Pizzeria Simulator te pone a cargo de desarrollar tu propio restaurante!",
+                    Genre = Genre.SurvivalHorror,
+                    DrmFree = Drm.DrmFree,
+                    ReleaseDate = new DateTime (2017, 12, 4),
+                    Price = 1,
+                    Stock = 999999,
+                    ImageGames = new List<ImageGame>
+                    {
+                        new ImageGame
+                        {
+                            ImageUrl = "images/FiveNightsAtFreddys6/Freddy6.png",
+                            AltText = "Imagen 1 de fnaf 6"
+                        }
+                    }
+                },
+
+                new Game {
+                    GameCode = Guid.NewGuid (),
+                    Title = "Ultimate Custom Night",
+                    Description = "¡Bienvenido al último mashup de FNAF, donde una vez más quedarás atrapado solo en una oficina defendiéndote de los animatrónicos asesinos!",
+                    Genre = Genre.SurvivalHorror,
+                    DrmFree = Drm.DrmFree,
+                    ReleaseDate = new DateTime (2018, 6, 27),
+                    Price = 1,
+                    Stock = 999999,
+                    ImageGames = new List<ImageGame>
+                    {
+                        new ImageGame
+                        {
+                            ImageUrl = "images/FiveNightsAtFreddys7/Freddy7.png",
+                            AltText = "Imagen 1 de fnaf ucn"
+                        }
+                    }
+                },
+
+                new Game {
+                    GameCode = Guid.NewGuid (),
+                    Title = "FIVE NIGHTS AT FREDDY'S: HELP WANTED",
+                    Description = "FIVE NIGHTS AT FREDDY'S: HELP WANTED es una colección de minijuegos clásicos y originales ambientados en el universo Five Nights.",
+                    Genre = Genre.SurvivalHorror,
+                    DrmFree = Drm.Drm,
+                    ReleaseDate = new DateTime (2019, 5, 28),
+                    Price = 2499,
+                    Stock = 99,
+                    ImageGames = new List<ImageGame>
+                    {
+                        new ImageGame
+                        {
+                            ImageUrl = "images/FiveNightsAtFreddysHelpWanted/FreddyHelpWanted.png",
+                            AltText = "Imagen 1 de fnaf Help Wanted"
+                        }
+                    }
+                },
+
+                new Game {
+                    GameCode = Guid.NewGuid (),
+                    Title = "Five Nights at Freddy's: Security Breach",
+                    Description = "EL SIGUIENTE CAPÍTULO DEL HORROR",
+                    Genre = Genre.SurvivalHorror,
+                    DrmFree = Drm.Drm,
+                    ReleaseDate = new DateTime (2022, 11, 22),
+                    Price = 3399,
+                    Stock = 10,
+                    ImageGames = new List<ImageGame>
+                    {
+                        new ImageGame
+                        {
+                            ImageUrl = "images/FiveNightsAtFreddysSecurityBreach/FreddySecurityBreach.png",
+                            AltText = "Imagen 1 de fnaf security breach"
+                        }
+                    }
+                },
+
+                new Game {
+                    GameCode = Guid.NewGuid (),
+                    Title = "Five Nights at Freddy's: Help Wanted 2",
+                    Description = "¡Descubre si tienes lo que hace falta para ser una Superstar de Fazbear!",
+                    Genre = Genre.SurvivalHorror,
+                    DrmFree = Drm.Drm,
+                    ReleaseDate = new DateTime (2023, 12, 14),
+                    Price = 3899,
+                    Stock = 16,
+                    ImageGames = new List<ImageGame>
+                    {
+                        new ImageGame
+                        {
+                            ImageUrl = "images/FiveNightsAtFreddysHelpWanted2/FreddyHelpWanted2.png",
+                            AltText = "Imagen 1 de fnaf help wanted 2"
+                        }
+                    }
+                },
+
+                new Game {
+                    GameCode = Guid.NewGuid (),
+                    Title = "Five Nights at Freddy's: Into the Pit",
+                    Description = "Sobrevive cinco noches de terror en este escalofriante juego de aventuras.",
+                    Genre = Genre.SurvivalHorror,
+                    DrmFree = Drm.Drm,
+                    ReleaseDate = new DateTime (2024, 8, 7),
+                    Price = 1950,
+                    Stock = 100,
+                    ImageGames = new List<ImageGame>
+                    {
+                        new ImageGame
+                        {
+                            ImageUrl = "images/FiveNightsAtFreddysIntoThePit/FreddyIntoThePit.png",
+                            AltText = "Imagen 1 de fnaf Into the pit"
+                        }
+                    }
+                },
             ];
 
         _context.Games.AddRange(games);

@@ -15,8 +15,8 @@ function GameCard({ title, stock, price, imgUrl }) {
   }
 
   function truncateText(text) {
-    if (text.length > 19) {
-      return text.slice(0, 19) + "...";
+    if (text.length > 17) {
+      return text.slice(0, 17) + "...";
     }
     return text;
   }
