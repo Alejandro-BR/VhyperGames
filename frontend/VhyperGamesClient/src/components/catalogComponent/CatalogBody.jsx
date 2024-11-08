@@ -116,7 +116,7 @@ function CatalogBody() {
         }));
     };
 
-    if (loading) return <p>Cargando juegos...</p>;
+    // if (loading) return <p>Cargando juegos...</p>;
 
     return (
         <>
