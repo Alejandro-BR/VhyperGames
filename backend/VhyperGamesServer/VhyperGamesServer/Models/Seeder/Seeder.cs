@@ -631,7 +631,7 @@ public class Seeder
                     Title = "Baldur's Gate 3",
                     Description = "Embárcate en una épica aventura de rol en un mundo de fantasía donde tus decisiones influyen en el destino del mundo y en el de tus compañeros.",
                     Genre = Genre.RPGDeAccion,
-                    DrmFree = Drm.Drm,
+                    DrmFree = Drm.DrmFree,
                     ReleaseDate = new DateTime(2023, 8, 3),
                     Price = 6999,
                     Stock = 120,
