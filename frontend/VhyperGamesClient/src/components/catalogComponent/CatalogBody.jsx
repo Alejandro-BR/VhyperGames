@@ -2,12 +2,12 @@ import React, { useState, useEffect } from "react";
 import CatalogFilters from "./CatalogFilters";
 import classes from "./CatalogStyle.module.css";
 import BlockGame from "../blockgameComponent/BlockGame";
-import Pagination from "./Pagination"; 
+import Pagination from "./Pagination";
 import { CATALOG_FILTER } from "../../config";
 import { getVarSessionStorage, updateSessionStorage } from "../../utils/keep.js";
 
 function CatalogBody() {
-    const [juegos, setJuegos] = useState([]); 
+    const [juegos, setJuegos] = useState([]);
     const [totalPages, setTotalPages] = useState(0);
     const [loading, setLoading] = useState(true);
     const [searchText, setSearchText] = useState("");
@@ -35,7 +35,7 @@ function CatalogBody() {
     }, [filtersLoaded]);
 
     const fetchJuegos = async (filter) => {
-        setLoading(true); 
+        setLoading(true);
         try {
             let queryParams = new URLSearchParams({
                 searchText: filter.searchText,
@@ -52,11 +52,11 @@ function CatalogBody() {
                     'Content-Type': 'application/json'
                 }
             });
-    
+
             if (!response.ok) {
                 throw new Error(`Error ${response.status}: ${response.statusText}`);
             }
-    
+
             const data = await response.json();
             setJuegos(Array.isArray(data.games) ? data.games : []);
             setTotalPages(data.totalPages);
@@ -66,7 +66,7 @@ function CatalogBody() {
             console.error('Error al cargar los juegos:', error);
             setJuegos([]);
         } finally {
-            setLoading(false); 
+            setLoading(false);
         }
     };
 
@@ -83,7 +83,7 @@ function CatalogBody() {
     }, [searchText]);
 
     useEffect(() => {
-        fetchJuegos(searchFilter); 
+        fetchJuegos(searchFilter);
     }, [searchFilter]);
 
     const handleSearchFilterChange = (newFilter) => {
@@ -100,14 +100,19 @@ function CatalogBody() {
             });
         } else if (newFilter.searchText !== undefined) {
             setSearchText(newFilter.searchText);
+            setSearchFilter(newFilter => ({
+                ...newFilter,
+                page: 1
+            }));
         } else {
             setSearchFilter(prevFilter => ({
                 ...prevFilter,
-                ...newFilter
+                ...newFilter,
+                page: 1
             }));
         }
     };
-    
+
 
     const handlePageChange = (newPage) => {
         setSearchFilter(prevFilter => ({
@@ -116,15 +121,13 @@ function CatalogBody() {
         }));
     };
 
-    // if (loading) return <p>Cargando juegos...</p>;
-
     return (
         <>
             <CatalogFilters filters={{ ...searchFilter, searchText }} onFilterChange={handleSearchFilterChange} />
             <div className={classes.juegardos}>
-                {juegos.length != 0 ? (<BlockGame games={juegos} variant="catalogo" />) : (<p>No se encontraron resultados con esa búsqueda.</p>)}   
+                {juegos.length != 0 ? (<BlockGame games={juegos} variant="catalogo" />) : (<p>No se encontraron resultados con esa búsqueda.</p>)}
             </div>
-            <Pagination 
+            <Pagination
                 currentPage={searchFilter.page}
                 totalPages={totalPages}
                 onPageChange={handlePageChange}

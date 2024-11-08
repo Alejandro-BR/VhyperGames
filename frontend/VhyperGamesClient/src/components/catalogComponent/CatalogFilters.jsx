@@ -1,7 +1,7 @@
 import classes from "./CatalogFilters.module.css";
 
 function CatalogFilters({ filters, onFilterChange }) {
-    const { searchText, sortCriteria, drmFree, genre, resultsPerPage, page } = filters;
+    const { searchText, sortCriteria, drmFree, genre, resultsPerPage} = filters;
 
     const handleInputChange = (key, value) => {
         console.log(`handleInputChange - ${key}:`, value);
@@ -57,9 +57,9 @@ function CatalogFilters({ filters, onFilterChange }) {
                         onChange={(e) => handleInputChange("genre", e.target.value)}
                         className={classes.filter}
                     >
-                        <option value="-1" disabled defaultValue>Genero:</option>
+                        <option value="-1" disabled defaultValue>Género:</option>
                         <option value="0">RPG de Acción</option>
-                        <option value="1">Survival horror</option>
+                        <option value="1">Survival Horror</option>
                         <option value="2">Aventura-Acción</option>
                         <option value="3">Estrategia</option>
                         <option value="4">Sandbox</option>
