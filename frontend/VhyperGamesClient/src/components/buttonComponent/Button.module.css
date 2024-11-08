@@ -5,7 +5,7 @@
 button {
   font-family: 'UniversCnBold', sans-serif;
   color: white;
-  border-radius: 8px;
+  border-radius: 10px;
   border: none;
   transition: background 0.3s ease;  
   cursor: pointer;
@@ -15,26 +15,26 @@ button {
 }
 
 button:active {
-  transform: translateY(3px);
+  transform: translateY(4px);
 }
 
 /* Variantes de tamaños */
 
 button.short {
-  width: 12vh; 
-  height: 4vh;
+  width: 100px; 
+  height: 30px;
   font-size: 1em; 
 }
 
 button.large {
-  width: 21vh; 
-  height: 5vh;   
+  width: 160px; 
+  height: 40px;   
   font-size: 1.25em;
 }
 
 button.medium {
-  width: 11vh; 
-  height: 6vh;  
+  width: 150px; 
+  height: 40px;  
 }
 
 /* Variantes de Colores */

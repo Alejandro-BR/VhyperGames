@@ -27,7 +27,7 @@
   grid-template-columns: 1fr 8fr 1fr;
   gap: 20px;
   background-color: var(--body-color);
-  height: 45px;
+  height: 30px;
   width: 50%;
   justify-items: center;
   align-items: center;
@@ -61,7 +61,7 @@
 .icons {
   display: flex;
   gap:50px;
-  height: 45px;
+  height: 40px;
 }
 
 .icon {

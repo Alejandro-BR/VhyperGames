@@ -16,7 +16,7 @@
 .loginModule {
   /*z-index: 1001;*/
   background-color: var(--body-color);
-  padding: 32px;
+  padding: 30px;
   border-radius: 8px;
   width: 350px;
   max-width: 80%;
@@ -45,8 +45,8 @@
 /* Botón de cerrar */
 .logoCerrar {
   position: absolute;
-  top: 15px;
-  right: 15px;
+  top: 16px;
+  right: 16px;
   cursor: pointer;
   background: none;
   border: none;
@@ -75,7 +75,7 @@
 
 /* Estilos de los inputs */
 .inputGroup input {
-  padding: 12px;
+  padding: 14px;
   border: 1px solid #ccc;
   border-radius: 4px;
   background-color: #e8e8e8;

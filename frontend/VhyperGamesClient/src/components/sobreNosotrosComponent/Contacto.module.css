@@ -7,7 +7,7 @@
   gap: 10px;
 }
 
-.contact,
+
 .whoAreWe {
   display: flex;
   flex-direction: column;
@@ -17,7 +17,7 @@
 
 .box p img {
   vertical-align: middle;
-  /* Alinea img y p*/
+
 }
 
 .data {
@@ -25,7 +25,7 @@
   display: flex;
   align-items: start;
   padding: 10px 0px;
-  gap: 5px;
+  gap: 4px;
 }
 
 .dataMap {
@@ -33,7 +33,7 @@
   display: flex;
   align-items: start;
   padding: 10px 0px;
-  gap: 5px;
+  gap: 4px;
 }
 
 .item {
@@ -46,14 +46,14 @@
   flex-direction: column;
   gap: 10px;
   border: 1px solid white;
-  padding: 15px;
+  padding: 14px;
   height: fit-content;
   width: fit-content;
 }
 
 .boxData {
   display: flex;
-  gap: 5px;
+  gap: 4px;
   align-items: center;
 }
 

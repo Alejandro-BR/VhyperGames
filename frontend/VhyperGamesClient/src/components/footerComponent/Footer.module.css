@@ -10,12 +10,12 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding-left: 6px;
+  padding-left: 8px;
 }
 
 .imgFooter {
   max-width: 80px;
-  margin-bottom: -6px;
+  margin-bottom: -8px;
   cursor: pointer;
 }
 
@@ -43,7 +43,7 @@
   flex-direction: column;
   align-items: center;
   gap: 10px;
-  padding-bottom: 32px;
+  padding-bottom: 30px;
 }
 
 .onlyIcons {

@@ -82,8 +82,8 @@ body {
 
 ---00 WHITESPACE SYSTEM / ATOM
 
-    - Spaging system (px)
-      / 0 / 4 / 10 / 14 / 16 / 20 / 24 / 30 / 40 /
+    - Spaging system (px) 
+      / 0 / 4 / 8 / 10 / 14 / 16 / 20 / 24 / 30 / 40 /
 
 ---01 TYPOGRAPHY 
 
@@ -97,7 +97,7 @@ body {
 
 ---02 BORDER RADIUS
     - px
-      / 1 / 2 / 3 / 24 /
+      / 1 / 2 / 3 / 10 /24 /
     - %
     / 50% /
 
