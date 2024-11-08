@@ -8,6 +8,7 @@ public class Game
     public Guid GameCode {  get; set; }
     public string Title { get; set; }
     public string Description { get; set; }
+    public string Sinopsis { get; set; } 
     public Genre Genre { get; set; }
     public Drm DrmFree {  get; set; }
     public DateTime ReleaseDate {  get; set; }

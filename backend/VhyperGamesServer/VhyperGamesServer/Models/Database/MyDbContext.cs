@@ -11,6 +11,7 @@ public class MyDbContext : DbContext
     //Tablas
     public DbSet<User> Users { get; set; }
     public DbSet<Game> Games { get; set; }
+    public DbSet<GameRequirements> GameRequirements {get; set;}
 
     public MyDbContext() { }
 
