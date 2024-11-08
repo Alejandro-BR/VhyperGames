@@ -13,11 +13,12 @@ import {
 
 
 const routeDefinition = createRoutesFromElements(
-  <Route path="/" element={<RootLayout/>} errorElement={<Error />}>
+  <Route path="/" element={<RootLayout />} errorElement={<Error />}>
     <Route index element={<Home />} />
-    <Route path="catalogo" element={<Catalogo/>}/>
+    <Route path="catalogo" element={<Catalogo />} />
     <Route path="error" element={<Error />} />
-    <Route path="sobre-nosotros" element={<SobreNosotros/>}/>
+    {/* <Route path="details" element={<Details />} /> */}
+    <Route path="sobre-nosotros" element={<SobreNosotros />} />
   </Route>
 );
 
