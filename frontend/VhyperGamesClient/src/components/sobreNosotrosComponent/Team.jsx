@@ -5,9 +5,9 @@ function Team() {
   const members = [
     { name: 'Alejandro Barrionuevo', role: 'Full Stack Developer', urlImage: '/img/ale.svg' },
     { name: 'Pablo Ruiz', role: 'Full Stack Developer', urlImage: '/img/pablo.svg' },
-    { name: 'Raquel Lopez', role: 'Team Leader', urlImage: '/img/raquel.svg' },
+    { name: 'Raquel López', role: 'Team Leader', urlImage: '/img/raquel.svg' },
     { name: 'José Molina', role: 'Backend Developer', urlImage: '/img/jose.svg' },
-    { name: 'Fernando Jafet', role: 'Full Stack Developer', urlImage: '/img/fernando.svg' },
+    { name: 'Fernando Sánchez', role: 'Full Stack Developer', urlImage: '/img/fernando.svg' },
   ];
 
   return (
