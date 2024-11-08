@@ -27,6 +27,7 @@ public class Seeder
                     ReleaseDate = new DateTime (2015, 05, 19),
                     Price = 1800,
                     Stock = 100,
+                    GameRequirementsId = 1,
                     ImageGames = new List<ImageGame> 
                     {
                         new ImageGame
@@ -46,6 +47,7 @@ public class Seeder
                     ReleaseDate = new DateTime (2011, 11, 11),
                     Price = 3000,
                     Stock = 100,
+                    GameRequirementsId = 0,
                     ImageGames = new List<ImageGame>
                     {
                         new ImageGame
@@ -65,6 +67,7 @@ public class Seeder
                     ReleaseDate = new DateTime (2019, 01, 25),
                     Price = 1900,
                     Stock = 100,
+                    GameRequirementsId = 1,
                     ImageGames = new List<ImageGame>
                     {
                         new ImageGame
@@ -84,6 +87,7 @@ public class Seeder
                     ReleaseDate = new DateTime (2018, 04, 20),
                     Price = 4800,
                     Stock = 100,
+                    GameRequirementsId = 2,
                     ImageGames = new List<ImageGame>
                     {
                         new ImageGame
@@ -103,6 +107,7 @@ public class Seeder
                     ReleaseDate = new DateTime (2024, 09, 20),
                     Price = 4000,
                     Stock = 100,
+                    GameRequirementsId = 2,
                     ImageGames = new List<ImageGame>
                     {
                         new ImageGame
@@ -122,6 +127,7 @@ public class Seeder
                     ReleaseDate = new DateTime (2011, 05, 16),
                     Price = 880,
                     Stock = 0,
+                    GameRequirementsId = 0,
                     ImageGames = new List<ImageGame>
                     {
                         new ImageGame
@@ -141,6 +147,7 @@ public class Seeder
                     ReleaseDate = new DateTime (2008, 09, 07),
                     Price = 150,
                     Stock = 100,
+                    GameRequirementsId = 1,
                     ImageGames = new List<ImageGame>
                     {
                         new ImageGame
@@ -160,6 +167,7 @@ public class Seeder
                     ReleaseDate = new DateTime (2018, 10, 13),
                     Price = 265,
                     Stock = 100,
+                    GameRequirementsId = 0,
                     ImageGames = new List<ImageGame>
                     {
                         new ImageGame
@@ -179,6 +187,7 @@ public class Seeder
                     ReleaseDate = new DateTime (2020, 12, 10),
                     Price = 5700,
                     Stock = 100,
+                    GameRequirementsId = 2,
                     ImageGames = new List<ImageGame>
                     {
                         new ImageGame
@@ -198,6 +207,7 @@ public class Seeder
                     ReleaseDate = new DateTime (2010, 11, 25),
                     Price = 5100,
                     Stock = 100,
+                    GameRequirementsId = 1,
                     ImageGames = new List<ImageGame>
                     {
                         new ImageGame
@@ -217,6 +227,7 @@ public class Seeder
                     ReleaseDate = new DateTime (2014, 8, 8),
                     Price = 399,
                     Stock = 100,
+                    GameRequirementsId = 0,
                     ImageGames = new List<ImageGame>
                     {
                         new ImageGame
@@ -236,6 +247,7 @@ public class Seeder
                     ReleaseDate = new DateTime (2014, 11, 10),
                     Price = 799,
                     Stock = 100,
+                    GameRequirementsId = 0,
                     ImageGames = new List<ImageGame>
                     {
                         new ImageGame
@@ -255,6 +267,7 @@ public class Seeder
                     ReleaseDate = new DateTime (2015, 3, 2),
                     Price = 799,
                     Stock = 100,
+                    GameRequirementsId = 1,
                     ImageGames = new List<ImageGame>
                     {
                         new ImageGame
@@ -274,6 +287,7 @@ public class Seeder
                     ReleaseDate = new DateTime (2015, 7, 23),
                     Price = 799,
                     Stock = 10,
+                    GameRequirementsId = 1,
                     ImageGames = new List<ImageGame>
                     {
                         new ImageGame
@@ -293,6 +307,7 @@ public class Seeder
                     ReleaseDate = new DateTime (2016, 10, 7),
                     Price = 799,
                     Stock = 10,
+                    GameRequirementsId = 1,
                     ImageGames = new List<ImageGame>
                     {
                         new ImageGame
@@ -312,6 +327,7 @@ public class Seeder
                     ReleaseDate = new DateTime (2016, 1, 21),
                     Price = 1,
                     Stock = 999999,
+                    GameRequirementsId = 0,
                     ImageGames = new List<ImageGame>
                     {
                         new ImageGame
@@ -331,6 +347,7 @@ public class Seeder
                     ReleaseDate = new DateTime (2017, 12, 4),
                     Price = 1,
                     Stock = 999999,
+                    GameRequirementsId = 1,
                     ImageGames = new List<ImageGame>
                     {
                         new ImageGame
@@ -350,6 +367,7 @@ public class Seeder
                     ReleaseDate = new DateTime (2018, 6, 27),
                     Price = 1,
                     Stock = 999999,
+                    GameRequirementsId = 1,
                     ImageGames = new List<ImageGame>
                     {
                         new ImageGame
@@ -369,6 +387,7 @@ public class Seeder
                     ReleaseDate = new DateTime (2019, 5, 28),
                     Price = 2499,
                     Stock = 99,
+                    GameRequirementsId = 1,
                     ImageGames = new List<ImageGame>
                     {
                         new ImageGame
@@ -388,6 +407,7 @@ public class Seeder
                     ReleaseDate = new DateTime (2022, 11, 22),
                     Price = 3399,
                     Stock = 10,
+                    GameRequirementsId = 1,
                     ImageGames = new List<ImageGame>
                     {
                         new ImageGame
@@ -407,6 +427,7 @@ public class Seeder
                     ReleaseDate = new DateTime (2023, 12, 14),
                     Price = 3899,
                     Stock = 16,
+                    GameRequirementsId = 1,
                     ImageGames = new List<ImageGame>
                     {
                         new ImageGame
@@ -426,6 +447,7 @@ public class Seeder
                     ReleaseDate = new DateTime (2024, 8, 7),
                     Price = 1950,
                     Stock = 100,
+                    GameRequirementsId = 1,
                     ImageGames = new List<ImageGame>
                     {
                         new ImageGame
@@ -445,6 +467,7 @@ public class Seeder
                     ReleaseDate = new DateTime(2023, 3, 15),
                     Price = 2990,
                     Stock = 150,
+                    GameRequirementsId = 2,
                     ImageGames = new List<ImageGame>
                     {
                         new ImageGame
@@ -464,6 +487,7 @@ public class Seeder
                     ReleaseDate = new DateTime(2020, 9, 17),
                     Price = 1790,
                     Stock = 200,
+                    GameRequirementsId = 0,
                     ImageGames = new List<ImageGame>
                     {
                         new ImageGame
@@ -483,6 +507,7 @@ public class Seeder
                     ReleaseDate = new DateTime(2018, 1, 25),
                     Price = 1590,
                     Stock = 0,
+                    GameRequirementsId = 0,
                     ImageGames = new List<ImageGame>
                     {
                         new ImageGame
@@ -502,6 +527,7 @@ public class Seeder
                     ReleaseDate = new DateTime(2016, 4, 12),
                     Price = 2790,
                     Stock = 80,
+                    GameRequirementsId = 1,
                     ImageGames = new List<ImageGame>
                     {
                         new ImageGame
@@ -521,6 +547,7 @@ public class Seeder
                     ReleaseDate = new DateTime(2016, 2, 26),
                     Price = 1490,
                     Stock = 220,
+                    GameRequirementsId = 0,
                     ImageGames = new List<ImageGame>
                     {
                         new ImageGame
@@ -540,6 +567,7 @@ public class Seeder
                     ReleaseDate = new DateTime(2020, 3, 20),
                     Price = 3590,
                     Stock = 110,
+                    GameRequirementsId = 2,
                     ImageGames = new List<ImageGame>
                     {
                         new ImageGame
@@ -559,6 +587,7 @@ public class Seeder
                     ReleaseDate = new DateTime(2017, 2, 24),
                     Price = 1250,
                     Stock = 180,
+                    GameRequirementsId = 1,
                     ImageGames = new List<ImageGame>
                     {
                         new ImageGame
@@ -578,6 +607,7 @@ public class Seeder
                     ReleaseDate = new DateTime(2011, 11, 18),
                     Price = 2490,
                     Stock = 500,
+                    GameRequirementsId = 0,
                     ImageGames = new List<ImageGame>
                     {
                         new ImageGame
@@ -597,6 +627,7 @@ public class Seeder
                     ReleaseDate = new DateTime(2024, 09, 19),
                     Price = 5990,
                     Stock = 150,
+                    GameRequirementsId = 2,
                     ImageGames = new List<ImageGame>
                     {
                         new ImageGame
@@ -616,6 +647,7 @@ public class Seeder
                     ReleaseDate = new DateTime(2024, 10, 15),
                     Price = 6999,
                     Stock = 200,
+                    GameRequirementsId = 1,
                     ImageGames = new List<ImageGame>
                     {
                         new ImageGame
@@ -635,6 +667,7 @@ public class Seeder
                     ReleaseDate = new DateTime(2023, 8, 3),
                     Price = 6999,
                     Stock = 120,
+                    GameRequirementsId = 2,
                     ImageGames = new List<ImageGame>
                     {
                         new ImageGame
