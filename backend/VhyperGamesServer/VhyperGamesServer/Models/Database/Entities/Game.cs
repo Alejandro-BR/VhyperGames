@@ -1,10 +1,12 @@
-﻿using VhyperGamesServer.Models.Database.Entities.Enum;
+﻿using System.Text.Json.Serialization;
+using VhyperGamesServer.Models.Database.Entities.Enum;
 
 namespace VhyperGamesServer.Models.Database.Entities;
 
 public class Game
 {
     public int Id { get; set; }
+    public int GameRequirementsId { get; set; }
     public Guid GameCode {  get; set; }
     public string Title { get; set; }
     public string Description { get; set; }
@@ -16,6 +18,8 @@ public class Game
     public int Stock {  get; set; }
     public int AvgRating { get; set; }
     public List<ImageGame> ImageGames { get; set; }
+    [JsonIgnore]
+    public GameRequirements GameRequirements { get; set; }
 
     public Game()
     {

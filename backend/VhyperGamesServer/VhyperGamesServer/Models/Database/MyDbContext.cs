@@ -90,6 +90,13 @@ public class MyDbContext : DbContext
                 .IsRequired()
                 .ValueGeneratedOnAdd();
 
+            entity.Property(e => e.GameRequirementsId)
+                .HasColumnName("game_id");
+
+            entity.HasOne(e => e.GameRequirements)
+                .WithMany(g => g.Games)
+                .HasForeignKey(e => e.GameRequirementsId);
+
             entity.Property(e => e.Title)
                 .HasColumnName("title")
                 .HasMaxLength(150)
@@ -131,6 +138,73 @@ public class MyDbContext : DbContext
                 .HasColumnName("avg_rating")
                 .IsRequired();
 
+        });
+
+        // Configuración de la tabla GameRequirements
+        modelBuilder.Entity<GameRequirements>(entity =>
+        {
+            entity.ToTable("gamerequirements");
+
+            // Configurar el Id como clave primaria
+            entity.HasKey(e => e.Id);
+
+            entity.Property(e => e.Id)
+                  .HasColumnName("id")
+                  .IsRequired()
+                  .ValueGeneratedOnAdd();
+
+            entity.Property(e => e.OS)
+                  .HasColumnName("os")
+                  .HasMaxLength(100)
+                  .IsRequired();
+
+            entity.Property(e => e.MinOS)
+                  .HasColumnName("min-os")
+                  .HasMaxLength(100)
+                  .IsRequired();
+
+            entity.Property(e => e.CPU)
+                  .HasColumnName("cpu")
+                  .HasMaxLength(100)
+                  .IsRequired();
+
+            entity.Property(e => e.MinCPU)
+                  .HasColumnName("min-cpu")
+                  .HasMaxLength(100)
+                  .IsRequired();
+
+            entity.Property(e => e.RAM)
+                  .HasColumnName("ram")
+                  .HasMaxLength(100)
+                  .IsRequired();
+
+            entity.Property(e => e.MinRAM)
+                  .HasColumnName("min-ram")
+                  .HasMaxLength(100)
+                  .IsRequired();
+
+            entity.Property(e => e.GPU)
+                  .HasColumnName("gpu")
+                  .HasMaxLength(40)
+                  .IsRequired();
+
+            entity.Property(e => e.MinGPU)
+                  .HasColumnName("min-gpu")
+                  .HasMaxLength(40)
+                  .IsRequired();
+
+            entity.Property(e => e.DirectX)
+                  .HasColumnName("directx")
+                  .IsRequired();
+
+            entity.Property(e => e.MinDirectX)
+                  .HasColumnName("min-directx")
+                  .IsRequired();
+
+            entity.Property(e => e.Storage)
+                  .HasColumnName("address")
+                  .HasMaxLength(250)
+                  .IsRequired();
         });
 
         modelBuilder.Entity<ImageGame>(entity =>
