@@ -32,6 +32,9 @@ namespace VhyperGamesServer.Services
                 {
                     query = query.Where(g => matchedTitles.Contains(g.Title));
                 }
+                else {
+                    return new CatalogDto();
+                }
             }
 
             int drmValue = (int)filter.DrmFree;

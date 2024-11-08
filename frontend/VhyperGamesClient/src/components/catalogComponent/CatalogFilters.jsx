@@ -30,8 +30,8 @@ function CatalogFilters({ filters, onFilterChange }) {
                         className={classes.filter}
                     >
                         <option value="" disabled defaultValue>Ordenar por:</option>
-                        <option value="2">Precio Asc.</option>
-                        <option value="3">Precio Desc.</option>
+                        <option value="3">Precio Asc.</option>
+                        <option value="2">Precio Desc.</option>
                         <option value="0">Alfabetico A-Z.</option>
                         <option value="1">Alfabetico Z-A.</option>
                     </select>
