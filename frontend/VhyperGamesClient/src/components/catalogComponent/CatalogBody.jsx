@@ -77,7 +77,7 @@ function CatalogBody() {
                 ...prevFilter,
                 searchText: searchText
             }));
-        }, 500);
+        }, 1000);
 
         return () => clearTimeout(delayDebounceFn);
     }, [searchText]);
