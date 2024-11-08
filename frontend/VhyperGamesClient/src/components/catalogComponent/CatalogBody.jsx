@@ -4,6 +4,7 @@ import classes from "./CatalogStyle.module.css";
 import BlockGame from "../blockgameComponent/BlockGame";
 import Pagination from "./Pagination"; 
 import { CATALOG_FILTER } from "../../config";
+import { getVarSessionStorage, updateSessionStorage } from "../../utils/keep.js";
 
 function CatalogBody() {
     const [juegos, setJuegos] = useState([]); 
@@ -18,11 +19,25 @@ function CatalogBody() {
         resultsPerPage: 10,
         page: 1
     });
- 
+
+    const CLAVE = "filter";
+    const [filtersLoaded, setFiltersLoaded] = useState(false);
+
+    useEffect(() => {
+        if (!filtersLoaded) {
+            const savedFilter = getVarSessionStorage(CLAVE);
+            if (savedFilter) {
+                setSearchFilter(savedFilter);
+                setSearchText(savedFilter.searchText || "");
+            }
+            setFiltersLoaded(true);
+        }
+    }, [filtersLoaded]);
+
     const fetchJuegos = async (filter) => {
         setLoading(true); 
         try {
-            const queryParams = new URLSearchParams({
+            let queryParams = new URLSearchParams({
                 searchText: filter.searchText,
                 sortCriteria: filter.sortCriteria,
                 drmFree: filter.drmFree,
@@ -45,6 +60,8 @@ function CatalogBody() {
             const data = await response.json();
             setJuegos(Array.isArray(data.games) ? data.games : []);
             setTotalPages(data.totalPages);
+            // Actualizar el Session Storage
+            updateSessionStorage(filter, CLAVE);
         } catch (error) {
             console.error('Error al cargar los juegos:', error);
             setJuegos([]);
@@ -60,7 +77,7 @@ function CatalogBody() {
                 ...prevFilter,
                 searchText: searchText
             }));
-        }, 300);
+        }, 500);
 
         return () => clearTimeout(delayDebounceFn);
     }, [searchText]);
@@ -105,7 +122,7 @@ function CatalogBody() {
         <>
             <CatalogFilters filters={{ ...searchFilter, searchText }} onFilterChange={handleSearchFilterChange} />
             <div className={classes.juegardos}>
-                <BlockGame games={juegos} variant="catalogo" /> 
+                {juegos.length != 0 ? (<BlockGame games={juegos} variant="catalogo" />) : (<p>No se encontraron resultados con esa búsqueda.</p>)}   
             </div>
             <Pagination 
                 currentPage={searchFilter.page}
