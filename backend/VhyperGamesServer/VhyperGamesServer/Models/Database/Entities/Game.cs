@@ -21,10 +21,13 @@ public class Game
     [JsonIgnore]
     public GameRequirements GameRequirements { get; set; }
 
+    public List<Review> Reviews { get; set; }
+
     public Game()
     {
         GameCode = Guid.NewGuid();
         AvgRating = 0;
         ImageGames = new List<ImageGame>();
+        Reviews = new List<Review>();
     }
 }
