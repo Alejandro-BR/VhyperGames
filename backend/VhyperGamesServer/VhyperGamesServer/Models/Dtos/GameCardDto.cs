@@ -12,4 +12,6 @@ public class GameCardDto
 
     public string ImageUrl { get; set; }
 
+    public int AvgRating { get; set; }
+
 }

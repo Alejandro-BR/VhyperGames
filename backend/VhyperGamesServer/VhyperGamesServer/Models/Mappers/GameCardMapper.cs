@@ -15,6 +15,7 @@ public class GameCardMapper
             Title = game.Title,
             Stock = game.Stock,
             Price = game.Price,
+            AvgRating = game.AvgRating,
 
             //Se obtiene la primera URL de la imagen.La primera debe ser la portada
             ImageUrl = game.ImageGames.FirstOrDefault()?.ImageUrl //Si no existe imagen dará Null
