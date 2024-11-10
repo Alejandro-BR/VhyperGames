@@ -1,4 +1,4 @@
-﻿namespace VhyperGamesServer.Models.DTO
+﻿namespace VhyperGamesServer.Models.Dtos
 {
     public class RequirementsDto
     {

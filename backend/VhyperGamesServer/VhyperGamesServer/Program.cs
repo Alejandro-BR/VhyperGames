@@ -41,8 +41,10 @@ public class Program
         // Inyección de servicios
         builder.Services.AddTransient<UserService>();
         builder.Services.AddTransient<CatalogService>();
+        builder.Services.AddTransient<DetailsViewService>();
         builder.Services.AddScoped<SmartSearchService>();
         builder.Services.AddScoped<GameCardMapper>();
+        builder.Services.AddScoped<DetailsViewMapper>();
 
         // Configuración de CORS
         if (builder.Environment.IsDevelopment())
@@ -59,11 +61,15 @@ public class Program
         }
 
         // Configuración de autenticación JWT
+        string key = Environment.GetEnvironmentVariable("JWT_KEY");
+        if (string.IsNullOrEmpty(key))
+        {
+            throw new InvalidOperationException("JWT_KEY is not configured in environment variables.");
+        }
+
         builder.Services.AddAuthentication()
             .AddJwtBearer(options =>
             {
-                string key = Environment.GetEnvironmentVariable("JWT_KEY");
-
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuer = false,
