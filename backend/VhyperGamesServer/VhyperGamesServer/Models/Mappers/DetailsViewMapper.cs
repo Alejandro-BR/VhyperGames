@@ -1,5 +1,4 @@
 ﻿using VhyperGamesServer.Models.Database.Entities;
-using VhyperGamesServer.Models.DTO;
 using VhyperGamesServer.Models.Dtos;
 
 namespace VhyperGamesServer.Models.Mappers;
