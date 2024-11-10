@@ -18,4 +18,7 @@ public class Review
 
     [JsonIgnore] 
     public Game Game { get; set; }
+
+    [JsonIgnore]
+    public User User { get; set; }
 }
