@@ -8,7 +8,7 @@ public class ReviewDto
 
     public int UserId { get; set; }
 
-    public string NameUser { get; set; }
+    public string UserName { get; set; }
 
     public string ReviewText { get; set; }
 

@@ -2,7 +2,7 @@
 
 namespace VhyperGamesServer.Models.Dtos;
 
-public class GameDatesDto
+public class GameDataDto
 {
     public int Id { get; set; }
 
@@ -11,7 +11,7 @@ public class GameDatesDto
     public string Sinopsis { get; set; }
     public List<ImageGame> ImageGames { get; set; }
 
-    public GameDatesDto()
+    public GameDataDto()
     {
         ImageGames = new List<ImageGame>();
     }

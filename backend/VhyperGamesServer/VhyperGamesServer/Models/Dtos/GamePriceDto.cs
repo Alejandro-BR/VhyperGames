@@ -10,7 +10,7 @@ public class GamePriceDto
 
     public int Stock { get; set; }
 
-    public int Quantity { get; set; };
+    public int Quantity { get; set; }
 
     public GamePriceDto(){
 
