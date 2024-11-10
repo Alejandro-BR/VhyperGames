@@ -16,6 +16,5 @@ public class GameRequirements
     public int DirectX { get; set; }
     public int MinDirectX { get; set; }
     public string Storage { get; set; }
-
     public List<Game> Games { get; set; }
 }

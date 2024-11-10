@@ -91,7 +91,7 @@ public class MyDbContext : DbContext
                 .ValueGeneratedOnAdd();
 
             entity.Property(e => e.GameRequirementsId)
-                .HasColumnName("game_id");
+                .HasColumnName("game_requirements_id");
 
             entity.HasOne(e => e.GameRequirements)
                 .WithMany(g => g.Games)
@@ -202,9 +202,10 @@ public class MyDbContext : DbContext
                   .IsRequired();
 
             entity.Property(e => e.Storage)
-                  .HasColumnName("address")
+                  .HasColumnName("storage")
                   .HasMaxLength(250)
                   .IsRequired();
+
         });
 
         modelBuilder.Entity<ImageGame>(entity =>
