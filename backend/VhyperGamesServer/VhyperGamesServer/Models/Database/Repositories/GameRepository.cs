@@ -48,4 +48,9 @@ public class GameRepository : Repository<Game, int>
 
         return titles;
     }
+
+    public async Task<Game> GetById(int id)
+    {
+        return await GetQueryable().FirstOrDefaultAsync(g => g.Id == id);
+    }
 }

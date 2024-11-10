@@ -4,7 +4,7 @@ using VhyperGamesServer.Models.Dtos;
 
 namespace VhyperGamesServer.Models.Mappers;
 
-public class ViewDetailsMapper
+public class DetailsViewMapper
 {
 
     public GameDataDto GameDataToDto(Game game)
