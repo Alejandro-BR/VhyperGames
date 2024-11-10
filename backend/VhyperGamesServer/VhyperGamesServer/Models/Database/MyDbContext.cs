@@ -11,7 +11,9 @@ public class MyDbContext : DbContext
     //Tablas
     public DbSet<User> Users { get; set; }
     public DbSet<Game> Games { get; set; }
-    public DbSet<GameRequirements> GameRequirements {get; set;}
+    public DbSet<GameRequirements> GameRequirements { get; set; }
+    public DbSet<Review> Reviews { get; set; }
+    public DbSet<ImageGame> ImagesGame { get; set; }
 
     public MyDbContext() { }
 
@@ -145,7 +147,6 @@ public class MyDbContext : DbContext
         {
             entity.ToTable("gamerequirements");
 
-            // Configurar el Id como clave primaria
             entity.HasKey(e => e.Id);
 
             entity.Property(e => e.Id)
@@ -206,6 +207,46 @@ public class MyDbContext : DbContext
                   .HasMaxLength(250)
                   .IsRequired();
 
+        });
+
+        modelBuilder.Entity<Review>(entity =>
+        {
+            entity.ToTable("reviews");
+
+            entity.HasKey(e => e.Id);
+
+            entity.Property(e => e.Id)
+                .HasColumnName("id")
+                .IsRequired()
+                .ValueGeneratedOnAdd();
+
+            entity.Property(e => e.GameId)
+                .HasColumnName("game_id")
+                .IsRequired();
+
+            entity.Property(e => e.UserId)
+                .HasColumnName("user_id")
+                .IsRequired();
+
+            entity.Property(e => e.ReviewText)
+                .HasColumnName("review_text")
+                .HasMaxLength(250)
+                .IsRequired();
+
+            entity.Property(e => e.ReviewDate)
+                .HasColumnName("review_date")
+                .HasColumnType("date")
+                .IsRequired()
+                .HasDefaultValueSql("CURRENT_DATE");
+
+            entity.Property(e => e.Rating)
+                .HasColumnName("rating")
+                .IsRequired();
+
+            entity.HasOne(e => e.Game)
+                .WithMany(g => g.Reviews)
+                .HasForeignKey(e => e.GameId)
+                .OnDelete(DeleteBehavior.Cascade);
         });
 
         modelBuilder.Entity<ImageGame>(entity =>
