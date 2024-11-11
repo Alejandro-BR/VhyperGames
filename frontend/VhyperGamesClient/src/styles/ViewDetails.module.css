@@ -1,0 +1,31 @@
+
+.view-details {
+  display: grid;
+  gap: 40px; 
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: auto auto;
+  grid-template-areas: 
+    "main-section        price-newreview"
+    "system-requirements reviews";
+  padding: 40px;
+}
+
+.view-details__main-section {
+  grid-area: main-section; 
+}
+
+.view-details__price-newreview {
+  grid-area: price-newreview;
+}
+
+.view-details__system-requirements {
+  grid-area: system-requirements;
+}
+
+.view-details__reviews {
+  grid-area: reviews;
+}
+
+/* .view-details__box {  
+
+} */

@@ -20,7 +20,7 @@ namespace VhyperGamesServer.Services
 
         public async Task<CatalogDto> FilterAndSortGamesAsync(GameFilterDto filter, SmartSearchService smartSearchService)
         {
-            IQueryable<Game> query = await _unitOfWork.GameRepository.GetIncludingImages();
+            IQueryable<Game> query = _unitOfWork.GameRepository.GetIncludingImages();
 
             if (!string.IsNullOrEmpty(filter.SearchText))
             {
