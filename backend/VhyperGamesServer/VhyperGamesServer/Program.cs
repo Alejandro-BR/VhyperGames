@@ -1,7 +1,9 @@
+using Microsoft.Extensions.ML;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using VhyperGamesServer.Models.Database;
 using VhyperGamesServer.Models.Database.Repositories;
+using VhyperGamesServer.Models.IA;
 using VhyperGamesServer.Models.Mappers;
 using VhyperGamesServer.Models.Seeder;
 using VhyperGamesServer.Services;
@@ -45,6 +47,10 @@ public class Program
         builder.Services.AddScoped<SmartSearchService>();
         builder.Services.AddScoped<GameCardMapper>();
         builder.Services.AddScoped<DetailsViewMapper>();
+
+        // Inyección de IA
+        builder.Services.AddPredictionEnginePool<ModelInput, ModelOutput>()
+            .FromFile("PruebaIADAW.mlnet");
 
         // Configuración de CORS
         if (builder.Environment.IsDevelopment())
