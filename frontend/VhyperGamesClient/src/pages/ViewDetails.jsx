@@ -1,4 +1,5 @@
 import Footer from "../components/footerComponent/Footer";
+import GameData from "../components/viewDetailsComponent/gameDataComponent/GameData";
 import classes from "../styles/ViewDetails.module.css";
 
 function ViewDetails() {
@@ -6,7 +7,7 @@ function ViewDetails() {
     <>
       <div className={classes["view-details"]}>
         <div className={`${classes["view-details__main-section"]} ${classes.box}`}>
-
+          <GameData />
         </div>
         <div className={`${classes["view-details__price-newreview"]} ${classes.box}`}>
           
