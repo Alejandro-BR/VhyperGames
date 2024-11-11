@@ -21,7 +21,7 @@ public class GameRepository : Repository<Game, int>
             .FirstOrDefaultAsync(game => game.Title.ToLower() == title);
     }
 
-    public async Task<IQueryable<Game>> GetIncludingImages()
+    public IQueryable<Game> GetIncludingImages()
     {
         return _context.Games.Include(g => g.ImageGames);
     }
