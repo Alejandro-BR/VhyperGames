@@ -9,13 +9,13 @@ public class UnitOfWork
     private readonly MyDbContext _myDbContext;
     private UserRepository _userRepository;
     private GameRepository _gameRepository;
-    private RequerimentRepository _querimentRepository;
+    private RequerimentRepository _requerimentRepository;
     private ReviewRepository _reviewRepository;
 
     public UserRepository UserRepository => _userRepository ??= new UserRepository(_myDbContext);
     public GameRepository GameRepository => _gameRepository ??= new GameRepository(_myDbContext);
     public ReviewRepository ReviewRepository => _reviewRepository ??= new ReviewRepository(_myDbContext);
-    public RequerimentRepository RequerimentRepository => _querimentRepository ??= new RequerimentRepository(_myDbContext);
+    public RequerimentRepository RequerimentRepository => _requerimentRepository ??= new RequerimentRepository(_myDbContext);
 
     public UnitOfWork(MyDbContext myDbContext)
     {

@@ -1,6 +1,8 @@
-﻿using VhyperGamesServer.Models.Database.Entities;
+﻿using Microsoft.AspNetCore.SignalR;
+using VhyperGamesServer.Models.Database.Entities;
 using VhyperGamesServer.Models.Database.Repositories;
 using VhyperGamesServer.Models.Dtos;
+using VhyperGamesServer.Models.IA;
 using VhyperGamesServer.Models.Mappers;
 
 namespace VhyperGamesServer.Services;
@@ -9,11 +11,13 @@ public class DetailsViewService
 {
     private readonly UnitOfWork _unitOfWork;
     private readonly DetailsViewMapper _viewDetailsMapper;
+    private readonly IAService _iaService;
 
-    public DetailsViewService(UnitOfWork unitOfWork, DetailsViewMapper viewDetailsMapper)
+    public DetailsViewService(UnitOfWork unitOfWork, DetailsViewMapper viewDetailsMapper, IAService iAService)
     {
         _unitOfWork = unitOfWork;
         _viewDetailsMapper = viewDetailsMapper;
+        _iaService = iAService;
     }
 
     public async Task<GameDataDto> GetGameData(int id)
@@ -82,5 +86,34 @@ public class DetailsViewService
         return reviewGameDto;
     }
 
-    // Falta la nueva reseña la cual no la implemente por falta de no tener la IA
+    public async Task<ReviewDto> NewReview(NewReviewDto newReviewDto)
+    {
+        var user = await _unitOfWork.UserRepository.GetByIdAsync(newReviewDto.UserId);
+        var game = await _unitOfWork.GameRepository.GetByIdAsync(newReviewDto.GameId);
+
+        if (await _unitOfWork.ReviewRepository.IsReviewed(newReviewDto.GameId, newReviewDto.UserId) != null)
+        {
+            throw new InvalidOperationException("Ya enviaste una reseña para este juego."); ;
+        }
+
+        ModelOutput modelOutput = _iaService.Predict(newReviewDto.ReviewText);
+
+        var newReview = new Review
+        {
+            ReviewDate = DateTime.Now,
+            UserId = newReviewDto.UserId,
+            GameId = newReviewDto.GameId,
+            ReviewText = modelOutput.Text,
+            Rating = (int)modelOutput.PredictedLabel,
+            User = user,
+            Game = game
+        };
+
+        var savedReview = await _unitOfWork.ReviewRepository.InsertAsync(newReview);
+
+        bool respuesta = await _unitOfWork.SaveAsync();
+
+        return _viewDetailsMapper.ReviewToDto(savedReview);
+    }
+
 }

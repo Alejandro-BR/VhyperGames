@@ -47,6 +47,7 @@ public class Program
         builder.Services.AddScoped<SmartSearchService>();
         builder.Services.AddScoped<GameCardMapper>();
         builder.Services.AddScoped<DetailsViewMapper>();
+        builder.Services.AddScoped<IAService>();
 
         // Inyección de IA
         builder.Services.AddPredictionEnginePool<ModelInput, ModelOutput>()

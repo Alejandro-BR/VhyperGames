@@ -14,7 +14,10 @@ public class ReviewRepository : Repository<Review, int>
 
     public async Task<List<Review>> GetAllReviewsOrderByDateByGameId(int idGame)
     {
+
         return await GetQueryable()
+            .Include(r => r.User)
+            .Include(r => r.Game)
             .Where(r => r.GameId == idGame)
             .OrderByDescending(r => r.ReviewDate)
             .ToListAsync();

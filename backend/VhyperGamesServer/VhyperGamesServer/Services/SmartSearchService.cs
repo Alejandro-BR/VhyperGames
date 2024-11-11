@@ -96,7 +96,7 @@ public class SmartSearchService
     }
 
     // Normaliza el texto quitándole las tildes y pasándolo a minúsculas
-    private string ClearText(string text)
+    public string ClearText(string text)
     {
         return RemoveDiacritics(text.ToLower());
     }

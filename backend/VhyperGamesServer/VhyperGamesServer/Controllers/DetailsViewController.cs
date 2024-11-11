@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using TorchSharp.Utils;
 using VhyperGamesServer.Models.Dtos;
 using VhyperGamesServer.Services;
 
@@ -44,4 +45,29 @@ public class DetailsViewController : ControllerBase
     {
         return await _detailsViewService.GetReviewsGame(id);
     }
+
+    [HttpPost("new-review")]
+    public async Task<ActionResult<ReviewDto>> NewReview([FromBody] NewReviewDto newReviewDto)
+    {
+        try
+        {
+            var reviewDto = await _detailsViewService.NewReview(newReviewDto);
+
+            if (reviewDto == null)
+            {
+                return BadRequest(new { message = "Unable to create review." });
+            }
+
+            return Ok(reviewDto);
+        }
+        catch (InvalidOperationException ex)
+        {
+            return Conflict(new { message = ex.Message });
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, new { message = "An unexpected error occurred.", detail = ex.Message });
+        }
+    }
+
 }

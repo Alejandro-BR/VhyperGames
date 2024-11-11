@@ -76,7 +76,7 @@ public class DetailsViewMapper
     {
         return new NewReviewDto
         {
-            Id = review.Id,
+            //Id = review.Id,
             GameId = review.GameId,
             UserId = review.UserId,
             ReviewText = review.ReviewText,
