@@ -1,0 +1,31 @@
+
+.container {
+  display: grid;
+  gap: 40px; 
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: auto auto;
+  grid-template-areas: 
+    "main-section        price-newreview"
+    "system-requirements reviews";
+  padding: 40px;
+}
+
+.main-section {
+  grid-area: main-section; 
+}
+
+.price-newreview {
+  grid-area: price-newreview;
+}
+
+.system-requirements {
+  grid-area: system-requirements;
+}
+
+.reviews {
+  grid-area: reviews;
+}
+
+/* .box {
+  
+} */
