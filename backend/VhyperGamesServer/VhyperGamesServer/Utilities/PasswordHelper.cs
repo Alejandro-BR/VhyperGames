@@ -1,7 +1,7 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
 
-namespace VhyperGamesServer.Resources;
+namespace VhyperGamesServer.Utilities;
 
 public class PasswordHelper
 {
