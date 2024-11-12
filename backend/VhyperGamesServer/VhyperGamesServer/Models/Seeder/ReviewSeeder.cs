@@ -8,11 +8,13 @@ namespace VhyperGamesServer.Seeders
     {
         private readonly MyDbContext _context;
         private readonly IAService _iaService;
+        private readonly DetailsViewService _detailsService;
 
-        public ReviewSeeder(MyDbContext context, IAService iaService)
+        public ReviewSeeder(MyDbContext context, IAService iaService, DetailsViewService detailsView)
         {
             _context = context;
             _iaService = iaService;
+            _detailsService = detailsView;
         }
 
         public void Seed()
@@ -55,6 +57,17 @@ namespace VhyperGamesServer.Seeders
 
             _context.Reviews.AddRange(reviews);
             _context.SaveChanges();
+
+            UpdateRatingsForSeededGames().Wait();
+        }
+
+        private async Task UpdateRatingsForSeededGames()
+        {
+            var gameIds = _context.Reviews.Select(r => r.GameId).Distinct().ToList();
+            foreach (var gameId in gameIds)
+            {
+                await _detailsService.UpdateGameAverageRating(gameId);
+            }
         }
     }
 }

@@ -104,10 +104,6 @@ public class MyDbContext : DbContext
                 .HasMaxLength(150)
                 .IsRequired();
 
-            entity.Property(e => e.GameCode)
-                .HasColumnName("game_code")
-                .IsRequired();
-
             entity.Property(e => e.Description)
                 .HasColumnName("description")
                 .HasMaxLength(800)

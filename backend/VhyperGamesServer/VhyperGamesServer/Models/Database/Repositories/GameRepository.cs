@@ -26,7 +26,6 @@ public class GameRepository : Repository<Game, int>
         return _context.Games.Include(g => g.ImageGames);
     }
 
-
     public async Task<List<Game>> GetNewGamesRelease()
     {
         const int QUANTITY = 5;
@@ -48,4 +47,25 @@ public class GameRepository : Repository<Game, int>
 
         return titles;
     }
+
+    public async Task<Game> GetByIdAsync(int gameId, bool includeReviews = false, bool includeImages = false)
+    {
+        IQueryable<Game> query = Context.Set<Game>();
+
+        // Si se requiere incluir reseñas
+        if (includeReviews)
+        {
+            query = query.Include(g => g.Reviews);
+        }
+
+        // Si se requiere incluir imágenes
+        if (includeImages)
+        {
+            query = query.Include(g => g.ImageGames);
+        }
+
+        // Ejecuta la consulta y busca por el ID
+        return await query.FirstOrDefaultAsync(g => g.Id == gameId);
+    }
+
 }

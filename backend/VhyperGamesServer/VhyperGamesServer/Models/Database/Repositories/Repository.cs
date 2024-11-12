@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System.Linq.Expressions;
 using VhyperGamesServer.Models.Database;
+using VhyperGamesServer.Models.Database.Entities;
 
 namespace VhyperGamesServer.Models.Database.Repositories;
 
@@ -51,6 +52,11 @@ public abstract class Repository<TEntity, TId> : IRepository<TEntity, TEntity> w
     public virtual async Task SaveAsync()
     {
         await Context.SaveChangesAsync();
+    }
+
+    public void Update(TEntity entity)
+    {
+        Context.Set<TEntity>().Update(entity);
     }
 }
 

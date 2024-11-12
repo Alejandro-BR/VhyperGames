@@ -34,4 +34,11 @@ public class ReviewRepository : Repository<Review, int>
             .FirstOrDefaultAsync(r => r.UserId == idUser && r.GameId == idGame);
     }
 
+    public async Task<List<int>> GetRatingsByGameIdAsync(int gameId)
+    {
+        return await Context.Reviews
+            .Where(r => r.GameId == gameId)
+            .Select(r => r.Rating)
+            .ToListAsync();
+    }
 }

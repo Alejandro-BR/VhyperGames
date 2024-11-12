@@ -7,7 +7,7 @@ function BlockGame({ games, variant }) {
     <div className={`${classes.container} ${[classes[variant]]}`} >
       {games.map((game) => (
         <div key={game.id}>
-          <GameCard title={game.title} stock={game.stock} price={game.price} imgUrl={game.imageUrl} avgRating={game.avgRating} />
+          <GameCard title={game.title} stock={game.stock} price={game.price} imgUrl={game.imageUrl} avgRating={game.avgRating} id={game.id}/>
         </div>
       ))}
     </div>

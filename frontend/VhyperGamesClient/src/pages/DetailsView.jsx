@@ -2,10 +2,11 @@ import Footer from "../components/footerComponent/Footer";
 import GameData from "../components/detailsViewComponents/gameDataComponent/GameData";
 import GamePrice from "../components/detailsViewComponents/gamePriceComponent/GamePrice"
 import classes from "../styles/DetailsView.module.css";
+import { useParams } from "react-router-dom";
 
 function ViewDetails() {
 
-  const id = 1;
+  const params = useParams();
 
   return (
     <>
@@ -13,7 +14,7 @@ function ViewDetails() {
         <div
           className={`${classes["view-details__main-section"]} ${classes.box}`}
         >
-          <GameData id={id} />
+          <GameData id={params.gameId} />
         </div>
         <div className={`${classes["view-details__price-newreview"]} ${classes.box}`}>
           <GamePrice id={id}/>
