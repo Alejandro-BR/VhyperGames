@@ -1,14 +1,13 @@
-function Rating(avgRating) {
+function Rating({avgRating}) {
   let color = "#D24042";
   if (avgRating <= 50) {
     color = "#D24042";
-  } else {
-    if (avgRating <= 75) {
+    } else if (avgRating <= 75){
       color = "#D2BF40";
-    } else {
+    } else if(avgRating > 75){
       color = "#13C345";
     }
-  }
+  
   return (
     <svg
       width="27"

@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom"; 
 import classes from "./GameCard.module.css";
 import { BASE_URL } from "../../config";
-import Rating from "./rating";
+import Rating from "./Rating";
 
 function GameCard({ id, title, stock, price, imgUrl, avgRating }) {
   const [isStock, setIsStock] = useState(false);
