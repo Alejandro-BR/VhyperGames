@@ -9,11 +9,13 @@ public class SeedManager
 {
     private readonly MyDbContext _context;
     private readonly IAService _iaService;
+    private readonly DetailsViewService _detailsService;
 
-    public SeedManager(MyDbContext context, IAService iaService)
+    public SeedManager(MyDbContext context, IAService iaService, DetailsViewService detailsService)
     {
         _context = context;
         _iaService = iaService;
+        _detailsService = detailsService;
     }
 
     public void SeedAll()
@@ -27,7 +29,7 @@ public class SeedManager
         var userSeeder = new UserSeeder(_context);
         userSeeder.Seed();
         
-        var reviewSeeder = new ReviewSeeder(_context, _iaService);
+        var reviewSeeder = new ReviewSeeder(_context, _iaService, _detailsService);
         reviewSeeder.Seed();
     }
 }
