@@ -4,3 +4,11 @@
     align-items: center; 
     padding: 20px;
 }
+
+/* Variables */
+
+.tituloJuego {
+    justify-content: left;
+    align-items: left; 
+    padding: 0px;
+}
