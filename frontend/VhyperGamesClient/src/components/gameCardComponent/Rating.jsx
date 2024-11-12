@@ -1,10 +1,12 @@
 function Rating({avgRating}) {
-  let color = "#D24042";
-  if (avgRating <= 50) {
+  let color = "#A0A0A0";
+  if (avgRating === null) {
+    color = "#A0A0A0";
+    } else if (avgRating < 0) {
     color = "#D24042";
-    } else if (avgRating <= 75){
+    } else if (avgRating === 0){
       color = "#D2BF40";
-    } else if(avgRating > 75){
+    } else if(avgRating > 0){
       color = "#13C345";
     }
   
