@@ -20,7 +20,7 @@ function GameCard({ id, title, stock, price, imgUrl, avgRating }) {
   }
 
   return (
-    <Link to={`/details/${id}`}> 
+    <Link to={`/juego/${id}`}> 
       <div className={classes.container}>
         <img src={`${BASE_URL}${imgUrl}`} alt={title} className={classes.gameCardImg} />
         <div className={classes.cardTitle}>
