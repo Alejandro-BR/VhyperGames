@@ -1,22 +1,25 @@
 ﻿using Microsoft.Extensions.ML;
+using System.Globalization;
+using System.Text;
 using VhyperGamesServer.Models.IA;
+using VhyperGamesServer.Utilities;
 
 namespace VhyperGamesServer.Services;
 
 public class IAService
 {
     private readonly PredictionEnginePool<ModelInput, ModelOutput> _model;
-    private readonly SmartSearchService _smartSearchService;
+ 
 
-    public IAService(PredictionEnginePool<ModelInput, ModelOutput> model , SmartSearchService smartSearchService)
+    public IAService(PredictionEnginePool<ModelInput, ModelOutput> model)
     {
         _model = model;
-        _smartSearchService = smartSearchService;
+      
     }
 
     public ModelOutput Predict(string text)
     {
-        string textModificado = _smartSearchService.ClearText(text);
+        string textModificado = TextCleaner.Clear(text);
 
         ModelInput input = new ModelInput()
         {
@@ -29,5 +32,4 @@ public class IAService
 
         return ouput;
     }
-
 }
