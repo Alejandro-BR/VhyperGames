@@ -46,10 +46,14 @@ function DetailsCarousel({ imgGames }) {
       <section className={classes.carousel}>
         {/* Imagen */}
         <article className={classes.img}>
-          <img
-            src={`https://localhost:7207/${imgSource[currentIndex].imageUrl}`}
-            alt={imgSource[currentIndex].altText}
-          />
+          {imgSource && imgSource.length > 0 ? (
+            <img
+              src={`https://localhost:7207/${imgSource[currentIndex]?.imageUrl}`}
+              alt={imgSource[currentIndex]?.altText || "Imagen no disponible"}
+            />
+          ) : (
+            <p>No hay imágenes disponibles</p>
+          )}
         </article>
       </section>
 
