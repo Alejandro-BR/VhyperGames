@@ -1,13 +1,8 @@
 import { useState } from "react";
 import classes from "./DetailsCarousel.module.css";
 
-function DetailsCarousel() {
-  const imgSource = [
-    { src: "/img/banner-figma.png", alt: "Banner de Figma" },
-    { src: "/img/dragon-ball.png", alt: "Imagen de Dragon Ball" },
-    { src: "/img/minecraft.png", alt: "Imagen de Minecraft" },
-    { src: "/img/witcher3.png", alt: "Imagen de The Witcher 3" },
-  ];
+function DetailsCarousel(imgGames) {
+  const imgSource = imgGames;
 
   // Estado para la imagen actual
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -27,7 +22,10 @@ function DetailsCarousel() {
   return (
     <div className={classes.container}>
       {/* Flecha izquierda */}
-      <div className={`${classes.arrow} ${classes.leftArrow}`} onClick={goToPrevious}>
+      <div
+        className={`${classes.arrow} ${classes.leftArrow}`}
+        onClick={goToPrevious}
+      >
         <svg
           width="30"
           height="30"
@@ -54,7 +52,10 @@ function DetailsCarousel() {
       </section>
 
       {/* Flecha derecha */}
-      <div className={`${classes.arrow} ${classes.rightArrow}`} onClick={goToNext}>
+      <div
+        className={`${classes.arrow} ${classes.rightArrow}`}
+        onClick={goToNext}
+      >
         <svg
           width="30"
           height="30"
