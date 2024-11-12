@@ -4,13 +4,16 @@ import GamePrice from "../components/detailsViewComponents/gamePriceComponent/Ga
 import classes from "../styles/DetailsView.module.css";
 
 function ViewDetails() {
+
+  const id = 1;
+
   return (
     <>
       <div className={`${classes["view-details"]} generalContainer`}>
         <div
           className={`${classes["view-details__main-section"]} ${classes.box}`}
         >
-          <GameData />
+          <GameData id={id} />
         </div>
         <div className={`${classes["view-details__price-newreview"]} ${classes.box}`}>
           <GamePrice />

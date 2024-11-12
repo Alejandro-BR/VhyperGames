@@ -7,8 +7,10 @@
 .gamedata__description {
   text-align: left; 
   font-size: 20px;
+  width: 90%;
 }
 
 .gamedata__sinopsis{
   text-align: justify;
+  width: 90%;
 }

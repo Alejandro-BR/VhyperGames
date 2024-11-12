@@ -6,25 +6,20 @@ import DetailsCarousel from "../detailsCarousel-estaVezEsPersonal/DetailsCarouse
 import classes from "./GameData.module.css"
 
 function GameData({ id }) {
-  // Id estático para propósitos de este ejemplo
-  id = 1;
 
-  // Estado inicial para almacenar el objeto de juego
   const [juego, setJuego] = useState(null);
 
-  // Función para obtener los datos del juego
   const fetchJuego = async (id) => {
     try {
       const response = await fetch(`${DETAILS_VIEW_GAME_DATA}?id=${id}`);
       if (!response.ok) throw new Error("Error en la respuesta de la API");
       const data = await response.json();
-      setJuego(data);  // Almacenar el objeto recibido en el estado
+      setJuego(data); 
     } catch (error) {
       console.error("Error al obtener los datos:", error);
     }
   };
 
-  // Llamar a fetchJuego cuando el componente se monte
   useEffect(() => {
     fetchJuego(id);
   }, [id]);
