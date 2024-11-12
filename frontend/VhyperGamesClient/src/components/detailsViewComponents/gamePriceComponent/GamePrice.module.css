@@ -1,0 +1,39 @@
+.price-Card {
+  width: 200px;
+  background-color: #1a1a2e;
+  color: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.productCode {
+  font-size: 1em;
+  color: #a0a0a0;
+}
+
+.price {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+
+.inStock {
+  font-size: 1em;
+  color: #00ff00;
+}
+
+.outOfStock {
+  color: #ff0000;
+}
+
+.ratingIconRed {
+  color: #D24042; 
+}
+
+.ratingIconYellow {
+  color: #D2BF40; 
+}
+
+.ratingIconGreen {
+  color: #13C345;
+}

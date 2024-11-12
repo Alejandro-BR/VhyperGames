@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from "react";
 import classes from './GamePrice.module.css';
 import { DETAILS_VIEW_GAME_PRICE } from "../../../config";
+import Rating from '../../gameCardComponent/Rating';
 
 const ProductCard = ({ id }) => {
   const [productPriceData, setProductPriceData] = useState({
     price: 0,
     avgRating: 0,
     stock: 0,
-    quantity: 0
+    quantity: 0,
   });
-  
+
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -20,7 +21,7 @@ const ProductCard = ({ id }) => {
       return;
     }
 
-    async function fetchPriceData() {
+    const fetchPriceData = async () => {
       setLoading(true);
       setError(null);
       try {
@@ -32,44 +33,39 @@ const ProductCard = ({ id }) => {
 
         setProductPriceData({
           price: data.price,
-          avgRating: data.avgRating,
+          avgRating: data.avgRating || 0, // Asegúrate de que avgRating venga en la respuesta
           stock: data.stock,
-          quantity: data.quantity || 0
+          quantity: data.quantity || 0,
         });
       } catch (error) {
         setError(error.message);
       } finally {
         setLoading(false);
       }
-    }
+    };
 
     fetchPriceData();
-
-    // Cleanup en caso de que el componente sea desmontado antes de que termine la carga
-    return () => {
-      setLoading(false);
-      setError(null);
-    };
-  }, [id]); // Dependencia en el id para que se recargue cuando cambie
+  }, [id]);
 
   if (loading) return <div>Cargando...</div>;
   if (error) return <div>Error: {error}</div>;
 
   const handleQuantityChange = (operation) => {
-    setProductPriceData(prevState => {
-      const newQuantity = operation === "increase" 
-        ? Math.min(prevState.quantity + 1, productPriceData.stock) 
+    setProductPriceData((prevState) => {
+      const newQuantity = operation === "increase"
+        ? Math.min(prevState.quantity + 1, prevState.stock)
         : Math.max(prevState.quantity - 1, 0);
-      
+
       return { ...prevState, quantity: newQuantity };
     });
   };
 
-  return(
+  return (
     <div className={classes.priceCard}>
       <div className={classes.productCode}>
         <p>Código: PROD-{id}</p>
       </div>
+
       <div className={classes.price}>
         <p>{productPriceData.price.toFixed(2)} €</p>
       </div>
@@ -83,14 +79,7 @@ const ProductCard = ({ id }) => {
       </div>
 
       <div className={classes.rating}>
-        {Array.from({ length: 5 }, (_, index) => (
-          <span 
-            key={index} 
-            className={productPriceData.avgRating > index ? classes.ratingIconActive : classes.ratingIcon}
-          >
-            🚀
-          </span>
-        ))}
+        <Rating avgRating={productPriceData.avgRating} />
       </div>
 
       <div className={classes.quantityControls}>
@@ -102,6 +91,6 @@ const ProductCard = ({ id }) => {
       <button className={classes.addToCart}>Añadir al Carrito</button>
     </div>
   );
-}
+};
 
 export default ProductCard;
