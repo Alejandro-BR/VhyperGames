@@ -1,8 +1,10 @@
 import { useState } from "react";
 import classes from "./DetailsCarousel.module.css";
 
-function DetailsCarousel(imgGames) {
+function DetailsCarousel({ imgGames }) {
   const imgSource = imgGames;
+
+  console.log(imgSource)
 
   // Estado para la imagen actual
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -45,8 +47,8 @@ function DetailsCarousel(imgGames) {
         {/* Imagen */}
         <article className={classes.img}>
           <img
-            src={imgSource[currentIndex].src}
-            alt={imgSource[currentIndex].alt}
+            src={`https://localhost:7207/${imgSource[currentIndex].imageUrl}`}
+            alt={imgSource[currentIndex].altText}
           />
         </article>
       </section>

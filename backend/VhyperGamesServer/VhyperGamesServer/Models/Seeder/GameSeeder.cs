@@ -45,31 +45,31 @@ public class GameSeeder
 
                         new ImageGame
                         {
-                            ImageUrl = "images/TheWitcher3/1.webp",
+                            ImageUrl = "images/TheWitcher3/1.png",
                             AltText = "Imagen 1 de The Witcher III"
                         },
 
                         new ImageGame
                         {
-                            ImageUrl = "images/TheWitcher3/2.webp",
+                            ImageUrl = "images/TheWitcher3/2.png",
                             AltText = "Imagen 2 de The Witcher III"
                         },
 
                         new ImageGame
                         {
-                            ImageUrl = "images/TheWitcher3/3.webp",
+                            ImageUrl = "images/TheWitcher3/3.png",
                             AltText = "Imagen 3 de The Witcher III"
                         },
 
                         new ImageGame
                         {
-                            ImageUrl = "images/TheWitcher3/4.webp",
+                            ImageUrl = "images/TheWitcher3/4.png",
                             AltText = "Imagen 4 de The Witcher III"
                         },
 
                         new ImageGame
                         {
-                            ImageUrl = "images/TheWitcher3/5.webp",
+                            ImageUrl = "images/TheWitcher3/5.png",
                             AltText = "Imagen 5 de The Witcher III"
                         }
 
