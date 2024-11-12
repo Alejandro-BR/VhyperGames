@@ -1,11 +1,6 @@
 import Footer from "../components/footerComponent/Footer";
 import GameData from "../components/detailsViewComponents/gameDataComponent/GameData";
-<<<<<<< HEAD
 import classes from "../styles/DetailsView.module.css";
-=======
-import GamePrice from "../components/detailsViewComponents/gamePriceComponent/gamePrice";
-import classes from "../styles/ViewDetails.module.css";
->>>>>>> jmolme
 
 function ViewDetails() {
   return (
