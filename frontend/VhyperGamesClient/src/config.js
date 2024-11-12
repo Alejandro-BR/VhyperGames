@@ -7,3 +7,4 @@ export const CATALOG_SALES = `${API_BASE_URL}catalog/sales`;
 export const CATALOG_NEW_RELEASES = `${API_BASE_URL}catalog/new-releases`;
 export const CATALOG_FILTER = `${API_BASE_URL}catalog/catalog-search`;
 export const DETAILS_VIEW_GAME_DATA = `${API_BASE_URL}detailsview/game-data`;
+export const DETAILS_VIEW_GAME_PRICE = `${API_BASE_URL}detailsview/game-price`;
