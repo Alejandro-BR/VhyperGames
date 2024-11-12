@@ -1,5 +1,6 @@
 import Footer from "../components/footerComponent/Footer";
 import GameData from "../components/detailsViewComponents/gameDataComponent/GameData";
+import GamePrice from "../components/detailsViewComponents/gamePriceComponent/GamePrice"
 import classes from "../styles/DetailsView.module.css";
 
 function ViewDetails() {
