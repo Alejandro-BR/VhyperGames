@@ -27,6 +27,13 @@ public class GameSeeder
                     Price = 1800,
                     Stock = 100,
                     GameRequirementsId = 2,
+                    Sinopsis = "Uno de los RPGs más aclamados de todos los tiempos, ahora listo para una nueva generación.\n\n" +
+                    "Eres Geralt de Rivia, cazador de monstruos. En un continente devastado por la guerra e infestado de criaturas, " +
+                    "tu misión es encontrar a Ciri, la niña de la profecía, un arma viviente que puede alterar el mundo tal y como lo conocemos.\n\n" +
+                    "La Complete Edition incluye el juego base, que ofrece una descomunal aventura en un mundo abierto de más de 100 horas de duración, " +
+                    "además de sus dos enormes expansiones de historia: Hearts of Stone y Blood and Wine, ¡con más de 50 horas adicionales de juego!\n\n" +
+                    "También incluye nuevo contenido publicado para el juego, junto a nuevos añadidos: objetos inspirados en la serie de Netflix The Witcher como el modo foto, " +
+                    "espadas, armaduras y atuendos alternativos, ¡y muchas cosas más!",
                     ImageGames = new List<ImageGame>
                     {
                         new ImageGame
@@ -35,6 +42,7 @@ public class GameSeeder
                             AltText = "Imagen 1 de The Witcher III"
                         }
                     }
+
                 },
 
                 new Game {
@@ -47,6 +55,7 @@ public class GameSeeder
                     Price = 3000,
                     Stock = 100,
                     GameRequirementsId = 1,
+
                     ImageGames = new List<ImageGame>
                     {
                         new ImageGame
@@ -55,6 +64,7 @@ public class GameSeeder
                             AltText = "Imagen 1 de Skyrim"
                         }
                     }
+
                 },
 
                 new Game {

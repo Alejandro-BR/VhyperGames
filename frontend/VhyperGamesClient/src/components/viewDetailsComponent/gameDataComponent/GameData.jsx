@@ -29,7 +29,7 @@ function GameData({ id }) {
   }, [id]);
 
   return (
-    <>
+    <div className={classes.gamedata}>
 
       <Title text={juego ? juego.title : "Cargando..."} size="3em" color="#fff" align="left" variant="tituloJuego" />
       {juego && (
@@ -38,7 +38,7 @@ function GameData({ id }) {
       {juego && (
         <p className={classes.gamedata__sinopsis}>{juego.sinopsis}</p>
       )}
-    </>
+    </div>
   );
 }
 
