@@ -2,9 +2,11 @@ import { useState, useEffect } from "react";
 import { DETAILS_VIEW_GAME_DATA } from "../../../config";
 import Title from "../../titleComponent/Title";
 
+import classes from "./GameData.module.css"
+
 function GameData({ id }) {
   // Id estático para propósitos de este ejemplo
-  id = 2;
+  id = 1;
 
   // Estado inicial para almacenar el objeto de juego
   const [juego, setJuego] = useState(null);
@@ -31,7 +33,10 @@ function GameData({ id }) {
 
       <Title text={juego ? juego.title : "Cargando..."} size="3em" color="#fff" align="left" variant="tituloJuego" />
       {juego && (
-        <p style={{ color: "#fff", textAlign: "left" }}>{juego.description}</p>
+        <p className={classes.gamedata__description}>{juego.description}</p>
+      )}
+      {juego && (
+        <p className={classes.gamedata__sinopsis}>{juego.sinopsis}</p>
       )}
     </>
   );

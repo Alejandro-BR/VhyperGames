@@ -1,0 +1,11 @@
+.gamedata {
+
+}
+
+.gamedata__description {
+  text-align: left; 
+}
+
+.gamedata__sinopsis{
+  text-align: justify;
+}
