@@ -117,11 +117,12 @@ public class Program
     {
         using var scope = serviceProvider.CreateScope();
         var dbContext = scope.ServiceProvider.GetService<MyDbContext>();
+        var iaService = scope.ServiceProvider.GetService<IAService>();
 
         if (dbContext.Database.EnsureCreated())
         {
-            var seeder = new Seeder(dbContext);
-            seeder.Seed();
+            var seeder = new SeedManager(dbContext, iaService);
+            seeder.SeedAll();
         }
     }
 }
