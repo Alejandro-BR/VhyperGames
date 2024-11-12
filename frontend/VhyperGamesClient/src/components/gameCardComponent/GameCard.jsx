@@ -1,43 +1,41 @@
 import { useState, useEffect } from "react";
-import clasess from "./GameCard.module.css";
+import { Link } from "react-router-dom"; 
+import classes from "./GameCard.module.css";
 import { BASE_URL } from "../../config";
 import Rating from "./rating";
 
-function GameCard({ title, stock, price, imgUrl, avgRating  }) {
-
-  const [isStock, setIsStock] = useState()
-  
-  function comprobarStock() {
-    if (stock > 0) {
-      setIsStock(true)
-    } else {
-      setIsStock(false)
-    }
-  }
+function GameCard({ id, title, stock, price, imgUrl, avgRating }) {
+  const [isStock, setIsStock] = useState(false);
 
   useEffect(() => {
-    comprobarStock();
-  }, []);
+    if (stock > 0) {
+      setIsStock(true);
+    } else {
+      setIsStock(false);
+    }
+  }, [stock]); 
 
   function precio() {
     return (price / 100).toFixed(2);
   }
 
   return (
-    <>
-      <div className={clasess.container}>
-        <img src={`${BASE_URL}${imgUrl}`} className={clasess.gameCardImg} />
-        <div className={clasess.cardTitle}>
+    <Link to={`/details/${id}`}> 
+      <div className={classes.container}>
+        <img src={`${BASE_URL}${imgUrl}`} alt={title} className={classes.gameCardImg} />
+        <div className={classes.cardTitle}>
           <h2>{title}</h2>
-          <Rating avgRating={avgRating}/>
+          <Rating avgRating={avgRating} />
         </div>
-        <div className={clasess.cardPrice}>
-          <p>{precio()}  €</p>
-          <p className={isStock ? clasess.stock : clasess.noStock}>{isStock ? "EN STOCK" : "SIN STOCK"}</p>
+        <div className={classes.cardPrice}>
+          <p>{precio()} €</p>
+          <p className={isStock ? classes.stock : classes.noStock}>
+            {isStock ? "EN STOCK" : "SIN STOCK"}
+          </p>
         </div>
       </div>
-    </>
-  )
+    </Link>
+  );
 }
 
 export default GameCard;
