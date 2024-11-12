@@ -49,10 +49,10 @@ public class DetailsViewService
 
         if (game == null) { return null; }
 
-        double avgRating = CalculatePositiveRatingPercentage(game.Reviews);
+        int AvgRating = CalculateRating(game.Reviews);
 
         GamePriceDto data = _viewDetailsMapper.GamePriceToDto(game);
-        data.AvgRating = avgRating;
+        data.AvgRating = AvgRating;
 
         data.Quantity = quantity;
 
@@ -126,7 +126,7 @@ public class DetailsViewService
     {
         List<Review> reviews = await _unitOfWork.ReviewRepository.GetAllReviewsOrderByDateByGameId(gameId);
 
-        double newAvgRating = CalculatePositiveRatingPercentage(reviews);
+        int newAvgRating = CalculateRating(reviews);
 
         var game = await _unitOfWork.GameRepository.GetByIdAsync(gameId);
         if (game != null)
@@ -137,18 +137,15 @@ public class DetailsViewService
         }
     }
 
-    private double CalculatePositiveRatingPercentage(List<Review> reviews)
+    private int CalculateRating(List<Review> reviews)
     {
         if (reviews == null || reviews.Count == 0)
         {
             return -1; 
         }
 
-        int positiveCount = reviews.Count(r => r.Rating >= 0);
-        int totalReviews = reviews.Count;
+        int positiveCount = reviews.Sum(r => r.Rating);
 
-        double positivePercentage = (double)positiveCount / totalReviews * 100;
-
-        return Math.Round(positivePercentage, 1);
+        return positiveCount;
     }
 }
