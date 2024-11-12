@@ -36,11 +36,43 @@ public class GameSeeder
                     AvgRating = -1,
                     ImageGames = new List<ImageGame>
                     {
+
                         new ImageGame
                         {
                             ImageUrl = "images/TheWitcher3/thewitcher3.png",
+                            AltText = "Banner de The Witcher III"
+                        },
+
+                        new ImageGame
+                        {
+                            ImageUrl = "images/TheWitcher3/1.webp",
                             AltText = "Imagen 1 de The Witcher III"
+                        },
+
+                        new ImageGame
+                        {
+                            ImageUrl = "images/TheWitcher3/2.webp",
+                            AltText = "Imagen 2 de The Witcher III"
+                        },
+
+                        new ImageGame
+                        {
+                            ImageUrl = "images/TheWitcher3/3.webp",
+                            AltText = "Imagen 3 de The Witcher III"
+                        },
+
+                        new ImageGame
+                        {
+                            ImageUrl = "images/TheWitcher3/4.webp",
+                            AltText = "Imagen 4 de The Witcher III"
+                        },
+
+                        new ImageGame
+                        {
+                            ImageUrl = "images/TheWitcher3/5.webp",
+                            AltText = "Imagen 5 de The Witcher III"
                         }
+
                     }
 
                 },
@@ -112,7 +144,7 @@ public class GameSeeder
                     }
                 },
 
-                new Game {   
+                new Game {
                     Title = "Frostpunk 2",
                     Description = "Lidera una sociedad en el borde de la extinción en un mundo helado, tomando decisiones duras para asegurar la supervivencia de tu gente.",
                     Genre = Genre.Estrategia,
