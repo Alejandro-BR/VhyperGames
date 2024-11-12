@@ -16,7 +16,7 @@ function ViewDetails() {
           <GameData id={id} />
         </div>
         <div className={`${classes["view-details__price-newreview"]} ${classes.box}`}>
-          <GamePrice />
+          <GamePrice id={id}/>
         </div>
         <div className={`${classes["view-details__system-requirements"]} ${classes.box}`}>
 
