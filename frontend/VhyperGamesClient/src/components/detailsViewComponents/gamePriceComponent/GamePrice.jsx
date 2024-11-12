@@ -33,7 +33,7 @@ const ProductCard = ({ id }) => {
 
         setProductPriceData({
           price: data.price,
-          avgRating: data.avgRating || 0, // Asegúrate de que avgRating venga en la respuesta
+          avgRating: data.avgRating, // Asegúrate de que avgRating venga en la respuesta
           stock: data.stock,
           quantity: data.quantity || 0,
         });
