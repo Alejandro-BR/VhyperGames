@@ -133,8 +133,7 @@ public class MyDbContext : DbContext
                 .IsRequired();
 
             entity.Property(e => e.AvgRating)
-                .HasColumnName("avg_rating")
-                .IsRequired();
+                .HasColumnName("avg_rating");
 
         });
 

@@ -33,7 +33,7 @@ public class GameSeeder
                     "además de sus dos enormes expansiones de historia: Hearts of Stone y Blood and Wine, ¡con más de 50 horas adicionales de juego!\n\n" +
                     "También incluye nuevo contenido publicado para el juego, junto a nuevos añadidos: objetos inspirados en la serie de Netflix The Witcher como el modo foto, " +
                     "espadas, armaduras y atuendos alternativos, ¡y muchas cosas más!",
-                    AvgRating = -1,
+                    AvgRating = null,
                     ImageGames = new List<ImageGame>
                     {
 
@@ -51,25 +51,25 @@ public class GameSeeder
 
                         new ImageGame
                         {
-                            ImageUrl = "images/TheWitcher3/2.png",
+                            ImageUrl = "images/TheWitcher3/2.jpg",
                             AltText = "Imagen 2 de The Witcher III"
                         },
 
                         new ImageGame
                         {
-                            ImageUrl = "images/TheWitcher3/3.png",
+                            ImageUrl = "images/TheWitcher3/3.jpg",
                             AltText = "Imagen 3 de The Witcher III"
                         },
 
                         new ImageGame
                         {
-                            ImageUrl = "images/TheWitcher3/4.png",
+                            ImageUrl = "images/TheWitcher3/4.jpg",
                             AltText = "Imagen 4 de The Witcher III"
                         },
 
                         new ImageGame
                         {
-                            ImageUrl = "images/TheWitcher3/5.png",
+                            ImageUrl = "images/TheWitcher3/5.jpg",
                             AltText = "Imagen 5 de The Witcher III"
                         }
 
@@ -87,7 +87,7 @@ public class GameSeeder
                     Stock = 100,
                     GameRequirementsId = 1,
                     Sinopsis = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-                    AvgRating = -1,
+                    AvgRating = null,
 
                     ImageGames = new List<ImageGame>
                     {
@@ -110,7 +110,7 @@ public class GameSeeder
                     Stock = 100,
                     GameRequirementsId = 2,
                     Sinopsis = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-                    AvgRating = -1,
+                    AvgRating = null,
 
                     ImageGames = new List<ImageGame>
                     {
@@ -132,7 +132,7 @@ public class GameSeeder
                     Stock = 100,
                     GameRequirementsId = 3,
                     Sinopsis = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-                    AvgRating = -1,
+                    AvgRating = null,
 
                     ImageGames = new List<ImageGame>
                     {
@@ -154,7 +154,7 @@ public class GameSeeder
                     Stock = 100,
                     GameRequirementsId = 3,
                     Sinopsis = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-                    AvgRating = -1,
+                    AvgRating = null,
 
                     ImageGames = new List<ImageGame>
                     {
@@ -176,7 +176,7 @@ public class GameSeeder
                     Stock = 0,
                     GameRequirementsId = 1,
                     Sinopsis = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-                    AvgRating = -1,
+                    AvgRating = null,
 
                     ImageGames = new List<ImageGame>
                     {
@@ -198,7 +198,7 @@ public class GameSeeder
                     Stock = 100,
                     GameRequirementsId = 2,
                     Sinopsis = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-                    AvgRating = -1,
+                    AvgRating = null,
 
                     ImageGames = new List<ImageGame>
                     {
@@ -220,7 +220,7 @@ public class GameSeeder
                     Stock = 100,
                     GameRequirementsId = 1,
                     Sinopsis = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-                    AvgRating = -1,
+                    AvgRating = null,
 
                     ImageGames = new List<ImageGame>
                     {
@@ -242,7 +242,7 @@ public class GameSeeder
                     Stock = 100,
                     GameRequirementsId = 3,
                     Sinopsis = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-                    AvgRating = -1,
+                    AvgRating = null,
 
                     ImageGames = new List<ImageGame>
                     {
@@ -264,7 +264,7 @@ public class GameSeeder
                     Stock = 100,
                     GameRequirementsId = 2,
                     Sinopsis = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-                    AvgRating = -1,
+                    AvgRating = null,
 
                     ImageGames = new List<ImageGame>
                     {
@@ -286,7 +286,7 @@ public class GameSeeder
                     Stock = 100,
                     GameRequirementsId = 1,
                     Sinopsis = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-                    AvgRating = -1,
+                    AvgRating = null,
 
                     ImageGames = new List<ImageGame>
                     {
@@ -308,7 +308,7 @@ public class GameSeeder
                     Stock = 100,
                     GameRequirementsId = 1,
                     Sinopsis = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-                    AvgRating = -1,
+                    AvgRating = null,
 
                     ImageGames = new List<ImageGame>
                     {
@@ -330,7 +330,7 @@ public class GameSeeder
                     Stock = 100,
                     GameRequirementsId = 2,
                     Sinopsis = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-                    AvgRating = -1,
+                    AvgRating = null,
 
                     ImageGames = new List<ImageGame>
                     {
@@ -352,7 +352,7 @@ public class GameSeeder
                     Stock = 10,
                     GameRequirementsId = 2,
                     Sinopsis = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-                    AvgRating = -1,
+                    AvgRating = null,
 
                     ImageGames = new List<ImageGame>
                     {
@@ -374,7 +374,7 @@ public class GameSeeder
                     Stock = 10,
                     GameRequirementsId = 2,
                     Sinopsis = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-                    AvgRating = -1,
+                    AvgRating = null,
 
                     ImageGames = new List<ImageGame>
                     {
@@ -396,7 +396,7 @@ public class GameSeeder
                     Stock = 999999,
                     GameRequirementsId = 1,
                     Sinopsis = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-                    AvgRating = -1,
+                    AvgRating = null,
 
                     ImageGames = new List<ImageGame>
                     {
@@ -418,7 +418,7 @@ public class GameSeeder
                     Stock = 999999,
                     GameRequirementsId = 2,
                     Sinopsis = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-                    AvgRating = -1,
+                    AvgRating = null,
 
                     ImageGames = new List<ImageGame>
                     {
@@ -440,7 +440,7 @@ public class GameSeeder
                     Stock = 999999,
                     GameRequirementsId = 2,
                     Sinopsis = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-                    AvgRating = -1,
+                    AvgRating = null,
 
                     ImageGames = new List<ImageGame>
                     {
@@ -462,7 +462,7 @@ public class GameSeeder
                     Stock = 99,
                     GameRequirementsId = 2,
                     Sinopsis = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-                    AvgRating = -1,
+                    AvgRating = null,
 
                     ImageGames = new List<ImageGame>
                     {
@@ -484,7 +484,7 @@ public class GameSeeder
                     Stock = 10,
                     GameRequirementsId = 2,
                     Sinopsis = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-                    AvgRating = -1,
+                    AvgRating = null,
 
                     ImageGames = new List<ImageGame>
                     {
@@ -506,7 +506,7 @@ public class GameSeeder
                     Stock = 16,
                     GameRequirementsId = 2,
                     Sinopsis = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-                    AvgRating = -1,
+                    AvgRating = null,
 
                     ImageGames = new List<ImageGame>
                     {
@@ -528,7 +528,7 @@ public class GameSeeder
                     Stock = 100,
                     GameRequirementsId = 2,
                     Sinopsis = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-                    AvgRating = -1,
+                    AvgRating = null,
 
                     ImageGames = new List<ImageGame>
                     {
@@ -550,7 +550,7 @@ public class GameSeeder
                     Stock = 150,
                     GameRequirementsId = 3,
                     Sinopsis = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-                    AvgRating = -1,
+                    AvgRating = null,
 
                     ImageGames = new List<ImageGame>
                     {
@@ -572,7 +572,7 @@ public class GameSeeder
                     Stock = 200,
                     GameRequirementsId = 1,
                     Sinopsis = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-                    AvgRating = -1,
+                    AvgRating = null,
 
                     ImageGames = new List<ImageGame>
                     {
@@ -594,7 +594,7 @@ public class GameSeeder
                     Stock = 0,
                     GameRequirementsId = 1,
                     Sinopsis = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-                    AvgRating = -1,
+                    AvgRating = null,
 
                     ImageGames = new List<ImageGame>
                     {
@@ -616,7 +616,7 @@ public class GameSeeder
                     Stock = 80,
                     GameRequirementsId = 2,
                     Sinopsis = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-                    AvgRating = -1,
+                    AvgRating = null,
 
                     ImageGames = new List<ImageGame>
                     {
@@ -638,7 +638,7 @@ public class GameSeeder
                     Stock = 220,
                     GameRequirementsId = 1,
                     Sinopsis = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-                    AvgRating = -1,
+                    AvgRating = null,
 
                     ImageGames = new List<ImageGame>
                     {
@@ -660,7 +660,7 @@ public class GameSeeder
                     Stock = 110,
                     GameRequirementsId = 3,
                     Sinopsis = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-                    AvgRating = -1,
+                    AvgRating = null,
 
                     ImageGames = new List<ImageGame>
                     {
@@ -682,7 +682,7 @@ public class GameSeeder
                     Stock = 180,
                     GameRequirementsId = 2,
                     Sinopsis = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-                    AvgRating = -1,
+                    AvgRating = null,
 
                     ImageGames = new List<ImageGame>
                     {
@@ -704,7 +704,7 @@ public class GameSeeder
                     Stock = 500,
                     GameRequirementsId = 1,
                     Sinopsis = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-                    AvgRating = -1,
+                    AvgRating = null,
 
                     ImageGames = new List<ImageGame>
                     {
@@ -726,7 +726,7 @@ public class GameSeeder
                     Stock = 150,
                     GameRequirementsId = 3,
                     Sinopsis = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-                    AvgRating = -1,
+                    AvgRating = null,
 
                     ImageGames = new List<ImageGame>
                     {
@@ -748,7 +748,7 @@ public class GameSeeder
                     Stock = 200,
                     GameRequirementsId = 2,
                     Sinopsis = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-                    AvgRating = -1,
+                    AvgRating = null,
 
                     ImageGames = new List<ImageGame>
                     {
@@ -770,7 +770,7 @@ public class GameSeeder
                     Stock = 120,
                     GameRequirementsId = 3,
                     Sinopsis = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-                    AvgRating = -1,
+                    AvgRating = null,
 
                     ImageGames = new List<ImageGame>
                     {

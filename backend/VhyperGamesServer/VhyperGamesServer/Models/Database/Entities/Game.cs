@@ -15,7 +15,7 @@ public class Game
     public DateTime ReleaseDate {  get; set; }
     public int Price { get; set; }
     public int Stock {  get; set; }
-    public double AvgRating { get; set; }
+    public int? AvgRating { get; set; }
     public List<ImageGame> ImageGames { get; set; }
     [JsonIgnore]
     public GameRequirements GameRequirements { get; set; }
@@ -24,7 +24,7 @@ public class Game
 
     public Game()
     {
-        AvgRating = -1;
+        AvgRating = null;
         ImageGames = new List<ImageGame>();
         Reviews = new List<Review>();
     }

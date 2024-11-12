@@ -12,6 +12,6 @@ public class GameCardDto
 
     public string ImageUrl { get; set; }
 
-    public double AvgRating { get; set; }
+    public int? AvgRating { get; set; }
 
 }

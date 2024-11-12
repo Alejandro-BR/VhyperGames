@@ -6,7 +6,7 @@ public class GamePriceDto
 
     public int Price { get; set; }
 
-    public double AvgRating { get; set; }
+    public int? AvgRating { get; set; }
 
     public int Stock { get; set; }
 
