@@ -22,7 +22,7 @@ public class DetailsViewService
 
     public async Task<GameDataDto> GetGameData(int id)
     {
-        Game game = await _unitOfWork.GameRepository.GetByIdAsync(id);
+        Game game = await _unitOfWork.GameRepository.GetByIdAsync(id, includeImages: true);
 
         if (game == null) { return null; }
 
@@ -49,7 +49,10 @@ public class DetailsViewService
 
         if (game == null) { return null; }
 
+        double avgRating = CalculatePositiveRatingPercentage(game.Reviews);
+
         GamePriceDto data = _viewDetailsMapper.GamePriceToDto(game);
+        data.AvgRating = avgRating;
 
         data.Quantity = quantity;
 
@@ -93,7 +96,7 @@ public class DetailsViewService
 
         if (await _unitOfWork.ReviewRepository.IsReviewed(newReviewDto.GameId, newReviewDto.UserId) != null)
         {
-            throw new InvalidOperationException("Ya enviaste una reseña para este juego."); ;
+            throw new InvalidOperationException("Ya enviaste una reseña para este juego."); 
         }
 
         ModelOutput modelOutput = _iaService.Predict(newReviewDto.ReviewText);
@@ -113,7 +116,39 @@ public class DetailsViewService
 
         bool respuesta = await _unitOfWork.SaveAsync();
 
+        //Recalcular el rating medio cuando se añade una review nueva
+        await UpdateGameAverageRating(game.Id);
+
         return _viewDetailsMapper.ReviewToDto(savedReview);
     }
 
+    public async Task UpdateGameAverageRating(int gameId)
+    {
+        List<Review> reviews = await _unitOfWork.ReviewRepository.GetAllReviewsOrderByDateByGameId(gameId);
+
+        double newAvgRating = CalculatePositiveRatingPercentage(reviews);
+
+        var game = await _unitOfWork.GameRepository.GetByIdAsync(gameId);
+        if (game != null)
+        {
+            game.AvgRating = newAvgRating;
+            _unitOfWork.GameRepository.Update(game);
+            await _unitOfWork.SaveAsync();
+        }
+    }
+
+    private double CalculatePositiveRatingPercentage(List<Review> reviews)
+    {
+        if (reviews == null || reviews.Count == 0)
+        {
+            return -1; 
+        }
+
+        int positiveCount = reviews.Count(r => r.Rating >= 0);
+        int totalReviews = reviews.Count;
+
+        double positivePercentage = (double)positiveCount / totalReviews * 100;
+
+        return Math.Round(positivePercentage, 1);
+    }
 }
