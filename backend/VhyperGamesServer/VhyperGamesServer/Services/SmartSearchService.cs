@@ -1,8 +1,7 @@
 ﻿using F23.StringSimilarity;
 using F23.StringSimilarity.Interfaces;
-using System.Globalization;
-using System.Text;
 using VhyperGamesServer.Models.Database.Repositories;
+using VhyperGamesServer.Utilities;
 
 namespace VhyperGamesServer.Services;
 
@@ -39,14 +38,14 @@ public class SmartSearchService
         else
         {
             // Limpiamos la query y la separamos por espacios
-            string[] queryKeys = GetKeys(ClearText(query));
+            string[] queryKeys = GetKeys(TextCleaner.Clear(query));
             // Aquí guardaremos los items que coincidan
             List<string> matches = new List<string>();
 
             foreach (string item in GameTitles)
             {
                 // Limpiamos el item y lo separamos por espacios
-                string[] itemKeys = GetKeys(ClearText(item));
+                string[] itemKeys = GetKeys(TextCleaner.Clear(item));
 
                 // Si coincide alguna de las palabras de item con las de query
                 // entonces añadimos item a la lista de coincidencias
@@ -93,30 +92,5 @@ public class SmartSearchService
     private string[] GetKeys(string query)
     {
         return query.Split(' ', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
-    }
-
-    // Normaliza el texto quitándole las tildes y pasándolo a minúsculas
-    public string ClearText(string text)
-    {
-        return RemoveDiacritics(text.ToLower());
-    }
-
-    // Quita las tildes a un texto
-    private string RemoveDiacritics(string text)
-    {
-        string normalizedString = text.Normalize(NormalizationForm.FormD);
-        StringBuilder stringBuilder = new StringBuilder(normalizedString.Length);
-
-        for (int i = 0; i < normalizedString.Length; i++)
-        {
-            char c = normalizedString[i];
-            UnicodeCategory unicodeCategory = CharUnicodeInfo.GetUnicodeCategory(c);
-            if (unicodeCategory != UnicodeCategory.NonSpacingMark)
-            {
-                stringBuilder.Append(c);
-            }
-        }
-
-        return stringBuilder.ToString().Normalize(NormalizationForm.FormC);
     }
 }

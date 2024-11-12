@@ -9,7 +9,7 @@ using Microsoft.IdentityModel.Tokens;
 using VhyperGamesServer.Models.Database.Entities;
 using VhyperGamesServer.Models.Database.Repositories;
 using VhyperGamesServer.Models.Dtos;
-using VhyperGamesServer.Resources;
+using VhyperGamesServer.Utilities;
 using RegisterRequest = VhyperGamesServer.Models.Dtos.RegisterRequest;
 
 namespace VhyperGamesServer.Controllers;

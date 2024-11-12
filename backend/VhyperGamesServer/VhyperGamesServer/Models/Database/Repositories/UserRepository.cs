@@ -2,7 +2,7 @@
 using VhyperGamesServer.Models.Database;
 using VhyperGamesServer.Models.Database.Entities;
 using VhyperGamesServer.Models.Dtos;
-using VhyperGamesServer.Resources;
+using VhyperGamesServer.Utilities;
 
 namespace VhyperGamesServer.Models.Database.Repositories;
 
