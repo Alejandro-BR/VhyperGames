@@ -1,0 +1,47 @@
+.container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 360px;
+    width: 540px;
+}
+
+.carousel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 400px;
+    max-width: 100%;
+    position: relative;
+}
+
+.carousel .img {
+    max-width: 100%;
+    position: relative;
+}
+
+.carousel .img img {
+    max-width: 100%;
+    display: block;
+}
+
+.arrow {
+    display: flex;
+    border-radius: 50%;
+    cursor: pointer;
+    position: absolute;
+    z-index: 10;
+    background-color: rgba(41, 41, 41, 0.836);
+}
+
+.leftArrow {
+    left: 10px;
+}
+
+.rightArrow {
+    right: 10px;
+}
+
+.rotation {
+    transform: rotate(180deg);
+}

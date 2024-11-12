@@ -3,7 +3,7 @@ import Home from './pages/Home';
 import Catalogo from './pages/Catalogo';
 import Error from './pages/Error';
 import SobreNosotros from './pages/SobreNosotros';
-import ViewDetails from './pages/ViewDetails';
+import ViewDetails from './pages/DetailsView';
 
 import {
   createBrowserRouter,
