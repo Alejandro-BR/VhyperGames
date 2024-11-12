@@ -7,7 +7,6 @@ public class Game
 {
     public int Id { get; set; }
     public int GameRequirementsId { get; set; }
-    public Guid GameCode {  get; set; }
     public string Title { get; set; }
     public string Description { get; set; }
     public string Sinopsis { get; set; } 
@@ -16,7 +15,7 @@ public class Game
     public DateTime ReleaseDate {  get; set; }
     public int Price { get; set; }
     public int Stock {  get; set; }
-    public int AvgRating { get; set; }
+    public double AvgRating { get; set; }
     public List<ImageGame> ImageGames { get; set; }
     [JsonIgnore]
     public GameRequirements GameRequirements { get; set; }
@@ -25,8 +24,7 @@ public class Game
 
     public Game()
     {
-        GameCode = Guid.NewGuid();
-        AvgRating = 0;
+        AvgRating = -1;
         ImageGames = new List<ImageGame>();
         Reviews = new List<Review>();
     }
