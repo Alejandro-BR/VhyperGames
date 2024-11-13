@@ -769,6 +769,24 @@ public class GameSeeder
                         {
                             ImageUrl = "images/GodOfWarRagnarok/Ragnarok.png",
                             AltText = "Imagen 1 de God of War Ragnarok"
+                        },
+
+                        new ImageGame
+                        {
+                            ImageUrl = "images/GodOfWarRagnarok/1.png",
+                            AltText = "Imagen 1 de God of War Ragnarok"
+                        },
+
+                        new ImageGame
+                        {
+                            ImageUrl = "images/GodOfWarRagnarok/2.png",
+                            AltText = "Imagen 2 de God of War Ragnarok"
+                        },
+
+                        new ImageGame
+                        {
+                            ImageUrl = "images/GodOfWarRagnarok/3.png",
+                            AltText = "Imagen 3 de God of War Ragnarok"
                         }
                     }
                 },

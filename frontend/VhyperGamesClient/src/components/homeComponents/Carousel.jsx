@@ -1,6 +1,7 @@
 import classes from "./Carousel.module.css";
 import CarouselPack from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import { Link } from "react-router-dom";
 
 function Carousel() {
   const responsive = {
@@ -31,24 +32,34 @@ function Carousel() {
         autoPlaySpeed={5000}
         showDots={true}
         arrows={false}
-      >
-        <img className={classes.bannerImg} src="/img/marca2.png" alt="Marca 2" />
-        <img
-          className={classes.bannerImg}
-          src="/img/dragon-ball.png"
-          alt="Dragon Ball"
-        />
-        <img className={classes.bannerImg} src="/img/gow.png" alt="GOW" />
-        <img
-          className={classes.bannerImg}
-          src="/img/minecraft.png"
-          alt="Minecraft"
-        />
-        <img
-          className={classes.bannerImg}
-          src="/img/witcher3.png"
-          alt="Witcher 3"
-        />
+      > 
+        <Link to={`/sobre-nosotros`}>
+          <img className={classes.bannerImg} src="/img/marca2.png" alt="Marca 2" />
+        </Link>
+        <Link to={`/juego/32`} >
+          <img
+            className={classes.bannerImg}
+            src="/img/dragon-ball.png"
+            alt="Dragon Ball"
+          />
+        </Link>
+        <Link to={`/juego/31`}>
+          <img className={classes.bannerImg} src="/img/gow.png" alt="GOW" />
+        </Link>
+        <Link to={`/juego/30`}>
+          <img
+            className={classes.bannerImg}
+            src="/img/minecraft.png"
+            alt="Minecraft"
+          />
+        </Link>
+        <Link to={`/juego/1`}>
+          <img
+            className={classes.bannerImg}
+            src="/img/witcher3.png"
+            alt="Witcher 3"
+          />
+        </Link>
       </CarouselPack>
     </div>
 
