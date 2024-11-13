@@ -21,7 +21,7 @@ function ViewDetails() {
           <GamePrice id={params.gameId}/>
         </div>
         <div className={`${classes["view-details__system-requirements"]} ${classes.box}`}>
-          <GameRequeriments id={1}/>
+          <GameRequeriments id={params.gameId}/>
         </div>
         <div className={`${classes["view-details__reviews"]} ${classes.box}`}>
 

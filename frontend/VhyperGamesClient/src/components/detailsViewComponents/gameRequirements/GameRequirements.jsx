@@ -1,6 +1,7 @@
 
 import { useEffect, useState } from "react";
 import { GAME_REQUERIMENTS } from "../../../config";
+import "./GameRequirements.module.css"
 
 function GameRequeriments({ id }) {
   const [loading, setLoading] = useState(true);
@@ -53,25 +54,36 @@ function GameRequeriments({ id }) {
 
   return (
     <>
-      <div>
-        <h1>Requisitos minimos</h1>
-        <div>CPU:  {requeriments.minCPU}</div>
-        <div>GPU:  {requeriments.minGPU}</div>
-        <div>Sistema operativo:  {requeriments.minOS}</div>
-        <div>RAM:  {requeriments.minRAM}</div>
-        <div>DirectX:  {requeriments.directX}</div>
-        <div>Almacenamiento:  {requeriments.storage}</div>
-      </div>
-
-      <div>
-        <h1>Requisitos recomendados</h1>
-        <p>CPU:  {requeriments.cpu}</p>
-        <div>GPU:  {requeriments.gpu}</div>
-        <div>Sistema operativo: {requeriments.os}</div>
-        <div>RAM:  {requeriments.ram}</div>
-        <div>DirectX:  {requeriments.directX}</div>
-        <div>Almacenamiento:  {requeriments.storage}</div>
-      </div>
+      <table>
+        <tr>
+          <th >Requisitos mínimos:</th>
+          <th >Requisitos recomendados:</th>
+        </tr>
+        <tr>
+          <td>CPU: {requeriments.minCPU}</td>
+          <td>CPU: {requeriments.cpu}</td>
+        </tr>
+        <tr>
+          <td>GPU: {requeriments.minGPU}</td>
+          <td>GPU: {requeriments.gpu}</td>
+        </tr>
+        <tr>
+          <td>Sistema operativo: {requeriments.minOS}</td>
+          <td>Sistema operativo: {requeriments.os}</td>
+        </tr>
+        <tr>
+          <td>RAM: {requeriments.minRAM}</td>
+          <td>RAM: {requeriments.ram}</td>
+        </tr>
+        <tr>
+          <td>DirectX: {requeriments.directX}</td>
+          <td>DirectX: {requeriments.directX}</td>
+        </tr>
+        <tr>
+          <td>Almacenamiento: {requeriments.storage}</td>
+          <td>Almacenamiento: {requeriments.storage}</td>
+        </tr>
+      </table>
     </>
   )
 

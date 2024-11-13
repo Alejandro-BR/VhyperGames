@@ -1,13 +1,15 @@
 
 .view-details {
   display: grid;
-  gap: 40px; 
+  gap: 20px; 
   grid-template-columns: 2fr 1fr;
   grid-template-rows: auto auto;
   grid-template-areas: 
     "main-section        price-newreview"
     "system-requirements reviews";
-  padding: 40px;
+  padding:16px 0 0 40px;
+  
+  
 }
 
 .view-details__main-section {
