@@ -3,6 +3,7 @@ import GameData from "../components/detailsViewComponents/gameDataComponent/Game
 import GamePrice from "../components/detailsViewComponents/gamePriceComponent/GamePrice"
 import classes from "../styles/DetailsView.module.css";
 import { useParams } from "react-router-dom";
+import GameRequeriments from "../components/detailsViewComponents/gameRequirements/GameRequirements";
 
 function ViewDetails() {
 
@@ -20,7 +21,7 @@ function ViewDetails() {
           <GamePrice id={params.gameId}/>
         </div>
         <div className={`${classes["view-details__system-requirements"]} ${classes.box}`}>
-
+          <GameRequeriments id={1}/>
         </div>
         <div className={`${classes["view-details__reviews"]} ${classes.box}`}>
 
