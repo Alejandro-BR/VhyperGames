@@ -760,7 +760,7 @@ public class GameSeeder
                     Price = 5990,
                     Stock = 150,
                     GameRequirementsId = 3,
-                    Sinopsis = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+                    Sinopsis = "En God of War Ragnarök, la secuela del aclamado God of War (2018), el Fimbulvetr está en marcha. Kratos y Atreus deben viajar a cada uno de los Nueve Reinos en busca de respuestas mientras las fuerzas asgardianas de Odín se preparan para la batalla profetizada que supondrá el fin del mundo.\r\n\r\nPor el camino, explorarán paisajes míticos increíbles y se enfrentarán a temibles enemigos, como monstruos y dioses nórdicos. A medida que se avecina la amenaza del Ragnarök, Kratos y Atreus tendrán que elegir entre la seguridad de su familia y la de los reinos.",
                     AvgRating = null,
 
                     ImageGames = new List<ImageGame>
@@ -800,7 +800,7 @@ public class GameSeeder
                     Price = 6999,
                     Stock = 200,
                     GameRequirementsId = 2,
-                    Sinopsis = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+                    Sinopsis = "DRAGON BALL: Sparking! ZERO lleva a un nuevo nivel el legendario estilo de juego de la serie Budokai Tenkaichi. Conviértete en un superguerrero y disfruta de los poderosos combates de Dragon Ball, ¡que hacen temblar la tierra y superan todos los límites!\r\nLibera el poder de más de 180 combatientes de Dragon Ball Z, Dragon Ball SUPER, Dragon Ball GT y algunas películas de Dragon Ball, ¡todos incluidos en el juego base! Cada personaje tiene sus habilidades, transformaciones y técnicas propias.\r\n¡Domina el poder destructivo de los luchadores más fuertes que han aparecido en Dragon Ball!",
                     AvgRating = null,
 
                     ImageGames = new List<ImageGame>
@@ -809,7 +809,25 @@ public class GameSeeder
                         {
                             ImageUrl = "images/DragonBallSparkingZero/SparkingZero.png",
                             AltText = "Imagen 1 de Dragon Ball Sparking Zero"
-                        }
+                        },
+
+                        new ImageGame
+                        {
+                            ImageUrl = "images/DragonBallSparkingZero/1.png",
+                            AltText = "Imagen 1 de Dragon Ball Sparking Zero"
+                        },
+
+                        new ImageGame
+                        {
+                            ImageUrl = "images/DragonBallSparkingZero/2.png",
+                            AltText = "Imagen 2 de Dragon Ball Sparking Zero"
+                        },
+
+                        new ImageGame
+                        {
+                            ImageUrl = "images/DragonBallSparkingZero/3.png",
+                            AltText = "Imagen 3 de Dragon Ball Sparking Zero"
+                        },
                     }
                 },
 
