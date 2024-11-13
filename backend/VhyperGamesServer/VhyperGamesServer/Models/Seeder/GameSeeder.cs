@@ -703,7 +703,7 @@ public class GameSeeder
                     Price = 2490,
                     Stock = 500,
                     GameRequirementsId = 1,
-                    Sinopsis = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+                    Sinopsis = "Explora mundos generados aleatoriamente y construye cosas maravillosas, desde una simple casa hasta un fastuoso castillo. Juega en modo creativo con recursos ilimitados o excava hasta las profundidades del mundo en el modo supervivencia y fabrica armas y armaduras para defenderte de peligrosas criaturas. Escala escarpadas montañas, descubre intrincadas cuevas y excava grandes vetas de minerales. Descubre los biomas de cuevas frondosas y cuevas de espeleotema. ¡Llena de luz tu mundo con velas para demostrar que eres un espeleólogo profesional y un maestro de la montaña!\r\n",
                     AvgRating = null,
 
                     ImageGames = new List<ImageGame>
@@ -711,8 +711,43 @@ public class GameSeeder
                         new ImageGame
                         {
                             ImageUrl = "images/Minecraft/Minecraft.png",
+                            AltText = "Imagen portada de Minecraft "
+                        },
+
+                        new ImageGame {
+                            ImageUrl = "images/Minecraft/1.png",
                             AltText = "Imagen 1 de Minecraft"
-                        }
+                        },
+
+                        new ImageGame {
+                            ImageUrl = "images/Minecraft/2.png",
+                            AltText = "Imagen 2 de Minecraft"
+                        },
+
+                        new ImageGame {
+                            ImageUrl = "images/Minecraft/3.png",
+                            AltText = "Imagen 3 de Minecraft"
+                        },
+
+                        new ImageGame {
+                            ImageUrl = "images/Minecraft/4.png",
+                            AltText = "Imagen 4 de Minecraft"
+                        },
+
+                        new ImageGame {
+                            ImageUrl = "images/Minecraft/5.png",
+                            AltText = "Imagen 5 de Minecraft"
+                        },
+
+                        new ImageGame {
+                            ImageUrl = "images/Minecraft/6.png",
+                            AltText = "Imagen 6 de Minecraft"
+                        },
+
+                        new ImageGame {
+                            ImageUrl = "images/Minecraft/7.png",
+                            AltText = "Imagen 7 de Minecraft"
+                        },
                     }
                 },
 
