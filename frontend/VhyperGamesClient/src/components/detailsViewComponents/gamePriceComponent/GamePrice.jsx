@@ -33,7 +33,7 @@ const ProductCard = ({ id }) => {
 
         setProductPriceData({
           price: data.price,
-          avgRating: data.avgRating, // Asegúrate de que avgRating venga en la respuesta
+          avgRating: data.avgRating ?? null, 
           stock: data.stock,
           quantity: data.quantity || 0,
         });
@@ -47,27 +47,52 @@ const ProductCard = ({ id }) => {
     fetchPriceData();
   }, [id]);
 
-  if (loading) return <div>Cargando...</div>;
-  if (error) return <div>Error: {error}</div>;
-
   const handleQuantityChange = (operation) => {
     setProductPriceData((prevState) => {
       const newQuantity = operation === "increase"
         ? Math.min(prevState.quantity + 1, prevState.stock)
         : Math.max(prevState.quantity - 1, 0);
 
+      sessionStorage.setItem('cartQuantity', newQuantity); //Usar funcion o no?
       return { ...prevState, quantity: newQuantity };
     });
   };
 
+  //Según el rating, muestra 1, 2 o 3 aviones con su color.
+  const getPlaneCount = (avgRating) => {
+    if (avgRating < 0) return 1;
+    if (avgRating === 0) return 2;
+    if (avgRating > 0) return 3;
+    return 0;
+  };
+
+  const planeCount = getPlaneCount(productPriceData.avgRating);
+
+  const price = () => {
+    return (productPriceData.price / 100).toFixed(2);
+  };
+
+  if (loading) return <div>Cargando...</div>;
+  if (error) return <div>Error: {error}</div>;
+
+
+
   return (
     <div className={classes.priceCard}>
+
+<div className={classes.leftPlaneWithStripes}>
+        <div className={classes.planeWithStripes}>
+        <img src="../../icon/icono-nave.svg" alt="nave"/>
+        </div>
+      </div>
+
       <div className={classes.productCode}>
         <p>Código: PROD-{id}</p>
       </div>
 
       <div className={classes.price}>
-        <p>{productPriceData.price.toFixed(2)} €</p>
+        <div><p>PRECIO</p></div>
+        <p>{price()} €</p>
       </div>
 
       <div className={classes.stockStatus}>
@@ -79,16 +104,27 @@ const ProductCard = ({ id }) => {
       </div>
 
       <div className={classes.rating}>
-        <Rating avgRating={productPriceData.avgRating} />
-      </div>
+          <p className={classes.label}>VALORACIÓN</p>
+          <div className={classes.planesContainer}>
+            {productPriceData.avgRating === null ? (  // Verificar si no hay reseñas
+              <p className={classes.noReviews}>No existen reseñas.</p>
+            ) : (
+              [...Array(planeCount)].map((_, index) => ( 
+                <Rating key={index} avgRating={productPriceData.avgRating} />
+              ))
+            )}
+          </div>
+        </div>
 
-      <div className={classes.quantityControls}>
-        <button onClick={() => handleQuantityChange("decrease")}>-</button>
-        <span>{productPriceData.quantity}</span>
-        <button onClick={() => handleQuantityChange("increase")}>+</button>
-      </div>
-
-      <button className={classes.addToCart}>Añadir al Carrito</button>
+      <div className={classes.cartIconWrapper}>
+            <img src="../../icon/carrito_header.svg" alt="Carrito" className={classes.cartIcon} />
+          </div>
+      <div className={classes.quantityButtons}>
+            <button onClick={() => handleQuantityChange("decrease")}>-</button>
+            <span>{productPriceData.quantity}</span>
+            <button onClick={() => handleQuantityChange("increase")}>+</button>
+          </div>
+          
     </div>
   );
 };

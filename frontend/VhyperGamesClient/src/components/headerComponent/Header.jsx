@@ -67,13 +67,13 @@ function Header() {
       <div className={classes.icons}>
         <img
           className={classes.icon}
-          src="./icon/carrito_header.svg"
+          src="../icon/carrito_header.svg"
           alt="cart"
           onClick={messageCart}
         />
         <img
           className={classes.icon}
-          src="./icon/user_header.svg"
+          src="../icon/user_header.svg"
           alt="user"
           onClick={handleImageClick} // Cambiado a la función sin paréntesis
         />
