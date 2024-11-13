@@ -1,0 +1,120 @@
+.priceCard {
+  display: flex;
+  width: 360px;
+  height: 220px;
+  color: white;
+  padding: 20px;
+  border-radius: 8px;
+  gap: 20px; 
+}
+
+.leftPlane {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 20%;  
+  height: 100%; 
+  position: relative;
+}
+
+.planeIcon {
+  width: auto; 
+  height: 100%;
+}
+
+.leftColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  flex-grow: 1;
+}
+
+.productCode {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 1em;
+  color: white;
+}
+
+.productId{
+  font-size: 0.9em;
+  color: white;
+}
+
+.price {
+  font-size: 1.25em;
+  font-weight: lighter;
+}
+
+.priceEUR {
+  font-size: 2.5em;
+  margin-left: 30px;
+}
+
+.label {
+  font-size: 1.25em;
+}
+
+.rating {
+  font-size: 1em;
+}
+
+.planesContainer {
+  display: flex;
+  gap: 6px;
+}
+
+.planesContainer svg {
+  width: 32px; 
+  height: 32px; 
+}
+
+.noReviews {
+  color: #a0a0a0;
+}
+
+.rightColumn {
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  gap: 10px;
+  justify-content: center; 
+  padding-bottom: 30px;
+}
+
+.stockStatus {
+  font-size: 1em;
+  text-align: center;
+}
+
+.inStock {
+  color: #00ff00;
+}
+
+.outOfStock {
+  color: #ff0000;
+}
+
+.cartIcon img {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+}
+
+.quantityControls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.quantityControls button {
+  background-color: var(--body-color);
+  color: white;
+  border: 1px solid white;
+  width: 24px;
+  height: 24px;
+  font-size: 1.25em;
+  cursor: pointer;
+  border-radius: 4px;
+}
