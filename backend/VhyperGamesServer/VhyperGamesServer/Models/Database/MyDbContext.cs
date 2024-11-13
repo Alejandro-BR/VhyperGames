@@ -14,6 +14,8 @@ public class MyDbContext : DbContext
     public DbSet<GameRequirements> GameRequirements { get; set; }
     public DbSet<Review> Reviews { get; set; }
     public DbSet<ImageGame> ImagesGame { get; set; }
+    public DbSet<Cart> Carts { get; set; }
+    public DbSet<CartDetail> CartsDetail { get; set; }
 
     public MyDbContext() { }
 
@@ -272,6 +274,53 @@ public class MyDbContext : DbContext
                 .HasMaxLength(100)
                 .IsRequired();
         });
+
+        modelBuilder.Entity<Cart>(entity =>
+        {
+            entity.ToTable("cart");
+
+            entity.HasKey(e => e.Id);
+
+            entity.Property(e => e.Id)
+                .HasColumnName("id")
+                .IsRequired()
+                .ValueGeneratedOnAdd();
+
+            entity.Property(e => e.UserId)
+                .HasColumnName("user_id")
+                .IsRequired();
+        });
+
+        modelBuilder.Entity<CartDetail>(entity =>
+        {
+            entity.ToTable("cart_details");
+
+            entity.HasKey(e => e.Id);
+
+            entity.Property(e => e.Id)
+                .HasColumnName("id")
+                .IsRequired()
+                .ValueGeneratedOnAdd();
+
+            entity.Property(e => e.CartId)
+                .HasColumnName("cart_id")
+                .IsRequired();
+
+            entity.Property(e => e.GameId)
+                .HasColumnName("game_id")
+                .IsRequired();
+
+            entity.Property(e => e.Quantity)
+                .HasColumnName("quantity")
+                .IsRequired();
+
+            entity.HasOne(cd => cd.Cart)              
+                .WithMany(c => c.CartDetails)        
+                .HasForeignKey(cd => cd.CartId)       
+                .OnDelete(DeleteBehavior.Cascade)     
+                .HasConstraintName("FK_CartDetail_Cart");
+        });
+
 
     }
 
