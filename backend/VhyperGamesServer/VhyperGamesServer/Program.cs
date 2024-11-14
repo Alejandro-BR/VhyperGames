@@ -58,11 +58,12 @@ public class Program
         {
             builder.Services.AddCors(options =>
             {
-                options.AddDefaultPolicy(policyBuilder =>
+                options.AddPolicy("AllowSpecificOrigin", builder =>
                 {
-                    policyBuilder.SetIsOriginAllowed(origin => new Uri(origin).Host == "localhost")
-                        .AllowAnyHeader()
-                        .AllowAnyMethod();
+                    builder.WithOrigins("http://localhost:5173")
+                           .AllowAnyHeader()
+                           .AllowAnyMethod()
+                           .AllowCredentials();
                 });
             });
         }
@@ -77,11 +78,15 @@ public class Program
         builder.Services.AddAuthentication()
             .AddJwtBearer(options =>
             {
+                options.SaveToken = true;
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuer = false,
                     ValidateAudience = false,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key))
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key)),
+                    ValidateLifetime = true,
+                    ClockSkew = TimeSpan.Zero
                 };
             });
     }
@@ -99,7 +104,7 @@ public class Program
         {
             app.UseSwagger();
             app.UseSwaggerUI();
-            app.UseCors();
+            app.UseCors("AllowSpecificOrigin");
         }
 
         // Redirigir HTTP a HTTPS

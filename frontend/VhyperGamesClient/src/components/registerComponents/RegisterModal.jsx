@@ -4,6 +4,7 @@ import classes from "../loginComponents/Login.module.css";
 import { jwtDecode } from "jwt-decode";
 import { REGISTER_ENDPOINT } from "../../config";
 import { validation } from "../../utils/validationForm.js";
+import { updateSessionStorage } from "../../utils/keep.js"
 
 function RegisterModal({ onClose }) {
   const nameRef = useRef();
@@ -98,7 +99,9 @@ function RegisterModal({ onClose }) {
             role: decodedToken.role,
             name: decodedToken.name,
           };
-          console.log("userInfo", userInfo);
+          
+          updateSessionStorage(token, "accessToken");
+          
         }
         onClose();
 
