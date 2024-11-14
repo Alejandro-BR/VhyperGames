@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using TorchSharp.Utils;
 using VhyperGamesServer.Models.Dtos;
 using VhyperGamesServer.Services;
@@ -47,15 +48,28 @@ public class DetailsViewController : ControllerBase
     }
 
     [HttpPost("new-review")]
+    [Authorize]
     public async Task<ActionResult<ReviewDto>> NewReview([FromBody] NewReviewDto newReviewDto)
     {
         try
         {
+            //Obtener en ID del usuario autenticado y asignarlo
+            var userIdClaim = User.FindFirst("id");
+            if (userIdClaim == null)
+            {
+                return Unauthorized(new { message = "Usuario no autenticado." });
+            }
+
+            int userId = int.Parse(userIdClaim.Value);
+            newReviewDto.UserId = userId;
+
+
+            //Llanar al servicio para crear la nueva reseña
             var reviewDto = await _detailsViewService.NewReview(newReviewDto);
 
             if (reviewDto == null)
             {
-                return BadRequest(new { message = "Unable to create review." });
+                return BadRequest(new { message = "No se ha podido crear la review." });
             }
 
             return Ok(reviewDto);
@@ -66,7 +80,7 @@ public class DetailsViewController : ControllerBase
         }
         catch (Exception ex)
         {
-            return StatusCode(500, new { message = "An unexpected error occurred.", detail = ex.Message });
+            return StatusCode(500, new { message = "Error inesperado", detail = ex.Message });
         }
     }
 
