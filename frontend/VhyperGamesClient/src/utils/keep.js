@@ -32,10 +32,12 @@ export function getVarLS(clave) {
  * Obtiene una variable del almacenamiento de sesión.
  * 
  * @param {string} clave - La clave bajo la cual se guardó el ítem en sessionStorage.
- * @returns {object[]} - El objeto o array recuperado del almacenamiento de sesión, o un array vacío.
+ * @returns {object | null} - El objeto o array recuperado del almacenamiento de sesión, o un null.
  */
 export function getVarSessionStorage(clave) {
-  return JSON.parse(sessionStorage.getItem(clave)) || [];
+  const item = sessionStorage.getItem(clave);
+  return item ? JSON.parse(item) : null;
+
 }
 
 /**
