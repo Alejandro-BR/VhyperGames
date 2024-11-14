@@ -64,7 +64,7 @@ public class DetailsViewController : ControllerBase
             newReviewDto.UserId = userId;
 
 
-            //Llamar al servicio para crear la nueva reseña
+            //Llanar al servicio para crear la nueva reseña
             var reviewDto = await _detailsViewService.NewReview(newReviewDto);
 
             if (reviewDto == null)

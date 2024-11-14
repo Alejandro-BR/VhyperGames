@@ -3,8 +3,7 @@ import classes from './Login.module.css';
 import Button from '../buttonComponent/Button';
 import RegisterModal from '../registerComponents/RegisterModal';
 import { jwtDecode } from 'jwt-decode';
-import { LOGIN_ENDPOINT } from '../../config';
-import { updateSessionStorage } from "../../utils/keep.js"
+import { LOGIN_ENDPOINT } from '../../config'; 
 
 
 function LoginModal({ onClose, onRegisterClick }) {
@@ -46,14 +45,15 @@ function LoginModal({ onClose, onRegisterClick }) {
 
                 //Decodificar el código
                 const decodedToken = jwtDecode(token);
-                updateSessionStorage(token, "accessToken");
-                console.log("Token decodificado:", decodedToken);
+
                 if (decodedToken) {
                     const userInfo = {
                         id: decodedToken.id,
                         role: decodedToken.role,
                         name: decodedToken.name
                     };
+                    console.log("userInfo", userInfo);
+
                 }
                 onClose();
 
