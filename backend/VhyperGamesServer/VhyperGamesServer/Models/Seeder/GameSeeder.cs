@@ -285,7 +285,7 @@ public class GameSeeder
                     Price = 399,
                     Stock = 100,
                     GameRequirementsId = 1,
-                    Sinopsis = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+                    Sinopsis = "La atracción principal es Freddy Fazbear, por supuesto; y sus dos amigos. ¡Son robots animatrónicos, programados para complacer a las multitudes! Sin embargo, el comportamiento de los robots se ha vuelto algo impredecible por la noche, y era mucho más barato contratarlo como guardia de seguridad que encontrar un reparador.\r\n\r\nDesde su pequeña oficina debe mirar las cámaras de seguridad con cuidado. Tiene una cantidad muy limitada de electricidad que puede usar por noche (recortes presupuestarios corporativos, ya sabe). Eso significa que cuando te quedas sin energía para la noche, ¡no más puertas de seguridad ni más luces! Si algo no está bien, es decir, si Freddybear o sus amigos no están en sus lugares adecuados, ¡debes encontrarlos en los monitores y protegerte si es necesario!\r\n\r\n¿Puedes sobrevivir cinco noches en Freddy's?\r\n",
                     AvgRating = null,
 
                     ImageGames = new List<ImageGame>
@@ -294,20 +294,44 @@ public class GameSeeder
                         {
                             ImageUrl = "images/FiveNightsAtFreddys/Freddy1.png",
                             AltText = "Imagen 1 de fnaf1"
-                        }
+                        },
+
+                        new ImageGame
+                        {
+                            ImageUrl = "images/FiveNightsAtFreddys/fnaf1-1.jpg",
+                            AltText = "Imagen 2 de fnaf1"
+                        },
+
+                         new ImageGame
+                        {
+                            ImageUrl = "images/FiveNightsAtFreddys/fnaf1-2.jpg",
+                            AltText = "Imagen 3 de fnaf1"
+                        },
+
+                         new ImageGame
+                        {
+                            ImageUrl = "images/FiveNightsAtFreddys/fnaf1-3.jpg",
+                            AltText = "Imagen 4 de fnaf1"
+                        },
+
+                         new ImageGame
+                        {
+                            ImageUrl = "images/FiveNightsAtFreddys/fnaf1-4.jpg",
+                            AltText = "Imagen 5 de fnaf1"
+                        },
                     }
                 },
 
                 new Game {
                     Title = "Five Nights at Freddy's 2",
-                    Description = "¡Bienvenido de nuevo a la nueva y mejorada pizza de Freddy Fazbear!",
+                    Description = "¡Bienvenido de nuevo a la nueva y mejorada pizzeria de Freddy Fazbear!",
                     Genre = Genre.SurvivalHorror,
                     DrmFree = Drm.DrmFree,
                     ReleaseDate = new DateTime (2014, 11, 10),
                     Price = 799,
                     Stock = 100,
                     GameRequirementsId = 1,
-                    Sinopsis = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+                    Sinopsis = "En Five Nights at Freddy's 2, los animatrónicos antiguos y viejos se unen a un nuevo elenco de personajes. ¡Son amigables para los niños, actualizados con lo último en tecnología de reconocimiento facial, vinculados a bases de datos criminales locales y prometen ofrecer un espectáculo seguro y entretenido para niños y adultos por igual!\r\n\r\n¿Qué podría salir mal?\r\n\r\nComo el nuevo guardia de seguridad que trabaja por las noches, su trabajo es monitorear las cámaras y asegurarse de que nada salga mal después de las horas. El guardia anterior se ha quejado de los personajes que intentan ingresar a la oficina (desde entonces ha sido trasladado al turno de día). Entonces, para facilitar su trabajo, se le ha proporcionado su propia cabeza vacía de Freddy Fazbear, lo que debería engañar a los personajes animatrónicos para que lo dejen solo si ingresan accidentalmente a su oficina.\r\n\r\nComo siempre, Fazbear Entertainment no es responsable de la muerte o el desmembramiento.",
                     AvgRating = null,
 
                     ImageGames = new List<ImageGame>
@@ -316,20 +340,44 @@ public class GameSeeder
                         {
                             ImageUrl = "images/FiveNightsAtFreddys2/Freddy2.png",
                             AltText = "Imagen 1 de fnaf2"
-                        }
+                        },
+
+                        new ImageGame
+                        {
+                            ImageUrl = "images/FiveNightsAtFreddys2/fnaf2-1.jpg",
+                            AltText = "Imagen 2 de fnaf2"
+                        },
+
+                         new ImageGame
+                        {
+                            ImageUrl = "images/FiveNightsAtFreddys2/fnaf2-2.jpg",
+                            AltText = "Imagen 3 de fnaf2"
+                        },
+
+                         new ImageGame
+                        {
+                            ImageUrl = "images/FiveNightsAtFreddys2/fnaf2-3.jpg",
+                            AltText = "Imagen 4 de fnaf2"
+                        },
+
+                         new ImageGame
+                        {
+                            ImageUrl = "images/FiveNightsAtFreddys2/fnaf2-4.jpg",
+                            AltText = "Imagen 5 de fnaf2"
+                        },
                     }
                 },
 
                 new Game {
                     Title = "Five Nights at Freddy's 3",
-                    Description = "Treinta años después de que Freddy Fazbear's Pizza cerrara sus puertas, los eventos que tuvieron lugar allí se han convertido en nada más que un rumor y un recuerdo de la infancia, pero los propietarios de \"Fazbear's Fright: The Horror Attraction\"",
+                    Description = "Treinta años después de que Freddy Fazbear's Pizza cerrara sus puertas, los eventos que tuvieron lugar allí se han convertido en nada más que un rumor y un recuerdo de la infancia",
                     Genre = Genre.SurvivalHorror,
                     DrmFree = Drm.DrmFree,
                     ReleaseDate = new DateTime (2015, 3, 2),
                     Price = 799,
                     Stock = 100,
-                    GameRequirementsId = 2,
-                    Sinopsis = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+                    GameRequirementsId = 1,
+                    Sinopsis = "pero los propietarios de \"Fazbear's Fright: The Horror Attraction\" están decididos a revivir la leyenda y hacer que la experiencia sea lo más auténtica posible para los clientes haciendo todo lo posible para encontrar cualquier cosa que pueda haber sobrevivido a décadas de negligencia y ruina.\r\n\r\nAl principio solo había conchas vacías, una mano, un gancho, una vieja muñeca de papel, pero luego se hizo un descubrimiento notable...\r\n\r\nLa atracción ahora tiene un animatrónico.",
                     AvgRating = null,
 
                     ImageGames = new List<ImageGame>
@@ -338,7 +386,31 @@ public class GameSeeder
                         {
                             ImageUrl = "images/FiveNightsAtFreddys3/Freddy3.png",
                             AltText = "Imagen 1 de fnaf3"
-                        }
+                        },
+
+                        new ImageGame
+                        {
+                            ImageUrl = "images/FiveNightsAtFreddys3/fnaf3-1.jpg",
+                            AltText = "Imagen 2 de fnaf3"
+                        },
+
+                         new ImageGame
+                        {
+                            ImageUrl = "images/FiveNightsAtFreddys3/fnaf3-2.jpg",
+                            AltText = "Imagen 3 de fnaf3"
+                        },
+
+                         new ImageGame
+                        {
+                            ImageUrl = "images/FiveNightsAtFreddys3/fnaf3-3.jpg",
+                            AltText = "Imagen 4 de fnaf3"
+                        },
+
+                         new ImageGame
+                        {
+                            ImageUrl = "images/FiveNightsAtFreddys3/fnaf3-4.jpg",
+                            AltText = "Imagen 5 de fnaf3"
+                        },
                     }
                 },
 
@@ -350,8 +422,8 @@ public class GameSeeder
                     ReleaseDate = new DateTime (2015, 7, 23),
                     Price = 799,
                     Stock = 10,
-                    GameRequirementsId = 2,
-                    Sinopsis = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+                    GameRequirementsId = 1,
+                    Sinopsis = "En este último capítulo de la historia original de Five Nights at Freddy, debes defenderte una vez más contra Freddy Fazbear, Chica, Bonnie, Foxy e incluso cosas peores que acechan en las sombras. Jugando como un niño cuyo papel aún se desconoce, debe protegerse hasta las 6 am observando las puertas, así como evitando criaturas no deseadas que pueden aventurarse en su armario o en la cama detrás de usted.\r\n\r\nSolo tienes una linterna para protegerte. Asustará las cosas que pueden estar arrastrándose en el otro extremo de los pasillos, pero tenga cuidado y escuche. Si algo se ha acercado demasiado, entonces las luces brillantes en sus ojos serán tu fin.",
                     AvgRating = null,
 
                     ImageGames = new List<ImageGame>
@@ -360,8 +432,32 @@ public class GameSeeder
                         {
                             ImageUrl = "images/FiveNightsAtFreddys4/Freddy4.png",
                             AltText = "Imagen 1 de fnaf4"
-                        }
-                    }
+                        },
+
+                        new ImageGame
+                        {
+                            ImageUrl = "images/FiveNightsAtFreddys4/fnaf4-1.jpg",
+                            AltText = "Imagen 2 de fnaf4"
+                        },
+
+                         new ImageGame
+                        {
+                            ImageUrl = "images/FiveNightsAtFreddys4/fnaf4-2.jpg",
+                            AltText = "Imagen 3 de fnaf4"
+                        },
+
+                         new ImageGame
+                        {
+                            ImageUrl = "images/FiveNightsAtFreddys4/fnaf4-3.jpg",
+                            AltText = "Imagen 4 de fnaf4"
+                        },
+
+                         new ImageGame
+                        {
+                            ImageUrl = "images/FiveNightsAtFreddys4/fnaf4-4.jpg",
+                            AltText = "Imagen 5 de fnaf4"
+                        },
+                    },
                 },
 
                 new Game {
@@ -372,8 +468,8 @@ public class GameSeeder
                     ReleaseDate = new DateTime (2016, 10, 7),
                     Price = 799,
                     Stock = 10,
-                    GameRequirementsId = 2,
-                    Sinopsis = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+                    GameRequirementsId = 1,
+                    Sinopsis = "¡Con artistas animatrónicos de vanguardia que se quitarán los calcetines de sus hijos, así como un catering de pizza personalizado, ninguna fiesta está completa sin Circus Baby y la pandilla!\r\n\r\nAhora contratando: Técnico nocturno. Debe disfrutar de espacios reducidos y sentirse cómodo con la maquinaria activa. No es responsable de la muerte o desmembramiento.",
                     AvgRating = null,
 
                     ImageGames = new List<ImageGame>
@@ -382,7 +478,31 @@ public class GameSeeder
                         {
                             ImageUrl = "images/FiveNightsAtFreddys5/Freddy5.png",
                             AltText = "Imagen 1 de fnaf5"
-                        }
+                        },
+
+                        new ImageGame
+                        {
+                            ImageUrl = "images/FiveNightsAtFreddys5/fnaf5-1.jpg",
+                            AltText = "Imagen 2 de fnaf5"
+                        },
+
+                         new ImageGame
+                        {
+                            ImageUrl = "images/FiveNightsAtFreddys5/fnaf5-2.jpg",
+                            AltText = "Imagen 3 de fnaf5"
+                        },
+
+                         new ImageGame
+                        {
+                            ImageUrl = "images/FiveNightsAtFreddys5/fnaf5-3.jpg",
+                            AltText = "Imagen 4 de fnaf5"
+                        },
+
+                         new ImageGame
+                        {
+                            ImageUrl = "images/FiveNightsAtFreddys5/fnaf5-4.jpg",
+                            AltText = "Imagen 5 de fnaf5"
+                        },
                     }
                 },
 
@@ -395,7 +515,7 @@ public class GameSeeder
                     Price = 1,
                     Stock = 999999,
                     GameRequirementsId = 1,
-                    Sinopsis = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+                    Sinopsis = "En un universo, donde todos los personajes animatrónicos de las primeras cuatro entregas habitan pacíficamente, están ocurriendo una serie de fallas en \"Flipside\", una dimensión interna del universo, causando inquietud entre los animatrónicos.",
                     AvgRating = null,
 
                     ImageGames = new List<ImageGame>
@@ -404,20 +524,44 @@ public class GameSeeder
                         {
                             ImageUrl = "images/FiveNightsAtFreddysWorld/FreddyWorld.png",
                             AltText = "Imagen 1 de fnaf World"
-                        }
+                        },
+
+                        new ImageGame
+                        {
+                            ImageUrl = "images/FiveNightsAtFreddysWorld/fnafWorld-1.jpg",
+                            AltText = "Imagen 2 de fnaf World"
+                        },
+
+                        new ImageGame
+                        {
+                            ImageUrl = "images/FiveNightsAtFreddysWorld/fnafWorld-2.jpg",
+                            AltText = "Imagen 3 de fnaf World"
+                        },
+
+                        new ImageGame
+                        {
+                            ImageUrl = "images/FiveNightsAtFreddysWorld/fnafWorld-3.jpg",
+                            AltText = "Imagen 4 de fnaf World"
+                        },
+
+                        new ImageGame
+                        {
+                            ImageUrl = "images/FiveNightsAtFreddysWorld/fnafWorld-4.jpg",
+                            AltText = "Imagen 5 de fnaf World"
+                        },
                     }
                 },
 
                  new Game {
                     Title = "Freddy Fazbear's Pizzeria Simulator",
-                    Description = "¡Presentando un divertido Five Nights en la aventura de Freddy con un toque más ligero para las vacaciones, Freddy Fazbear's Pizzeria Simulator te pone a cargo de desarrollar tu propio restaurante!",
+                    Description = "¡Presentando un divertido Five Nights en la aventura de Freddy con un toque más ligero para las vacaciones!",
                     Genre = Genre.SurvivalHorror,
                     DrmFree = Drm.DrmFree,
                     ReleaseDate = new DateTime (2017, 12, 4),
                     Price = 1,
                     Stock = 999999,
-                    GameRequirementsId = 2,
-                    Sinopsis = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+                    GameRequirementsId = 1,
+                    Sinopsis = "¡Freddy Fazbear's Pizzeria Simulator te pone a cargo de desarrollar tu propio restaurante! ¡Diseñe pizzas, alimente a los niños y obtenga puntajes altos!",
                     AvgRating = null,
 
                     ImageGames = new List<ImageGame>
@@ -426,7 +570,25 @@ public class GameSeeder
                         {
                             ImageUrl = "images/FiveNightsAtFreddys6/Freddy6.png",
                             AltText = "Imagen 1 de fnaf 6"
-                        }
+                        },
+
+                        new ImageGame
+                        {
+                            ImageUrl = "images/FiveNightsAtFreddys6/fnaf6-1.jpg",
+                            AltText = "Imagen 2 de fnaf 6"
+                        },
+
+                        new ImageGame
+                        {
+                            ImageUrl = "images/FiveNightsAtFreddys6/fnaf6-2.jpg",
+                            AltText = "Imagen 3 de fnaf 6"
+                        },
+
+                        new ImageGame
+                        {
+                            ImageUrl = "images/FiveNightsAtFreddys6/fnaf6-3.jpg",
+                            AltText = "Imagen 4 de fnaf 6"
+                        },
                     }
                 },
 
@@ -438,8 +600,8 @@ public class GameSeeder
                     ReleaseDate = new DateTime (2018, 6, 27),
                     Price = 1,
                     Stock = 999999,
-                    GameRequirementsId = 2,
-                    Sinopsis = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+                    GameRequirementsId = 1,
+                    Sinopsis = "Con 50 personajes animatrónicos seleccionables que abarcan siete Five Nights en los juegos de Freddy, las opciones de personalización son casi infinitas. ¡Mezcle y combine cualquier variedad de personajes que desee, establezca su dificultad de 0-20 y luego salte directamente a la acción! Desde el escritorio de su oficina, deberá administrar dos puertas laterales, dos respiraderos y dos mangueras de aire, todas las cuales conducen directamente a su oficina.\r\n\r\nEsta vez también tendrá que dominar otras herramientas si desea completar los desafíos finales, herramientas como el calentador, A/C, una caja de música global, un generador de energía y más. ¡Como si todo eso no fuera suficiente, también tendrá que configurar trampas láser en los respiraderos, recoger Faz-Coins, comprar artículos en el mostrador de premios, y como siempre, mantener un ojo de cerca no uno, sino dos, cortinas Pirate Cove!",
                     AvgRating = null,
 
                     ImageGames = new List<ImageGame>
@@ -448,7 +610,31 @@ public class GameSeeder
                         {
                             ImageUrl = "images/FiveNightsAtFreddys7/Freddy7.png",
                             AltText = "Imagen 1 de fnaf ucn"
-                        }
+                        },
+
+                        new ImageGame
+                        {
+                            ImageUrl = "images/FiveNightsAtFreddys7/fnaf7-1.jpg",
+                            AltText = "Imagen 2 de fnaf 7"
+                        },
+
+                        new ImageGame
+                        {
+                            ImageUrl = "images/FiveNightsAtFreddys7/fnaf7-2.jpg",
+                            AltText = "Imagen 3 de fnaf 7"
+                        },
+
+                        new ImageGame
+                        {
+                            ImageUrl = "images/FiveNightsAtFreddys7/fnaf7-3.jpg",
+                            AltText = "Imagen 4 de fnaf 7"
+                        },
+
+                        new ImageGame
+                        {
+                            ImageUrl = "images/FiveNightsAtFreddys7/fnaf7-4.jpg",
+                            AltText = "Imagen 5 de fnaf 7"
+                        },
                     }
                 },
 
@@ -460,8 +646,8 @@ public class GameSeeder
                     ReleaseDate = new DateTime (2019, 5, 28),
                     Price = 2499,
                     Stock = 99,
-                    GameRequirementsId = 2,
-                    Sinopsis = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+                    GameRequirementsId = 3,
+                    Sinopsis = "Sobrevive a encuentros terroríficos con tus animatrónicos asesinos favoritos en una colección de experiencias nuevas y clásicas de FIVE NIGHTS AT FREDDYidsS™. “¡Donde la fantasía y la diversión cobran vida!”\r\n\r\nNO se requiere un auricular VR para jugar.\r\n\r\nUSTED ES CONTRATADO - Es hora de ensuciarse las manos. Repare los sistemas de ventilación claustrofóbicos, solucione problemas de animatrónicos rotos que podrían activarse en cualquier momento o pase las tardes encogiéndose en la oficina de guardia de seguridad nocturna.\r\nCELEBRAR - Enfréntate a tus animatrónicos asesinos favoritos, incluyendo; Freddy, Bonnie, Chica, Foxy, Springtrap, The Mangle, Funtime Foxy y Circus Baby.\r\nDIVERSIÓN DIVERSIÓN PREMIOS ¡Juguetes, peluches, Bobbleheads y dulces dulces! ¡Gana premios súper divertidos con los que puedas jugar en el Contador de Premios interactivo! Recoge Faz-Tokens bien ocultos para desbloquear coleccionables aún más raros para más SUPER FUN FUN FUN.\r\nFIESTA DE PIZZA - Las escenas de los títulos clásicos se han actualizado y rehecho para una experiencia totalmente inmersiva que incluye; Five Nights at Freddydids, Five Nights at Freddydids 2, Five Nights at Freddydids 3, Five Nights at Freddydids 4 y Five Nights at Freddydids: Sister Location.\r\nDOS FORMAS DE JUGAR - Experimente el horror en modo plano (no VR) o VR. Oculus Rift y HTC Vive son compatibles.",
                     AvgRating = null,
 
                     ImageGames = new List<ImageGame>
@@ -470,7 +656,31 @@ public class GameSeeder
                         {
                             ImageUrl = "images/FiveNightsAtFreddysHelpWanted/FreddyHelpWanted.png",
                             AltText = "Imagen 1 de fnaf Help Wanted"
-                        }
+                        },
+
+                        new ImageGame
+                        {
+                            ImageUrl = "images/FiveNightsAtFreddysHelpWanted/fnafHW-1.jpg",
+                            AltText = "Imagen 2 de fnaf Help Wanted"
+                        },
+
+                        new ImageGame
+                        {
+                            ImageUrl = "images/FiveNightsAtFreddysHelpWanted/fnafHW-2.jpg",
+                            AltText = "Imagen 3 de fnaf Help Wanted"
+                        },
+
+                        new ImageGame
+                        {
+                            ImageUrl = "images/FiveNightsAtFreddysHelpWanted/fnafHW-3.jpg",
+                            AltText = "Imagen 4 de fnaf Help Wanted"
+                        },
+
+                        new ImageGame
+                        {
+                            ImageUrl = "images/FiveNightsAtFreddysHelpWanted/fnafHW-4.jpg",
+                            AltText = "Imagen 5 de fnaf Help Wanted"
+                        },
                     }
                 },
 
@@ -482,8 +692,8 @@ public class GameSeeder
                     ReleaseDate = new DateTime (2022, 11, 22),
                     Price = 3399,
                     Stock = 10,
-                    GameRequirementsId = 2,
-                    Sinopsis = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+                    GameRequirementsId = 3,
+                    Sinopsis = "Five Nights at Freddy's: Security Breach es la última entrega de la saga de juegos de terror para toda la familia que ha cautivado a millones de jugadores en todo el mundo. Juega con Gregory, un joven que pasa la noche atrapado en Freddy Fazbear's Mega Pizzaplex. Con la ayuda del mismísimo Freddy Fazbear, Gregory debe sobrevivir a la inagotable cacería de las nuevas versiones de los personajes de Five Nights at Freddy's y a una serie de amenazas igualmente terroríficas.",
                     AvgRating = null,
 
                     ImageGames = new List<ImageGame>
@@ -492,7 +702,31 @@ public class GameSeeder
                         {
                             ImageUrl = "images/FiveNightsAtFreddysSecurityBreach/FreddySecurityBreach.png",
                             AltText = "Imagen 1 de fnaf security breach"
-                        }
+                        },
+
+                        new ImageGame
+                        {
+                            ImageUrl = "images/FiveNightsAtFreddysSecurityBreach/fnafSB-1.jpg",
+                            AltText = "Imagen 2 de fnaf security breach"
+                        },
+
+                        new ImageGame
+                        {
+                            ImageUrl = "images/FiveNightsAtFreddysSecurityBreach/fnafSB-2.jpg",
+                            AltText = "Imagen 3 de fnaf security breach"
+                        },
+
+                        new ImageGame
+                        {
+                            ImageUrl = "images/FiveNightsAtFreddysSecurityBreach/fnafSB-3.jpg",
+                            AltText = "Imagen 3 de fnaf security breach"
+                        },
+
+                        new ImageGame
+                        {
+                            ImageUrl = "images/FiveNightsAtFreddysSecurityBreach/fnafSB-4.jpg",
+                            AltText = "Imagen 4 de fnaf security breach"
+                        },
                     }
                 },
 
@@ -504,8 +738,8 @@ public class GameSeeder
                     ReleaseDate = new DateTime (2023, 12, 14),
                     Price = 3899,
                     Stock = 16,
-                    GameRequirementsId = 2,
-                    Sinopsis = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+                    GameRequirementsId = 3,
+                    Sinopsis = "Five Nights at Freddy’s: Help Wanted 2 es la secuela de la terrorífica experiencia de RV que ha dado nueva vida a la icónica franquicia de miedo. Como nuevo miembro del personal Fazbear, tendrás que demostrar que puedes destacar en todos los aspectos administrativos y de mantenimiento de la pizzería.",
                     AvgRating = null,
 
                     ImageGames = new List<ImageGame>
@@ -514,7 +748,31 @@ public class GameSeeder
                         {
                             ImageUrl = "images/FiveNightsAtFreddysHelpWanted2/FreddyHelpWanted2.png",
                             AltText = "Imagen 1 de fnaf help wanted 2"
-                        }
+                        },
+
+                        new ImageGame
+                        {
+                            ImageUrl = "images/FiveNightsAtFreddysHelpWanted2/fnafHW2-1.jpg",
+                            AltText = "Imagen 2 de fnaf help wanted 2"
+                        },
+
+                        new ImageGame
+                        {
+                            ImageUrl = "images/FiveNightsAtFreddysHelpWanted2/fnafHW2-2.jpg",
+                            AltText = "Imagen 3 de fnaf help wanted 2"
+                        },
+
+                        new ImageGame
+                        {
+                            ImageUrl = "images/FiveNightsAtFreddysHelpWanted2/fnafHW2-3.jpg",
+                            AltText = "Imagen 4 de fnaf help wanted 2"
+                        },
+
+                        new ImageGame
+                        {
+                            ImageUrl = "images/FiveNightsAtFreddysHelpWanted2/fnafHW2-4.jpg",
+                            AltText = "Imagen 5 de fnaf help wanted 2"
+                        },
                     }
                 },
 
@@ -527,7 +785,7 @@ public class GameSeeder
                     Price = 1950,
                     Stock = 100,
                     GameRequirementsId = 2,
-                    Sinopsis = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+                    Sinopsis = "Salta al pozo y sumérgete en un nuevo capítulo en el universo de Five Nights at Freddy's. Oswald deseaba que su ciudad, y su vida, no fueran tan aburridas. Todo cambia cuando explora la piscina de bolas en una pizzaria decadente y se encuentra en el pasado. Sin embargo, el deseo más profundo de Oswald tendrá un costo inesperado…\r\n\r\nExperimenta la emocionante aventura de una entrada querida en la franquicia de Five Nights at Freddy’s, Into the Pit.\r\nResuelve satisfactorios puzles entrelazados con una historia cargada de adrenalina.\r\nSumérjase en una experiencia narrativa.\r\nIntenta salvar a tus amigos, a tu familia y tu propia vida.\r\nDescubra secretos que abarcan décadas.\r\nDescubre diferentes finales.\r\nEscapa de las garras de las criaturas animatrónicas que causan estragos a través del tiempo.",
                     AvgRating = null,
 
                     ImageGames = new List<ImageGame>
@@ -536,7 +794,31 @@ public class GameSeeder
                         {
                             ImageUrl = "images/FiveNightsAtFreddysIntoThePit/FreddyIntoThePit.png",
                             AltText = "Imagen 1 de fnaf Into the pit"
-                        }
+                        },
+
+                        new ImageGame
+                        {
+                            ImageUrl = "images/FiveNightsAtFreddysIntoThePit/fnafIP-1.jpg",
+                            AltText = "Imagen 2 de fnaf Into the pit"
+                        },
+
+                        new ImageGame
+                        {
+                            ImageUrl = "images/FiveNightsAtFreddysIntoThePit/fnafIP-2.jpg",
+                            AltText = "Imagen 3 de fnaf Into the pit"
+                        },
+
+                        new ImageGame
+                        {
+                            ImageUrl = "images/FiveNightsAtFreddysIntoThePit/fnafIP-3.jpg",
+                            AltText = "Imagen 4 de fnaf Into the pit"
+                        },
+
+                        new ImageGame
+                        {
+                            ImageUrl = "images/FiveNightsAtFreddysIntoThePit/fnafIP-4.jpg",
+                            AltText = "Imagen 5 de fnaf Into the pit"
+                        },
                     }
                 },
 
