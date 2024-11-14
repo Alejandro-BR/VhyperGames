@@ -31,6 +31,10 @@
   margin: 0 10px 0 10px;
 }
 
+.rating{
+  min-width:27px ;
+  min-height: 22px;
+}
 .stock {
   color: var(--principal-green);
 }

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom"; 
+import { Link } from "react-router-dom";
 import classes from "./GameCard.module.css";
 import { BASE_URL } from "../../config";
 import Rating from "./Rating";
@@ -13,7 +13,7 @@ function GameCard({ id, title, stock, price, imgUrl, avgRating }) {
     } else {
       setIsStock(false);
     }
-  }, [stock]); 
+  }, [stock]);
 
   function precio() {
     console.log("Valor de avgRating para el juego:", title, avgRating);
@@ -21,12 +21,15 @@ function GameCard({ id, title, stock, price, imgUrl, avgRating }) {
   }
 
   return (
-    <Link to={`/juego/${id}`}> 
+    <Link to={`/juego/${id}`}>
       <div className={classes.container}>
         <img src={`${BASE_URL}${imgUrl}`} alt={title} className={classes.gameCardImg} />
         <div className={classes.cardTitle}>
           <h2>{title}</h2>
-          <Rating avgRating={avgRating} />
+          <div className={classes.rating}>
+            <Rating avgRating={avgRating} />
+          </div>
+
         </div>
         <div className={classes.cardPrice}>
           <p>{precio()} €</p>
