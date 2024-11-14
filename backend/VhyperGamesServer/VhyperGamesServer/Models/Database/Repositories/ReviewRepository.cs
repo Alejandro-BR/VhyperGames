@@ -41,4 +41,12 @@ public class ReviewRepository : Repository<Review, int>
             .Select(r => r.Rating)
             .ToListAsync();
     }
+
+    public async Task<Review?> GetReviewByUserAndGameAsync(int gameId, int userId)
+    {
+        return await _context.Reviews
+            .Include(r => r.User)
+            .Where(r => r.GameId == gameId && r.UserId == userId)
+            .FirstOrDefaultAsync();
+    }
 }

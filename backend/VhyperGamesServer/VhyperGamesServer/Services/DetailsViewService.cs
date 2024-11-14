@@ -94,9 +94,10 @@ public class DetailsViewService
         var user = await _unitOfWork.UserRepository.GetByIdAsync(newReviewDto.UserId);
         var game = await _unitOfWork.GameRepository.GetByIdAsync(newReviewDto.GameId);
 
-        if (await _unitOfWork.ReviewRepository.IsReviewed(newReviewDto.GameId, newReviewDto.UserId) != null)
+        var existingReview = await _unitOfWork.ReviewRepository.IsReviewed(newReviewDto.GameId, newReviewDto.UserId);
+        if (existingReview != null)
         {
-            throw new InvalidOperationException("Ya enviaste una reseña para este juego."); 
+            return _viewDetailsMapper.ReviewToDto(existingReview);
         }
 
         ModelOutput modelOutput = _iaService.Predict(newReviewDto.ReviewText);
@@ -148,4 +149,15 @@ public class DetailsViewService
 
         return positiveCount;
     }
+
+    public async Task<ReviewDto?> GetReviewByUserAndGameAsync(int gameId, int userId)
+    {
+        var review = await _unitOfWork.ReviewRepository.GetReviewByUserAndGameAsync(gameId, userId);
+
+        if (review == null)
+            return null;
+
+        return _viewDetailsMapper.ReviewToDto(review);
+    }
+
 }

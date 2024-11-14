@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TorchSharp.Utils;
+using VhyperGamesServer.Models.Database.Entities;
 using VhyperGamesServer.Models.Dtos;
 using VhyperGamesServer.Services;
 
@@ -84,4 +85,23 @@ public class DetailsViewController : ControllerBase
         }
     }
 
+    [HttpGet("get-user-review")]
+    [Authorize]
+    public async Task<ActionResult<ReviewDto>> GetReviewByUserAndGameAsync(int gameId)
+    {
+        var userIdClaim = User.FindFirst("id");
+        if (userIdClaim == null)
+            return Unauthorized(new { message = "Usuario no autenticado." });
+
+        if (!int.TryParse(userIdClaim.Value, out int userId))
+            return BadRequest(new { message = "ID de usuario no válido." });
+
+        // Obtener la reseña para el usuario autenticado y el juego especificado
+        var reviewDto = await _detailsViewService.GetReviewByUserAndGameAsync(gameId, userId);
+
+        if (reviewDto == null)
+            return Ok(new { reviewText = "", hasReview = false });
+
+        return Ok(new { review = reviewDto, hasReview = true });
+    }
 }
