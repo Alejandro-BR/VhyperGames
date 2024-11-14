@@ -86,7 +86,7 @@ public class GameSeeder
                     Price = 3000,
                     Stock = 100,
                     GameRequirementsId = 1,
-                    Sinopsis = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+                    Sinopsis = "The Elder Scrolls V: Skyrim Special Edition, ganador de más de 200 premios al “Juego del año”, da vida a la fantasía épica con un nivel de detalle asombroso. La Special Edition incluye el juego aclamado por la crítica y complementos con nuevas funcionalidades como gráficos y efectos renovados, rayos crepusculares volumétricos, reflejos en tiempo real, profundidad de campo dinámica y muchas más.\r\n\r\nAdemás, Skyrim Special Edition lleva el poder de las creaciones de Bethesda Game Studios a PC y a las consolas: nuevas misiones, entornos, personajes, diálogos, armaduras y armas, entre otras muchas cosas. ¡Con las creaciones, la experiencia no tiene límites!",
                     AvgRating = null,
 
                     ImageGames = new List<ImageGame>
@@ -95,6 +95,23 @@ public class GameSeeder
                         {
                             ImageUrl = "images/Skyrim/skyrim.png",
                             AltText = "Imagen 1 de Skyrim"
+                        },
+                         new ImageGame
+                        {
+                            ImageUrl = "images/Skyrim/1.png",
+                            AltText = "Imagen 2 de The Witcher III"
+                        },
+
+                         new ImageGame
+                        {
+                            ImageUrl = "images/Skyrim/2.png",
+                            AltText = "Imagen 3 de The Witcher III"
+                        },
+
+                         new ImageGame
+                        {
+                            ImageUrl = "images/Skyrim/3.png",
+                            AltText = "Imagen 4 de The Witcher III"
                         }
                     }
 
@@ -109,7 +126,7 @@ public class GameSeeder
                     Price = 1900,
                     Stock = 100,
                     GameRequirementsId = 2,
-                    Sinopsis = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+                    Sinopsis = "Vuelve Resident Evil 2, la obra maestra que definió un género, completamente renovado para una narrativa aún más intensa. Con el motor gráfico RE propietario de Capcom, Resident Evil 2 supone un nuevo enfoque de esta saga clásica del survival horror, con gráficos espectacularmente realistas, estremecedor sonido inmersivo, una nueva vista sobre el hombro y nuevos controles, además de modos de juego del título original.",
                     AvgRating = null,
 
                     ImageGames = new List<ImageGame>
@@ -118,7 +135,23 @@ public class GameSeeder
                         {
                             ImageUrl = "images/ResidentEvil2/residentevil2.png",
                             AltText = "Imagen 1 de Resident Evil 2"
+                        },
+                        new ImageGame
+                        {
+                            ImageUrl = "images/ResidentEvil2/1.png",
+                            AltText = "Imagen 2 de Resident Evil 2"
+                        },
+                        new ImageGame
+                        {
+                            ImageUrl = "images/ResidentEvil2/2.png",
+                            AltText = "Imagen 3 de Resident Evil 2"
+                        },
+                        new ImageGame
+                        {
+                            ImageUrl = "images/ResidentEvil2/3.png",
+                            AltText = "Imagen 4 de Resident Evil 2"
                         }
+
                     }
                 },
 
@@ -131,7 +164,7 @@ public class GameSeeder
                     Price = 4800,
                     Stock = 100,
                     GameRequirementsId = 3,
-                    Sinopsis = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+                    Sinopsis = "Entra en los dominios nórdicos\r\nKratos ha dejado atrás su venganza contra los dioses del Olimpo y vive ahora como un hombre en los dominios de los dioses y monstruos nórdicos. En este mundo cruel e implacable debe luchar para sobrevivir… y enseñar a su hijo a hacerlo también.\r\n\r\nAprovecha una segunda oportunidad\r\nKratos vuelve a ser padre. Como progenitor y protector de Atreus, un hijo decidido a ganarse el respeto del padre, Kratos debe sobrevivir en un mundo muy peligroso dominando y controlando la ira que tanto lo ha caracterizado.\r\n\r\nViaja a un mundo oscuro y elemental de criaturas temibles\r\nEste entorno inequívocamente nuevo, con su propio panteón de criaturas, monstruos y dioses, nos lleva desde las columnas de mármol del fastuoso Olimpo hasta los bosques agrestes, las montañas y las cuevas de la tradición nórdica anterior a los vikingos.",
                     AvgRating = null,
 
                     ImageGames = new List<ImageGame>
@@ -140,6 +173,21 @@ public class GameSeeder
                         {
                             ImageUrl = "images/GodOfWar/godofwar.png",
                             AltText = "Imagen 1 de God of War"
+                        },
+                        new ImageGame
+                        {
+                            ImageUrl = "images/GodOfWar/1.png",
+                            AltText = "Imagen 2 de God of War"
+                        },
+                        new ImageGame
+                        {
+                            ImageUrl = "images/GodOfWar/2.png",
+                            AltText = "Imagen 3 de God of War"
+                        },
+                        new ImageGame
+                        {
+                            ImageUrl = "images/GodOfWar/3.png",
+                            AltText = "Imagen 4 de God of War"
                         }
                     }
                 },
@@ -153,7 +201,7 @@ public class GameSeeder
                     Price = 4000,
                     Stock = 100,
                     GameRequirementsId = 3,
-                    Sinopsis = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+                    Sinopsis = "Frostpunk 2 eleva el género de la supervivencia urbana a otro nivel. Asume el papel de un Gobernante y lidera la ciudad a lo largo de una serie de calamidades que se desarrollan en un entorno nevado posapocalíptico. Construye grandes distritos con sus necesidades y demandas. Enfréntate a los conflictos de intereses de las distintas facciones que habitan en tu metrópolis. Al aumentar las necesidades de la ciudad y el poder de cada grupo, solo tú podrás dirigir la sociedad hacia un incierto futuro.",
                     AvgRating = null,
 
                     ImageGames = new List<ImageGame>
@@ -162,6 +210,21 @@ public class GameSeeder
                         {
                             ImageUrl = "images/Frostpunk2/frostpunk2.png",
                             AltText = "Imagen 1 de Frostpunk2"
+                        },
+                        new ImageGame
+                        {
+                            ImageUrl = "images/Frostpunk2/1.png",
+                            AltText = "Imagen 2 de Frostpunk2"
+                        },
+                        new ImageGame
+                        {
+                            ImageUrl = "images/Frostpunk2/2.png",
+                            AltText = "Imagen 3 de Frostpunk2"
+                        },
+                        new ImageGame
+                        {
+                            ImageUrl = "images/Frostpunk2/3.png",
+                            AltText = "Imagen 4 de Frostpunk2"
                         }
                     }
                 },
@@ -175,7 +238,7 @@ public class GameSeeder
                     Price = 880,
                     Stock = 0,
                     GameRequirementsId = 1,
-                    Sinopsis = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+                    Sinopsis = "¡Cava, lucha, explora, construye! Nada es imposible en este juego de aventuras repleto de acción. El mundo es tu lienzo y la tierra misma es tu pintura.\r\n¡Coge tus herramientas y adelante! Crea armas para deshacerte de una gran variedad de enemigos en numerosos ecosistemas. Excava profundo bajo tierra para encontrar accesorios, dinero y otras cosas muy útiles. Reúne recursos para crear todo lo que necesites y conformar así tu propio mundo. Construye una casa, un fuerte o incluso un castillo. La gente se mudará a vivir ahí e incluso quizás te vendan diferentes mercancías que te ayuden en tu viaje.",
                     AvgRating = null,
 
                     ImageGames = new List<ImageGame>
@@ -184,6 +247,21 @@ public class GameSeeder
                         {
                             ImageUrl = "images/Terraria/terraria.png",
                             AltText = "Imagen 1 de Terraria"
+                        },
+                        new ImageGame
+                        {
+                            ImageUrl = "images/Terraria/1.png",
+                            AltText = "Imagen 2 de Terraria"
+                        },
+                        new ImageGame
+                        {
+                            ImageUrl = "images/Terraria/2.png",
+                            AltText = "Imagen 3 de Terraria"
+                        },
+                        new ImageGame
+                        {
+                            ImageUrl = "images/Terraria/3.png",
+                            AltText = "Imagen 4 de Terraria"
                         }
                     }
                 },
@@ -197,7 +275,7 @@ public class GameSeeder
                     Price = 150,
                     Stock = 100,
                     GameRequirementsId = 2,
-                    Sinopsis = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+                    Sinopsis = "Desde una sola Célula hasta un Dios Galáctico, haz que tu criatura evolucione en el universo de tus propias creaciones.\r\nJuega a lo largo de las cinco etapas evolutivas de Spore: Célula, Criatura, Tribu, Civilización, y Espacio. Cada etapa está caracterizada por sus propios estilos, retos, y objetivos. Puedes jugar como quieras empieza por una célula y cría una especie desde organismo rudimental de marisma a viajador intergaláctico, o empieza en el medio y crea tribus o civilizaciones en nuevos planetas. Lo que hagas con tu universo es tu decisión.\r\nSpore te da una multitud de instrumentos potentes pero fáciles de usar así puedes encargarte de todos los aspectos de tu universo: criaturas, vehículos, edificios, y hasta naves espaciales. Aunque Spore sea un juego de un solo jugador, tus creaciones serán compartidas automáticamente con otros jugadores por lo que habrá un número infinito de mundos para explorar y jugar.",
                     AvgRating = null,
 
                     ImageGames = new List<ImageGame>
@@ -206,6 +284,21 @@ public class GameSeeder
                         {
                             ImageUrl = "images/Spore/spore.png",
                             AltText = "Imagen 1 de Spore"
+                        },
+                        new ImageGame
+                        {
+                            ImageUrl = "images/Spore/1.png",
+                            AltText = "Imagen 2 de Spore"
+                        },
+                        new ImageGame
+                        {
+                            ImageUrl = "images/Spore/2.png",
+                            AltText = "Imagen 3 de Spore"
+                        },
+                        new ImageGame
+                        {
+                            ImageUrl = "images/Spore/3.png",
+                            AltText = "Imagen 4 de Spore"
                         }
                     }
                 },
@@ -219,7 +312,7 @@ public class GameSeeder
                     Price = 265,
                     Stock = 100,
                     GameRequirementsId = 1,
-                    Sinopsis = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+                    Sinopsis = "Gris es una muchacha llena de esperanzas y perdida en su propio mundo, enfrentada a una experiencia dolorosa de su vida. Su viaje a través de la tristeza se manifiesta en su vestido, que le otorga nuevas habilidades para recorrer mejor su realidad difuminada. Según se desarrolla la historia, Gris madura emocionalmente y ve su mundo de un modo diferente, lo que revela nuevos caminos para explorar usando sus nuevas habilidades.",
                     AvgRating = null,
 
                     ImageGames = new List<ImageGame>
@@ -228,6 +321,21 @@ public class GameSeeder
                         {
                             ImageUrl = "images/GRIS/gris.png",
                             AltText = "Imagen 1 de GRIS"
+                        },
+                        new ImageGame
+                        {
+                            ImageUrl = "images/GRIS/1.png",
+                            AltText = "Imagen 2 de GRIS"
+                        },
+                        new ImageGame
+                        {
+                            ImageUrl = "images/GRIS/2.png",
+                            AltText = "Imagen 3 de GRIS"
+                        },
+                        new ImageGame
+                        {
+                            ImageUrl = "images/GRIS/3.png",
+                            AltText = "Imagen 4 de GRIS"
                         }
                     }
                 },
@@ -241,7 +349,7 @@ public class GameSeeder
                     Price = 5700,
                     Stock = 100,
                     GameRequirementsId = 3,
-                    Sinopsis = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+                    Sinopsis = "Cyberpunk 2077 es un RPG de aventura y acción de mundo abierto ambientado en la megalópolis de Night City, donde te pondrás en la piel de un mercenario o una mercenaria ciberpunk y vivirás su lucha a vida o muerte por la supervivencia. Mejorado y con contenido nuevo adicional gratuito. Personaliza tu personaje y tu estilo de juego a medida que aceptas trabajos, te labras una reputación y desbloqueas mejoras. Las relaciones que forjes y las decisiones que tomes darán forma al mundo que te rodea. Aquí nacen las leyendas. ¿Cuál será la tuya? Bienvenido al mundo del BUG!.",
                     AvgRating = null,
 
                     ImageGames = new List<ImageGame>
@@ -250,6 +358,22 @@ public class GameSeeder
                         {
                             ImageUrl = "images/Cyberpunk/cyberpunk.png",
                             AltText = "Imagen 1 de Cyberpunk"
+                        },
+                        new ImageGame
+                        {
+                            ImageUrl = "images/Cyberpunk/1.png",
+                            AltText = "Imagen 2 de Cyberpunk"
+                        }
+                        ,
+                        new ImageGame
+                        {
+                            ImageUrl = "images/Cyberpunk/2.png",
+                            AltText = "Imagen 3 de Cyberpunk"
+                        },
+                        new ImageGame
+                        {
+                            ImageUrl = "images/Cyberpunk/3.png",
+                            AltText = "Imagen 4 de Cyberpunk"
                         }
                     }
                 },
@@ -263,7 +387,7 @@ public class GameSeeder
                     Price = 5100,
                     Stock = 100,
                     GameRequirementsId = 2,
-                    Sinopsis = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+                    Sinopsis = "Disney Epic Mickey: Rebrushed da vida a la magia de Disney en un vibrante juego de plataformas en 3D. En este vistoso remake, Mickey Mouse se lanza a un viaje épico por el Páramo, un reino plagado de personajes Disney olvidados. En el papel de Mickey, tendrás que adentrarte en un mundo fantástico y, armado con pintura y disolvente, dar forma a tu aventura y al destino de esta dimensión alternativa.",
                     AvgRating = null,
 
                     ImageGames = new List<ImageGame>
@@ -272,6 +396,21 @@ public class GameSeeder
                         {
                             ImageUrl = "images/EpicMickey/epicmickey.png",
                             AltText = "Imagen 1 de Epic Mickey"
+                        },
+                        new ImageGame
+                        {
+                            ImageUrl = "images/EpicMickey/1.png",
+                            AltText = "Imagen 2 de Epic Mickey"
+                        },
+                        new ImageGame
+                        {
+                            ImageUrl = "images/EpicMickey/2.png",
+                            AltText = "Imagen 3 de Epic Mickey"
+                        },
+                        new ImageGame
+                        {
+                            ImageUrl = "images/EpicMickey/3.png",
+                            AltText = "Imagen 4 de Epic Mickey"
                         }
                     }
                 },
@@ -831,7 +970,7 @@ public class GameSeeder
                     Price = 2990,
                     Stock = 150,
                     GameRequirementsId = 3,
-                    Sinopsis = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+                    Sinopsis = "Resident Evil 7 biohazard es la siguiente gran entrega de la renombrada serie Resident Evil y supone un nuevo hito para la franquicia, puesto que se aprovecha de sus raíces y abre la puerta a una experiencia de miedo realmente terrorífica. Con su gran cambio a la vista en primera persona y un estilo fotorrealista gracias al nuevo motor de Capcom RE Engine, Resident Evil 7 trae un nivel sin precedentes de inmersión que logra una experiencia de terror muy cercana y personal.",
                     AvgRating = null,
 
                     ImageGames = new List<ImageGame>
@@ -840,6 +979,21 @@ public class GameSeeder
                         {
                             ImageUrl = "images/ResidentEvilBiohazard/Biohazard.png",
                             AltText = "Imagen 1 de Resident Evil Biohazard"
+                        },
+                        new ImageGame
+                        {
+                            ImageUrl = "images/ResidentEvilBiohazard/1.png",
+                            AltText = "Imagen 2 de Resident Evil Biohazard"
+                        },
+                        new ImageGame
+                        {
+                            ImageUrl = "images/ResidentEvilBiohazard/2.png",
+                            AltText = "Imagen 3 de Resident Evil Biohazard"
+                        },
+                        new ImageGame
+                        {
+                            ImageUrl = "images/ResidentEvilBiohazard/3.png",
+                            AltText = "Imagen 4 de Resident Evil Biohazard"
                         }
                     }
                 },
@@ -853,7 +1007,7 @@ public class GameSeeder
                     Price = 1790,
                     Stock = 200,
                     GameRequirementsId = 1,
-                    Sinopsis = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+                    Sinopsis = "Hades es un juego roguelike de exploración de mazmorras que combina los mejores aspectos de los aclamados títulos anteriores de Supergiant, como la acción rápida de Bastion, la atmósfera y la profundidad de Transistor y la narrativa centrada en los personajes de Pyre.",
                     AvgRating = null,
 
                     ImageGames = new List<ImageGame>
@@ -862,6 +1016,21 @@ public class GameSeeder
                         {
                             ImageUrl = "images/Hades/Hades.png",
                             AltText = "Imagen 1 de Hades"
+                        },
+                        new ImageGame
+                        {
+                            ImageUrl = "images/Hades/1.png",
+                            AltText = "Imagen 2 de Hades"
+                        },
+                        new ImageGame
+                        {
+                            ImageUrl = "images/Hades/2.png",
+                            AltText = "Imagen 3 de Hades"
+                        },
+                        new ImageGame
+                        {
+                            ImageUrl = "images/Hades/3.png",
+                            AltText = "Imagen 4 de Hades"
                         }
                     }
                 },
@@ -875,7 +1044,7 @@ public class GameSeeder
                     Price = 1590,
                     Stock = 0,
                     GameRequirementsId = 1,
-                    Sinopsis = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+                    Sinopsis = "Ayuda a Madeline a sobrevivir a los demonios de su interior en su viaje a la cima de la montaña Celeste; un ajustadísimo plataforma diseñado a mano por los creadores del clásico multijugador TowerFall. Los mandos son sencillos y accesibles: salta, acelera en el aire y escala, pero con varias capas de profundidad de expresión que habrá que dominar, pues cada muerte enseña una lección. Las reapariciones relámpago te permiten seguir escalando mientras desvelas misterios y te enfrentas a numerosos peligros.",
                     AvgRating = null,
 
                     ImageGames = new List<ImageGame>
@@ -884,6 +1053,21 @@ public class GameSeeder
                         {
                             ImageUrl = "images/Celeste/Celeste.png",
                             AltText = "Imagen 1 de Celeste"
+                        },
+                        new ImageGame
+                        {
+                            ImageUrl = "images/Celeste/1.png",
+                            AltText = "Imagen 2 de Celeste"
+                        },
+                        new ImageGame
+                        {
+                            ImageUrl = "images/Celeste/2.png",
+                            AltText = "Imagen 3 de Celeste"
+                        },
+                        new ImageGame
+                        {
+                            ImageUrl = "images/Celeste/3.png",
+                            AltText = "Imagen 4 de Celeste"
                         }
                     }
                 },
@@ -897,7 +1081,7 @@ public class GameSeeder
                     Price = 2790,
                     Stock = 80,
                     GameRequirementsId = 2,
-                    Sinopsis = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+                    Sinopsis = "Adéntrate en un universo lleno de enemigos y entornos descomunales, un mundo en ruinas en el que las llamas se están apagando. Los jugadores se sumergirán en la atmósfera épica de un mundo de oscuridad gracias a un juego más rápido y una intensidad de combate ampliada. Tanto fans como recién llegados disfrutarán de una acción gratificante y gráficos absorbentes.\r\nSolo quedan las ascuas... ¡Prepárate una vez más para sumergirte en la oscuridad!",
                     AvgRating = null,
 
                     ImageGames = new List<ImageGame>
@@ -906,6 +1090,21 @@ public class GameSeeder
                         {
                             ImageUrl = "images/DarkSoulsIII/DarkSoulsIII.png",
                             AltText = "Imagen 1 de Dark Souls III"
+                        },
+                        new ImageGame
+                        {
+                            ImageUrl = "images/DarkSoulsIII/1.png",
+                            AltText = "Imagen 2 de Dark Souls III"
+                        },
+                        new ImageGame
+                        {
+                            ImageUrl = "images/DarkSoulsIII/2.png",
+                            AltText = "Imagen 3 de Dark Souls III"
+                        },
+                        new ImageGame
+                        {
+                            ImageUrl = "images/DarkSoulsIII/3.png",
+                            AltText = "Imagen 4 de Dark Souls III"
                         }
                     }
                 },
@@ -919,7 +1118,7 @@ public class GameSeeder
                     Price = 1490,
                     Stock = 220,
                     GameRequirementsId = 1,
-                    Sinopsis = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+                    Sinopsis = "Acabas de heredar la vieja parcela agrícola de tu abuelo de Stardew Valley. Decides partir hacia una nueva vida con unas herramientas usadas y algunas monedas. ¿Te ves capaz de vivir de la tierra y convertir estos campos descuidados en un hogar próspero?",
                     AvgRating = null,
 
                     ImageGames = new List<ImageGame>
@@ -928,6 +1127,21 @@ public class GameSeeder
                         {
                             ImageUrl = "images/StardewValley/StardewValley.png",
                             AltText = "Imagen 1 de Stardew Valley"
+                        },
+                        new ImageGame
+                        {
+                            ImageUrl = "images/StardewValley/1.png",
+                            AltText = "Imagen 2 de Stardew Valley"
+                        },
+                        new ImageGame
+                        {
+                            ImageUrl = "images/StardewValley/2.png",
+                            AltText = "Imagen 3 de Stardew Valley"
+                        },
+                        new ImageGame
+                        {
+                            ImageUrl = "images/StardewValley/3.png",
+                            AltText = "Imagen 4 de Stardew Valley"
                         }
                     }
                 },
@@ -941,7 +1155,7 @@ public class GameSeeder
                     Price = 3590,
                     Stock = 110,
                     GameRequirementsId = 3,
-                    Sinopsis = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+                    Sinopsis = "Los ejércitos del infierno han invadido la Tierra. Ponte en la piel del Slayer en una épica campaña para un jugador y cruza dimensiones aniquilando demonios para detener la destrucción definitiva de la humanidad. Obtén lo que necesites de tus enemigos: consigue salud al ejecutarlos, armadura al incinerarlos y munición al destriparlos con la motosierra; conviértete en el matademonios supremo.",
                     AvgRating = null,
 
                     ImageGames = new List<ImageGame>
@@ -950,6 +1164,21 @@ public class GameSeeder
                         {
                             ImageUrl = "images/DOOMEternal/DOOMEternal.png",
                             AltText = "Imagen 1 de DOOM Eternal"
+                        },
+                        new ImageGame
+                        {
+                            ImageUrl = "images/DOOMEternal/1.png",
+                            AltText = "Imagen 2 de DOOM Eternal"
+                        },
+                        new ImageGame
+                        {
+                            ImageUrl = "images/DOOMEternal/2.png",
+                            AltText = "Imagen 3 de DOOM Eternal"
+                        },
+                        new ImageGame
+                        {
+                            ImageUrl = "images/DOOMEternal/3.png",
+                            AltText = "Imagen 4 de DOOM Eternal"
                         }
                     }
                 },
@@ -963,7 +1192,7 @@ public class GameSeeder
                     Price = 1250,
                     Stock = 180,
                     GameRequirementsId = 2,
-                    Sinopsis = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+                    Sinopsis = "Bajo la deteriorada ciudad de Petrópolis yace un antiguo reino en ruinas. A muchos les atrae la vida bajo la superficie y van en busca de riquezas, gloria o respuestas a viejos enigmas. Hollow Knight es una aventura de acción clásica en 2D ambientada en un vasto mundo interconectado. Explora cavernas tortuosas, ciudades antiguas y páramos mortales. Combate contra criaturas corrompidas, haz amistad con extraños insectos y resuelve los antiguos misterios que yacen en el corazón de reino.",
                     AvgRating = null,
 
                     ImageGames = new List<ImageGame>
@@ -972,6 +1201,21 @@ public class GameSeeder
                         {
                             ImageUrl = "images/HollowKnight/HollowKnight.png",
                             AltText = "Imagen 1 de Hollow Knight"
+                        },
+                        new ImageGame
+                        {
+                            ImageUrl = "images/HollowKnight/1.png",
+                            AltText = "Imagen 2 de Hollow Knight"
+                        },
+                        new ImageGame
+                        {
+                            ImageUrl = "images/HollowKnight/2.png",
+                            AltText = "Imagen 3 de Hollow Knight"
+                        },
+                        new ImageGame
+                        {
+                            ImageUrl = "images/HollowKnight/3.png",
+                            AltText = "Imagen 4 de Hollow Knight"
                         }
                     }
                 },
@@ -1122,7 +1366,7 @@ public class GameSeeder
                     Price = 6999,
                     Stock = 120,
                     GameRequirementsId = 3,
-                    Sinopsis = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+                    Sinopsis = "Reúne a tu grupo y regresa a los Reinos Olvidados en una historia de compañerismo, traición, sacrificio, supervivencia y la atracción de un poder absoluto.\r\n\r\nUnas misteriosas aptitudes empiezan a surgir en tu interior por obra de un parásito de los azotamentes que te han implantado en el cerebro. Resístete y vuelve a la oscuridad contra sí misma o abraza la corrupción y conviértete en el mal supremo.\r\n\r\nDe manos de los creadores de Divinity: Original Sin 2, llega un juego de rol para la nueva generación de consolas, ambientado en el mundo de Dungeons & Dragons.",
                     AvgRating = null,
 
                     ImageGames = new List<ImageGame>
@@ -1130,7 +1374,22 @@ public class GameSeeder
                         new ImageGame
                         {
                             ImageUrl = "images/BaldursGate3/BaldursGate3.png",
-                            AltText = "Imagen de Baldur's Gate 3"
+                            AltText = "Imagen 1 de Baldur's Gate 3"
+                        },
+                        new ImageGame
+                        {
+                            ImageUrl = "images/BaldursGate3/1.png",
+                            AltText = "Imagen 2 de Baldur's Gate 3"
+                        },
+                        new ImageGame
+                        {
+                            ImageUrl = "images/BaldursGate3/2.png",
+                            AltText = "Imagen 3 de Baldur's Gate 3"
+                        },
+                        new ImageGame
+                        {
+                            ImageUrl = "images/BaldursGate3/3.png",
+                            AltText = "Imagen 4 de Baldur's Gate 3"
                         }
                     }
                 },
