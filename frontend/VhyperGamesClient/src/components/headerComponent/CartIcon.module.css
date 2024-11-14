@@ -1,0 +1,26 @@
+.cartIconWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.icon {
+  cursor: pointer;
+  height: 30px; 
+}
+
+.cartCount {
+  position: absolute;
+  top: 0;
+  left: 55%;
+  background: var(--principal-purple);
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2px;
+
+}

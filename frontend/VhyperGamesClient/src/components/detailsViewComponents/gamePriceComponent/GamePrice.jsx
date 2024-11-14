@@ -52,25 +52,32 @@ const ProductCard = ({ id }) => {
         ? Math.min(prevState.quantity + 1, prevState.stock)
         : Math.max(prevState.quantity - 1, 0);
   
-      // Crear el objeto con id y cantidad
       const productData = {
         id, 
         quantity: newQuantity,
       };
-  
+
       const cart = JSON.parse(localStorage.getItem('cart')) || [];
   
-      // Verificamos si el producto ya existe en el carrito
       const existingProductIndex = cart.findIndex(item => item.id === id);
-      
+  
       if (existingProductIndex >= 0) {
-        // Si ya existe, actualizamos la cantidad
         cart[existingProductIndex].quantity = newQuantity;
+  
+        // Si la cantidad es 0 se elimina
+        if (newQuantity === 0) {
+          cart.splice(existingProductIndex, 1); 
+        }
       } else {
-        cart.push(productData);
+        if (newQuantity > 0) { // Se agrega si es mayor que 0
+          cart.push(productData);
+        }
       }
-
+  
       localStorage.setItem('cart', JSON.stringify(cart));
+  
+      // Evento carrito
+      window.dispatchEvent(new Event('cart-updated'));
   
       return { ...prevState, quantity: newQuantity };
     });
