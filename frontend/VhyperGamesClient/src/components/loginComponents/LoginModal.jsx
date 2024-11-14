@@ -55,6 +55,10 @@ function LoginModal({ onClose, onRegisterClick }) {
                         name: decodedToken.name
                     };
                 }
+                
+                // Forzar recarga de la página
+                window.location.reload();
+
                 onClose();
 
                 setTimeout(() => {

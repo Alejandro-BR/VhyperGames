@@ -103,6 +103,10 @@ function RegisterModal({ onClose }) {
           updateSessionStorage(token, "accessToken");
           
         }
+
+        // Forzar recarga de la página
+        window.location.reload();
+        
         onClose();
 
         setTimeout(() => {
