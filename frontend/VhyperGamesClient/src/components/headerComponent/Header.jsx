@@ -5,6 +5,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import LoginModal from "../loginComponents/LoginModal";
 import RegisterModal from "../registerComponents/RegisterModal";
+import CartIcon from "./CartIcon";
+
 
 function Header() {
   const [mostrarLogin, setMostrarLogin] = useState(false);
@@ -65,12 +67,8 @@ function Header() {
       </div>
 
       <div className={classes.icons}>
-        <img
-          className={classes.icon}
-          src="../icon/carrito_header.svg"
-          alt="cart"
-          onClick={messageCart}
-        />
+        <CartIcon onClick={messageCart}/>
+
         <img
           className={classes.icon}
           src="../icon/user_header.svg"
