@@ -23,7 +23,7 @@ public class GameSeeder
                     Genre = Genre.RPGDeAccion,
                     DrmFree = Drm.DrmFree,
                     ReleaseDate = new DateTime (2015, 05, 19),
-                    Price = 1800,
+                    Price = 1799,
                     Stock = 100,
                     GameRequirementsId = 2,
                     Sinopsis = "Uno de los RPGs más aclamados de todos los tiempos, ahora listo para una nueva generación.\n\n" +
@@ -83,7 +83,7 @@ public class GameSeeder
                     Genre = Genre.RPGDeAccion,
                     DrmFree = Drm.DrmFree,
                     ReleaseDate = new DateTime (2011, 11, 11),
-                    Price = 3000,
+                    Price = 2999,
                     Stock = 100,
                     GameRequirementsId = 1,
                     Sinopsis = "The Elder Scrolls V: Skyrim Special Edition, ganador de más de 200 premios al “Juego del año”, da vida a la fantasía épica con un nivel de detalle asombroso. La Special Edition incluye el juego aclamado por la crítica y complementos con nuevas funcionalidades como gráficos y efectos renovados, rayos crepusculares volumétricos, reflejos en tiempo real, profundidad de campo dinámica y muchas más.\r\n\r\nAdemás, Skyrim Special Edition lleva el poder de las creaciones de Bethesda Game Studios a PC y a las consolas: nuevas misiones, entornos, personajes, diálogos, armaduras y armas, entre otras muchas cosas. ¡Con las creaciones, la experiencia no tiene límites!",
@@ -123,7 +123,7 @@ public class GameSeeder
                     Genre = Genre.SurvivalHorror,
                     DrmFree = Drm.DrmFree,
                     ReleaseDate = new DateTime (2019, 01, 25),
-                    Price = 1900,
+                    Price = 1899,
                     Stock = 100,
                     GameRequirementsId = 2,
                     Sinopsis = "Vuelve Resident Evil 2, la obra maestra que definió un género, completamente renovado para una narrativa aún más intensa. Con el motor gráfico RE propietario de Capcom, Resident Evil 2 supone un nuevo enfoque de esta saga clásica del survival horror, con gráficos espectacularmente realistas, estremecedor sonido inmersivo, una nueva vista sobre el hombro y nuevos controles, además de modos de juego del título original.",
@@ -161,7 +161,7 @@ public class GameSeeder
                     Genre = Genre.AventuraAccion,
                     DrmFree = Drm.DrmFree,
                     ReleaseDate = new DateTime (2018, 04, 20),
-                    Price = 4800,
+                    Price = 4799,
                     Stock = 100,
                     GameRequirementsId = 3,
                     Sinopsis = "Entra en los dominios nórdicos\r\nKratos ha dejado atrás su venganza contra los dioses del Olimpo y vive ahora como un hombre en los dominios de los dioses y monstruos nórdicos. En este mundo cruel e implacable debe luchar para sobrevivir… y enseñar a su hijo a hacerlo también.\r\n\r\nAprovecha una segunda oportunidad\r\nKratos vuelve a ser padre. Como progenitor y protector de Atreus, un hijo decidido a ganarse el respeto del padre, Kratos debe sobrevivir en un mundo muy peligroso dominando y controlando la ira que tanto lo ha caracterizado.\r\n\r\nViaja a un mundo oscuro y elemental de criaturas temibles\r\nEste entorno inequívocamente nuevo, con su propio panteón de criaturas, monstruos y dioses, nos lleva desde las columnas de mármol del fastuoso Olimpo hasta los bosques agrestes, las montañas y las cuevas de la tradición nórdica anterior a los vikingos.",
@@ -198,7 +198,7 @@ public class GameSeeder
                     Genre = Genre.Estrategia,
                     DrmFree = Drm.DrmFree,
                     ReleaseDate = new DateTime (2024, 09, 20),
-                    Price = 4000,
+                    Price = 3999,
                     Stock = 100,
                     GameRequirementsId = 3,
                     Sinopsis = "Frostpunk 2 eleva el género de la supervivencia urbana a otro nivel. Asume el papel de un Gobernante y lidera la ciudad a lo largo de una serie de calamidades que se desarrollan en un entorno nevado posapocalíptico. Construye grandes distritos con sus necesidades y demandas. Enfréntate a los conflictos de intereses de las distintas facciones que habitan en tu metrópolis. Al aumentar las necesidades de la ciudad y el poder de cada grupo, solo tú podrás dirigir la sociedad hacia un incierto futuro.",
@@ -346,7 +346,7 @@ public class GameSeeder
                     Genre = Genre.RPGDeAccion,
                     DrmFree = Drm.DrmFree,
                     ReleaseDate = new DateTime (2020, 12, 10),
-                    Price = 5700,
+                    Price = 5699,
                     Stock = 100,
                     GameRequirementsId = 3,
                     Sinopsis = "Cyberpunk 2077 es un RPG de aventura y acción de mundo abierto ambientado en la megalópolis de Night City, donde te pondrás en la piel de un mercenario o una mercenaria ciberpunk y vivirás su lucha a vida o muerte por la supervivencia. Mejorado y con contenido nuevo adicional gratuito. Personaliza tu personaje y tu estilo de juego a medida que aceptas trabajos, te labras una reputación y desbloqueas mejoras. Las relaciones que forjes y las decisiones que tomes darán forma al mundo que te rodea. Aquí nacen las leyendas. ¿Cuál será la tuya? Bienvenido al mundo del BUG!.",
@@ -384,7 +384,7 @@ public class GameSeeder
                     Genre = Genre.Plataforma,
                     DrmFree = Drm.DrmFree,
                     ReleaseDate = new DateTime (2010, 11, 25),
-                    Price = 5100,
+                    Price = 5099,
                     Stock = 100,
                     GameRequirementsId = 2,
                     Sinopsis = "Disney Epic Mickey: Rebrushed da vida a la magia de Disney en un vibrante juego de plataformas en 3D. En este vistoso remake, Mickey Mouse se lanza a un viaje épico por el Páramo, un reino plagado de personajes Disney olvidados. En el papel de Mickey, tendrás que adentrarte en un mundo fantástico y, armado con pintura y disolvente, dar forma a tu aventura y al destino de esta dimensión alternativa.",
@@ -1400,13 +1400,19 @@ public class GameSeeder
                     Genre = Genre.RPGDeAccion,
                     DrmFree = Drm.DrmFree,
                     ReleaseDate = new DateTime (2015, 05, 19),
-                    Price = 4900,
+                    Price = 4899,
                     Stock = 100,
                     GameRequirementsId = 2,
                     Sinopsis = "En Sekiro™: Shadows Die Twice encarnas al 'lobo manco', un guerrero desfigurado y caído en desgracia que ha sido rescatado al borde de la muerte. Tras jurar proteger a un joven señor descendiente de un antiguo linaje, te conviertes en el objetivo de despiadados enemigos, entre ellos el peligroso clan Ashina. Cuando el joven señor sea capturado, nada te detendrá en tu peligrosa aventura por restituir tu honor, ni siquiera la muerte.\r\n\r\nExplora el Japón de la era Sengoku de finales del siglo XVI, un brutal periodo de constante conflicto, mientras te enfrentas a inconmensurables enemigos en un mundo oscuro y tortuoso. Despliega un arsenal de instrumentos protésicos letales y poderosas habilidades ninja, al mismo tiempo que combinas el sigilo, la verticalidad y transversalidad, y los viscerales combates cara a cara en una sangrienta confrontación.\r\n\r\nVéngate. Restituye tu honor. Mata con ingenio.",
                     AvgRating = null,
                     ImageGames = new List<ImageGame>
                     {
+
+                        new ImageGame
+                        {
+                            ImageUrl = "images/Sekiro/caratula.png",
+                            AltText = "1"
+                        },
 
                         new ImageGame
                         {
