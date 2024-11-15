@@ -1393,6 +1393,54 @@ public class GameSeeder
                         }
                     }
                 },
+
+                new Game {
+                    Title = "Sekiro: Shadows Die Twice",
+                    Description = "Traza tu propio camino hacia la venganza en la galardonada aventura de FromSoftware, creadores de la saga Dark Souls.",
+                    Genre = Genre.RPGDeAccion,
+                    DrmFree = Drm.DrmFree,
+                    ReleaseDate = new DateTime (2015, 05, 19),
+                    Price = 4900,
+                    Stock = 100,
+                    GameRequirementsId = 2,
+                    Sinopsis = "En Sekiro™: Shadows Die Twice encarnas al 'lobo manco', un guerrero desfigurado y caído en desgracia que ha sido rescatado al borde de la muerte. Tras jurar proteger a un joven señor descendiente de un antiguo linaje, te conviertes en el objetivo de despiadados enemigos, entre ellos el peligroso clan Ashina. Cuando el joven señor sea capturado, nada te detendrá en tu peligrosa aventura por restituir tu honor, ni siquiera la muerte.\r\n\r\nExplora el Japón de la era Sengoku de finales del siglo XVI, un brutal periodo de constante conflicto, mientras te enfrentas a inconmensurables enemigos en un mundo oscuro y tortuoso. Despliega un arsenal de instrumentos protésicos letales y poderosas habilidades ninja, al mismo tiempo que combinas el sigilo, la verticalidad y transversalidad, y los viscerales combates cara a cara en una sangrienta confrontación.\r\n\r\nVéngate. Restituye tu honor. Mata con ingenio.",
+                    AvgRating = null,
+                    ImageGames = new List<ImageGame>
+                    {
+
+                        new ImageGame
+                        {
+                            ImageUrl = "images/Sekiro/1.png",
+                            AltText = "1"
+                        },
+
+                        new ImageGame
+                        {
+                            ImageUrl = "images/Sekiro/2.png",
+                            AltText = "1"
+                        },
+
+                        new ImageGame
+                        {
+                            ImageUrl = "images/Sekiro/3.png",
+                            AltText = "1"
+                        },
+
+                        new ImageGame
+                        {
+                            ImageUrl = "images/Sekiro/4.png",
+                            AltText = "1"
+                        },
+
+                        new ImageGame
+                        {
+                            ImageUrl = "images/Sekiro/5.png",
+                            AltText = "1"
+                        }
+
+                    }
+
+                },
             ];
 
         _context.Games.AddRange(games);
