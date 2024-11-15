@@ -1,7 +1,7 @@
 .priceCard {
   display: flex;
   width: 360px;
-  height: 220px;
+  height: fit-content;
   color: white;
   padding: 20px;
   border-radius: 8px;

@@ -11,3 +11,4 @@ export const DETAILS_VIEW_GAME_PRICE = `${API_BASE_URL}detailsview/game-price`;
 export const GAME_REQUERIMENTS = `${API_BASE_URL}detailsview/game-requirements`;
 export const NEW_REVIEW = `${API_BASE_URL}detailsview/new-review`;
 export const GET_REVIEW_BY_USER = `${API_BASE_URL}detailsview/get-user-review`;
+export const GET_REVIEW = `${API_BASE_URL}DetailsView/game-reviews`;

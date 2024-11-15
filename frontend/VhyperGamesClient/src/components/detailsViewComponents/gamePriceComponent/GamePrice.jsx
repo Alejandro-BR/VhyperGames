@@ -33,7 +33,7 @@ const ProductCard = ({ id }) => {
 
         setProductPriceData({
           price: data.price,
-          avgRating:  data.avgRating, 
+          avgRating: data.avgRating,
           stock: data.stock,
           quantity: data.quantity || 0,
         });
@@ -51,38 +51,38 @@ const ProductCard = ({ id }) => {
       const newQuantity = operation === "increase"
         ? Math.min(prevState.quantity + 1, prevState.stock)
         : Math.max(prevState.quantity - 1, 0);
-  
+
       const productData = {
-        id, 
+        id,
         quantity: newQuantity,
       };
 
       const cart = JSON.parse(localStorage.getItem('cart')) || [];
-  
+
       const existingProductIndex = cart.findIndex(item => item.id === id);
-  
+
       if (existingProductIndex >= 0) {
         cart[existingProductIndex].quantity = newQuantity;
-  
+
         // Si la cantidad es 0 se elimina
         if (newQuantity === 0) {
-          cart.splice(existingProductIndex, 1); 
+          cart.splice(existingProductIndex, 1);
         }
       } else {
         if (newQuantity > 0) { // Se agrega si es mayor que 0
           cart.push(productData);
         }
       }
-  
+
       localStorage.setItem('cart', JSON.stringify(cart));
-  
+
       // Evento carrito
       window.dispatchEvent(new Event('cart-updated'));
-  
+
       return { ...prevState, quantity: newQuantity };
     });
   };
-  
+
 
   //Según el rating, muestra 1, 2 o 3 aviones con su color.
   const getPlaneCount = (avgRating) => {
@@ -95,7 +95,7 @@ const ProductCard = ({ id }) => {
   const planeCount = getPlaneCount(productPriceData.avgRating);
 
   const price = () => {
-    return (productPriceData.price / 100).toFixed(2).replace('.',',');
+    return (productPriceData.price / 100).toFixed(2).replace('.', ',');
   };
 
   if (loading) return <div>Cargando...</div>;
@@ -104,57 +104,57 @@ const ProductCard = ({ id }) => {
 
 
   return (
-<div className={classes.priceCard}>
+    <div className={classes.priceCard}>
 
-<div className={classes.leftPlane}>
-  <img src="../../icon/avion-detalle.svg" alt="Avion detalle" className={classes.planeIcon} />
-</div>
+      <div className={classes.leftPlane}>
+        <img src="../../icon/avion-detalle.svg" alt="Avion detalle" className={classes.planeIcon} />
+      </div>
 
-  <div className={classes.leftColumn}>
-    <div className={classes.productCode}>
-      <p className={classes.productCode}>Código: </p>
-      <p className={classes.productId}>PROD-{id}</p>
-    </div>
+      <div className={classes.leftColumn}>
+        <div className={classes.productCode}>
+          <p className={classes.productCode}>Código: </p>
+          <p className={classes.productId}>PROD-{id}</p>
+        </div>
 
-    <div className={classes.price}>
-      <div><p>PRECIO</p></div>
-      <p className={classes.priceEUR}>{price()} €</p>
-    </div>
+        <div className={classes.price}>
+          <div><p>PRECIO</p></div>
+          <p className={classes.priceEUR}>{price()} €</p>
+        </div>
 
-    <div className={classes.rating}>
-      <p className={classes.label}>VALORACIÓN</p>
-      <div className={classes.planesContainer}>
-        {productPriceData.avgRating === null ? (
-          <p className={classes.noReviews}>No existen reseñas.</p>
-        ) : (
-          [...Array(planeCount)].map((_, index) => (
-            <Rating key={index} avgRating={productPriceData.avgRating} />
-          ))
-        )}
+        <div className={classes.rating}>
+          <p className={classes.label}>VALORACIÓN</p>
+          <div className={classes.planesContainer}>
+            {productPriceData.avgRating === null ? (
+              <p className={classes.noReviews}>No existen reseñas.</p>
+            ) : (
+              [...Array(planeCount)].map((_, index) => (
+                <Rating key={index} avgRating={productPriceData.avgRating} />
+              ))
+            )}
+          </div>
+        </div>
+      </div>
+
+      <div className={classes.rightColumn}>
+        <div className={classes.stockStatus}>
+          {productPriceData.stock > 0 ? (
+            <span className={classes.inStock}>EN STOCK</span>
+          ) : (
+            <span className={classes.outOfStock}>SIN STOCK</span>
+          )}
+        </div>
+
+        <div className={classes.cartIcon}>
+          <img src="../../icon/carrito_header.svg" alt="Carrito" />
+        </div>
+
+        <div className={classes.quantityControls}>
+          <button onClick={() => handleQuantityChange("decrease")}>-</button>
+          <span>{productPriceData.quantity}</span>
+          <button onClick={() => handleQuantityChange("increase")}>+</button>
+        </div>
       </div>
     </div>
-  </div>
-
-  <div className={classes.rightColumn}>
-    <div className={classes.stockStatus}>
-      {productPriceData.stock > 0 ? (
-        <span className={classes.inStock}>EN STOCK</span>
-      ) : (
-        <span className={classes.outOfStock}>SIN STOCK</span>
-      )}
-    </div>
-
-    <div className={classes.cartIcon}>
-      <img src="../../icon/carrito_header.svg" alt="Carrito" />
-    </div>
-
-    <div className={classes.quantityControls}>
-      <button onClick={() => handleQuantityChange("decrease")}>-</button>
-      <span>{productPriceData.quantity}</span>
-      <button onClick={() => handleQuantityChange("increase")}>+</button>
-    </div>
-  </div>
-</div>
   );
 };
 
