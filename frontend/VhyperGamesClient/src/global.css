@@ -70,8 +70,6 @@ body {
   background-color: var(--body-color);
   font-family: 'UniversCnBold', sans-serif;
   line-height: 1.4;
-  -webkit-user-select: none;
-  user-select: none; 
 }
 
 body::-webkit-scrollbar {
