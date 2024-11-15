@@ -26,7 +26,16 @@ public class CartMapper
         return cartDetail.Select(cartDetail => ToCartGameDto(cartDetail));
     }
 
+    public CartPaymentDto ToCartPaymentDto(Cart cart)
+    {
+        return new CartPaymentDto
+        {
+            UserId = cart.UserId,
 
+            CartId = cart.Id,
 
+            Games = (List<CartGameDto>)ToListCartGameDto(cart.CartDetails)
+        };
+    }
 
 }
