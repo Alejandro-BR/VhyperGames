@@ -10,4 +10,19 @@ public class CartPaymentDto
 
     public int TotalPrice { get; set; }
 
+    public CartPaymentDto()
+    {
+        TotalPrice = GetSumTotal();
+    }
+
+    public int GetSumTotal()
+    {
+        int precioTotal = 0;
+
+        foreach (var g in Games)
+        {
+            precioTotal += g.TotalPrice;
+        }
+        return precioTotal;
+    }
 }
