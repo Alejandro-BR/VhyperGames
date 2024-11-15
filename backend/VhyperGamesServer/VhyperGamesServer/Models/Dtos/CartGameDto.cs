@@ -12,6 +12,8 @@ public class CartGameDto
 
     public int Price { get; set; }
 
+    public int TotalPrice => Price * Quantity;
+
     public ImageGame ImageGames { get; set; }
 
     public int Quantity { get; set; }
