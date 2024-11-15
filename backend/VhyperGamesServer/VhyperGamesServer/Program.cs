@@ -51,7 +51,7 @@ public class Program
 
         // Inyección de IA
         builder.Services.AddPredictionEnginePool<ModelInput, ModelOutput>()
-            .FromFile("PruebaIADAW.mlnet");
+            .FromFile("IA.mlnet");
 
         // Configuración de CORS
         if (builder.Environment.IsDevelopment())

@@ -138,7 +138,7 @@ const ProductCard = ({ id }) => {
       <div className={classes.rightColumn}>
         <div className={classes.stockStatus}>
           {productPriceData.stock > 0 ? (
-            <span className={classes.inStock}>EN STOCK</span>
+            <span className={classes.inStock}>EN STOCK: {productPriceData.stock}</span>
           ) : (
             <span className={classes.outOfStock}>SIN STOCK</span>
           )}
