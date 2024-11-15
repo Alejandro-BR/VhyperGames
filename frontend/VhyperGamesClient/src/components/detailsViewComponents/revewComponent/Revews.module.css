@@ -1,10 +1,19 @@
+.titles{
+  display: flex;
+  gap: 10px;
+}
+
+.palito{
+  color: var(--principal-purple);
+}
 .reviewsContainer {
   display: flex;
   flex-direction: column;
   gap: 10px;
   width: auto;
-  height: 230px;
-  overflow-y: auto;
+  height: 260px;
+  overflow-y:auto;
+  
 }
 
 .reviewContainer {
@@ -14,6 +23,7 @@
   border: 4px solid var(--principal-purple);
   padding: 20px;
   gap: 20px;
+  border-radius: 8px;
 }
 
 .leftReview {
@@ -37,3 +47,16 @@
 .reviewDate{
   font-size: 0.9em;
 }
+
+.reviewsContainer::-webkit-scrollbar {
+  width: 12px;               
+}
+
+.ratingPlains{
+  width: 90px;
+}
+.reviewsContainer::-webkit-scrollbar-thumb {
+  background-color: var(--principal-purple);    
+  border-radius: 20px;       
+  border: 3px solid var(--body-color); 
+} 

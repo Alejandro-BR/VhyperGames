@@ -19,15 +19,18 @@
 .view-details__price-newreview {
   grid-area: price-newreview;
   display: grid;
-  gap: 60px;
+  gap: 30px;
 }
 
 .view-details__system-requirements {
   grid-area: system-requirements;
+  padding-top: 20px;
 }
 
 .view-details__reviews {
   grid-area: reviews;
+  margin:0 20px 20px 0;
+
 }
 
 /* .view-details__box {  

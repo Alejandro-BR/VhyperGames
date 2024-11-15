@@ -7,6 +7,7 @@ function Reviews({ id }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [reviews, setReviews] = useState([]);
+  const [totalReviews, setTotalReviews] = useState(null)
 
   useEffect(() => {
     if (id === 0) {
@@ -26,6 +27,7 @@ function Reviews({ id }) {
         const data = await response.json();
 
         setReviews(data.reviews);
+        setTotalReviews(data.totalReviews)
       } catch (error) {
         setError(error.message);
       } finally {
@@ -48,7 +50,11 @@ function Reviews({ id }) {
 
   return (
     <>
-      <h1>Reseñas :</h1>
+      <div className={classes.titles}>
+        <h1 className={classes.palito}>❙</h1>
+        <h1>Reseñas : {totalReviews}</h1>
+      </div>
+
       <div className={classes.reviewsContainer}>
         {reviews.map((review) => (
 
@@ -59,7 +65,7 @@ function Reviews({ id }) {
             </div>
 
             <div className={classes.rightReview}>
-              <div>
+              <div className={classes.ratingPlains}>
                 {[...Array(getPlaneCount(review.rating))].map((_, index) => (
                   <Rating key={review.id + index} avgRating={review.rating} />
                 ))}

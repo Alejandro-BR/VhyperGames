@@ -74,6 +74,24 @@ body {
   user-select: none; 
 }
 
+body::-webkit-scrollbar {
+  width: 12px;               
+}
+
+
+
+body::-webkit-scrollbar-track {
+  background: var(--header-footer-color);
+}
+
+body::-webkit-scrollbar-thumb {
+  /* display: none; */
+  background-color: var(--led-purple);    
+  border-radius: 20px;       
+  border: 3px solid var(--principal-purple); 
+} 
+
+
 /* CLASES GENERALES */
 
 .generalContainer {
