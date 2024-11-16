@@ -1,19 +1,20 @@
+/* Estilos del header */
 .header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   position: sticky;
-  height: 5vh;
   top: 0;
+  height: 5vh; 
   background-color: var(--header-footer-color);
   z-index: 10;
   padding: 20px;
 }
 
+/* Contenedor del logo y botón de catálogo */
 .left {
   display: flex;
   align-items: center;
-  justify-content: center;
   gap: 100px;
 }
 
@@ -22,30 +23,34 @@
   cursor: pointer;
 }
 
+.buttonHeader {
+  display: flex;
+  align-items: center;
+}
+
+/* Barra de búsqueda centrada */
 .searchBar {
-  display: grid;
-  grid-template-columns: 1fr 8fr 1fr;
-  gap: 20px;
+  display: flex;
+  align-items: center;
   background-color: var(--body-color);
   height: 30px;
   width: 50%;
-  justify-items: center;
-  align-items: center;
-  justify-content: center;
-  align-content: center;
   border-radius: 20px;
+  padding: 0 10px;
+  gap: 10px;
 }
 
 .menu {
-  height: 25%;
+  height: 50%;
+  cursor: pointer;
 }
 
 .intoSearchBar {
+  flex: 1;
   color: white;
-  width: 100%;
-  height: auto;
   background-color: var(--body-color);
   border: none;
+  padding: 0 10px;
 }
 
 .intoSearchBar::placeholder {
@@ -54,16 +59,53 @@
 }
 
 .search {
-  height: 25%;
+  height: 75%;
   cursor: pointer;
 }
 
+/* Contenedor de iconos a la derecha */
 .icons {
   display: flex;
-  gap:50px;
-  height: 40px;
+  align-items: center;
+  gap: 50px;
 }
 
-.icon {
+
+.userContainer {
+  display: flex;
+  flex-direction: column; 
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.user {
   cursor: pointer;
 }
+
+.userLabel {
+  font-size: 12px;
+  color: #fff; 
+  text-align: center;
+}
+
+.userIconWrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.logoutContainer {
+  position: absolute;
+  top: 120%;
+  left: 50%;
+  display: flex;
+  align-items: center;
+  transform: translateX(-50%);
+  background-color: var(--header-footer-color);
+  border: 1px solid #fff;
+  border-radius: 5px;
+  padding: 5px;
+  cursor: pointer;
+}
+
+
