@@ -1,35 +1,35 @@
-.priceCard {
+.price-card {
   display: flex;
   width: 360px;
   height: fit-content;
   color: white;
   padding: 20px;
   border-radius: 8px;
-  gap: 20px; 
+  gap: 20px;
 }
 
-.leftPlane {
+.price-card__left-plane {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 20%;  
-  height: 100%; 
+  width: 20%;
+  height: 100%;
   position: relative;
 }
 
-.planeIcon {
-  width: auto; 
+.price-card__plane-icon {
+  width: auto;
   height: 100%;
 }
 
-.leftColumn {
+.price-card__left-column {
   display: flex;
   flex-direction: column;
   gap: 20px;
   flex-grow: 1;
 }
 
-.productCode {
+.price-card__product-code {
   display: flex;
   align-items: center;
   gap: 6px;
@@ -37,78 +37,78 @@
   color: white;
 }
 
-.productId{
+.price-card__product-id {
   font-size: 0.9em;
   color: white;
 }
 
-.price {
+.price-card__price {
   font-size: 1.25em;
   font-weight: lighter;
 }
 
-.priceEUR {
+.price-card__price-eur {
   font-size: 2.2em;
   margin-left: 28px;
 }
 
-.label {
+.price-card__label {
   font-size: 1.25em;
 }
 
-.rating {
+.price-card__rating {
   font-size: 1em;
 }
 
-.planesContainer {
+.price-card__planes-container {
   display: flex;
   gap: 6px;
 }
 
-.planesContainer svg {
-  width: 32px; 
-  height: 32px; 
+.price-card__planes-container svg {
+  width: 32px;
+  height: 32px;
 }
 
-.noReviews {
+.price-card__no-reviews {
   color: #a0a0a0;
 }
 
-.rightColumn {
+.price-card__right-column {
   display: flex;
   flex-direction: column;
-  align-items: center; 
+  align-items: center;
   gap: 10px;
-  justify-content: center; 
+  justify-content: center;
   padding-bottom: 30px;
 }
 
-.stockStatus {
+.price-card__stock-status {
   font-size: 1em;
   text-align: center;
 }
 
-.inStock {
+.price-card__stock-status--in-stock {
   color: #00ff00;
 }
 
-.outOfStock {
+.price-card__stock-status--out-of-stock {
   color: #ff0000;
 }
 
-.cartIcon img {
+.price-card__cart-icon img {
   width: 24px;
   height: 24px;
   cursor: pointer;
 }
 
-.quantityControls {
+.price-card__quantity-controls {
   display: flex;
   align-items: center;
   gap: 10px;
 }
 
-.quantityControls button {
+.price-card__quantity-controls button {
   display: flex;
   align-items: center;
   justify-content: center;
