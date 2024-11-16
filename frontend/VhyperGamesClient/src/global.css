@@ -84,9 +84,9 @@ body::-webkit-scrollbar-track {
 
 body::-webkit-scrollbar-thumb {
   /* display: none; */
-  background-color: var(--led-purple);    
+  background-color:  var(--led-purple);    
   border-radius: 20px;       
-  border: 3px solid var(--principal-purple); 
+  border: 3px outset var(--principal-purple); 
 } 
 
 
