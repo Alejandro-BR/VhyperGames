@@ -14,5 +14,6 @@ public class CartDetail
     public Cart Cart { get; set; }
 
     [JsonIgnore]
-    public Game Game { get; set; } 
+    public Game Game { get; set; }
+    public int Price { get; internal set; }
 }

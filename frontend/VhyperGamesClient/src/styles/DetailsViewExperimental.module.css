@@ -1,0 +1,11 @@
+.container{
+  padding-left: 40px;
+}
+
+
+.info{
+  display: grid;
+  grid-template-columns: 1.5fr 1fr; 
+  grid-template-rows: auto auto;
+
+}

@@ -95,8 +95,7 @@ function Header() {
       </div>
 
       <div className={classes.icons}>
-        <CartIcon onClick={messageCart} />
-
+        <CartIcon onClick={() => navigate("/cart")} />
 
         <div
           className={classes.userIconWrapper}
