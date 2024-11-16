@@ -4,6 +4,7 @@ import Catalogo from './pages/Catalogo';
 import Error from './pages/Error';
 import SobreNosotros from './pages/SobreNosotros';
 import ViewDetails from './pages/DetailsView';
+import { AuthProvider } from '../src/context/authcontext';
 
 import {
   createBrowserRouter,
@@ -26,7 +27,10 @@ const routeDefinition = createRoutesFromElements(
 const router = createBrowserRouter(routeDefinition);
 
 function App() {
-  return <RouterProvider router={router}></RouterProvider>;
-}
+  return (
+    <AuthProvider>
+      <RouterProvider router={router}></RouterProvider>;
+    </AuthProvider>
+)}
 
 export default App;
