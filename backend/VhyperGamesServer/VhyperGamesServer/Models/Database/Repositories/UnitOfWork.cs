@@ -11,16 +11,17 @@ public class UnitOfWork
     private GameRepository _gameRepository;
     private RequerimentRepository _requerimentRepository;
     private ReviewRepository _reviewRepository;
-    private CartDetailsRepository _cartDetailsRepository;
     private CartRepository _cartRepository;
+    private CartDetailsRepository _cartDetailsRepository;
+    
 
     public UserRepository UserRepository => _userRepository ??= new UserRepository(_myDbContext);
     public GameRepository GameRepository => _gameRepository ??= new GameRepository(_myDbContext);
     public ReviewRepository ReviewRepository => _reviewRepository ??= new ReviewRepository(_myDbContext);
     public RequerimentRepository RequerimentRepository => _requerimentRepository ??= new RequerimentRepository(_myDbContext);
-
-    public CartDetailsRepository CartDetailsRepository => _cartDetailsRepository ??= new CartDetailsRepository(_myDbContext);
     public CartRepository CartRepository => _cartRepository ??= new CartRepository(_myDbContext);
+    public CartDetailsRepository CartDetailsRepository => _cartDetailsRepository ??= new CartDetailsRepository(_myDbContext);
+    
 
     public UnitOfWork(MyDbContext myDbContext)
     {
