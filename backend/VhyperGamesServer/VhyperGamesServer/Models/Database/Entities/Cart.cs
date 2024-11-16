@@ -10,6 +10,11 @@ public class Cart
     public int UserId { get; set; }
 
     [JsonIgnore]
-    public List<CartDetail> CartDetails { get; set; } = new List<CartDetail>();
+    public List<CartDetail> CartDetails { get; set; };
+
+    public Cart()
+    {
+        CartDetails = new List<CartDetail>();
+    }
 
 }
