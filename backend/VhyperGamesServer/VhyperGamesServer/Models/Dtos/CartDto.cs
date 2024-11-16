@@ -1,6 +1,6 @@
 ﻿namespace VhyperGamesServer.Models.Dtos;
 
-public class CartPaymentDto
+public class CartDto
 {
     public int UserId { get; set; }
 
@@ -10,7 +10,7 @@ public class CartPaymentDto
 
     public int TotalPrice { get; set; }
 
-    public CartPaymentDto()
+    public CartDto()
     {
         TotalPrice = GetSumTotal();
     }

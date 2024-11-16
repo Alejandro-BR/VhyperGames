@@ -26,9 +26,9 @@ public class CartMapper
         return cartDetail.Select(cartDetail => ToCartGameDto(cartDetail));
     }
 
-    public CartPaymentDto ToCartPaymentDto(Cart cart)
+    public CartDto ToCartPaymentDto(Cart cart)
     {
-        return new CartPaymentDto
+        return new CartDto
         {
             UserId = cart.UserId,
 

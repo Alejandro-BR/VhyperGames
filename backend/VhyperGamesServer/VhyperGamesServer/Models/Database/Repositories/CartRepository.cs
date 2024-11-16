@@ -1,4 +1,6 @@
-﻿using VhyperGamesServer.Models.Database.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using TorchSharp.Modules;
+using VhyperGamesServer.Models.Database.Entities;
 
 namespace VhyperGamesServer.Models.Database.Repositories;
 
@@ -8,5 +10,12 @@ public class CartRepository : Repository<Cart, int>
     public CartRepository(MyDbContext context) : base(context)
     {
         _context = context;
+    }
+
+    public async Task<Cart> GetByIdCart(int id)
+    {
+        return await Context.Set<Cart>()
+            .Include(c => c.CartDetails)
+            .FirstOrDefaultAsync(c => c.Id == id);
     }
 }

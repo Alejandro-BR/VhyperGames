@@ -15,12 +15,18 @@ public class CartService
         _cartMapper = cartMapper;
     }
 
-    public async Task<CartPaymentDto> UpdateCart(CartPaymentDto cartDto)
+    public async Task<CartDto> UpdateCart(CartDto cartDto)
     {
-        Cart cart = await _unitOfWork.CartRepository.GetByIdAsync(cartDto.CartId);
+        Cart cart = await _unitOfWork.CartRepository.GetByIdCart(cartDto.CartId);
 
-        if (cart == null) return null;
+        if (cart == null) return null; // Devuelve una excepcion esto no vale
 
-        return null;
+        // Actualizar datos del cart con los nuevos datos que te trae el dto
+        // Solo usamos la lista que tiene CartDto de CartGameDto, lo llamamos y lo recorremos entero y actualizamos o metemos en la lista CartDetail de Cart lo que necesitamos
+        
+        // Actualizas la base de datos 
+
+        // Mapeas el cart a un nuevo cartDto
+        return null; // Devuelves el nuevo CartDto
     }
 }
