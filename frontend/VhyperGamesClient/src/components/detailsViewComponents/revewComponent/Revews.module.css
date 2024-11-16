@@ -20,7 +20,7 @@
   display: flex;
   justify-content: space-between;
   background-color: var(--header-footer-color);
-  border: 4px solid var(--principal-purple);
+  border: 4px ridge var(--led-purple);
   padding: 20px;
   gap: 20px;
   border-radius: 8px;

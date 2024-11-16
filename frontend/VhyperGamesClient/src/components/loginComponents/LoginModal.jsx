@@ -2,12 +2,12 @@ import { useRef, useState } from 'react';
 import classes from './Login.module.css';
 import Button from '../buttonComponent/Button';
 import RegisterModal from '../registerComponents/RegisterModal';
-import { jwtDecode } from 'jwt-decode';
 import { LOGIN_ENDPOINT } from '../../config';
-import { updateSessionStorage } from "../../utils/keep.js"
+import { useAuth } from '../../context/authcontext';
 
 
 function LoginModal({ onClose, onRegisterClick }) {
+    const { saveToken } = useAuth();
     const emailRef = useRef(null);
     const passwordRef = useRef(null);
     const [promesaError, setPromesaError] = useState(null);
@@ -42,19 +42,8 @@ function LoginModal({ onClose, onRegisterClick }) {
             if (response.ok) {
                 const datosPromesa = await response.json();
                 const token = datosPromesa.accessToken;
-                console.log('Token recibido:', token)
-
-                //Decodificar el código
-                const decodedToken = jwtDecode(token);
-                updateSessionStorage(token, "accessToken");
-                console.log("Token decodificado:", decodedToken);
-                if (decodedToken) {
-                    const userInfo = {
-                        id: decodedToken.id,
-                        role: decodedToken.role,
-                        name: decodedToken.name
-                    };
-                }
+                
+                saveToken(token);
                 
                 // Forzar recarga de la página
                 window.location.reload();

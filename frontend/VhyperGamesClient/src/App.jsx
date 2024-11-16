@@ -4,6 +4,8 @@ import Catalogo from './pages/Catalogo';
 import Error from './pages/Error';
 import SobreNosotros from './pages/SobreNosotros';
 import ViewDetails from './pages/DetailsView';
+import { AuthProvider } from '../src/context/authcontext';
+import Cart from './pages/Cart';
 
 import {
   createBrowserRouter,
@@ -20,13 +22,17 @@ const routeDefinition = createRoutesFromElements(
     <Route path="error" element={<Error />} />
     <Route path="sobre-nosotros" element={<SobreNosotros />} />
     <Route path="juego/:gameId" element={<ViewDetails />} />
+    <Route path="cart" element={<Cart />} />
   </Route>
 );
 
 const router = createBrowserRouter(routeDefinition);
 
 function App() {
-  return <RouterProvider router={router}></RouterProvider>;
-}
+  return (
+    <AuthProvider>
+      <RouterProvider router={router}></RouterProvider>
+    </AuthProvider>
+)}
 
 export default App;
