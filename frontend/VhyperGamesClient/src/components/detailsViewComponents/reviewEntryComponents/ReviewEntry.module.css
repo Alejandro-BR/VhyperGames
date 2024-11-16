@@ -5,7 +5,7 @@
     gap: 20px;
 }
 
-.textbox {
+.review-box__textarea {
     display: flex;
     width: 500px;
     height: 250px;
@@ -14,13 +14,13 @@
     font-size: 1.75em;
 }
 
-.button {
+.review-box__button {
     display: flex;
     align-items: center; 
     width: 100%;
 }
 
-.existingReviewText {
+.review-box__existing-text {
     display: flex;
     font-size: 1em;
 }
