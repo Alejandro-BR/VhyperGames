@@ -25,12 +25,12 @@ function Header() {
   return (
     <div className={classes.header}>
       <div className={classes.left}>
-          <img
-            className={classes.logoImg}
-            src="/img/LogoVG.png"
-            alt="Logo"
-            onClick={() => navigate("/")}
-          />
+        <img
+          className={classes.logoImg}
+          src="/img/LogoVG.png"
+          alt="Logo"
+          onClick={() => navigate("/")}
+        />
         <div className={classes.buttonHeader}>
           <Button
             variant={"short"}
@@ -67,7 +67,7 @@ function Header() {
       </div>
 
       <div className={classes.icons}>
-        <CartIcon onClick={messageCart}/>
+        <CartIcon onClick={() => navigate("/cart")} />
 
         <img
           className={classes.icon}
