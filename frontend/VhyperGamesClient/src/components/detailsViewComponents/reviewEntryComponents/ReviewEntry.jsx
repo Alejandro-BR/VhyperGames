@@ -1,19 +1,20 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { NEW_REVIEW, GET_REVIEW_BY_USER } from '../../../config.js';
-import { getVarSessionStorage } from "../../../utils/keep.js";
-import { jwtDecode } from 'jwt-decode';
 import Button from '../../buttonComponent/Button.jsx';
 import classes from './ReviewEntry.module.css';
+import { useAuth } from '../../../context/authcontext.jsx'
 
-const ReviewEntry = ({ gameId, isAuthenticated }) => {
+const ReviewEntry = ({ gameId }) => {
+  const { token, decodedToken } = useAuth();
   const [reviewText, setReviewText] = useState('');
   const [existingReview, setExistingReview] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  const token = getVarSessionStorage('accessToken');
+  const isAuthenticated = !!token;
   
-  // Función para cargar la reseña existente si la hay
+  // Función para cargar la reseña existente, si la hay
   const fetchUserReview = async () => {
+
     try {
       const response = await fetch(`${GET_REVIEW_BY_USER}?gameId=${gameId}`, {
           method: 'GET',
@@ -47,7 +48,7 @@ const ReviewEntry = ({ gameId, isAuthenticated }) => {
     if (isAuthenticated) {
       fetchUserReview();
     }
-  }, [gameId, isAuthenticated]);
+  }, [gameId, isAuthenticated, token]);
 
   const handleInputChange = (e) => {
     setReviewText(e.target.value);
@@ -56,7 +57,6 @@ const ReviewEntry = ({ gameId, isAuthenticated }) => {
   const handleSubmit = async () => {
     if (reviewText.trim() === '') return;
 
-    const decodedToken = jwtDecode(token);
     const userId = decodedToken.id;
 
     // Crear una nueva reseña
@@ -94,7 +94,7 @@ const ReviewEntry = ({ gameId, isAuthenticated }) => {
       {isAuthenticated ? (
         <>
           <textarea
-            className={classes.textbox}
+            className={classes['review-box__textarea']}
             placeholder="Escribe tu reseña aquí..."
             value={reviewText}
             onChange={handleInputChange}
@@ -104,14 +104,14 @@ const ReviewEntry = ({ gameId, isAuthenticated }) => {
 
           {/* Mostrar el botón adecuado */}
           {existingReview ? (
-            <p className={classes.existingReviewText}>Reseña enviada el {new Date(existingReview.reviewDate).toLocaleDateString()}</p>
+            <p className={classes['review-box__existing-text']}>Reseña enviada el {new Date(existingReview.reviewDate).toLocaleDateString()}</p>
           ) : (
             <Button
               variant={"large"}
               color={"azul"}
               onClick={handleSubmit}
               disabled={isLoading}
-              className={classes.button}
+              className={classes['review-box__button']}
             >
               {isLoading ? "Cargando..." : "Nueva Reseña"}
             </Button>

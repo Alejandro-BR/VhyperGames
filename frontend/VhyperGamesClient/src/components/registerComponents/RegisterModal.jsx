@@ -1,12 +1,12 @@
 import { useRef, useState } from "react";
 import Button from "../buttonComponent/Button";
 import classes from "../loginComponents/Login.module.css";
-import { jwtDecode } from "jwt-decode";
 import { REGISTER_ENDPOINT } from "../../config";
 import { validation } from "../../utils/validationForm.js";
-import { updateSessionStorage } from "../../utils/keep.js"
+import { useAuth } from '../../context/authcontext';
 
 function RegisterModal({ onClose }) {
+  const { saveToken } = useAuth();
   const nameRef = useRef();
   const surnameRef = useRef();
   const emailRef = useRef();
@@ -88,21 +88,8 @@ function RegisterModal({ onClose }) {
       if (response.ok) {
         const datosPromesa = await response.json();
         const token = datosPromesa.accessToken;
-        console.log("Token recibido:", token);
-
-        //Decodificar el código
-        const decodedToken = jwtDecode(token);
-
-        if (decodedToken) {
-          const userInfo = {
-            id: decodedToken.id,
-            role: decodedToken.role,
-            name: decodedToken.name,
-          };
-          
-          updateSessionStorage(token, "accessToken");
-          
-        }
+        
+        saveToken(token);
 
         // Forzar recarga de la página
         window.location.reload();
