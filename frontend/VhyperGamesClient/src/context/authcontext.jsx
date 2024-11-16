@@ -20,7 +20,7 @@ export const AuthProvider = ({ children }) => {
     useEffect(() => {
         const storedToken = getVarSessionStorage('accessToken'); 
         if (storedToken) {
-            setToken(storedToken); 
+            setToken(storedToken);
             setDecodedToken(jwtDecode(storedToken)); 
         }
     }, []);
@@ -35,13 +35,16 @@ export const AuthProvider = ({ children }) => {
     // Función para eliminar el token
     const logout = () => {
         deleteSessionStorage('accessToken'); 
-        setToken(null); 
-        setDecodedToken(null); 
+        setToken(null);
+        setDecodedToken(null);
     };
+
+    const username = decodedToken?.name || null;
 
     const contextValue = {
         token, 
-        decodedToken, 
+        decodedToken,
+        username, 
         saveToken, 
         logout, 
     };
