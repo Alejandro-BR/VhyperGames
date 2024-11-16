@@ -46,6 +46,7 @@ const ProductCard = ({ id }) => {
 
     fetchPriceData();
   }, [id]);
+
   const handleQuantityChange = (operation) => {
     setProductPriceData((prevState) => {
       const newQuantity = operation === "increase"
@@ -64,27 +65,23 @@ const ProductCard = ({ id }) => {
       if (existingProductIndex >= 0) {
         cart[existingProductIndex].quantity = newQuantity;
 
-        // Si la cantidad es 0 se elimina
         if (newQuantity === 0) {
           cart.splice(existingProductIndex, 1);
         }
       } else {
-        if (newQuantity > 0) { // Se agrega si es mayor que 0
+        if (newQuantity > 0) {
           cart.push(productData);
         }
       }
 
       localStorage.setItem('cart', JSON.stringify(cart));
 
-      // Evento carrito
       window.dispatchEvent(new Event('cart-updated'));
 
       return { ...prevState, quantity: newQuantity };
     });
   };
 
-
-  //Según el rating, muestra 1, 2 o 3 aviones con su color.
   const getPlaneCount = (avgRating) => {
     if (avgRating < 0) return 1;
     if (avgRating === 0) return 2;
@@ -101,31 +98,29 @@ const ProductCard = ({ id }) => {
   if (loading) return <div>Cargando...</div>;
   if (error) return <div>Error: {error}</div>;
 
-
-
   return (
-    <div className={classes.priceCard}>
+    <div className={classes['price-card']}>
 
-      <div className={classes.leftPlane}>
-        <img src="../../icon/avion-detalle.svg" alt="Avion detalle" className={classes.planeIcon} />
+      <div className={classes['price-card__left-plane']}>
+        <img src="../../icon/avion-detalle.svg" alt="Avion detalle" className={classes['price-card__plane-icon']} />
       </div>
 
-      <div className={classes.leftColumn}>
-        <div className={classes.productCode}>
-          <p className={classes.productCode}>Código: </p>
-          <p className={classes.productId}>PROD-{id}</p>
+      <div className={classes['price-card__left-column']}>
+        <div className={classes['price-card__product-code']}>
+          <p>Código: </p>
+          <p className={classes['price-card__product-id']}>PROD-{id}</p>
         </div>
 
-        <div className={classes.price}>
-          <div><p>PRECIO</p></div>
-          <p className={classes.priceEUR}>{price()} €</p>
+        <div className={classes['price-card__price']}>
+          <p>PRECIO</p>
+          <p className={classes['price-card__price-eur']}>{price()} €</p>
         </div>
 
-        <div className={classes.rating}>
-          <p className={classes.label}>VALORACIÓN</p>
-          <div className={classes.planesContainer}>
+        <div className={classes['price-card__rating']}>
+          <p className={classes['price-card__label']}>VALORACIÓN</p>
+          <div className={classes['price-card__planes-container']}>
             {productPriceData.avgRating === null ? (
-              <p className={classes.noReviews}>No existen reseñas.</p>
+              <p className={classes['price-card__no-reviews']}>No existen reseñas.</p>
             ) : (
               [...Array(planeCount)].map((_, index) => (
                 <Rating key={index} avgRating={productPriceData.avgRating} />
@@ -135,20 +130,20 @@ const ProductCard = ({ id }) => {
         </div>
       </div>
 
-      <div className={classes.rightColumn}>
-        <div className={classes.stockStatus}>
+      <div className={classes['price-card__right-column']}>
+        <div className={classes['price-card__stock-status']}>
           {productPriceData.stock > 0 ? (
-            <span className={classes.inStock}>EN STOCK: {productPriceData.stock}</span>
+            <span className={classes['price-card__stock-status--in-stock']}>EN STOCK: {productPriceData.stock}</span>
           ) : (
-            <span className={classes.outOfStock}>SIN STOCK</span>
+            <span className={classes['price-card__stock-status--out-of-stock']}>SIN STOCK</span>
           )}
         </div>
 
-        <div className={classes.cartIcon}>
+        <div className={classes['price-card__cart-icon']}>
           <img src="../../icon/carrito_header.svg" alt="Carrito" />
         </div>
 
-        <div className={classes.quantityControls}>
+        <div className={classes['price-card__quantity-controls']}>
           <button onClick={() => handleQuantityChange("decrease")}>-</button>
           <span>{productPriceData.quantity}</span>
           <button onClick={() => handleQuantityChange("increase")}>+</button>
