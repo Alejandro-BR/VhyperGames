@@ -54,7 +54,7 @@ public class AuthController : ControllerBase
 
             Cart cart = new Cart()
             {
-
+                UserId = newUser.Id
             };
 
             await _unitOfWork.UserRepository.InsertAsync(newUser);

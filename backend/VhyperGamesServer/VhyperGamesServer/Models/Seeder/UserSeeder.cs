@@ -45,6 +45,22 @@ public class UserSeeder
             }
         };
 
+        var carts = new List<Cart>
+        {
+            new Cart
+            {
+                Id = 1,
+                UserId = 1
+            },
+
+            new Cart
+            {
+                Id = 2,
+                UserId = 2
+            }
+        };
+
+        _context.Carts.AddRange(carts);
         _context.Users.AddRange(users);
         _context.SaveChanges();
     }
