@@ -31,7 +31,7 @@ const router = createBrowserRouter(routeDefinition);
 function App() {
   return (
     <AuthProvider>
-      <RouterProvider router={router}></RouterProvider>;
+      <RouterProvider router={router}></RouterProvider>
     </AuthProvider>
 )}
 
