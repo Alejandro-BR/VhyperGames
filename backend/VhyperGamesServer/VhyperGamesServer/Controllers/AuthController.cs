@@ -52,7 +52,13 @@ public class AuthController : ControllerBase
 
             };
 
+            Cart cart = new Cart()
+            {
+
+            };
+
             await _unitOfWork.UserRepository.InsertAsync(newUser);
+            await _unitOfWork.CartRepository.InsertAsync(cart);
             await _unitOfWork.SaveAsync();
 
             SecurityTokenDescriptor tokenDescriptor = new SecurityTokenDescriptor
