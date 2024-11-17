@@ -40,5 +40,8 @@
 
 .cartPayment__containerButtons {
   display: flex;
-  gap: 8px;
+  justify-content: center;
+  align-items: center; 
+  gap: 16px; 
+  width: 100%; 
 }
