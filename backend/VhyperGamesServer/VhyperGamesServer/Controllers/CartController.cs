@@ -61,5 +61,15 @@ namespace VhyperGamesServer.Controllers
                 return BadRequest($"Error occurred while updating cart: {ex.Message}");
             }
         }
+
+
+
+        //// Codigo de Alejandro
+
+        [HttpPut("update")]
+        public async Task<ActionResult<CartDto>> PutUpdateCart([FromBody] CartDto cartDto)
+        {
+            return await _cartService.PutUpdateCart(cartDto);
+        }
     }
 }
