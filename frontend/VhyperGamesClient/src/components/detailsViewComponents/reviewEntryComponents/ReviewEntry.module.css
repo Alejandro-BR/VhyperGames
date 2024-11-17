@@ -12,6 +12,7 @@
     background-color: var(--header-footer-color);
     border: none;
     font-size: 1.75em;
+    resize: none;
 }
 
 .review-box__button {
