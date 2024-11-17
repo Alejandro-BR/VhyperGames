@@ -1,0 +1,27 @@
+.container {
+    display: flex;
+    gap: 20px;
+    max-width: 400px;
+    flex-wrap: wrap;
+}
+
+.container__left {
+    display: flex;
+}
+
+.container__right {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
+.container__right_bottom {
+    margin-top: auto;
+}
+.cartPayment__line {
+    border: none;
+    height: 4px;
+    background: var(--gradient-purple-blue);
+    width: 100%;
+    align-self: stretch;
+}
