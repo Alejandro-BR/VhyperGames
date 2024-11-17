@@ -15,11 +15,11 @@ public class CartMapper
             Id = cartDetail.Id,
             IdGame = cartDetail.GameId,
             Quantity = cartDetail.Quantity,
-            Title = cartDetail.Game.Title,
-            Price = cartDetail.Game.Price,
-            TotalPrice = cartDetail.Quantity * cartDetail.Game.Price, 
-            Stock = cartDetail.Game.Stock,
-            ImageGames = cartDetail.Game.ImageGames?.FirstOrDefault()
+            Title = cartDetail.Game?.Title ?? "Título no disponible",
+            Price = cartDetail.Game?.Price ?? 0,
+            TotalPrice = cartDetail.Quantity * (cartDetail.Game?.Price ?? 0),
+            Stock = cartDetail.Game?.Stock ?? 0,
+            ImageGames = cartDetail.Game?.ImageGames?.FirstOrDefault()
         };
     }
 
