@@ -41,7 +41,7 @@ function Header() {
     }, 500); 
   };
 
-
+  // Manejar clic en logout
   const handleLogout = () => {
     if (timerRef.current) clearTimeout(timerRef.current);
     logout();
