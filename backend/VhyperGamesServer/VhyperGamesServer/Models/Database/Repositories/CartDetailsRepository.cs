@@ -19,5 +19,4 @@ public class CartDetailsRepository : Repository<CartDetail, int>
             .Include(cd => cd.Game.ImageGames)
             .FirstOrDefaultAsync(cd => cd.Id == id);
     }
-
 }
