@@ -20,27 +20,32 @@ export const CartProvider = ({ children }) => {
         localStorage.setItem("cart", JSON.stringify(cart));
     }, [cart]);
 
-    // Sincronizar carrito con la base de datos
     const syncCartWithDB = async () => {
         if (token && decodedToken) {
-            const userId = decodedToken.id; // Obtenemos el ID del usuario desde el token decodificado
+            const userId = decodedToken.id; // Obtiene el ID del usuario desde el token decodificado
 
-            // Preparar el carrito en el formato esperado por el backend
+            // Prepara el payload
             const payload = {
-                userId: userId,
-                cartId: userId, // Asegúrate de reemplazar este valor por el real si es dinámico
+                userId: userId, // ID del usuario desde el token decodificado
+                cartId: userId, // O un ID único del carrito si es diferente
                 games: cart.map((item) => ({
-                    id: item.id,
-                    idGame: item.id,
-                    title: item.title,
-                    price: item.price,
-                    totalPrice: item.price * item.quantity,
-                    imageGames: item.imageGames,
-                    quantity: item.quantity,
-                    stock: item.stock,
+                    id: item.cartDetailId || 0, // ID del detalle del carrito (opcional)
+                    idGame: item.id, // ID del juego
+                    title: item.title || "Título no disponible", // Título del juego
+                    price: item.price || 0, // Precio por unidad
+                    totalPrice: (item.price || 0) * (item.quantity || 0), // Precio total
+                    imageGames: {
+                        id: item.imageId || 0, // ID de la imagen (opcional)
+                        gameId: item.id, // ID del juego
+                        imageUrl: item.image || "URL de imagen por defecto", // URL de la imagen
+                        altText: item.imageAlt || "Texto alternativo no disponible", // Texto alternativo
+                    },
+                    quantity: item.quantity || 0, // Cantidad seleccionada
+                    stock: item.stock || 0, // Stock disponible
                 })),
-                totalPrice: cart.reduce((sum, item) => sum + item.price * item.quantity, 0),
+                totalPrice: cart.reduce((sum, item) => sum + (item.price || 0) * (item.quantity || 0), 0), // Precio total del carrito
             };
+
 
             try {
                 const response = await fetch("https://localhost:7207/api/Cart/update", {
@@ -55,11 +60,14 @@ export const CartProvider = ({ children }) => {
                 if (!response.ok) {
                     throw new Error(`Error al sincronizar el carrito: ${response.statusText}`);
                 }
+
+                console.log("Carrito sincronizado exitosamente:", await response.json());
             } catch (error) {
-                console.error("Error al sincronizar el carrito:", error);
+                console.error("Error al sincronizar el carrito:", error.message);
             }
         }
     };
+
 
 
     // Añadir producto al carrito
