@@ -1,10 +1,9 @@
-{/*Ale importa aquí tu componente*/ }
+import CartPayment from "../components/cartViewComponent/CartPayment";
 
 function Cart() {
     return (
         <div>
-            <h1>Minecraft</h1>
-            {/*Ale introduce aquí tu componente*/}
+            <CartPayment />
         </div>
     )
 }
