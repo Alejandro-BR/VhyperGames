@@ -20,6 +20,7 @@
   grid-area: price-newreview;
   display: grid;
   gap: 30px;
+  margin-right: 30px;
 }
 
 .view-details__system-requirements {

@@ -1,25 +1,52 @@
+import { useState, useRef } from "react";
 import classes from "./Header.module.css";
 import Button from "../buttonComponent/Button";
 import { messageCart, messageCatalog } from "../../helpers/messages";
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import LoginModal from "../loginComponents/LoginModal";
 import RegisterModal from "../registerComponents/RegisterModal";
 import CartIcon from "./CartIcon";
-
+import { useAuth } from "../../context/authcontext";
 
 function Header() {
   const [mostrarLogin, setMostrarLogin] = useState(false);
   const [mostrarRegister, setMostrarRegister] = useState(false);
-
+  const [showLogout, setShowLogout] = useState(false);
+  const { token, username, logout } = useAuth();
   const navigate = useNavigate();
+  const timerRef = useRef(null);
 
-  const handleImageClick = () => {
-    setMostrarLogin(true);
+  // Manejar clic en el ícono de usuario
+  const handleUserClick = () => {
+    if (!token) {
+      setMostrarLogin(true);
+    } else {
+      alert("Aún no tenemos página de usuario.");
+    }
   };
-  const handleRegisterClick = () => {
-    setMostrarLogin(false);
-    setMostrarRegister(true);
+
+  // Mostrar el ícono de logout al hacer hover
+  const handleMouseEnter = () => {
+    if (timerRef.current) {
+      clearTimeout(timerRef.current);
+      timerRef.current = null;
+    }
+    setShowLogout(true);
+  };
+
+
+  const handleMouseLeave = () => {
+    timerRef.current = setTimeout(() => {
+      setShowLogout(false);
+    }, 500); 
+  };
+
+
+  const handleLogout = () => {
+    if (timerRef.current) clearTimeout(timerRef.current);
+    logout();
+    setShowLogout(false);
+    navigate("/");
   };
 
   return (
@@ -46,6 +73,7 @@ function Header() {
           </Button>
         </div>
       </div>
+
       <div className={classes.searchBar}>
         <img
           className={classes.menu}
@@ -69,23 +97,48 @@ function Header() {
       <div className={classes.icons}>
         <CartIcon onClick={() => navigate("/cart")} />
 
-        <img
-          className={classes.icon}
-          src="../icon/user_header.svg"
-          alt="user"
-          onClick={handleImageClick} // Cambiado a la función sin paréntesis
-        />
+        <div
+          className={classes.userIconWrapper}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+        >
+
+          <div className={classes.userContainer}>
+            <img
+              className={classes.user}
+              src="../icon/user_header.svg"
+              alt="user"
+              onClick={handleUserClick}
+            />
+            {token && (
+              <span className={classes.userLabel}>
+                Hola, {username}
+              </span>
+            )}
+          </div>
+
+
+          {token && showLogout && (
+            <div className={classes.logoutContainer}>
+              <img
+                className={classes.logoutIcon}
+                src="../icon/logout.svg"
+                alt="logout"
+                onClick={handleLogout}
+              />
+            </div>
+          )}
+        </div>
       </div>
 
       {/* Renderizar el LoginModal si mostrarLogin es true */}
       {mostrarLogin && (
         <LoginModal
           onClose={() => setMostrarLogin(false)}
-          onRegisterClick={handleRegisterClick}
+          onRegisterClick={() => setMostrarRegister(true)}
         />
       )}
 
-      {/* Renderizar el RegisterModal si mostrarRegister es true */}
       {mostrarRegister && (
         <RegisterModal onClose={() => setMostrarRegister(false)} />
       )}

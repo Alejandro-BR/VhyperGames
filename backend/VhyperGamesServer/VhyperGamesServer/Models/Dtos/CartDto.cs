@@ -12,6 +12,7 @@ public class CartDto
 
     public CartDto()
     {
+        Games = new List<CartGameDto>();  
         TotalPrice = GetSumTotal();
     }
 
