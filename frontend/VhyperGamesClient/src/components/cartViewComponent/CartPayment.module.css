@@ -6,6 +6,16 @@
   width: 300px;
 }
 
+.cartPayment__containerTitle {
+  display: flex;
+  gap: 2px;
+}
+
+.cartPayment__palito {
+  color: var(--principal-purple);
+  font-size: 2.2em;
+}
+
 .cartPayment__title {
   font-size: 2.2em ;
 }
@@ -15,7 +25,7 @@
   font-family: 'UniversLight';
 }
 
-.cartPayment__precio {
+.cartPayment__price {
   display: flex;
   justify-content: flex-end; 
   font-size: 2.2em;
@@ -30,5 +40,8 @@
 
 .cartPayment__containerButtons {
   display: flex;
-  gap: 8px;
+  justify-content: center;
+  align-items: center; 
+  gap: 16px; 
+  width: 100%; 
 }

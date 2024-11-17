@@ -16,6 +16,8 @@ public class CartRepository : Repository<Cart, int>
     {
         return await Context.Set<Cart>()
             .Include(c => c.CartDetails)
+                .ThenInclude(cd => cd.Game)
+                .ThenInclude(cd => cd.ImageGames)
             .FirstOrDefaultAsync(c => c.Id == id);
     }
 }

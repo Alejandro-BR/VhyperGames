@@ -20,5 +20,11 @@ namespace VhyperGamesServer.Controllers
         {
             return await _cartService.UpdateCart(cartDto);
         }
+
+        [HttpGet("cartById")]
+        public async Task<ActionResult<CartDto>> GetCartById(int id)
+        {
+            return await _cartService.GetCartById(id);
+        }
     }
 }

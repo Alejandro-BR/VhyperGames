@@ -1,16 +1,19 @@
+import { messageEuros , messageEthereum} from '../../helpers/messages';
 import { ConvertToDecimal } from "../../utils/price";
 import Button from "../buttonComponent/Button"
-
 import classes from "./CartPayment.module.css"
 
 function CartPayment() {
-  let precioBack = 4498;
+  let precioBack = 4498; // Hay que cogerlo desde el contexto 
   const precio = ConvertToDecimal(precioBack);
 
   return (<div className={classes.cartPayment} >
-    <p className={classes.cartPayment__title}>Carrito</p>
+    <div className={classes.cartPayment__containerTitle}>
+      <p className={classes.cartPayment__palito}>&#10073;</p>
+      <p className={classes.cartPayment__title}>Carrito</p>
+    </div>
     <p className={classes.cartPayment__total}>TOTAL</p>
-    <div className={classes.cartPayment__precio}>
+    <div className={classes.cartPayment__price}>
       <p >{precio} €</p>
     </div>
     <hr className={classes.cartPayment__line}/>
@@ -18,12 +21,12 @@ function CartPayment() {
       <Button
         variant={"medium"}
         color={"morado-azul"}
-        // onClick={alert("Hola")}
-      >PAGAR EN EUROS</Button>
+        onClick={messageEuros}
+      >PAGAR EN <br/> EUROS</Button>
       <Button
         variant={"medium"}
         color={"azul-morado"}
-        // onClick={alert("Hola")}
+        onClick={messageEthereum}
       >PAGAR EN ETHEREUM</Button>
     </div>
   </div>);
