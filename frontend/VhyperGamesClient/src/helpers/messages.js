@@ -38,3 +38,19 @@ export function messageCompany() {
   const message = "Pronto podrás descubrir más sobre Vhyper Games.";
   messages(message);
 }
+
+/**
+ * Muestra un mensaje informativo sobre el pago.
+ */
+export function messageEuros() {
+  const message = "No se puede pagar en Euros todavia."
+  messages(message);
+}
+
+/**
+ * Muestra un mensaje informativo sobre el pago.
+ */
+export function messageEthereum() {
+  const message = "No se puede pagar en Ethereum todavia."
+  messages(message);
+}
