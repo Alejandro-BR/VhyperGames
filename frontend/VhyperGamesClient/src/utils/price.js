@@ -6,9 +6,9 @@
  * 
  * cent -> €
  * 
- * @param {*} integer - centimos
- * @returns decimal - euros
+ * @param {*} cent
+ * @returns euros
  */
-export function ConvertToDecimal(integer) {
-  return integer / 100;
+export function ConvertToDecimal(cent) {
+  return (cent / 100).toFixed(2).replace('.', ',');
 }

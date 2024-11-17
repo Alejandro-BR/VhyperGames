@@ -1,0 +1,34 @@
+
+.cartPayment {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 300px;
+}
+
+.cartPayment__title {
+  font-size: 2.2em ;
+}
+
+.cartPayment__total {
+  font-size: 1em;
+  font-family: 'UniversLight';
+}
+
+.cartPayment__precio {
+  display: flex;
+  justify-content: flex-end; 
+  font-size: 2.2em;
+}
+
+.cartPayment__line {
+  border: none; 
+  height: 4px; 
+  background: var(--gradient-purple-blue); 
+  margin: 10px 0; 
+}
+
+.cartPayment__containerButtons {
+  display: flex;
+  gap: 8px;
+}
