@@ -71,4 +71,16 @@ public class CartService
         return updatedCartDto;
     }
 
+    public async Task<CartDto> GetCartById(int id)
+    {
+        Cart cart = await _unitOfWork.CartRepository.GetByIdCart(id);
+
+        if (cart == null)
+        {
+            throw new KeyNotFoundException($"No se ha encontrado carrito con este id {id}.");
+        }
+
+        return _cartMapper.ToCartPaymentDto(cart);
+    }
+
 }
