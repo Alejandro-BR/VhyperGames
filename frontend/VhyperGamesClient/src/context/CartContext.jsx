@@ -1,12 +1,13 @@
 import React, { createContext, useState, useEffect, useContext } from "react";
 import { useAuth } from "./authcontext"; // Usamos el AuthContext para obtener el token y el userId
+import { GET_CART, UPDATE_CART } from '../config'; // Importamos las URLs desde el archivo config.js
 
-// 1. Creo el contexto del carrito
+// Crear el contexto del carrito
 export const CartContext = createContext();
 
-// 2. Creo el provider
+// Crear el provider
 export const CartProvider = ({ children }) => {
-    const { token, decodedToken } = useAuth(); // Obtenemos el token y la decodificación del token desde el AuthContext
+    const { token, decodedToken } = useAuth(); // Obtener el token y la decodificación del token desde el AuthContext
     const [cart, setCart] = useState([]);
 
     // Cargar LocalStorage al iniciar
@@ -20,35 +21,34 @@ export const CartProvider = ({ children }) => {
         localStorage.setItem("cart", JSON.stringify(cart));
     }, [cart]);
 
+    // Sincronizar carrito con la base de datos
     const syncCartWithDB = async () => {
         if (token && decodedToken) {
             const userId = decodedToken.id; // Obtiene el ID del usuario desde el token decodificado
 
-            // Prepara el payload
             const payload = {
-                userId: userId, // ID del usuario desde el token decodificado
+                userId: userId,
                 cartId: userId, // O un ID único del carrito si es diferente
                 games: cart.map((item) => ({
-                    id: item.cartDetailId || 0, // ID del detalle del carrito (opcional)
-                    idGame: item.id, // ID del juego
-                    title: item.title || "Título no disponible", // Título del juego
-                    price: item.price || 0, // Precio por unidad
-                    totalPrice: (item.price || 0) * (item.quantity || 0), // Precio total
+                    id: item.cartDetailId || 0,
+                    idGame: item.id,
+                    title: item.title || "Título no disponible",
+                    price: item.price || 0,
+                    totalPrice: (item.price || 0) * (item.quantity || 0),
                     imageGames: {
-                        id: item.imageId || 0, // ID de la imagen (opcional)
-                        gameId: item.id, // ID del juego
-                        imageUrl: item.image || "URL de imagen por defecto", // URL de la imagen
-                        altText: item.imageAlt || "Texto alternativo no disponible", // Texto alternativo
+                        id: item.imageId || 0,
+                        gameId: item.id,
+                        imageUrl: item.image || "URL de imagen por defecto",
+                        altText: item.imageAlt || "Texto alternativo no disponible",
                     },
-                    quantity: item.quantity || 0, // Cantidad seleccionada
-                    stock: item.stock || 0, // Stock disponible
+                    quantity: item.quantity || 0,
+                    stock: item.stock || 0,
                 })),
-                totalPrice: cart.reduce((sum, item) => sum + (item.price || 0) * (item.quantity || 0), 0), // Precio total del carrito
+                totalPrice: cart.reduce((sum, item) => sum + (item.price || 0) * (item.quantity || 0), 0),
             };
 
-
             try {
-                const response = await fetch("https://localhost:7207/api/Cart/update", {
+                const response = await fetch(UPDATE_CART, {
                     method: "PUT",
                     headers: {
                         "Content-Type": "application/json",
@@ -68,7 +68,50 @@ export const CartProvider = ({ children }) => {
         }
     };
 
+    // Obtener el carrito desde la base de datos (GET)
+    const getCartFromDB = async () => {
+        if (token && decodedToken) {
+            const userId = decodedToken.id; // Obtener el ID del usuario desde el token
 
+            try {
+                // Realizar la solicitud GET con el userId en la URL
+                const response = await fetch(`${GET_CART}/${userId}`, {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${token}`, // Incluir el token en las cabeceras
+                    },
+                });
+
+                // Verificar si la respuesta es exitosa
+                if (!response.ok) {
+                    const errorMessage = await response.text();
+                    throw new Error(`Error al obtener el carrito: ${response.status} - ${errorMessage}`);
+                }
+
+                const data = await response.json();
+
+                // Guardar los datos del carrito en el estado de React
+                setCart(data.games.map((item) => ({
+                    id: item.idGame,
+                    title: item.title,
+                    price: item.price,
+                    quantity: item.quantity,
+                    stock: item.stock,
+                    image: item.imageGames.imageUrl,
+                    imageAlt: item.imageGames.altText,
+                    imageId: item.imageGames.id,
+                })));
+
+                // Guardar los datos en LocalStorage
+                localStorage.setItem("cart", JSON.stringify(data.games));
+
+            } catch (error) {
+                console.error("Error al obtener el carrito desde la base de datos:", error.message);
+                alert(`Hubo un problema al obtener el carrito: ${error.message}`);
+            }
+        }
+    };
 
     // Añadir producto al carrito
     const addToCart = (product) => {
@@ -79,7 +122,7 @@ export const CartProvider = ({ children }) => {
                 // Si el producto ya está en el carrito, solo incrementamos su cantidad en 1
                 return prevCart.map((item) =>
                     item.id === product.id
-                        ? { ...item, quantity: item.quantity + 1 } // Incrementamos solo 1
+                        ? { ...item, quantity: item.quantity + 1 }
                         : item
                 );
             } else {
@@ -88,7 +131,6 @@ export const CartProvider = ({ children }) => {
             }
         });
     };
-
 
     // Actualizar la cantidad de un producto
     const updateQuantity = (id, quantity) => {
@@ -112,6 +154,13 @@ export const CartProvider = ({ children }) => {
             syncCartWithDB();
         }
     }, [cart, token]); // Solo sincroniza si el carrito cambia o el token es modificado
+
+    // Obtener el carrito desde la base de datos solo al inicio o cuando se cambie el token
+    useEffect(() => {
+        if (token) {
+            getCartFromDB();
+        }
+    }, [token]);
 
     return (
         <CartContext.Provider value={{ cart, addToCart, removeFromCart, updateQuantity }}>

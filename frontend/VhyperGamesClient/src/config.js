@@ -12,3 +12,5 @@ export const GAME_REQUERIMENTS = `${API_BASE_URL}detailsview/game-requirements`;
 export const NEW_REVIEW = `${API_BASE_URL}detailsview/new-review`;
 export const GET_REVIEW_BY_USER = `${API_BASE_URL}detailsview/get-user-review`;
 export const GET_REVIEW = `${API_BASE_URL}DetailsView/game-reviews`;
+export const GET_CART = `${API_BASE_URL}Cart/cartById`;
+export const UPDATE_CART = `${API_BASE_URL}Cart/update`; 
