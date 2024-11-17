@@ -23,25 +23,44 @@ export const CartProvider = ({ children }) => {
     // Sincronizar carrito con la base de datos
     const syncCartWithDB = async () => {
         if (token && decodedToken) {
-            const userId = decodedToken.id; // Id del usuario desde el token decodificado
+            const userId = decodedToken.id; // Obtenemos el ID del usuario desde el token decodificado
+
+            // Preparar el carrito en el formato esperado por el backend
+            const payload = {
+                userId: userId,
+                cartId: userId, // Asegúrate de reemplazar este valor por el real si es dinámico
+                games: cart.map((item) => ({
+                    id: item.id,
+                    idGame: item.id,
+                    title: item.title,
+                    price: item.price,
+                    totalPrice: item.price * item.quantity,
+                    imageGames: item.imageGames,
+                    quantity: item.quantity,
+                    stock: item.stock,
+                })),
+                totalPrice: cart.reduce((sum, item) => sum + item.price * item.quantity, 0),
+            };
 
             try {
-                await fetch("/api/cart/sync", {
-                    method: "POST",
+                const response = await fetch("/api/cart/update", {
+                    method: "PUT",
                     headers: {
-                        "Content-Type": "application/json", // Cambia según sea necesario
+                        "Content-Type": "application/json",
                         Authorization: `Bearer ${token}`,
                     },
-                    body: JSON.stringify({
-                        userId: userId,
-                        cartItems: cart,
-                    }),
+                    body: JSON.stringify(payload),
                 });
+
+                if (!response.ok) {
+                    throw new Error(`Error al sincronizar el carrito: ${response.statusText}`);
+                }
             } catch (error) {
                 console.error("Error al sincronizar el carrito:", error);
             }
         }
     };
+
 
     // Añadir producto al carrito
     const addToCart = (product) => {
