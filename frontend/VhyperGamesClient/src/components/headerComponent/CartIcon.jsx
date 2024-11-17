@@ -1,24 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import classes from './CartIcon.module.css';
+import { CartContext } from "../../context/CartContext"; // Importamos el contexto
 
 const CartIcon = ({ onClick }) => {
+  const { cart } = useContext(CartContext); // Obtenemos el carrito desde el contexto
   const [cartCount, setCartCount] = useState(0);
 
-  const calculateCartCount = () => {
-    const cartData = JSON.parse(localStorage.getItem('cart')) || [];
-    const totalQuantity = cartData.reduce((total, product) => total + product.quantity, 0);
-    setCartCount(totalQuantity);
-  };
-
+  // Calculamos la cantidad total de productos en el carrito
   useEffect(() => {
-    calculateCartCount();
-    // Cambios en el carrito
-    window.addEventListener('cart-updated', calculateCartCount);
-
-    return () => {
-      window.removeEventListener('cart-updated', calculateCartCount);
-    };
-  }, []); 
+    const totalQuantity = cart.reduce((total, product) => total + product.quantity, 0);
+    setCartCount(totalQuantity);
+  }, [cart]); // Se ejecuta cada vez que el carrito cambia
 
   return (
     <div className={classes.cartIconWrapper} onClick={onClick}>
