@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import classes from './GamePrice.module.css';
+import { CartContext } from "../../../context/CartContext";
 import { DETAILS_VIEW_GAME_PRICE } from "../../../config";
 import Rating from '../../gameCardComponent/Rating';
 
 const ProductCard = ({ id }) => {
+  const { addToCart, updateQuantity, removeFromCart, cart } = useContext(CartContext); // Usa las funciones del contexto
   const [productPriceData, setProductPriceData] = useState({
     price: 0,
     avgRating: 0,
@@ -14,6 +16,7 @@ const ProductCard = ({ id }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  // Carga de datos del producto
   useEffect(() => {
     if (!id) {
       setError("ID no válido");
@@ -31,11 +34,13 @@ const ProductCard = ({ id }) => {
         }
         const data = await response.json();
 
+        // Actualiza el estado del producto
+        const productInCart = cart.find((item) => item.id === id) || {};
         setProductPriceData({
           price: data.price,
           avgRating: data.avgRating,
           stock: data.stock,
-          quantity: data.quantity || 0,
+          quantity: productInCart.quantity || 0,
         });
       } catch (error) {
         setError(error.message);
@@ -45,41 +50,19 @@ const ProductCard = ({ id }) => {
     };
 
     fetchPriceData();
-  }, [id]);
+  }, [id, cart]);
 
   const handleQuantityChange = (operation) => {
-    setProductPriceData((prevState) => {
-      const newQuantity = operation === "increase"
-        ? Math.min(prevState.quantity + 1, prevState.stock)
-        : Math.max(prevState.quantity - 1, 0);
+    const newQuantity =
+      operation === "increase"
+        ? Math.min(productPriceData.quantity + 1, productPriceData.stock)
+        : Math.max(productPriceData.quantity - 1, 0);
 
-      const productData = {
-        id,
-        quantity: newQuantity,
-      };
-
-      const cart = JSON.parse(localStorage.getItem('cart')) || [];
-
-      const existingProductIndex = cart.findIndex(item => item.id === id);
-
-      if (existingProductIndex >= 0) {
-        cart[existingProductIndex].quantity = newQuantity;
-
-        if (newQuantity === 0) {
-          cart.splice(existingProductIndex, 1);
-        }
-      } else {
-        if (newQuantity > 0) {
-          cart.push(productData);
-        }
-      }
-
-      localStorage.setItem('cart', JSON.stringify(cart));
-
-      window.dispatchEvent(new Event('cart-updated'));
-
-      return { ...prevState, quantity: newQuantity };
-    });
+    if (newQuantity > 0) {
+      addToCart({ ...productPriceData, id, quantity: newQuantity }); //AddTocart
+    } else {
+      removeFromCart(id); //Remove fron cart
+    }
   };
 
   const getPlaneCount = (avgRating) => {

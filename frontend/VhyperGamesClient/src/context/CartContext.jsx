@@ -43,7 +43,7 @@ export const CartProvider = ({ children }) => {
             };
 
             try {
-                const response = await fetch("/api/cart/update", {
+                const response = await fetch("https://localhost:7207/api/Cart/update", {
                     method: "PUT",
                     headers: {
                         "Content-Type": "application/json",

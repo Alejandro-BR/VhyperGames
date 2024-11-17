@@ -5,6 +5,7 @@ import Error from './pages/Error';
 import SobreNosotros from './pages/SobreNosotros';
 import DetailsViewLegacy from './pages/DetailsViewLegacy';
 import { AuthProvider } from '../src/context/authcontext';
+import { CartProvider } from './context/CartContext';
 import Cart from './pages/Cart';
 
 import {
@@ -31,8 +32,11 @@ const router = createBrowserRouter(routeDefinition);
 function App() {
   return (
     <AuthProvider>
-      <RouterProvider router={router}></RouterProvider>
+      <CartProvider>
+        <RouterProvider router={router}></RouterProvider>
+      </CartProvider>
     </AuthProvider>
-)}
+  )
+}
 
 export default App;
