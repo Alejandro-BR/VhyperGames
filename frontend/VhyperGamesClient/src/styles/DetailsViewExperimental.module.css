@@ -22,11 +22,13 @@
 .details-view__game-requirements {
   grid-column: 2;
   grid-row: 2;
+  padding-left: 30px;
 }
 
 .details-view__review-entry {
   grid-column: 2;
   grid-row: 3;
+  padding-left: 30px;
 }
 
 .details-view__reviews {

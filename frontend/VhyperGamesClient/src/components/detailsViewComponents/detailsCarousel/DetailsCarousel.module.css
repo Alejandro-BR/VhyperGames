@@ -2,8 +2,8 @@
     position: relative;
     display: flex;
     align-items: center;
-    height: 360px;
-    width: 720px;
+    height: 46vh;
+    width: 50vw;
     overflow: hidden; /* Asegura que el contenido fuera del contenedor se oculte */
     -webkit-user-select: none;
     user-select: none; 
