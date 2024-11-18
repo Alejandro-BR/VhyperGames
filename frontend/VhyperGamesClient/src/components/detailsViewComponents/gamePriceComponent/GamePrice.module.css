@@ -1,7 +1,7 @@
 .price-card {
   display: flex;
   width: 360px;
-  min-height: 275px;
+  /* min-height: 275px; */ /*SOLO SI PONEMOS CARGANDO*/
   height: fit-content;
   color: white;
   padding: 20px;

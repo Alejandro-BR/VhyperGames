@@ -53,15 +53,12 @@ const ProductCard = ({ id }) => {
   }, [id, cart]);
 
   const handleQuantityChange = (operation) => {
-    const newQuantity =
-      operation === "increase"
-        ? Math.min(productPriceData.quantity + 1, productPriceData.stock)
-        : Math.max(productPriceData.quantity - 1, 0);
+    const newQuantity = operation === "increase" ? Math.min(productPriceData.quantity + 1, productPriceData.stock): Math.max(productPriceData.quantity - 1, 0);
 
     if (newQuantity > 0) {
-      addToCart({ ...productPriceData, id, quantity: newQuantity }); //AddTocart
+      addToCart({ ...productPriceData, id, quantity: newQuantity });
     } else {
-      removeFromCart(id); //Remove fron cart
+      removeFromCart(id);
     }
   };
 
@@ -78,7 +75,7 @@ const ProductCard = ({ id }) => {
     return (productPriceData.price / 100).toFixed(2).replace('.', ',');
   };
 
-  if (loading) return <div className={classes['price-card']}>Cargando...</div>;
+  // if (loading) return <div className={classes['price-card']}>Cargando...</div>;
   if (error) return <div className={classes['price-card']}>Error: {error}</div>;
 
   return (
