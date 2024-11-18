@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext } from "react";
 import classes from './GamePrice.module.css';
 import { CartContext } from "../../../context/CartContext";
 import { DETAILS_VIEW_GAME_PRICE } from "../../../config";
@@ -78,8 +78,8 @@ const ProductCard = ({ id }) => {
     return (productPriceData.price / 100).toFixed(2).replace('.', ',');
   };
 
-  if (loading) return <div>Cargando...</div>;
-  if (error) return <div>Error: {error}</div>;
+  if (loading) return <div className={classes['price-card']}>Cargando...</div>;
+  if (error) return <div className={classes['price-card']}>Error: {error}</div>;
 
   return (
     <div className={classes['price-card']}>

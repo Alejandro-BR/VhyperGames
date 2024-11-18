@@ -1,6 +1,7 @@
 .price-card {
   display: flex;
   width: 360px;
+  min-height: 275px;
   height: fit-content;
   color: white;
   padding: 20px;

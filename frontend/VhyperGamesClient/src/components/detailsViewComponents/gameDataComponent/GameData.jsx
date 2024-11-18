@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { DETAILS_VIEW_GAME_DATA } from "../../../config";
 import Title from "../../titleComponent/Title";
-import DetailsCarousel from "../detailsCarousel-estaVezEsPersonal/DetailsCarousel";
+import DetailsCarousel from "../detailsCarousel/DetailsCarousel";
 
 import classes from "./GameData.module.css";
 
