@@ -11,37 +11,37 @@ const ReviewEntry = ({ gameId }) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const isAuthenticated = !!token;
-  
+
   // Función para cargar la reseña existente, si la hay
   const fetchUserReview = async () => {
 
     try {
       const response = await fetch(`${GET_REVIEW_BY_USER}?gameId=${gameId}`, {
-          method: 'GET',
-          headers: {
-              'Content-Type': 'application/json',
-              'Authorization': `Bearer ${token}`
-          }
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        }
       });
 
       if (response.ok) {
         const data = await response.json();
-    
+
         // Si no hay reseña, simplemente salir
         if (!data || !data.hasReview) {
-            console.log("No hay reseña para este juego.");
-            return;
+          console.log("No hay reseña para este juego.");
+          return;
         }
-  
+
         // Si hay una reseña, cargarla en el estado
         setReviewText(data.review.reviewText);
         setExistingReview(data.review);
-       }
+      }
 
     } catch (error) {
-        console.error("Error al obtener la reseña:", error);
+      console.error("Error al obtener la reseña:", error);
     }
-};
+  };
 
 
   useEffect(() => {
@@ -93,14 +93,7 @@ const ReviewEntry = ({ gameId }) => {
     <div className={classes.reviewbox}>
       {isAuthenticated ? (
         <>
-          <textarea
-            className={classes['review-box__textarea']}
-            placeholder="Escribe tu reseña aquí..."
-            value={reviewText}
-            onChange={handleInputChange}
-            maxLength="200"
-            readOnly={!!existingReview}
-          />
+
 
           {/* Mostrar el botón adecuado */}
           {existingReview ? (
@@ -115,7 +108,17 @@ const ReviewEntry = ({ gameId }) => {
             >
               {isLoading ? "Cargando..." : "Nueva Reseña"}
             </Button>
+
           )}
+
+          <textarea
+            className={classes['review-box__textarea']}
+            placeholder="Escribe tu reseña aquí..."
+            value={reviewText}
+            onChange={handleInputChange}
+            maxLength="200"
+            readOnly={!!existingReview}
+          />
         </>
       ) : (
         <p>Debes estar registrado para dejar una reseña.</p>

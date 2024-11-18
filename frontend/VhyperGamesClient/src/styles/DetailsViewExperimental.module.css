@@ -1,11 +1,35 @@
-.container{
+.details-view__info {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  grid-template-rows: auto auto;
+  padding-bottom: 40px;
+  gap: 30px;
   padding-left: 40px;
+  padding-right: 20px;
 }
 
+.details-view__game-data {
+  grid-column: 1;
+  grid-row: 1 / span 2;
+}
 
-.info{
-  display: grid;
-  grid-template-columns: 1.5fr 1fr; 
-  grid-template-rows: auto auto;
+.details-view__game-price {
+  grid-column: 2;
+  grid-row: 1;
+  padding-top: 66px;
+}
 
+.details-view__game-requirements {
+  grid-column: 2;
+  grid-row: 2;
+}
+
+.details-view__review-entry {
+  grid-column: 1;
+  grid-row: 3;
+}
+
+.details-view__reviews {
+  grid-column: 2;
+  grid-row: 3;
 }

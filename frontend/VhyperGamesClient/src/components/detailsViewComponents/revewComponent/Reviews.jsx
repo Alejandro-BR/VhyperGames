@@ -49,10 +49,13 @@ function Reviews({ id }) {
   if (error) return <div>Error: {error}</div>;
 
   return (
-    <>
+    <div className={classes.container}>
       <div className={classes.titles}>
-        <h1 className={classes.palito}>❙</h1>
-        <h1>Reseñas : {totalReviews}</h1>
+        <div className={classes.title}>
+          <h1 className={classes.palito}>❙</h1>
+          <h1>Reseñas : </h1>
+        </div>
+        <h1>{totalReviews}</h1>
       </div>
 
       <div className={classes.reviewsContainer}>
@@ -75,7 +78,7 @@ function Reviews({ id }) {
           </div>
         ))}
       </div>
-    </>
+    </div>
   );
 }
 
