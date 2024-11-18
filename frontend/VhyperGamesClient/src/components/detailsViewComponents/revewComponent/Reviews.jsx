@@ -8,6 +8,7 @@ function Reviews({ id }) {
   const [error, setError] = useState(null);
   const [reviews, setReviews] = useState([]);
   const [totalReviews, setTotalReviews] = useState(null)
+  const [isReviews, setIsRievews] = useState(true)
 
   useEffect(() => {
     if (id === 0) {
@@ -45,6 +46,15 @@ function Reviews({ id }) {
     return 0;
   };
 
+  useEffect(() => {
+    if (totalReviews > 0) {
+      setIsRievews(true);
+    } else {
+      setIsRievews(false);
+    }
+  }, [totalReviews]);
+
+
   if (loading) return <div>Cargando...</div>;
   if (error) return <div>Error: {error}</div>;
 
@@ -55,7 +65,7 @@ function Reviews({ id }) {
           <h1 className={classes.palito}>❙</h1>
           <h1>Reseñas : </h1>
         </div>
-        <h1>{totalReviews}</h1>
+        <h1>{isReviews ?  totalReviews : "No hay reseñas" }</h1>
       </div>
 
       <div className={classes.reviewsContainer}>

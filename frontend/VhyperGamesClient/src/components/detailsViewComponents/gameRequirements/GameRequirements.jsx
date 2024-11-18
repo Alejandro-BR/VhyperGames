@@ -1,4 +1,4 @@
-
+import classes from "./GameRequirements.module.css"
 import { useEffect, useState } from "react";
 import { GAME_REQUERIMENTS } from "../../../config";
 import "./GameRequirements.module.css"
@@ -55,35 +55,40 @@ function GameRequeriments({ id }) {
   return (
     <>
       <table>
-        <tr>
-          <th >Requisitos mínimos:</th>
-          <th >Requisitos recomendados:</th>
-        </tr>
-        <tr>
-          <td>CPU: {requeriments.minCPU}</td>
-          <td>CPU: {requeriments.cpu}</td>
-        </tr>
-        <tr>
-          <td>GPU: {requeriments.minGPU}</td>
-          <td>GPU: {requeriments.gpu}</td>
-        </tr>
-        <tr>
-          <td>Sistema operativo: {requeriments.minOS}</td>
-          <td>Sistema operativo: {requeriments.os}</td>
-        </tr>
-        <tr>
-          <td>RAM: {requeriments.minRAM}</td>
-          <td>RAM: {requeriments.ram}</td>
-        </tr>
-        <tr>
-          <td>DirectX: {requeriments.directX}</td>
-          <td>DirectX: {requeriments.directX}</td>
-        </tr>
-        <tr>
-          <td>Almacenamiento: {requeriments.storage}</td>
-          <td>Almacenamiento: {requeriments.storage}</td>
-        </tr>
+        <thead>
+          <tr>
+            <th>Requisitos mínimos:</th>
+            <th>Requisitos recomendados:</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>CPU: {requeriments.minCPU}</td>
+            <td>CPU: {requeriments.cpu}</td>
+          </tr>
+          <tr>
+            <td>GPU: {requeriments.minGPU}</td>
+            <td>GPU: {requeriments.gpu}</td>
+          </tr>
+          <tr>
+            <td>Sistema operativo: {requeriments.minOS}</td>
+            <td>Sistema operativo: {requeriments.os}</td>
+          </tr>
+          <tr>
+            <td>RAM: {requeriments.minRAM}</td>
+            <td>RAM: {requeriments.ram}</td>
+          </tr>
+          <tr>
+            <td>DirectX: {requeriments.directX}</td>
+            <td>DirectX: {requeriments.directX}</td>
+          </tr>
+          <tr>
+            <td>Almacenamiento: {requeriments.storage}</td>
+            <td>Almacenamiento: {requeriments.storage}</td>
+          </tr>
+        </tbody>
       </table>
+
     </>
   )
 

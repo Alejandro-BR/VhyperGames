@@ -17,8 +17,7 @@ td {
   padding: 6px;
 }
 
-
-
-
-
+.line{
+  color: var(--led-purple);
+}
 
