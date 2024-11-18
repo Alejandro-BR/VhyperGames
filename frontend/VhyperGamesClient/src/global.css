@@ -72,29 +72,6 @@ body {
   line-height: 1.4;
 }
 
-::-webkit-scrollbar {
-  width: 12px;
-}
-
-::-webkit-scrollbar-button:single-button:vertical:decrement {
-  background-color: Canvas;
-}
-
-::-webkit-scrollbar-button:single-button:vertical:increment {
-  background-color: Canvas;
-}
-
-::-webkit-scrollbar-track {
-  background-color: var(--body-color);
-
-}
-
-::-webkit-scrollbar-thumb {
-  /* display: none; */
-  background-color: Canvas;
-
-}
-
 
 /* CLASES GENERALES */
 
