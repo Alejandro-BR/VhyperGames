@@ -72,21 +72,21 @@ body {
   line-height: 1.4;
 }
 
-body::-webkit-scrollbar {
+/* body::-webkit-scrollbar {
   width: 12px;               
-}
+}*/
 
 
 
 body::-webkit-scrollbar-track {
-  background: var(--header-footer-color);
-}
+  background: var(--body-color);
+} 
 
 body::-webkit-scrollbar-thumb {
   /* display: none; */
-  background-color:  var(--body-color);    
-  border-radius: 20px;       
-  border: 2px solid var(--header-footer-color); 
+  /* background-color:  var(--body-color);     */
+  /* border-radius: 20px;       
+  border: 2px solid var(--header-footer-color);  */
 } 
 
 
