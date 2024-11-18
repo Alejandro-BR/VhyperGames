@@ -18,35 +18,37 @@ export const AuthProvider = ({ children }) => {
 
     // Cargar el token desde sessionStorage al inicio
     useEffect(() => {
-        const storedToken = getVarSessionStorage('accessToken'); 
+        const storedToken = getVarSessionStorage('accessToken');
         if (storedToken) {
             setToken(storedToken);
-            setDecodedToken(jwtDecode(storedToken)); 
+            setDecodedToken(jwtDecode(storedToken));
         }
     }, []);
 
     // Función para almacenar el token
     const saveToken = (newToken) => {
-        updateSessionStorage(newToken, 'accessToken'); 
-        setToken(newToken); 
-        setDecodedToken(jwtDecode(newToken)); 
+        updateSessionStorage(newToken, 'accessToken');
+        setToken(newToken);
+        setDecodedToken(jwtDecode(newToken));
     };
 
     // Función para eliminar el token
     const logout = () => {
-        deleteSessionStorage('accessToken'); 
+        deleteSessionStorage('accessToken');
         setToken(null);
         setDecodedToken(null);
     };
 
     const username = decodedToken?.name || null;
+    const userId = decodedToken?.id || null;
 
     const contextValue = {
-        token, 
+        token,
         decodedToken,
-        username, 
-        saveToken, 
-        logout, 
+        username,
+        userId,
+        saveToken,
+        logout,
     };
 
     return (

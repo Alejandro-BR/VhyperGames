@@ -7,42 +7,30 @@ export const CartContext = createContext();
 
 // Crear el provider
 export const CartProvider = ({ children }) => {
-    const { token, decodedToken } = useAuth(); // Obtener el token y la decodificación del token desde el AuthContext
+    const { token, userId } = useAuth(); // Obtener el token y la decodificación del token desde el AuthContext
     const [cart, setCart] = useState([]);
 
     // Cargar LocalStorage al iniciar
     useEffect(() => {
         const savedCart = JSON.parse(localStorage.getItem("cart")) || [];
         setCart(savedCart);
-    }, []);
+    }, []); // Solo se ejecuta una vez cuando se monta el componente
 
     // Guardar carrito en LocalStorage cuando cambie
     useEffect(() => {
         localStorage.setItem("cart", JSON.stringify(cart));
-    }, [cart]);
+    }, [cart]); // Se ejecuta cada vez que cart cambie
 
     // Sincronizar carrito con la base de datos
     const syncCartWithDB = async () => {
-        if (token && decodedToken) {
-            const userId = decodedToken.id; // Obtiene el ID del usuario desde el token decodificado
-
+        if (token && userId) {
             const payload = {
                 userId: userId,
                 cartId: userId, // O un ID único del carrito si es diferente
                 games: cart.map((item) => ({
                     id: item.cartDetailId || 0,
                     idGame: item.id,
-                    title: item.title || "Título no disponible",
-                    price: item.price || 0,
-                    totalPrice: (item.price || 0) * (item.quantity || 0),
-                    imageGames: {
-                        id: item.imageId || 0,
-                        gameId: item.id,
-                        imageUrl: item.image || "URL de imagen por defecto",
-                        altText: item.imageAlt || "Texto alternativo no disponible",
-                    },
                     quantity: item.quantity || 0,
-                    stock: item.stock || 0,
                 })),
                 totalPrice: cart.reduce((sum, item) => sum + (item.price || 0) * (item.quantity || 0), 0),
             };
@@ -70,20 +58,16 @@ export const CartProvider = ({ children }) => {
 
     // Obtener el carrito desde la base de datos (GET)
     const getCartFromDB = async () => {
-        if (token && decodedToken) {
-            const userId = decodedToken.id; // Obtener el ID del usuario desde el token
-
+        if (token && userId) {
             try {
-                // Realizar la solicitud GET con el userId en la URL
                 const response = await fetch(`${GET_CART}/${userId}`, {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",
-                        Authorization: `Bearer ${token}`, // Incluir el token en las cabeceras
+                        Authorization: `Bearer ${token}`,
                     },
                 });
 
-                // Verificar si la respuesta es exitosa
                 if (!response.ok) {
                     const errorMessage = await response.text();
                     throw new Error(`Error al obtener el carrito: ${response.status} - ${errorMessage}`);
@@ -91,20 +75,27 @@ export const CartProvider = ({ children }) => {
 
                 const data = await response.json();
 
-                // Guardar los datos del carrito en el estado de React
-                setCart(data.games.map((item) => ({
-                    id: item.idGame,
-                    title: item.title,
-                    price: item.price,
-                    quantity: item.quantity,
-                    stock: item.stock,
-                    image: item.imageGames.imageUrl,
-                    imageAlt: item.imageGames.altText,
-                    imageId: item.imageGames.id,
-                })));
+                console.log('Cart data received:', data); // Ver la respuesta completa
 
-                // Guardar los datos en LocalStorage
-                localStorage.setItem("cart", JSON.stringify(data.games));
+                // Si la respuesta tiene juegos
+                if (data && data.games && data.games.length > 0) {
+                    const formattedGames = data.games.map((item) => ({
+                        id: item.idGame,
+                        title: item.title,
+                        price: item.price,
+                        quantity: item.quantity,
+                        stock: item.stock,
+                        image: item.imageGames.imageUrl,
+                        imageAlt: item.imageGames.altText,
+                        imageId: item.imageGames.id,
+                    }));
+
+                    setCart(formattedGames); // Actualiza el estado con los juegos recibidos
+                    localStorage.setItem("cart", JSON.stringify(formattedGames)); // Guarda en localStorage
+                    console.log("Cart data saved to localStorage", formattedGames);
+                } else {
+                    console.log("No games found in cart");
+                }
 
             } catch (error) {
                 console.error("Error al obtener el carrito desde la base de datos:", error.message);
@@ -113,21 +104,21 @@ export const CartProvider = ({ children }) => {
         }
     };
 
-    // Método para agregar el producto al carrito
+    // Añadir producto al carrito
     const addToCart = (product) => {
         setCart((prevCart) => {
             const existingProduct = prevCart.find((item) => item.id === product.id);
 
             if (existingProduct) {
-                // Si el producto ya está en el carrito, actualizamos la cantidad
+                // Si el producto ya está en el carrito, solo incrementamos su cantidad en 1
                 return prevCart.map((item) =>
                     item.id === product.id
-                        ? { ...item, quantity: product.quantity }  // Actualizamos con la cantidad proporcionada
+                        ? { ...item, quantity: item.quantity + 1 }
                         : item
                 );
             } else {
-                // Si el producto no existe en el carrito, lo añadimos con la cantidad proporcionada
-                return [...prevCart, { ...product }];
+                // Si el producto no existe, lo añadimos con cantidad 1
+                return [...prevCart, { ...product, quantity: 1 }];
             }
         });
     };
@@ -157,10 +148,10 @@ export const CartProvider = ({ children }) => {
 
     // Obtener el carrito desde la base de datos solo al inicio o cuando se cambie el token
     useEffect(() => {
-        if (token) {
+        if (token && userId) {
             getCartFromDB();
         }
-    }, [token]);
+    }, [token, userId]); // Se ejecuta cuando el token o el userId cambian
 
     return (
         <CartContext.Provider value={{ cart, addToCart, removeFromCart, updateQuantity }}>
