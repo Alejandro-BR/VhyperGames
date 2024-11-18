@@ -1,6 +1,6 @@
 .details-view__info {
   display: grid;
-  grid-template-columns: 1.5fr 1fr;
+  grid-template-columns: 2fr 1fr;
   grid-template-rows: auto auto;
   padding-bottom: 40px;
   gap: 30px;
@@ -28,7 +28,7 @@
 .details-view__review-entry {
   grid-column: 2;
   grid-row: 3;
-  
+  padding-right: 44px;
 }
 
 .details-view__reviews {

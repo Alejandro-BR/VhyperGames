@@ -4,17 +4,19 @@ table {
   border-radius: 8px;
   border: 4px ridge var(--led-purple);
   text-align: left;
-
 }
 
 th {
   font-size: 1.25em;
   padding: 6px;
+  padding-left: 10px;
 }
 
 td {
   color: white;
   padding: 6px;
+  padding-right: 24px;
+  padding-left: 10px;
 }
 
 .line{
