@@ -53,7 +53,13 @@ const ProductCard = ({ id }) => {
   }, [id, cart]);
 
   const handleQuantityChange = (operation) => {
-    const newQuantity = operation === "increase" ? Math.min(productPriceData.quantity + 1, productPriceData.stock): Math.max(productPriceData.quantity - 1, 0);
+    let newQuantity;
+
+    if (operation === "increase") {
+      newQuantity = Math.min(productPriceData.quantity + 1, productPriceData.stock);
+    } else if (operation === "decrease") {
+      newQuantity = Math.max(productPriceData.quantity - 1, 0);
+    }
 
     if (newQuantity > 0) {
       addToCart({ ...productPriceData, id, quantity: newQuantity });
