@@ -4,7 +4,6 @@ namespace VhyperGamesServer.Models.Dtos;
 
 public class CartGameDto
 {
-    public int Id { get; set; }
 
     public int IdGame { get; set; }
 
@@ -16,7 +15,7 @@ public class CartGameDto
 
     public ImageGame ImageGames { get; set; }
 
-    public int Quantity { get; set; }
+    //public int Quantity { get; set; }
 
     public int Stock { get; set; }
 }

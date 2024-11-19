@@ -15,48 +15,43 @@ public class CartService
         _cartMapper = cartMapper;
     }
 
-
-    public async Task<CartDto> UpdateCart(CartDto cartDto)
+    public async Task<List<CartResponseDto>> UpdateCart(List<CartResponseDto> cartResponseDtos, int cartId)
     {
-        Cart cart = await _unitOfWork.CartRepository.GetByIdCart(cartDto.CartId);
+        Cart cart = await _unitOfWork.CartRepository.GetByIdCart(cartId);
 
         if (cart == null)
         {
-            throw new KeyNotFoundException($"No se ha encontrado este {cartDto.CartId}.");
+            throw new KeyNotFoundException($"No se ha encontrado este {cartId}.");
         }
 
         List<CartDetail> updatedCartDetails = new List<CartDetail>();
 
-        foreach (CartGameDto game in cartDto.Games)
-        {
-            CartDetail cartDetail = await _unitOfWork.CartDetailsRepository.GetByIdCartDetails(game.Id);
+        List<CartDetail> cartDetails = await _unitOfWork.CartDetailsRepository.GetByIdCart(cartId);
 
-            if (cartDetail != null && cartDetail.CartId != cartDto.CartId)
+        foreach (CartResponseDto gameDto in cartResponseDtos)
+        {
+            bool exist = false;
+
+            foreach (CartDetail game in cartDetails)
             {
-                cartDetail = null;
+                if (game.GameId == gameDto.GameId)
+                {
+                    exist = true;
+                    game.Quantity = gameDto.Quantity;
+                }
             }
 
-            if (cartDetail == null)
+            if (!exist)
             {
-                cartDetail = new CartDetail
+                CartDetail newCartDetail = new CartDetail()
                 {
-                    GameId = game.IdGame,
-                    Quantity = game.Quantity,
-                    CartId = cartDto.CartId,
-                    Price = game.Price,
+                    GameId = gameDto.GameId,
+                    Quantity = gameDto.Quantity,
                 };
 
-                await _unitOfWork.CartDetailsRepository.InsertAsync(cartDetail);
+                updatedCartDetails.Add(newCartDetail);
+                await _unitOfWork.CartDetailsRepository.InsertAsync(newCartDetail);
             }
-            else
-            {
-                cartDetail.Quantity = game.Quantity;
-                cartDetail.Price = game.Price;
-
-                _unitOfWork.CartDetailsRepository.Update(cartDetail);
-            }
-
-            updatedCartDetails.Add(cartDetail);
         }
 
         cart.CartDetails = updatedCartDetails;
@@ -65,22 +60,28 @@ public class CartService
         await _unitOfWork.CartDetailsRepository.SaveAsync();
         await _unitOfWork.CartRepository.SaveAsync();
 
-        CartDto updatedCartDto = _cartMapper.ToCartPaymentDto(cart);
-        updatedCartDto.TotalPrice = updatedCartDto.GetSumTotal();
+        List<CartDetail> BackcartDetails = await _unitOfWork.CartDetailsRepository.GetByIdCart(cartId);
 
-        return updatedCartDto;
+        return _cartMapper.ToListCartResponseDto(BackcartDetails);
     }
 
-    public async Task<CartDto> GetCartById(int id)
+    public async Task<List<CartResponseDto>> GetCartById(int cartId)
     {
-        Cart cart = await _unitOfWork.CartRepository.GetByIdCart(id);
+        List<CartDetail> cartDetails = await _unitOfWork.CartDetailsRepository.GetByIdCart(cartId);
 
-        if (cart == null)
+        if (cartDetails == null)
         {
-            throw new KeyNotFoundException($"No se ha encontrado carrito con este id {id}.");
+            throw new KeyNotFoundException($"No se ha encontrado carrito con este id {cartId}.");
         }
 
-        return _cartMapper.ToCartPaymentDto(cart);
+        return _cartMapper.ToListCartResponseDto(cartDetails);
     }
 
+
+    public async Task<List<CartGameDto>> GetCartGames(List<CartRepository> cartRepositories)
+    {
+        
+
+        return null;
+    }
 }

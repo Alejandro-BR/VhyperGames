@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using VhyperGamesServer.Services;
 using VhyperGamesServer.Models.Dtos;
+using Microsoft.AspNetCore.Authorization;
 
 namespace VhyperGamesServer.Controllers
 {
@@ -16,15 +17,57 @@ namespace VhyperGamesServer.Controllers
         }
 
         [HttpPut("update")]
-        public async Task<ActionResult<CartDto>> UpdateCart([FromBody] CartDto cartDto)
+        [Authorize]
+        public async Task<ActionResult<List<CartResponseDto>>> UpdateCart([FromBody] List<CartResponseDto> cartResponseDtos)
         {
-            return await _cartService.UpdateCart(cartDto);
+            try
+            {
+                var userIdClaim = User.FindFirst("id");
+                if (userIdClaim == null)
+                {
+                    return Unauthorized(new { message = "Usuario no autenticado." });
+                }
+
+                int userId = int.Parse(userIdClaim.Value);
+                int cartId = userId;
+
+                return await _cartService.UpdateCart(cartResponseDtos, cartId);
+            }
+            catch (InvalidOperationException ex)
+            {
+                return Conflict(new { message = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = "Error inesperado", detail = ex.Message });
+            }
         }
 
-        [HttpGet("cartById/{id}")]
-        public async Task<ActionResult<CartDto>> GetCartById(int id)
+        [HttpGet("cartById")]
+        [Authorize]
+        public async Task<ActionResult<List<CartResponseDto>>> GetCartById()
         {
-            return await _cartService.GetCartById(id);
+            try
+            {
+                var userIdClaim = User.FindFirst("id");
+                if (userIdClaim == null)
+                {
+                    return Unauthorized(new { message = "Usuario no autenticado." });
+                }
+
+                int userId = int.Parse(userIdClaim.Value);
+                int cartId = userId;
+
+                return await _cartService.GetCartById(cartId);
+            }
+            catch (InvalidOperationException ex)
+            {
+                return Conflict(new { message = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = "Error inesperado", detail = ex.Message });
+            }
         }
     }
 }
