@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import classes from './GamePrice.module.css';
+import { CartContext } from "../../../context/CartContext";
 import { DETAILS_VIEW_GAME_PRICE } from "../../../config";
 import Rating from '../../gameCardComponent/Rating';
 import { ConvertToDecimal } from '../../../utils/price';
@@ -14,6 +15,7 @@ const ProductCard = ({ id }) => {
   });
   const [error, setError] = useState(null);
 
+  // Carga de datos del producto
   useEffect(() => {
     if (!id) {
       setError("ID no válido");
@@ -35,7 +37,7 @@ const ProductCard = ({ id }) => {
           price: data.price,
           avgRating: data.avgRating,
           stock: data.stock,
-          quantity: 0, // Inicializa la cantidad a 0
+          quantity: productInCart.quantity || 0,
         });
       } catch (error) {
         setError(error.message);
