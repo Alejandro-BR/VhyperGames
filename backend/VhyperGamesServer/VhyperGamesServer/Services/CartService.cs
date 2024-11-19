@@ -26,20 +26,11 @@ public class CartService
 
         List<CartDetail> updatedCartDetails = new List<CartDetail>();
 
-        List<CartDetail> cartDetails = await _unitOfWork.CartDetailsRepository.GetByIdCart(cartId);
-
         foreach (CartResponseDto gameDto in cartResponseDtos)
         {
             bool exist = false;
 
-            foreach (CartDetail game in cartDetails)
-            {
-                if (game.GameId == gameDto.GameId)
-                {
-                    exist = true;
-                    game.Quantity = gameDto.Quantity;
-                }
-            }
+            CartDetail cartDetail = await _unitOfWork.CartDetailsRepository.GetCartByIds(cartId, gameDto.GameId);
 
             if (!exist)
             {

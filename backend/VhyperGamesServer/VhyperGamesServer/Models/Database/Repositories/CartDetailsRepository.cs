@@ -28,4 +28,12 @@ public class CartDetailsRepository : Repository<CartDetail, int>
         .Include(cd => cd.Game.ImageGames)
         .ToListAsync();
     }
+
+    public async Task<CartDetail> GetCartByIds(int idCart, int idGame )
+    {
+        return await Context.Set<CartDetail>()
+            .Include(cd => cd.Game)
+            .Include(cd => cd.Game.ImageGames)
+            .FirstOrDefaultAsync(cd => cd.CartId == idCart && cd.GameId == idGame);
+    }
 }
