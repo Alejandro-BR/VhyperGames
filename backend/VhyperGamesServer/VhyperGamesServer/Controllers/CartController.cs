@@ -2,6 +2,8 @@
 using VhyperGamesServer.Services;
 using VhyperGamesServer.Models.Dtos;
 using Microsoft.AspNetCore.Authorization;
+using VhyperGamesServer.Models.Database.Entities;
+using VhyperGamesServer.Models.Database.Repositories;
 
 namespace VhyperGamesServer.Controllers
 {
@@ -69,5 +71,24 @@ namespace VhyperGamesServer.Controllers
                 return StatusCode(500, new { message = "Error inesperado", detail = ex.Message });
             }
         }
+    
+
+    [HttpGet("cartByGames")]
+    public async Task<ActionResult<List<CartGameDto>>> GetCartGames([FromQuery] List<int> gameIds, [FromQuery] List<int> quantities)
+    {
+        if (gameIds.Count != quantities.Count)
+        {
+            return BadRequest("La cantidad de IDs de juegos no coincide con la cantidad de cantidades.");
+        }
+
+        // Combina las listas para recrear el objeto CartResponseDto
+        var cartItems = gameIds.Select((id, index) => new CartResponseDto
+        {
+            GameId = id,
+            Quantity = quantities[index]
+        }).ToList();
+
+        return await _cartService.GetCartGames(cartItems);
+    }
     }
 }

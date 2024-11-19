@@ -13,17 +13,18 @@ public class CartDto
     public CartDto()
     {
         Games = new List<CartGameDto>();  
-        TotalPrice = GetSumTotal();
+        //TotalPrice = GetSumTotal();
     }
 
-    public int GetSumTotal()
-    {
-        int precioTotal = 0;
+    //public int GetSumTotal()
+    //{
+    //    int precioTotal = 0;
 
-        foreach (var g in Games)
-        {
-            precioTotal += g.TotalPrice;
-        }
-        return precioTotal;
-    }
+    //    foreach (var g in Games)
+    //    {
+    //        precioTotal += g.TotalPrice;
+    //    }
+    //    return precioTotal;
+
+    //}
 }

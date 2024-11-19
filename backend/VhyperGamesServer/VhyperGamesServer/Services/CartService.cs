@@ -78,10 +78,15 @@ public class CartService
     }
 
 
-    public async Task<List<CartGameDto>> GetCartGames(List<CartRepository> cartRepositories)
+    public async Task<List<CartGameDto>> GetCartGames(List<CartResponseDto> cartResponseDtos)
     {
-        
+        List<Game> games = new List<Game>();
 
-        return null;
+        foreach (CartResponseDto cartResponseDto in cartResponseDtos)
+        {
+            games.Add(await _unitOfWork.GameRepository.GetByIdAsync(cartResponseDto.GameId, false, true));
+        }
+
+        return _cartMapper.ToListCartGameDto(games);
     }
 }

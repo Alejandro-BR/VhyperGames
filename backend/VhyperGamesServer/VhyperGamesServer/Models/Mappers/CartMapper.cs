@@ -26,4 +26,28 @@ public class CartMapper
 
         return cartResponseDtos;
     }
+
+    public CartGameDto ToCartGameDto(Game game)
+    {
+        return new CartGameDto()
+        {
+            IdGame = game.Id,
+            Title = game.Title,
+            Price = game.Price,
+            ImageGame = game.ImageGames.FirstOrDefault(),
+            Stock = game.Stock
+        };
+    }
+
+    public List<CartGameDto> ToListCartGameDto(List<Game> games)
+    {
+        List<CartGameDto> cartGameDtos = new List<CartGameDto>();
+
+        foreach (Game game in games)
+        {
+            cartGameDtos.Add(ToCartGameDto(game));
+        }
+
+        return cartGameDtos;
+    }
 }
