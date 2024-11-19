@@ -1,12 +1,10 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import classes from './GamePrice.module.css';
-import { CartContext } from "../../../context/CartContext";
 import { DETAILS_VIEW_GAME_PRICE } from "../../../config";
 import Rating from '../../gameCardComponent/Rating';
-import {ConvertToDecimal} from '../../../utils/price'
+import { ConvertToDecimal } from '../../../utils/price';
 
 const ProductCard = ({ id }) => {
-  const { addToCart, updateQuantity, removeFromCart, cart } = useContext(CartContext); // Usa las funciones del contexto
   const [productPriceData, setProductPriceData] = useState({
     price: 0,
     avgRating: 0,
@@ -17,7 +15,6 @@ const ProductCard = ({ id }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Carga de datos del producto
   useEffect(() => {
     if (!id) {
       setError("ID no válido");
@@ -35,13 +32,11 @@ const ProductCard = ({ id }) => {
         }
         const data = await response.json();
 
-        // Actualiza el estado del producto
-        const productInCart = cart.find((item) => item.id === id) || {};
         setProductPriceData({
           price: data.price,
           avgRating: data.avgRating,
           stock: data.stock,
-          quantity: productInCart.quantity || 0,
+          quantity: 0, // Inicializa la cantidad a 0
         });
       } catch (error) {
         setError(error.message);
@@ -51,22 +46,20 @@ const ProductCard = ({ id }) => {
     };
 
     fetchPriceData();
-  }, [id, cart]);
+  }, [id]);
 
   const handleQuantityChange = (operation) => {
-    let newQuantity;
+    setProductPriceData((prevData) => {
+      const newQuantity =
+        operation === "increase"
+          ? Math.min(prevData.quantity + 1, prevData.stock)
+          : Math.max(prevData.quantity - 1, 0);
 
-    if (operation === "increase") {
-      newQuantity = Math.min(productPriceData.quantity + 1, productPriceData.stock);
-    } else if (operation === "decrease") {
-      newQuantity = Math.max(productPriceData.quantity - 1, 0);
-    }
-
-    if (newQuantity > 0) {
-      addToCart({ ...productPriceData, id, quantity: newQuantity });
-    } else {
-      removeFromCart(id);
-    }
+      return {
+        ...prevData,
+        quantity: newQuantity,
+      };
+    });
   };
 
   const getPlaneCount = (avgRating) => {
@@ -82,7 +75,6 @@ const ProductCard = ({ id }) => {
     return ConvertToDecimal(productPriceData.price);
   };
 
-  // if (loading) return <div className={classes['price-card']}>Cargando...</div>;
   if (error) return <div className={classes['price-card']}>Error: {error}</div>;
 
   return (
