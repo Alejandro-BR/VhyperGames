@@ -5,7 +5,7 @@ import { DETAILS_VIEW_GAME_PRICE } from "../../../config";
 import Rating from '../../gameCardComponent/Rating';
 
 const ProductCard = ({ id }) => {
-  const { addToCart, updateQuantity, removeFromCart, cart } = useContext(CartContext); // Usa las funciones del contexto
+  const { items, addItemToCart, handleUpdateCartItemQuantity, removeFromCart } = useContext(CartContext); // Usa las funciones del contexto
   const [productPriceData, setProductPriceData] = useState({
     price: 0,
     avgRating: 0,
@@ -34,8 +34,8 @@ const ProductCard = ({ id }) => {
         }
         const data = await response.json();
 
-        // Actualiza el estado del producto
-        const productInCart = cart.find((item) => item.id === id) || {};
+        // Encuentra el producto en el carrito y actualiza los datos
+        const productInCart = items.find((item) => item.id === id) || {};
         setProductPriceData({
           price: data.price,
           avgRating: data.avgRating,
@@ -50,21 +50,27 @@ const ProductCard = ({ id }) => {
     };
 
     fetchPriceData();
-  }, [id, cart]);
+  }, [id, items]); // Dependemos de `items` para que se actualice si cambia el carrito
 
   const handleQuantityChange = (operation) => {
     let newQuantity;
 
-    if (operation === "increase") {
-      newQuantity = Math.min(productPriceData.quantity + 1, productPriceData.stock);
-    } else if (operation === "decrease") {
-      newQuantity = Math.max(productPriceData.quantity - 1, 0);
-    }
+    if (productPriceData.stock !== 0) {
+      if (operation === "increase") {
+        newQuantity = Math.min(productPriceData.quantity + 1, productPriceData.stock);
+      } else if (operation === "decrease") {
+        newQuantity = Math.max(productPriceData.quantity - 1, 0);
+      }
 
-    if (newQuantity > 0) {
-      addToCart({ ...productPriceData, id, quantity: newQuantity });
+      if (newQuantity > 0) {
+        // Agregar o actualizar el producto en el carrito
+        addItemToCart({ ...productPriceData, id, quantity: newQuantity });
+      } else {
+        // Eliminar el producto si la cantidad llega a 0
+        removeFromCart(id);
+      }
     } else {
-      removeFromCart(id);
+      alert("No hay stock");
     }
   };
 
@@ -81,7 +87,7 @@ const ProductCard = ({ id }) => {
     return (productPriceData.price / 100).toFixed(2).replace('.', ',');
   };
 
-  // if (loading) return <div className={classes['price-card']}>Cargando...</div>;
+  if (loading) return <div className={classes['price-card']}>Cargando...</div>;
   if (error) return <div className={classes['price-card']}>Error: {error}</div>;
 
   return (
