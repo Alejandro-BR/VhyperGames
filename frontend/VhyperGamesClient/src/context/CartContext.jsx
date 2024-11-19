@@ -23,8 +23,8 @@ const CartProvider = ({ children }) => {
         const parsedCart = JSON.parse(storedCart);
         setCart({ items: parsedCart.items || [] });
       } catch (error) {
-        console.error("Error parsing cart from localStorage:", error);
-        setCart({ items: [] }); // Fallback a un carrito vacío
+        console.error("Error parseo cart from Localstorage:", error);
+        setCart({ items: [] }); 
       }
     }
   }, []);
@@ -38,20 +38,19 @@ const CartProvider = ({ children }) => {
     }
   };
 
+  // function sincronizarCarrito(carritoBackend){
+  //   //Hacer concat pero si el id ya está que sume somo cantidad
+  // }
+
   // Sincronizar carrito con la base de datos
   const syncCartWithDB = async () => {
     if (token && userId) {
       const payload = {
         userId,
         games: cart.items.map((item) => ({
-          id: item.cartDetailId || 0,
-          idGame: item.id,
-          quantity: item.quantity || 0,
+          id: item.id,  
+          quantity: item.quantity || 0,  
         })),
-        totalPrice: cart.items.reduce(
-          (sum, item) => sum + (item.price || 0) * (item.quantity || 0),
-          0
-        ),
       };
 
       try {
@@ -95,13 +94,8 @@ const CartProvider = ({ children }) => {
 
         if (data && data.games) {
           const formattedGames = data.games.map((item) => ({
-            id: item.idGame,
-            title: item.title,
-            price: item.price,
-            quantity: item.quantity,
-            stock: item.stock,
-            image: item.imageGames?.imageUrl || "",
-            imageAlt: item.imageGames?.altText || "",
+            id: item.idGame,  
+            quantity: item.quantity,  
           }));
 
           setCart({ items: formattedGames });
@@ -113,36 +107,38 @@ const CartProvider = ({ children }) => {
     }
   };
 
-  // Añadir producto al carrito
   const addItemToCart = (product) => {
     setCart((prevShoppingCart) => {
       const items = prevShoppingCart.items || [];
       const existingItemIndex = items.findIndex((item) => item.id === product.id);
-
+  
       let updatedItems;
       if (existingItemIndex !== -1) {
+        // Si el producto ya está en el carrito, solo incrementamos la cantidad
         updatedItems = items.map((item, index) =>
           index === existingItemIndex
-            ? { ...item, quantity: Math.min(item.quantity + product.quantity, product.stock) }
+            ? { ...item, quantity: item.quantity + product.quantity } // Incrementamos la cantidad
             : item
         );
       } else {
-        updatedItems = [...items, product];
+        // Si no está, lo añadimos al carrito con la cantidad que se pasa
+        updatedItems = [...items, { ...product }];
       }
-
+  
       const updatedCart = { items: updatedItems };
-      updateLocalStorage(updatedCart);
+      updateLocalStorage(updatedCart); // Guardamos en localStorage
       return updatedCart;
     });
   };
+  
 
   // Actualizar la cantidad de un producto
-  const handleUpdateCartItemQuantity = (productId, amount) => {
+  const handleUpdateCartItemQuantity = (productId, quantitys) => {
     setCart((prevShoppingCart) => {
       const items = prevShoppingCart.items || [];
       const updatedItems = items.map((item) =>
         item.id === productId
-          ? { ...item, quantity: Math.max(item.quantity + amount, 0) }
+          ? { ...item, quantity: Math.max(item.quantity + quantitys, 0) }
           : item
       );
   
@@ -154,7 +150,6 @@ const CartProvider = ({ children }) => {
   };
   
 
-  // Eliminar producto del carrito
   const removeFromCart = (id) => {
     setCart((prevShoppingCart) => {
       const items = prevShoppingCart.items || [];
@@ -164,7 +159,6 @@ const CartProvider = ({ children }) => {
       return updatedCart;
     });
   };
-
   // Sincronizar carrito con la base de datos al cambiar
   useEffect(() => {
     if (token && cart.items.length > 0) {
