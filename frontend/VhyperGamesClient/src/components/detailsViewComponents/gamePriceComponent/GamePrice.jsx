@@ -47,6 +47,8 @@ const ProductCard = ({ id }) => {
     fetchPriceData();
   }, [id, items]);
 
+
+  //PASAR ESTE METODO AL CONTEXT
   const handleQuantityChange = (operation) => {
     if (productPriceData.stock === 0) {
       alert("No hay stock");
