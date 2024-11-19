@@ -3,30 +3,26 @@ import classes from './GamePrice.module.css';
 import { CartContext } from "../../../context/CartContext";
 import { DETAILS_VIEW_GAME_PRICE } from "../../../config";
 import Rating from '../../gameCardComponent/Rating';
-import {ConvertToDecimal} from '../../../utils/price'
+import { ConvertToDecimal } from '../../../utils/price';
 
 const ProductCard = ({ id }) => {
-  const { items, addItemToCart, handleUpdateCartItemQuantity, removeFromCart } = useContext(CartContext); // Usa las funciones del contexto
+  const { items = [], addItemToCart, handleUpdateCartItemQuantity, removeFromCart } = useContext(CartContext);
   const [productPriceData, setProductPriceData] = useState({
     price: 0,
     avgRating: 0,
     stock: 0,
     quantity: 0,
   });
-
-  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   // Carga de datos del producto
   useEffect(() => {
     if (!id) {
       setError("ID no válido");
-      setLoading(false);
       return;
     }
 
     const fetchPriceData = async () => {
-      setLoading(true);
       setError(null);
       try {
         const response = await fetch(`${DETAILS_VIEW_GAME_PRICE}?id=${id}`);
@@ -45,34 +41,43 @@ const ProductCard = ({ id }) => {
         });
       } catch (error) {
         setError(error.message);
-      } finally {
-        setLoading(false);
       }
     };
 
     fetchPriceData();
-  }, [id, items]); // Dependemos de `items` para que se actualice si cambia el carrito
+  }, [id, items]);
 
   const handleQuantityChange = (operation) => {
-    let newQuantity;
-
-    if (productPriceData.stock !== 0) {
-      if (operation === "increase") {
-        newQuantity = Math.min(productPriceData.quantity + 1, productPriceData.stock);
-      } else if (operation === "decrease") {
-        newQuantity = Math.max(productPriceData.quantity - 1, 0);
-      }
-
-      if (newQuantity > 0) {
-        // Agregar o actualizar el producto en el carrito
-        addItemToCart({ ...productPriceData, id, quantity: newQuantity });
-      } else {
-        // Eliminar el producto si la cantidad llega a 0
-        removeFromCart(id);
-      }
-    } else {
+    if (productPriceData.stock === 0) {
       alert("No hay stock");
+      return;
     }
+
+    let newQuantity = productPriceData.quantity;
+
+    if (operation === "increase") {
+      newQuantity = Math.min(productPriceData.quantity + 1, productPriceData.stock);
+    } else if (operation === "decrease") {
+      newQuantity = Math.max(productPriceData.quantity - 1, 0);
+    }
+
+    const difference = newQuantity - productPriceData.quantity;
+
+    if (difference > 0) {
+      addItemToCart({
+        id,
+        price: productPriceData.price,
+        quantity: difference,
+        stock: productPriceData.stock,
+      });
+    } else if (difference < 0) {
+      handleUpdateCartItemQuantity(id, difference);
+    }
+
+    setProductPriceData((prevData) => ({
+      ...prevData,
+      quantity: newQuantity,
+    }));
   };
 
   const getPlaneCount = (avgRating) => {
@@ -87,13 +92,10 @@ const ProductCard = ({ id }) => {
   const price = () => {
     return ConvertToDecimal(productPriceData.price);
   };
-
-  if (loading) return <div className={classes['price-card']}>Cargando...</div>;
   if (error) return <div className={classes['price-card']}>Error: {error}</div>;
 
   return (
     <div className={classes['price-card']}>
-
       <div className={classes['price-card__left-plane']}>
         <img src="../../icon/avion-detalle.svg" alt="Avion detalle" className={classes['price-card__plane-icon']} />
       </div>

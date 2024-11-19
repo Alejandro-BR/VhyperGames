@@ -7,6 +7,7 @@ import LoginModal from "../loginComponents/LoginModal";
 import RegisterModal from "../registerComponents/RegisterModal";
 import CartIcon from "./CartIcon";
 import { useAuth } from "../../context/authcontext";
+import { deleteLocalStorage } from "../../utils/keep";
 
 function Header() {
   const [mostrarLogin, setMostrarLogin] = useState(false);
@@ -46,6 +47,7 @@ function Header() {
     if (timerRef.current) clearTimeout(timerRef.current);
     logout();
     setShowLogout(false);
+    deleteLocalStorage("cart");
     navigate("/");
   };
 
