@@ -1,5 +1,7 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.ML;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using System.Text;
 using VhyperGamesServer.Models.Database;
 using VhyperGamesServer.Models.Database.Repositories;
@@ -91,6 +93,36 @@ public class Program
                     ClockSkew = TimeSpan.Zero
                 };
             });
+
+        builder.Services.AddSwaggerGen(options =>
+        {
+            options.AddSecurityDefinition(JwtBearerDefaults.AuthenticationScheme, new OpenApiSecurityScheme
+            {
+                BearerFormat = "JWT",
+                Name = "Authorization",
+                Description = "Escribe SOLO tu token JWT",
+                In = ParameterLocation.Header,
+                Type = SecuritySchemeType.Http,
+                Scheme = JwtBearerDefaults.AuthenticationScheme
+            });
+
+            // Establecer los requisitos de seguridad para las operaciones de la API
+            options.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = JwtBearerDefaults.AuthenticationScheme
+                }
+            },
+            new string[] { }
+        }
+    });
+        });
+
     }
 
     private static void ConfigureMiddleware(WebApplication app)
