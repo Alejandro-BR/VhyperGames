@@ -1,161 +1,192 @@
-import React, { createContext, useState, useEffect, useContext } from "react";
-import { useAuth } from "./authcontext"; // Usamos el AuthContext para obtener el token y el userId
-import { GET_CART, UPDATE_CART } from '../config'; // Importamos las URLs desde el archivo config.js
+import React, { createContext, useState, useEffect } from "react";
+import { useAuth } from "./authcontext";
+import { GET_CART, UPDATE_CART } from "../config";
 
 // Crear el contexto del carrito
-export const CartContext = createContext();
+const CartContext = createContext({
+  items: [],
+  addItemToCart: () => {},
+  handleUpdateCartItemQuantity: () => {},
+  removeFromCart: () => {},
+});
 
 // Crear el provider
-export const CartProvider = ({ children }) => {
-    const { token, userId } = useAuth(); // Obtener el token y la decodificación del token desde el AuthContext
-    const [cart, setCart] = useState([]);
+const CartProvider = ({ children }) => {
+  const { token, userId } = useAuth();
+  const [cart, setCart] = useState({ items: [] });
 
-    // Cargar LocalStorage al iniciar
-    useEffect(() => {
-        const savedCart = JSON.parse(localStorage.getItem("cart")) || [];
-        setCart(savedCart);
-    }, []); // Solo se ejecuta una vez cuando se monta el componente
+  // Cargar el carrito desde LocalStorage al iniciar
+  useEffect(() => {
+    const storedCart = localStorage.getItem("cart");
+    if (storedCart) {
+      try {
+        const parsedCart = JSON.parse(storedCart);
+        setCart({ items: parsedCart.items || [] });
+      } catch (error) {
+        console.error("Error parsing cart from localStorage:", error);
+        setCart({ items: [] }); // Fallback a un carrito vacío
+      }
+    }
+  }, []);
 
-    // Guardar carrito en LocalStorage cuando cambie
-    useEffect(() => {
-        localStorage.setItem("cart", JSON.stringify(cart));
-    }, [cart]); // Se ejecuta cada vez que cart cambie
+  // Guardar carrito en LocalStorage cada vez que cambia
+  const updateLocalStorage = (cart) => {
+    try {
+      localStorage.setItem("cart", JSON.stringify(cart));
+    } catch (error) {
+      console.error("Error saving cart to localStorage:", error);
+    }
+  };
 
-    // Sincronizar carrito con la base de datos
-    const syncCartWithDB = async () => {
-        if (token && userId) {
-            const payload = {
-                userId: userId,
-                cartId: userId, // O un ID único del carrito si es diferente
-                games: cart.map((item) => ({
-                    id: item.cartDetailId || 0,
-                    idGame: item.id,
-                    quantity: item.quantity || 0,
-                })),
-                totalPrice: cart.reduce((sum, item) => sum + (item.price || 0) * (item.quantity || 0), 0),
-            };
+  // Sincronizar carrito con la base de datos
+  const syncCartWithDB = async () => {
+    if (token && userId) {
+      const payload = {
+        userId,
+        games: cart.items.map((item) => ({
+          id: item.cartDetailId || 0,
+          idGame: item.id,
+          quantity: item.quantity || 0,
+        })),
+        totalPrice: cart.items.reduce(
+          (sum, item) => sum + (item.price || 0) * (item.quantity || 0),
+          0
+        ),
+      };
 
-            try {
-                const response = await fetch(UPDATE_CART, {
-                    method: "PUT",
-                    headers: {
-                        "Content-Type": "application/json",
-                        Authorization: `Bearer ${token}`,
-                    },
-                    body: JSON.stringify(payload),
-                });
-
-                if (!response.ok) {
-                    throw new Error(`Error al sincronizar el carrito: ${response.statusText}`);
-                }
-
-                console.log("Carrito sincronizado exitosamente:", await response.json());
-            } catch (error) {
-                console.error("Error al sincronizar el carrito:", error.message);
-            }
-        }
-    };
-
-    // Obtener el carrito desde la base de datos (GET)
-    const getCartFromDB = async () => {
-        if (token && userId) {
-            try {
-                const response = await fetch(`${GET_CART}/${userId}`, {
-                    method: "GET",
-                    headers: {
-                        "Content-Type": "application/json",
-                        Authorization: `Bearer ${token}`,
-                    },
-                });
-
-                if (!response.ok) {
-                    const errorMessage = await response.text();
-                    throw new Error(`Error al obtener el carrito: ${response.status} - ${errorMessage}`);
-                }
-
-                const data = await response.json();
-
-                console.log('Cart data received:', data); // Ver la respuesta completa
-
-                // Si la respuesta tiene juegos
-                if (data && data.games && data.games.length > 0) {
-                    const formattedGames = data.games.map((item) => ({
-                        id: item.idGame,
-                        title: item.title,
-                        price: item.price,
-                        quantity: item.quantity,
-                        stock: item.stock,
-                        image: item.imageGames.imageUrl,
-                        imageAlt: item.imageGames.altText,
-                        imageId: item.imageGames.id,
-                    }));
-
-                    setCart(formattedGames); // Actualiza el estado con los juegos recibidos
-                    localStorage.setItem("cart", JSON.stringify(formattedGames)); // Guarda en localStorage
-                    console.log("Cart data saved to localStorage", formattedGames);
-                } else {
-                    console.log("No games found in cart");
-                }
-
-            } catch (error) {
-                console.error("Error al obtener el carrito desde la base de datos:", error.message);
-                alert(`Hubo un problema al obtener el carrito: ${error.message}`);
-            }
-        }
-    };
-
-    // Añadir producto al carrito
-    const addToCart = (product) => {
-        setCart((prevCart) => {
-            const existingProduct = prevCart.find((item) => item.id === product.id);
-
-            if (existingProduct) {
-                // Si el producto ya está en el carrito, solo incrementamos su cantidad en 1
-                return prevCart.map((item) =>
-                    item.id === product.id
-                        ? { ...item, quantity: item.quantity + 1 }
-                        : item
-                );
-            } else {
-                // Si el producto no existe, lo añadimos con cantidad 1
-                return [...prevCart, { ...product, quantity: 1 }];
-            }
+      try {
+        const response = await fetch(UPDATE_CART, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(payload),
         });
-    };
 
-    // Actualizar la cantidad de un producto
-    const updateQuantity = (id, quantity) => {
-        setCart((prevCart) =>
-            prevCart.map((item) =>
-                item.id === id
-                    ? { ...item, quantity }
-                    : item
-            )
+        if (!response.ok) {
+          throw new Error(`Error al sincronizar el carrito: ${response.statusText}`);
+        }
+
+        console.log("Carrito sincronizado exitosamente.");
+      } catch (error) {
+        console.error("Error al sincronizar el carrito:", error.message);
+      }
+    }
+  };
+
+  // Obtener el carrito desde la base de datos
+  const getCartFromDB = async () => {
+    if (token && userId) {
+      try {
+        const response = await fetch(`${GET_CART}/${userId}`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error("Error al obtener el carrito");
+        }
+
+        const data = await response.json();
+
+        if (data && data.games) {
+          const formattedGames = data.games.map((item) => ({
+            id: item.idGame,
+            title: item.title,
+            price: item.price,
+            quantity: item.quantity,
+            stock: item.stock,
+            image: item.imageGames?.imageUrl || "",
+            imageAlt: item.imageGames?.altText || "",
+          }));
+
+          setCart({ items: formattedGames });
+          updateLocalStorage({ items: formattedGames });
+        }
+      } catch (error) {
+        console.error("Error al obtener el carrito desde la base de datos:", error.message);
+      }
+    }
+  };
+
+  // Añadir producto al carrito
+  const addItemToCart = (product) => {
+    setCart((prevShoppingCart) => {
+      const items = prevShoppingCart.items || [];
+      const existingItemIndex = items.findIndex((item) => item.id === product.id);
+
+      let updatedItems;
+      if (existingItemIndex !== -1) {
+        updatedItems = items.map((item, index) =>
+          index === existingItemIndex
+            ? { ...item, quantity: Math.min(item.quantity + product.quantity, product.stock) }
+            : item
         );
-    };
+      } else {
+        updatedItems = [...items, product];
+      }
 
-    // Eliminar producto del carrito
-    const removeFromCart = (id) => {
-        setCart((prevCart) => prevCart.filter((item) => item.id !== id));
-    };
+      const updatedCart = { items: updatedItems };
+      updateLocalStorage(updatedCart);
+      return updatedCart;
+    });
+  };
 
-    // Sincronizar carrito con la base de datos solo cuando se modifique
-    useEffect(() => {
-        if (token) {
-            syncCartWithDB();
-        }
-    }, [cart, token]); // Solo sincroniza si el carrito cambia o el token es modificado
+  // Actualizar la cantidad de un producto
+  const handleUpdateCartItemQuantity = (productId, amount) => {
+    setCart((prevShoppingCart) => {
+      const items = prevShoppingCart.items || [];
+      const updatedItems = items.map((item) =>
+        item.id === productId
+          ? { ...item, quantity: Math.max(item.quantity + amount, 0) }
+          : item
+      );
+  
+      const filteredItems = updatedItems.filter((item) => item.quantity > 0);
+      const updatedCart = { items: filteredItems };
+      updateLocalStorage(updatedCart);
+      return updatedCart;
+    });
+  };
+  
 
-    // Obtener el carrito desde la base de datos solo al inicio o cuando se cambie el token
-    useEffect(() => {
-        if (token && userId) {
-            getCartFromDB();
-        }
-    }, [token, userId]); // Se ejecuta cuando el token o el userId cambian
+  // Eliminar producto del carrito
+  const removeFromCart = (id) => {
+    setCart((prevShoppingCart) => {
+      const items = prevShoppingCart.items || [];
+      const updatedItems = items.filter((item) => item.id !== id);
+      const updatedCart = { items: updatedItems };
+      updateLocalStorage(updatedCart);
+      return updatedCart;
+    });
+  };
 
-    return (
-        <CartContext.Provider value={{ cart, addToCart, removeFromCart, updateQuantity }}>
-            {children}
-        </CartContext.Provider>
-    );
+  // Sincronizar carrito con la base de datos al cambiar
+  useEffect(() => {
+    if (token && cart.items.length > 0) {
+      syncCartWithDB();
+    }
+  }, [cart.items, token]);
+
+  // Obtener carrito desde la base de datos al iniciar sesión
+  useEffect(() => {
+    if (token && userId) {
+      getCartFromDB();
+    }
+  }, [token, userId]);
+
+  const ctxValue = {
+    items: cart.items || [],
+    addItemToCart,
+    handleUpdateCartItemQuantity,
+    removeFromCart,
+  };
+
+  return <CartContext.Provider value={ctxValue}>{children}</CartContext.Provider>;
 };
+
+export { CartContext, CartProvider };
