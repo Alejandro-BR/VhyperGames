@@ -84,7 +84,7 @@ public class GameSeeder
                     DrmFree = Drm.DrmFree,
                     ReleaseDate = new DateTime (2011, 11, 11),
                     Price = 2999,
-                    Stock = 100,
+                    Stock = 5,
                     GameRequirementsId = 1,
                     Sinopsis = "The Elder Scrolls V: Skyrim Special Edition, ganador de más de 200 premios al “Juego del año”, da vida a la fantasía épica con un nivel de detalle asombroso. La Special Edition incluye el juego aclamado por la crítica y complementos con nuevas funcionalidades como gráficos y efectos renovados, rayos crepusculares volumétricos, reflejos en tiempo real, profundidad de campo dinámica y muchas más.\r\n\r\nAdemás, Skyrim Special Edition lleva el poder de las creaciones de Bethesda Game Studios a PC y a las consolas: nuevas misiones, entornos, personajes, diálogos, armaduras y armas, entre otras muchas cosas. ¡Con las creaciones, la experiencia no tiene límites!",
                     AvgRating = null,

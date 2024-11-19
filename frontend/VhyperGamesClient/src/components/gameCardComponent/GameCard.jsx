@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import classes from "./GameCard.module.css";
 import { BASE_URL } from "../../config";
 import Rating from "./Rating";
+import {ConvertToDecimal} from "../../utils/price"
 
 function GameCard({ id, title, stock, price, imgUrl, avgRating }) {
   const [isStock, setIsStock] = useState(false);
@@ -17,7 +18,8 @@ function GameCard({ id, title, stock, price, imgUrl, avgRating }) {
 
   function precio() {
     console.log("Valor de avgRating para el juego:", title, avgRating);
-    return (price / 100).toFixed(2);
+    // return (price / 100).toFixed(2);
+    return ConvertToDecimal(price);
   }
 
   return (
