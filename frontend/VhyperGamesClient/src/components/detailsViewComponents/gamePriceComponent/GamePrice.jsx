@@ -5,25 +5,22 @@ import Rating from '../../gameCardComponent/Rating';
 import { ConvertToDecimal } from '../../../utils/price';
 
 const ProductCard = ({ id }) => {
+  const { items = [], addItemToCart, handleUpdateCartItemQuantity, removeFromCart } = useContext(CartContext);
   const [productPriceData, setProductPriceData] = useState({
     price: 0,
     avgRating: 0,
     stock: 0,
     quantity: 0,
   });
-
-  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     if (!id) {
       setError("ID no válido");
-      setLoading(false);
       return;
     }
 
     const fetchPriceData = async () => {
-      setLoading(true);
       setError(null);
       try {
         const response = await fetch(`${DETAILS_VIEW_GAME_PRICE}?id=${id}`);
@@ -32,6 +29,8 @@ const ProductCard = ({ id }) => {
         }
         const data = await response.json();
 
+        // Encuentra el producto en el carrito y actualiza los datos
+        const productInCart = items.find((item) => item.id === id) || {};
         setProductPriceData({
           price: data.price,
           avgRating: data.avgRating,
@@ -40,26 +39,43 @@ const ProductCard = ({ id }) => {
         });
       } catch (error) {
         setError(error.message);
-      } finally {
-        setLoading(false);
       }
     };
 
     fetchPriceData();
-  }, [id]);
+  }, [id, items]);
 
   const handleQuantityChange = (operation) => {
-    setProductPriceData((prevData) => {
-      const newQuantity =
-        operation === "increase"
-          ? Math.min(prevData.quantity + 1, prevData.stock)
-          : Math.max(prevData.quantity - 1, 0);
+    if (productPriceData.stock === 0) {
+      alert("No hay stock");
+      return;
+    }
 
-      return {
-        ...prevData,
-        quantity: newQuantity,
-      };
-    });
+    let newQuantity = productPriceData.quantity;
+
+    if (operation === "increase") {
+      newQuantity = Math.min(productPriceData.quantity + 1, productPriceData.stock);
+    } else if (operation === "decrease") {
+      newQuantity = Math.max(productPriceData.quantity - 1, 0);
+    }
+
+    const difference = newQuantity - productPriceData.quantity;
+
+    if (difference > 0) {
+      addItemToCart({
+        id,
+        price: productPriceData.price,
+        quantity: difference,
+        stock: productPriceData.stock,
+      });
+    } else if (difference < 0) {
+      handleUpdateCartItemQuantity(id, difference);
+    }
+
+    setProductPriceData((prevData) => ({
+      ...prevData,
+      quantity: newQuantity,
+    }));
   };
 
   const getPlaneCount = (avgRating) => {
@@ -74,12 +90,10 @@ const ProductCard = ({ id }) => {
   const price = () => {
     return ConvertToDecimal(productPriceData.price);
   };
-
   if (error) return <div className={classes['price-card']}>Error: {error}</div>;
 
   return (
     <div className={classes['price-card']}>
-
       <div className={classes['price-card__left-plane']}>
         <img src="../../icon/avion-detalle.svg" alt="Avion detalle" className={classes['price-card__plane-icon']} />
       </div>
