@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { GET_REVIEW } from "../../../config";
-import classes from "./Revews.module.css";
+import classes from "./Reviews.module.css";
 import Rating from '../../gameCardComponent/Rating';
 
 function Reviews({ id }) {

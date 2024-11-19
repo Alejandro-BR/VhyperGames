@@ -3,6 +3,7 @@ import classes from './GamePrice.module.css';
 import { CartContext } from "../../../context/CartContext";
 import { DETAILS_VIEW_GAME_PRICE } from "../../../config";
 import Rating from '../../gameCardComponent/Rating';
+import {ConvertToDecimal} from '../../../utils/price'
 
 const ProductCard = ({ id }) => {
   const { items, addItemToCart, handleUpdateCartItemQuantity, removeFromCart } = useContext(CartContext); // Usa las funciones del contexto
@@ -84,7 +85,7 @@ const ProductCard = ({ id }) => {
   const planeCount = getPlaneCount(productPriceData.avgRating);
 
   const price = () => {
-    return (productPriceData.price / 100).toFixed(2).replace('.', ',');
+    return ConvertToDecimal(productPriceData.price);
   };
 
   if (loading) return <div className={classes['price-card']}>Cargando...</div>;
