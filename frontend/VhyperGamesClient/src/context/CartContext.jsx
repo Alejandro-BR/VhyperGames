@@ -49,10 +49,10 @@ const CartProvider = ({ children }) => {
     if (token && userId) {
       // Crear el array de objetos para los juegos
       const payload = cart.items.map((item) => ({
-        gameId: item.id,       
+        gameId: item.gameId,       
         quantity: item.quantity || 0, 
       }));
-  
+      console.log("Payload enviado al backend:", JSON.stringify(payload, null, 2));
       try {
         const response = await fetch(UPDATE_CART, {
           method: "PUT",
@@ -62,7 +62,8 @@ const CartProvider = ({ children }) => {
           },
           body: JSON.stringify(payload), 
         });
-  
+        console.log("Payload enviado al backend:", payload);
+
         if (!response.ok) {
           throw new Error(`Error al sincronizar el carrito: ${response.statusText}`);
         }
@@ -92,13 +93,13 @@ const CartProvider = ({ children }) => {
         }
   
         const data = await response.json();
-  
-        if (data && data.games) {
-          const formattedGames = data.games.map((item) => ({
-            gameId: item.idGame,  
+        console.log("data", data);
+        console.log("datagames", data.games);
+        if (Array.isArray(data) && data.length > 0) {
+          const formattedGames = data.map((item) => ({
+            gameId: item.gameId,  
             quantity: item.quantity,  
           }));
-  
           setCart({ items: formattedGames });
           updateLocalStorage({ items: formattedGames });
         }
@@ -112,7 +113,8 @@ const CartProvider = ({ children }) => {
   const addItemToCart = (product) => {
     setCart((prevShoppingCart) => {
       const items = prevShoppingCart.items || [];
-      const existingItemIndex = items.findIndex((item) => item.id === product.id);
+      const existingItemIndex = items.findIndex((item) => item.gameId === product.gameId);
+
   
       let updatedItems;
       if (existingItemIndex !== -1) {
