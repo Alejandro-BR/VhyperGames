@@ -6,37 +6,48 @@ namespace VhyperGamesServer.Models.Mappers;
 
 public class CartMapper
 {
-    public CartGameDto ToCartGameDto(CartDetail cartDetail)
-    {
-        //var imageUrl = cartDetail.Game.ImageGames?.FirstOrDefault()?.ImageUrl ?? "default_image_url.jpg"; 
 
-        return new CartGameDto
+    public CartResponseDto ToCartResponseDto(CartDetail cartDetail)
+    {
+        return new CartResponseDto
         {
-            Id = cartDetail.Id,
-            IdGame = cartDetail.GameId,
-            Quantity = cartDetail.Quantity,
-            Title = cartDetail.Game?.Title ?? "Título no disponible",
-            Price = cartDetail.Game?.Price ?? 0,
-            TotalPrice = cartDetail.Quantity * (cartDetail.Game?.Price ?? 0),
-            Stock = cartDetail.Game?.Stock ?? 0,
-            ImageGames = cartDetail.Game?.ImageGames?.FirstOrDefault()
+            GameId = cartDetail.GameId,
+            Quantity = cartDetail.Quantity
         };
     }
 
-    public IEnumerable<CartGameDto> ToListCartGameDto(IEnumerable<CartDetail> cartDetails)
+    public List<CartResponseDto> ToListCartResponseDto(List<CartDetail> cartDetails)
     {
-        return cartDetails.Select(detail => ToCartGameDto(detail));
+        List<CartResponseDto> cartResponseDtos = new List<CartResponseDto>();
+
+        foreach (CartDetail cartDetail in cartDetails) {
+            cartResponseDtos.Add(ToCartResponseDto(cartDetail));
+        }
+
+        return cartResponseDtos;
     }
 
-    public CartDto ToCartPaymentDto(Cart cart)
+    public CartGameDto ToCartGameDto(Game game)
     {
-        var games = ToListCartGameDto(cart.CartDetails).ToList(); 
-        return new CartDto
+        return new CartGameDto()
         {
-            UserId = cart.UserId,
-            CartId = cart.Id,
-            Games = games,
-            TotalPrice = games.Sum(game => game.TotalPrice) 
+            IdGame = game.Id,
+            Title = game.Title,
+            Price = game.Price,
+            ImageGame = game.ImageGames.FirstOrDefault(),
+            Stock = game.Stock
         };
+    }
+
+    public List<CartGameDto> ToListCartGameDto(List<Game> games)
+    {
+        List<CartGameDto> cartGameDtos = new List<CartGameDto>();
+
+        foreach (Game game in games)
+        {
+            cartGameDtos.Add(ToCartGameDto(game));
+        }
+
+        return cartGameDtos;
     }
 }
