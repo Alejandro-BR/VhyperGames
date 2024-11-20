@@ -15,7 +15,7 @@ public class CartService
         _cartMapper = cartMapper;
     }
 
-    public async Task<List<CartResponseDto>> UpdateCart(List<CartResponseDto> cartResponseDtos, int cartId)
+    public async Task<List<CartDto>> UpdateCart(List<CartDto> cartResponseDtos, int cartId)
     {
         Cart cart = await _unitOfWork.CartRepository.GetByIdCart(cartId);
 
@@ -26,7 +26,7 @@ public class CartService
 
         List<CartDetail> updatedCartDetails = new List<CartDetail>();
 
-        foreach (CartResponseDto gameDto in cartResponseDtos)
+        foreach (CartDto gameDto in cartResponseDtos)
         {
             bool exist = false;
 
@@ -56,7 +56,7 @@ public class CartService
         return _cartMapper.ToListCartResponseDto(BackcartDetails);
     }
 
-    public async Task<List<CartResponseDto>> GetCartById(int cartId)
+    public async Task<List<CartDto>> GetCartById(int cartId)
     {
         List<CartDetail> cartDetails = await _unitOfWork.CartDetailsRepository.GetByIdCart(cartId);
 
@@ -69,15 +69,15 @@ public class CartService
     }
 
 
-    public async Task<List<CartGameDto>> GetCartGames(List<CartResponseDto> cartResponseDtos)
+    public async Task<List<CartGameDto>> GetCartGames(List<CartDto> cartDtos)
     {
         List<Game> games = new List<Game>();
 
-        foreach (CartResponseDto cartResponseDto in cartResponseDtos)
+        foreach (CartDto cartDto in cartDtos)
         {
-            games.Add(await _unitOfWork.GameRepository.GetByIdAsync(cartResponseDto.GameId, false, true));
+            games.Add(await _unitOfWork.GameRepository.GetByIdAsync(cartDto.GameId, false, true));
         }
 
-        return _cartMapper.ToListCartGameDto(games);
+        return _cartMapper.ToListCartGameDto(games, cartDtos);
     }
 }

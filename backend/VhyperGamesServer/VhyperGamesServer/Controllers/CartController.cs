@@ -2,8 +2,6 @@
 using VhyperGamesServer.Services;
 using VhyperGamesServer.Models.Dtos;
 using Microsoft.AspNetCore.Authorization;
-using VhyperGamesServer.Models.Database.Entities;
-using VhyperGamesServer.Models.Database.Repositories;
 
 namespace VhyperGamesServer.Controllers
 {
@@ -20,7 +18,7 @@ namespace VhyperGamesServer.Controllers
 
         [HttpPut("update")]
         [Authorize]
-        public async Task<ActionResult<List<CartResponseDto>>> UpdateCart([FromBody] List<CartResponseDto> cartResponseDtos)
+        public async Task<ActionResult<List<CartDto>>> UpdateCart([FromBody] List<CartDto> cartResponseDtos)
         {
             try
             {
@@ -47,7 +45,7 @@ namespace VhyperGamesServer.Controllers
 
         [HttpGet("cartById")]
         [Authorize]
-        public async Task<ActionResult<List<CartResponseDto>>> GetCartById()
+        public async Task<ActionResult<List<CartDto>>> GetCartById()
         {
             try
             {
@@ -81,8 +79,7 @@ namespace VhyperGamesServer.Controllers
             return BadRequest("La cantidad de IDs de juegos no coincide con la cantidad de cantidades.");
         }
 
-        // Combina las listas para recrear el objeto CartResponseDto
-        var cartItems = gameIds.Select((id, index) => new CartResponseDto
+        var cartItems = gameIds.Select((id, index) => new CartDto
         {
             GameId = id,
             Quantity = quantities[index]
