@@ -51,9 +51,7 @@ public class CartService
         await _unitOfWork.CartDetailsRepository.SaveAsync();
         await _unitOfWork.CartRepository.SaveAsync();
 
-        List<CartDetail> BackcartDetails = await _unitOfWork.CartDetailsRepository.GetByIdCart(cartId);
-
-        return _cartMapper.ToListCartResponseDto(BackcartDetails);
+        return _cartMapper.ToListCartResponseDto(updatedCartDetails);
     }
 
     public async Task<List<CartDto>> GetCartById(int cartId)
@@ -129,8 +127,6 @@ public class CartService
         await _unitOfWork.CartDetailsRepository.SaveAsync();
         await _unitOfWork.CartRepository.SaveAsync();
 
-        List<CartDetail> BackcartDetails = await _unitOfWork.CartDetailsRepository.GetByIdCart(cartId);
-
-        return _cartMapper.ToListCartResponseDto(BackcartDetails);
+        return _cartMapper.ToListCartResponseDto(updatedCartDetails);
     }
 }
