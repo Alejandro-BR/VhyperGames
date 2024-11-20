@@ -6,7 +6,7 @@ import Rating from '../../gameCardComponent/Rating';
 import { ConvertToDecimal } from '../../../utils/price';
 
 const ProductCard = ({ id }) => {
-  const { items = [], addItemToCart, handleUpdateCartItemQuantity, removeFromCart } = useContext(CartContext);
+  const { items = [], addItemToCart, removeFromCart } = useContext(CartContext);
   const [productPriceData, setProductPriceData] = useState({
     price: 0,
     avgRating: 0,
@@ -47,38 +47,44 @@ const ProductCard = ({ id }) => {
     fetchPriceData();
   }, [id, items]);
 
+
+  //PASAR ESTE METODO AL CONTEXT
   const handleQuantityChange = (operation) => {
     if (productPriceData.stock === 0) {
       alert("No hay stock");
       return;
     }
-
+  
     let newQuantity = productPriceData.quantity;
-
+  
+    // Cambiar la cantidad dependiendo de la operación
     if (operation === "increase") {
       newQuantity = Math.min(productPriceData.quantity + 1, productPriceData.stock);
     } else if (operation === "decrease") {
       newQuantity = Math.max(productPriceData.quantity - 1, 0);
     }
-
+  
     const difference = newQuantity - productPriceData.quantity;
-
-    if (difference > 0) {
+  
+    // Si la cantidad llega a 0, eliminar el producto del carrito
+    if (newQuantity === 0) {
+      removeFromCart(id);
+    } else if (difference !== 0) {
       addItemToCart({
         id,
-        price: productPriceData.price,
-        quantity: difference,
-        stock: productPriceData.stock,
+        quantity: difference, 
       });
-    } else if (difference < 0) {
-      handleUpdateCartItemQuantity(id, difference);
+  
+      // Actualizamos el estado local para reflejar el cambio de cantidad
+      setProductPriceData((prevData) => ({
+        ...prevData,
+        quantity: newQuantity,
+      }));
     }
-
-    setProductPriceData((prevData) => ({
-      ...prevData,
-      quantity: newQuantity,
-    }));
   };
+  
+  
+  
 
   const getPlaneCount = (avgRating) => {
     if (avgRating < 0) return 1;
