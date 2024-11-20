@@ -7,18 +7,18 @@ namespace VhyperGamesServer.Models.Mappers;
 public class CartMapper
 {
 
-    public CartResponseDto ToCartResponseDto(CartDetail cartDetail)
+    public CartDto ToCartResponseDto(CartDetail cartDetail)
     {
-        return new CartResponseDto
+        return new CartDto
         {
             GameId = cartDetail.GameId,
             Quantity = cartDetail.Quantity
         };
     }
 
-    public List<CartResponseDto> ToListCartResponseDto(List<CartDetail> cartDetails)
+    public List<CartDto> ToListCartResponseDto(List<CartDetail> cartDetails)
     {
-        List<CartResponseDto> cartResponseDtos = new List<CartResponseDto>();
+        List<CartDto> cartResponseDtos = new List<CartDto>();
 
         foreach (CartDetail cartDetail in cartDetails) {
             cartResponseDtos.Add(ToCartResponseDto(cartDetail));
@@ -27,7 +27,7 @@ public class CartMapper
         return cartResponseDtos;
     }
 
-    public CartGameDto ToCartGameDto(Game game)
+    public CartGameDto ToCartGameDto(Game game, int quantity)
     {
         return new CartGameDto()
         {
@@ -35,19 +35,29 @@ public class CartMapper
             Title = game.Title,
             Price = game.Price,
             ImageGame = game.ImageGames.FirstOrDefault(),
-            Stock = game.Stock
+            Stock = game.Stock,
+            Quantity = quantity
+            
         };
     }
 
-    public List<CartGameDto> ToListCartGameDto(List<Game> games)
+    public List<CartGameDto> ToListCartGameDto(List<Game> games, List<CartDto> cartDtos)
     {
         List<CartGameDto> cartGameDtos = new List<CartGameDto>();
 
         foreach (Game game in games)
         {
-            cartGameDtos.Add(ToCartGameDto(game));
+            var cartDto = cartDtos.FirstOrDefault(c => c.GameId == game.Id);
+            int quantity = 0;
+
+            if (cartDto != null) {
+                quantity = cartDto.Quantity;
+            }
+
+            cartGameDtos.Add(ToCartGameDto(game, quantity));
         }
 
         return cartGameDtos;
     }
+
 }
