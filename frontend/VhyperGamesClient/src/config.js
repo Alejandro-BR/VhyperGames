@@ -14,3 +14,4 @@ export const GET_REVIEW_BY_USER = `${API_BASE_URL}detailsview/get-user-review`;
 export const GET_REVIEW = `${API_BASE_URL}DetailsView/game-reviews`;
 export const GET_CART = `${API_BASE_URL}Cart/cartById`;
 export const UPDATE_CART = `${API_BASE_URL}Cart/update`; 
+export const GET_CART_DATA = `${API_BASE_URL}Cart/cartByData`;
