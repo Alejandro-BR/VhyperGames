@@ -80,4 +80,57 @@ public class CartService
 
         return _cartMapper.ToListCartGameDto(games, cartDtos);
     }
+
+    public async Task<List<CartDto>> MergeCart(List<CartDto> cartDtos, int cartId)
+    {
+        Cart cart = await _unitOfWork.CartRepository.GetByIdCart(cartId);
+
+        if (cart == null)
+        {
+            throw new KeyNotFoundException($"No se ha encontrado este {cartId}.");
+        }
+
+        List<CartDetail> updatedCartDetails = new List<CartDetail>();
+
+        List<CartDetail> backCartDetails = await _unitOfWork.CartDetailsRepository.GetByIdCart(cartId);
+
+
+        foreach (CartDetail cartDetail in backCartDetails)
+        {
+            CartDto newCartDto = cartDtos.FirstOrDefault(c => c.GameId == cartDetail.GameId);
+
+            if (newCartDto != null)
+            {
+                cartDetail.Quantity += newCartDto.Quantity;
+            }
+
+            updatedCartDetails.Add(cartDetail);
+        }
+
+        foreach (CartDto cartDto in cartDtos)
+        {
+            CartDetail cartDetail = updatedCartDetails.FirstOrDefault(c => c.GameId == cartDto.GameId);
+
+            if (cartDetail == null) {
+                cartDetail = new CartDetail()
+                {
+                    GameId = cartDto.GameId,
+                    Quantity = cartDto.Quantity,
+                };
+
+                updatedCartDetails.Add(cartDetail);
+
+            }
+        }
+
+        cart.CartDetails = updatedCartDetails;
+        _unitOfWork.CartRepository.Update(cart);
+
+        await _unitOfWork.CartDetailsRepository.SaveAsync();
+        await _unitOfWork.CartRepository.SaveAsync();
+
+        List<CartDetail> BackcartDetails = await _unitOfWork.CartDetailsRepository.GetByIdCart(cartId);
+
+        return _cartMapper.ToListCartResponseDto(BackcartDetails);
+    }
 }

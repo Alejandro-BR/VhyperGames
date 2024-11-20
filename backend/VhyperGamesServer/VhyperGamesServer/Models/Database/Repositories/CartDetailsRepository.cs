@@ -12,11 +12,10 @@ public class CartDetailsRepository : Repository<CartDetail, int>
         _context = context;
     }
 
-    // Quizas para el checkout sirvira ???
     //public async Task<CartDetail> GetByIdCartDetails(int id)
     //{
     //    return await Context.Set<CartDetail>()
-    //        .Include(cd => cd.Game) 
+    //        .Include(cd => cd.Game)
     //        .Include(cd => cd.Game.ImageGames)
     //        .FirstOrDefaultAsync(cd => cd.Id == id);
     //}
