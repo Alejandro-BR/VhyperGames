@@ -39,20 +39,20 @@ const CartProvider = ({ children }) => {
   };
 
   // function sincronizarCarrito(carritoBackend){
+
   //   //Hacer concat pero si el id ya está que sume somo cantidad
   // }
 
-  // Sincronizar carrito con la base de datos
+  // Sincronizar carrito con la base de datos P
+  //CAMBIAR PETICION 
   const syncCartWithDB = async () => {
     if (token && userId) {
-      const payload = {
-        userId,
-        games: cart.items.map((item) => ({
-          id: item.id,  
-          quantity: item.quantity || 0,  
-        })),
-      };
-
+      // Crear el array de objetos para los juegos
+      const payload = cart.items.map((item) => ({
+        gameId: item.id,       
+        quantity: item.quantity || 0, 
+      }));
+  
       try {
         const response = await fetch(UPDATE_CART, {
           method: "PUT",
@@ -60,44 +60,45 @@ const CartProvider = ({ children }) => {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
-          body: JSON.stringify(payload),
+          body: JSON.stringify(payload), 
         });
-
+  
         if (!response.ok) {
           throw new Error(`Error al sincronizar el carrito: ${response.statusText}`);
         }
-
+  
         console.log("Carrito sincronizado exitosamente.");
       } catch (error) {
         console.error("Error al sincronizar el carrito:", error.message);
       }
     }
   };
+  
 
   // Obtener el carrito desde la base de datos
   const getCartFromDB = async () => {
     if (token && userId) {
       try {
-        const response = await fetch(`${GET_CART}/${userId}`, {
+        const response = await fetch(`${GET_CART}`, { //GET
           method: "GET",
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
         });
-
+  
         if (!response.ok) {
           throw new Error("Error al obtener el carrito");
         }
-
+  
         const data = await response.json();
-
+  
         if (data && data.games) {
           const formattedGames = data.games.map((item) => ({
-            id: item.idGame,  
+            gameId: item.idGame,  
             quantity: item.quantity,  
           }));
-
+  
           setCart({ items: formattedGames });
           updateLocalStorage({ items: formattedGames });
         }
@@ -106,6 +107,7 @@ const CartProvider = ({ children }) => {
       }
     }
   };
+  
 
   const addItemToCart = (product) => {
     setCart((prevShoppingCart) => {
