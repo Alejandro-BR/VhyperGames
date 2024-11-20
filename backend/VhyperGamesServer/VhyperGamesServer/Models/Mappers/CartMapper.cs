@@ -27,7 +27,7 @@ public class CartMapper
         return cartResponseDtos;
     }
 
-    public CartGameDto ToCartGameDto(Game game, int quantity)
+    public CartGameDto ToCartGameDto(Game game)
     {
         return new CartGameDto()
         {
@@ -36,25 +36,18 @@ public class CartMapper
             Price = game.Price,
             ImageGame = game.ImageGames.FirstOrDefault(),
             Stock = game.Stock,
-            Quantity = quantity
             
         };
     }
 
-    public List<CartGameDto> ToListCartGameDto(List<Game> games, List<CartDto> cartDtos)
+    public List<CartGameDto> ToListCartGameDto(List<Game> games)
     {
         List<CartGameDto> cartGameDtos = new List<CartGameDto>();
 
         foreach (Game game in games)
         {
-            var cartDto = cartDtos.FirstOrDefault(c => c.GameId == game.Id);
-            int quantity = 0;
 
-            if (cartDto != null) {
-                quantity = cartDto.Quantity;
-            }
-
-            cartGameDtos.Add(ToCartGameDto(game, quantity));
+            cartGameDtos.Add(ToCartGameDto(game));
         }
 
         return cartGameDtos;

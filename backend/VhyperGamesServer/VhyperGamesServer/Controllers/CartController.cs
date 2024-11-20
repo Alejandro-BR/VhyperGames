@@ -72,20 +72,9 @@ public class CartController : ControllerBase
 
 
     [HttpGet("cartByGames")]
-    public async Task<ActionResult<List<CartGameDto>>> GetCartGames([FromQuery] List<int> gameIds, [FromQuery] List<int> quantities)
+    public async Task<ActionResult<List<CartGameDto>>> GetCartGames([FromQuery] List<int> gameIds)
     {
-        if (gameIds.Count != quantities.Count)
-        {
-            return BadRequest("La cantidad de IDs de juegos no coincide con la cantidad de cantidades.");
-        }
-
-        var cartItems = gameIds.Select((id, index) => new CartDto
-        {
-            GameId = id,
-            Quantity = quantities[index]
-        }).ToList();
-
-        return await _cartService.GetCartGames(cartItems);
+        return await _cartService.GetCartGames(gameIds);
     }
 
 

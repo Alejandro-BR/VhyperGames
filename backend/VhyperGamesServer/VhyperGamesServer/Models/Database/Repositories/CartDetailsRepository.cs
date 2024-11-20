@@ -33,7 +33,7 @@ public class CartDetailsRepository : Repository<CartDetail, int>
     {
         return await Context.Set<CartDetail>()
             .Include(cd => cd.Game)
-            .Include(cd => cd.Game.ImageGames)
+                .ThenInclude(g => g.ImageGames)
             .FirstOrDefaultAsync(cd => cd.CartId == idCart && cd.GameId == idGame);
     }
 }
