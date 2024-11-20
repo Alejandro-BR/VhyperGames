@@ -71,7 +71,7 @@ const ProductCard = ({ id }) => {
       removeFromCart(id);
     } else if (difference !== 0) {
       addItemToCart({
-        id,
+        gameId: Number(id),
         quantity: difference, 
       });
   
