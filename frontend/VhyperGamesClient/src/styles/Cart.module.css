@@ -1,0 +1,16 @@
+.container{
+  display: flex;
+  padding: 60px;
+  justify-content: space-between;
+}
+
+.cartListGames{
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 20px;
+}
+
+.cartPayment{
+  top: 0;
+  position: sticky;
+}

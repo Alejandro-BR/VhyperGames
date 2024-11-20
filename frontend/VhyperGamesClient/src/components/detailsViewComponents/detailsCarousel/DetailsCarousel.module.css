@@ -2,7 +2,7 @@
     position: relative;
     display: flex;
     align-items: center;
-    height: 46vh;
+    max-height: 52vh;
     width: 56vw;
     overflow: hidden; 
     -webkit-user-select: none;
