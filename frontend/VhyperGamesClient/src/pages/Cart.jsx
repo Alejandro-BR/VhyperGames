@@ -7,14 +7,6 @@ function Cart() {
         <div className={classes.containerCartList}>
             <div className={classes.cartListGames}>
                 <CartListGames />
-                <CartListGames />
-                <CartListGames />
-                <CartListGames />
-                <CartListGames />
-                <CartListGames />
-                <CartListGames />
-                <CartListGames />
-                <CartListGames />
             </div>
 
             <div className={classes.cartPayment}>
