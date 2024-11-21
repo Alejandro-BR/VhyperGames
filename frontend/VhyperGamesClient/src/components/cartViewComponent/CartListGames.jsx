@@ -3,6 +3,7 @@ import { CartContext } from "../../context/CartContext";
 import classes from "./CartListGames.module.css";
 import { ConvertToDecimal, TotalPrice } from "../../utils/price";
 import { BASE_URL } from "../../config";
+import QuantityButton from "../quantityButtonComponents/QuantityButton";
 
 const CartListGames = () => {
   const { gameDetails, fetchCartByGames, handleQuantityChange } = useContext(CartContext);
@@ -46,9 +47,10 @@ const CartListGames = () => {
               <p>Cantidad: {game.quantity}</p>
             </div>
             <div className={classes.gameCard__right_bottom}>
-              <button onClick={() => handleQuantityChange(game.idGame, "decrease")}>-</button>
+              {/* <button onClick={() => handleQuantityChange(game.idGame, "decrease")}>-</button>
               <span>{game.quantity}</span>
-              <button onClick={() => handleQuantityChange(game.idGame, "increase")}>+</button>
+              <button onClick={() => handleQuantityChange(game.idGame, "increase")}>+</button> */}
+              <QuantityButton id={game.idGame} stock={game.stock} bin={true} />
             </div>
           </div>
           <hr className={classes.gameCard__line} />

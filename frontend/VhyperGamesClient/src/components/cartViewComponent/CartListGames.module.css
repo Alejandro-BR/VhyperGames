@@ -11,9 +11,9 @@
     flex-wrap: wrap;
 }
 
-.gameCard__left {
+/* .gameCard__left {
     display: flex;
-}
+} */
 
 .gameCard__right {
     display: flex;
