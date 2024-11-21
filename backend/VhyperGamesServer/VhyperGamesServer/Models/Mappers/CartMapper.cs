@@ -34,7 +34,7 @@ public class CartMapper
             IdGame = game.Id,
             Title = game.Title,
             Price = game.Price,
-            ImageGame = game.ImageGames.FirstOrDefault(),
+            ImageGame = game.ImageGames.FirstOrDefault().ImageUrl,
             Stock = game.Stock,
             
         };

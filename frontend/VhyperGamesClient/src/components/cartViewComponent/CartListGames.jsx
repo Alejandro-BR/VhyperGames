@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import { CartContext } from "../../context/CartContext";
 import classes from "./CartListGames.module.css";
 import { ConvertToDecimal, TotalPrice } from "../../utils/price";
+import { BASE_URL } from "../../config";
 
 const CartListGames = () => {
   const { gameDetails, fetchCartByGames, handleQuantityChange } = useContext(CartContext);
@@ -28,12 +29,14 @@ const CartListGames = () => {
     };
   });
 
+  
+
   return (
     <>
       {gamesWithQuantity.map((game) => (
         <div key={game.idGame} className={classes.container}>
           <div className={classes.container__left}>
-            <img src={game.imageGame?.[0]?.imageUrl} alt={game.title || "Game Image"} />
+            <img src={`${BASE_URL}${game.imageUrl}`} />
             {/*LA IMAGEN NO LA PILLA, REVISAR BACK . EN CONSOLE LOG ESTA PETICION SE LLAMA DATOS OBTENIDOS DE LA API*/}
           </div>
           <div className={classes.container__right}>

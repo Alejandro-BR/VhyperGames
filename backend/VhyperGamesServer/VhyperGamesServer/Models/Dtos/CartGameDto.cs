@@ -11,7 +11,7 @@ public class CartGameDto
 
     public int Price { get; set; }
 
-    public ImageGame ImageGame { get; set; }
+    public string ImageGame { get; set; }
 
     public int Stock { get; set; }
 }
