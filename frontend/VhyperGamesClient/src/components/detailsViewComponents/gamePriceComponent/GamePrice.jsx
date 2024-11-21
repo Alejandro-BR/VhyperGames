@@ -4,6 +4,7 @@ import { CartContext } from "../../../context/CartContext";
 import { DETAILS_VIEW_GAME_PRICE } from "../../../config";
 import Rating from '../../gameCardComponent/Rating';
 import { ConvertToDecimal } from '../../../utils/price';
+import QuantityButton from "../../quantityButtonComponents/QuantityButton";
 
 const ProductCard = ({ id }) => {
   const { items = [], handleQuantityChange } = useContext(CartContext); // Importar el contexto del carrito
@@ -128,7 +129,7 @@ const ProductCard = ({ id }) => {
           <img src="../../icon/carrito_header.svg" alt="Carrito" />
         </div>
 
-        <div className={classes['price-card__quantity-controls']}>
+        {/* <div className={classes['price-card__quantity-controls']}>
           <button
             disabled={productPriceData.quantity <= 0}
             onClick={() => handleQuantityChange(id, "decrease")}
@@ -142,7 +143,8 @@ const ProductCard = ({ id }) => {
           >
             +
           </button>
-        </div>
+        </div> */}
+        <QuantityButton id={id} stock={productPriceData.stock}/>
       </div>
     </div>
   );
