@@ -21,9 +21,8 @@ export const AuthProvider = ({ children }) => {
     useEffect(() => {
         if (decodedToken) {
             const currentTime = Math.floor(Date.now() / 1000);
-            
-            let expirationTime = decodedToken?.exp - currentTime;
-            expirationTime = 5000
+            let expirationTime = (decodedToken?.exp - currentTime)*1000;
+            console.log(expirationTime)
             inactivityTimeLimit.current = expirationTime;
             startInactivityTimer();
 
