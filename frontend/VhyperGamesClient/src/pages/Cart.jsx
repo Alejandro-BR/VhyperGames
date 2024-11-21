@@ -6,21 +6,13 @@ function Cart() {
     return (
         <div className={classes.container}>
             <div className={classes.cartListGames}>
-            <CartListGames />
-            <CartListGames />
-            <CartListGames />
-            <CartListGames />
-            <CartListGames />
-            <CartListGames />
-            <CartListGames />
-            <CartListGames />
-            <CartListGames />
+                <CartListGames />
             </div>
-            
+
             <div className={classes.cartPayment}>
-            <CartPayment />
+                <CartPayment />
             </div>
-            
+
         </div>
     )
 }
