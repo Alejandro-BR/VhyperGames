@@ -27,8 +27,8 @@ export function TotalPrice(data) {
   let totalPrice = 0;
 
   data.forEach(game => {
-    totalPrice += game.price * game.quantity;
+    totalPrice += game.price * game.quantity; 
   });
 
-  return totalPrice;
+  return totalPrice; 
 }
