@@ -6,7 +6,7 @@ import Rating from '../../gameCardComponent/Rating';
 import { ConvertToDecimal } from '../../../utils/price';
 
 const ProductCard = ({ id }) => {
-  const { items = [], addItemToCart, removeFromCart } = useContext(CartContext);
+  const { items = [], handleQuantityChange } = useContext(CartContext); // Importar el contexto del carrito
   const [productPriceData, setProductPriceData] = useState({
     price: 0,
     avgRating: 0,
@@ -15,7 +15,7 @@ const ProductCard = ({ id }) => {
   });
   const [error, setError] = useState(null);
 
-  // Carga de datos del producto
+  // Cargar los datos del producto desde el servidor
   useEffect(() => {
     if (!id) {
       setError("ID no válido");
@@ -27,12 +27,12 @@ const ProductCard = ({ id }) => {
       try {
         const response = await fetch(`${DETAILS_VIEW_GAME_PRICE}?id=${id}`);
         if (!response.ok) {
-          throw new Error("Error al obtener los datos");
+          throw new Error("Error al obtener los datos del producto");
         }
         const data = await response.json();
 
-        // Encuentra el producto en el carrito y actualiza los datos
-        const productInCart = items.find((item) => item.id === id) || {};
+        // Obtener la cantidad del producto desde el carrito
+        const productInCart = items.find((item) => item.gameId === id) || {};
         setProductPriceData({
           price: data.price,
           avgRating: data.avgRating,
@@ -47,45 +47,16 @@ const ProductCard = ({ id }) => {
     fetchPriceData();
   }, [id, items]);
 
+  // Actualizar la cantidad local si cambian los datos del carrito global
+  useEffect(() => {
+    const productInCart = items.find((item) => item.gameId === id) || {};
+    setProductPriceData((prevData) => ({
+      ...prevData,
+      quantity: productInCart.quantity || 0,
+    }));
+  }, [id, items]);
 
-  //PASAR ESTE METODO AL CONTEXT
-  const handleQuantityChange = (operation) => {
-    if (productPriceData.stock === 0) {
-      alert("No hay stock");
-      return;
-    }
-  
-    let newQuantity = productPriceData.quantity;
-  
-    // Cambiar la cantidad dependiendo de la operación
-    if (operation === "increase") {
-      newQuantity = Math.min(productPriceData.quantity + 1, productPriceData.stock);
-    } else if (operation === "decrease") {
-      newQuantity = Math.max(productPriceData.quantity - 1, 0);
-    }
-  
-    const difference = newQuantity - productPriceData.quantity;
-  
-    // Si la cantidad llega a 0, eliminar el producto del carrito
-    if (newQuantity === 0) {
-      removeFromCart(id);
-    } else if (difference !== 0) {
-      addItemToCart({
-        gameId: Number(id),
-        quantity: difference, 
-      });
-  
-      // Actualizamos el estado local para reflejar el cambio de cantidad
-      setProductPriceData((prevData) => ({
-        ...prevData,
-        quantity: newQuantity,
-      }));
-    }
-  };
-  
-  
-  
-
+  // Calcular el número de iconos de aviones según la valoración
   const getPlaneCount = (avgRating) => {
     if (avgRating < 0) return 1;
     if (avgRating === 0) return 2;
@@ -98,12 +69,19 @@ const ProductCard = ({ id }) => {
   const price = () => {
     return ConvertToDecimal(productPriceData.price);
   };
-  if (error) return <div className={classes['price-card']}>Error: {error}</div>;
+
+  if (error) {
+    return <div className={classes['price-card']}>Error: {error}</div>;
+  }
 
   return (
     <div className={classes['price-card']}>
       <div className={classes['price-card__left-plane']}>
-        <img src="../../icon/avion-detalle.svg" alt="Avion detalle" className={classes['price-card__plane-icon']} />
+        <img
+          src="../../icon/avion-detalle.svg"
+          alt="Avion detalle"
+          className={classes['price-card__plane-icon']}
+        />
       </div>
 
       <div className={classes['price-card__left-column']}>
@@ -121,7 +99,9 @@ const ProductCard = ({ id }) => {
           <p className={classes['price-card__label']}>VALORACIÓN</p>
           <div className={classes['price-card__planes-container']}>
             {productPriceData.avgRating === null ? (
-              <p className={classes['price-card__no-reviews']}>No existen reseñas.</p>
+              <p className={classes['price-card__no-reviews']}>
+                No existen reseñas.
+              </p>
             ) : (
               [...Array(planeCount)].map((_, index) => (
                 <Rating key={index} avgRating={productPriceData.avgRating} />
@@ -134,9 +114,13 @@ const ProductCard = ({ id }) => {
       <div className={classes['price-card__right-column']}>
         <div className={classes['price-card__stock-status']}>
           {productPriceData.stock > 0 ? (
-            <span className={classes['price-card__stock-status--in-stock']}>EN STOCK: {productPriceData.stock}</span>
+            <span className={classes['price-card__stock-status--in-stock']}>
+              EN STOCK: {productPriceData.stock}
+            </span>
           ) : (
-            <span className={classes['price-card__stock-status--out-of-stock']}>SIN STOCK</span>
+            <span className={classes['price-card__stock-status--out-of-stock']}>
+              SIN STOCK
+            </span>
           )}
         </div>
 
@@ -145,9 +129,19 @@ const ProductCard = ({ id }) => {
         </div>
 
         <div className={classes['price-card__quantity-controls']}>
-          <button onClick={() => handleQuantityChange("decrease")}>-</button>
+          <button
+            disabled={productPriceData.quantity <= 0}
+            onClick={() => handleQuantityChange(id, "decrease")}
+          >
+            -
+          </button>
           <span>{productPriceData.quantity}</span>
-          <button onClick={() => handleQuantityChange("increase")}>+</button>
+          <button
+            disabled={productPriceData.stock <= productPriceData.quantity}
+            onClick={() => handleQuantityChange(id, "increase")}
+          >
+            +
+          </button>
         </div>
       </div>
     </div>
