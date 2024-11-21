@@ -19,6 +19,7 @@ const CartProvider = ({ children }) => {
   const { token, userId } = useAuth();
   const [cart, setCart] = useState({ items: [] });
   const [gameDetails, setGameDetails] = useState([]); //Se almacenan los juegos usados en CartListGames
+  const [mergeCompleted, setMergeCompleted] = useState(false);
 
   // Cargar el carrito desde LocalStorage al iniciar
   useEffect(() => {
@@ -34,6 +35,42 @@ const CartProvider = ({ children }) => {
     }
   }, []);
 
+  useEffect(() => {
+    const syncOrMergeCart = async () => {
+      if (token && userId) {
+        const storedCart = localStorage.getItem("cart");
+
+        try {
+          if (storedCart) {
+            const parsedCart = JSON.parse(storedCart);
+
+            if (Array.isArray(parsedCart.items) && parsedCart.items.length > 0) {
+              // Si hay elementos en el carrito local, realizar un merge
+              console.log("Realizando merge con la base de datos...");
+              await mergeCartWithDB();
+              setMergeCompleted(true);
+            } else {
+              // Si el carrito está vacío, obtener datos de la base de datos
+              console.log("El carrito local está vacío. Obteniendo datos de la base de datos...");
+              await getCartFromDB();
+              setMergeCompleted(true);
+            }
+          } else {
+            // Si no hay carrito en localStorage, obtener datos desde la base de datos
+            console.log("No hay carrito en localStorage. Obteniendo datos de la base de datos...");
+            await getCartFromDB();
+            setMergeCompleted(true);
+          }
+        } catch (error) {
+          console.error("Error durante la sincronización o el merge:", error);
+        }
+      }
+    };
+
+    syncOrMergeCart(); // Ejecuta la función async separada
+  }, [token, userId]); // Solo se ejecuta al cambiar el token o el userId
+
+
   // Función para obtener el carrito desde la base de datos al iniciar sesión
   // useEffect(() => {
   //   if (token && userId) {
@@ -41,14 +78,18 @@ const CartProvider = ({ children }) => {
   //   }
   // }, [token, userId]);
 
-  //Función para sincronizar el carrito con la base de datos
-  // Redundantes, no?
-  useEffect(() => {
-    if (token && userId) {
-      getCartFromDB();
-      syncCartWithDB();
-    }
-  }, [cart, token, userId]);
+  // //Función para sincronizar el carrito con la base de datos
+  // useEffect(() => {
+  //   if (token && userId) {
+  //     syncCartWithDB();
+  //   }
+  // }, [cart, token, userId]);
+
+  // useEffect(() => {
+  //   if (token && userId) {
+  //     mergeCartWithDB(); // Realizar el merge al iniciar sesión
+  //   }
+  // }, [token, userId]);
 
   // Guardar carrito en LocalStorage cada vez que cambia
   const updateLocalStorage = (cart) => {
@@ -65,20 +106,20 @@ const CartProvider = ({ children }) => {
         console.error("gameIds no es un array válido:", gameIds);
         return;
       }
-  
+
       const validGameIds = gameIds
-        .map(id => Number(id)) 
-        .filter(id => Number.isInteger(id) && id > 0); 
-  
+        .map(id => Number(id))
+        .filter(id => Number.isInteger(id) && id > 0);
+
       if (validGameIds.length === 0) {
         console.error("gameIds no contiene valores válidos:", gameIds);
         return;
       }
-  
+
       const query = validGameIds.map(id => `gameIds=${id}`).join("&");
       const url = `${GET_CART_BY_GAMES}?${query}`;
       console.log("URL generada:", url);
-  
+
       // Realizar la solicitud al backend
       const response = await fetch(url, {
         method: "GET",
@@ -87,11 +128,11 @@ const CartProvider = ({ children }) => {
           Authorization: `Bearer ${token}`,
         },
       });
-  
+
       if (!response.ok) {
         throw new Error("Error al obtener información de los juegos");
       }
-  
+
       // Procesar la respuesta
       const data = await response.json();
       console.log("Datos obtenidos de la API:", data);
@@ -102,7 +143,7 @@ const CartProvider = ({ children }) => {
       setGameDetails([]);
     }
   }, [token]);
-  
+
 
   // Sincronizar carrito local con la base de datos (Merge, nuevo endpoint PUT)
   const mergeCartWithDB = async () => {
@@ -179,6 +220,8 @@ const CartProvider = ({ children }) => {
   };
 
 
+
+
   const syncCartWithDB = async () => {
     if (token && userId) {
       const payload = cart.items
@@ -212,7 +255,7 @@ const CartProvider = ({ children }) => {
       }
     }
   };
-  
+
   // Añadir producto al carrito
   const addItemToCart = (product) => {
     setCart((prevCart) => {
