@@ -72,7 +72,7 @@ public class AuthController : ControllerBase
                 },
 
                  // Aquí indicamos cuándo caduca el token
-                 Expires = DateTime.UtcNow.AddDays(5),
+                 Expires = DateTime.UtcNow.AddMinutes(1),
                  // Aquí especificamos nuestra clave y el algoritmo de firmado
                  SigningCredentials = new SigningCredentials(
                  _tokenParameters.IssuerSigningKey,
