@@ -5,11 +5,11 @@
 }
 
 .cartListGames {
-
   gap: 20px;
 }
 
 .cartPayment {
+  align-self: start;
   top: 29.3%;
   position: sticky;
 }
