@@ -24,23 +24,33 @@ public class CartService
             throw new KeyNotFoundException($"No se ha encontrado este {cartId}.");
         }
 
+        List<CartDetail> updateCD = new List<CartDetail>();
+
         foreach (CartDto gameDto in cartResponseDtos)
         {
-
             CartDetail cartDetail = cart.CartDetails.FirstOrDefault(cd => cd.GameId == gameDto.GameId);
 
-            CartDetail newCartDetail = new CartDetail()
+            if (cartDetail != null)
             {
-                GameId = gameDto.GameId,
-                Quantity = gameDto.Quantity,
-            };
-
-            cart.CartDetails.Add(newCartDetail);
-            await _unitOfWork.CartDetailsRepository.InsertAsync(newCartDetail);
+                cartDetail.Quantity = gameDto.Quantity;
+                updateCD.Add(cartDetail);
+                _unitOfWork.CartDetailsRepository.Update(cartDetail); 
+            }
+            else
+            {
+                CartDetail newCartDetail = new CartDetail()
+                {
+                    GameId = gameDto.GameId,
+                    Quantity = gameDto.Quantity,
+                };
+                cart.CartDetails.Add(newCartDetail);
+                updateCD.Add(newCartDetail);
+                await _unitOfWork.CartDetailsRepository.InsertAsync(newCartDetail);
+            }
         }
 
+        cart.CartDetails = updateCD;
         _unitOfWork.CartRepository.Update(cart);
-
         await _unitOfWork.SaveAsync();
 
         return _cartMapper.ToListCartResponseDto(cart.CartDetails);

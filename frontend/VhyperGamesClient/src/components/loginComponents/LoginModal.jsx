@@ -43,16 +43,12 @@ function LoginModal({ onClose, onRegisterClick }) {
                 const datosPromesa = await response.json();
                 const token = datosPromesa.accessToken;
                 
+                console.log("save token login")
                 saveToken(token);
                 
                 // Forzar recarga de la página
-                window.location.reload();
 
                 onClose();
-
-                setTimeout(() => {
-                    alert(`Bienvenido, ${decodedToken.name}`);
-                }, 500);
 
             } else if (response.status === 401) {
                 setPromesaError("Email o contraseña inválidos");
