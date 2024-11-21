@@ -56,11 +56,11 @@ export function CreateData() {
   let data = [];
 
   localstorage.forEach(localItem => {
-    const backItem = dataBack.find(game => game.idGame === localItem.gameId);
+    const backGame = dataBack.find(game => game.idGame === localItem.gameId);
 
-    if (backItem) {
+    if (backGame) {
       data.push({
-        price: backItem.price,
+        price: backGame.price,
         quantity: localItem.quantity
       });
     }
