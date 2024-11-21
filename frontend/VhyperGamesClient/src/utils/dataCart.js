@@ -1,32 +1,71 @@
-// let data = [{price: 1200, quantity: 1},{price: 3099, quantity: 2}];
-
 export function CreateData() {
   const localstorage = [
     {
       "gameId": 1,
-      "quantity": 14
+      "quantity": 6
     },
     {
-      "gameId": 1,
-      "quantity": 14
+      "gameId": 2,
+      "quantity": 4
     },
     {
-      "gameId": 3,
-      "quantity": 3
-    },
-    {
-      "gameId": 1,
-      "quantity": 42
-    },
-    {
-      "gameId": 11,
-      "quantity": 12
-    },
-    {
-      "gameId": 14,
-      "quantity": 5
+      "gameId": 12,
+      "quantity": 1
     }
   ];
 
-  
+  const dataBack = [
+    {
+      "idGame": 1,
+      "title": "The Witcher III",
+      "price": 1799,
+      "imageGame": {
+        "id": 1,
+        "gameId": 1,
+        "imageUrl": "images/TheWitcher3/thewitcher3.png",
+        "altText": "Banner de The Witcher III"
+      },
+      "stock": 100
+    },
+    {
+      "idGame": 2,
+      "title": "The Elder Scroll V: Skyrim",
+      "price": 2999,
+      "imageGame": {
+        "id": 7,
+        "gameId": 2,
+        "imageUrl": "images/Skyrim/skyrim.png",
+        "altText": "Imagen 1 de Skyrim"
+      },
+      "stock": 5
+    },
+    {
+      "idGame": 12,
+      "title": "Five Nights at Freddy's 2",
+      "price": 799,
+      "imageGame": {
+        "id": 48,
+        "gameId": 12,
+        "imageUrl": "images/FiveNightsAtFreddys2/Freddy2.png",
+        "altText": "Imagen 1 de fnaf2"
+      },
+      "stock": 100
+    }
+  ];
+
+  let data = [];
+
+  localstorage.forEach(localItem => {
+    const backItem = dataBack.find(game => game.idGame === localItem.gameId);
+
+    if (backItem) {
+      data.push({
+        price: backItem.price,
+        quantity: localItem.quantity
+      });
+    }
+  });
+
+  return data;
 }
+

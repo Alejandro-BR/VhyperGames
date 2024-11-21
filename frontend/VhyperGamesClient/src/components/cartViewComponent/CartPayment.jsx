@@ -1,12 +1,13 @@
 import { messageEuros , messageEthereum} from '../../helpers/messages';
+import { CreateData } from '../../utils/dataCart';
 import { ConvertToDecimal, TotalPrice } from "../../utils/price";
 import Button from "../buttonComponent/Button"
 import classes from "./CartPayment.module.css"
 
 function CartPayment() {
-  let data = [{price: 1200, quantity: 1},{price: 3099, quantity: 2}];
-  let precioBack = TotalPrice(data); // Hay que cogerlo desde el contexto 
-  const precio = ConvertToDecimal(precioBack);
+  let data = CreateData();
+  data = TotalPrice(data); 
+  const precio = ConvertToDecimal(data);
 
   return (<div className={classes.cartPayment} >
     <div className={classes.cartPayment__containerTitle}>
