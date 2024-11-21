@@ -128,22 +128,6 @@ const ProductCard = ({ id }) => {
         <div className={classes['price-card__cart-icon']}>
           <img src="../../icon/carrito_header.svg" alt="Carrito" />
         </div>
-
-        {/* <div className={classes['price-card__quantity-controls']}>
-          <button
-            disabled={productPriceData.quantity <= 0}
-            onClick={() => handleQuantityChange(id, "decrease")}
-          >
-            -
-          </button>
-          <span>{productPriceData.quantity}</span>
-          <button
-            disabled={productPriceData.stock <= productPriceData.quantity}
-            onClick={() => handleQuantityChange(id, "increase")}
-          >
-            +
-          </button>
-        </div> */}
         <QuantityButton id={id} stock={productPriceData.stock}/>
       </div>
     </div>
