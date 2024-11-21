@@ -1,18 +1,15 @@
 .containerCartList {
-  display: flex;
+  display: grid;
+  grid-template-columns: 3fr 1fr;
   padding: 60px;
-  justify-content: space-between;
-  align-items: flex-start; 
- 
 }
 
 .cartListGames {
-  display: grid;
-  grid-template-columns: 1.5fr 1fr;
+
   gap: 20px;
 }
 
 .cartPayment {
-  top: 10%;
+  top: 29.3%;
   position: sticky;
 }

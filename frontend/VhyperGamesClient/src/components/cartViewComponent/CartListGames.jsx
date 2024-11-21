@@ -29,31 +29,33 @@ const CartListGames = () => {
     };
   });
 
-  
+
 
   return (
-    <>
+    <section className={classes.gamesList}>
+
       {gamesWithQuantity.map((game) => (
-        <div key={game.idGame} className={classes.container}>
-          <div className={classes.container__left}>
-            <img src={`${BASE_URL}${game.imageGame.imageUrl}`} alt={game.imageGame.altText}/>
+        <article key={game.idGame} className={classes.gameCard}>
+          <div className={classes.gameCard__left}>
+            <img src={`${BASE_URL}${game.imageGame.imageUrl}`} alt={game.imageGame.altText} />
           </div>
-          <div className={classes.container__right}>
-            <div className={classes.container__right_top}>
+          <div className={classes.gameCard__right}>
+            <div className={classes.gameCard__right_top}>
               <p>{game.title}</p>
               <p>€{(game.price / 100).toFixed(2)}</p>
               <p>Cantidad: {game.quantity}</p>
             </div>
-            <div className={classes.container__right_bottom}>
+            <div className={classes.gameCard__right_bottom}>
               <button onClick={() => handleQuantityChange(game.idGame, "decrease")}>-</button>
               <span>{game.quantity}</span>
               <button onClick={() => handleQuantityChange(game.idGame, "increase")}>+</button>
             </div>
           </div>
-          <hr className={classes.cartPayment__line} />
-        </div>
+          <hr className={classes.gameCard__line} />
+        </article>
       ))}
-    </>
+
+    </section>
   );
 };
 
