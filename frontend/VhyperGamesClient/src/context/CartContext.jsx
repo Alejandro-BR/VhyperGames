@@ -35,15 +35,17 @@ const CartProvider = ({ children }) => {
   }, []);
 
   // Función para obtener el carrito desde la base de datos al iniciar sesión
+  // useEffect(() => {
+  //   if (token && userId) {
+  //     getCartFromDB();
+  //   }
+  // }, [token, userId]);
+
+  //Función para sincronizar el carrito con la base de datos
+  // Redundantes, no?
   useEffect(() => {
     if (token && userId) {
       getCartFromDB();
-    }
-  }, [token, userId]);
-
-  //Función para sincronizar el carrito con la base de datos
-  useEffect(() => {
-    if (token && userId) {
       syncCartWithDB();
     }
   }, [cart, token, userId]);

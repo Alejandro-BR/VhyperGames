@@ -33,7 +33,8 @@ const CartListGames = () => {
       {gamesWithQuantity.map((game) => (
         <div key={game.idGame} className={classes.container}>
           <div className={classes.container__left}>
-            <img src={game.imageGame?.imageUrl} alt={game.title || "Game Image"} />  {/*LA IMAGEN NO LA PILLA, REVISAR BACK . EN CONSOLE LOG ESTA PETICION SE LLAMA DATOS OBTENIDOS DE LA API*/}
+            <img src={game.imageGame?.[0]?.imageUrl} alt={game.title || "Game Image"} />
+            {/*LA IMAGEN NO LA PILLA, REVISAR BACK . EN CONSOLE LOG ESTA PETICION SE LLAMA DATOS OBTENIDOS DE LA API*/}
           </div>
           <div className={classes.container__right}>
             <div className={classes.container__right_top}>
