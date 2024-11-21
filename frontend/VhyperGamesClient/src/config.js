@@ -15,4 +15,4 @@ export const GET_REVIEW = `${API_BASE_URL}DetailsView/game-reviews`;
 export const GET_CART = `${API_BASE_URL}Cart/cartById`;
 export const UPDATE_CART = `${API_BASE_URL}Cart/update`;
 export const GET_CART_BY_GAMES = `${API_BASE_URL}Cart/cartByGames`;
-export const PUT_MERGE = `${API_BASE_URL}Cart/cartByData`;
+export const PUT_MERGE = `${API_BASE_URL}Cart/mergeCart`;
