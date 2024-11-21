@@ -21,20 +21,6 @@ const CartProvider = ({ children }) => {
   const [gameDetails, setGameDetails] = useState([]); //Se almacenan los juegos usados en CartListGames
   const [mergeCompleted, setMergeCompleted] = useState(false);
 
-  // Cargar el carrito desde LocalStorage al iniciar
-  useEffect(() => {
-    const storedCart = localStorage.getItem("cart");
-    if (storedCart) {
-      try {
-        const parsedCart = JSON.parse(storedCart);
-        setCart({ items: parsedCart.items || [] });
-      } catch (error) {
-        console.error("Error parseando cart desde LocalStorage:", error);
-        setCart({ items: [] });
-      }
-    }
-  }, []);
-
   useEffect(() => {
     const syncOrMergeCart = async () => {
       if (token && userId) {
@@ -70,26 +56,6 @@ const CartProvider = ({ children }) => {
     syncOrMergeCart(); // Ejecuta la función async separada
   }, [token, userId]); // Solo se ejecuta al cambiar el token o el userId
 
-
-  // Función para obtener el carrito desde la base de datos al iniciar sesión
-  // useEffect(() => {
-  //   if (token && userId) {
-  //     getCartFromDB();
-  //   }
-  // }, [token, userId]);
-
-  // //Función para sincronizar el carrito con la base de datos
-  // useEffect(() => {
-  //   if (token && userId) {
-  //     syncCartWithDB();
-  //   }
-  // }, [cart, token, userId]);
-
-  // useEffect(() => {
-  //   if (token && userId) {
-  //     mergeCartWithDB(); // Realizar el merge al iniciar sesión
-  //   }
-  // }, [token, userId]);
 
   // Guardar carrito en LocalStorage cada vez que cambia
   const updateLocalStorage = (cart) => {
@@ -209,7 +175,6 @@ const CartProvider = ({ children }) => {
           setCart({ items: formattedItems });
           updateLocalStorage({ items: formattedItems });
         } else {
-          // Manejar el caso donde el carrito está vacío o no hay datos
           setCart({ items: [] });
           updateLocalStorage({ items: [] });
         }
@@ -264,7 +229,7 @@ const CartProvider = ({ children }) => {
       let newItems = [...prevCart.items];
 
       if (existingItemIndex !== -1) {
-        // Producto ya existe, aumentar cantidad
+        // Producto ya existe, aumentamos cantidad
         const existingItem = newItems[existingItemIndex];
         newItems[existingItemIndex] = {
           ...existingItem,
