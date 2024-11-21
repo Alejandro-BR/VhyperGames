@@ -37,7 +37,6 @@ const CartListGames = () => {
         <div key={game.idGame} className={classes.container}>
           <div className={classes.container__left}>
             <img src={`${BASE_URL}${game.imageGame.imageUrl}`} />
-            {/*LA IMAGEN NO LA PILLA, REVISAR BACK . EN CONSOLE LOG ESTA PETICION SE LLAMA DATOS OBTENIDOS DE LA API*/}
           </div>
           <div className={classes.container__right}>
             <div className={classes.container__right_top}>
