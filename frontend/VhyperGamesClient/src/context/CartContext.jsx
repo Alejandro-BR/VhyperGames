@@ -41,7 +41,12 @@ const CartProvider = ({ children }) => {
     }
   }, [token, userId]);
 
-
+  //Función para sincronizar el carrito con la base de datos
+  useEffect(() => {
+    if (token && userId) {
+      syncCartWithDB();
+    }
+  }, [cart, token, userId]);
 
   // Guardar carrito en LocalStorage cada vez que cambia
   const updateLocalStorage = (cart) => {
@@ -52,19 +57,26 @@ const CartProvider = ({ children }) => {
     }
   };
 
-  const fetchCartByGames = useCallback(async (gameIds) => { // GAMEDETAILS OK
+  const fetchCartByGames = useCallback(async (gameIds) => {
     try {
-      // Validar los IDs (asegurarse de que sean números válidos)
-      const validGameIds = gameIds.filter(id => Number.isInteger(id) && id > 0);
+      if (!Array.isArray(gameIds)) {
+        console.error("gameIds no es un array válido:", gameIds);
+        return;
+      }
+  
+      const validGameIds = gameIds
+        .map(id => Number(id)) 
+        .filter(id => Number.isInteger(id) && id > 0); 
+  
       if (validGameIds.length === 0) {
         console.error("gameIds no contiene valores válidos:", gameIds);
         return;
       }
-
+  
       const query = validGameIds.map(id => `gameIds=${id}`).join("&");
       const url = `${GET_CART_BY_GAMES}?${query}`;
       console.log("URL generada:", url);
-
+  
       // Realizar la solicitud al backend
       const response = await fetch(url, {
         method: "GET",
@@ -73,23 +85,22 @@ const CartProvider = ({ children }) => {
           Authorization: `Bearer ${token}`,
         },
       });
-
+  
       if (!response.ok) {
         throw new Error("Error al obtener información de los juegos");
       }
-
+  
       // Procesar la respuesta
       const data = await response.json();
       console.log("Datos obtenidos de la API:", data);
       setGameDetails(data);
+
     } catch (error) {
       console.error("Error al obtener información de juegos:", error.message);
       setGameDetails([]);
     }
   }, [token]);
-
-
-
+  
 
   // Sincronizar carrito local con la base de datos (Merge, nuevo endpoint PUT)
   const mergeCartWithDB = async () => {
@@ -166,13 +177,16 @@ const CartProvider = ({ children }) => {
   };
 
 
-  // Sincronizar el carrito con la base de datos OK
   const syncCartWithDB = async () => {
     if (token && userId) {
-      const payload = cart.items.map((item) => ({
-        gameId: item.gameId,
-        quantity: item.quantity || 0,
-      }));
+      const payload = cart.items
+        .filter((item) => item.gameId && item.quantity >= 0)
+        .map((item) => ({
+          gameId: item.gameId,
+          quantity: item.quantity || 0,
+        }));
+
+      console.log("Payload para sincronizar carrito:", payload);
 
       try {
         const response = await fetch(UPDATE_CART, {
@@ -185,7 +199,9 @@ const CartProvider = ({ children }) => {
         });
 
         if (!response.ok) {
-          throw new Error(`Error al sincronizar el carrito: ${response.statusText}`);
+          const errorText = await response.text();
+          console.error("Error del servidor al sincronizar el carrito:", errorText);
+          throw new Error(`Error al sincronizar el carrito: ${response.status} - ${response.statusText}`);
         }
 
         console.log("Carrito sincronizado exitosamente.");
@@ -194,7 +210,7 @@ const CartProvider = ({ children }) => {
       }
     }
   };
-
+  
   // Añadir producto al carrito
   const addItemToCart = (product) => {
     setCart((prevCart) => {
