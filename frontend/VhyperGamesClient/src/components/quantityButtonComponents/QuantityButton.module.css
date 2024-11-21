@@ -17,3 +17,8 @@
   cursor: pointer;
   border-radius: 4px;
 }
+
+.quantity-controls__bin {
+  padding-left: 5px;
+  align-items: center;
+}

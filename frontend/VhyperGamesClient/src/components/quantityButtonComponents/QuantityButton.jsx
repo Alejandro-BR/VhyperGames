@@ -2,8 +2,8 @@ import classes from './QuantityButton.module.css';
 import { CartContext } from '../../context/CartContext';
 import { useContext } from 'react';
 
-function QuantityButton({ id, stock }) {
-  const { items, handleQuantityChange } = useContext(CartContext);
+function QuantityButton({ id, stock, bin = false }) {
+  const { items, handleQuantityChange, removeFromCart } = useContext(CartContext);
 
   // Encuentra el producto actual en el carrito
   const currentProduct = items.find((item) => item.gameId === id) || {};
@@ -24,6 +24,11 @@ function QuantityButton({ id, stock }) {
       >
         +
       </button>
+      {bin && 
+        <div className={classes['quantity-controls__bin']}>
+          <img src="/icon/icono-bin.svg" alt="Icono basura" onClick={() => removeFromCart(id)}/>
+        </div>
+      }
     </div>
   );
 }
