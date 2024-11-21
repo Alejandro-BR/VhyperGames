@@ -20,7 +20,8 @@ public class CartMapper
     {
         List<CartDto> cartResponseDtos = new List<CartDto>();
 
-        foreach (CartDetail cartDetail in cartDetails) {
+        foreach (CartDetail cartDetail in cartDetails)
+        {
             cartResponseDtos.Add(ToCartResponseDto(cartDetail));
         }
 
@@ -34,9 +35,9 @@ public class CartMapper
             IdGame = game.Id,
             Title = game.Title,
             Price = game.Price,
-            ImageGame = game.ImageGames.FirstOrDefault().ImageUrl,
+            ImageGame = game.ImageGames.FirstOrDefault(),
             Stock = game.Stock,
-            
+
         };
     }
 

@@ -1,0 +1,19 @@
+.quantity-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.quantity-controls button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--body-color);
+  color: white;
+  border: 1px solid white;
+  width: 30px;
+  height: 30px;
+  font-size: 1.25em;
+  cursor: pointer;
+  border-radius: 4px;
+}

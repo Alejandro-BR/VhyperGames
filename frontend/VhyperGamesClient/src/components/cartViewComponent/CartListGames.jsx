@@ -37,7 +37,7 @@ const CartListGames = () => {
       {gamesWithQuantity.map((game) => (
         <article key={game.idGame} className={classes.gameCard}>
           <div className={classes.gameCard__left}>
-            <img src={`${BASE_URL}${game.imageGame}`} />
+            <img src={`${BASE_URL}${game.imageGame.imageUrl}`} alt={game.imageGame.altText} />
           </div>
           <div className={classes.gameCard__right}>
             <div className={classes.gameCard__right_top}>
