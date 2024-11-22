@@ -11,9 +11,8 @@ const CartListGames = () => {
   const clave = "cart";
 
   useEffect(() => {
-    const storedCart = getVarLS(clave);
-    if (storedCart) {
-      const cart = storedCart;
+    const cart = getVarLS(clave);
+    if (cart) {
       const gameIds = cart.items.map(item => item.gameId);
       if (gameIds.length > 0) {
         fetchCartByGames(gameIds);
@@ -39,14 +38,18 @@ const CartListGames = () => {
               <div className={classes.gameCard__left}>
                 <img src={`${BASE_URL}${game.imageGame.imageUrl}`} alt={game.imageGame.altText} />
               </div>
+
+              <div className={classes.gameCard__right}>
               <div className={classes.gameCard__right_top}>
                 <p>{game.title}</p>
                 <p>{(ConvertToDecimal(game.price))} €</p>
+                <p>Cantidad: {quantity}</p>
               </div>
               <div className={classes.gameCard__right_bottom}>
-                <p>Cantidad: {quantity}</p>
                 <QuantityButton id={game.idGame} stock={game.stock} bin={true} />
               </div>
+              </div>
+              
               <hr className={classes.gameCard__line} />
             </article>
           );
