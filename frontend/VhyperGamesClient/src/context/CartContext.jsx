@@ -252,9 +252,12 @@ const CartProvider = ({ children }) => {
   // Cambiar la cantidad de un producto (añadir y decrementar) - 0 +
   const handleQuantityChange = (gameId, operation) => {
     setCart((prevShoppingCart) => {
+      gameId = Number(gameId);
       const items = prevShoppingCart.items || [];
       const productIndex = items.findIndex((item) => item.gameId === gameId);
       const product = items[productIndex];
+
+      console.log(gameId);
 
       if (!product && operation === "increase") {
         const newItem = { gameId, quantity: 1 };
