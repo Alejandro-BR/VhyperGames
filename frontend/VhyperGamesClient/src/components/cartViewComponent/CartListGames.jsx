@@ -1,12 +1,12 @@
-import React, { useContext, useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import { CartContext } from "../../context/CartContext";
 import classes from "./CartListGames.module.css";
-import { ConvertToDecimal, TotalPrice } from "../../utils/price";
+import { ConvertToDecimal } from "../../utils/price";
 import { BASE_URL } from "../../config";
 import QuantityButton from "../quantityButtonComponents/QuantityButton";
 
 const CartListGames = () => {
-  const { gameDetails, fetchCartByGames } = useContext(CartContext);
+  const { gameDetails, fetchCartByGames, items } = useContext(CartContext);
 
   // Ejecutar fetchCartByGames al montar el componente
   useEffect(() => {
@@ -18,19 +18,17 @@ const CartListGames = () => {
         fetchCartByGames(gameIds);
       }
     }
-  }, [fetchCartByGames]);
+  }, [fetchCartByGames, items]);
 
   // Combinar cantidades de los juegos basados en su ID
-  const gamesWithQuantity = gameDetails.map((game) => {
-    const storedCart = JSON.parse(localStorage.getItem('cart')) || { items: [] };
-    const cartItem = storedCart.items.find(item => item.gameId === game.idGame);
-    return {
-      ...game,
-      quantity: cartItem ? cartItem.quantity : 1, // Asigna la cantidad del carrito
-    };
-  });
-
-
+  // const gamesWithQuantity = gameDetails.map((game) => {
+  //   const storedCart = JSON.parse(localStorage.getItem('cart')) || { items: [] };
+  //   const cartItem = storedCart.items.find(item => item.gameId === game.idGame);
+  //   return {
+  //     ...game,
+  //     quantity: cartItem ? cartItem.quantity : 1, // Asigna la cantidad del carrito
+  //   };
+  // });
 
   return (
     <section className={classes.gamesList}>
@@ -52,7 +50,7 @@ const CartListGames = () => {
               </div>
               <div className={classes.gameCard__right_top}>
                 <p>{game.title}</p>
-                <p>€{(game.price / 100).toFixed(2)}</p>
+                <p>{(ConvertToDecimal(game.price))} €</p>
               </div>
               <div className={classes.gameCard__right_bottom}>
                 <p>Cantidad: {quantity}</p>
