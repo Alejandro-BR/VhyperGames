@@ -1,6 +1,6 @@
 import React, { createContext, useState, useEffect, useCallback } from "react";
 import { useAuth } from "./authcontext";
-import { GET_CART, UPDATE_CART, GET_CART_BY_GAMES, PUT_MERGE } from "../config";
+import { GET_CART, UPDATE_CART, GET_CART_BY_GAMES, PUT_MERGE, DELETE_CART_DETAIL } from "../config";
 
 // Crear el contexto del carrito
 const CartContext = createContext({
@@ -12,6 +12,7 @@ const CartContext = createContext({
   fetchCartByGames: () => { },
   mergeCartWithDB: () => { },
   syncCartWithDB: () => { },
+  deleteCartItem: () => { },
 });
 
 // Crear el provider
@@ -187,17 +188,15 @@ const CartProvider = ({ children }) => {
 
 
 
-  const syncCartWithDB = async () => {
+  const syncCartWithDB = async (updatedCart) => {
     if (token && userId) {
-      const payload = cart.items
-        .filter((item) => item.gameId && item.quantity >= 0)
-        .map((item) => ({
-          gameId: item.gameId,
-          quantity: item.quantity || 0,
-        }));
-
-      console.log("Payload para sincronizar carrito:", payload);
-
+      const payload = updatedCart.items.map((item) => ({
+        gameId: item.gameId,
+        quantity: item.quantity || 0,
+      }));
+  
+      console.log("Payload enviado al backend:", payload);
+  
       try {
         const response = await fetch(UPDATE_CART, {
           method: "PUT",
@@ -207,19 +206,20 @@ const CartProvider = ({ children }) => {
           },
           body: JSON.stringify(payload),
         });
-
+  
         if (!response.ok) {
           const errorText = await response.text();
           console.error("Error del servidor al sincronizar el carrito:", errorText);
           throw new Error(`Error al sincronizar el carrito: ${response.status} - ${response.statusText}`);
         }
-
+  
         console.log("Carrito sincronizado exitosamente.");
       } catch (error) {
         console.error("Error al sincronizar el carrito:", error.message);
       }
     }
   };
+  
 
   // Añadir producto al carrito
   const addItemToCart = (product) => {
@@ -251,42 +251,60 @@ const CartProvider = ({ children }) => {
 
   // Cambiar la cantidad de un producto (añadir y decrementar) - 0 +
   const handleQuantityChange = (gameId, operation) => {
+    gameId = Number(gameId); // Asegura que el gameId sea un número
+  
     setCart((prevShoppingCart) => {
-      const items = prevShoppingCart.items || [];
-      const productIndex = items.findIndex((item) => item.gameId === gameId);
-      const product = items[productIndex];
-
+      const items = prevShoppingCart.items || []; // Asegura que 'items' sea un array
+      const updatedItems = [...items];
+      const productIndex = updatedItems.findIndex((item) => item.gameId === gameId);
+      const product = updatedItems[productIndex];
+  
       if (!product && operation === "increase") {
+        // Caso: carrito vacío o producto no existe
         const newItem = { gameId, quantity: 1 };
-        const updatedCart = { items: [...items, newItem] };
-        updateLocalStorage(updatedCart);
+        const updatedCart = { items: [...updatedItems, newItem] };
+  
+        updateLocalStorage(updatedCart); // Actualiza el localStorage
+        syncCartWithDB(updatedCart); // Sincroniza el carrito actualizado con el backend
+  
         return updatedCart;
       }
-
+  
       if (product) {
         let newQuantity = product.quantity;
-
+  
         if (operation === "increase") {
-          newQuantity = newQuantity + 1; // Puedes manejar stock aquí si es necesario
+          newQuantity += 1;
         } else if (operation === "decrease") {
           newQuantity = Math.max(newQuantity - 1, 0);
         }
-
-        const updatedItems = [...items];
+  
         if (newQuantity === 0) {
-          updatedItems.splice(productIndex, 1); // Eliminar del carrito
+          // Eliminar producto si la cantidad llega a 0
+          updatedItems.splice(productIndex, 1);
+          const updatedCart = { items: updatedItems };
+  
+          updateLocalStorage(updatedCart); // Actualiza el localStorage
+          syncCartWithDB(updatedCart); // Sincroniza el carrito restante
+  
+          return updatedCart;
         } else {
+          // Actualizar cantidad
           updatedItems[productIndex] = { ...product, quantity: newQuantity };
+          const updatedCart = { items: updatedItems };
+  
+          updateLocalStorage(updatedCart); // Actualiza el localStorage
+          syncCartWithDB(updatedCart); // Sincroniza el carrito actualizado
+  
+          return updatedCart;
         }
-
-        const updatedCart = { items: updatedItems };
-        updateLocalStorage(updatedCart);
-        return updatedCart;
       }
-
-      return prevShoppingCart;
+  
+      return prevShoppingCart; // Si no hay cambios, devuelve el carrito anterior
     });
   };
+  
+ 
 
   // Eliminar producto del carrito
   const removeFromCart = (gameId) => {
@@ -298,6 +316,40 @@ const CartProvider = ({ children }) => {
     });
   };
 
+  async function deleteCartItem(gameId) {
+    try {
+        const response = await fetch(`${DELETE_CART_DETAIL}?gameId=${gameId}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`, // Asegúrate de tener el token
+            },
+        });
+
+        if (response.status === 204) {
+            console.log('Producto eliminado exitosamente.');
+            setCart((prevCart) => {
+              const updatedItems = prevCart.items.filter((item) => item.gameId !== gameId);
+              const updatedCart = { items: updatedItems };
+              updateLocalStorage(updatedCart);
+              return updatedCart;
+            });
+
+        } else if (response.status === 404) {
+            const error = await response.json();
+            console.error('Error:', error.Message);
+
+        } else if (response.status === 401) {
+            console.error('No estás autorizado para realizar esta acción.');
+
+        } else {
+            console.error('Error al eliminar el producto.');
+        }
+    } catch (error) {
+        console.error('Error al realizar la solicitud DELETE:', error);
+    }
+}
+
   const ctxValue = {
     items: cart.items || [],
     gameDetails,
@@ -307,6 +359,7 @@ const CartProvider = ({ children }) => {
     fetchCartByGames,
     mergeCartWithDB,
     syncCartWithDB,
+    deleteCartItem,
   };
 
   return <CartContext.Provider value={ctxValue}>{children}</CartContext.Provider>;
