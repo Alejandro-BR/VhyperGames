@@ -10,6 +10,6 @@
 
 .cartPayment {
   align-self: start;
-  top: 29.3%;
-  position: sticky;
+  justify-self: right;
+  position: fixed;
 }

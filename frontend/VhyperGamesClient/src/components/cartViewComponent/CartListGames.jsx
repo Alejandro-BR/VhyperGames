@@ -40,18 +40,19 @@ const CartListGames = () => {
           <div className={classes.gameCard__left}>
             <img src={`${BASE_URL}${game.imageGame.imageUrl}`} alt={game.imageGame.altText} />
           </div>
-          <div className={classes.gameCard__right}>
+          {/* <div className={classes.gameCard__right}> */}
             <div className={classes.gameCard__right_top}>
               <p>{game.title}</p>
               <p>€{(game.price / 100).toFixed(2)}</p>
-              <p>Cantidad: {game.quantity}</p>
+
             </div>
             <div className={classes.gameCard__right_bottom}>
               {/* <button onClick={() => handleQuantityChange(game.idGame, "decrease")}>-</button>
               <span>{game.quantity}</span>
               <button onClick={() => handleQuantityChange(game.idGame, "increase")}>+</button> */}
+              <p>Cantidad: {game.quantity}</p>
               <QuantityButton id={game.idGame} stock={game.stock} bin={true} />
-            </div>
+            {/* </div> */}
           </div>
           <hr className={classes.gameCard__line} />
         </article>
