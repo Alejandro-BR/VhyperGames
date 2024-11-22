@@ -117,4 +117,27 @@ public class CartService
         await _unitOfWork.SaveAsync();
         return _cartMapper.ToListCartResponseDto(cart.CartDetails);
     }
+
+    public async Task DeleteCartDetailAsync(int gameId, int cartId)
+    {
+        var cart = await _unitOfWork.CartRepository.GetByIdCart(cartId);
+
+        if (cart == null)
+        {
+            throw new KeyNotFoundException($"No se encontró el carrito con ID {cartId}.");
+        }
+
+        var cartItem = cart.CartDetails.FirstOrDefault(c => c.GameId == gameId);
+
+        if (cartItem != null)
+        {
+            _unitOfWork.CartDetailsRepository.Delete(cartItem);
+
+            await _unitOfWork.SaveAsync();
+        }
+        else
+        {
+            throw new KeyNotFoundException($"No se encontró el item con GameId {gameId} en el carrito.");
+        }
+    }
 }

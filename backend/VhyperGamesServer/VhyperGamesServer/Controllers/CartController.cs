@@ -104,6 +104,36 @@ public class CartController : ControllerBase
             return StatusCode(500, new { message = "Error inesperado", detail = ex.Message });
         }
     }
+
+    [HttpDelete("deleteCartDetail")]
+    [Authorize]
+    public async Task<IActionResult> DeleteCartDetail(int gameId)
+    {
+        try
+        {
+     
+            var userIdClaim = User.FindFirst("id");
+            if (userIdClaim == null)
+            {
+                return Unauthorized(new { message = "Usuario no autenticado." });
+            }
+
+            int userId = int.Parse(userIdClaim.Value);
+            int cartId = userId; 
+
+            await _cartService.DeleteCartDetailAsync(gameId, cartId);
+            return NoContent();
+        }
+        catch (KeyNotFoundException ex)
+        {
+            return NotFound(new { Message = ex.Message });
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, new { Message = "Ocurrió un error al eliminar el producto.", Error = ex.Message });
+        }
+    }
+
 }
 
 
