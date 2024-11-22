@@ -24,7 +24,11 @@
    justify-content: space-between;
 }
 
-
+.gameCard__right_top{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
 .gameCard__line {
     grid-row-start: -1;
     grid-column: 1/4;
