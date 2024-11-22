@@ -3,6 +3,7 @@ import { createContext, useState, useContext, useEffect, useRef } from 'react';
 import { getVarSessionStorage, updateSessionStorage, deleteSessionStorage } from "../utils/keep.js";
 import { jwtDecode } from 'jwt-decode'; // Importación corregida
 
+
 // Crear el contexto de autenticación
 export const AuthContext = createContext();
 
@@ -17,6 +18,7 @@ export const AuthProvider = ({ children }) => {
     const [decodedToken, setDecodedToken] = useState(null);
     const inactivityTimer = useRef(null); 
     const inactivityTimeLimit = useRef(null);
+
 
     useEffect(() => {
         if (decodedToken) {
@@ -50,8 +52,6 @@ export const AuthProvider = ({ children }) => {
         window.removeEventListener('scroll', resetInactivityTimer);
     };
 
-    
-
 
 
     // Cargar el token desde sessionStorage al inicio
@@ -77,6 +77,7 @@ export const AuthProvider = ({ children }) => {
         deleteSessionStorage('accessToken');
         setToken(null);
         setDecodedToken(null);
+        window.location.href = "/";
     };
 
     const username = decodedToken?.name || null;
