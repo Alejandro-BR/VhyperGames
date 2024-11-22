@@ -299,15 +299,8 @@ const CartProvider = ({ children }) => {
           return updatedCart;
         }
       }
-<<<<<<< HEAD
-
-      updateLocalStorage(updatedCart);
-
-      return prevShoppingCart;
-=======
   
       return prevShoppingCart; // Si no hay cambios, devuelve el carrito anterior
->>>>>>> raquel
     });
   };
   
