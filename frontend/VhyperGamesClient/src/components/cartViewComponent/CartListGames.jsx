@@ -9,12 +9,11 @@ import classes from "./CartListGames.module.css";
 const CartListGames = () => {
   const { gameDetails, fetchCartByGames, items } = useContext(CartContext);
   const clave = "cart";
+  const storedCart = getVarLS(clave) || { items: [] };
 
   useEffect(() => {
-    const storedCart = getVarLS(clave);
-    if (storedCart) {
-      const cart = storedCart;
-      const gameIds = cart.items.map(item => item.gameId);
+    if (storedCart && Array.isArray(storedCart.items)) { 
+      const gameIds = storedCart.items.map((item) => item.gameId);
       if (gameIds.length > 0) {
         fetchCartByGames(gameIds);
       }
@@ -25,12 +24,10 @@ const CartListGames = () => {
     <section className={classes.gamesList}>
       {gameDetails
         .filter((game) => {
-          const storedCart = getVarLS(clave) || { items: [] };
           const cartItem = storedCart.items.find((item) => item.gameId === game.idGame);
           return cartItem && cartItem.quantity > 0; 
         })
         .map((game) => {
-          const storedCart = getVarLS(clave) || { items: [] };
           const cartItem = storedCart.items.find((item) => item.gameId === game.idGame);
           const quantity = cartItem ? cartItem.quantity : 0;
   
