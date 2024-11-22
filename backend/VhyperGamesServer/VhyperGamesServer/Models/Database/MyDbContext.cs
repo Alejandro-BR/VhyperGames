@@ -17,6 +17,9 @@ public class MyDbContext : DbContext
     public DbSet<Cart> Carts { get; set; }
     public DbSet<CartDetail> CartsDetail { get; set; }
 
+    public DbSet<Reserve> Reserve { get; set; }
+    public DbSet<ReserveDetail> ReserveDetail { get; set; }
+
     public MyDbContext() { }
 
     public MyDbContext(DbContextOptions<MyDbContext> options) : base(options) { }
@@ -321,7 +324,106 @@ public class MyDbContext : DbContext
                 .HasConstraintName("FK_CartDetail_Cart");
         });
 
+        modelBuilder.Entity<Reserve>(entity =>
+        {
+            entity.ToTable("reserve");
 
+            entity.HasKey(e => e.Id);
+
+            entity.Property(e => e.Id)
+                .HasColumnName("id")
+                .IsRequired()
+                .ValueGeneratedOnAdd();
+
+            entity.Property(e => e.UserId)
+                .HasColumnName("user_id")
+                .IsRequired();
+        });
+
+        modelBuilder.Entity<ReserveDetail>(entity =>
+        {
+            entity.ToTable("reserve_details");
+
+            entity.HasKey(e => e.Id);
+
+            entity.Property(e => e.Id)
+                .HasColumnName("id")
+                .IsRequired()
+                .ValueGeneratedOnAdd();
+
+            entity.Property(e => e.ReserveId)
+                .HasColumnName("reserve_id")
+                .IsRequired();
+
+            entity.Property(e => e.GameId)
+                .HasColumnName("game_id")
+                .IsRequired();
+
+            entity.Property(e => e.Quantity)
+                .HasColumnName("quantity")
+                .IsRequired();
+
+            entity.HasOne(cd => cd.Reserve)
+                .WithMany(c => c.ReserveDetails)
+                .HasForeignKey(cd => cd.ReserveId)
+                .OnDelete(DeleteBehavior.Cascade)
+                .HasConstraintName("FK_ReserveDetail_Reserve");
+        });
+
+        modelBuilder.Entity<Order>(entity =>
+        {
+            entity.ToTable("order");
+
+            entity.HasKey(e => e.Id);
+
+            entity.Property(e => e.Id)
+                .HasColumnName("id")
+                .IsRequired()
+                .ValueGeneratedOnAdd();
+
+            entity.Property(e => e.UserId)
+                .HasColumnName("user_id")
+                .IsRequired();
+            entity.Property(e => e.PayMode)
+                .HasColumnName("pay_mode")
+                .IsRequired();
+            entity.Property(e => e.TotalPrice)
+                .HasColumnName("total_price")
+                .IsRequired();
+            entity.Property(e => e.BillingDate)
+                .HasColumnName("Billing_date")
+                .IsRequired();
+        });
+
+        modelBuilder.Entity<OrderDetail>(entity =>
+        {
+            entity.ToTable("order_details");
+
+            entity.HasKey(e => e.Id);
+
+            entity.Property(e => e.Id)
+                .HasColumnName("id")
+                .IsRequired()
+                .ValueGeneratedOnAdd();
+
+            entity.Property(e => e.OrderId)
+                .HasColumnName("order_id")
+                .IsRequired();
+
+            entity.Property(e => e.GameId)
+                .HasColumnName("game_id")
+                .IsRequired();
+
+            entity.Property(e => e.Quantity)
+                .HasColumnName("quantity")
+                .IsRequired();
+
+            entity.HasOne(cd => cd.Order)
+                .WithMany(c => c.OrderDetails)
+                .HasForeignKey(cd => cd.OrderId)
+                .OnDelete(DeleteBehavior.Cascade)
+                .HasConstraintName("FK_OrderDetail_Order");
+        });
     }
 
 
