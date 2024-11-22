@@ -3,6 +3,7 @@ using VhyperGamesServer.Models.Database.Entities.Enuml;
 
 namespace VhyperGamesServer.Models.Database.Entities;
 
+// clase order
 public class Order
 {
     public int Id { get; set; }

@@ -1,5 +1,7 @@
 ﻿namespace VhyperGamesServer.Models.Database.Entities;
 
+//clase ReserveDetail
+
 public class ReserveDetail
 {
     public int Id { get; set; }

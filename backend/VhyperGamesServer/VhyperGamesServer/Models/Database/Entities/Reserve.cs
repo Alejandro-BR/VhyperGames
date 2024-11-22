@@ -3,6 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace VhyperGamesServer.Models.Database.Entities;
 
+//clase Reserve
 public class Reserve
 {
     public int Id { get; set; }
