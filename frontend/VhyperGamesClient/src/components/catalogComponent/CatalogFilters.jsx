@@ -4,7 +4,6 @@ function CatalogFilters({ filters, onFilterChange }) {
     const { searchText, sortCriteria, drmFree, genre, resultsPerPage} = filters;
 
     const handleInputChange = (key, value) => {
-        console.log(`handleInputChange - ${key}:`, value);
         onFilterChange({ [key]: value });
     };
 

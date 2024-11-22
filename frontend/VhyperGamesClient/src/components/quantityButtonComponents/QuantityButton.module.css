@@ -21,4 +21,5 @@
 .quantity-controls__bin {
   padding-left: 5px;
   align-items: center;
+  cursor: pointer;
 }

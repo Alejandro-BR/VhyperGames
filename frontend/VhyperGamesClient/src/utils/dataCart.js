@@ -1,3 +1,11 @@
+/**
+ * CreateData
+ * Combina datos de LocalStorage con detalles de juegos.
+ * 
+ * @param {Array} ls - LocalStorage. 
+ * @param {Array} gameDetails - Lista de detalles de juegos. 
+ * @returns {Array} - [{price, quantity}]:
+ */
 export function CreateData(ls, gameDetails) {
 
   const data = ls.map(localItem => {
