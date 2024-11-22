@@ -24,12 +24,11 @@ const CartProvider = ({ children }) => {
 
   useEffect(() => {
     const syncOrMergeCart = async () => {
+      const storedCart = getVarLS("cart");
       if (token && userId) {
-        const storedCart = getVarLS("cart");
         try {
           if (storedCart) {
-            const parsedCart = storedCart;
-            if (Array.isArray(parsedCart.items) && parsedCart.items.length > 0) {
+            if (Array.isArray(storedCart.items) && storedCart.items.length > 0 ) {
               // Si hay elementos en el carrito local, realizar un merge
               await mergeCartWithDB();
               setMergeCompleted(true);
@@ -46,6 +45,10 @@ const CartProvider = ({ children }) => {
         } catch (error) {
           console.error("Error durante la sincronización o el merge:", error);
         }
+      } else {
+        if (storedCart != []) {
+          setCart(storedCart);
+        } 
       }
     };
     syncOrMergeCart();
