@@ -1,18 +1,19 @@
 import { useContext, useEffect } from 'react';
 import { CartContext } from "../../context/CartContext";
-import classes from "./CartListGames.module.css";
 import { ConvertToDecimal } from "../../utils/price";
 import { BASE_URL } from "../../config";
+import { getVarLS } from '../../utils/keep';
 import QuantityButton from "../quantityButtonComponents/QuantityButton";
+import classes from "./CartListGames.module.css";
 
 const CartListGames = () => {
   const { gameDetails, fetchCartByGames, items } = useContext(CartContext);
+  const clave = "cart";
 
-  // Ejecutar fetchCartByGames al montar el componente
   useEffect(() => {
-    const storedCart = localStorage.getItem('cart');
+    const storedCart = getVarLS(clave);
     if (storedCart) {
-      const cart = JSON.parse(storedCart);
+      const cart = storedCart;
       const gameIds = cart.items.map(item => item.gameId);
       if (gameIds.length > 0) {
         fetchCartByGames(gameIds);
@@ -20,26 +21,16 @@ const CartListGames = () => {
     }
   }, [fetchCartByGames, items]);
 
-  // Combinar cantidades de los juegos basados en su ID
-  // const gamesWithQuantity = gameDetails.map((game) => {
-  //   const storedCart = JSON.parse(localStorage.getItem('cart')) || { items: [] };
-  //   const cartItem = storedCart.items.find(item => item.gameId === game.idGame);
-  //   return {
-  //     ...game,
-  //     quantity: cartItem ? cartItem.quantity : 1, // Asigna la cantidad del carrito
-  //   };
-  // });
-
   return (
     <section className={classes.gamesList}>
       {gameDetails
         .filter((game) => {
-          const storedCart = JSON.parse(localStorage.getItem('cart')) || { items: [] };
+          const storedCart = getVarLS(clave) || { items: [] };
           const cartItem = storedCart.items.find((item) => item.gameId === game.idGame);
-          return cartItem && cartItem.quantity > 0; // Filtrar solo juegos con cantidad > 0
+          return cartItem && cartItem.quantity > 0; 
         })
         .map((game) => {
-          const storedCart = JSON.parse(localStorage.getItem('cart')) || { items: [] };
+          const storedCart = getVarLS(clave) || { items: [] };
           const cartItem = storedCart.items.find((item) => item.gameId === game.idGame);
           const quantity = cartItem ? cartItem.quantity : 0;
   
