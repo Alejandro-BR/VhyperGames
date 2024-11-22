@@ -3,6 +3,7 @@ import { CartContext } from "../../context/CartContext";
 import classes from "./CartListGames.module.css";
 import { ConvertToDecimal, TotalPrice } from "../../utils/price";
 import { BASE_URL } from "../../config";
+import QuantityButton from "../quantityButtonComponents/QuantityButton";
 
 const CartListGames = () => {
   const { gameDetails, fetchCartByGames } = useContext(CartContext);
