@@ -33,7 +33,7 @@ const ProductCard = ({ id }) => {
         const data = await response.json();
 
         // Obtener la cantidad del producto desde el carrito
-        const productInCart = items.find((item) => item.gameId === id) || {};
+        const productInCart = items.find((item) => item.gameId === Number(id)) || {};
         setProductPriceData({
           price: data.price,
           avgRating: data.avgRating,
