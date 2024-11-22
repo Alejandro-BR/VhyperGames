@@ -5,7 +5,7 @@ import { ConvertToDecimal, TotalPrice } from "../../utils/price";
 import { BASE_URL } from "../../config";
 
 const CartListGames = () => {
-  const { gameDetails, fetchCartByGames, handleQuantityChange } = useContext(CartContext);
+  const { gameDetails, fetchCartByGames } = useContext(CartContext);
 
   // Ejecutar fetchCartByGames al montar el componente
   useEffect(() => {
@@ -33,28 +33,34 @@ const CartListGames = () => {
 
   return (
     <section className={classes.gamesList}>
-
-      {gamesWithQuantity.map((game) => (
-        <article key={game.idGame} className={classes.gameCard}>
-          <div className={classes.gameCard__left}>
-            <img src={`${BASE_URL}${game.imageGame.imageUrl}`} alt={game.imageGame.altText} />
-          </div>
-          <div className={classes.gameCard__right}>
-            <div className={classes.gameCard__right_top}>
-              <p>{game.title}</p>
-              <p>€{(game.price / 100).toFixed(2)}</p>
-              <p>Cantidad: {game.quantity}</p>
-            </div>
-            <div className={classes.gameCard__right_bottom}>
-              <button onClick={() => handleQuantityChange(game.idGame, "decrease")}>-</button>
-              <span>{game.quantity}</span>
-              <button onClick={() => handleQuantityChange(game.idGame, "increase")}>+</button>
-            </div>
-          </div>
-          <hr className={classes.gameCard__line} />
-        </article>
-      ))}
-
+      {gameDetails
+        .filter((game) => {
+          const storedCart = JSON.parse(localStorage.getItem('cart')) || { items: [] };
+          const cartItem = storedCart.items.find((item) => item.gameId === game.idGame);
+          return cartItem && cartItem.quantity > 0; // Filtrar solo juegos con cantidad > 0
+        })
+        .map((game) => {
+          const storedCart = JSON.parse(localStorage.getItem('cart')) || { items: [] };
+          const cartItem = storedCart.items.find((item) => item.gameId === game.idGame);
+          const quantity = cartItem ? cartItem.quantity : 0;
+  
+          return (
+            <article key={game.idGame} className={classes.gameCard}>
+              <div className={classes.gameCard__left}>
+                <img src={`${BASE_URL}${game.imageGame.imageUrl}`} alt={game.imageGame.altText} />
+              </div>
+              <div className={classes.gameCard__right_top}>
+                <p>{game.title}</p>
+                <p>€{(game.price / 100).toFixed(2)}</p>
+              </div>
+              <div className={classes.gameCard__right_bottom}>
+                <p>Cantidad: {quantity}</p>
+                <QuantityButton id={game.idGame} stock={game.stock} bin={true} />
+              </div>
+              <hr className={classes.gameCard__line} />
+            </article>
+          );
+        })}
     </section>
   );
 };
