@@ -41,5 +41,5 @@
     height: 4px;
     background: var(--gradient-purple-blue);
     /* width: 100%; */
-    align-self: stretch;
+    align-self:center;
 }

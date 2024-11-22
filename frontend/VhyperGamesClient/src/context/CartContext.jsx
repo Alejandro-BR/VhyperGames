@@ -284,6 +284,8 @@ const CartProvider = ({ children }) => {
         return updatedCart;
       }
 
+      updateLocalStorage(updatedCart);
+
       return prevShoppingCart;
     });
   };
