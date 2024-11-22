@@ -13,7 +13,6 @@ function GameData({ id }) {
       const response = await fetch(`${DETAILS_VIEW_GAME_DATA}?id=${id}`);
       if (!response.ok) throw new Error("Error en la respuesta de la API");
       const data = await response.json();
-      console.log(data);
       setJuego(data);
     } catch (error) {
       console.error("Error al obtener los datos:", error);
@@ -38,7 +37,6 @@ function GameData({ id }) {
       {juego && (
         <DetailsCarousel imgGames={juego.imageGames} />
       )}
-      {/* <DetailsCarousel imgGames={juego.imageGames} /> */}
       {juego && (
         <p className={classes.gamedata__description}>{juego.description}</p>
       )}

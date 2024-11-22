@@ -24,7 +24,6 @@ export const AuthProvider = ({ children }) => {
         if (decodedToken) {
             const currentTime = Math.floor(Date.now() / 1000);
             let expirationTime = (decodedToken?.exp - currentTime)*1000;
-            console.log(expirationTime)
             inactivityTimeLimit.current = expirationTime;
             startInactivityTimer();
 
@@ -65,7 +64,6 @@ export const AuthProvider = ({ children }) => {
 
     // Función para almacenar el token
     const saveToken = (newToken) => {
-        console.log("saveToken")
         updateSessionStorage(newToken, 'accessToken');
         setToken(newToken);
         setDecodedToken(jwtDecode(newToken));

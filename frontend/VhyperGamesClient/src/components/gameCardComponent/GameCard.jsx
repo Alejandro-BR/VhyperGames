@@ -17,8 +17,6 @@ function GameCard({ id, title, stock, price, imgUrl, avgRating }) {
   }, [stock]);
 
   function precio() {
-    console.log("Valor de avgRating para el juego:", title, avgRating);
-    // return (price / 100).toFixed(2);
     return ConvertToDecimal(price);
   }
 

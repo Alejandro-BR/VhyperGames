@@ -43,7 +43,6 @@ function LoginModal({ onClose, onRegisterClick }) {
                 const datosPromesa = await response.json();
                 const token = datosPromesa.accessToken;
                 
-                console.log("save token login")
                 saveToken(token);
                 
                 // Forzar recarga de la página

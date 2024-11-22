@@ -4,8 +4,6 @@ import classes from "./DetailsCarousel.module.css";
 function DetailsCarousel({ imgGames }) {
   const imgSource = imgGames;
 
-  console.log(imgSource)
-
   // Estado para la imagen actual
   const [currentIndex, setCurrentIndex] = useState(0);
 
