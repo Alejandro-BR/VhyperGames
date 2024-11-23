@@ -11,11 +11,11 @@ public class OrderRepository : Repository<Order, int>
         _context = context;
     }
 
-    public async Task<Reserve> GetOrderById(int id)
+    public async Task<Order> GetOrderById(int id)
     {
-        return await Context.Set<Reserve>()
-            .Include(c => c.ReserveDetails)
-                .ThenInclude(cd => cd.Game)
+        return await Context.Set<Order>()
+            .Include(o => o.OrderDetails)
+                .ThenInclude(od => od.Game)
                     .ThenInclude(g => g.ImageGames)
             .FirstOrDefaultAsync(c => c.Id == id);
     }

@@ -15,9 +15,9 @@ public class ReserveDetailsRepository : Repository<ReserveDetail, int>
     public async Task<List<ReserveDetail>> GetReserveById(int idReserve)
     {
         return await Context.Set<ReserveDetail>()
-        .Where(cd => cd.ReserveId == idReserve)
-        .Include(cd => cd.Game)
-        .Include(cd => cd.Game.ImageGames)
+        .Where(rd => rd.ReserveId == idReserve)
+        .Include(rd => rd.Game)
+            .ThenInclude(g => g.Game.ImageGames) // Corregir
         .ToListAsync();
     }
 
