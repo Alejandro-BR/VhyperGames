@@ -16,7 +16,7 @@ public class ReserveService
 
     public async Task<Reserve> CreateReserve(int userId, List<CartDto> cart)
     {
-        if (cart == null)
+        if (cart == null || !cart.Any())
         {
             throw new ArgumentException("El carrito no puede estar vacíos.");
         }
@@ -40,10 +40,8 @@ public class ReserveService
             // Reducir stock temporalmente
             game.Stock -= cartItem.Quantity;
 
-            // Actualizar juego en el contexto
             _unitOfWork.GameRepository.Update(game);
 
-            // Agregar detalle de reserva
             reserveDetails.Add(new ReserveDetail
             {
                 GameId = cartItem.GameId,
@@ -51,7 +49,6 @@ public class ReserveService
             });
         }
 
-        // Crear reserva
         var reserve = new Reserve
         {
             UserId = userId,
@@ -60,7 +57,6 @@ public class ReserveService
 
         try
         {
-            // Insertar reserva y guardar cambios
             await _unitOfWork.ReserveRepository.InsertAsync(reserve);
             await _unitOfWork.ReserveRepository.SaveAsync();
         }
@@ -77,7 +73,7 @@ public class ReserveService
     {
         var reserve = await _unitOfWork.ReserveRepository.GetReserveById(reserveId);
 
-        if(reserve == null)
+        if (reserve == null)
         {
             throw new KeyNotFoundException($"La reserva con ID {reserveId} no existe.");
         }
@@ -114,4 +110,33 @@ public class ReserveService
 
         await _unitOfWork.ReserveRepository.SaveAsync();
     }
+
+
+    public async Task CancelReserve(int reserveId)
+    {
+        var reserve = await _unitOfWork.ReserveRepository.GetReserveById(reserveId);
+
+        if (reserve == null)
+        {
+            throw new KeyNotFoundException($"La reserva con ID {reserveId} no existe.");
+        }
+
+        foreach(var detail in reserve.ReserveDetails)
+        {
+            var game = await _unitOfWork.GameRepository.GetByIdAsync(detail.GameId);
+
+            if (game != null)
+            {
+                game.Stock += detail.Quantity;
+                _unitOfWork.GameRepository.Update(game);
+            }
+        }
+
+        _unitOfWork.ReserveRepository.Delete(reserve);
+
+        await _unitOfWork.ReserveRepository.SaveAsync();
+    }
+
+
+
 }
