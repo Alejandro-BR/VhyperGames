@@ -14,9 +14,18 @@ public class ReserveRepository : Repository<Reserve, int>
     public async Task<Reserve> GetReserveById(int id)
     {
         return await Context.Set<Reserve>()
-            .Include(c => c.ReserveDetails)
-                .ThenInclude(cd => cd.Game)
+            .Include(r => r.ReserveDetails)
+                .ThenInclude(rd => rd.Game)
                     .ThenInclude(g => g.ImageGames)
-            .FirstOrDefaultAsync(c => c.Id == id);
+            .FirstOrDefaultAsync(r => r.Id == id);
+    }
+
+    public async Task<Reserve> GetReserveByUserId(int id)
+    {
+        return await Context.Set<Reserve>()
+            .Include(r => r.ReserveDetails)
+                .ThenInclude(rd => rd.Game)
+                    .ThenInclude(g => g.ImageGames)
+            .FirstOrDefaultAsync(r => r.UserId == id);
     }
 }

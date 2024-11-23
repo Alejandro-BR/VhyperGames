@@ -2,13 +2,11 @@
 
 namespace VhyperGamesServer.Models.Dtos;
 
-public class ReserveDetailDto
+public class GameOrderDto
 {
-    public int IdGame { get; set; }
-
-    public string Title { get; set; }
-
+    public int GameId { get; set; }
+    public int Quantity { get; set; }
     public int Price { get; set; }
-
     public ImageGame ImageGame { get; set; }
+
 }
