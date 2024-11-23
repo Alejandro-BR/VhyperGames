@@ -13,6 +13,10 @@ public class UnitOfWork
     private ReviewRepository _reviewRepository;
     private CartRepository _cartRepository;
     private CartDetailsRepository _cartDetailsRepository;
+    private ReserveRepository _reserveRepository;
+    private ReserveDetailsRepository _reserveDetailsRepository;
+    private OrderRepository _orderRepository;
+    private OrderDetailsRepository _orderDetailsRepository;
     
 
     public UserRepository UserRepository => _userRepository ??= new UserRepository(_myDbContext);
@@ -21,7 +25,10 @@ public class UnitOfWork
     public RequerimentRepository RequerimentRepository => _requerimentRepository ??= new RequerimentRepository(_myDbContext);
     public CartRepository CartRepository => _cartRepository ??= new CartRepository(_myDbContext);
     public CartDetailsRepository CartDetailsRepository => _cartDetailsRepository ??= new CartDetailsRepository(_myDbContext);
-    
+    public ReserveRepository ReserveRepository => _reserveRepository ??= new ReserveRepository(_myDbContext);
+    public ReserveDetailsRepository ReserveDetailsRepository => _reserveDetailsRepository ??= new ReserveDetailsRepository(_myDbContext);
+    private OrderRepository orderRepository => _orderRepository ??= new OrderRepository(_myDbContext);
+    private OrderDetailsRepository orderDetailsRepository => _orderDetailsRepository ??= new OrderDetailsRepository(_myDbContext);
 
     public UnitOfWork(MyDbContext myDbContext)
     {

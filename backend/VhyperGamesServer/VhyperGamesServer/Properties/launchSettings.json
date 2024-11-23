@@ -16,7 +16,9 @@
       "launchUrl": "swagger",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
-        "JWT_KEY": "aB3#fG8@jK2$mN6!pQ4^xY1&cD7*oR9%zW0"
+        "JWT_KEY": "aB3#fG8@jK2$mN6!pQ4^xY1&cD7*oR9%zW0",
+        "STRIPE_KEY": "sk_test_51QOKYuCxS12Ptr4oJREmsyCwwYoynEEPFug0RhDXbcK5ngaOr1lTTrYPCh7gvK50LoatXmwCobBvzlqQEvYnkvXO00KydUgCm6",
+        "CLIENT_URL": "http://localhost:5173/"
       },
       "dotnetRunMessages": true,
       "applicationUrl": "https://localhost:7207;http://localhost:5018"

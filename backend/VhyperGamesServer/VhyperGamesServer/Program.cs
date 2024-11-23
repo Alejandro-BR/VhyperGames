@@ -1,7 +1,11 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.ML;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Stripe;
 using System.Text;
 using VhyperGamesServer.Models.Database;
 using VhyperGamesServer.Models.Database.Repositories;
@@ -26,6 +30,9 @@ public class Program
 
         // Configuración del middleware de la aplicación
         ConfigureMiddleware(app);
+
+        // Configura stripe
+        ConfigureStripe(app.Services);
 
         // Ejecutar la aplicación web y escuchar las solicitudes entrantes
         app.Run();
@@ -52,6 +59,9 @@ public class Program
         builder.Services.AddScoped<CartMapper>();
         builder.Services.AddScoped<IAService>();
         builder.Services.AddScoped<CartService>();
+
+        // Stripe
+        builder.Services.AddTransient<StripeService>();
 
         // Inyección de IA
         builder.Services.AddPredictionEnginePool<ModelInput, ModelOutput>()
@@ -165,4 +175,20 @@ public class Program
             seeder.SeedAll();
         }
     }
+    private static void ConfigureStripe(IServiceProvider serviceProvider)
+    {
+
+        using IServiceScope scope = serviceProvider.CreateScope();
+
+        string key = Environment.GetEnvironmentVariable("STRIPE_KEY");
+
+        if (string.IsNullOrEmpty(key))
+        {
+            throw new InvalidOperationException("STRIPE_KEY is not configured in environment variables.");
+        }
+
+        StripeConfiguration.ApiKey = key;
+
+    }
+
 }
