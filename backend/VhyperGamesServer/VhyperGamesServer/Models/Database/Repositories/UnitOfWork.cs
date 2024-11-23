@@ -27,8 +27,8 @@ public class UnitOfWork
     public CartDetailsRepository CartDetailsRepository => _cartDetailsRepository ??= new CartDetailsRepository(_myDbContext);
     public ReserveRepository ReserveRepository => _reserveRepository ??= new ReserveRepository(_myDbContext);
     public ReserveDetailsRepository ReserveDetailsRepository => _reserveDetailsRepository ??= new ReserveDetailsRepository(_myDbContext);
-    private OrderRepository orderRepository => _orderRepository ??= new OrderRepository(_myDbContext);
-    private OrderDetailsRepository orderDetailsRepository => _orderDetailsRepository ??= new OrderDetailsRepository(_myDbContext);
+    public OrderRepository OrderRepository => _orderRepository ??= new OrderRepository(_myDbContext);
+    public OrderDetailsRepository OrderDetailsRepository => _orderDetailsRepository ??= new OrderDetailsRepository(_myDbContext);
 
     public UnitOfWork(MyDbContext myDbContext)
     {
