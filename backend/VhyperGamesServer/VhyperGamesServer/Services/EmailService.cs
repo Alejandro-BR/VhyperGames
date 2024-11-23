@@ -16,7 +16,7 @@ public class EmailService
 
     public async Task SendInvoiceAsync(Order order)
     {
-        // Crear el contenido HTML
+        // HTML
         StringBuilder emailContent = new StringBuilder();
 
         emailContent.AppendLine("<html>");
@@ -24,7 +24,6 @@ public class EmailService
         emailContent.AppendLine("<h2>¡Gracias por tu compra, " + order.User.Name + ".</h2>");
         emailContent.AppendLine("<p>Confirmación de compra :</p>");
 
-        // Crear la tabla de productos
         emailContent.AppendLine("<table border='1' style='width:100%; border-collapse: collapse;'>");
         emailContent.AppendLine("<tr>");
         emailContent.AppendLine("<th>Imagen</th>");
@@ -33,7 +32,6 @@ public class EmailService
         emailContent.AppendLine("<th>Cantidad</th>");
         emailContent.AppendLine("</tr>");
 
-        // Recorrer los juegos en el pedido
         foreach (OrderDetail orderDetail in order.OrderDetails)
         {
             emailContent.AppendLine("<tr>");
@@ -47,7 +45,6 @@ public class EmailService
 
         emailContent.AppendLine("</table>");
 
-        // Detalles adicionales del pedido
         emailContent.AppendLine("<p><b>Total pagado:</b> " + order.TotalPrice + " €</p>");
 
         if (order.PayMode == 0)
@@ -57,13 +54,12 @@ public class EmailService
         {
             emailContent.AppendLine("<p>Pagado con: CreditCard </p>");
         }
-        //emailContent.AppendLine("<p><b>Pagado con:</b> " + order.PayMode + "</p>");
+
         emailContent.AppendLine("<p>El pedido será entregado en: " + order.User.Address + "</p>");
 
         emailContent.AppendLine("</body>");
         emailContent.AppendLine("</html>");
 
-        // Enviar el correo usando el helper
         await EmailHelper.SendEmailAsync(order.User.Email, "Confirmación de compra", emailContent.ToString(), true);
     }
 
