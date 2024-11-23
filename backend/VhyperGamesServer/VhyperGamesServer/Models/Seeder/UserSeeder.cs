@@ -28,7 +28,7 @@ public class UserSeeder
                 Id = 1,
                 Name = "Vhyper",
                 Surname = "Games",
-                Email = "vhypergames@gmail.com",
+                Email = "vhypergames24@gmail.com",
                 HashPassword = PasswordHelper.Hash("vhypergames"),
                 Rol = "Admin",
                 Address = "Calle 123"
