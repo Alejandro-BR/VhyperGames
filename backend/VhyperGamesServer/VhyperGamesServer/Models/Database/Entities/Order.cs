@@ -15,6 +15,8 @@ public class Order
     [JsonIgnore]
     public List<OrderDetail> OrderDetails { get; set; }
 
+    public User User { get; set; }
+
     public Order()
     {
         OrderDetails = new List<OrderDetail>();

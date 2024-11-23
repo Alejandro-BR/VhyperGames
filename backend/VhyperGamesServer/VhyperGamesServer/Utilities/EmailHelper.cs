@@ -8,7 +8,6 @@ internal class EmailHelper
     private const string SMTP_HOST = "smtp.gmail.com";
     private const int SMTP_PORT = 587;
     private const string EMAIL_FROM = "vhypergames24@gmail.com";
-    // Se obtiene de este video https://www.youtube.com/watch?v=Yv_Wh0zjMw4
     private const string PASSWORD_EMAIL_FROM = "EMAIL_KEY";
 
     public static async Task SendEmailAsync(string to, string subject, string body, bool isHtml = false)
