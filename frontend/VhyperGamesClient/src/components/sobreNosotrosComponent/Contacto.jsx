@@ -18,7 +18,7 @@ function Contacto() {
           <div className={classes.boxData}>
             <img src="/icon/email-icon.svg" alt="icon-email" />
             <p>
-              vhypergames@gmail.com
+              vhypergames24@gmail.com
             </p>
           </div>
           <div className={classes.boxData}>
