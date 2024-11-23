@@ -20,6 +20,10 @@ public class MyDbContext : DbContext
     public DbSet<Reserve> Reserve { get; set; }
     public DbSet<ReserveDetail> ReserveDetail { get; set; }
 
+    public DbSet<Order> Order { get; set; }
+
+    public DbSet<OrderDetail> OrderDetail { get; set; }
+
     public MyDbContext() { }
 
     public MyDbContext(DbContextOptions<MyDbContext> options) : base(options) { }
