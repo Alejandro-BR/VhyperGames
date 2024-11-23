@@ -4,7 +4,6 @@ namespace VhyperGamesServer.Models.Dtos;
 
 public class CartGameDto
 {
-
     public int IdGame { get; set; }
 
     public string Title { get; set; }
