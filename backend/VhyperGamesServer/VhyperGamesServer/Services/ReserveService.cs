@@ -5,17 +5,24 @@ using VhyperGamesServer.Models.Database.Repositories;
 using VhyperGamesServer.Models.Dtos;
 using VhyperGamesServer.Models.Mappers;
 
+using Stripe.Checkout;
+
+
 namespace VhyperGamesServer.Services;
 
 public class ReserveService
 {
     private readonly UnitOfWork _unitOfWork;
-    private readonly GameOrderMapper _gameOrderMapper;
+    private readonly ReserveAndOrderMapper _gameOrderMapper;
+    private readonly OrderService _orderService;
+    private readonly StripeService _stripeService;
 
-    public ReserveService(UnitOfWork unitOfWork, GameOrderMapper gameOrderMapper)
+    public ReserveService(UnitOfWork unitOfWork, OrderService orderService, ReserveAndOrderMapper gameOrderMapper, StripeService stripeService)
     {
         _unitOfWork = unitOfWork;
         _gameOrderMapper = gameOrderMapper;
+        _orderService = orderService;
+        _stripeService = stripeService;
     }
 
     public async Task CreateReserve(int userId, List<CartDto> cart, PayMode modeOfPay)
@@ -72,7 +79,7 @@ public class ReserveService
     }
 
 
-    public async Task <List<GameOrderDto>> GetReserveDetails(int userId) 
+    public async Task <List<OrderDetailDto>> GetReserveDetails(int userId) 
     {
         Reserve reserve = await _unitOfWork.ReserveRepository.GetReserveByUserId(userId); 
 
@@ -80,10 +87,10 @@ public class ReserveService
         {
             throw new KeyNotFoundException($"El usuario con ID {userId} no tiene reserva.");
         }
-        return _gameOrderMapper.ToListGameOrderDto(reserve.ReserveDetails);
+        return _gameOrderMapper.ToListOrderDetailDto(reserve.ReserveDetails);
     }
 
-    public async Task ConfirmReserve(int reserveId, PayMode modeOfPay)
+    public async Task ConfirmReserve(int reserveId, PayMode modeOfPay, string sessionId)
     {
         Reserve reserve = await _unitOfWork.ReserveRepository.GetReserveById(reserveId);
 
@@ -92,29 +99,17 @@ public class ReserveService
             throw new KeyNotFoundException($"La reserva con ID {reserveId} no existe.");
         }
 
-        int totalPrice = reserve.ReserveDetails.Sum(detail => detail.Game.Price * detail.Quantity);
-
-        Order order = new Order
+        if (!await _stripeService.IsPaymentCompleted(sessionId))
         {
-            UserId = reserve.UserId,
-            TotalPrice = totalPrice,
-            BillingDate = DateTime.UtcNow,
-            ModeOfPay = modeOfPay,
-            OrderDetails = reserve.ReserveDetails.Select(detail => new OrderDetail
-            {
-                GameId = detail.GameId,
-                Quantity = detail.Quantity,
-            }).ToList()
-        };
+            throw new InvalidOperationException("El pago no ha sido completado. No se puede confirmar la reserva.");
+        }
 
-        await _unitOfWork.OrderRepository.InsertAsync(order);
+        await _orderService.CreateOrderFromReserve(reserve, modeOfPay);
 
-        //Elimina reserva temporal
         _unitOfWork.ReserveRepository.Delete(reserve);
 
         await _unitOfWork.SaveAsync();
     }
-
 
     public async Task CancelReserve(int reserveId)
     {
