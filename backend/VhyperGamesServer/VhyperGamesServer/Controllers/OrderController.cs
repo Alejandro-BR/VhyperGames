@@ -19,12 +19,24 @@ namespace VhyperGamesServer.Controllers
             _orderService = orderService;
         }
 
-        [HttpGet("user/{userId}/recent")]
-        public async Task<IActionResult> GetRecentOrderByUserId(int userId)
+        [HttpGet("most-recent-order")]
+        [Authorize]
+        public async Task<IActionResult> GetRecentOrderByUserId()
         {
             try
             {
+                // Extraer el userId de los claims del usuario autenticado
+                var userIdClaim = User.FindFirst("id");
+                if (userIdClaim == null)
+                {
+                    return Unauthorized(new { message = "Usuario no autenticado." });
+                }
+
+                int userId = int.Parse(userIdClaim.Value);
+
+                // Llamar al servicio para obtener la orden más reciente
                 var order = await _orderService.GetRecentOrderByUserIdAsync(userId);
+
                 return Ok(order);
             }
             catch (KeyNotFoundException ex)
