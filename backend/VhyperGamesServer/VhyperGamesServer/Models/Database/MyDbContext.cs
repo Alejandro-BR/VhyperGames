@@ -22,7 +22,7 @@ public class MyDbContext : DbContext
 
     public DbSet<Order> Order { get; set; }
 
-    public DbSet<OrderGame> OrderDetail { get; set; }
+    public DbSet<OrderDetail> OrderDetail { get; set; }
 
     public MyDbContext() { }
 
@@ -399,7 +399,7 @@ public class MyDbContext : DbContext
                 .IsRequired();
         });
 
-        modelBuilder.Entity<OrderGame>(entity =>
+        modelBuilder.Entity<OrderDetail>(entity =>
         {
             entity.ToTable("order_details");
 
@@ -423,7 +423,7 @@ public class MyDbContext : DbContext
                 .IsRequired();
 
             entity.HasOne(cd => cd.Order)
-                .WithMany(c => c.OrderGames)
+                .WithMany(c => c.OrderDetails)
                 .HasForeignKey(cd => cd.OrderId)
                 .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_OrderDetail_Order");

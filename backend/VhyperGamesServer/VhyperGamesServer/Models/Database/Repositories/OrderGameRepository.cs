@@ -3,7 +3,7 @@ using VhyperGamesServer.Models.Database.Entities;
 
 namespace VhyperGamesServer.Models.Database.Repositories;
 
-public class OrderGameRepository : Repository<OrderGame, int>
+public class OrderGameRepository : Repository<OrderDetail, int>
 {
     private readonly MyDbContext _context;
 
@@ -12,18 +12,18 @@ public class OrderGameRepository : Repository<OrderGame, int>
         _context = context;
     }
 
-    public async Task<List<OrderGame>> GetOrderById(int idOrder)
+    public async Task<List<OrderDetail>> GetOrderById(int idOrder)
     {
-        return await Context.Set<OrderGame>()
+        return await Context.Set<OrderDetail>()
         .Where(cd => cd.OrderId == idOrder)
         .Include(cd => cd.Game)
         .Include(cd => cd.Game.ImageGames)
         .ToListAsync();
     }
 
-    public async Task<OrderGame> GetOrderByIds(int idOrder, int idGame)
+    public async Task<OrderDetail> GetOrderByIds(int idOrder, int idGame)
     {
-        return await Context.Set<OrderGame>()
+        return await Context.Set<OrderDetail>()
             .Include(cd => cd.Game)
                 .ThenInclude(g => g.ImageGames)
             .FirstOrDefaultAsync(cd => cd.OrderId == idOrder && cd.GameId == idGame);

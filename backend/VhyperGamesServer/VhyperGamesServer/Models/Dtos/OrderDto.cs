@@ -6,7 +6,7 @@ namespace VhyperGamesServer.Models.Dtos;
 public class OrderDto
 {
     public DateTime BillingDate { get; set; }
-    public List<OrderGame> OrderGames { get; set; }
+    public List<OrderDetail> OrderGames { get; set; }
     public PayMode ModeOfPay { get; set; }
     public int TotalPrice { get; set; }
 }

@@ -1,7 +1,6 @@
 ﻿namespace VhyperGamesServer.Models.Database.Entities;
 
-//clase OrderDetail
-public class OrderGame
+public class OrderDetail
 {
     public int Id { get; set; }
     public int OrderId { get; set; }

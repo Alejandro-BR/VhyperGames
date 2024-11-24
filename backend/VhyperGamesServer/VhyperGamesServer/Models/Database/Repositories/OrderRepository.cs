@@ -15,7 +15,7 @@ public class OrderRepository : Repository<Order, int>
     {
         return await Context.Set<Order>()
             .Include(o => o.User)
-            .Include(o => o.OrderGames)
+            .Include(o => o.OrderDetails)
                 .ThenInclude(og => og.Game)
                     .ThenInclude(g => g.ImageGames)
             .FirstOrDefaultAsync(o => o.Id == id);
@@ -25,7 +25,7 @@ public class OrderRepository : Repository<Order, int>
     {
         return await Context.Set<Order>()
             .Include(o => o.User)
-            .Include(o => o.OrderGames)
+            .Include(o => o.OrderDetails)
                 .ThenInclude(og => og.Game)
                     .ThenInclude(g => g.ImageGames)
             .Where(o => o.UserId == userId)
@@ -36,7 +36,7 @@ public class OrderRepository : Repository<Order, int>
     {
         return await Context.Set<Order>()
             .Include(o => o.User)
-            .Include(o => o.OrderGames)
+            .Include(o => o.OrderDetails)
                 .ThenInclude(og => og.Game)
                     .ThenInclude(g => g.ImageGames)
             .Where(o => o.UserId == userId)

@@ -32,7 +32,7 @@ public class EmailService
         emailContent.AppendLine("<th>Cantidad</th>");
         emailContent.AppendLine("</tr>");
 
-        foreach (OrderGame orderDetail in order.OrderGames)
+        foreach (OrderDetail orderDetail in order.OrderDetails)
         {
             emailContent.AppendLine("<tr>");
 

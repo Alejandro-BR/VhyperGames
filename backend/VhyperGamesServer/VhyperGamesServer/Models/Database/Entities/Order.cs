@@ -13,12 +13,12 @@ public class Order
     public DateTime BillingDate { get; set; }
 
     [JsonIgnore]
-    public List<OrderGame> OrderGames { get; set; }
+    public List<OrderDetail> OrderDetails { get; set; }
 
     public User User { get; set; }
 
     public Order()
     {
-        OrderGames = new List<OrderGame>();
+        OrderDetails = new List<OrderDetail>();
     }
 }

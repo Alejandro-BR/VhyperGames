@@ -12,7 +12,7 @@ public class OrderMapper
         return new OrderDto
         {
             BillingDate = order.BillingDate,
-            OrderGames = order.OrderGames,
+            OrderGames = order.OrderDetails,
             ModeOfPay = order.ModeOfPay,
             TotalPrice = order.TotalPrice,
         };
