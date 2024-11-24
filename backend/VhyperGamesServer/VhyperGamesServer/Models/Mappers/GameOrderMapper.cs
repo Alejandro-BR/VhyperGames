@@ -18,15 +18,15 @@ public class GameOrderMapper
         };
     }
 
-    public GameOrderDto ToOrderDto(OrderDetail orderDetail)
+    public GameOrderDto ToOrderDto(OrderGame orderGame) // no es otro ToGameOrderDto? Puede llamarse igual creo, por recibir diferentes parámetros son diferentes funciones
     {
         return new GameOrderDto
         {
-            GameId = orderDetail.GameId,
-            Title = orderDetail.Game.Title,
-            Quantity = orderDetail.Quantity,
-            Price = orderDetail.Game.Price * orderDetail.Quantity,
-            ImageGame = orderDetail.Game.ImageGames[0],
+            GameId = orderGame.GameId,
+            Title = orderGame.Game.Title,
+            Quantity = orderGame.Quantity,
+            Price = orderGame.Game.Price * orderGame.Quantity,
+            ImageGame = orderGame.Game.ImageGames[0],
         };
     }
 
@@ -42,13 +42,13 @@ public class GameOrderMapper
         return gameOrderDtos;
     }
 
-    public List<GameOrderDto> TolistOrderDto(List<OrderDetail> orderDetails)
+    public List<GameOrderDto> TolistOrderDto(List<OrderGame> orderGames)
     {
         List<GameOrderDto> orderDtos = new List<GameOrderDto>();
 
-        foreach (OrderDetail OrderDetail in orderDetails)
+        foreach (OrderGame OrderGame in orderGames)
         {
-           orderDtos.Add(ToOrderDto(OrderDetail));
+           orderDtos.Add(ToOrderDto(OrderGame));
         }
         return orderDtos;
     }

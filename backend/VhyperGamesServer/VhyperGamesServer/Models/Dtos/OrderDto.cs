@@ -1,10 +1,12 @@
-﻿using VhyperGamesServer.Models.Database.Entities.Enuml;
+﻿using VhyperGamesServer.Models.Database.Entities;
+using VhyperGamesServer.Models.Database.Entities.Enuml;
 
 namespace VhyperGamesServer.Models.Dtos;
 
 public class OrderDto
 {
-    public int GameId { get; set; }
+    public DateTime BillingDate { get; set; }
+    public List<OrderGame> OrderGames { get; set; }
+    public PayMode ModeOfPay { get; set; }
     public int TotalPrice { get; set; }
-    public PayMode PayMode { get; set; }
 }

@@ -15,8 +15,8 @@ public class OrderRepository : Repository<Order, int>
     {
         return await Context.Set<Order>()
             .Include(o => o.User)
-            .Include(o => o.OrderDetails)
-                .ThenInclude(od => od.Game)
+            .Include(o => o.OrderGames)
+                .ThenInclude(og => og.Game)
                     .ThenInclude(g => g.ImageGames)
             .FirstOrDefaultAsync(o => o.Id == id);
     }
@@ -24,24 +24,24 @@ public class OrderRepository : Repository<Order, int>
     public async Task<List<Order>> GetOrdersByUserId(int userId)
     {
         return await Context.Set<Order>()
-            .Include(o => o.User)  
-            .Include(o => o.OrderDetails)  
-                .ThenInclude(od => od.Game) 
-                    .ThenInclude(g => g.ImageGames)  
-            .Where(o => o.UserId == userId)  
-            .ToListAsync(); 
+            .Include(o => o.User)
+            .Include(o => o.OrderGames)
+                .ThenInclude(og => og.Game)
+                    .ThenInclude(g => g.ImageGames)
+            .Where(o => o.UserId == userId)
+            .ToListAsync();
     }
 
     public async Task<Order> GetRecentOrderByUserId(int userId)
     {
         return await Context.Set<Order>()
-            .Include(o => o.User) 
-            .Include(o => o.OrderDetails) 
-                .ThenInclude(od => od.Game) 
-                    .ThenInclude(g => g.ImageGames) 
-            .Where(o => o.UserId == userId)  
-            .OrderByDescending(o => o.BillingDate) 
-            .FirstOrDefaultAsync(); 
+            .Include(o => o.User)
+            .Include(o => o.OrderGames)
+                .ThenInclude(og => og.Game)
+                    .ThenInclude(g => g.ImageGames)
+            .Where(o => o.UserId == userId)
+            .OrderByDescending(o => o.BillingDate)
+            .FirstOrDefaultAsync();
     }
 
 

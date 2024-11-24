@@ -22,7 +22,7 @@ public class MyDbContext : DbContext
 
     public DbSet<Order> Order { get; set; }
 
-    public DbSet<OrderDetail> OrderDetail { get; set; }
+    public DbSet<OrderGame> OrderDetail { get; set; }
 
     public MyDbContext() { }
 
@@ -388,7 +388,7 @@ public class MyDbContext : DbContext
             entity.Property(e => e.UserId)
                 .HasColumnName("user_id")
                 .IsRequired();
-            entity.Property(e => e.PayMode)
+            entity.Property(e => e.ModeOfPay)
                 .HasColumnName("pay_mode")
                 .IsRequired();
             entity.Property(e => e.TotalPrice)
@@ -399,7 +399,7 @@ public class MyDbContext : DbContext
                 .IsRequired();
         });
 
-        modelBuilder.Entity<OrderDetail>(entity =>
+        modelBuilder.Entity<OrderGame>(entity =>
         {
             entity.ToTable("order_details");
 
@@ -423,7 +423,7 @@ public class MyDbContext : DbContext
                 .IsRequired();
 
             entity.HasOne(cd => cd.Order)
-                .WithMany(c => c.OrderDetails)
+                .WithMany(c => c.OrderGames)
                 .HasForeignKey(cd => cd.OrderId)
                 .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_OrderDetail_Order");

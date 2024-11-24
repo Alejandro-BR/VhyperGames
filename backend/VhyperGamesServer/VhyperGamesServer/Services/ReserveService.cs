@@ -96,7 +96,7 @@ public class ReserveService
             UserId = reserve.UserId,
             TotalPrice = totalPrice,
             BillingDate = DateTime.UtcNow,
-            OrderDetails = reserve.ReserveDetails.Select(detail => new OrderDetail
+            OrderGames = reserve.ReserveDetails.Select(detail => new OrderGame
             {
                 GameId = detail.GameId,
                 Quantity = detail.Quantity,

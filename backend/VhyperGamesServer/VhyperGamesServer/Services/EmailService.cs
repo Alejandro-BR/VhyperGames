@@ -32,7 +32,7 @@ public class EmailService
         emailContent.AppendLine("<th>Cantidad</th>");
         emailContent.AppendLine("</tr>");
 
-        foreach (OrderDetail orderDetail in order.OrderDetails)
+        foreach (OrderGame orderDetail in order.OrderGames)
         {
             emailContent.AppendLine("<tr>");
 
@@ -47,7 +47,7 @@ public class EmailService
 
         emailContent.AppendLine("<p><b>Total pagado:</b> " + order.TotalPrice + " €</p>");
 
-        if (order.PayMode == 0)
+        if (order.ModeOfPay == 0)
         {
            emailContent.AppendLine("<p>Pagado con: Ethereum </p>");
         } else
