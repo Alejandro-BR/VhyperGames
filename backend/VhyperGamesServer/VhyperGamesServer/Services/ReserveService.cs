@@ -5,9 +5,6 @@ using VhyperGamesServer.Models.Database.Repositories;
 using VhyperGamesServer.Models.Dtos;
 using VhyperGamesServer.Models.Mappers;
 
-using Stripe.Checkout;
-
-
 namespace VhyperGamesServer.Services;
 
 public class ReserveService
@@ -92,11 +89,11 @@ public class ReserveService
 
     public async Task ConfirmReserve(int reserveId, PayMode modeOfPay, string sessionId)
     {
-        Reserve reserve = await _unitOfWork.ReserveRepository.GetReserveByUserId(userId);
+        Reserve reserve = await _unitOfWork.ReserveRepository.GetReserveById(reserveId);
 
         if (reserve == null)
         {
-            throw new KeyNotFoundException($"La reserva con ID {userId} no existe.");
+            throw new KeyNotFoundException($"La reserva con ID {reserveId} no existe.");
         }
 
         if (!await _stripeService.IsPaymentCompleted(sessionId))
@@ -107,20 +104,19 @@ public class ReserveService
         await _orderService.CreateOrderFromReserve(reserve, modeOfPay);
 
         _unitOfWork.ReserveRepository.Delete(reserve);
-
         await _unitOfWork.SaveAsync();
     }
 
     public async Task CancelReserve(int reserveId)
     {
-        Reserve reserve = await _unitOfWork.ReserveRepository.GetReserveByUserId(userId);
+        Reserve reserve = await _unitOfWork.ReserveRepository.GetReserveById(reserveId);
 
         if (reserve == null)
         {
-            throw new KeyNotFoundException($"El usuario con ID {userId} no tiene una reserva.");
+            throw new KeyNotFoundException($"La reserva con ID {reserveId} no existe.");
         }
 
-        foreach(var detail in reserve.ReserveDetails)
+        foreach (var detail in reserve.ReserveDetails)
         {
             Game game = await _unitOfWork.GameRepository.GetByIdAsync(detail.GameId);
 
@@ -130,8 +126,8 @@ public class ReserveService
                 _unitOfWork.GameRepository.Update(game);
             }
         }
-        _unitOfWork.ReserveRepository.Delete(reserve);
 
+        _unitOfWork.ReserveRepository.Delete(reserve);
         await _unitOfWork.SaveAsync();
     }
 }
