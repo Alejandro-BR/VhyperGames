@@ -17,7 +17,7 @@ public class ReserveDetailsRepository : Repository<ReserveDetail, int>
         return await Context.Set<ReserveDetail>()
         .Where(rd => rd.ReserveId == idReserve)
         .Include(rd => rd.Game)
-            .ThenInclude(g => g.Game.ImageGames) // Corregir
+            .ThenInclude(g => g.ImageGames) 
         .ToListAsync();
     }
 
