@@ -13,6 +13,8 @@ public class Reserve
 
     public PayMode ModeOfPay { get; set; }
 
+    public string SessionId { get; set; }
+
     [JsonIgnore]
     public List<ReserveDetail> ReserveDetails { get; set; }
 
