@@ -79,7 +79,7 @@ public class ReserveController : ControllerBase
 
     [HttpPost("confirm")]
     [Authorize]
-    public async Task<IActionResult> ConfirmReserve([FromQuery] PayMode modeOfPay)
+    public async Task<IActionResult> ConfirmReserve([FromQuery] int reserveId, [FromQuery] PayMode modeOfPay, [FromQuery] string sessionId)
     {
         try
         {
@@ -91,18 +91,23 @@ public class ReserveController : ControllerBase
 
             int userId = int.Parse(userIdClaim.Value);
 
-            await _reserveService.ConfirmReserve(userId, modeOfPay);
+            await _reserveService.ConfirmReserve(reserveId, modeOfPay, sessionId);
             return Ok(new { message = "Reserva confirmada exitosamente." });
         }
         catch (KeyNotFoundException ex)
         {
             return NotFound(new { message = ex.Message });
         }
+        catch (InvalidOperationException ex)
+        {
+            return BadRequest(new { message = ex.Message });
+        }
         catch (Exception ex)
         {
             return StatusCode(500, new { message = "Error inesperado", detail = ex.Message });
         }
     }
+
 
     [HttpDelete("cancel")]
     [Authorize]
