@@ -57,9 +57,11 @@ public class Program
         builder.Services.AddScoped<GameCardMapper>();
         builder.Services.AddScoped<DetailsViewMapper>();
         builder.Services.AddScoped<CartMapper>();
+        builder.Services.AddScoped<GameOrderMapper>();
         builder.Services.AddScoped<IAService>();
         builder.Services.AddScoped<CartService>();
-        builder.Services.AddScoped<GameOrderMapper>();
+        builder.Services.AddScoped<ReserveService>();
+
         // Stripe
         builder.Services.AddTransient<StripeService>();
 

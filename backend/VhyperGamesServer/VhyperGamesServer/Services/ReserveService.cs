@@ -83,13 +83,13 @@ public class ReserveService
         return _gameOrderMapper.ToListGameOrderDto(reserve.ReserveDetails);
     }
 
-    public async Task ConfirmReserve(int reserveId, PayMode modeOfPay)
+    public async Task ConfirmReserve(int userId, PayMode modeOfPay)
     {
-        Reserve reserve = await _unitOfWork.ReserveRepository.GetReserveById(reserveId);
+        Reserve reserve = await _unitOfWork.ReserveRepository.GetReserveByUserId(userId);
 
         if (reserve == null)
         {
-            throw new KeyNotFoundException($"La reserva con ID {reserveId} no existe.");
+            throw new KeyNotFoundException($"La reserva con ID {userId} no existe.");
         }
 
         int totalPrice = reserve.ReserveDetails.Sum(detail => detail.Game.Price * detail.Quantity);
@@ -116,13 +116,13 @@ public class ReserveService
     }
 
 
-    public async Task CancelReserve(int reserveId)
+    public async Task CancelReserve(int userId)
     {
-        Reserve reserve = await _unitOfWork.ReserveRepository.GetReserveById(reserveId);
+        Reserve reserve = await _unitOfWork.ReserveRepository.GetReserveByUserId(userId);
 
         if (reserve == null)
         {
-            throw new KeyNotFoundException($"La reserva con ID {reserveId} no existe.");
+            throw new KeyNotFoundException($"El usuario con ID {userId} no tiene una reserva.");
         }
 
         foreach(var detail in reserve.ReserveDetails)
