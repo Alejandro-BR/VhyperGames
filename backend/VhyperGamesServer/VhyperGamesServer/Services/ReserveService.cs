@@ -72,13 +72,13 @@ public class ReserveService
     }
 
 
-    public async Task <List<GameOrderDto>> GetReserveDetails(int reserveId)
+    public async Task <List<GameOrderDto>> GetReserveDetails(int userId) 
     {
-        Reserve reserve = await _unitOfWork.ReserveRepository.GetReserveById(reserveId);
+        Reserve reserve = await _unitOfWork.ReserveRepository.GetReserveByUserId(userId); 
 
         if (reserve == null)
         {
-            throw new KeyNotFoundException($"La reserva con ID {reserveId} no existe.");
+            throw new KeyNotFoundException($"El usuario con ID {userId} no tiene reserva.");
         }
         return _gameOrderMapper.ToListGameOrderDto(reserve.ReserveDetails);
     }
