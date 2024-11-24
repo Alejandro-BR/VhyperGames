@@ -12,7 +12,6 @@ public class Order
     public PayMode ModeOfPay { get; set; }
     public DateTime BillingDate { get; set; }
 
-    [JsonIgnore]
     public List<OrderDetail> OrderDetails { get; set; }
 
     public User User { get; set; }
