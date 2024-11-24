@@ -43,8 +43,4 @@ public class OrderRepository : Repository<Order, int>
             .OrderByDescending(o => o.BillingDate)
             .FirstOrDefaultAsync();
     }
-
-
-
-
 }
