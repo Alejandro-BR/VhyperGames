@@ -16,7 +16,7 @@ public class UnitOfWork
     private ReserveRepository _reserveRepository;
     private ReserveDetailsRepository _reserveDetailsRepository;
     private OrderRepository _orderRepository;
-    private OrderGameRepository _orderDetailsRepository;
+    private OrderDetailRepository _orderDetailsRepository;
     
 
     public UserRepository UserRepository => _userRepository ??= new UserRepository(_myDbContext);
@@ -28,7 +28,7 @@ public class UnitOfWork
     public ReserveRepository ReserveRepository => _reserveRepository ??= new ReserveRepository(_myDbContext);
     public ReserveDetailsRepository ReserveDetailsRepository => _reserveDetailsRepository ??= new ReserveDetailsRepository(_myDbContext);
     public OrderRepository OrderRepository => _orderRepository ??= new OrderRepository(_myDbContext);
-    public OrderGameRepository OrderDetailsRepository => _orderDetailsRepository ??= new OrderGameRepository(_myDbContext);
+    public OrderDetailRepository OrderDetailsRepository => _orderDetailsRepository ??= new OrderDetailRepository(_myDbContext);
 
     public UnitOfWork(MyDbContext myDbContext)
     {
