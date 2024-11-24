@@ -92,11 +92,11 @@ public class ReserveService
 
     public async Task ConfirmReserve(int reserveId, PayMode modeOfPay, string sessionId)
     {
-        Reserve reserve = await _unitOfWork.ReserveRepository.GetReserveById(reserveId);
+        Reserve reserve = await _unitOfWork.ReserveRepository.GetReserveByUserId(userId);
 
         if (reserve == null)
         {
-            throw new KeyNotFoundException($"La reserva con ID {reserveId} no existe.");
+            throw new KeyNotFoundException($"La reserva con ID {userId} no existe.");
         }
 
         if (!await _stripeService.IsPaymentCompleted(sessionId))
@@ -113,11 +113,11 @@ public class ReserveService
 
     public async Task CancelReserve(int reserveId)
     {
-        Reserve reserve = await _unitOfWork.ReserveRepository.GetReserveById(reserveId);
+        Reserve reserve = await _unitOfWork.ReserveRepository.GetReserveByUserId(userId);
 
         if (reserve == null)
         {
-            throw new KeyNotFoundException($"La reserva con ID {reserveId} no existe.");
+            throw new KeyNotFoundException($"El usuario con ID {userId} no tiene una reserva.");
         }
 
         foreach(var detail in reserve.ReserveDetails)
