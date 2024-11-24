@@ -1,8 +1,5 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.ML;
-using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Stripe;
@@ -54,12 +51,17 @@ public class Program
         builder.Services.AddTransient<CatalogService>();
         builder.Services.AddTransient<DetailsViewService>();
         builder.Services.AddScoped<SmartSearchService>();
+        builder.Services.AddScoped<IAService>();
+        builder.Services.AddScoped<CartService>();
+        builder.Services.AddScoped<ReserveService>();
+        builder.Services.AddScoped<OrderService>();
+
+        //Inyección de mappers
         builder.Services.AddScoped<GameCardMapper>();
         builder.Services.AddScoped<DetailsViewMapper>();
         builder.Services.AddScoped<CartMapper>();
-        builder.Services.AddScoped<IAService>();
-        builder.Services.AddScoped<CartService>();
-        builder.Services.AddScoped<GameOrderMapper>();
+        builder.Services.AddScoped<ReserveAndOrderMapper>();
+
         // Stripe
         builder.Services.AddTransient<StripeService>();
 
