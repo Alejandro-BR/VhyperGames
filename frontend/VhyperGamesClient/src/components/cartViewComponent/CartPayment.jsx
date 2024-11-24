@@ -3,6 +3,7 @@ import { messageEuros, messageEthereum } from '../../helpers/messages';
 import { CreateData } from '../../utils/dataCart';
 import { ConvertToDecimal, TotalPrice } from '../../utils/price';
 // import { getVarLS } from '../../utils/keep';
+import { useNavigate } from "react-router-dom";
 import { CartContext } from '../../context/CartContext';
 import Button from '../buttonComponent/Button';
 import classes from './CartPayment.module.css';
@@ -10,6 +11,7 @@ import classes from './CartPayment.module.css';
 function CartPayment() {
   const { gameDetails, items } = useContext(CartContext); 
   const [data, setData] = useState([]); 
+  const navigate = useNavigate();
 
   useEffect(() => {
     const updatedData = CreateData(items, gameDetails);
@@ -33,14 +35,14 @@ function CartPayment() {
         <Button
           variant={"medium"}
           color={"morado-azul"}
-          onClick={messageEuros}
+          onClick={() => navigate("/checkout/euros")}
         >
           PAGAR EN <br /> EUROS
         </Button>
         <Button
           variant={"medium"}
           color={"azul-morado"}
-          onClick={messageEthereum}
+          onClick={() => navigate("/checkout/ethereum")}
         >
           PAGAR EN ETHEREUM
         </Button>

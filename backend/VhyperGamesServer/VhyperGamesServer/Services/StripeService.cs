@@ -1,4 +1,5 @@
-﻿using Stripe.Checkout;
+﻿using Stripe;
+using Stripe.Checkout;
 using VhyperGamesServer.Models.Database.Entities;
 using VhyperGamesServer.Models.Database.Repositories;
 using VhyperGamesServer.Models.Dtos;
@@ -38,4 +39,14 @@ public class StripeService
 
         return options;
     }
+
+    public async Task SetSessionIdReserve(string sessionId, int userId)
+    {
+        Reserve reserve = await _unitOfWork.ReserveRepository.GetReserveByUserId(userId);
+
+        if (reserve != null) { 
+            reserve.SessionId = sessionId;
+        }
+    }
+
 }
