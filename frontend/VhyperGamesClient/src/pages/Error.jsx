@@ -9,11 +9,8 @@ function Error() {
         <Title text="ERROR 404!" size="3em" color="#fff" align="center" />
         <Error404Message />
       </div>
-      {/* <Footer></Footer> */}
     </>
   );
 }
 
 export default Error;
-
-// Esta clase hay que hacer un error 404 bien hecho
