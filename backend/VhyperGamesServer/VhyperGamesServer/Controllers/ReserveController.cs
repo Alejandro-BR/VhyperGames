@@ -141,7 +141,7 @@ public class ReserveController : ControllerBase
 
 
 
-    [HttpGet("embedded-checkout")]
+    [HttpPost("embedded-checkout")]
     [Authorize]
     public async Task<IActionResult> EmbeddedCheckout()
     {

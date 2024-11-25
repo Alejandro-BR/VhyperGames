@@ -25,3 +25,7 @@ export const UPDATE_CART = `${API_BASE_URL}Cart/update`;
 export const GET_CART_BY_GAMES = `${API_BASE_URL}Cart/cartByGames`;
 export const PUT_MERGE = `${API_BASE_URL}Cart/mergeCart`;
 export const DELETE_CART_DETAIL = `${API_BASE_URL}Cart/deleteCartDetail`;
+
+/* ENDPOINTS DE CHECKOUT */
+/* STRIPE */
+export const CREATE_PAYMENT_SESSION = `${API_BASE_URL}Reserve/embedded-checkout`;
