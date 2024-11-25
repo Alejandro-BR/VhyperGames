@@ -155,10 +155,10 @@ public class ReserveController : ControllerBase
 
             int userId = int.Parse(userIdClaim.Value);
 
-            var options = await _stripeService.EmbededCheckout(userId);
+            SessionCreateOptions options = await _stripeService.EmbededCheckout(userId);
 
-            var sessionService = new SessionService();
-            var session = await sessionService.CreateAsync(options);
+            SessionService sessionService = new SessionService();
+            Session session = await sessionService.CreateAsync(options);
 
             await _stripeService.SetSessionIdReserve(session.Id, userId);
 
