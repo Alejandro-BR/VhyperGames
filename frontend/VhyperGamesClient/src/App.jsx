@@ -6,6 +6,7 @@ import SobreNosotros from './pages/SobreNosotros';
 import Checkout from './pages/Checkout';
 import Cart from './pages/Cart';
 import DetailsView from './pages/DetailsView';
+import PaymentConfirmation from './pages/PaymentConfirmation';
 import { AuthProvider } from '../src/context/authcontext';
 import { CartProvider } from './context/CartContext';
 
@@ -16,6 +17,7 @@ import {
   Route,
 } from "react-router-dom";
 
+
 const routeDefinition = createRoutesFromElements(
   <Route path="/" element={<RootLayout />} errorElement={<Error />}>
     <Route index element={<Home />} />
@@ -25,6 +27,7 @@ const routeDefinition = createRoutesFromElements(
     <Route path="juego/:gameId" element={<DetailsView />} />
     <Route path="cart" element={<Cart />} />
     <Route path="checkout/:modo" element={<Checkout />}/>
+    <Route path="paymentConfirmation" element={<PaymentConfirmation />}/>
   </Route>
 );
 
