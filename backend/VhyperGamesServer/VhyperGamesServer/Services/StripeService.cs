@@ -46,6 +46,7 @@ public class StripeService
 
         if (reserve != null) { 
             reserve.SessionId = sessionId;
+            _unitOfWork.SaveAsync();
         }
     }
     public async Task<Session> GetSessionAsync(string sessionId)
