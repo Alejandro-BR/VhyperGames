@@ -1,24 +1,36 @@
 .container{
   display: flex;
   flex-direction: column;
+  gap: 10px;
+  border: 1px solid;
+  border-image: var(--gradient-purple-blue) 1;
+  width: 80vw;
+  margin: auto; 
+  font-size: 1.2em;
+}
+
+.gameItem{
+  display: flex;
+  align-items: center;
+  gap: 20px;
 }
 
 .gameList{
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 100px;
 }
 
-
-.gameListImg{
-  .img{
-
-  }
-
-}
 
 .listImg{
-  width: 120px;
-  height: 100px;
+  max-width: 180px;
+  max-height: 250px;
+}
 
+.line {
+  border: none;
+  height: 4px;
+  width: 250px;
+  background: var(--gradient-blue-purple);
+  margin: 10px 0;
 }

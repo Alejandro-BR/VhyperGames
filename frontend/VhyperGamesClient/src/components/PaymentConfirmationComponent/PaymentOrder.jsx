@@ -22,13 +22,14 @@ const orderData = {
       quantity: 1,
     },
     {
-      id: 3,
+      id: 4,
       orderId: 3584755,
       gameId: 103,
       gameName: "Stardew Valley",
       price: 14.99,
       quantity: 1,
     },
+    
   ],
   modeOfPay: "Ethereum",
   totalPrice: 48.98,
@@ -37,31 +38,33 @@ const orderData = {
 function PaymentOrder() {
   return (
     <div className={classes.container}>
-      <div className="order">
-          <p>Pedido Nº {orderData.id}</p>
-          <p>Fecha de facturación: {orderData.billingDate}</p>
+      <div className={classes.order}>
+        <p>Pedido Nº {orderData.id}</p>
+        <p>Fecha de facturación: {orderData.billingDate}</p>
+        <hr className={classes.line} />
       </div>
+
 
       <div className={classes.gameList}>
         {orderData.orderGames.map((game) => (
-          <div key={game.id} className="gameItem">
+          <div key={game.id} className={classes.gameItem}>
             <div className={classes.gameListImg}>
-              <img src={"/img/witcher3.png"} alt={game.gameName} className={classes.listImg}/>
+              <img src={"/img/cyberpunk.png"} alt={game.gameName} className={classes.listImg} />
             </div>
-            <div className="gameList-data">
-              <p>{game.gameName}</p>
-              <p>{game.price} €</p>
-              <p>Cantidad: {game.quantity}</p>
-            </div>
+            <div className={classes.gameListData}>
+                <p>{game.gameName}</p>
+                <p>{game.price} €</p>
+                <p>Cantidad: {game.quantity}</p>
+              </div>
           </div>
         ))}
+      </div>
 
-        <div className="payment">
+      <div className={classes.payment}>
+        <hr className={classes.line}/>
           <p>Pagado con: {orderData.modeOfPay}</p>
           <p>Total pagado: {orderData.totalPrice}€</p>
         </div>
-      </div>
-
     </div>
   );
 }
