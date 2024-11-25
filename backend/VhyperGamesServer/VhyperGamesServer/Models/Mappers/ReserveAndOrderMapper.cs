@@ -10,6 +10,7 @@ public class ReserveAndOrderMapper
     {
         return new OrderDto
         {
+            Id = order.Id,
             BillingDate = order.BillingDate,
             OrderGames = order.OrderDetails,
             ModeOfPay = order.ModeOfPay,
