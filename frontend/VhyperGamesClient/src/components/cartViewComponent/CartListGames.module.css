@@ -17,23 +17,24 @@
     grid-row: 1 / 3;
 }
 
-.gameCard__right{
+.gameCard__right {
     grid-row: 1 / span 2;
-   display: flex;
-   flex-direction: column;
-   justify-content: space-between;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
-.gameCard__right_top{
+.gameCard__right_top {
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
+
 .gameCard__line {
     grid-row-start: -1;
     grid-column: 1/4;
     border: none;
     height: 4px;
     background: var(--gradient-purple-blue);
-    align-self:center;
+    align-self: center;
 }

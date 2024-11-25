@@ -1,6 +1,7 @@
 // config.js
-export const BASE_URL = 'https://localhost:7207/';
-export const API_BASE_URL = 'https://localhost:7207/api/';
+export const BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
+export const API_BASE_URL = `${BASE_URL}api/`;
 
 /* ENDPOINTS DE LOGIN Y REGISTRO */
 export const LOGIN_ENDPOINT = `${API_BASE_URL}auth/login`;

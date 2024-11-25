@@ -38,14 +38,14 @@ public class EmailService
 
             emailContent.AppendLine($"<td><img src='{orderDetail.Game.ImageGames[0].ImageUrl}' alt='{orderDetail.Game.ImageGames[0].AltText}' style='width:100px;' /></td>");
             emailContent.AppendLine($"<td>{orderDetail.Game.Title}</td>");
-            emailContent.AppendLine($"<td>{orderDetail.Game.Price * orderDetail.Quantity}€</td>");
+            emailContent.AppendLine($"<td>{(double) (((double) (orderDetail.Game.Price / 100)) * orderDetail.Quantity)}€</td>");
             emailContent.AppendLine($"<td>{orderDetail.Quantity}</td>");
             emailContent.AppendLine("</tr>");
         }
 
         emailContent.AppendLine("</table>");
 
-        emailContent.AppendLine("<p><b>Total pagado:</b> " + order.TotalPrice + " €</p>");
+        emailContent.AppendLine("<p><b>Total pagado:</b> " + (double) order.TotalPrice / 100 + " €</p>");
 
         if (order.ModeOfPay == 0)
         {
