@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Stripe.Checkout;
 using VhyperGamesServer.Models.Database.Entities;
 using VhyperGamesServer.Models.Database.Entities.Enuml;
 using VhyperGamesServer.Models.Dtos;
@@ -13,10 +14,12 @@ namespace VhyperGamesServer.Controllers;
 public class ReserveController : ControllerBase
 {
     private readonly ReserveService _reserveService;
+    private readonly StripeService _stripeService;
     
-    public ReserveController(ReserveService reserveService)
+    public ReserveController(ReserveService reserveService, StripeService stripeService)
     {
         _reserveService = reserveService;
+        _stripeService = stripeService;
     }
 
 
@@ -133,6 +136,37 @@ public class ReserveController : ControllerBase
         catch (Exception ex)
         {
             return StatusCode(500, new { message = "Error inesperado", detail = ex.Message });
+        }
+    }
+
+
+
+    [HttpGet("embedded-checkout")]
+    [Authorize]
+    public async Task<IActionResult> EmbeddedCheckout()
+    {
+        try
+        {
+            var userIdClaim = User.FindFirst("id");
+            if (userIdClaim == null)
+            {
+                return Unauthorized(new { message = "Usuario no autenticado." });
+            }
+
+            int userId = int.Parse(userIdClaim.Value);
+
+            var options = await _stripeService.EmbededCheckout(userId);
+
+            var sessionService = new SessionService();
+            var session = await sessionService.CreateAsync(options);
+
+            await _stripeService.SetSessionIdReserve(session.Id, userId);
+
+            return Ok(new { clientSecret = session.ClientSecret });
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, new { message = "Error al generar la sesión de pago.", detail = ex.Message });
         }
     }
 }
