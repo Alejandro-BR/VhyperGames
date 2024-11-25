@@ -11,3 +11,4 @@ Proyecto de creación de E-Commerce de una tienda de videojuegos.
 - react-router-dom
 - react-multi-carousel
 - jwt-decode
+- --save @stripe/react-stripe-js @stripe/stripe-js
