@@ -9,12 +9,14 @@ namespace VhyperGamesServer.Services
     public class OrderService
     {
         private readonly UnitOfWork _unitOfWork;
+        private readonly EmailService _emailService;
         private readonly ReserveAndOrderMapper _mapper;
 
-        public OrderService(UnitOfWork unitOfWork, ReserveAndOrderMapper mapper)
+        public OrderService(UnitOfWork unitOfWork, ReserveAndOrderMapper mapper, EmailService emailService)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
+            _emailService = emailService;
         }
 
         public async Task<Order> GetOrderByIdAsync(int id)
@@ -77,6 +79,8 @@ namespace VhyperGamesServer.Services
 
             await _unitOfWork.OrderRepository.InsertAsync(order);
             await _unitOfWork.SaveAsync();
+
+            await _emailService.NewEmail(order.UserId);
         }
     }
 }
