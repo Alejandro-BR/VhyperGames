@@ -14,7 +14,7 @@ public class EmailService
         _unitOfWork = unitOfWork;
     }
 
-    public async Task SendInvoiceAsync(Order order)
+    private async Task SendInvoiceAsync(Order order)
     {
         // HTML
         StringBuilder emailContent = new StringBuilder();
