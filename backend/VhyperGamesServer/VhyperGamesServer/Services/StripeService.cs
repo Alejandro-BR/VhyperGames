@@ -24,6 +24,14 @@ public class StripeService
         Reserve reserve = await _unitOfWork.ReserveRepository.GetReserveByUserId(userId);
         User user = await _unitOfWork.UserRepository.GetByIdAsync(userId);
 
+        if (reserve == null) {
+            throw new KeyNotFoundException($"No hay reserva con este ID {userId} de usuario.");
+        }
+
+        if (user == null) {
+            throw new KeyNotFoundException($"No hay usuario con este ID {userId}");
+        }
+
         List<SessionLineItemOptions> newLineItems = _gameOrderMapper.ToListSessionLineItemOptions(reserve.ReserveDetails);
 
         SessionCreateOptions options = new SessionCreateOptions
