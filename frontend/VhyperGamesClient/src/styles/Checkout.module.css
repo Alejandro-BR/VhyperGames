@@ -6,7 +6,8 @@
   display: grid;
   grid-template-areas: 'list pay';
   gap: 40px;
-  padding: 40px 0px;
+  padding-top: 40px;
+  min-height: 75vh;
 } 
 
 .checkout__list {
