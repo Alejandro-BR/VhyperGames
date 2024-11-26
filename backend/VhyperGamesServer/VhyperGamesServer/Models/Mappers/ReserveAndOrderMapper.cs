@@ -65,34 +65,34 @@ public class ReserveAndOrderMapper
         return orderDtos;
     }
 
-    public SessionLineItemOptions ToSessionLineItemOptions(OrderDetailDto gameOrderDto)
+    public SessionLineItemOptions ToSessionLineItemOptions(ReserveDetail reserveDetail)
     {
         SessionLineItemOptions sessionLineItemOptions = new SessionLineItemOptions()
         {
             PriceData = new SessionLineItemPriceDataOptions()
             {
                 Currency = "eur",
-                UnitAmount = gameOrderDto.Price,
+                UnitAmount = reserveDetail.Game.Price,
                 ProductData = new SessionLineItemPriceDataProductDataOptions()
                 {
-                    Name = gameOrderDto.Title,
+                    Name = reserveDetail.Game.Title,
                     Description = "Juego",
-                    Images = [gameOrderDto.ImageGame.ImageUrl]
+                    Images = [reserveDetail.Game.ImageGames[0].ImageUrl]
                 }
             },
-            Quantity = gameOrderDto.Quantity,
+            Quantity = reserveDetail.Quantity,
         };
 
         return sessionLineItemOptions;
     }
 
-    public List<SessionLineItemOptions> ToListSessionLineItemOptions(List<OrderDetailDto> gameOrderDtos)
+    public List<SessionLineItemOptions> ToListSessionLineItemOptions(List<ReserveDetail> reserveDetails)
     {
         List<SessionLineItemOptions> newLineItems = new List<SessionLineItemOptions>();
 
-        foreach (OrderDetailDto gameOrderDto in gameOrderDtos)
+        foreach (ReserveDetail reserveDetail in reserveDetails)
         {
-            newLineItems.Add(ToSessionLineItemOptions(gameOrderDto));
+            newLineItems.Add(ToSessionLineItemOptions(reserveDetail));
         }
 
         return newLineItems;
