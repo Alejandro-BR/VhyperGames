@@ -9,6 +9,7 @@ import DetailsView from './pages/DetailsView';
 import PaymentConfirmation from './pages/PaymentConfirmation';
 import { AuthProvider } from '../src/context/authcontext';
 import { CartProvider } from './context/CartContext';
+import { CheckoutProvider } from './context/CheckoutContext';
 
 import {
   createBrowserRouter,
@@ -26,8 +27,8 @@ const routeDefinition = createRoutesFromElements(
     <Route path="sobre-nosotros" element={<SobreNosotros />} />
     <Route path="juego/:gameId" element={<DetailsView />} />
     <Route path="cart" element={<Cart />} />
-    <Route path="checkout/:modo" element={<Checkout />}/>
-    <Route path="paymentConfirmation" element={<PaymentConfirmation />}/>
+    <Route path="checkout/:modo" element={<Checkout />} />
+    <Route path="paymentConfirmation" element={<PaymentConfirmation />} />
   </Route>
 );
 
@@ -37,7 +38,9 @@ function App() {
   return (
     <AuthProvider>
       <CartProvider>
-        <RouterProvider router={router}></RouterProvider>
+        <CheckoutProvider>
+          <RouterProvider router={router}></RouterProvider>
+        </CheckoutProvider>
       </CartProvider>
     </AuthProvider>
   )
