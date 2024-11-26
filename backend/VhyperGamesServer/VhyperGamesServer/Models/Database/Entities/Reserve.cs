@@ -15,6 +15,8 @@ public class Reserve
 
     public string SessionId { get; set; }
 
+    public DateTime ExpirationTime { get; set; }
+
     [JsonIgnore]
     public List<ReserveDetail> ReserveDetails { get; set; }
 
