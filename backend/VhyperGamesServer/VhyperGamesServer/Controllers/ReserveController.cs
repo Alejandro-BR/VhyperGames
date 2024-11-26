@@ -83,7 +83,7 @@ public class ReserveController : ControllerBase
 
     [HttpPost("confirm")]
     [Authorize]
-    public async Task<IActionResult> ConfirmReserve([FromQuery] int reserveId, [FromQuery] PayMode modeOfPay, [FromQuery] string sessionId)
+    public async Task<IActionResult> ConfirmReserve([FromQuery] int reserveId)
     {
         try
         {
@@ -95,7 +95,7 @@ public class ReserveController : ControllerBase
 
             int userId = int.Parse(userIdClaim.Value);
 
-            await _reserveService.ConfirmReserve(reserveId, modeOfPay, sessionId);
+            await _reserveService.ConfirmReserve(reserveId);
             return Ok(new { message = "Reserva confirmada exitosamente." });
         }
         catch (KeyNotFoundException ex)
@@ -161,7 +161,7 @@ public class ReserveController : ControllerBase
             SessionService sessionService = new SessionService();
             Session session = await sessionService.CreateAsync(options);
 
-            await _stripeService.SetSessionIdReserve(session.Id, userId);
+            await _stripeService.SetSessionIdReserve(session.Id, reserveId);
 
             return Ok(new { clientSecret = session.ClientSecret });
         }

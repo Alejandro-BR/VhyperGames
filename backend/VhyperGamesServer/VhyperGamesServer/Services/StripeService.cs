@@ -25,7 +25,7 @@ public class StripeService
         User user = await _unitOfWork.UserRepository.GetByIdAsync(userId);
 
         if (reserve == null) {
-            throw new KeyNotFoundException($"No hay reserva con este ID {userId} de usuario.");
+            throw new KeyNotFoundException($"No hay reserva con este ID {reserveId}.");
         }
 
         if (user == null) {
@@ -47,9 +47,9 @@ public class StripeService
         return options;
     }
 
-    public async Task SetSessionIdReserve(string sessionId, int userId)
+    public async Task SetSessionIdReserve(string sessionId, int reserveId)
     {
-        Reserve reserve = await _unitOfWork.ReserveRepository.GetReserveByUserId(userId);
+        Reserve reserve = await _unitOfWork.ReserveRepository.GetReserveById(reserveId);
 
         if (reserve != null) { 
             reserve.SessionId = sessionId;
