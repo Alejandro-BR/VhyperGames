@@ -16,6 +16,8 @@ public class EmailService
 
     private async Task SendInvoiceAsync(Order order)
     {
+        string url = Environment.GetEnvironmentVariable("SERVER_URL");
+
         // HTML
         StringBuilder emailContent = new StringBuilder();
 
@@ -34,11 +36,13 @@ public class EmailService
 
         foreach (OrderDetail orderDetail in order.OrderDetails)
         {
+            double price = (orderDetail.Game.Price / 100.0) * orderDetail.Quantity;
+
             emailContent.AppendLine("<tr>");
 
-            emailContent.AppendLine($"<td><img src='{orderDetail.Game.ImageGames[0].ImageUrl}' alt='{orderDetail.Game.ImageGames[0].AltText}' style='width:100px;' /></td>");
+            emailContent.AppendLine($"<td><img src='{url + orderDetail.Game.ImageGames[0].ImageUrl}' alt='{orderDetail.Game.ImageGames[0].AltText}' style='width:100px;' /></td>");
             emailContent.AppendLine($"<td>{orderDetail.Game.Title}</td>");
-            emailContent.AppendLine($"<td>{(double) (((double) (orderDetail.Game.Price / 100)) * orderDetail.Quantity)}€</td>");
+            emailContent.AppendLine($"<td>{price}€</td>");
             emailContent.AppendLine($"<td>{orderDetail.Quantity}</td>");
             emailContent.AppendLine("</tr>");
         }
