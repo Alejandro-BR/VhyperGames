@@ -30,6 +30,7 @@ public class EmailService
         emailContent.AppendLine("<tr>");
         emailContent.AppendLine("<th>Imagen</th>");
         emailContent.AppendLine("<th>Nombre</th>");
+        emailContent.AppendLine("<th>Precio Unitario</th>");
         emailContent.AppendLine("<th>Precio Total</th>");
         emailContent.AppendLine("<th>Cantidad</th>");
         emailContent.AppendLine("</tr>");
@@ -42,6 +43,7 @@ public class EmailService
 
             emailContent.AppendLine($"<td><img src='{url + orderDetail.Game.ImageGames[0].ImageUrl}' alt='{orderDetail.Game.ImageGames[0].AltText}' style='width:100px;' /></td>");
             emailContent.AppendLine($"<td>{orderDetail.Game.Title}</td>");
+            emailContent.AppendLine($"<td>{(double) orderDetail.Game.Price / 100}€</td>");
             emailContent.AppendLine($"<td>{price}€</td>");
             emailContent.AppendLine($"<td>{orderDetail.Quantity}</td>");
             emailContent.AppendLine("</tr>");
