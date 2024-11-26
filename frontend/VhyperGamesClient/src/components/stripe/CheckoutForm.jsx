@@ -17,8 +17,6 @@ function CheckoutForm() {
   const { reserveId } = useContext(CheckoutContext);
 
   async function createPaymentSession() {
-    const url = `${CREATE_PAYMENT_SESSION}?reserveId=${reserveId}`;
-    console.log(url);
 
     try {
       console.log("Token enviado:", token.token);
