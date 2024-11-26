@@ -1,11 +1,13 @@
-.checkout {
-  margin: auto;
-}
+/* .checkout {
+
+} */
 
 .checkout__components {
   display: grid;
   grid-template-areas: 'list pay';
   gap: 40px;
+  padding-top: 40px;
+  min-height: 75vh;
 } 
 
 .checkout__list {
@@ -14,6 +16,6 @@
 }
 
 .checkout__pay {
-  width: 50%;
   grid-area: pay;
+  width: 50%;
 }
