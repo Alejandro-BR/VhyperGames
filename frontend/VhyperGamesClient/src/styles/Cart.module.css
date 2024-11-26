@@ -1,3 +1,18 @@
+.emptyCartContainer {
+  display: flex;
+  flex-direction: column; 
+  justify-content: center; 
+  align-items: center; 
+  height: 80vh; 
+  text-align: center;
+  gap: 20px; 
+}
+
+.emptyCartGif {
+  max-width: 300px; 
+  height: auto; 
+}
+
 .containerCartList {
   display: grid;
   grid-template-columns: 3fr 1fr;
