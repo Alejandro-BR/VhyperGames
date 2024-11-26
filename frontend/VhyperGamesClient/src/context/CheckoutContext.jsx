@@ -20,12 +20,6 @@ export const CheckoutProvider = ({ children }) => {
     const [modeOfPay, setModeOfPay] = useState(0);
     const [message, setMessage] = useState('');
 
-    // Usuario no logueado que ha metido cosas en el carrito clicka pagar
-
-
-    // Creamos variable en Local Storage que guarde la reserva
-    // let reserve = getReserve; // Debe ocurrir antes del login
-
     // Enviamos reserve a la BBDD
     function CreateReserve() {
 
@@ -45,7 +39,7 @@ export const CheckoutProvider = ({ children }) => {
                     return;
                 }
 
-                const response = await fetch(CREATE_RESERVE, {
+                const response = await fetch(`${CREATE_RESERVE}?modeOfPay=${modeOfPay}`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -68,10 +62,10 @@ export const CheckoutProvider = ({ children }) => {
         };
     }
 
-
-
+    // Esto exporta :)
     const contextValue = {
         setModeOfPay,
+        CreateReserve
     };
 
     return (

@@ -21,6 +21,12 @@ function CartPayment() {
     setData(updatedData);
   }, [gameDetails, items]);
 
+  const handleClick = (modeOfPay, route) => {
+    setReserve();
+    setModeOfPay(modeOfPay);
+    navigate(route);
+  };
+
   const precio = ConvertToDecimal(TotalPrice(data));
 
   return (
@@ -39,9 +45,7 @@ function CartPayment() {
           variant={"medium"}
           color={"morado-azul"}
           onClick={() => {
-            navigate("/checkout/euros");
-            setModeOfPay(1);
-            setReserve;
+            handleClick(1, "/checkout/euros");
           }}
         >
           PAGAR EN <br /> EUROS
@@ -50,9 +54,7 @@ function CartPayment() {
           variant={"medium"}
           color={"azul-morado"}
           onClick={() => {
-            navigate("/checkout/ethereum");
-            setModeOfPay(0);
-            setReserve;
+            handleClick(0, "/checkout/ethereum");
           }}
         >
           PAGAR EN ETHEREUM
