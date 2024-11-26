@@ -41,7 +41,7 @@ public class StripeService
             PaymentMethodTypes = ["card"],
             LineItems = newLineItems,
             CustomerEmail = user.Email,
-            ReturnUrl = URL_CLIENT + "/checkout?session_id={CHECKOUT_SESSION_ID}",
+            RedirectOnCompletion = "never"
         };
 
         return options;
