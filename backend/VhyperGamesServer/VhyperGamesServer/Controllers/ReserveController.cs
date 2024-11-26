@@ -25,7 +25,7 @@ public class ReserveController : ControllerBase
 
     [HttpPost("create")]
     [Authorize]
-    public async Task<IActionResult> CreateReserve([FromBody] List<CartDto> cart, [FromQuery] PayMode modeOfPay)
+    public async Task<ActionResult<int>> CreateReserve([FromBody] List<CartDto> cart, [FromQuery] PayMode modeOfPay)
     {
         try
         {
@@ -38,8 +38,8 @@ public class ReserveController : ControllerBase
             
             int userId = int.Parse(userIdClaim.Value);
 
-            await _reserveService.CreateReserve(userId, cart, modeOfPay);
-            return Ok(new { message = "Reserva creada exitosamente." });
+            int reserveId = await _reserveService.CreateReserve(userId, cart, modeOfPay);
+            return Ok(reserveId);
         }
         catch (InvalidOperationException ex)
         {
@@ -143,7 +143,7 @@ public class ReserveController : ControllerBase
 
     [HttpPost("embedded-checkout")]
     [Authorize]
-    public async Task<IActionResult> EmbeddedCheckout()
+    public async Task<IActionResult> EmbeddedCheckout([FromQuery] int reserveId)
     {
         try
         {
@@ -155,7 +155,7 @@ public class ReserveController : ControllerBase
 
             int userId = int.Parse(userIdClaim.Value);
 
-            SessionCreateOptions options = await _stripeService.EmbededCheckout(userId);
+            SessionCreateOptions options = await _stripeService.EmbededCheckout(userId, reserveId);
 
             SessionService sessionService = new SessionService();
             Session session = await sessionService.CreateAsync(options);

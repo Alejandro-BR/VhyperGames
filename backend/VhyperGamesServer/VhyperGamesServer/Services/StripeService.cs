@@ -19,9 +19,9 @@ public class StripeService
         URL_CLIENT = Environment.GetEnvironmentVariable("CLIENT_URL");
     }
 
-    public async Task<SessionCreateOptions> EmbededCheckout(int userId)
+    public async Task<SessionCreateOptions> EmbededCheckout(int userId, int reserveId)
     {
-        Reserve reserve = await _unitOfWork.ReserveRepository.GetReserveByUserId(userId);
+        Reserve reserve = await _unitOfWork.ReserveRepository.GetReserveById(userId);
         User user = await _unitOfWork.UserRepository.GetByIdAsync(userId);
 
         if (reserve == null) {
@@ -41,7 +41,7 @@ public class StripeService
             PaymentMethodTypes = ["card"],
             LineItems = newLineItems,
             CustomerEmail = user.Email,
-            ReturnUrl = URL_CLIENT + "/checkout?session_id={CHECKOUT_SESSION_ID}",
+            RedirectOnCompletion = "never"
         };
 
         return options;

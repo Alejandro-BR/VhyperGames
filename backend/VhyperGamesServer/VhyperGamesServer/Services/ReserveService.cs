@@ -22,7 +22,7 @@ public class ReserveService
         _stripeService = stripeService;
     }
 
-    public async Task CreateReserve(int userId, List<CartDto> cart, PayMode modeOfPay)
+    public async Task<int> CreateReserve(int userId, List<CartDto> cart, PayMode modeOfPay)
     {
         if (cart == null || !cart.Any())
         {
@@ -68,6 +68,7 @@ public class ReserveService
         {
             await _unitOfWork.ReserveRepository.InsertAsync(reserve);
             await _unitOfWork.SaveAsync();
+            return reserve.Id;
         }
         catch (DbUpdateException ex)
         {
