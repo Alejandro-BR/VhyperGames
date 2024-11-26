@@ -56,6 +56,7 @@ public class Program
         builder.Services.AddScoped<ReserveService>();
         builder.Services.AddScoped<OrderService>();
         builder.Services.AddScoped<EmailService>();
+        builder.Services.AddScoped<MybackgroundService>();
 
         //Inyección de mappers
         builder.Services.AddScoped<GameCardMapper>();

@@ -40,13 +40,21 @@ public class ReserveService
                 throw new InvalidOperationException($"El juego con ID {cartItem.GameId} no existe.");
             }
 
+            if (cartItem.Quantity <= 0)
+            {
+                throw new InvalidOperationException($"La cantidad para el juego '{game.Title}' debe ser mayor a 0.");
+            }
+
             if (game.Stock < cartItem.Quantity)
             {
                 throw new InvalidOperationException($"No hay suficiente stock para el juego '{game.Title}'.");
             }
+            Console.WriteLine($"Stock antes: {game.Stock}");
 
             // Reducir stock temporalmente
             game.Stock -= cartItem.Quantity;
+
+            Console.WriteLine($"Stock después: {game.Stock}");
 
             _unitOfWork.GameRepository.Update(game);
 
@@ -61,7 +69,8 @@ public class ReserveService
         {
             UserId = userId,
             ReserveDetails = reserveDetails,
-            ModeOfPay = modeOfPay
+            ModeOfPay = modeOfPay,
+            ExpirationTime = DateTime.UtcNow.AddMinutes(1) //1 Minuto 
         };
 
         try
@@ -95,6 +104,11 @@ public class ReserveService
         if (reserve == null)
         {
             throw new KeyNotFoundException($"La reserva con ID {reserveId} no existe.");
+        }
+
+        if (DateTime.UtcNow > reserve.ExpirationTime)
+        {
+            throw new InvalidOperationException("La reserva ha caducado y no puede ser confirmada.");
         }
 
         await _orderService.CreateOrderFromReserve(reserve, reserve.ModeOfPay);

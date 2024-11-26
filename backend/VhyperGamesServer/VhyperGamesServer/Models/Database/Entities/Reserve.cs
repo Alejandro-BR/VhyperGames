@@ -4,7 +4,6 @@ using VhyperGamesServer.Models.Database.Entities.Enuml;
 
 namespace VhyperGamesServer.Models.Database.Entities;
 
-//clase Reserve
 public class Reserve
 {
     public int Id { get; set; }

@@ -39,4 +39,13 @@ public class ReserveRepository : Repository<Reserve, int>
             .OrderByDescending(r => r.Id)
             .FirstOrDefaultAsync();
     }
+
+    public async Task<List<Reserve>> GetExpiredReserves()
+    {
+        return await Context.Set<Reserve>()
+            .Include(r => r.ReserveDetails)
+            .Where(r => r.ExpirationTime < DateTime.UtcNow)
+            .ToListAsync();
+    }
+
 }
