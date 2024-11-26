@@ -7,6 +7,7 @@ import {
 import { useAuth } from "../../context/authcontext";
 import { CREATE_PAYMENT_SESSION } from "../../config";
 import { CheckoutContext } from "../../context/CheckoutContext"
+import { deleteLocalStorage } from "../../utils/keep";
 
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
 
@@ -51,6 +52,13 @@ function CheckoutForm() {
       setError("No se encontró el token de autenticación.");
     }
   }, [token]);
+
+  useEffect(() => {
+    return () => {
+      console.log("Limpiando reserve al desmontar CheckoutForm...");
+      deleteLocalStorage("reserve");
+    };
+  }, []);
 
   const handleComplete = () => {
     //aquí aviso al server que el pago se ha completado

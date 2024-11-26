@@ -1,21 +1,9 @@
-/* .checkout {
 
-} */
 
 .checkout__components {
   display: grid;
-  grid-template-areas: 'list pay';
+  grid-template-columns: 1.5fr 1fr ;
   gap: 40px;
-  padding-top: 40px;
+  padding: 60px;
   min-height: 75vh;
 } 
-
-.checkout__list {
-  grid-area: list;
-  width: 50%;
-}
-
-.checkout__pay {
-  grid-area: pay;
-  width: 50%;
-}

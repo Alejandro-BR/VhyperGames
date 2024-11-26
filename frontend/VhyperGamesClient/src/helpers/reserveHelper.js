@@ -5,9 +5,9 @@ export const createReserve = async (url, reserveData, token) => {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`, // Token de autenticación
+            Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify(reserveData.cart.items),
+        body: JSON.stringify(reserveData.reserve.items),
     });
 
     if (!response.ok) {

@@ -112,6 +112,10 @@ const CartProvider = ({ children }) => {
   // ENDPOINT - PUT_MERGE - Sincronizar carrito local con la base de datos
   const mergeCartWithDB = async () => {
     if (token && userId) {
+
+      const cartCopy = { ...cart };
+      updateLocalStorage(cartCopy, "reserve");
+
       const localItems = cart.items.map((item) => ({
         gameId: item.gameId,
         quantity: item.quantity || 0,
