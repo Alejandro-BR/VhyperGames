@@ -28,4 +28,15 @@ public class ReserveRepository : Repository<Reserve, int>
                     .ThenInclude(g => g.ImageGames)
             .FirstOrDefaultAsync(r => r.UserId == id);
     }
+
+    public async Task<Reserve> GetLastReserveByUserId(int id)
+    {
+        return await Context.Set<Reserve>()
+            .Include(r => r.ReserveDetails)
+                .ThenInclude(rd => rd.Game)
+                    .ThenInclude(g => g.ImageGames)
+            .Where(r => r.UserId == id)
+            .OrderByDescending(r => r.Id)
+            .FirstOrDefaultAsync();
+    }
 }

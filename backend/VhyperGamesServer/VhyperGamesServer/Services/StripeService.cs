@@ -21,8 +21,9 @@ public class StripeService
 
     public async Task<SessionCreateOptions> EmbededCheckout(int userId, int reserveId)
     {
-        Reserve reserve = await _unitOfWork.ReserveRepository.GetReserveById(userId);
         User user = await _unitOfWork.UserRepository.GetByIdAsync(userId);
+        Reserve reserve = await _unitOfWork.ReserveRepository.GetLastReserveByUserId(userId);
+
 
         if (reserve == null) {
             throw new KeyNotFoundException($"No hay reserva con este ID {reserveId}.");
