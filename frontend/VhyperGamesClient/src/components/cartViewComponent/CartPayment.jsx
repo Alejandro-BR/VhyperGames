@@ -7,18 +7,20 @@ import { useNavigate } from "react-router-dom";
 import { CartContext } from '../../context/CartContext';
 import Button from '../buttonComponent/Button';
 import classes from './CartPayment.module.css';
+import { useCheckoutCxt } from '../../context/CheckoutContext';
 
 function CartPayment() {
-  const { gameDetails, items } = useContext(CartContext); 
-  const [data, setData] = useState([]); 
+  const { gameDetails, items } = useContext(CartContext);
+  const { setModeOfPay } = useCheckoutCxt;
+  const [data, setData] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
     const updatedData = CreateData(items, gameDetails);
     setData(updatedData);
-  }, [gameDetails, items]); 
+  }, [gameDetails, items]);
 
-  const precio = ConvertToDecimal(TotalPrice(data)); 
+  const precio = ConvertToDecimal(TotalPrice(data));
 
   return (
     <div className={classes.cartPayment}>
@@ -35,14 +37,20 @@ function CartPayment() {
         <Button
           variant={"medium"}
           color={"morado-azul"}
-          onClick={() => navigate("/checkout/euros")}
+          onClick={() => {
+            navigate("/checkout/euros");
+            setModeOfPay(1);
+          }}
         >
           PAGAR EN <br /> EUROS
         </Button>
         <Button
           variant={"medium"}
           color={"azul-morado"}
-          onClick={() => navigate("/checkout/ethereum")}
+          onClick={() => {
+            navigate("/checkout/ethereum");
+            setModeOfPay(0);
+          }}
         >
           PAGAR EN ETHEREUM
         </Button>
