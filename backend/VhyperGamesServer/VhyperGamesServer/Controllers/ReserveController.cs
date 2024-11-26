@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Stripe.Checkout;
+using System.Collections.Generic;
 using VhyperGamesServer.Models.Database.Entities;
 using VhyperGamesServer.Models.Database.Entities.Enuml;
 using VhyperGamesServer.Models.Dtos;
@@ -54,7 +55,7 @@ public class ReserveController : ControllerBase
 
     [HttpGet("details")]
     [Authorize]
-    public async Task<IActionResult> GetReserveDetails()
+    public async Task<ActionResult<List<OrderDetailDto>>> GetReserveDetails([FromQuery] int reserveId)
     {
         try
         {
@@ -67,8 +68,8 @@ public class ReserveController : ControllerBase
 
             int userId = int.Parse(userIdClaim.Value);
 
-            var reserveDetails = await _reserveService.GetReserveDetails(userId);
-            return Ok(reserveDetails);
+            List<OrderDetailDto> orderDetailDto = await _reserveService.GetReserveDetails(reserveId);
+            return Ok(orderDetailDto);
         }
         catch (KeyNotFoundException ex)
         {
@@ -82,7 +83,7 @@ public class ReserveController : ControllerBase
 
     [HttpPost("confirm")]
     [Authorize]
-    public async Task<IActionResult> ConfirmReserve([FromQuery] int reserveId, [FromQuery] PayMode modeOfPay, [FromQuery] string sessionId)
+    public async Task<IActionResult> ConfirmReserve([FromQuery] int reserveId)
     {
         try
         {
@@ -94,7 +95,7 @@ public class ReserveController : ControllerBase
 
             int userId = int.Parse(userIdClaim.Value);
 
-            await _reserveService.ConfirmReserve(reserveId, modeOfPay, sessionId);
+            await _reserveService.ConfirmReserve(reserveId);
             return Ok(new { message = "Reserva confirmada exitosamente." });
         }
         catch (KeyNotFoundException ex)
@@ -160,7 +161,7 @@ public class ReserveController : ControllerBase
             SessionService sessionService = new SessionService();
             Session session = await sessionService.CreateAsync(options);
 
-            await _stripeService.SetSessionIdReserve(session.Id, userId);
+            await _stripeService.SetSessionIdReserve(session.Id, reserveId);
 
             return Ok(new { clientSecret = session.ClientSecret });
         }

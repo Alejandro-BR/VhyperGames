@@ -7,9 +7,13 @@ function Checkout() {
 
   return (
     <div>
-      {params.modo === "euros" ? <CheckoutForm /> : <p>hola</p>}
-      <div className="generalContainer">
-        <p>Checkout con pago con {params.modo}</p>
+      <div>
+        <div>
+          Lista de juegos
+        </div>
+        <div>
+          {params.modo === "euros" ? <CheckoutForm /> : <p>hola</p>}
+        </div>
       </div>
       <Footer />
     </div>

@@ -77,18 +77,18 @@ public class ReserveService
     }
 
 
-    public async Task <List<OrderDetailDto>> GetReserveDetails(int userId) 
+    public async Task <List<OrderDetailDto>> GetReserveDetails(int reserveId) 
     {
-        Reserve reserve = await _unitOfWork.ReserveRepository.GetReserveByUserId(userId); 
+        Reserve reserve = await _unitOfWork.ReserveRepository.GetReserveById(reserveId); 
 
         if (reserve == null)
         {
-            throw new KeyNotFoundException($"El usuario con ID {userId} no tiene reserva.");
+            throw new KeyNotFoundException($"La reserva con ID {reserveId} no tiene reserva.");
         }
         return _gameOrderMapper.ToListOrderDetailDto(reserve.ReserveDetails);
     }
 
-    public async Task ConfirmReserve(int reserveId, PayMode modeOfPay, string sessionId)
+    public async Task ConfirmReserve(int reserveId)
     {
         Reserve reserve = await _unitOfWork.ReserveRepository.GetReserveById(reserveId);
 
@@ -97,12 +97,7 @@ public class ReserveService
             throw new KeyNotFoundException($"La reserva con ID {reserveId} no existe.");
         }
 
-        if (!await _stripeService.IsPaymentCompleted(sessionId))
-        {
-            throw new InvalidOperationException("El pago no ha sido completado. No se puede confirmar la reserva.");
-        }
-
-        await _orderService.CreateOrderFromReserve(reserve, modeOfPay);
+        await _orderService.CreateOrderFromReserve(reserve, reserve.ModeOfPay);
 
         _unitOfWork.ReserveRepository.Delete(reserve);
         await _unitOfWork.SaveAsync();
