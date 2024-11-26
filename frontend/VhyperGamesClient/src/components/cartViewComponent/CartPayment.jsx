@@ -7,12 +7,12 @@ import { useNavigate } from "react-router-dom";
 import { CartContext } from '../../context/CartContext';
 import Button from '../buttonComponent/Button';
 import classes from './CartPayment.module.css';
-import { useCheckoutCxt } from '../../context/CheckoutContext';
+import { CheckoutContext } from '../../context/CheckoutContext';
 import { setReserve } from '../../helpers/reserveHelper';
 
 function CartPayment() {
   const { gameDetails, items } = useContext(CartContext);
-  const { setModeOfPay } = useCheckoutCxt;
+  const { setModeOfPay, CreateReserve } = useContext(CheckoutContext);
   const [data, setData] = useState([]);
   const navigate = useNavigate();
 
@@ -21,9 +21,10 @@ function CartPayment() {
     setData(updatedData);
   }, [gameDetails, items]);
 
-  const handleClick = (modeOfPay, route) => {
+  const handleClick = async (modeOfPay, route) => {
     setReserve();
     setModeOfPay(modeOfPay);
+    await CreateReserve();
     navigate(route);
   };
 

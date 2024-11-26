@@ -2,15 +2,10 @@ import { createContext, useState, useContext, useEffect, useRef } from 'react';
 import { useAuth } from "./authcontext";
 import { getVarLS, updateLocalStorage } from "../utils/keep";
 import { CartContext } from './CartContext';
-import { getReserve } from '../../helpers/reserveHelper';
+import { getReserve } from '../helpers/reserveHelper';
 
 // Crear el contexto de checkout
 export const CheckoutContext = createContext();
-
-// Hook personalizado para consumir el contexto
-export const useCheckoutCxt = () => {
-    return useContext(CheckoutContext);
-};
 
 // Proveedor del contexto
 export const CheckoutProvider = ({ children }) => {
