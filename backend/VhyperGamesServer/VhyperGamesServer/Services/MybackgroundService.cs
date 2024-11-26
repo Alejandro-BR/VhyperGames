@@ -1,50 +1,58 @@
-﻿using VhyperGamesServer.Models.Database.Repositories;
+﻿
+using VhyperGamesServer.Models.Database.Repositories;
 
 public class MybackgroundService : BackgroundService
 {
-    private readonly UnitOfWork _unitOfWork;
+    private readonly IServiceScopeFactory _serviceScopeFactory;
 
-    public MybackgroundService(UnitOfWork unitOfWork)
+    public MybackgroundService(IServiceScopeFactory serviceScopeFactory)
     {
-        _unitOfWork = unitOfWork;
+        _serviceScopeFactory = serviceScopeFactory;
     }
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
+        Console.WriteLine("Ejecuta Escaneo cada 30 segundos");
+
         while (!stoppingToken.IsCancellationRequested)
         {
-            await ProcessExpiredReserves(stoppingToken);
-            await Task.Delay(30000, stoppingToken); // 30 segundos
-        }
-    }
-
-    private async Task ProcessExpiredReserves(CancellationToken stoppingToken)
-    {
-        try
-        {
-            var expiredReserves = await _unitOfWork.ReserveRepository.GetExpiredReserves();
-
-            foreach (var reserve in expiredReserves)
+            using (var scope = _serviceScopeFactory.CreateScope())
             {
-                foreach (var detail in reserve.ReserveDetails)
-                {
-                    var game = await _unitOfWork.GameRepository.GetByIdAsync(detail.GameId);
-                    if (game != null)
-                    {
-                        game.Stock += detail.Quantity;
-                        _unitOfWork.GameRepository.Update(game);
-                    }
-                }
+                UnitOfWork unitOfWork = scope.ServiceProvider.GetRequiredService<UnitOfWork>();
 
-                _unitOfWork.ReserveRepository.Delete(reserve);
+                try
+                {
+                    await ProcessExpiredReserves(unitOfWork, stoppingToken);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error en el escaneo: {ex.Message}");
+                }
             }
 
-            await _unitOfWork.SaveAsync();
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"Error al procesar reservas expiradas: {ex.Message}");
+            await Task.Delay(30000, stoppingToken); //Escaneo cada 30 seg
         }
     }
 
+    private async Task ProcessExpiredReserves(UnitOfWork unitOfWork, CancellationToken stoppingToken)
+    {
+        var expiredReserves = await unitOfWork.ReserveRepository.GetExpiredReserves();
+
+        foreach (var reserve in expiredReserves)
+        {
+            foreach (var detail in reserve.ReserveDetails)
+            {
+                var game = await unitOfWork.GameRepository.GetByIdAsync(detail.GameId);
+                if (game != null)
+                {
+                    game.Stock += detail.Quantity;
+                    unitOfWork.GameRepository.Update(game);
+                }
+            }
+
+            unitOfWork.ReserveRepository.Delete(reserve);
+            Console.WriteLine($"Reserva eliminada: {reserve.Id}");
+        }
+        await unitOfWork.SaveAsync();
+    }
 }

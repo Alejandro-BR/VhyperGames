@@ -70,7 +70,7 @@ public class ReserveService
             UserId = userId,
             ReserveDetails = reserveDetails,
             ModeOfPay = modeOfPay,
-            ExpirationTime = DateTime.UtcNow.AddMinutes(1) //1 Minuto 
+            ExpirationTime = DateTime.UtcNow.AddMinutes(3) // Minutos Expiracion 
         };
 
         try
@@ -103,12 +103,25 @@ public class ReserveService
 
         if (reserve == null)
         {
-            throw new KeyNotFoundException($"La reserva con ID {reserveId} no existe.");
+            throw new KeyNotFoundException("La reserva ya no existe. Puede haber expirado o haber sido eliminada.");
         }
 
         if (DateTime.UtcNow > reserve.ExpirationTime)
         {
-            throw new InvalidOperationException("La reserva ha caducado y no puede ser confirmada.");
+            foreach (var detail in reserve.ReserveDetails)
+            {
+                var game = await _unitOfWork.GameRepository.GetByIdAsync(detail.GameId);
+                if (game != null)
+                {
+                    game.Stock += detail.Quantity;
+                    _unitOfWork.GameRepository.Update(game);
+                }
+            }
+
+            _unitOfWork.ReserveRepository.Delete(reserve);
+            await _unitOfWork.SaveAsync();
+
+            throw new InvalidOperationException("La reserva ha caducado y se ha eliminado automáticamente.");
         }
 
         await _orderService.CreateOrderFromReserve(reserve, reserve.ModeOfPay);
@@ -116,6 +129,8 @@ public class ReserveService
         _unitOfWork.ReserveRepository.Delete(reserve);
         await _unitOfWork.SaveAsync();
     }
+
+
 
     public async Task CancelReserve(int reserveId)
     {

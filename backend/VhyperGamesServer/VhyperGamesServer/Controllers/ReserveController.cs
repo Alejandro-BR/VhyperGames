@@ -98,19 +98,21 @@ public class ReserveController : ControllerBase
             await _reserveService.ConfirmReserve(reserveId);
             return Ok(new { message = "Reserva confirmada exitosamente." });
         }
-        catch (InvalidOperationException ex)
-        {
-            return BadRequest(new { message = ex.Message });
-        }
         catch (KeyNotFoundException ex)
         {
-            return NotFound(new { message = ex.Message });
+            return NotFound(new { message = ex.Message }); 
+        }
+        catch (InvalidOperationException ex)
+        {
+            return BadRequest(new { message = ex.Message }); 
         }
         catch (Exception ex)
         {
             return StatusCode(500, new { message = "Error inesperado", detail = ex.Message });
         }
     }
+
+
 
 
     [HttpDelete("cancel")]

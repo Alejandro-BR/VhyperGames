@@ -342,6 +342,10 @@ public class MyDbContext : DbContext
             entity.Property(e => e.UserId)
                 .HasColumnName("user_id")
                 .IsRequired();
+
+            entity.Property(e => e.ExpirationTime)
+             .HasColumnName("expirationtime") 
+             .IsRequired();
         });
 
         modelBuilder.Entity<ReserveDetail>(entity =>
