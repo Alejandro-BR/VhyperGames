@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { loadStripe } from "@stripe/stripe-js";
 import {
   EmbeddedCheckoutProvider,
@@ -6,6 +6,7 @@ import {
 } from "@stripe/react-stripe-js";
 import { useAuth } from "../../context/authcontext";
 import { CREATE_PAYMENT_SESSION } from "../../config";
+import { CheckoutContext } from "../../context/CheckoutContext"
 
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
 
@@ -13,11 +14,14 @@ function CheckoutForm() {
   const [clientSecret, setClientSecret] = useState("");
   const [error, setError] = useState(null);
   const token = useAuth();
+  const { reserveId } = useContext(CheckoutContext);
 
   async function createPaymentSession() {
+    const url = `${CREATE_PAYMENT_SESSION}?reserveId=${reserveId}`;
+    console.log(url);
+
     try {
       console.log("Token enviado:", token.token);
-
       const response = await fetch(
         CREATE_PAYMENT_SESSION,
         {
@@ -26,6 +30,7 @@ function CheckoutForm() {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token.token}`,
           },
+          body: JSON.stringify(reserveId),
         }
       );
 

@@ -14,55 +14,59 @@ export const CheckoutProvider = ({ children }) => {
     const { token } = useAuth();
     const { getCartFromDB } = useContext(CartContext);
     const [modeOfPay, setModeOfPay] = useState(0);
+    const [reserveId, setReserveId] = useState(null);
     const [message, setMessage] = useState('');
 
     const handleCreateReserve = async (modeOfPay) => {
         try {
-
-            // Obtener el carrito desde el contexto de Cart
+            console.log("Inicio del proceso de creación de reserva");
+    
             const cart = getVarLS("cart");
             console.log("Carrito obtenido:", cart);
-
-            if (!cart || cart.length === 0) {
+    
+            if (!cart || !cart.items || cart.items.length === 0) {
                 setMessage('El carrito está vacío. No se puede crear una reserva.');
-                console.log("El carrito está vacío. Fin del proceso.");
-                return;
+                return null; // Retorna null si no hay carrito
             }
-
+    
             const reserveData = {
                 modeOfPay,
                 cart,
             };
-
+            console.log("Datos de la reserva preparados:", reserveData);
+    
             if (!token) {
-                // Usuario no logueado: guardar en localStorage
                 updateLocalStorage('reserves', reserveData);
                 setMessage('Reserva guardada localmente. Inicia sesión para confirmarla.');
                 console.log("Reserva guardada en localStorage:", reserveData);
+                return null; // No hay reserveId si no hay token
             } else {
-                // Usuario logueado: enviar al backend
                 console.log("Enviando datos al backend...");
                 const response = await createReserve(CREATE_RESERVE, reserveData, token);
-                console.log("Respuesta del backend:", response);
-
-                if (response.success) {
-                    setMessage('Reserva creada exitosamente.');
-                    console.log("Reserva creada exitosamente.");
+                console.log("Respuesta del backend (ID de reserva):", response);
+    
+                if (typeof response === 'number') {
+                    setReserveId(response); // Guarda el ID en el contexto
+                    setMessage(`Reserva creada exitosamente. ID: ${response}`);
+                    return response; // Retorna el ID de la reserva
                 } else {
-                    throw new Error(response.message || 'Error desconocido al crear la reserva.');
+                    throw new Error('Respuesta inesperada del backend.');
                 }
             }
         } catch (error) {
             console.error("Error al crear la reserva:", error);
             setMessage(`Error: ${error.message}`);
+            throw error;
         }
-    };
+    };    
+    
 
     // Esto exporta :)
     const contextValue = {
         setModeOfPay,
         handleCreateReserve,
         message,
+        reserveId,
     };
 
     return (

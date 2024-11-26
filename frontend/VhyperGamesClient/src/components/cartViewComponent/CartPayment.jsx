@@ -25,14 +25,21 @@ function CartPayment() {
 
   const handleClick = async (modeOfPay, route) => {
     if (!token) {
-      setIsLoginModalOpen(true);
-      return;
+        setIsLoginModalOpen(true);
+        return;
     }
     try {
-      await handleCreateReserve(modeOfPay);
-      navigate(route);
+        const reserveId = await handleCreateReserve(modeOfPay); // Captura el reserveId
+        if (!reserveId) {
+            console.error("No se pudo obtener el ID de la reserva.");
+            return; // Detén el flujo si no hay reserveId
+        }
+        console.log("ID de reserva obtenido:", reserveId);
+
+        // Aquí puedes usar reserveId para otras operaciones (ejemplo: createPaymentSession)
+        navigate(route); // Redirige después de manejar la reserva
     } catch (error) {
-      console.error("Error en handleClick:", error);
+        console.error("Error en handleClick:", error);
     }
   };
 
