@@ -1,19 +1,21 @@
-import { useContext, useState, useEffect } from 'react';
-import { messageEuros, messageEthereum } from '../../helpers/messages';
+import React, { useContext, useState, useEffect } from 'react';
 import { CreateData } from '../../utils/dataCart';
 import { ConvertToDecimal, TotalPrice } from '../../utils/price';
-// import { getVarLS } from '../../utils/keep';
 import { useNavigate } from "react-router-dom";
 import { CartContext } from '../../context/CartContext';
-import Button from '../buttonComponent/Button';
-import classes from './CartPayment.module.css';
 import { CheckoutContext } from '../../context/CheckoutContext';
-import { setReserve } from '../../helpers/reserveHelper';
+import Button from '../buttonComponent/Button';
+import LoginModal from '../loginComponents/LoginModal'; // Importar el modal de login
+import classes from './CartPayment.module.css';
+import { useAuth } from '../../context/authcontext';
+
 
 function CartPayment() {
   const { gameDetails, items } = useContext(CartContext);
-  const { setModeOfPay, CreateReserve } = useContext(CheckoutContext);
+  const { handleCreateReserve } = useContext(CheckoutContext); // Supongo que el token viene del contexto
+  const { token } = useAuth();
   const [data, setData] = useState([]);
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false); // Estado para el modal
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -22,10 +24,16 @@ function CartPayment() {
   }, [gameDetails, items]);
 
   const handleClick = async (modeOfPay, route) => {
-    setReserve();
-    setModeOfPay(modeOfPay);
-    await CreateReserve();
-    navigate(route);
+    if (!token) {
+      setIsLoginModalOpen(true);
+      return;
+    }
+    try {
+      await handleCreateReserve(modeOfPay);
+      navigate(route);
+    } catch (error) {
+      console.error("Error en handleClick:", error);
+    }
   };
 
   const precio = ConvertToDecimal(TotalPrice(data));
@@ -61,6 +69,10 @@ function CartPayment() {
           PAGAR EN ETHEREUM
         </Button>
       </div>
+      {/* Modal para Login */}
+      {isLoginModalOpen && (
+        <LoginModal onClose={() => setIsLoginModalOpen(false)} />
+      )}
     </div>
   );
 }

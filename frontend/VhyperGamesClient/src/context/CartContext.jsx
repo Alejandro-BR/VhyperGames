@@ -307,6 +307,7 @@ const CartProvider = ({ children }) => {
     fetchCartByGames,
     mergeCartWithDB,
     syncCartWithDB,
+    getCartFromDB,
     deleteCartItem,
   };
 
