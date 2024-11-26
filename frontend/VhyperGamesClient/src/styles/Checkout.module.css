@@ -1,0 +1,19 @@
+.checkout {
+  margin: auto;
+}
+
+.checkout__components {
+  display: grid;
+  grid-template-areas: 'list pay';
+  gap: 40px;
+} 
+
+.checkout__list {
+  grid-area: list;
+  width: 50%;
+}
+
+.checkout__pay {
+  width: 50%;
+  grid-area: pay;
+}
