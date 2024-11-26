@@ -1,6 +1,6 @@
 // src/context/AuthContext.js
 import { createContext, useState, useContext, useEffect, useRef } from 'react';
-import { getVarSessionStorage, updateSessionStorage, deleteSessionStorage } from "../utils/keep.js";
+import { getVarSessionStorage, updateSessionStorage, deleteSessionStorage, deleteLocalStorage } from "../utils/keep.js";
 import { jwtDecode } from 'jwt-decode'; // Importación corregida
 
 
@@ -73,6 +73,7 @@ export const AuthProvider = ({ children }) => {
     const logout = () => {
         stopInactivityTimer()
         deleteSessionStorage('accessToken');
+        deleteLocalStorage('reserve');
         setToken(null);
         setDecodedToken(null);
         window.location.href = "/";

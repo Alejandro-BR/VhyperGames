@@ -21,34 +21,43 @@ export const CheckoutProvider = ({ children }) => {
         try {
             console.log("Inicio del proceso de creación de reserva");
     
-            const cart = getVarLS("cart");
-            console.log("Carrito obtenido:", cart);
+            // Comprobar primero si existe reserve
+            let reserve = getVarLS("reserve");
     
-            if (!cart || !cart.items || cart.items.length === 0) {
-                setMessage('El carrito está vacío. No se puede crear una reserva.');
-                return null; // Retorna null si no hay carrito
+            // Si no existe reserve, comprobar carrito
+            if (!reserve || !reserve.items || reserve.items.length === 0) {
+                console.log("No se encontró reserve, comprobando carrito...");
+                const cart = getVarLS("cart");
+    
+                if (!cart || !cart.items || cart.items.length === 0) {
+                    setMessage('El carrito está vacío. No se puede crear una reserva.');
+                    return null; // Salir si tampoco hay carrito
+                }
+    
+                // Usar carrito como reserva
+                reserve = { ...cart };
+                console.log("Usando carrito como reserva:", reserve);
             }
     
             const reserveData = {
                 modeOfPay,
-                cart,
+                reserve,
             };
+    
             console.log("Datos de la reserva preparados:", reserveData);
     
             if (!token) {
-                updateLocalStorage('reserves', reserveData);
-                setMessage('Reserva guardada localmente. Inicia sesión para confirmarla.');
-                console.log("Reserva guardada en localStorage:", reserveData);
-                return null; // No hay reserveId si no hay token
+                console.log("Usuario no autenticado. Reserva guardada en localStorage:", reserveData);
+                return null; // Salir si no hay token
             } else {
                 console.log("Enviando datos al backend...");
                 const response = await createReserve(CREATE_RESERVE, reserveData, token);
                 console.log("Respuesta del backend (ID de reserva):", response);
     
                 if (typeof response === 'number') {
-                    setReserveId(response); // Guarda el ID en el contexto
+                    setReserveId(response); // Guardar el ID en el contexto
                     setMessage(`Reserva creada exitosamente. ID: ${response}`);
-                    return response; // Retorna el ID de la reserva
+                    return response; // Retornar el ID de la reserva
                 } else {
                     throw new Error('Respuesta inesperada del backend.');
                 }
@@ -58,7 +67,7 @@ export const CheckoutProvider = ({ children }) => {
             setMessage(`Error: ${error.message}`);
             throw error;
         }
-    };    
+    };
     
 
     // Esto exporta :)
