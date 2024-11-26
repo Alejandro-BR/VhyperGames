@@ -8,6 +8,7 @@ import { CartContext } from '../../context/CartContext';
 import Button from '../buttonComponent/Button';
 import classes from './CartPayment.module.css';
 import { useCheckoutCxt } from '../../context/CheckoutContext';
+import { setReserve } from '../../helpers/reserveHelper';
 
 function CartPayment() {
   const { gameDetails, items } = useContext(CartContext);
@@ -40,6 +41,7 @@ function CartPayment() {
           onClick={() => {
             navigate("/checkout/euros");
             setModeOfPay(1);
+            setReserve;
           }}
         >
           PAGAR EN <br /> EUROS
@@ -50,6 +52,7 @@ function CartPayment() {
           onClick={() => {
             navigate("/checkout/ethereum");
             setModeOfPay(0);
+            setReserve;
           }}
         >
           PAGAR EN ETHEREUM

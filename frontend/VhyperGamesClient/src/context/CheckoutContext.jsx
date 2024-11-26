@@ -1,6 +1,8 @@
 import { createContext, useState, useContext, useEffect, useRef } from 'react';
 import { useAuth } from "./authcontext";
 import { getVarLS, updateLocalStorage } from "../utils/keep";
+import { CartContext } from './CartContext';
+import { getReserve } from '../../helpers/reserveHelper';
 
 // Crear el contexto de checkout
 export const CheckoutContext = createContext();
@@ -14,32 +16,42 @@ export const useCheckoutCxt = () => {
 export const CheckoutProvider = ({ children }) => {
 
     const { token } = useAuth();
+    const { getCartFromDB } = useContext(CartContext);
+    const [modeOfPay, setModeOfPay] = useState(0);
+    const [message, setMessage] = useState('');
 
     // Usuario no logueado que ha metido cosas en el carrito clicka pagar
 
 
     // Creamos variable en Local Storage que guarde la reserva
-    const reserve = getVarLS("cart"); // Debe ocurrir antes del login
-
-    // Traemos el token
+    // let reserve = getReserve; // Debe ocurrir antes del login
 
     // Enviamos reserve a la BBDD
-    //CREATE_RESERVE
-
     function CreateReserve() {
-        const [cart, setCart] = useState([]);
-        const [modeOfPay, setModeOfPay] = useState(0);
-        const [message, setMessage] = useState('');
 
         const createReserve = async () => {
+
             try {
+
+                let reserve = getReserve;
+
+                if (!reserve || reserve.length === 0) {
+                    reserve = await getCartFromDB();
+                }
+
+                // Por si tampoco hay nada en la base de datos
+                if (!reserve || reserve.length === 0) {
+                    setMessage("No hay nada en el carrito");
+                    return;
+                }
+
                 const response = await fetch(CREATE_RESERVE, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                         'Authorization': `Bearer ${token}`
                     },
-                    body: JSON.stringify(cart)
+                    body: JSON.stringify(reserve)
                 });
 
                 if (response.ok) {
@@ -54,23 +66,8 @@ export const CheckoutProvider = ({ children }) => {
                 setMessage('Error al conectar con el servidor.');
             }
         };
-
-        return (
-            <div>
-                <h1>Crear Reserva</h1>
-                <button onClick={createReserve}>Enviar Reserva</button>
-                <p>{message}</p>
-            </div>
-        );
     }
 
-    export default CreateReserve;
-
-
-
-    // Llevarlo a login/registro
-
-    // CreateReserve([FromBody] List < CartDto > cart, [FromQuery] PayMode modeOfPay)
 
 
     const contextValue = {
