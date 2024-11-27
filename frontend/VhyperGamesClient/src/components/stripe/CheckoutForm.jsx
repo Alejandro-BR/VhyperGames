@@ -4,7 +4,7 @@ import {
   EmbeddedCheckoutProvider,
   EmbeddedCheckout,
 } from "@stripe/react-stripe-js";
-import { useAuth } from '../../context/AuthContext';
+import { useAuth } from "../../context/authcontext";
 import { CREATE_PAYMENT_SESSION } from "../../config";
 import { CheckoutContext } from "../../context/CheckoutContext"
 import { deleteLocalStorage } from "../../utils/keep";
@@ -20,7 +20,6 @@ function CheckoutForm() {
   async function createPaymentSession() {
 
     try {
-      console.log("Token enviado:", token.token);
       const response = await fetch(
         CREATE_PAYMENT_SESSION,
         {
@@ -62,6 +61,8 @@ function CheckoutForm() {
 
   const handleComplete = () => {
     //aquí aviso al server que el pago se ha completado
+
+    //que pasa si no se hace bien el pago o la reserva expira
     console.log("Payment completed!");
   };
 

@@ -17,11 +17,11 @@ export const CheckoutProvider = ({ children }) => {
     const [reserveId, setReserveId] = useState(null);
     const [message, setMessage] = useState('');
 
+    let reserve;
+
     const handleCreateReserve = async (modeOfPay, useLocalReserve = false) => {
     try {
-        console.log("Inicio del proceso de creación de reserva");
-
-        let reserve;
+       
 
         // Decide si usar la reserva del localStorage o los datos del carrito
         if (useLocalReserve) {
@@ -84,6 +84,7 @@ export const CheckoutProvider = ({ children }) => {
     const contextValue = {
         setModeOfPay,
         handleCreateReserve,
+        reserve,
         message,
         reserveId,
     };
