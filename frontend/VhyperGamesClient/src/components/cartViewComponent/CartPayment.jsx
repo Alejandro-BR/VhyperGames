@@ -13,7 +13,7 @@ import { useAuth } from '../../context/AuthContext';
 
 function CartPayment() {
   const { gameDetails, items } = useContext(CartContext);
-  const { handleCreateReserve } = useContext(CheckoutContext); 
+  const { handleCreateReserve, setReserveId } = useContext(CheckoutContext); 
   const { token } = useAuth();
   const [data, setData] = useState([]);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
@@ -51,7 +51,7 @@ function CartPayment() {
         return;
       }
 
-      console.log("Reserva creada exitosamente, redirigiendo...");
+      setReserveId(reserveId);
       navigate(route); // Redirigir a la página de pago
     } catch (error) {
       console.error("Error en handlePaymentClick:", error);
@@ -60,17 +60,14 @@ function CartPayment() {
 
   // Callback cuando el usuario se loguea correctamente desde el modal
   const handleLoginSuccess = async () => {
-    console.log("onSuccess llamado correctamente. Ejecutando handleLoginSuccess...");
     setIsLoginModalOpen(false);
 
     if (isPaymentInitiated) {
         try {
-          console.log("Esperando que el token esté disponible...");
           await new Promise(resolve => setTimeout(resolve, 500)); // Pequeño retardo
 
             // Recuperar el token directamente de localStorage
             const storedToken = sessionStorage.getItem("accessToken");
-            console.log("Token sincronizado desde localStorage:", storedToken);
 
             if (!storedToken) {
                 console.error("Token aún no está disponible. Abortando reserva.");
@@ -82,13 +79,12 @@ function CartPayment() {
                 console.error("No se pudo crear la reserva después del login.");
                 return;
             }
-            console.log(token)
-            console.log("Reserva creada después del login, redirigiendo...");
-            navigate(paymentRoute); // Usa paymentRoute del estado
+
+            navigate(paymentRoute); 
         } catch (error) {
             console.error("Error al crear la reserva después del login:", error);
         } finally {
-            setIsPaymentInitiated(false); // Resetea el estado
+            setIsPaymentInitiated(false); 
         }
     }
 };
