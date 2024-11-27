@@ -1,10 +1,9 @@
-import { createContext, useState, useContext } from "react";
+import { createContext, useState } from "react";
 import { useAuth } from "./authcontext";
-import { CartContext } from "./CartContext";
-import { createReserve, getReserveDetails } from "../helpers/reserveHelper";
+import { createReserve, getReserveDetails, confirmReserve } from "../helpers/reserveHelper";
 import { getVarLS, updateLocalStorage } from "../utils/keep";
 
-import { CREATE_RESERVE, GET_RESERVE_DETAILS } from "../config";
+import { CREATE_RESERVE } from "../config";
 
 // Crear el contexto de checkout
 export const CheckoutContext = createContext();
@@ -12,7 +11,6 @@ export const CheckoutContext = createContext();
 // Proveedor del contexto
 export const CheckoutProvider = ({ children }) => {
   const { token } = useAuth();
-  const { getCartFromDB } = useContext(CartContext);
   const [modeOfPay, setModeOfPay] = useState(0);
   const [reserve, setReserve] = useState([]);
   const [reserveId, setReserveId] = useState(null);
@@ -86,6 +84,20 @@ export const CheckoutProvider = ({ children }) => {
     }
   };
   
+  const handleConfirmReserve = async (url, reserveId) => {
+    if (!token) {
+      console.error("No se puede cargar la reserva: Token de autenticación no disponible.");
+      return;
+    }
+
+    try {
+      const data = await confirmReserve(url, reserveId, token);
+      return data;
+    } catch (error) {
+      console.error("Error al confirmar la reserva:", error.message);
+    }
+  };
+
   const contextValue = {
     setModeOfPay,
     handleCreateReserve,
@@ -93,7 +105,8 @@ export const CheckoutProvider = ({ children }) => {
     message,
     reserveId,
     setReserveId,
-    loadReserveDetails
+    loadReserveDetails,
+    handleConfirmReserve
   };
 
   return (

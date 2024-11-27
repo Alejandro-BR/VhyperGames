@@ -60,7 +60,7 @@ namespace VhyperGamesServer.Services
             return _mapper.ToOrderDto(order);
         }
 
-        public async Task CreateOrderFromReserve(Reserve reserve, PayMode modeOfPay)
+        public async Task<int> CreateOrderFromReserve(Reserve reserve, PayMode modeOfPay)
         {
             int totalPrice = reserve.ReserveDetails.Sum(detail => detail.Game.Price * detail.Quantity);
 
@@ -81,6 +81,8 @@ namespace VhyperGamesServer.Services
             await _unitOfWork.SaveAsync();
 
             await _emailService.NewEmail(order.UserId);
+
+            return order.Id; // Devuelve el ID de la orden creada
         }
     }
 }

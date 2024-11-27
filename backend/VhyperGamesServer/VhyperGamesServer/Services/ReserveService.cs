@@ -97,7 +97,7 @@ public class ReserveService
         return _gameOrderMapper.ToListOrderDetailDto(reserve.ReserveDetails);
     }
 
-    public async Task ConfirmReserve(int reserveId)
+    public async Task<int> ConfirmReserve(int reserveId)
     {
         Reserve reserve = await _unitOfWork.ReserveRepository.GetReserveById(reserveId);
 
@@ -124,11 +124,15 @@ public class ReserveService
             throw new InvalidOperationException("La reserva ha caducado y se ha eliminado automáticamente.");
         }
 
-        await _orderService.CreateOrderFromReserve(reserve, reserve.ModeOfPay);
+       
+        int orderId = await _orderService.CreateOrderFromReserve(reserve, reserve.ModeOfPay);
 
         _unitOfWork.ReserveRepository.Delete(reserve);
         await _unitOfWork.SaveAsync();
+
+        return orderId; 
     }
+
 
 
 
