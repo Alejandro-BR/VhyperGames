@@ -54,7 +54,6 @@ function CheckoutForm() {
 
   useEffect(() => {
     return () => {
-      console.log("Limpiando reserve al desmontar CheckoutForm...");
       deleteLocalStorage("reserve");
     };
   }, []);

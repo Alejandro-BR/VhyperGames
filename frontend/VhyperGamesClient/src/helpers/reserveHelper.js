@@ -22,7 +22,7 @@ export const getReserveDetails = async (url, reserveId, token) => {
     const fullUrl = `${url}?reserveID=${reserveId}`
 
     const response = await fetch(fullUrl, {
-        method: 'POST',
+        method: 'GET',
         headers: {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${token}`,

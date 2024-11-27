@@ -14,20 +14,23 @@ export const CheckoutProvider = ({ children }) => {
   const { token } = useAuth();
   const { getCartFromDB } = useContext(CartContext);
   const [modeOfPay, setModeOfPay] = useState(0);
+  const [reserve, setReserve] = useState([]);
   const [reserveId, setReserveId] = useState(null);
   const [message, setMessage] = useState("");
 
-  let reserve;
+  
 
   const handleCreateReserve = async (modeOfPay, useLocalReserve = false) => {
     try {
+      let reserve;
+
       if (useLocalReserve) {
         reserve = getVarLS("reserve");
       } else {
         const cart = getVarLS("cart");
         if (!cart || !cart.items || cart.items.length === 0) {
           setMessage("El carrito está vacío. No se puede crear una reserva.");
-          return null; // Salir si el carrito está vacío
+          return null;
         }
         reserve = { ...cart };
       }
@@ -62,27 +65,35 @@ export const CheckoutProvider = ({ children }) => {
     }
   };
 
-  const fetchReserveDetails = async () => {
+  const loadReserveDetails = async (url, reserveId) => {
+    if (!token) {
+      console.error("No se puede cargar la reserva: Token de autenticación no disponible.");
+      return { items: [] };
+    }
+  
     try {
-      const reserveDetails = await getReserveDetails(
-        GET_RESERVE_DETAILS,
-        reserveId,
-        token
-      );
-      console.log("Detalles de la reserva:", reserveDetails);
+      const data = await getReserveDetails(url, reserveId, token);
+  
+      if (JSON.stringify(data) !== JSON.stringify(reserve)) {
+        setReserve(data);
+      }
+  
+      return data;
     } catch (error) {
-      console.error("Error:", error.message);
+      console.error("Error al cargar los detalles de la reserva:", error.message);
+      setReserve({ items: [] }); 
+      throw error;
     }
   };
-
-  // Esto exporta :)
+  
   const contextValue = {
     setModeOfPay,
     handleCreateReserve,
     reserve,
     message,
     reserveId,
-    fetchReserveDetails,
+    setReserveId,
+    loadReserveDetails
   };
 
   return (
