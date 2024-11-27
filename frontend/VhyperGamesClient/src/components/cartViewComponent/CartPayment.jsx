@@ -1,11 +1,12 @@
-import React, { useContext, useState, useEffect } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { CreateData } from '../../utils/dataCart';
 import { ConvertToDecimal, TotalPrice } from '../../utils/price';
 import { useNavigate } from "react-router-dom";
 import { CartContext } from '../../context/CartContext';
 import { CheckoutContext } from '../../context/CheckoutContext';
 import Button from '../buttonComponent/Button';
-import LoginModal from '../loginComponents/LoginModal'; // Importar el modal de login
+import LoginModal from '../loginComponents/LoginModal'; 
+import RegisterModal from '../registerComponents/RegisterModal';
 import classes from './CartPayment.module.css';
 import { useAuth } from '../../context/AuthContext';
 
@@ -15,7 +16,8 @@ function CartPayment() {
   const { handleCreateReserve } = useContext(CheckoutContext); 
   const { token } = useAuth();
   const [data, setData] = useState([]);
-  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false); 
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false); 
   const [isPaymentInitiated, setIsPaymentInitiated] = useState(false);
   const [paymentRoute, setPaymentRoute] = useState("");
   const [paymentMode, setPaymentMode] = useState(null);
@@ -129,10 +131,22 @@ function CartPayment() {
       </div>
       {/* Modal para Login */}
       {isLoginModalOpen && (
-        <LoginModal onClose={() => 
-          setIsLoginModalOpen(false)}
-          onSuccess={handleLoginSuccess} />
-      )}
+      <LoginModal
+        onClose={() => setIsLoginModalOpen(false)}
+        onRegisterClick={() => {
+          setIsLoginModalOpen(false); // Cierra el LoginModal
+          setIsRegisterModalOpen(true); // Abre el RegisterModal
+        }}
+        onSuccess={handleLoginSuccess}
+      />
+    )}
+
+  {isRegisterModalOpen && (
+    <RegisterModal
+      onClose={() => setIsRegisterModalOpen(false)}
+      onSuccess={handleLoginSuccess}
+    />
+  )}
     </div>
   );
 }
