@@ -31,3 +31,6 @@ export const DELETE_CART_DETAIL = `${API_BASE_URL}Cart/deleteCartDetail`;
 /* STRIPE */
 export const CREATE_PAYMENT_SESSION = `${API_BASE_URL}Reserve/embedded-checkout`;
 export const CREATE_RESERVE = `${API_BASE_URL}Reserve/create`;
+
+/* ENDPOINTS ORDER */
+export const MOST_RECENT_ORDER = `${API_BASE_URL}Order/most-recent-order`;
