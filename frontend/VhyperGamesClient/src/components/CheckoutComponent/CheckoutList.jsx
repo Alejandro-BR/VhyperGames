@@ -1,56 +1,54 @@
 import { useContext, useEffect } from 'react';
-import { CartContext } from "../../context/CartContext";
-import { ConvertToDecimal } from "../../utils/price";
-import { BASE_URL } from "../../config";
+import { CheckoutContext } from '../../context/CheckoutContext';
+import { ConvertToDecimal } from '../../utils/price';
+import { BASE_URL } from '../../config';
 import { getVarLS } from '../../utils/keep';
-import classes from "./CheckoutList.module.css"
+import classes from './CheckoutList.module.css';
 
 function CheckoutList() {
-  const { gameDetails, fetchCartByGames, items } = useContext(CartContext);
-  const clave = "cart";
-  const storedCart = getVarLS(clave) || { items: [] };
+  const { reserve } = useContext(CheckoutContext); // Usa la reserva proporcionada por el contexto
+  const clave = 'cart';
+  const storedCart = getVarLS(clave) || { items: [] }; // Carrito desde localStorage como respaldo
+
+  // La lista de juegos viene del carrito almacenado
+  const cartItems = reserve.items.length > 0 ? reserve.items : storedCart.items;
 
   useEffect(() => {
-    if (storedCart && Array.isArray(storedCart.items)) {
-      const gameIds = storedCart.items.map((item) => item.gameId);
-      if (gameIds.length > 0) {
-        fetchCartByGames(gameIds);
-      }
+    if (!cartItems || cartItems.length === 0) {
+      console.log('El carrito está vacío.');
     }
-  }, [fetchCartByGames, items]);
+  }, [cartItems]);
 
+  console.log(cartItems);
   return (
     <section className={classes.gamesList}>
-      {gameDetails
-        .filter((game) => {
-          const cartItem = storedCart.items.find((item) => item.gameId === game.idGame);
-          return cartItem && cartItem.quantity > 0;
-        })
-        .map((game) => {
-          const cartItem = storedCart.items.find((item) => item.gameId === game.idGame);
-          const quantity = cartItem ? cartItem.quantity : 0;
-
-          return (
-            <div className={classes.container}>
-            <article key={game.idGame} className={classes.gameCard}>
+      {cartItems.length > 0 ? (
+        cartItems.map((cartItem) => ( 
+          <div key={cartItem.gameId} className={classes.container}>
+            <article className={classes.gameCard}>
               <div className={classes.gameCard__left}>
-                <img src={`${BASE_URL}${game.imageGame.imageUrl}`} alt={game.imageGame.altText} />
+                <img
+                  src={`${BASE_URL}${cartItem.imageUrl}`}
+                  alt={cartItem.altText || 'Imagen del juego'}
+                />
               </div>
-
               <div className={classes.gameCard__right}>
-                <p>{game.title}</p>
-                <p>Precio total: {(ConvertToDecimal(game.price * quantity))} €</p>
-                <p>Cantidad: {quantity}</p>
+                <p>{cartItem.title}</p>
+                <p>
+                  Precio total:{' '}
+                  {ConvertToDecimal(cartItem.price * cartItem.quantity)} €
+                </p>
+                <p>Cantidad: {cartItem.quantity}</p>
               </div>
-
             </article>
             <hr className={classes.gameCard__line} />
-            </div>
-            
-          );
-        })}
+          </div>
+        ))
+      ) : (
+        <p className={classes.emptyMessage}>Tu carrito está vacío.</p>
+      )}
     </section>
-  )
+  );
 }
 
-export default CheckoutList
+export default CheckoutList;
