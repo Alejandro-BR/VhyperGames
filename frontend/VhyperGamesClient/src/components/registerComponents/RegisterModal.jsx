@@ -3,7 +3,7 @@ import Button from "../buttonComponent/Button";
 import classes from "../loginComponents/Login.module.css";
 import { REGISTER_ENDPOINT } from "../../config";
 import { validation } from "../../utils/validationForm.js";
-import { useAuth } from '../../context/authcontext';
+import { useAuth } from '../../context/AuthContext.jsx';
 
 function RegisterModal({ onClose }) {
   const { saveToken } = useAuth();

@@ -7,15 +7,18 @@ import { CheckoutContext } from '../../context/CheckoutContext';
 import Button from '../buttonComponent/Button';
 import LoginModal from '../loginComponents/LoginModal'; // Importar el modal de login
 import classes from './CartPayment.module.css';
-import { useAuth } from '../../context/authcontext';
+import { useAuth } from '../../context/AuthContext';
 
 
 function CartPayment() {
   const { gameDetails, items } = useContext(CartContext);
-  const { handleCreateReserve } = useContext(CheckoutContext); // Supongo que el token viene del contexto
+  const { handleCreateReserve } = useContext(CheckoutContext); 
   const { token } = useAuth();
   const [data, setData] = useState([]);
-  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false); // Estado para el modal
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false); 
+  const [isPaymentInitiated, setIsPaymentInitiated] = useState(false);
+  const [paymentRoute, setPaymentRoute] = useState("");
+  const [paymentMode, setPaymentMode] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -23,25 +26,66 @@ function CartPayment() {
     setData(updatedData);
   }, [gameDetails, items]);
 
-  const handleClick = async (modeOfPay, route) => {
+  const handlePaymentClick = async (useLocalReserve, modeOfPay, route) => {
     if (!token) {
-        setIsLoginModalOpen(true);
-        return;
+      setIsLoginModalOpen(true); 
+      setIsPaymentInitiated(true); 
+      setPaymentRoute(route); 
+      setPaymentMode(modeOfPay);
+      return;
     }
-    try {
-        const reserveId = await handleCreateReserve(modeOfPay); // Captura el reserveId
-        if (!reserveId) {
-            console.error("No se pudo obtener el ID de la reserva.");
-            return; // Detén el flujo si no hay reserveId
-        }
-        console.log("ID de reserva obtenido:", reserveId);
 
-        // Aquí puedes usar reserveId para otras operaciones (ejemplo: createPaymentSession)
-        navigate(route); // Redirige después de manejar la reserva
+    try {
+      const reserveId = await handleCreateReserve(modeOfPay, useLocalReserve, route);
+      if (!reserveId) {
+        console.error("No se pudo crear la reserva.");
+        return;
+      }
+
+      console.log("Reserva creada exitosamente, redirigiendo...");
+      navigate(route); // Redirigir a la página de pago
     } catch (error) {
-        console.error("Error en handleClick:", error);
+      console.error("Error en handlePaymentClick:", error);
     }
   };
+
+  // Callback cuando el usuario se loguea correctamente desde el modal
+  const handleLoginSuccess = async () => {
+    console.log("onSuccess llamado correctamente. Ejecutando handleLoginSuccess...");
+    setIsLoginModalOpen(false);
+
+    if (isPaymentInitiated) {
+        try {
+          console.log("Esperando que el token esté disponible...");
+          await new Promise(resolve => setTimeout(resolve, 500)); // Pequeño retardo
+
+            // Recuperar el token directamente de localStorage
+            const storedToken = sessionStorage.getItem("accessToken");
+            console.log("Token sincronizado desde localStorage:", storedToken);
+
+            if (!storedToken) {
+                console.error("Token aún no está disponible. Abortando reserva.");
+                return;
+            }
+
+            const reserveId = await handleCreateReserve(paymentMode, true);
+            if (!reserveId) {
+                console.error("No se pudo crear la reserva después del login.");
+                return;
+            }
+
+            console.log("Reserva creada después del login, redirigiendo...");
+            navigate(paymentRoute); // Usa paymentRoute del estado
+        } catch (error) {
+            console.error("Error al crear la reserva después del login:", error);
+        } finally {
+            setIsPaymentInitiated(false); // Resetea el estado
+        }
+    }
+};
+
+
+  
 
   const precio = ConvertToDecimal(TotalPrice(data));
 
@@ -61,7 +105,7 @@ function CartPayment() {
           variant={"medium"}
           color={"morado-azul"}
           onClick={() => {
-            handleClick(1, "/checkout/euros");
+            handlePaymentClick(false, 1, "/checkout/euros");
           }}
         >
           PAGAR EN <br /> EUROS
@@ -70,7 +114,7 @@ function CartPayment() {
           variant={"medium"}
           color={"azul-morado"}
           onClick={() => {
-            handleClick(0, "/checkout/ethereum");
+            handlePaymentClick(false, 0, "/checkout/ethereum");
           }}
         >
           PAGAR EN ETHEREUM
@@ -78,7 +122,9 @@ function CartPayment() {
       </div>
       {/* Modal para Login */}
       {isLoginModalOpen && (
-        <LoginModal onClose={() => setIsLoginModalOpen(false)} />
+        <LoginModal onClose={() => 
+          setIsLoginModalOpen(false)}
+          onSuccess={handleLoginSuccess} />
       )}
     </div>
   );
