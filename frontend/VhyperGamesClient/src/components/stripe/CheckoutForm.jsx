@@ -4,7 +4,7 @@ import {
   EmbeddedCheckoutProvider,
   EmbeddedCheckout,
 } from "@stripe/react-stripe-js";
-import { useAuth } from "../../context/authcontext";
+import { useAuth } from '../../context/AuthContext';
 import { CREATE_PAYMENT_SESSION } from "../../config";
 import { CheckoutContext } from "../../context/CheckoutContext"
 import { deleteLocalStorage } from "../../utils/keep";

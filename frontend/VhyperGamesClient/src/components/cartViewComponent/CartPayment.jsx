@@ -26,6 +26,13 @@ function CartPayment() {
     setData(updatedData);
   }, [gameDetails, items]);
 
+  useEffect(() => {
+    if (token && isPaymentInitiated) {
+      handleLoginSuccess();
+    }
+  }, [token, isPaymentInitiated]);
+  
+
   const handlePaymentClick = async (useLocalReserve, modeOfPay, route) => {
     if (!token) {
       setIsLoginModalOpen(true); 
@@ -73,7 +80,7 @@ function CartPayment() {
                 console.error("No se pudo crear la reserva después del login.");
                 return;
             }
-
+            console.log(token)
             console.log("Reserva creada después del login, redirigiendo...");
             navigate(paymentRoute); // Usa paymentRoute del estado
         } catch (error) {
