@@ -1,7 +1,8 @@
-.container{
+.container {
   display: flex;
   flex-direction: column;
 }
+
 .gamesList {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -14,15 +15,15 @@
   gap: 20px;
 }
 
-.gameCard__left{
+.gameCard__left {
   width: fit-content;
 }
 
 .gameCard__right {
- display: flex;
- flex-direction: column;
- justify-content: space-around;
- width: 60%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 60%;
 }
 
 .gameCard__line {
@@ -30,5 +31,5 @@
   width: 400px;
   height: 4px;
   background: var(--gradient-purple-blue);
-  
+
 }

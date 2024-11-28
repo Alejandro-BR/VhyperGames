@@ -10,7 +10,7 @@ function PaymentConfirmation() {
                 <Title text="PAGO REALIZADO" size="3em" color="#fff" align="center" />
             </div>
             <div className="orderPayment">
-              <PaymentOrder/>
+                <PaymentOrder />
             </div>
             <Footer />
         </div>

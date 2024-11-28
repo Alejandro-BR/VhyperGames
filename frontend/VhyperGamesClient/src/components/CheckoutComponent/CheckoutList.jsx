@@ -32,21 +32,21 @@ function CheckoutList() {
 
           return (
             <div className={classes.container}>
-            <article key={game.idGame} className={classes.gameCard}>
-              <div className={classes.gameCard__left}>
-                <img src={`${BASE_URL}${game.imageGame.imageUrl}`} alt={game.imageGame.altText} />
-              </div>
+              <article key={game.idGame} className={classes.gameCard}>
+                <div className={classes.gameCard__left}>
+                  <img src={`${BASE_URL}${game.imageGame.imageUrl}`} alt={game.imageGame.altText} />
+                </div>
 
-              <div className={classes.gameCard__right}>
-                <p>{game.title}</p>
-                <p>Precio total: {(ConvertToDecimal(game.price * quantity))} €</p>
-                <p>Cantidad: {quantity}</p>
-              </div>
+                <div className={classes.gameCard__right}>
+                  <p>{game.title}</p>
+                  <p>Precio total: {(ConvertToDecimal(game.price * quantity))} €</p>
+                  <p>Cantidad: {quantity}</p>
+                </div>
 
-            </article>
-            <hr className={classes.gameCard__line} />
+              </article>
+              <hr className={classes.gameCard__line} />
             </div>
-            
+
           );
         })}
     </section>
