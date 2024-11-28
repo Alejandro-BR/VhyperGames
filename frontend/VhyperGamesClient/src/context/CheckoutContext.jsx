@@ -15,10 +15,10 @@ export const CheckoutProvider = ({ children }) => {
   const [reserve, setReserve] = useState([]);
   const [reserveId, setReserveId] = useState(null);
   const [message, setMessage] = useState("");
-  const [orderId, setOrderId] = useState(null); // Se exporta a PaymentOrder
-
+  const [orderId, setOrderId] = useState(() => {
+    return localStorage.getItem("orderId") || null;
+  });
   
-
   const handleCreateReserve = async (modeOfPay, useLocalReserve = false) => {
     try {
       let reserve;

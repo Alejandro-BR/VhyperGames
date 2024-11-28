@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import classes from "./PaymentOrder.module.css";
 import { orderById } from "../../helpers/orderHelper";
 import { useAuth } from "../../context/authcontext";
-import { ORDER_BY_ID, BASE_URL } from "../../config"; // Importa BASE_URL
+import { ORDER_BY_ID, BASE_URL } from "../../config";
 import { CheckoutContext } from "../../context/CheckoutContext";
 
 const paymentModes = {
@@ -12,33 +12,34 @@ const paymentModes = {
 
 function PaymentOrder() {
   const { token } = useAuth();
-  const [orderData, setOrderData] = useState(null);
   const { orderId } = useContext(CheckoutContext);
-  const [error, setError] = useState(null);
+  const [orderData, setOrderData] = useState(null);
+  const [status, setStatus] = useState("loading"); // 'loading', 'error', or 'success'
 
   useEffect(() => {
-    if (!token) {
-      console.log("Token no disponible todavía, esperando...");
+    if (orderId) localStorage.setItem("orderId", orderId);
+
+    if (!token || !orderId) {
+      setStatus("loading");
       return;
     }
 
     const fetchOrder = async () => {
-      console.log("Token utilizado:", token);
-
       try {
-        const data = await orderById(ORDER_BY_ID, orderId, token); 
+        const data = await orderById(ORDER_BY_ID, orderId, token);
         setOrderData(data);
-      } catch (err) {
-        setError(err.message);
+        setStatus("success");
+      } catch (error) {
+        setStatus("error");
       }
     };
 
     fetchOrder();
-  }, [token]);
+  }, [token, orderId]);
 
-  if (!orderData) {
-    return <p>Cargando datos de la reserva...</p>;
-  }
+  if (status === "loading") return <p>Cargando datos de la orden...</p>;
+  if (status === "error") return <p>Error al cargar la orden.</p>;
+  if (!orderData) return <p>No se encontraron datos para esta orden.</p>;
 
   return (
     <div className={classes.container}>
@@ -49,23 +50,22 @@ function PaymentOrder() {
       </div>
 
       <div className={classes.gameList}>
-        {Array.isArray(orderData.orderGames) &&
-          orderData.orderGames.map((game) => (
-            <div key={game.gameId} className={classes.gameItem}>
-              <div className={classes.gameListImg}>
-                <img
-                  src={`${BASE_URL}${game.imageGame.imageUrl}`} 
-                  alt={game.imageGame.altText}
-                  className={classes.listImg}
-                />
-              </div>
-              <div className={classes.gameListData}>
-                <p>{game.title}</p>
-                <p>{(game.price / 100).toFixed(2)} €</p>
-                <p>Cantidad: {game.quantity}</p>
-              </div>
+        {orderData.orderGames?.map((game) => (
+          <div key={game.gameId} className={classes.gameItem}>
+            <div className={classes.gameListImg}>
+              <img
+                src={`${BASE_URL}${game.imageGame.imageUrl}`}
+                alt={game.imageGame.altText}
+                className={classes.listImg}
+              />
             </div>
-          ))}
+            <div className={classes.gameListData}>
+              <p>{game.title}</p>
+              <p>{(game.price / 100).toFixed(2)} €</p>
+              <p>Cantidad: {game.quantity}</p>
+            </div>
+          </div>
+        ))}
       </div>
 
       <div className={classes.payment}>
@@ -76,4 +76,5 @@ function PaymentOrder() {
     </div>
   );
 }
+
 export default PaymentOrder;
