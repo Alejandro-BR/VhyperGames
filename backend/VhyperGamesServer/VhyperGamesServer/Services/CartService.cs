@@ -140,4 +140,20 @@ public class CartService
             throw new KeyNotFoundException($"No se encontró el item con GameId {gameId} en el carrito.");
         }
     }
+
+    public async Task DeleteCartPayment(int idUser,List<CartDto> cartDtos)
+    {
+        // Buscar el carrito usando el id del usuario
+
+        // Despues compruenba que no sea null nada  y si algo es null excepcion y listo
+
+        // Recorres el CartDtos en un foreach o lo que mas te guste 
+
+            // Haces una consulta de que si hay algun carDetail del cart de este usuario con el mismo id de juego
+                // Si la hay coges y miras si la cantidad es la misma
+                    // Si la cantidad es la misma borras este carDetail
+                // Si no es la misma modificas la cantidad de este carDetail restandole la cantidad
+
+        // Guardas el objeto cart y listo :)
+    }
 }

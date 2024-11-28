@@ -120,6 +120,7 @@ public class ReserveService
 
         
             _unitOfWork.ReserveRepository.Delete(reserve);
+            // Aqui llamnas al metodo de borrar carrito :) o llamarlo desde el front no tengo ni idea xd
             await _unitOfWork.SaveAsync();
 
             throw new InvalidOperationException("La reserva ha caducado y se ha eliminado automáticamente.");
