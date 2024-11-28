@@ -1,9 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Stripe.Checkout;
-using Stripe.Forwarding;
-using System.Collections.Generic;
-using VhyperGamesServer.Models.Database.Entities;
 using VhyperGamesServer.Models.Database.Entities.Enuml;
 using VhyperGamesServer.Models.Dtos;
 using VhyperGamesServer.Services;
@@ -117,10 +114,6 @@ public class ReserveController : ControllerBase
         }
     }
 
-
-
-
-
     [HttpDelete("cancel")]
     [Authorize]
     public async Task<IActionResult> CancelReserve()
@@ -147,8 +140,6 @@ public class ReserveController : ControllerBase
             return StatusCode(500, new { message = "Error inesperado", detail = ex.Message });
         }
     }
-
-
 
     [HttpPost("embedded-checkout")]
     [Authorize]
