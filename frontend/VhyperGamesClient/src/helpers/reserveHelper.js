@@ -1,3 +1,5 @@
+import {CONFIRM_RESERVE} from "../config"
+
 export const createReserve = async (url, reserveData, token) => {
     const fullUrl = `${url}?modeOfPay=${reserveData.modeOfPay}`
 
@@ -38,16 +40,15 @@ export const getReserveDetails = async (url, reserveId, token) => {
     return data;
 };
 
-export async function confirmReserve(url, reserveId, token) {
-    const fullUrl = `${url}?reserveId=${reserveId}`
-
+export async function confirmReserve(reserveId, token) {
   try {
-    const response = await fetch(fullUrl, {
+    const response = await fetch(CONFIRM_RESERVE, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
+      body: JSON.stringify(reserveId),
     });
 
     if (response.ok) {

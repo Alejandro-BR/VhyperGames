@@ -178,5 +178,13 @@ public class ReserveController : ControllerBase
             return StatusCode(500, new { message = "Error al generar la sesión de pago.", detail = ex.Message });
         }
     }
+
+    [HttpGet("status/{sessionId}")]
+    public async Task<ActionResult> SessionStatus(string sessionId)
+    {
+        Session session = await _stripeService.SessionStatus(sessionId);
+
+        return Ok(new { status = session.Status, customerEmail = session.CustomerEmail });
+    }
 }
 
