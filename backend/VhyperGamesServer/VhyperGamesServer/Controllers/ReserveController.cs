@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Stripe.Checkout;
+using Stripe.Forwarding;
 using System.Collections.Generic;
 using VhyperGamesServer.Models.Database.Entities;
 using VhyperGamesServer.Models.Database.Entities.Enuml;
@@ -95,8 +96,12 @@ public class ReserveController : ControllerBase
 
             int userId = int.Parse(userIdClaim.Value);
 
-            await _reserveService.ConfirmReserve(reserveId);
-            return Ok(new { message = "Reserva confirmada exitosamente." });
+            int orderId = await _reserveService.ConfirmReserve(reserveId);
+            return Ok(new
+            {
+                message = "Reserva confirmada exitosamente.",
+                orderId
+            });
         }
         catch (KeyNotFoundException ex)
         {
