@@ -6,7 +6,7 @@ import {
   EmbeddedCheckout,
 } from "@stripe/react-stripe-js";
 import { useAuth } from "../../context/authcontext";
-import { CREATE_PAYMENT_SESSION } from "../../config";
+import { CREATE_PAYMENT_SESSION, CONFIRM_RESERVE } from "../../config";
 import { CheckoutContext } from "../../context/CheckoutContext"
 import { deleteLocalStorage } from "../../utils/keep";
 
@@ -62,11 +62,19 @@ function CheckoutForm() {
 
   const handleComplete = async () => {
     try {
-      await handleConfirmReserve(); // Confirmación de la reserva
-      navigate("/paymentConfirmation", { state: { status: "success" } }); // Redirige con estado
+      console.log("Esta es la id de la reserva", reserveId)
+      const orderId = await handleConfirmReserve(CONFIRM_RESERVE, reserveId);
+      console.log("Esta es la ID de la orden:", orderId)
+      if (orderId === -1) {
+        navigate("/paymentConfirmation", { state: { status: "failure" } });
+
+      } else {
+        navigate("/paymentConfirmation", { state: { status: "success", orderId } });
+      }
+
     } catch (error) {
       console.error("Error al completar el pago:", error);
-      navigate("/paymentConfirmation", { state: { status: "failure" } }); // Redirige con estado
+      navigate("/paymentConfirmation", { state: { status: "failure" } });
     }
   };
 

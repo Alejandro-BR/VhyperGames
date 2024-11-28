@@ -30,6 +30,18 @@ namespace VhyperGamesServer.Services
             return order;
         }
 
+        public async Task<OrderDto> GetOrderByUserIdAndOrderIdAsync(int userId, int orderId)
+        {
+            Order order = await _unitOfWork.OrderRepository.GetOrderByUserIdAndOrderIdAsync(userId, orderId);
+
+            if (order == null)
+            {
+                throw new KeyNotFoundException($"No hay una orden con ID = {orderId} para el usuario con ID = {userId}");
+            }
+
+            return _mapper.ToOrderDto(order);
+        }
+
         public async Task<List<OrderDto>> GetOrdersByUserIdAsync(int userId)
         {
             List<Order> orders = await _unitOfWork.OrderRepository.GetOrdersByUserId(userId);

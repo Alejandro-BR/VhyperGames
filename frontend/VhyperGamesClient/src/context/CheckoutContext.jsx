@@ -87,14 +87,15 @@ export const CheckoutProvider = ({ children }) => {
   const handleConfirmReserve = async (url, reserveId) => {
     if (!token) {
       console.error("No se puede cargar la reserva: Token de autenticación no disponible.");
-      return;
+      return -1;
     }
 
     try {
-      const data = await confirmReserve(url, reserveId, token);
-      return data;
+      const orderId = await confirmReserve(url, reserveId, token);
+      return orderId;
     } catch (error) {
       console.error("Error al confirmar la reserva:", error.message);
+      return -1;
     }
   };
 

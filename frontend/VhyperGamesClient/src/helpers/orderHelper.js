@@ -1,5 +1,6 @@
-export const recentOrder = async (url, token) => {
-  const response = await fetch(`${url}`, {
+export const orderById = async (url, token) => {
+  const fullUrl = `${url}?orderId=${orderId}`;
+  const response = await fetch(fullUrl, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",

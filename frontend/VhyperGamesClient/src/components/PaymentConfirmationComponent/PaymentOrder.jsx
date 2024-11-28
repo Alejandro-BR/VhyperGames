@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import classes from "./PaymentOrder.module.css";
-import { recentOrder } from "../../helpers/orderHelper";
+import { orderById } from "../../helpers/orderHelper";
 import { useAuth } from "../../context/authcontext";
-import { BASE_URL, MOST_RECENT_ORDER } from "../../config";
+import { ORDER_BY_ID } from "../../config";
 
 const paymentModes = {
   0: "Ethereum",
@@ -24,7 +24,7 @@ function PaymentOrder() {
       console.log("Token utilizado:", token); 
 
       try {
-        const data = await recentOrder(MOST_RECENT_ORDER, token); 
+        const data = await orderById(ORDER_BY_ID, token); 
         setOrderData(data);
       } catch (err) {
         setError(err.message);

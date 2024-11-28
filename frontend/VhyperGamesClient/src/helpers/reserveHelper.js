@@ -53,11 +53,13 @@ export async function confirmReserve(url, reserveId, token) {
     if (response.ok) {
       const data = await response.json();
       console.log("Reserva confirmada exitosamente. Id de la Orden:", data.message);
-      return data;
+      return data.orderId;
     } else {
       console.error("Error al confirmar la reserva.");
+      return -1;
     }
   } catch (error) {
     console.error("Ocurrió un error:", error.message);
+    return -1;
   }
 }

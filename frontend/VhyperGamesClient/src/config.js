@@ -35,4 +35,4 @@ export const GET_RESERVE_DETAILS = `${API_BASE_URL}Reserve/details`;
 export const CONFIRM_RESERVE = `${API_BASE_URL}Reserve/confirm`;
 
 /* ENDPOINTS ORDER */
-export const MOST_RECENT_ORDER = `${API_BASE_URL}Order/most-recent-order`;
+export const ORDER_BY_ID = `${API_BASE_URL}Order/get-by-id`;

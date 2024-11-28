@@ -19,6 +19,31 @@ namespace VhyperGamesServer.Controllers
             _orderService = orderService;
         }
 
+        [HttpGet("get-by-id")]
+        public async Task<IActionResult> GetOrderByUserAndOrderIdAsync(int orderId)
+        {
+            try
+            {
+                var userIdClaim = User.FindFirst("id");
+                if (userIdClaim == null)
+                {
+                    return Unauthorized(new { message = "Usuario no autenticado." });
+                }
+                int userId = int.Parse(userIdClaim.Value);
+
+                OrderDto orderDto = await _orderService.GetOrderByUserIdAndOrderIdAsync(userId, orderId);
+                return Ok(orderDto);
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound(new { message = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = "Ocurrió un error inesperado.", detail = ex.Message });
+            }
+        }
+
         [HttpGet("most-recent-order")]
         [Authorize]
         public async Task<IActionResult> GetRecentOrderByUserId()
@@ -35,9 +60,9 @@ namespace VhyperGamesServer.Controllers
                 int userId = int.Parse(userIdClaim.Value);
 
                 // Llamar al servicio para obtener la orden más reciente
-                var order = await _orderService.GetRecentOrderByUserIdAsync(userId);
+                OrderDto orderDto = await _orderService.GetRecentOrderByUserIdAsync(userId);
 
-                return Ok(order);
+                return Ok(orderDto);
             }
             catch (KeyNotFoundException ex)
             {
