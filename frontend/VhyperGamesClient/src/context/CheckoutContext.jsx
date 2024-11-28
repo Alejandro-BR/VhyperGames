@@ -92,7 +92,7 @@ export const CheckoutProvider = ({ children }) => {
     }
 
     try {
-      const orderId = await confirmReserve(reserveId, token);
+      const orderId = await confirmReserve(url ,reserveId, token);
       console.log(orderId + " Esto es el order id");
       setOrderId(orderId);
       return orderId;
