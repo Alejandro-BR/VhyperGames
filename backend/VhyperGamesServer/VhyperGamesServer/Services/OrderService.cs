@@ -81,6 +81,8 @@ namespace VhyperGamesServer.Services
             await _unitOfWork.SaveAsync();
 
             await _emailService.NewEmail(order.UserId);
+
+            return order.Id; 
         }
     }
 }
