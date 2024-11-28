@@ -52,7 +52,7 @@ export async function confirmReserve(url, reserveId, token) {
 
     if (response.ok) {
       const data = await response.json();
-      console.log("Reserva confirmada exitosamente:", data.message);
+      console.log("Reserva confirmada exitosamente. Id de la Orden:", data.message);
       return data;
     } else {
       console.error("Error al confirmar la reserva.");
