@@ -20,4 +20,14 @@ public class CartRepository : Repository<Cart, int>
                     .ThenInclude(g => g.ImageGames)
             .FirstOrDefaultAsync(c => c.Id == id);
     }
+
+    public async Task<Cart> GetByUserId(int userId)
+    {
+        return await Context.Set<Cart>()
+            .Include(c => c.CartDetails)
+                .ThenInclude(cd => cd.Game)
+                    .ThenInclude(g => g.ImageGames)
+            .FirstOrDefaultAsync(c => c.UserId == userId);
+    }
+
 }

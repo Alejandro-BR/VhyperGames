@@ -141,19 +141,35 @@ public class CartService
         }
     }
 
-    public async Task DeleteCartPayment(int idUser,List<CartDto> cartDtos)
+    public async Task DeleteCartPayment(int idUser, List<CartDto> cartDtos)
     {
-        // Buscar el carrito usando el id del usuario
+        Cart cart = await _unitOfWork.CartRepository.GetByUserId(idUser);
 
-        // Despues compruenba que no sea null nada  y si algo es null excepcion y listo
+        if (cart == null)
+        {
+            throw new KeyNotFoundException("El carrito no existe para el usuario.");
+        }
 
-        // Recorres el CartDtos en un foreach o lo que mas te guste 
+        foreach (var cartDto in cartDtos)
+        {
+            CartDetail cartDetail = cart.CartDetails.FirstOrDefault(cd => cd.GameId == cartDto.GameId);
 
-            // Haces una consulta de que si hay algun carDetail del cart de este usuario con el mismo id de juego
-                // Si la hay coges y miras si la cantidad es la misma
-                    // Si la cantidad es la misma borras este carDetail
-                // Si no es la misma modificas la cantidad de este carDetail restandole la cantidad
-
-        // Guardas el objeto cart y listo :)
+            if (cartDetail != null)
+            {
+                if (cartDetail.Quantity == cartDto.Quantity)
+                {
+                    cart.CartDetails.Remove(cartDetail);
+                }
+                else
+                {
+                    // Si no coincide cantidad te la resta
+                    cartDetail.Quantity -= cartDto.Quantity;
+                    _unitOfWork.CartDetailsRepository.Update(cartDetail);
+                }
+            }
+        }
+        _unitOfWork.CartRepository.Update(cart);
+        await _unitOfWork.SaveAsync();
     }
+
 }

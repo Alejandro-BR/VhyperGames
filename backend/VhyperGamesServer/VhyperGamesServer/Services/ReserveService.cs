@@ -13,13 +13,15 @@ public class ReserveService
     private readonly ReserveAndOrderMapper _gameOrderMapper;
     private readonly OrderService _orderService;
     private readonly StripeService _stripeService;
+    private readonly CartService _cartService;
 
-    public ReserveService(UnitOfWork unitOfWork, OrderService orderService, ReserveAndOrderMapper gameOrderMapper, StripeService stripeService)
+    public ReserveService(UnitOfWork unitOfWork, OrderService orderService, ReserveAndOrderMapper gameOrderMapper, StripeService stripeService, CartService cartService)
     {
         _unitOfWork = unitOfWork;
         _gameOrderMapper = gameOrderMapper;
         _orderService = orderService;
         _stripeService = stripeService;
+        _cartService = cartService;
     }
 
     public async Task<int> CreateReserve(int userId, List<CartDto> cart, PayMode modeOfPay)
@@ -118,20 +120,30 @@ public class ReserveService
                 }
             }
 
-        
             _unitOfWork.ReserveRepository.Delete(reserve);
-            // Aqui llamnas al metodo de borrar carrito :) o llamarlo desde el front no tengo ni idea xd
             await _unitOfWork.SaveAsync();
 
             throw new InvalidOperationException("La reserva ha caducado y se ha eliminado automáticamente.");
         }
 
+        // Orden creada
         int orderId = await _orderService.CreateOrderFromReserve(reserve, reserve.ModeOfPay);
+
+        // Metodo borra reserva
         _unitOfWork.ReserveRepository.Delete(reserve);
+
+        // Metodo borra carrito
+        await _cartService.DeleteCartPayment(reserve.UserId, reserve.ReserveDetails.Select(d => new CartDto
+        {
+            GameId = d.GameId,
+            Quantity = d.Quantity
+        }).ToList());
+
         await _unitOfWork.SaveAsync();
 
         return orderId;
     }
+
 
 
 
