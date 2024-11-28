@@ -14,31 +14,20 @@ function PaymentOrder() {
   const { token } = useAuth();
   const { orderId } = useContext(CheckoutContext);
   const [orderData, setOrderData] = useState(null);
-  const [status, setStatus] = useState("loading"); // 'loading', 'error', or 'success'
 
   useEffect(() => {
     if (orderId) localStorage.setItem("orderId", orderId);
-
-    if (!token || !orderId) {
-      setStatus("loading");
-      return;
-    }
 
     const fetchOrder = async () => {
       try {
         const data = await orderById(ORDER_BY_ID, orderId, token);
         setOrderData(data);
-        setStatus("success");
       } catch (error) {
-        setStatus("error");
       }
     };
-
     fetchOrder();
   }, [token, orderId]);
 
-  if (status === "loading") return <p>Cargando datos de la orden...</p>;
-  if (status === "error") return <p>Error al cargar la orden.</p>;
   if (!orderData) return <p>No se encontraron datos para esta orden.</p>;
 
   return (
