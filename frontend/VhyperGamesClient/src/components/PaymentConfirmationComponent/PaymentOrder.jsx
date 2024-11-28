@@ -1,72 +1,79 @@
-import React from "react";
+import React, { useEffect, useState, useContext } from "react";
 import classes from "./PaymentOrder.module.css";
+import { orderById } from "../../helpers/orderHelper";
+import { useAuth } from "../../context/authcontext";
+import { ORDER_BY_ID, BASE_URL } from "../../config"; // Importa BASE_URL
+import { CheckoutContext } from "../../context/CheckoutContext";
 
-const orderData = {
-  id: 3584755,
-  billingDate: "2024-10-10",
-  orderGames: [
-    {
-      id: 1,
-      orderId: 3584755,
-      gameId: 101,
-      gameName: "The Witcher III",
-      price: 9.99,
-      quantity: 1,
-    },
-    {
-      id: 2,
-      orderId: 3584755,
-      gameId: 102,
-      gameName: "Minecraft",
-      price: 20.0,
-      quantity: 1,
-    },
-    {
-      id: 4,
-      orderId: 3584755,
-      gameId: 103,
-      gameName: "Stardew Valley",
-      price: 14.99,
-      quantity: 1,
-    },
-    
-  ],
-  modeOfPay: "Ethereum",
-  totalPrice: 48.98,
+const paymentModes = {
+  0: "Ethereum",
+  1: "Tarjeta de crédito",
 };
 
 function PaymentOrder() {
+  const { token } = useAuth();
+  const [orderData, setOrderData] = useState(null);
+  const { orderId } = useContext(CheckoutContext);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    if (!token) {
+      console.log("Token no disponible todavía, esperando...");
+      return;
+    }
+
+    const fetchOrder = async () => {
+      console.log("Token utilizado:", token);
+
+      try {
+        const data = await orderById(ORDER_BY_ID, orderId, token); 
+        setOrderData(data);
+      } catch (err) {
+        setError(err.message);
+      }
+    };
+
+    fetchOrder();
+  }, [token]);
+
+  if (!orderData) {
+    return <p>Cargando datos de la reserva...</p>;
+  }
+
   return (
     <div className={classes.container}>
       <div className={classes.order}>
         <p>Pedido Nº {orderData.id}</p>
-        <p>Fecha de facturación: {orderData.billingDate}</p>
+        <p>Fecha de facturación: {new Date(orderData.billingDate).toLocaleDateString()}</p>
         <hr className={classes.line} />
       </div>
 
-
       <div className={classes.gameList}>
-        {orderData.orderGames.map((game) => (
-          <div key={game.id} className={classes.gameItem}>
-            <div className={classes.gameListImg}>
-              <img src={"/img/cyberpunk.png"} alt={game.gameName} className={classes.listImg} />
-            </div>
-            <div className={classes.gameListData}>
-                <p>{game.gameName}</p>
-                <p>{game.price} €</p>
+        {Array.isArray(orderData.orderGames) &&
+          orderData.orderGames.map((game) => (
+            <div key={game.gameId} className={classes.gameItem}>
+              <div className={classes.gameListImg}>
+                <img
+                  src={`${BASE_URL}${game.imageGame.imageUrl}`} 
+                  alt={game.imageGame.altText}
+                  className={classes.listImg}
+                />
+              </div>
+              <div className={classes.gameListData}>
+                <p>{game.title}</p>
+                <p>{(game.price / 100).toFixed(2)} €</p>
                 <p>Cantidad: {game.quantity}</p>
               </div>
-          </div>
-        ))}
+            </div>
+          ))}
       </div>
 
       <div className={classes.payment}>
-        <hr className={classes.line}/>
-          <p>Pagado con: {orderData.modeOfPay}</p>
-          <p>Total pagado: {orderData.totalPrice}€</p>
-        </div>
+        <hr className={classes.line} />
+        <p>Pagado con: {paymentModes[orderData.modeOfPay]}</p>
+        <p>Total pagado: {(orderData.totalPrice / 100).toFixed(2)} €</p>
+      </div>
     </div>
   );
 }
-
 export default PaymentOrder;

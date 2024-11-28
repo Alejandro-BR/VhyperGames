@@ -3,9 +3,9 @@ import Button from "../buttonComponent/Button";
 import classes from "../loginComponents/Login.module.css";
 import { REGISTER_ENDPOINT } from "../../config";
 import { validation } from "../../utils/validationForm.js";
-import { useAuth } from '../../context/authcontext';
+import { useAuth } from '../../context/AuthContext.jsx';
 
-function RegisterModal({ onClose }) {
+function RegisterModal({ onClose, onSuccess }) {
   const { saveToken } = useAuth();
   const nameRef = useRef();
   const surnameRef = useRef();
@@ -91,14 +91,12 @@ function RegisterModal({ onClose }) {
         
         saveToken(token);
 
-        // Forzar recarga de la página
-        window.location.reload();
+        if (onSuccess) {
+          onSuccess(); 
+        }
         
         onClose();
 
-        setTimeout(() => {
-          alert(`Bienvenido, ${decodedToken.name}`);
-        }, 500);
       } else if (response.status === 400) {
         setEmailError("Email en uso.");
       }

@@ -12,7 +12,7 @@ public class ReserveAndOrderMapper
         {
             Id = order.Id,
             BillingDate = order.BillingDate,
-            OrderGames = order.OrderDetails,
+            OrderGames = order.OrderDetails.Select(od => ToOrderDetailDto(od)).ToList(),
             ModeOfPay = order.ModeOfPay,
             TotalPrice = order.TotalPrice,
         };

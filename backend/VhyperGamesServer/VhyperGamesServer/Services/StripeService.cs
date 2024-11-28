@@ -1,8 +1,6 @@
-﻿using Stripe;
-using Stripe.Checkout;
+﻿using Stripe.Checkout;
 using VhyperGamesServer.Models.Database.Entities;
 using VhyperGamesServer.Models.Database.Repositories;
-using VhyperGamesServer.Models.Dtos;
 using VhyperGamesServer.Models.Mappers;
 
 namespace VhyperGamesServer.Services;
@@ -69,6 +67,14 @@ public class StripeService
         {
             throw new InvalidOperationException($"Error al obtener la sesión de Stripe con ID {sessionId}.", ex);
         }
+    }
+
+    public async Task<Session> SessionStatus(string sessionId)
+    {
+        SessionService sessionService = new SessionService();
+        Session session = await sessionService.GetAsync(sessionId);
+
+        return session;
     }
 
     public async Task<bool> IsPaymentCompleted(string sessionId)

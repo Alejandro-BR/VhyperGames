@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Stripe.Checkout;
-using System.Collections.Generic;
-using VhyperGamesServer.Models.Database.Entities;
 using VhyperGamesServer.Models.Database.Entities.Enuml;
 using VhyperGamesServer.Models.Dtos;
 using VhyperGamesServer.Services;
@@ -83,7 +81,7 @@ public class ReserveController : ControllerBase
 
     [HttpPost("confirm")]
     [Authorize]
-    public async Task<IActionResult> ConfirmReserve([FromQuery] int reserveId)
+    public async Task<IActionResult> ConfirmReserve([FromBody] int reserveId)
     {
         try
         {
@@ -95,25 +93,26 @@ public class ReserveController : ControllerBase
 
             int userId = int.Parse(userIdClaim.Value);
 
-            await _reserveService.ConfirmReserve(reserveId);
-            return Ok(new { message = "Reserva confirmada exitosamente." });
+            int orderId = await _reserveService.ConfirmReserve(reserveId);
+            return Ok(new
+            {
+                message = "Reserva confirmada exitosamente.",
+                orderId
+            });
         }
         catch (KeyNotFoundException ex)
         {
-            return NotFound(new { message = ex.Message }); 
+            return NotFound(new { message = ex.Message });
         }
         catch (InvalidOperationException ex)
         {
-            return BadRequest(new { message = ex.Message }); 
+            return BadRequest(new { message = ex.Message });
         }
         catch (Exception ex)
         {
             return StatusCode(500, new { message = "Error inesperado", detail = ex.Message });
         }
     }
-
-
-
 
     [HttpDelete("cancel")]
     [Authorize]
@@ -142,8 +141,6 @@ public class ReserveController : ControllerBase
         }
     }
 
-
-
     [HttpPost("embedded-checkout")]
     [Authorize]
     public async Task<IActionResult> EmbeddedCheckout([FromBody] int reserveId)
@@ -171,6 +168,14 @@ public class ReserveController : ControllerBase
         {
             return StatusCode(500, new { message = "Error al generar la sesión de pago.", detail = ex.Message });
         }
+    }
+
+    [HttpGet("status/{sessionId}")]
+    public async Task<ActionResult> SessionStatus(string sessionId)
+    {
+        Session session = await _stripeService.SessionStatus(sessionId);
+
+        return Ok(new { status = session.Status, customerEmail = session.CustomerEmail });
     }
 }
 

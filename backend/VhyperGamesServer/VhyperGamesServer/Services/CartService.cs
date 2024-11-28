@@ -140,4 +140,36 @@ public class CartService
             throw new KeyNotFoundException($"No se encontró el item con GameId {gameId} en el carrito.");
         }
     }
+
+    public async Task DeleteCartPayment(int idUser, List<CartDto> cartDtos)
+    {
+        Cart cart = await _unitOfWork.CartRepository.GetByUserId(idUser);
+
+        if (cart == null)
+        {
+            throw new KeyNotFoundException("El carrito no existe para el usuario.");
+        }
+
+        foreach (var cartDto in cartDtos)
+        {
+            CartDetail cartDetail = cart.CartDetails.FirstOrDefault(cd => cd.GameId == cartDto.GameId);
+
+            if (cartDetail != null)
+            {
+                if (cartDetail.Quantity == cartDto.Quantity)
+                {
+                    cart.CartDetails.Remove(cartDetail);
+                }
+                else
+                {
+                    // Si no coincide cantidad te la resta
+                    cartDetail.Quantity -= cartDto.Quantity;
+                    _unitOfWork.CartDetailsRepository.Update(cartDetail);
+                }
+            }
+        }
+        _unitOfWork.CartRepository.Update(cart);
+        await _unitOfWork.SaveAsync();
+    }
+
 }

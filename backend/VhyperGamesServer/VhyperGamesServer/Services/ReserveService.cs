@@ -13,13 +13,15 @@ public class ReserveService
     private readonly ReserveAndOrderMapper _gameOrderMapper;
     private readonly OrderService _orderService;
     private readonly StripeService _stripeService;
+    private readonly CartService _cartService;
 
-    public ReserveService(UnitOfWork unitOfWork, OrderService orderService, ReserveAndOrderMapper gameOrderMapper, StripeService stripeService)
+    public ReserveService(UnitOfWork unitOfWork, OrderService orderService, ReserveAndOrderMapper gameOrderMapper, StripeService stripeService, CartService cartService)
     {
         _unitOfWork = unitOfWork;
         _gameOrderMapper = gameOrderMapper;
         _orderService = orderService;
         _stripeService = stripeService;
+        _cartService = cartService;
     }
 
     public async Task<int> CreateReserve(int userId, List<CartDto> cart, PayMode modeOfPay)
@@ -97,7 +99,7 @@ public class ReserveService
         return _gameOrderMapper.ToListOrderDetailDto(reserve.ReserveDetails);
     }
 
-    public async Task ConfirmReserve(int reserveId)
+    public async Task<int> ConfirmReserve(int reserveId)
     {
         Reserve reserve = await _unitOfWork.ReserveRepository.GetReserveById(reserveId);
 
@@ -124,11 +126,25 @@ public class ReserveService
             throw new InvalidOperationException("La reserva ha caducado y se ha eliminado automáticamente.");
         }
 
-        await _orderService.CreateOrderFromReserve(reserve, reserve.ModeOfPay);
+        // Orden creada
+        int orderId = await _orderService.CreateOrderFromReserve(reserve, reserve.ModeOfPay);
 
+        // Metodo borra reserva
         _unitOfWork.ReserveRepository.Delete(reserve);
+
+        // Metodo borra carrito
+        await _cartService.DeleteCartPayment(reserve.UserId, reserve.ReserveDetails.Select(d => new CartDto
+        {
+            GameId = d.GameId,
+            Quantity = d.Quantity
+        }).ToList());
+
         await _unitOfWork.SaveAsync();
+
+        return orderId;
     }
+
+
 
 
 

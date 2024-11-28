@@ -30,6 +30,18 @@ namespace VhyperGamesServer.Services
             return order;
         }
 
+        public async Task<OrderDto> GetOrderByUserIdAndOrderIdAsync(int userId, int orderId)
+        {
+            Order order = await _unitOfWork.OrderRepository.GetOrderByUserIdAndOrderIdAsync(userId, orderId);
+
+            if (order == null)
+            {
+                throw new KeyNotFoundException($"No hay una orden con ID = {orderId} para el usuario con ID = {userId}");
+            }
+
+            return _mapper.ToOrderDto(order);
+        }
+
         public async Task<List<OrderDto>> GetOrdersByUserIdAsync(int userId)
         {
             List<Order> orders = await _unitOfWork.OrderRepository.GetOrdersByUserId(userId);
@@ -60,7 +72,7 @@ namespace VhyperGamesServer.Services
             return _mapper.ToOrderDto(order);
         }
 
-        public async Task CreateOrderFromReserve(Reserve reserve, PayMode modeOfPay)
+        public async Task<int> CreateOrderFromReserve(Reserve reserve, PayMode modeOfPay)
         {
             int totalPrice = reserve.ReserveDetails.Sum(detail => detail.Game.Price * detail.Quantity);
 
@@ -81,6 +93,8 @@ namespace VhyperGamesServer.Services
             await _unitOfWork.SaveAsync();
 
             await _emailService.NewEmail(order.UserId);
+
+            return order.Id; 
         }
     }
 }
