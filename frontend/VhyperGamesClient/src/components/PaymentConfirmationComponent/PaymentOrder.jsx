@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import classes from "./PaymentOrder.module.css";
 import { orderById } from "../../helpers/orderHelper";
 import { useAuth } from "../../context/authcontext";
-import { ORDER_BY_ID } from "../../config";
+import { ORDER_BY_ID, BASE_URL } from "../../config"; // Importa BASE_URL
+import { CheckoutContext } from "../../context/CheckoutContext";
 
 const paymentModes = {
   0: "Ethereum",
@@ -10,8 +11,9 @@ const paymentModes = {
 };
 
 function PaymentOrder() {
-  const { token } = useAuth(); 
+  const { token } = useAuth();
   const [orderData, setOrderData] = useState(null);
+  const { orderId } = useContext(CheckoutContext);
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -21,10 +23,10 @@ function PaymentOrder() {
     }
 
     const fetchOrder = async () => {
-      console.log("Token utilizado:", token); 
+      console.log("Token utilizado:", token);
 
       try {
-        const data = await orderById(ORDER_BY_ID, token); 
+        const data = await orderById(ORDER_BY_ID, orderId, token); 
         setOrderData(data);
       } catch (err) {
         setError(err.message);
@@ -52,7 +54,7 @@ function PaymentOrder() {
             <div key={game.gameId} className={classes.gameItem}>
               <div className={classes.gameListImg}>
                 <img
-                  src={`${BASE_URL}${game.imageGame.imageUrl}`}
+                  src={`${BASE_URL}${game.imageGame.imageUrl}`} 
                   alt={game.imageGame.altText}
                   className={classes.listImg}
                 />
@@ -74,5 +76,4 @@ function PaymentOrder() {
     </div>
   );
 }
-
 export default PaymentOrder;

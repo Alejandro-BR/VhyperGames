@@ -15,6 +15,7 @@ export const CheckoutProvider = ({ children }) => {
   const [reserve, setReserve] = useState([]);
   const [reserveId, setReserveId] = useState(null);
   const [message, setMessage] = useState("");
+  const [orderId, setOrderId] = useState(null); // Se exporta a PaymentOrder
 
   
 
@@ -93,6 +94,7 @@ export const CheckoutProvider = ({ children }) => {
     try {
       const orderId = await confirmReserve(reserveId, token);
       console.log(orderId + " Esto es el order id");
+      setOrderId(orderId);
       return orderId;
     } catch (error) {
       console.error("Error al confirmar la reserva:", error.message);
@@ -108,7 +110,9 @@ export const CheckoutProvider = ({ children }) => {
     reserveId,
     setReserveId,
     loadReserveDetails,
-    handleConfirmReserve
+    handleConfirmReserve,
+    orderId, 
+    setOrderId,
   };
 
   return (

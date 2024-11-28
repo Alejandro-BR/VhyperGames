@@ -1,4 +1,4 @@
-export const orderById = async (url, token) => {
+export const orderById = async (url, orderId ,token) => {
   const fullUrl = `${url}?orderId=${orderId}`;
   const response = await fetch(fullUrl, {
     method: "GET",

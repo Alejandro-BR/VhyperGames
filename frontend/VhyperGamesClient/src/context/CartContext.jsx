@@ -57,7 +57,7 @@ const CartProvider = ({ children }) => {
   useEffect(()=> { if (!token){
     const storedCart = getVarLS("cart");
     if (storedCart != []) {
-      setCart(storedCart);
+      //setCart(storedCart);
     } 
   }},[token]);
   // Guardar carrito en LocalStorage cada vez que cambia
