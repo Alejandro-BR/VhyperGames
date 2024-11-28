@@ -1,27 +1,38 @@
 import React, { useEffect, useState } from "react";
 import classes from "./PaymentOrder.module.css";
-import { createReserve } from "../../helpers/orderHelper"; 
+import { recentOrder } from "../../helpers/orderHelper";
+import { useAuth } from "../../context/authcontext";
+import { BASE_URL, MOST_RECENT_ORDER } from "../../config";
 
-function PaymentOrder({ apiUrl, authToken }) {
+const paymentModes = {
+  0: "Ethereum",
+  1: "Tarjeta de crédito",
+};
+
+function PaymentOrder() {
+  const { token } = useAuth(); 
   const [orderData, setOrderData] = useState(null);
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    if (!token) {
+      console.log("Token no disponible todavía, esperando...");
+      return;
+    }
+
     const fetchOrder = async () => {
+      console.log("Token utilizado:", token); 
+
       try {
-        const data = await createReserve(apiUrl, authToken);
-        setOrderData(data); // Almacena los datos obtenidos
+        const data = await recentOrder(MOST_RECENT_ORDER, token); 
+        setOrderData(data);
       } catch (err) {
-        setError(err.message); // Almacena el error en caso de fallo
+        setError(err.message);
       }
     };
 
     fetchOrder();
-  }, [apiUrl, authToken]);
-
-  if (error) {
-    return <p>Error: {error}</p>;
-  }
+  }, [token]);
 
   if (!orderData) {
     return <p>Cargando datos de la reserva...</p>;
@@ -36,27 +47,28 @@ function PaymentOrder({ apiUrl, authToken }) {
       </div>
 
       <div className={classes.gameList}>
-        {orderData.orderGames.map((game) => (
-          <div key={game.gameId} className={classes.gameItem}>
-            <div className={classes.gameListImg}>
-              <img
-                src={game.imageGame.imageUrl}
-                alt={game.imageGame.altText}
-                className={classes.listImg}
-              />
+        {Array.isArray(orderData.orderGames) &&
+          orderData.orderGames.map((game) => (
+            <div key={game.gameId} className={classes.gameItem}>
+              <div className={classes.gameListImg}>
+                <img
+                  src={`${BASE_URL}${game.imageGame.imageUrl}`}
+                  alt={game.imageGame.altText}
+                  className={classes.listImg}
+                />
+              </div>
+              <div className={classes.gameListData}>
+                <p>{game.title}</p>
+                <p>{(game.price / 100).toFixed(2)} €</p>
+                <p>Cantidad: {game.quantity}</p>
+              </div>
             </div>
-            <div className={classes.gameListData}>
-              <p>{game.title}</p>
-              <p>{(game.price / 100).toFixed(2)} €</p>
-              <p>Cantidad: {game.quantity}</p>
-            </div>
-          </div>
-        ))}
+          ))}
       </div>
 
       <div className={classes.payment}>
         <hr className={classes.line} />
-        <p>Pagado con: {orderData.modeOfPay}</p>
+        <p>Pagado con: {paymentModes[orderData.modeOfPay]}</p>
         <p>Total pagado: {(orderData.totalPrice / 100).toFixed(2)} €</p>
       </div>
     </div>

@@ -118,6 +118,7 @@ public class ReserveService
                 }
             }
 
+        
             _unitOfWork.ReserveRepository.Delete(reserve);
             await _unitOfWork.SaveAsync();
 
@@ -125,12 +126,12 @@ public class ReserveService
         }
 
         int orderId = await _orderService.CreateOrderFromReserve(reserve, reserve.ModeOfPay);
-
         _unitOfWork.ReserveRepository.Delete(reserve);
         await _unitOfWork.SaveAsync();
 
         return orderId;
     }
+
 
 
 

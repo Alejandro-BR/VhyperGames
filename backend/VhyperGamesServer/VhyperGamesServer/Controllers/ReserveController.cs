@@ -84,7 +84,7 @@ public class ReserveController : ControllerBase
 
     [HttpPost("confirm")]
     [Authorize]
-    public async Task<IActionResult> ConfirmReserve([FromQuery] int reserveId)
+    public async Task<IActionResult> ConfirmReserve([FromBody] int reserveId)
     {
         try
         {
@@ -105,17 +105,18 @@ public class ReserveController : ControllerBase
         }
         catch (KeyNotFoundException ex)
         {
-            return NotFound(new { message = ex.Message }); 
+            return NotFound(new { message = ex.Message });
         }
         catch (InvalidOperationException ex)
         {
-            return BadRequest(new { message = ex.Message }); 
+            return BadRequest(new { message = ex.Message });
         }
         catch (Exception ex)
         {
             return StatusCode(500, new { message = "Error inesperado", detail = ex.Message });
         }
     }
+
 
 
 

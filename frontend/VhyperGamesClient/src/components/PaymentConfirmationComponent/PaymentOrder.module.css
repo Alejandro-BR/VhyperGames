@@ -4,8 +4,8 @@
   gap: 10px;
   border: 1px solid;
   border-image: var(--gradient-purple-blue) 1;
-  width: 80vw;
-  margin: auto; 
+  width: fit-content;
+  padding: 30px;
   font-size: 1.2em;
 }
 
@@ -18,12 +18,12 @@
 .gameList{
   display: flex;
   flex-wrap: wrap;
-  gap: 100px;
+  gap: 80px;
 }
 
 
 .listImg{
-  max-width: 180px;
+  max-width: 130px;
   max-height: 250px;
 }
 
@@ -33,4 +33,11 @@
   width: 250px;
   background: var(--gradient-blue-purple);
   margin: 10px 0;
+}
+
+.gameListData{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 50%;
 }

@@ -1,4 +1,5 @@
 import { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { loadStripe } from "@stripe/stripe-js";
 import {
   EmbeddedCheckoutProvider,
@@ -15,7 +16,8 @@ function CheckoutForm() {
   const [clientSecret, setClientSecret] = useState("");
   const [error, setError] = useState(null);
   const token = useAuth();
-  const { reserveId } = useContext(CheckoutContext);
+  const { reserveId, handleConfirmReserve } = useContext(CheckoutContext);
+  const navigate = useNavigate();
 
   async function createPaymentSession() {
 
@@ -58,11 +60,14 @@ function CheckoutForm() {
     };
   }, []);
 
-  const handleComplete = () => {
-    //aquí aviso al server que el pago se ha completado
-
-    //que pasa si no se hace bien el pago o la reserva expira
-    console.log("Payment completed!");
+  const handleComplete = async () => {
+    try {
+      await handleConfirmReserve(); // Confirmación de la reserva
+      navigate("/paymentConfirmation", { state: { status: "success" } }); // Redirige con estado
+    } catch (error) {
+      console.error("Error al completar el pago:", error);
+      navigate("/paymentConfirmation", { state: { status: "failure" } }); // Redirige con estado
+    }
   };
 
   return (
