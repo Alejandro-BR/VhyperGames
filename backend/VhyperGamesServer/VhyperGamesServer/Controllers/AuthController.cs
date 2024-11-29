@@ -43,21 +43,23 @@ public class AuthController : ControllerBase
 
             var newUser = new User
             {
+                Name = request.Name,
+                Surname = request.Surname,
                 Email = request.Email,
                 HashPassword = PasswordHelper.Hash(request.Password),
                 Rol = "User",
-                Name = request.Name,
-                Surname = request.Surname,
                 Address = request.Address
-
             };
+
+            await _unitOfWork.UserRepository.InsertAsync(newUser);
+            await _unitOfWork.SaveAsync();
 
             Cart cart = new Cart()
             {
                 UserId = newUser.Id
             };
 
-            await _unitOfWork.UserRepository.InsertAsync(newUser);
+            
             await _unitOfWork.CartRepository.InsertAsync(cart);
             await _unitOfWork.SaveAsync();
 
