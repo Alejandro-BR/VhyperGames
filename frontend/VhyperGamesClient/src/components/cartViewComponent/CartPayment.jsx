@@ -8,7 +8,7 @@ import Button from '../buttonComponent/Button';
 import LoginModal from '../loginComponents/LoginModal'; 
 import RegisterModal from '../registerComponents/RegisterModal';
 import classes from './CartPayment.module.css';
-import { useAuth } from '../../context/AuthContext';
+import { useAuth } from '../../context/authcontext';
 
 
 function CartPayment() {

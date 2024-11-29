@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect, useCallback } from "react";
-import { useAuth } from "./AuthContext";
+import { useAuth } from "./authcontext";
 import { GET_CART, UPDATE_CART, GET_CART_BY_GAMES, PUT_MERGE, DELETE_CART_DETAIL } from "../config";
 import { getVarLS, updateLocalStorage } from "../utils/keep";
 
