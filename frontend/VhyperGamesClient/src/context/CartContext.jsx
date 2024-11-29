@@ -13,6 +13,7 @@ const CartContext = createContext({
   mergeCartWithDB: () => { },
   syncCartWithDB: () => { },
   deleteCartItem: () => { },
+  refreshCart: () => { },
 });
 
 // Crear el provider
@@ -303,6 +304,17 @@ const CartProvider = ({ children }) => {
     });
   };
 
+  const refreshCart = async () => {
+    if (token) {
+      await getCartFromDB();
+    } else {
+      const storedCart = getVarLS("cart");
+      if (storedCart) {
+        setCart(storedCart);
+      }
+    }
+  };
+
   const ctxValue = {
     items: cart.items || [],
     gameDetails,
@@ -313,6 +325,7 @@ const CartProvider = ({ children }) => {
     syncCartWithDB,
     getCartFromDB,
     deleteCartItem,
+    refreshCart
   };
 
   return <CartContext.Provider value={ctxValue}>{children}</CartContext.Provider>;
