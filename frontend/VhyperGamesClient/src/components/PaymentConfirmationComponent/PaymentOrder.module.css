@@ -4,7 +4,7 @@
   gap: 10px;
   border: 1px solid;
   border-image: var(--gradient-purple-blue) 1;
-  width: fit-content;
+  width: 80vw;
   padding: 30px;
   font-size: 1.2em;
 }
@@ -13,12 +13,13 @@
   display: flex;
   align-items: center;
   gap: 20px;
+  min-width: 280px;
 }
 
 .gameList{
-  display: flex;
-  flex-wrap: wrap;
-  gap: 80px;
+  display: grid;
+  grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));
+  gap: 40px;
 }
 
 
@@ -39,5 +40,5 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
-  width: 50%;
+  width: 54%;
 }
