@@ -69,22 +69,22 @@ export const CheckoutProvider = ({ children }) => {
       console.error("No se puede cargar la reserva: Token de autenticación no disponible.");
       return { items: [] };
     }
-  
+
     try {
       const data = await getReserveDetails(url, reserveId, token);
-  
+
       if (JSON.stringify(data) !== JSON.stringify(reserve)) {
         setReserve(data);
       }
-  
+
       return data;
     } catch (error) {
       console.error("Error al cargar los detalles de la reserva:", error.message);
-      setReserve({ items: [] }); 
+      setReserve({ items: [] });
       throw error;
     }
   };
-  
+
   const handleConfirmReserve = async (url, reserveId) => {
     if (!token) {
       console.error("No se puede cargar la reserva: Token de autenticación no disponible.");
@@ -92,7 +92,7 @@ export const CheckoutProvider = ({ children }) => {
     }
 
     try {
-      const orderId = await confirmReserve(reserveId, token);
+      const orderId = await confirmReserve(url ,reserveId, token);
       console.log(orderId + " Esto es el order id");
       setOrderId(orderId);
       return orderId;
@@ -111,7 +111,7 @@ export const CheckoutProvider = ({ children }) => {
     setReserveId,
     loadReserveDetails,
     handleConfirmReserve,
-    orderId, 
+    orderId,
     setOrderId,
   };
 

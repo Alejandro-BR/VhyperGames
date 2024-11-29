@@ -40,9 +40,9 @@ export const getReserveDetails = async (url, reserveId, token) => {
     return data;
 };
 
-export async function confirmReserve(reserveId, token) {
+export async function confirmReserve(url, reserveId, token) {
   try {
-    const response = await fetch(CONFIRM_RESERVE, {
+    const response = await fetch(url, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
