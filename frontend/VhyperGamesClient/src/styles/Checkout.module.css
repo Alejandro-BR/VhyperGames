@@ -7,3 +7,10 @@
   padding: 60px;
   min-height: 75vh;
 } 
+
+
+.checkout__list {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
