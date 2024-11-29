@@ -37,15 +37,16 @@ function ConfirmationMsg() {
     fetchOrderData();
   }, [token, orderId]);
 
-  useEffect(() => {
-    refreshCart();
-  }, [refreshCart]);
+  //useEffect(() => {
+  //  refreshCart();
+  //  console.log("refreshCart");
+  //}, [refreshCart]);
 
   // Redirect timer if payment fails
   useEffect(() => {
     if (status === "failure") {
       const timer = setTimeout(() => {
-        window.location.href = "/cart";
+        //window.location.href = "/cart";
       }, 3000);
 
       return () => clearTimeout(timer); // Cleanup

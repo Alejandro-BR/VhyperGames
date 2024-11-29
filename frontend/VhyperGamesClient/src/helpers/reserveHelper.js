@@ -64,3 +64,23 @@ export async function confirmReserve(url, reserveId, token) {
     return -1;
   }
 }
+
+export const getSessionStripe = async (url, sessionId, token) => {
+  const fullUrl = `${url}/${sessionId}`
+  console.log(fullUrl);
+  const response = await fetch(fullUrl, {
+      method: 'GET',
+      headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+      },
+  });
+
+  if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.message || 'Error al crear la reserva.');
+  }
+
+  const data = await response.json();
+  return data;
+};

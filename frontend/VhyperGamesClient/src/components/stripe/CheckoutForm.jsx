@@ -6,9 +6,11 @@ import {
   EmbeddedCheckout,
 } from "@stripe/react-stripe-js";
 import { useAuth } from "../../context/authcontext";
-import { CREATE_PAYMENT_SESSION, CONFIRM_RESERVE } from "../../config";
+import { CREATE_PAYMENT_SESSION, CONFIRM_RESERVE, PAYMENT_STATUS } from "../../config";
 import { CheckoutContext } from "../../context/CheckoutContext"
 import { deleteLocalStorage } from "../../utils/keep";
+import { getSessionStripe } from "../../helpers/reserveHelper";
+
 
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
 
@@ -16,7 +18,7 @@ function CheckoutForm() {
   const [clientSecret, setClientSecret] = useState("");
   const [error, setError] = useState(null);
   const token = useAuth();
-  const { reserveId, handleConfirmReserve } = useContext(CheckoutContext);
+  const { reserveId, handleConfirmReserve  } = useContext(CheckoutContext);
   const navigate = useNavigate();
 
   async function createPaymentSession() {
@@ -62,21 +64,21 @@ function CheckoutForm() {
 
   const handleComplete = async () => {
     try {
-      console.log("Esta es la id de la reserva", reserveId)
-      const orderId = await handleConfirmReserve(CONFIRM_RESERVE, reserveId);
-      console.log("Esta es la ID de la orden:", orderId)
-      if (orderId === -1) {
+      const status = await getSessionStripe (PAYMENT_STATUS, reserveId, token);
+      console.log(status);
+      if (error) {
+        console.error("Error al completar el pago:", error);
         navigate("/paymentConfirmation", { state: { status: "failure" } });
-
       } else {
+        const orderId = await handleConfirmReserve(CONFIRM_RESERVE, reserveId);
         navigate("/paymentConfirmation", { state: { status: "success", orderId } });
       }
-
-    } catch (error) {
-      console.error("Error al completar el pago:", error);
+    } catch (err) {
+      console.error("Error inesperado al completar el pago:", err);
       navigate("/paymentConfirmation", { state: { status: "failure" } });
     }
   };
+
 
   return (
     <>
