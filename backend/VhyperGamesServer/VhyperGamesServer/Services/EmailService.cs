@@ -74,7 +74,7 @@ public class EmailService
             emailContent.AppendLine("<p>Pagado con: Tarjeta de Crédito</p>");
         }
 
-        emailContent.AppendLine("<p>El pedido será entregado en: <strong>" + order.User.Address + "</strong></p>");
+        emailContent.AppendLine("<p>Su dirección de facturación: <strong>" + order.User.Address + "</strong></p>");
 
         emailContent.AppendLine("</body>");
         emailContent.AppendLine("</html>");
