@@ -45,7 +45,7 @@ public class AuthController : ControllerBase
             {
                 Email = request.Email,
                 HashPassword = PasswordHelper.Hash(request.Password),
-                Rol = "Usuario",
+                Rol = "User",
                 Name = request.Name,
                 Surname = request.Surname,
                 Address = request.Address
