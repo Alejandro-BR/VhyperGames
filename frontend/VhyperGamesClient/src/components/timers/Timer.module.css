@@ -1,0 +1,13 @@
+.timer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.timer__separator {
+  border: none;
+  width: 400px;
+  height: 4px;
+  background: var(--gradient-purple-blue);
+}
+
