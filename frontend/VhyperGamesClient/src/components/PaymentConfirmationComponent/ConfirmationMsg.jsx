@@ -1,9 +1,10 @@
 import React, { useEffect, useState, useContext } from "react";
-import classes from "./PaymentOrder.module.css";
+import classes from "./ConfirmationMsg.module.css";
 import { useAuth } from "../../context/authcontext";
 import { CheckoutContext } from "../../context/CheckoutContext";
 import { orderById } from "../../helpers/orderHelper";
 import { ORDER_BY_ID } from "../../config";
+import Title from "../titleComponent/Title";
 
 // No sé si la lógica debe ir aquí o solamente recoger status, pero al colega le parece bien de esta forma
 
@@ -41,23 +42,27 @@ function ConfirmationMsg(
     if (status === "success" && orderData) {
         return (
             <div className={classes.msg}>
-                <h2>¡Pago confirmado!</h2>
-                <p>Pedido Nº: {orderData.id}</p>
-                <p>Fecha: {new Date(orderData.billingDate).toLocaleDateString()}</p>
-                <p>Total pagado: {(orderData.totalPrice / 100).toFixed(2)} €</p>
-                <p>Pagado con: {orderData.modeOfPay === 0 ? "Ethereum" : "Tarjeta de crédito"}</p>
-                <hr />
-                <div>
-                    {Array.isArray(orderData.orderGames) &&
-                        orderData.orderGames.map((game) => (
-                            <div key={game.gameId}>
-                                <p>Juego: {game.title}</p>
-                                <p>Precio: {(game.price / 100).toFixed(2)} €</p>
-                                <p>Cantidad: {game.quantity}</p>
-                            </div>
-                        ))}
-                </div>
+                <Title text="PAGO REALIZADO" size="3em" color="#fff" align="center" variant="paymentSuccessful" />
+                <img className={classes.gif} src="/gif/hollow-knight.gif" alt="Hollow knight haciendo un baile mamalón" />
             </div>
+            // <div className={classes.msg}>
+            //     <h2>¡Pago confirmado!</h2>
+            //     <p>Pedido Nº: {orderData.id}</p>
+            //     <p>Fecha: {new Date(orderData.billingDate).toLocaleDateString()}</p>
+            //     <p>Total pagado: {(orderData.totalPrice / 100).toFixed(2)} €</p>
+            //     <p>Pagado con: {orderData.modeOfPay === 0 ? "Ethereum" : "Tarjeta de crédito"}</p>
+            //     <hr />
+            //     <div>
+            //         {Array.isArray(orderData.orderGames) &&
+            //             orderData.orderGames.map((game) => (
+            //                 <div key={game.gameId}>
+            //                     <p>Juego: {game.title}</p>
+            //                     <p>Precio: {(game.price / 100).toFixed(2)} €</p>
+            //                     <p>Cantidad: {game.quantity}</p>
+            //                 </div>
+            //             ))}
+            //     </div>
+            // </div>
         );
     } else if (status === "failure") {
         // Mostrar mensaje de error y redirigir al carrito
@@ -71,7 +76,7 @@ function ConfirmationMsg(
 
         return (
             <div className={classes.msg}>
-                <h2>Algo salió mal en el pago :(</h2>
+                <Title text="Algo salió mal en el pago :(" size="3em" color="#fff" align="center" />
                 <p>Te estamos redirigiendo al carrito...</p>
             </div>
         );

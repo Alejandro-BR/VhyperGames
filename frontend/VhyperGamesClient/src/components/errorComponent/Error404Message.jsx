@@ -11,7 +11,7 @@ function Error404Message() {
       <img
         className={classes.gif}
         src="/gif/goku.gif"
-        alt="gif de kirby andando"
+        alt="gif de goku corriendo"
       />
     </div>
   );
