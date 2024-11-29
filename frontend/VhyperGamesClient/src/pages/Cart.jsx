@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import CartListGames from "../components/cartViewComponent/CartListGames";
 import CartPayment from "../components/cartViewComponent/CartPayment";
 import Footer from "../components/footerComponent/Footer";
@@ -5,9 +6,23 @@ import { getVarLS } from "../utils/keep";
 import classes from "../styles/Cart.module.css";
 
 function Cart() {
+
   const clave = "cart";
-  const storedCart = getVarLS(clave);
-  const isCartEmpty = !storedCart || !storedCart.items || storedCart.items.length === 0;
+  const [isCartEmpty, setIsCartEmpty] = useState(true);
+
+  useEffect(() => {
+    const checkCartStatus = () => {
+      const storedCart = getVarLS(clave); 
+      const isEmpty = !storedCart || !storedCart.items || storedCart.items.length === 0;
+      setIsCartEmpty(isEmpty); 
+    };
+
+    checkCartStatus();
+
+    const interval = setInterval(checkCartStatus, 500); 
+
+    return () => clearInterval(interval); 
+  }, []);
 
   return (
     <div>
