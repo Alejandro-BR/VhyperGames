@@ -1,3 +1,4 @@
+using Examples.WebApi.Services.Blockchain;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.ML;
 using Microsoft.IdentityModel.Tokens;
@@ -56,6 +57,9 @@ public class Program
         builder.Services.AddScoped<ReserveService>();
         builder.Services.AddScoped<OrderService>();
         builder.Services.AddScoped<EmailService>();
+
+        // Blockhain
+        builder.Services.AddTransient<BlockhainService>();
 
         // Inyeccion Hosted Services
         builder.Services.AddHostedService<MybackgroundService>();
