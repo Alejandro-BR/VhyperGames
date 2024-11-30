@@ -58,6 +58,7 @@ public class Program
         builder.Services.AddScoped<EmailService>();
         builder.Services.AddScoped<AdminGameService>();
         builder.Services.AddScoped<AdminUserService>();
+        builder.Services.AddScoped<ImageService>();
 
         // Inyeccion Hosted Services
         builder.Services.AddHostedService<MybackgroundService>();
