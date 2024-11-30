@@ -1,0 +1,14 @@
+.pageContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px;
+    gap: 20px;
+}
+
+.line{
+    width: 85vw;
+    border: none;
+    height: 4px;
+    background: var(--gradient-purple-blue);
+}

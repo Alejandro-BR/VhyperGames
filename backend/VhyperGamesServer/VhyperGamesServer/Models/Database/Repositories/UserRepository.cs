@@ -43,4 +43,9 @@ public class UserRepository : Repository<User, int>
         return true;
     }
 
+    public async Task<List<User>> GetAllUserAsync()
+    {
+        return await GetQueryable().ToListAsync();
+    }
+
 }

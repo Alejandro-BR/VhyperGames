@@ -39,10 +39,8 @@ public class GameRepository : Repository<Game, int>
 
     public async Task<List<string>> GetAllTitles()
     {
-        // Obtener todos los juegos
         ICollection<Game> games = await GetAllAsync();
 
-        // Seleccionar solo los títulos de cada juego
         List<string> titles = games.Select(g => g.Title).ToList();
 
         return titles;
@@ -52,20 +50,26 @@ public class GameRepository : Repository<Game, int>
     {
         IQueryable<Game> query = Context.Set<Game>();
 
-        // Si se requiere incluir reseñas
         if (includeReviews)
         {
             query = query.Include(g => g.Reviews);
         }
 
-        // Si se requiere incluir imágenes
         if (includeImages)
         {
             query = query.Include(g => g.ImageGames);
         }
 
-        // Ejecuta la consulta y busca por el ID
         return await query.FirstOrDefaultAsync(g => g.Id == gameId);
     }
+
+
+    public async Task<List<Game>> GetAllGamesAsync()
+    {
+        IQueryable<Game> query = Context.Set<Game>().Include(g => g.ImageGames);
+        return await query.ToListAsync();
+    }
+
+
 
 }

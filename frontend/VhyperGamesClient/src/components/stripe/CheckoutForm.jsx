@@ -65,14 +65,14 @@ function CheckoutForm() {
   const handleComplete = async () => {
     try {
       const status = await getSessionStripe (PAYMENT_STATUS, reserveId, token);
-      console.log(status);
-      if (error) {
-        console.error("Error al completar el pago:", error);
-        navigate("/paymentConfirmation", { state: { status: "failure" } });
-      } else {
+      console.log("Pagado o no:", status.paymentStatus)
+      if (status.paymentStatus === "paid") {
         const orderId = await handleConfirmReserve(CONFIRM_RESERVE, reserveId);
         navigate("/paymentConfirmation", { state: { status: "success", orderId } });
-      }
+      } else {
+        console.error("Error al completar el pago.");
+        navigate("/paymentConfirmation", { state: { status: "failure" } });
+      } 
     } catch (err) {
       console.error("Error inesperado al completar el pago:", err);
       navigate("/paymentConfirmation", { state: { status: "failure" } });
