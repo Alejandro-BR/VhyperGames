@@ -48,7 +48,6 @@ function Header() {
     logout();
     setShowLogout(false);
     deleteLocalStorage("cart");
-    // window.location.reload();
     navigate("/");
   };
 

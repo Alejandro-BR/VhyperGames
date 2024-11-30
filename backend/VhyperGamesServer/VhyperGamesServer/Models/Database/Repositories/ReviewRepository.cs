@@ -49,4 +49,17 @@ public class ReviewRepository : Repository<Review, int>
             .Where(r => r.GameId == gameId && r.UserId == userId)
             .FirstOrDefaultAsync();
     }
+
+    public async Task<bool> UserOwnsGameAsync(int userId, int gameId)
+    {
+        if (userId <= -1 || gameId <= -1)
+        {
+            return false;
+        }
+
+        return await _context.Order
+            .Where(o => o.UserId == userId) 
+            .SelectMany(o => o.OrderDetails) 
+            .AnyAsync(od => od.GameId == gameId); 
+    }
 }

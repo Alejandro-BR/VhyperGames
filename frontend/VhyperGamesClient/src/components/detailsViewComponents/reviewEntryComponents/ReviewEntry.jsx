@@ -9,6 +9,7 @@ const ReviewEntry = ({ gameId }) => {
   const [reviewText, setReviewText] = useState('');
   const [existingReview, setExistingReview] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [ownsGame, setOwnsGame] = useState(false);
 
   const isAuthenticated = !!token;
 
@@ -27,12 +28,14 @@ const ReviewEntry = ({ gameId }) => {
       if (response.ok) {
         const data = await response.json();
 
+        setOwnsGame(data.ownsGame);
+
         // Si no hay reseña, simplemente salir
         if (!data || !data.hasReview) {
-          console.log("No hay reseña para este juego.");
           return;
         }
 
+        
         // Si hay una reseña, cargarla en el estado
         setReviewText(data.review.reviewText);
         setExistingReview(data.review);
@@ -93,32 +96,40 @@ const ReviewEntry = ({ gameId }) => {
     <div className={classes.reviewbox}>
       {isAuthenticated ? (
         <>
-
-
-          {/* Mostrar el botón adecuado */}
-          {existingReview ? (
-            <p className={classes['review-box__existing-text']}>Reseña enviada el {new Date(existingReview.reviewDate).toLocaleDateString()}</p>
+          {/* Verificar si el usuario posee el juego */}
+          {ownsGame ? (
+            <>
+              {/* Mostrar el botón adecuado */}
+              {existingReview ? (
+                <p className={classes['review-box__existing-text']}>
+                  Reseña enviada el {new Date(existingReview.reviewDate).toLocaleDateString()}
+                </p>
+              ) : (
+                <Button
+                  variant={"large"}
+                  color={"azul"}
+                  onClick={handleSubmit}
+                  disabled={isLoading}
+                  className={classes['review-box__button']}
+                >
+                  {isLoading ? "Cargando..." : "Nueva Reseña"}
+                </Button>
+              )}
+  
+              <textarea
+                className={classes['review-box__textarea']}
+                placeholder="Escribe tu reseña aquí..."
+                value={reviewText}
+                onChange={handleInputChange}
+                maxLength="200"
+                readOnly={!!existingReview}
+              />
+            </>
           ) : (
-            <Button
-              variant={"large"}
-              color={"azul"}
-              onClick={handleSubmit}
-              disabled={isLoading}
-              className={classes['review-box__button']}
-            >
-              {isLoading ? "Cargando..." : "Nueva Reseña"}
-            </Button>
-
+            <p className={classes['review-box__error-text']}>
+              No puedes dejar una reseña porque no posees este juego.
+            </p>
           )}
-
-          <textarea
-            className={classes['review-box__textarea']}
-            placeholder="Escribe tu reseña aquí..."
-            value={reviewText}
-            onChange={handleInputChange}
-            maxLength="200"
-            readOnly={!!existingReview}
-          />
         </>
       ) : (
         <p>Debes estar registrado para dejar una reseña.</p>
