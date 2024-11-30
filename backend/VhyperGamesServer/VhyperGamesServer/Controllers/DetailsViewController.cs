@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using TorchSharp.Utils;
 using VhyperGamesServer.Models.Database.Entities;
+using VhyperGamesServer.Models.Database.Repositories;
 using VhyperGamesServer.Models.Dtos;
 using VhyperGamesServer.Services;
 
@@ -11,10 +12,12 @@ namespace VhyperGamesServer.Controllers;
 [ApiController]
 public class DetailsViewController : ControllerBase
 {
+    private readonly UnitOfWork _unitOfWork;
     private readonly DetailsViewService _detailsViewService;
 
-    public DetailsViewController(DetailsViewService detailsViewService)
+    public DetailsViewController(UnitOfWork unitOfWork, DetailsViewService detailsViewService)
     {
+        _unitOfWork = unitOfWork;
         _detailsViewService = detailsViewService;
     }
 
@@ -66,7 +69,7 @@ public class DetailsViewController : ControllerBase
 
 
             //Llamar al servicio para crear la nueva reseña
-            var reviewDto = await _detailsViewService.NewReview(newReviewDto);
+            ReviewDto reviewDto = await _detailsViewService.NewReview(newReviewDto);
 
             if (reviewDto == null)
             {
@@ -87,8 +90,9 @@ public class DetailsViewController : ControllerBase
 
     [HttpGet("get-user-review")]
     [Authorize]
-    public async Task<ActionResult<ReviewDto>> GetReviewByUserAndGameAsync(int gameId)
+    public async Task<ActionResult> GetReviewByUserAndGameAsync(int gameId)
     {
+        // Verificar si el usuario está autenticado
         var userIdClaim = User.FindFirst("id");
         if (userIdClaim == null)
             return Unauthorized(new { message = "Usuario no autenticado." });
@@ -96,12 +100,30 @@ public class DetailsViewController : ControllerBase
         if (!int.TryParse(userIdClaim.Value, out int userId))
             return BadRequest(new { message = "ID de usuario no válido." });
 
-        // Obtener la reseña para el usuario autenticado y el juego especificado
-        var reviewDto = await _detailsViewService.GetReviewByUserAndGameAsync(gameId, userId);
 
-        if (reviewDto == null)
-            return Ok(new { reviewText = "", hasReview = false });
+        bool userOwnsGame = await _unitOfWork.ReviewRepository.UserOwnsGameAsync(userId, gameId);
 
-        return Ok(new { review = reviewDto, hasReview = true });
+
+        if (!userOwnsGame)
+        {
+            return Ok(new
+            {
+                ownsGame = false, 
+                hasReview = false, 
+                review = (ReviewDto)null 
+            });
+        }
+
+        ReviewDto reviewDto = await _detailsViewService.GetReviewByUserAndGameAsync(gameId, userId);
+
+        var response = new
+        {
+            ownsGame = true, 
+            hasReview = reviewDto != null,
+            review = reviewDto 
+        };
+
+        return Ok(response);
     }
+
 }
