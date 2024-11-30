@@ -1,0 +1,24 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4vh;
+}
+
+.userIcon{
+    max-width: 20vh;
+    min-width: 190px
+}
+
+.userInfo{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.line{
+    border: none;
+    height: 4px;
+    background: var(--gradient-purple-blue);
+    align-self: center;
+}

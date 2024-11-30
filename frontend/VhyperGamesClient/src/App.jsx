@@ -10,6 +10,7 @@ import PaymentConfirmation from './pages/PaymentConfirmation';
 import { AuthProvider } from '../src/context/authcontext';
 import { CartProvider } from './context/CartContext';
 import { CheckoutProvider } from './context/CheckoutContext';
+import UserPage from './pages/UserPage';
 
 import {
   createBrowserRouter,
@@ -29,6 +30,7 @@ const routeDefinition = createRoutesFromElements(
     <Route path="cart" element={<Cart />} />
     <Route path="checkout/:modo" element={<Checkout />} />
     <Route path="paymentConfirmation" element={<PaymentConfirmation />} />
+    <Route path="user" element={<UserPage />} />
   </Route>
 );
 

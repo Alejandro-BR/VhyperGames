@@ -37,3 +37,6 @@ export const CONFIRM_RESERVE = `${API_BASE_URL}Reserve/confirm`;
 
 /* ENDPOINTS ORDER */
 export const ORDER_BY_ID = `${API_BASE_URL}Order/get-by-id`;
+
+/* ENDPOINTS DE USUARIO*/
+export const GET_USERS =  `${API_BASE_URL}User/GetUsers`;
