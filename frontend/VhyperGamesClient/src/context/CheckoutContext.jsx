@@ -19,6 +19,7 @@ export const CheckoutProvider = ({ children }) => {
     return localStorage.getItem("orderId") || null;
   });
   
+  
   const handleCreateReserve = async (modeOfPay, useLocalReserve = false) => {
     try {
       let reserve;

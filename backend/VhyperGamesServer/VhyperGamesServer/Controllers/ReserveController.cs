@@ -1,7 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Stripe;
 using Stripe.Checkout;
+using VhyperGamesServer.Models.Database.Entities;
 using VhyperGamesServer.Models.Database.Entities.Enuml;
+using VhyperGamesServer.Models.Database.Repositories;
 using VhyperGamesServer.Models.Dtos;
 using VhyperGamesServer.Services;
 
@@ -14,11 +17,13 @@ public class ReserveController : ControllerBase
 {
     private readonly ReserveService _reserveService;
     private readonly StripeService _stripeService;
+    private readonly UnitOfWork _unitOfWork;
     
-    public ReserveController(ReserveService reserveService, StripeService stripeService)
+    public ReserveController(ReserveService reserveService, StripeService stripeService, UnitOfWork unitOfWork)
     {
         _reserveService = reserveService;
         _stripeService = stripeService;
+        _unitOfWork = unitOfWork;
     }
 
 
@@ -170,10 +175,12 @@ public class ReserveController : ControllerBase
         }
     }
 
-    [HttpGet("status/{sessionId}")]
-    public async Task<ActionResult> SessionStatus(string sessionId)
+    [HttpGet("status/{reserveId}")]
+    public async Task<ActionResult> SessionStatus(int reserveId)
     {
-        Session session = await _stripeService.SessionStatus(sessionId);
+        Reserve reserve = await _unitOfWork.ReserveRepository.GetReserveById(reserveId);
+
+        Session session = await _stripeService.SessionStatus(reserve.SessionId);
 
         return Ok(new { status = session.Status, customerEmail = session.CustomerEmail });
     }

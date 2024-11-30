@@ -27,6 +27,7 @@ const CartProvider = ({ children }) => {
     const syncOrMergeCart = async () => {
       const storedCart = getVarLS("cart");
       if (token && userId) {
+        console.log("aaaaaaaaaaa");
         try {
           if (storedCart) {
             if (Array.isArray(storedCart.items) && storedCart.items.length > 0 ) {
@@ -48,7 +49,7 @@ const CartProvider = ({ children }) => {
         }
       } else {
         if (storedCart != []) {
-          // setCart(storedCart);
+          //setCart(storedCart);
         } 
       }
     };
@@ -61,6 +62,34 @@ const CartProvider = ({ children }) => {
       //setCart(storedCart);
     } 
   }},[token]);
+
+  const refreshCart = async () => {
+    if (token) {
+      await getCartFromDB();
+    } else {
+      const storedCart = getVarLS("cart");
+      if (storedCart) {
+        setCart(storedCart);
+      }
+    }
+  };
+
+  useEffect(() => {
+    function handleVisibilityChange() {
+      if (document.visibilityState === "visible") {
+        refreshCart(); // Refresca el carrito solo si la pestaña está visible
+        console.log("funciona");
+      }
+    }
+  
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+  
+    // Limpia el evento cuando el componente se desmonta
+    return () => {
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+    };
+  }, [refreshCart]);
+
   // Guardar carrito en LocalStorage cada vez que cambia
   const updateLocalStorageCart = (cart) => {
     try {
@@ -304,17 +333,7 @@ const CartProvider = ({ children }) => {
     });
   };
 
-  const refreshCart = async () => {
-    if (token) {
-      await getCartFromDB();
-    } else {
-      const storedCart = getVarLS("cart");
-      if (storedCart) {
-        setCart(storedCart);
-      }
-    }
-  };
-
+  
   const ctxValue = {
     items: cart.items || [],
     gameDetails,

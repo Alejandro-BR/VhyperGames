@@ -32,6 +32,7 @@ export const DELETE_CART_DETAIL = `${API_BASE_URL}Cart/deleteCartDetail`;
 export const CREATE_PAYMENT_SESSION = `${API_BASE_URL}Reserve/embedded-checkout`;
 export const CREATE_RESERVE = `${API_BASE_URL}Reserve/create`;
 export const GET_RESERVE_DETAILS = `${API_BASE_URL}Reserve/details`;
+export const PAYMENT_STATUS = `${API_BASE_URL}Reserve/status`;
 export const CONFIRM_RESERVE = `${API_BASE_URL}Reserve/confirm`;
 
 /* ENDPOINTS ORDER */
