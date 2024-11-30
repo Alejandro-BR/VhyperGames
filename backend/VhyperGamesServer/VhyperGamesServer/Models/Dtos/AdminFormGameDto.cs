@@ -15,5 +15,5 @@ public class AdminFormGameDto
     public DateTime ReleaseDate { get; set; }
     public int Price { get; set; }
     public int Stock { get; set; }
-    public List<ImageGame> ImageGames { get; set; }
+    public List<String> AltImagen { get; set; }
 }

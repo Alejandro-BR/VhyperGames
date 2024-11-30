@@ -22,7 +22,7 @@ function Header() {
     if (!token) {
       setMostrarLogin(true);
     } else {
-      alert("Aún no tenemos página de usuario.");
+      navigate("/user");
     }
   };
 

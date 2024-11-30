@@ -37,3 +37,11 @@ export const CONFIRM_RESERVE = `${API_BASE_URL}Reserve/confirm`;
 
 /* ENDPOINTS ORDER */
 export const ORDER_BY_ID = `${API_BASE_URL}Order/get-by-id`;
+
+/* ENDPOINTS DE USUARIO*/
+export const GET_USERS =  `${API_BASE_URL}User/GetUsers`;
+
+/* ETHEREUM */
+export const BLOCKCHAIN = `${API_BASE_URL}Blockchain`;
+export const BLOCKCHAIN_TRANSACTION = `${API_BASE_URL}Blockchain/transaction`;
+export const BLOCKCHAIN_CHECK = `${API_BASE_URL}Blockchain/check`;

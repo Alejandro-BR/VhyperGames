@@ -9,6 +9,6 @@ public class ImageGame
     public string ImageUrl { get; set; }
     public string AltText { get; set; }
 
-    [JsonIgnore] // Para que no lo meta en el json y no hacer un bucle de referencias circulares
+    [JsonIgnore]
     public Game Game { get; set; }
 }

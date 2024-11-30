@@ -1,0 +1,50 @@
+﻿using Microsoft.AspNetCore.Mvc;
+using VhyperGamesServer.Models.Database.Entities;
+using VhyperGamesServer.Models.Dtos;
+using VhyperGamesServer.Models.Mappers;
+using VhyperGamesServer.Services;
+
+namespace VhyperGamesServer.Controllers;
+
+[Route("api/[controller]")]
+[ApiController]
+public class ImagesController : ControllerBase
+{
+    private readonly ImageService _service;
+
+    public ImagesController(ImageService service)
+    {
+        _service = service;
+    }
+
+    [HttpGet]
+    public async Task<List<ImageGame>> GetAllAsync()
+    {
+        List<ImageGame> images = await _service.GetAllAsync();
+
+        return images;
+    }
+
+    [HttpGet("{id}")]
+    public async Task<ImageGame> GetAsync(int id)
+    {
+        return await _service.GetAsync(id);
+    }
+
+    [HttpPost]
+    public async Task<ActionResult<ImageGame>> InsertAsync(ImageRequestDto createImage, int gameId)
+    {
+        ImageGame newImage = await _service.InsertAsync(createImage, gameId);
+
+        return Ok(newImage);
+    }
+
+    [HttpPut("{id}")]
+    public async Task<ActionResult<ImageGame>> UpdateAsync(ImageRequestDto updateImage, int imageId)
+    {
+        ImageGame imageUpdated = await _service.UpdateAsync(updateImage, imageId);
+
+        return Ok(imageUpdated);
+    }
+
+}

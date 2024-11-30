@@ -77,9 +77,9 @@ public class StripeService
         return session;
     }
 
-    public async Task<bool> IsPaymentCompleted(string sessionId)
+    public async Task<string> GetPaymentStatus(string sessionId)
     {
         Session session = await GetSessionAsync(sessionId);
-        return session.PaymentStatus == "paid";
+        return session.PaymentStatus;
     }
 }

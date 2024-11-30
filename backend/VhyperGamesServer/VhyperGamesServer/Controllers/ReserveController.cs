@@ -182,7 +182,9 @@ public class ReserveController : ControllerBase
 
         Session session = await _stripeService.SessionStatus(reserve.SessionId);
 
-        return Ok(new { status = session.Status, customerEmail = session.CustomerEmail });
+        string paymentStatus = await _stripeService.GetPaymentStatus(reserve.SessionId);
+
+        return Ok(new { status = session.Status, customerEmail = session.CustomerEmail, paymentStatus });
     }
 }
 
