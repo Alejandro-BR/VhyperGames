@@ -56,6 +56,8 @@ public class Program
         builder.Services.AddScoped<ReserveService>();
         builder.Services.AddScoped<OrderService>();
         builder.Services.AddScoped<EmailService>();
+        builder.Services.AddScoped<AdminGameService>();
+        builder.Services.AddScoped<AdminUserService>();
 
         // Inyeccion Hosted Services
         builder.Services.AddHostedService<MybackgroundService>();
@@ -65,6 +67,7 @@ public class Program
         builder.Services.AddScoped<DetailsViewMapper>();
         builder.Services.AddScoped<CartMapper>();
         builder.Services.AddScoped<ReserveAndOrderMapper>();
+        builder.Services.AddScoped<AdminMapper>();
 
         // Stripe
         builder.Services.AddTransient<StripeService>();
