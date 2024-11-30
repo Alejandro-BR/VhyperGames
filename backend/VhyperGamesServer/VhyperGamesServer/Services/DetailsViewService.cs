@@ -91,8 +91,14 @@ public class DetailsViewService
 
     public async Task<ReviewDto> NewReview(NewReviewDto newReviewDto)
     {
-        var user = await _unitOfWork.UserRepository.GetByIdAsync(newReviewDto.UserId);
-        var game = await _unitOfWork.GameRepository.GetByIdAsync(newReviewDto.GameId);
+        bool userOwnsGame = await _unitOfWork.ReviewRepository.UserOwnsGameAsync(newReviewDto.UserId, newReviewDto.GameId);
+        if (!userOwnsGame)
+        {
+            throw new InvalidOperationException("El usuario no tiene el juego y no puede dejar una nueva reseña.");
+        }
+
+        User user = await _unitOfWork.UserRepository.GetByIdAsync(newReviewDto.UserId);
+        Game game = await _unitOfWork.GameRepository.GetByIdAsync(newReviewDto.GameId);
 
         var existingReview = await _unitOfWork.ReviewRepository.IsReviewed(newReviewDto.GameId, newReviewDto.UserId);
         if (existingReview != null)
