@@ -1,8 +1,8 @@
 
 import Title from "../components/titleComponent/Title";
 import ProductCardBlock from "../components/productManagementComponents/productCardBlock";
-import AddProductButton from "../components/productManagementComponents/AddProductButton";
-import SearchBarProduct from "../components/productManagementComponents/SearchBarProduct";
+import AddProductButton from "../components/productManagement/AddProductButton";
+import SearchBarProduct from "../components/productManagement/SearchBarProduct";
 
 function ProductManagement() {
     return (
