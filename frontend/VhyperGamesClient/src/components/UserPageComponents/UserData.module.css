@@ -3,11 +3,12 @@
     flex-direction: column;
     align-items: center;
     gap: 4vh;
+    
 }
 
 .userIcon{
-    max-width: 20vh;
-    min-width: 190px
+    max-width: 10vh;
+    min-width: 96px;
 }
 
 .userInfo{

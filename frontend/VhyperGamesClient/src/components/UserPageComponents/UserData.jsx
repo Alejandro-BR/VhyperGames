@@ -49,7 +49,7 @@ function UserData({ id }) {
         <div className={classes.container}>
             <img src="/icon/user-grande-icon.svg" alt="user icon" className={classes.userIcon}/>
             <div className={classes.userInfo}>    
-                <div>Nombre del usuario: {userInfo.name +" "+ userInfo.surname}</div>
+                <div>Nombre de usuario: {userInfo.name +" "+ userInfo.surname}</div>
                 <div>Correo electronico: {userInfo.email}</div>
                 <div>Direccion: {userInfo.address}</div>
                 <div>Rol: {userInfo.rol}</div>

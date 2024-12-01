@@ -4,6 +4,7 @@
     align-items: center;
     padding: 30px;
     gap: 20px;
+    min-height: 75vh;
 }
 
 .line{

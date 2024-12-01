@@ -28,7 +28,7 @@ function PaymentOrder() {
     fetchOrder();
   }, [token, orderId]);
 
-  if (!orderData) return <p>No se encontraron datos para esta orden.</p>;
+  if (!orderData) return <p>No hay ningun pedido.</p>;
 
   return (
     <div className={classes.container}>
