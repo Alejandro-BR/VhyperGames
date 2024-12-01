@@ -12,7 +12,7 @@ function ProductCard(
     // NO ENTIENDO POR QUÉ NO FUNCIONA EL FETCH NI EL MAP
 
     let imgUrl = "/img/sekiro.png"
-    let title = "El brujero"
+    let title = "El brujero 38 ahora es personal se vienen ,ertymetmetm ety jtdryjm"
     let price = 1999
     let stock = 30
     let id = 0
@@ -42,6 +42,10 @@ function ProductCard(
                 <h2 className={classes.containerTitle}>Stock</h2>
                 <p className={classes.stock}>{stock}</p>
             </div>
+
+            <button className={classes.editGame}>
+                <img src="/icon/edit-icon.svg" alt="editar producto" />
+            </button>
 
         </article>
     );

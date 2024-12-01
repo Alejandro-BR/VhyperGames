@@ -2,7 +2,7 @@
     width: 100%;
     min-height: fit-content;
     display: grid;
-    grid-template-columns: 1.5fr repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1.5fr) repeat(2, 1fr);
     align-items: center;
     justify-content: center;
     background-color: var(--header-footer-color);
@@ -10,34 +10,85 @@
     gap: 15px;
     border: 1px ridge var(--principal-blue);
     border-radius: 4px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+}
+
+.card:hover {
+    transform: scale(1.02);
+    box-shadow: 0px 0px 50px var(--led-purple);
 }
 
 .gameImg {
-    height: 100px;
+    width: 100%;
+    height: auto;
     max-height: 200px;
     border-radius: 4px;
+    object-fit: contain;
 }
-
-.containerTitle {}
 
 .container {
     background-color: var(--body-color);
-    height: 75%;
+    height: auto;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
-    /*esto va a haber que cambiarlo para que no se rompa con*/
+    justify-content: center;
     align-items: center;
     border-radius: 4px;
     border: 1px solid var(--principal-blue);
+    padding: 6px;
+    text-align: center;
+    gap: 4px;
+    transition: background-color 0.3s ease;
 }
 
-.title {}
+.container:hover {
+    background-color: var(--principal-light-blue);
+    /* Color de hover */
+}
 
-.priceContainer {}
+.containerTitle {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--principal-blue);
 
-.price {}
+}
 
-.stockContainer {}
+.title {
+    font-size: 0.9rem;
+    /* Tamaño reducido para acomodar texto largo */
+    font-weight: 400;
+    color: var(--text-color);
+    word-wrap: break-word;
+    /* Permite cortes naturales de palabras */
+    white-space: normal;
+    /* Permite que el texto ocupe varias líneas */
+    margin: 0;
+    /* Elimina márgenes innecesarios */
+}
 
-.stock {}
+.price,
+.stock {
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--text-dark);
+}
+
+.editGame {
+    position: absolute;
+    bottom: 2px;
+    right: 0px;
+    padding: 6px 6px;
+    background-color: var(--button-bg-color);
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.price {
+    color: var(--success-color);
+}
+
+.stock {
+    color: var(--warning-color);
+}
