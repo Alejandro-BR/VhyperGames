@@ -1,6 +1,6 @@
 
 import Title from "../components/titleComponent/Title";
-import ProductCardBlock from "../components/productManagementComponents/productCardBlock";
+import ProductCardBlock from "../components/productManagement/productCardBlock";
 import AddProductButton from "../components/productManagement/AddProductButton";
 import SearchBarProduct from "../components/productManagement/SearchBarProduct";
 

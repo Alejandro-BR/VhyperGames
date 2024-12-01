@@ -4,43 +4,48 @@ import { Link } from "react-router-dom";
 import { ConvertToDecimal } from "../../utils/price"
 
 function ProductCard(
-    id, title, stock, price, imgUrl
+    // id, title, stock, price, imgUrl
 ) {
+
+
+
+    // NO ENTIENDO POR QUÉ NO FUNCIONA EL FETCH NI EL MAP
+
+    let imgUrl = "/img/sekiro.png"
+    let title = "El brujero"
+    let price = 1999
+    let stock = 30
+    let id = 0
 
     function precio() {
         return ConvertToDecimal(price);
     }
 
-    // NO ENTIENDO POR QUÉ NO FUNCIONA EL FETCH NI EL MAP
-
     return (
         <article className={classes.card}>
 
             <Link to={`/juego/${id}`}>
-                <img src={`${BASE_URL}${imgUrl}`} alt={title} className={classes.gameImg} />
-                {/* <img src="/img/witcher3.png" alt="" /> */}
+                <img src={imgUrl} alt={title} className={classes.gameImg} />
             </Link>
 
-            <div className={classes.titleContainer}>
+            <div className={classes.container}>
                 <h2 className={classes.containerTitle}>Título</h2>
                 <p className={classes.title}>{title}</p>
-                {/* <p>The Witcher</p> */}
             </div>
 
-            <div className={classes.priceContainer}>
-                <h2 containerTitle>Precio</h2>
-                <p className={classes.precio}>{precio()} €</p>
-                {/* <p>18.99 €</p> */}
+            <div className={classes.container}>
+                <h2 className={classes.containerTitle}>Precio</h2>
+                <p className={classes.price}>{precio()} €</p>
             </div>
 
-            <div className={classes.stockContainer}>
-                <h2 containerTitle>Stock</h2>
+            <div className={classes.container}>
+                <h2 className={classes.containerTitle}>Stock</h2>
                 <p className={classes.stock}>{stock}</p>
-                {/* <p>18</p> */}
             </div>
 
         </article>
     );
+
 
 }
 

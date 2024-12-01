@@ -1,0 +1,8 @@
+.productsList {
+    width: 90vw;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    justify-items: center;
+    gap: 50px;
+    margin-left: 5vw;
+}
