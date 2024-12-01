@@ -2,7 +2,6 @@
 using VhyperGamesServer.Models.Dtos;
 using VhyperGamesServer.Services;
 using Microsoft.AspNetCore.Authorization;
-using Stripe.Climate;
 
 namespace VhyperGamesServer.Controllers;
 

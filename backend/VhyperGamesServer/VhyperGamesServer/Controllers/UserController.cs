@@ -21,9 +21,9 @@ public class UserController : ControllerBase
      * GetUsers
      * Devuelve todos los usuarios
      */
-    [HttpGet("GetUsers")]
-    public async Task<IEnumerable<User>> GetUsers()
-    {
-        return await _service.GetUsers();
-    }
+    //[HttpGet("GetUsers")]
+    //public async Task<IEnumerable<User>> GetUsers()
+    //{
+    //    return await _service.GetUsers();
+    //}
 }

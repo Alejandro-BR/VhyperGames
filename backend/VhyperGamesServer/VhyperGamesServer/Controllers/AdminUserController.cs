@@ -1,11 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using VhyperGamesServer.Services;
 using Microsoft.AspNetCore.Authorization;
-using VhyperGamesServer.Models.Database.Entities;
-using VhyperGamesServer.Models.Database.Repositories;
 using VhyperGamesServer.Models.Dtos;
-using VhyperGamesServer.Models.Mappers;
-
 
 namespace VhyperGamesServer.Controllers;
 
