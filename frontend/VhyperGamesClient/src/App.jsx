@@ -12,6 +12,7 @@ import { CartProvider } from './context/CartContext';
 import { CheckoutProvider } from './context/CheckoutContext';
 import UserPage from './pages/UserPage';
 import Ethereum from './components/Ethereum/Ethereum';
+import ProductManagement from './pages/ProductManagement';
 
 import {
   createBrowserRouter,
@@ -34,6 +35,7 @@ const routeDefinition = createRoutesFromElements(
     <Route path="paymentConfirmation" element={<PaymentConfirmation />} />
     <Route path="user" element={<UserPage />} />
     <Route path="EthereumCheckout" element={<Ethereum />} />
+    <Route path="product-management" element={<ProductManagement />} />
   </Route>
 );
 

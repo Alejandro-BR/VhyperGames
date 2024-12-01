@@ -1,48 +1,57 @@
+import React, { useState, useEffect } from "react";
 import ProductCard from "./productCard";
+import { CATALOG_FILTER } from "../../config";
 
-
-
-function productCardBlock() {
-
-
+function ProductCardBlock() {
     const [juegos, setJuegos] = useState([]);
+    const [loading, setLoading] = useState(true);
 
-    // CREO QUE HABRÍA QUE HACER ALGO ASYNC PERO NO TENGO CLARO QUÉ
-    // ME HE BASADO EN CATALOG BODY Y BLOCKGAME, PERO ME HA PARECIDO MEJOR METER TODA LA LOGICA EN EL COMPONENTE YA QUE AQUÍ NO HAY FILTROS
+    const fetchGames = async () => {
+        setLoading(true);
+        try {
+            const response = await fetch(`${CATALOG_FILTER}`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
 
-    try {
-        const response = fetch(`${CATALOG_FILTER}?${queryParams}`, { // si query params esta vacio devolvia todos los juegos? De todas formas habría que modificar esto
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
+            if (!response.ok) {
+                throw new Error(`Error ${response.status}: ${response.statusText}`);
             }
-        });
 
-        if (!response.ok) {
-            throw new Error(`Error ${response.status}: ${response.statusText}`);
+            const data = await response.json();
+            setJuegos(Array.isArray(data.games) ? data.games : []);
+        } catch (error) {
+            console.error("Error al cargar los juegos:", error);
+            setJuegos([]);
+        } finally {
+            setLoading(false);
         }
+    };
 
-        const data = response.json();
+    useEffect(() => {
+        fetchGames();
+    }, []);
 
-        setJuegos(Array.isArray(data.games) ? data.games : []);
-
-    } catch (error) {
-        console.error('Error al cargar los juegos:', error);
-        setJuegos([]);
-    } finally {
-        setLoading(false);
-    }
-
+    if (loading) return <p>Cargando juegos...</p>;
 
     return (
         <section>
             {juegos.map((game) => (
                 <div key={game.id}>
-                    <ProductCard imgUrl={game.imageUrl} title={game.title} price={game.price} stock={game.stock} id={game.id} />
+                    <ProductCard
+                        imgUrl={game.imageUrl || "/default-image.png"} // Asegurarte de que hay un valor
+                        title={game.title || "No title"} // Asegurarte de que el título es una cadena
+                        price={game.price || 0} // Asegurarte de que el precio es un número
+                        stock={game.stock || 0} // Asegurarte de que el stock es un número
+                        id={game.id}
+                    />
                 </div>
             ))}
+
         </section>
     );
 }
 
-export default productCardBlock
+export default ProductCardBlock;
