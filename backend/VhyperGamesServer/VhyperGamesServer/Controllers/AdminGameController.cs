@@ -1,7 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using VhyperGamesServer.Models.Database.Entities;
 using VhyperGamesServer.Models.Dtos;
 using VhyperGamesServer.Services;
-using Microsoft.AspNetCore.Authorization;
 
 namespace VhyperGamesServer.Controllers;
 
@@ -14,7 +15,7 @@ public class AdminGameController : ControllerBase
 
     public AdminGameController(AdminGameService adminGameService)
     {
-           _adminGameService = adminGameService;
+        _adminGameService = adminGameService;
     }
 
     [HttpGet("get-game")]
@@ -42,10 +43,15 @@ public class AdminGameController : ControllerBase
             return BadRequest("El objeto AdminFormGameDto no puede ser nulo.");
         }
 
-        await _adminGameService.PutGame(adminFormGameDto, images, alt); 
+        await _adminGameService.PutGame(adminFormGameDto, images, alt);
         return Ok();
     }
 
-
+    [HttpPost]
+    public async Task PostNewGame([FromForm] AdminFormGameDto adminFormGameDto, [FromForm] List<IFormFile> images, [FromForm] List<string> alt)
+    {
+        string title = await _adminGameService.PostNewGame(adminFormGameDto);
+        await _adminGameService.PostNewImages(images, alt, title);
+    }
 
 }

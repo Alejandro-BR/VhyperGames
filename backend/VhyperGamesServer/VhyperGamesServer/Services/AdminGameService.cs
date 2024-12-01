@@ -27,44 +27,58 @@ public class AdminGameService
         return _adminMapper.ToListAdminGameDto(games);
     }
 
-    //public async Task PostNewGame(AdminFormGameDto adminFormGameDto) 
-    //{
-    //    if (adminFormGameDto == null)
-    //    {
-    //        throw new ArgumentNullException("El objeto AdminFormGameDto no puede ser nulo.");
-    //    }
+    public async Task PostNewImages(List<IFormFile> images, List<string> alt, string title)
+    {
+        ArgumentNullException.ThrowIfNull(images);
+        ArgumentNullException.ThrowIfNull(title);
 
-    //    List<ImageGame> imageGames = new List<ImageGame>();
+        Game game = await _unitOfWork.GameRepository.GetGameByTitle(title);
 
-    //    foreach (ImageRequestDto request in adminFormGameDto.ImageRequests) {
-    //        string relativePath = $"{IMAGES_FOLDER}/{Guid.NewGuid()}_{request.File.FileName}";
+        for (int i = 0; i < images.Count; i++)
+        {
 
-    //        ImageGame imageGame = new ImageGame()
-    //        {
-    //            AltText = request.AltText,
-    //            ImageUrl = relativePath
-    //        };
+            string altText = images[i].Name;
 
-    //        imageGames.Add(imageGame);
-    //    }
+            if (alt != null && alt[i] != null)
+            {
+                altText = alt[i];
+            }
 
-    //    Game game = new Game()
-    //    {
-    //        Title = adminFormGameDto.Title,
-    //        Price = adminFormGameDto.Price,
-    //        Stock = adminFormGameDto.Stock,
-    //        GameRequirementsId = adminFormGameDto.GameRequirementsId,
-    //        Description = adminFormGameDto.Description,
-    //        Sinopsis = adminFormGameDto.Sinopsis,
-    //        Genre = adminFormGameDto.Genre,
-    //        DrmFree = adminFormGameDto.DrmFree,
-    //        ReleaseDate = adminFormGameDto.ReleaseDate,
-    //        ImageGames = imageGames,
-    //    };
+            ImageRequestDto imageRequestDto = new ImageRequestDto()
+            {
+                File = images[i],
+                AltText = altText
+            };
 
-    //    await _unitOfWork.GameRepository.InsertAsync(game);
-    //    await _unitOfWork.SaveAsync();
-    //}
+           await _imageService.InsertAsync(imageRequestDto, game.Id);
+        }
+    }
+
+    public async Task<string> PostNewGame(AdminFormGameDto adminFormGameDto)
+    {
+        if (adminFormGameDto == null)
+        {
+            throw new ArgumentNullException("Los parametros no pueden ser nulos.");
+        }
+
+        Game game = new Game()
+        {
+            Title = adminFormGameDto.Title,
+            Price = adminFormGameDto.Price,
+            Stock = adminFormGameDto.Stock,
+            GameRequirementsId = adminFormGameDto.GameRequirementsId,
+            Description = adminFormGameDto.Description,
+            Sinopsis = adminFormGameDto.Sinopsis,
+            Genre = adminFormGameDto.Genre,
+            DrmFree = adminFormGameDto.DrmFree,
+            ReleaseDate = adminFormGameDto.ReleaseDate,
+        };
+
+        await _unitOfWork.GameRepository.InsertAsync(game);
+        await _unitOfWork.SaveAsync();
+
+        return game.Title;
+    }
 
     public async Task<AdminFormGameDto> GetFormGame(int gameId)
     {
