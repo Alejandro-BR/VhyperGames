@@ -78,7 +78,7 @@ public class AdminGameService
         return _adminMapper.ToAdminFormGameDto(game);
     }
 
-    public async Task PutGame(AdminFormGameDto adminFormGameDto, List<IFormFile> imageFiles)
+    public async Task PutGame(AdminFormGameDto adminFormGameDto, List<IFormFile> images, List<string> alt)
     {
         if (adminFormGameDto == null)
         {
@@ -136,9 +136,28 @@ public class AdminGameService
             game.ReleaseDate = adminFormGameDto.ReleaseDate;
         }
 
-        foreach(IFormFile file in imageFiles)
+        if (images != null && alt != null)
         {
-            //_imageService.UpdateAsync(file, -1);
+            List<ImageGame> imagesBack = await _imageService.GetImagesByGameIdAsync(game.Id);
+
+            if (images.Count != imagesBack.Count)
+            {
+                throw new InvalidOperationException("El número de imágenes existentes no coincide con el número de archivos proporcionados.");
+            }
+
+            if (images.Count != alt.Count)
+            {
+                throw new InvalidOperationException("No hay los mismo alt que imagenes.");
+            }
+
+            for (int i = 0; i < images.Count; i++)
+            {
+                IFormFile file = images[i];
+                ImageGame existingImage = imagesBack[i];
+                string text = alt[i];
+
+                await _imageService.UpdateAsync2(file, text, existingImage.Id);
+            }
         }
 
         await _unitOfWork.SaveAsync();

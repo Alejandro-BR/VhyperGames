@@ -57,6 +57,21 @@ public class ImageService
         return newImage;
     }
 
+    public async Task<ImageGame> UpdateAsync2(IFormFile image, string alt, int id)
+    {
+        ImageGame entity = await _unitOfWork.ImageGameRepository.GetByIdAsync(id);
+        entity.AltText = alt;
+
+        _unitOfWork.ImageGameRepository.Update(entity);
+
+        if (await _unitOfWork.SaveAsync() && alt != null)
+        {
+            await StoreImageAsync(entity.ImageUrl, image);
+        }
+
+        return entity;
+    }
+
     public async Task<ImageGame> UpdateAsync(ImageRequestDto image, int id)
     {
         ImageGame entity = await _unitOfWork.ImageGameRepository.GetByIdAsync(id);
@@ -64,7 +79,7 @@ public class ImageService
 
         _unitOfWork.ImageGameRepository.Update(entity);
 
-        if (await _unitOfWork.SaveAsync() && image.File != null)
+        if (await _unitOfWork.SaveAsync() && entity != null)
         {
             await StoreImageAsync(entity.ImageUrl, image.File);
         }
@@ -77,6 +92,11 @@ public class ImageService
         using Stream stream = file.OpenReadStream();
 
         await FileHelper.SaveAsync(stream, relativePath);
+    }
+
+    public async Task<List<ImageGame>> GetImagesByGameIdAsync(int gameId)
+    {
+        return await _unitOfWork.ImageGameRepository.GetImagesByGameIdAsync(gameId);
     }
 
 }

@@ -35,15 +35,14 @@ public class AdminGameController : ControllerBase
     }
 
     [HttpPut("update")]
-    public async Task<IActionResult> PutGame([FromForm] AdminFormGameDto adminFormGameDto, [FromForm] List<IFormFile> imageFiles)
+    public async Task<IActionResult> PutGame([FromForm] AdminFormGameDto adminFormGameDto, [FromForm] List<IFormFile> images, [FromForm] List<string> alt)
     {
-        // Aquí puedes acceder a los archivos cargados en imageFiles
         if (adminFormGameDto == null)
         {
             return BadRequest("El objeto AdminFormGameDto no puede ser nulo.");
         }
 
-        await _adminGameService.PutGame(adminFormGameDto, imageFiles); 
+        await _adminGameService.PutGame(adminFormGameDto, images, alt); 
         return Ok();
     }
 
