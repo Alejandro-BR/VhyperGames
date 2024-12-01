@@ -140,23 +140,16 @@ public class AdminGameService
         {
             List<ImageGame> imagesBack = await _imageService.GetImagesByGameIdAsync(game.Id);
 
-            if (images.Count != imagesBack.Count)
+            if ((images.Count == imagesBack.Count) && (images.Count == alt.Count))
             {
-                throw new InvalidOperationException("El número de imágenes existentes no coincide con el número de archivos proporcionados.");
-            }
+                for (int i = 0; i < images.Count; i++)
+                {
+                    IFormFile file = images[i];
+                    ImageGame existingImage = imagesBack[i];
+                    string text = alt[i];
 
-            if (images.Count != alt.Count)
-            {
-                throw new InvalidOperationException("No hay los mismo alt que imagenes.");
-            }
-
-            for (int i = 0; i < images.Count; i++)
-            {
-                IFormFile file = images[i];
-                ImageGame existingImage = imagesBack[i];
-                string text = alt[i];
-
-                await _imageService.UpdateAsync2(file, text, existingImage.Id);
+                    await _imageService.UpdateAsync2(file, text, existingImage.Id);
+                }
             }
         }
 
