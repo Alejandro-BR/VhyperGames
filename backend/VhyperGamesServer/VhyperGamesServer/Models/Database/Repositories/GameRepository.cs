@@ -70,6 +70,17 @@ public class GameRepository : Repository<Game, int>
         return await query.ToListAsync();
     }
 
+    public async Task<List<Game>> GetGamesByTitles(IEnumerable<string> titles)
+    {
+        if (titles == null || !titles.Any())
+        {
+            return new List<Game>();
+        }
+
+        return await Context.Games
+            .Where(g => titles.Contains(g.Title))
+            .ToListAsync();
+    }
 
 
 }

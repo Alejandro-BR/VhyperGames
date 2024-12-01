@@ -12,13 +12,14 @@ public class AdminGameService
 
     private readonly ImageService _imageService;
 
-    private const string IMAGES_FOLDER = "images";
+    private readonly SmartSearchService _smartSearchService;
 
-    public AdminGameService(AdminMapper adminMapper, UnitOfWork unitOfWork, ImageService imageService)
+    public AdminGameService(AdminMapper adminMapper, UnitOfWork unitOfWork, ImageService imageService, SmartSearchService smartSearchService)    
     {
         _adminMapper = adminMapper;
         _unitOfWork = unitOfWork;
         _imageService = imageService;
+        _smartSearchService = smartSearchService;
     }
 
     public async Task<List<AdminGameDto>> GetListGame()
@@ -168,6 +169,37 @@ public class AdminGameService
         }
 
         await _unitOfWork.SaveAsync();
+    }
+
+    public async Task<List<AdminGameDto>> GetGameBySearch(string search)
+    {
+        List<Game> games = new List<Game>();
+
+        if (string.IsNullOrWhiteSpace(search))
+        {
+            throw new ArgumentException("La búsqueda no puede estar vacía.");
+        }
+
+        Game game = await _unitOfWork.GameRepository.GetGameByTitle(search);
+
+        if (game != null && game.Title == search)
+        {
+            games.Add(game);
+
+        } else
+        {
+            IEnumerable<string> matchedTitles = _smartSearchService.Search(search);
+
+            if (matchedTitles != null && matchedTitles.Any())
+            {
+                games = await _unitOfWork.GameRepository.GetGamesByTitles(matchedTitles);
+            }
+
+        }
+
+        List<AdminGameDto> adminGames = _adminMapper.ToListAdminGameDto(games);
+
+        return adminGames;
     }
 
 }

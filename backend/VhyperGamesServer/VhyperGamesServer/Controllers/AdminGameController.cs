@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using VhyperGamesServer.Models.Database.Entities;
 using VhyperGamesServer.Models.Dtos;
 using VhyperGamesServer.Services;
 
@@ -53,5 +52,12 @@ public class AdminGameController : ControllerBase
         string title = await _adminGameService.PostNewGame(adminFormGameDto);
         await _adminGameService.PostNewImages(images, alt, title);
     }
+
+    [HttpGet("search")]
+    public async Task<IActionResult> GetGameBySearch(string search)
+    {
+        return Ok(await _adminGameService.GetGameBySearch(search));
+    }
+
 
 }
