@@ -12,13 +12,14 @@ public class AdminGameService
 
     private readonly ImageService _imageService;
 
-    private const string IMAGES_FOLDER = "images";
+    private readonly SmartSearchService _smartSearchService;
 
-    public AdminGameService(AdminMapper adminMapper, UnitOfWork unitOfWork, ImageService imageService)
+    public AdminGameService(AdminMapper adminMapper, UnitOfWork unitOfWork, ImageService imageService, SmartSearchService smartSearchService)    
     {
         _adminMapper = adminMapper;
         _unitOfWork = unitOfWork;
         _imageService = imageService;
+        _smartSearchService = smartSearchService;
     }
 
     public async Task<List<AdminGameDto>> GetListGame()
@@ -27,44 +28,58 @@ public class AdminGameService
         return _adminMapper.ToListAdminGameDto(games);
     }
 
-    //public async Task PostNewGame(AdminFormGameDto adminFormGameDto) 
-    //{
-    //    if (adminFormGameDto == null)
-    //    {
-    //        throw new ArgumentNullException("El objeto AdminFormGameDto no puede ser nulo.");
-    //    }
+    public async Task PostNewImages(List<IFormFile> images, List<string> alt, string title)
+    {
+        ArgumentNullException.ThrowIfNull(images);
+        ArgumentNullException.ThrowIfNull(title);
 
-    //    List<ImageGame> imageGames = new List<ImageGame>();
+        Game game = await _unitOfWork.GameRepository.GetGameByTitle(title);
 
-    //    foreach (ImageRequestDto request in adminFormGameDto.ImageRequests) {
-    //        string relativePath = $"{IMAGES_FOLDER}/{Guid.NewGuid()}_{request.File.FileName}";
+        for (int i = 0; i < images.Count; i++)
+        {
 
-    //        ImageGame imageGame = new ImageGame()
-    //        {
-    //            AltText = request.AltText,
-    //            ImageUrl = relativePath
-    //        };
+            string altText = images[i].Name;
 
-    //        imageGames.Add(imageGame);
-    //    }
+            if (alt != null && alt[i] != null)
+            {
+                altText = alt[i];
+            }
 
-    //    Game game = new Game()
-    //    {
-    //        Title = adminFormGameDto.Title,
-    //        Price = adminFormGameDto.Price,
-    //        Stock = adminFormGameDto.Stock,
-    //        GameRequirementsId = adminFormGameDto.GameRequirementsId,
-    //        Description = adminFormGameDto.Description,
-    //        Sinopsis = adminFormGameDto.Sinopsis,
-    //        Genre = adminFormGameDto.Genre,
-    //        DrmFree = adminFormGameDto.DrmFree,
-    //        ReleaseDate = adminFormGameDto.ReleaseDate,
-    //        ImageGames = imageGames,
-    //    };
+            ImageRequestDto imageRequestDto = new ImageRequestDto()
+            {
+                File = images[i],
+                AltText = altText
+            };
 
-    //    await _unitOfWork.GameRepository.InsertAsync(game);
-    //    await _unitOfWork.SaveAsync();
-    //}
+           await _imageService.InsertAsync(imageRequestDto, game.Id);
+        }
+    }
+
+    public async Task<string> PostNewGame(AdminFormGameDto adminFormGameDto)
+    {
+        if (adminFormGameDto == null)
+        {
+            throw new ArgumentNullException("Los parametros no pueden ser nulos.");
+        }
+
+        Game game = new Game()
+        {
+            Title = adminFormGameDto.Title,
+            Price = adminFormGameDto.Price,
+            Stock = adminFormGameDto.Stock,
+            GameRequirementsId = adminFormGameDto.GameRequirementsId,
+            Description = adminFormGameDto.Description,
+            Sinopsis = adminFormGameDto.Sinopsis,
+            Genre = adminFormGameDto.Genre,
+            DrmFree = adminFormGameDto.DrmFree,
+            ReleaseDate = adminFormGameDto.ReleaseDate,
+        };
+
+        await _unitOfWork.GameRepository.InsertAsync(game);
+        await _unitOfWork.SaveAsync();
+
+        return game.Title;
+    }
 
     public async Task<AdminFormGameDto> GetFormGame(int gameId)
     {
@@ -78,7 +93,7 @@ public class AdminGameService
         return _adminMapper.ToAdminFormGameDto(game);
     }
 
-    public async Task PutGame(AdminFormGameDto adminFormGameDto, List<IFormFile> imageFiles)
+    public async Task PutGame(AdminFormGameDto adminFormGameDto, List<IFormFile> images, List<string> alt)
     {
         if (adminFormGameDto == null)
         {
@@ -136,12 +151,55 @@ public class AdminGameService
             game.ReleaseDate = adminFormGameDto.ReleaseDate;
         }
 
-        foreach(IFormFile file in imageFiles)
+        if (images != null && alt != null)
         {
-            //_imageService.UpdateAsync(file, -1);
+            List<ImageGame> imagesBack = await _imageService.GetImagesByGameIdAsync(game.Id);
+
+            if ((images.Count == imagesBack.Count) && (images.Count == alt.Count))
+            {
+                for (int i = 0; i < images.Count; i++)
+                {
+                    IFormFile file = images[i];
+                    ImageGame existingImage = imagesBack[i];
+                    string text = alt[i];
+
+                    await _imageService.UpdateAsync2(file, text, existingImage.Id);
+                }
+            }
         }
 
         await _unitOfWork.SaveAsync();
+    }
+
+    public async Task<List<AdminGameDto>> GetGameBySearch(string search)
+    {
+        List<Game> games = new List<Game>();
+
+        if (string.IsNullOrWhiteSpace(search))
+        {
+            throw new ArgumentException("La búsqueda no puede estar vacía.");
+        }
+
+        Game game = await _unitOfWork.GameRepository.GetGameByTitle(search);
+
+        if (game != null && game.Title == search)
+        {
+            games.Add(game);
+
+        } else
+        {
+            IEnumerable<string> matchedTitles = _smartSearchService.Search(search);
+
+            if (matchedTitles != null && matchedTitles.Any())
+            {
+                games = await _unitOfWork.GameRepository.GetGamesByTitles(matchedTitles);
+            }
+
+        }
+
+        List<AdminGameDto> adminGames = _adminMapper.ToListAdminGameDto(games);
+
+        return adminGames;
     }
 
 }
