@@ -15,10 +15,6 @@ function Catalogo() {
         const searchText = queryParams.get("SearchText") || "";
         const drmFree = queryParams.get("DrmFree") !== null ? parseInt(queryParams.get("DrmFree"), 10) : -1;
 
-        console.log("Query Parameters:", location.search);
-        console.log("SearchText:", searchText);
-        console.log("DrmFree:", drmFree);
-
         setInitialSearchText(searchText);
         setInitialDrmFree(drmFree);
     }, [location.search]);

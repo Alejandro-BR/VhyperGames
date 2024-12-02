@@ -128,6 +128,11 @@ function Header() {
           type="text"
           placeholder="Buscar juegos"
           onChange={(e) => setSearchText(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              handleSearch();
+            }
+          }}
         />
 
         <img
