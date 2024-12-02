@@ -122,7 +122,7 @@ namespace VhyperGamesServer.Services
 
         public async Task<List<GameCardDto>> GetSaleGames()
         {
-            string[] titles = { "The Witcher III" };
+            string[] titles = { "The Witcher III", "Minecraft", "Hollow Knight", "Spore", "GRIS" };
             List<Game> games = new List<Game>();
 
             foreach (var title in titles)
