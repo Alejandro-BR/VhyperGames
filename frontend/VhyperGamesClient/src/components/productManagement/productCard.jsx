@@ -1,4 +1,4 @@
-import classes from "./productCard.module.css"
+import classes from "./ProductCard.module.css"
 import { BASE_URL } from "../../config";
 import { Link } from "react-router-dom";
 import { ConvertToDecimal } from "../../utils/price"

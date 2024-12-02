@@ -16,7 +16,7 @@
 
 .card:hover {
     transform: scale(1.02);
-    box-shadow: 0px 0px 50px var(--led-purple);
+    box-shadow: 0px 0px 10px var(--led-purple);
 }
 
 .gameImg {
@@ -44,7 +44,6 @@
 
 .container:hover {
     background-color: var(--principal-light-blue);
-    /* Color de hover */
 }
 
 .containerTitle {

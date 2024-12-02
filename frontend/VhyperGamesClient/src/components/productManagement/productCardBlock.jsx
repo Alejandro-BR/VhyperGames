@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import ProductCard from "./productCard";
+import ProductCard from "./ProductCard";
 import { CATALOG_FILTER } from "../../config";
-import classes from "./productCardBlock.module.css";
+import classes from "./ProductCardBlock.module.css";
 
 // function ProductCardBlock() {
 // const [juegos, setJuegos] = useState([]);

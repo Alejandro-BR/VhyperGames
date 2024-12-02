@@ -13,6 +13,7 @@ import { CheckoutProvider } from './context/CheckoutContext';
 import UserPage from './pages/UserPage';
 import Ethereum from './components/Ethereum/Ethereum';
 import ProductManagement from './pages/ProductManagement';
+import UsersManagement from './pages/UsersManagement';
 
 import {
   createBrowserRouter,
@@ -36,6 +37,7 @@ const routeDefinition = createRoutesFromElements(
     <Route path="user" element={<UserPage />} />
     <Route path="EthereumCheckout" element={<Ethereum />} />
     <Route path="product-management" element={<ProductManagement />} />
+    <Route path="users-management" element={<UsersManagement />} />
   </Route>
 );
 
