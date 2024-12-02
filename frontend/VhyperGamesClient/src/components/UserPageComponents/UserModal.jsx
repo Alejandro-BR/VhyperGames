@@ -5,9 +5,6 @@ function UserModal({ onClose }) {
     return (
         <div className={classes.modalOverlay}>
             <div className={classes.userModal}>
-                <button className={classes.logoCerrar} onClick={onClose}>
-                    <img src="/icon/cerrar-icon.svg" alt="icono cerrar" />
-                </button>
 
                 <div className={classes.inputGroup}>
                     <input
@@ -49,7 +46,28 @@ function UserModal({ onClose }) {
                     />
                 </div>
 
+                <div className={classes.inputGroup}>
+                    <input
+                        id="password"
+                        name="password"
+                        placeholder="Contraseña"
+                        type="text"
+                        required
+                    />
+                </div>
+
+                <div className={classes.inputGroup}>
+                    <input
+                        id="passwordConfirm"
+                        name="passworConfirm"
+                        placeholder="Confirme la contraseña"
+                        type="text"
+                        required
+                    />
+                </div>
+
                 <Button children="Actualizar datos" variant="large" color="azul"/>
+                <Button children="Cancelar" variant="large" color="morado" onClick={onClose}/>
             </div>
 
         </div>
