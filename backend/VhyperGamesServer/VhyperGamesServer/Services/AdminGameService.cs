@@ -107,49 +107,7 @@ public class AdminGameService
             throw new KeyNotFoundException($"No se encontró un juego con el ID {adminFormGameDto.Id}.");
         }
 
-        if (adminFormGameDto.Title != null && adminFormGameDto.Title != "" && adminFormGameDto.Title != game.Title) {
-            game.Title = adminFormGameDto.Title;
-        }
-
-        if (adminFormGameDto.Price != 0 && adminFormGameDto.Price != game.Price)
-        {
-            game.Price = adminFormGameDto.Price;
-        }
-
-        if (adminFormGameDto.Stock != 0 && adminFormGameDto.Stock != game.Stock)
-        {
-            game.Stock = adminFormGameDto.Stock;
-        }
-
-        if (adminFormGameDto.GameRequirementsId != 0 && adminFormGameDto.GameRequirementsId != game.GameRequirementsId)
-        {
-            game.GameRequirementsId = adminFormGameDto.GameRequirementsId;
-        }
-
-        if (adminFormGameDto.Description != null && adminFormGameDto.Description != "" && adminFormGameDto.Description != game.Description)
-        {
-            game.Description = adminFormGameDto.Description;
-        }
-
-        if (adminFormGameDto.Sinopsis != null && adminFormGameDto.Sinopsis != "" && adminFormGameDto.Sinopsis != game.Sinopsis)
-        {
-            game.Sinopsis = adminFormGameDto.Sinopsis;
-        }
-
-        if (adminFormGameDto.Genre != game.Genre)
-        {
-            game.Genre = adminFormGameDto.Genre;
-        }
-
-        if (adminFormGameDto.DrmFree != game.DrmFree)
-        {
-            game.DrmFree = adminFormGameDto.DrmFree;
-        }
-
-        if (adminFormGameDto.ReleaseDate != game.ReleaseDate)
-        {
-            game.ReleaseDate = adminFormGameDto.ReleaseDate;
-        }
+        UpdateGameData(game, adminFormGameDto);
 
         if (images != null && adminFormGameDto.ImagesId != null)
         {
@@ -203,5 +161,54 @@ public class AdminGameService
 
         return adminGames;
     }
+
+    private static void UpdateGameData(Game game, AdminFormGameDto adminFormGameDto)
+    {
+        if (adminFormGameDto.Title != null && adminFormGameDto.Title != "" && adminFormGameDto.Title != game.Title)
+        {
+            game.Title = adminFormGameDto.Title;
+        }
+
+        if (adminFormGameDto.Price != 0 && adminFormGameDto.Price != game.Price)
+        {
+            game.Price = adminFormGameDto.Price;
+        }
+
+        if (adminFormGameDto.Stock != 0 && adminFormGameDto.Stock != game.Stock)
+        {
+            game.Stock = adminFormGameDto.Stock;
+        }
+
+        if (adminFormGameDto.GameRequirementsId != 0 && adminFormGameDto.GameRequirementsId != game.GameRequirementsId)
+        {
+            game.GameRequirementsId = adminFormGameDto.GameRequirementsId;
+        }
+
+        if (adminFormGameDto.Description != null && adminFormGameDto.Description != "" && adminFormGameDto.Description != game.Description)
+        {
+            game.Description = adminFormGameDto.Description;
+        }
+
+        if (adminFormGameDto.Sinopsis != null && adminFormGameDto.Sinopsis != "" && adminFormGameDto.Sinopsis != game.Sinopsis)
+        {
+            game.Sinopsis = adminFormGameDto.Sinopsis;
+        }
+
+        if (adminFormGameDto.Genre != game.Genre)
+        {
+            game.Genre = adminFormGameDto.Genre;
+        }
+
+        if (adminFormGameDto.DrmFree != game.DrmFree)
+        {
+            game.DrmFree = adminFormGameDto.DrmFree;
+        }
+
+        if (adminFormGameDto.ReleaseDate != game.ReleaseDate)
+        {
+            game.ReleaseDate = adminFormGameDto.ReleaseDate;
+        }
+    }
+
 
 }
