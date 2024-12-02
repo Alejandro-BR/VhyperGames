@@ -48,9 +48,9 @@ public class Program
         builder.Services.AddScoped<UnitOfWork>();
 
         // Inyección de servicios
-        builder.Services.AddTransient<UserService>();
-        builder.Services.AddTransient<CatalogService>();
-        builder.Services.AddTransient<DetailsViewService>();
+        builder.Services.AddScoped<UserService>();
+        builder.Services.AddScoped<CatalogService>();
+        builder.Services.AddScoped<DetailsViewService>();
         builder.Services.AddScoped<SmartSearchService>();
         builder.Services.AddScoped<IAService>();
         builder.Services.AddScoped<CartService>();
@@ -73,6 +73,7 @@ public class Program
         builder.Services.AddScoped<CartMapper>();
         builder.Services.AddScoped<ReserveAndOrderMapper>();
         builder.Services.AddScoped<AdminMapper>();
+        builder.Services.AddScoped<UserMapper>();
 
         // Stripe
         builder.Services.AddTransient<StripeService>();

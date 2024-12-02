@@ -1,7 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using VhyperGamesServer.Models.Database;
-using VhyperGamesServer.Models.Database.Entities;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Nethereum.ABI.CompilationMetadata;
 using VhyperGamesServer.Models.Database.Repositories;
+using VhyperGamesServer.Models.Dtos;
 using VhyperGamesServer.Services;
 
 namespace VhyperGamesServer.Controller;
@@ -10,20 +11,64 @@ namespace VhyperGamesServer.Controller;
 [ApiController]
 public class UserController : ControllerBase
 {
-    private readonly UserService _service;
+    private readonly UserService _userService;
+    private readonly UnitOfWork _unitOfWork;
 
-    public UserController(UserService service)
+    public UserController(UserService userService, UnitOfWork unitOfWork)
     {
-        _service = service;
+        _userService = userService;
+        _unitOfWork = unitOfWork;
     }
 
-    /**
-     * GetUsers
-     * Devuelve todos los usuarios
-     */
-    //[HttpGet("GetUsers")]
-    //public async Task<IEnumerable<User>> GetUsers()
-    //{
-    //    return await _service.GetUsers();
-    //}
+    [HttpGet("get-user")]
+    [Authorize]
+    public async Task<ActionResult<UserDto>> GetUser()
+        {
+        try
+        {
+            var userIdClaim = User.FindFirst("id");
+            if (userIdClaim == null)
+            {
+                return Unauthorized(new { message = "Usuario no autenticado." });
+            }
+
+            int userId = int.Parse(userIdClaim.Value);
+
+            return await _userService.GetUserDtoById(userId);
+
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, new { message = "Error al generar la sesión de pago.", detail = ex.Message });
+        }
+    }
+
+    [HttpPut("update-user")]
+    [Authorize]
+    public async Task<IActionResult> UpdateUser([FromBody] UserDto userDto)
+    {
+        try
+        {
+            var userIdClaim = User.FindFirst("id");
+            if (userIdClaim == null)
+            {
+                return Unauthorized(new { message = "Usuario no autenticado." });
+            }
+
+            int userId = int.Parse(userIdClaim.Value);
+
+            await _userService.UpdateUserBD(userId, userDto);
+
+            return Ok(new { message = "Usuario actualizado exitosamente." });
+
+        }
+        catch (KeyNotFoundException ex)
+        {
+            return NotFound(new { message = ex.Message });
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, new { message = "Error al actualizar el usuario.", detail = ex.Message });
+        }
+    }
 }

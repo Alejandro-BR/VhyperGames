@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using TorchSharp.Modules;
 using VhyperGamesServer.Models.Database;
 using VhyperGamesServer.Models.Database.Entities;
 using VhyperGamesServer.Models.Dtos;
@@ -46,6 +47,12 @@ public class UserRepository : Repository<User, int>
     public async Task<List<User>> GetAllUserAsync()
     {
         return await GetQueryable().ToListAsync();
+    }
+
+    public async Task<User> GetUserById(int id)
+    {
+        return await Context.Set<User>()
+            .FirstOrDefaultAsync(u => u.Id == id);
     }
 
 }
