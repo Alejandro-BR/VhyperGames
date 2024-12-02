@@ -13,7 +13,7 @@ function Catalogo() {
         // Extrae los parámetros de la URL cada vez que cambian
         const queryParams = new URLSearchParams(location.search);
         const searchText = queryParams.get("SearchText") || "";
-        const drmFree = queryParams.get("DrmFree") !== null ? parseInt(queryParams.get("DrmFree"), 10) : -1;
+        const drmFree = queryParams.get("DrmFree") !== null ? queryParams.get("DrmFree") : -1;
 
         setInitialSearchText(searchText);
         setInitialDrmFree(drmFree);
