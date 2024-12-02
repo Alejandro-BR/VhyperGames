@@ -40,10 +40,48 @@
   gap: 10px;
 }
 
-.menu {
-  height: 50%;
-  cursor: pointer;
+
+.menu-container {
+  position: relative; 
+  display: inline-block;
 }
+
+
+.menu-icon {
+  cursor: pointer;
+  display: block;
+}
+
+
+.dropdown-menu {
+  position: absolute;
+  display: flex;
+  flex-direction: column; 
+  top: 80%; 
+  background-color: var(--header-footer-color);
+  width: 100px;  
+}
+
+
+.dropdown-menu__option {
+  padding: 4px;
+  cursor: pointer;
+  color: white;
+  text-align: center;
+  border: 1px solid #fff;
+  font-family: 'UniversCnBold', sans-serif;
+  transition: background-color 0.3s ease;
+}
+
+.dropdown-menu__option:hover {
+  background-color: var(--principal-blue); 
+}
+
+.dropdown-menu__option--selected {
+  background-color: var(--principal-blue);
+}
+
+
 
 .intoSearchBar {
   flex: 1;

@@ -1,21 +1,26 @@
 import { useState, useRef } from "react";
 import classes from "./Header.module.css";
 import Button from "../buttonComponent/Button";
-import { messageCart, messageCatalog } from "../../helpers/messages";
 import { useNavigate } from "react-router-dom";
 import LoginModal from "../loginComponents/LoginModal";
 import RegisterModal from "../registerComponents/RegisterModal";
 import CartIcon from "./CartIcon";
-import { useAuth } from "../../context/authcontext";
+import { useAuth } from "../../context/AuthContext";
 import { deleteLocalStorage } from "../../utils/keep";
 
 function Header() {
   const [mostrarLogin, setMostrarLogin] = useState(false);
   const [mostrarRegister, setMostrarRegister] = useState(false);
   const [showLogout, setShowLogout] = useState(false);
+
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [searchText, setSearchText] = useState("");
+  const [drmFilter, setDrmFilter] = useState(-1);
+
   const { token, username, logout } = useAuth();
   const navigate = useNavigate();
   const timerRef = useRef(null);
+
 
   // Manejar clic en el ícono de usuario
   const handleUserClick = () => {
@@ -39,8 +44,22 @@ function Header() {
   const handleMouseLeave = () => {
     timerRef.current = setTimeout(() => {
       setShowLogout(false);
-    }, 500); 
+    }, 500);
   };
+
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
+
+  const handleDRMOption = (drmValue) => {
+    setDrmFilter((prevFilter) => (prevFilter === drmValue ? -1 : drmValue));
+    setMenuOpen(false);
+  };
+
+  const handleSearch = () => {
+    navigate(`/catalogo?SearchText=${encodeURIComponent(searchText)}&DrmFree=${drmFilter}`);
+  };
+
 
   // Manejar clic en logout
   const handleLogout = () => {
@@ -77,22 +96,45 @@ function Header() {
       </div>
 
       <div className={classes.searchBar}>
-        <img
-          className={classes.menu}
-          src="/img/menu.PNG"
-          alt="menu"
-          onClick={messageCatalog}
-        />
+        <div className={classes["menu-container"]}>
+          <img
+            className="menu-icon"
+            src="/icon/rayas-icon.svg"
+            alt="menu"
+            onClick={toggleMenu}
+          />
+
+          {menuOpen && (
+            <div className={classes["dropdown-menu"]}>
+              <div
+                className={`${classes["dropdown-menu__option"]} ${drmFilter === 1 ? classes["dropdown-menu__option--selected"] : ""
+                  }`}
+                onClick={() => handleDRMOption(1)}
+              >
+                DRM-FREE
+              </div>
+              <div
+                className={`${classes["dropdown-menu__option"]} ${drmFilter === 0 ? classes["dropdown-menu__option--selected"] : ""
+                  }`}
+                onClick={() => handleDRMOption(0)}
+              >
+                DRM
+              </div>
+            </div>
+          )}
+        </div>
         <input
           className={classes.intoSearchBar}
           type="text"
           placeholder="Buscar juegos"
+          onChange={(e) => setSearchText(e.target.value)}
         />
+
         <img
           className={classes.search}
           src="/img/lupa.PNG"
           alt="search"
-          onClick={messageCatalog}
+          onClick={handleSearch}
         />
       </div>
 

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import CatalogFilters from "./CatalogFilters";
 import classes from "./CatalogStyle.module.css";
 import BlockGame from "../blockgameComponent/BlockGame";
@@ -6,19 +7,30 @@ import Pagination from "./Pagination";
 import { CATALOG_FILTER } from "../../config";
 import { getVarSessionStorage, updateSessionStorage } from "../../utils/keep.js";
 
-function CatalogBody() {
+function CatalogBody({ initialSearchText = "", initialDrmFree = -1 }) {
     const [juegos, setJuegos] = useState([]);
     const [totalPages, setTotalPages] = useState(0);
     const [loading, setLoading] = useState(true);
     const [searchText, setSearchText] = useState("");
     const [searchFilter, setSearchFilter] = useState({
-        searchText: "",
+        searchText: initialSearchText,
         sortCriteria: 0,
-        drmFree: -1,
+        drmFree: initialDrmFree,
         genre: -1,
         resultsPerPage: 10,
         page: 1
     });
+
+    useEffect(() => {
+        if (initialSearchText || initialDrmFree !== null) {
+            setSearchFilter(prevFilter => ({
+                ...prevFilter,
+                searchText: initialSearchText || prevFilter.searchText,
+                drmFree: initialDrmFree !== null ? initialDrmFree : prevFilter.drmFree,
+            }));
+        }
+    }, [initialSearchText, initialDrmFree]);
+    
 
     const CLAVE = "filter";
     const [filtersLoaded, setFiltersLoaded] = useState(false);
@@ -37,13 +49,15 @@ function CatalogBody() {
     const fetchJuegos = async (filter) => {
         setLoading(true);
         try {
+            console.log("fetchJuegos filter:", filter);
+
             let queryParams = new URLSearchParams({
-                searchText: filter.searchText,
-                sortCriteria: filter.sortCriteria,
-                drmFree: filter.drmFree,
-                genre: filter.genre,
-                resultsPerPage: filter.resultsPerPage,
-                page: filter.page
+                searchText: filter.searchText || "",
+                sortCriteria: filter.sortCriteria || 0,
+                drmFree: (filter.drmFree !== undefined && filter.drmFree !== null) ? filter.drmFree : -1,
+                genre: filter.genre || -1,
+                resultsPerPage: filter.resultsPerPage || 10,
+                page: filter.page || 1,
             }).toString();
 
             const response = await fetch(`${CATALOG_FILTER}?${queryParams}`, {
