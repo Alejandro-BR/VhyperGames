@@ -122,7 +122,7 @@ function CartPayment() {
           variant={"medium"}
           color={"azul-morado"}
           onClick={() => {
-            handlePaymentClick(false, 0, "/checkout/ethereum");
+            handlePaymentClick(false, 0, "/checkout/EthereumCheckout");
           }}
         >
           PAGAR EN ETHEREUM

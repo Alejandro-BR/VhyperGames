@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using VhyperGamesServer.Models.Dtos;
 using VhyperGamesServer.Services;
-using Microsoft.AspNetCore.Authorization;
 
 namespace VhyperGamesServer.Controllers;
 
@@ -14,7 +14,7 @@ public class AdminGameController : ControllerBase
 
     public AdminGameController(AdminGameService adminGameService)
     {
-           _adminGameService = adminGameService;
+        _adminGameService = adminGameService;
     }
 
     [HttpGet("get-game")]
@@ -35,18 +35,29 @@ public class AdminGameController : ControllerBase
     }
 
     [HttpPut("update")]
-    public async Task<IActionResult> PutGame([FromForm] AdminFormGameDto adminFormGameDto, [FromForm] List<IFormFile> imageFiles)
+    public async Task<IActionResult> PutGame([FromForm] AdminFormGameDto adminFormGameDto, [FromForm] List<IFormFile> images, [FromForm] List<string> alt)
     {
-        // Aquí puedes acceder a los archivos cargados en imageFiles
         if (adminFormGameDto == null)
         {
             return BadRequest("El objeto AdminFormGameDto no puede ser nulo.");
         }
 
-        await _adminGameService.PutGame(adminFormGameDto, imageFiles); 
+        await _adminGameService.PutGame(adminFormGameDto, images, alt);
         return Ok();
     }
 
+    [HttpPost]
+    public async Task PostNewGame([FromForm] AdminFormGameDto adminFormGameDto, [FromForm] List<IFormFile> images, [FromForm] List<string> alt)
+    {
+        string title = await _adminGameService.PostNewGame(adminFormGameDto);
+        await _adminGameService.PostNewImages(images, alt, title);
+    }
+
+    [HttpGet("search")]
+    public async Task<IActionResult> GetGameBySearch(string search)
+    {
+        return Ok(await _adminGameService.GetGameBySearch(search));
+    }
 
 
 }

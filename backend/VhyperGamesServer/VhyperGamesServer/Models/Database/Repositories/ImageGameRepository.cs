@@ -16,4 +16,12 @@ public class ImageGameRepository : Repository<ImageGame, int>
     {
         return await _context.ImagesGame.Include(ig => ig.Game).ToListAsync(); 
     }
+
+    public async Task<List<ImageGame>> GetImagesByGameIdAsync(int gameId)
+    {
+        return await _context.ImagesGame
+            .Where(ig => ig.GameId == gameId) 
+            .ToListAsync();
+    }
+
 }

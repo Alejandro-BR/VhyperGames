@@ -1,83 +1,123 @@
-import { useState } from "react";
+import { useState, useContext, useEffect } from "react";
 import Web3 from "web3";
-import { BLOCKCHAIN_TRANSACTION, BLOCKCHAIN_CHECK } from "../../config";
+import { useNavigate } from "react-router-dom";
+import {
+  BLOCKCHAIN_TRANSACTION,
+  BLOCKCHAIN_CHECK,
+  CREATE_PAYMENT_SESSION,
+  CONFIRM_RESERVE,
+} from "../../config";
 export const WALLET_METAMASK = import.meta.env.VITE_WALLET_METAMASK;
+import { useAuth } from "../../context/authcontext";
+import { CheckoutContext } from "../../context/CheckoutContext";
+import Button from "../buttonComponent/Button";
 
 function Ethereum() {
   const [wallet, setWallet] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [transactionProcessing, setTransactionProcessing] = useState(false);
   const [transactionEnd, setTransactionEnd] = useState(false);
+  const [cartTotalEuros, setCartTotalEuros] = useState(0);
+  const [cartTotalEth, setCartTotalEth] = useState(0);
+  const token = useAuth();
+  const { reserveId, handleConfirmReserve } = useContext(CheckoutContext);
+  const navigate = useNavigate(); 
 
-  const total = 10; 
+  async function createPaymentSession() {
+    try {
+      setLoading(true);
+      const response = await fetch(CREATE_PAYMENT_SESSION, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token.token}`,
+        },
+        body: JSON.stringify(reserveId),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Error: ${response.status} - ${response.statusText}`);
+      }
+
+      const data = await response.json();
+      setCartTotalEuros(data.totalEuros);
+      setCartTotalEth(data.totalEth);
+      setError(null);
+    } catch (err) {
+      setError(`Error al crear la sesión de pago: ${err.message}`);
+    } finally {
+      setLoading(false);
+    }
+  }
 
   async function conectandoWallet() {
     try {
-      console.log("Conectando a MetaMask...");
       if (!window.ethereum?.isMetaMask) {
-        setError("MetaMask no está instalado en tu navegador.");
-        return;
+        throw new Error("MetaMask no está instalado en tu navegador.");
       }
 
-      setError(null);
       setLoading(true);
-
       const web3Instance = new Web3(window.ethereum);
       const accounts = await web3Instance.eth.requestAccounts();
 
       if (accounts.length === 0) {
-        setError("No tienes ninguna cuenta activa en MetaMask.");
-        return;
+        throw new Error("No tienes ninguna cuenta activa en MetaMask.");
       }
 
-      const account = accounts[0];
-      setWallet(account);
-      console.log("Wallet conectada:", account);
+      setWallet(accounts[0]);
+      setError(null);
+    } catch (err) {
+      setError(`Error al conectar MetaMask: ${err.message}`);
+    } finally {
+      setLoading(false);
+    }
+  }
 
-      // Solicitar datos de la transacción al backend
-      const transactionData = await fetchTransactionData(total);
-      console.log("Datos de transacción recibidos:", transactionData);
+  async function handleComplete() {
+    try {
+      if (!wallet) {
+        throw new Error("Debes conectar tu wallet antes de completar la transacción.");
+      }
 
-      // Crear y enviar la transacción desde MetaMask
+      const transactionData = await fetchTransactionData(cartTotalEuros);
+
+      setTransactionProcessing(true);
       const txHash = await window.ethereum.request({
         method: "eth_sendTransaction",
         params: [
           {
-            from: account,
-            to: WALLET_METAMASK, 
-            value: transactionData.value, 
+            from: wallet,
+            to: WALLET_METAMASK,
+            value: transactionData.value,
             gas: transactionData.gas,
             gasPrice: transactionData.gasPrice,
           },
         ],
       });
 
-      console.log("Hash de la transacción:", txHash);
+      console.log("Transacción enviada, hash:", txHash);
 
-      // Verificar la transacción en el backend
+      await new Promise((resolve) => setTimeout(resolve, 10000));
 
-await new Promise((resolve) => setTimeout(resolve, 10000));
+      const isValid = await verifyTransaction(txHash, wallet, WALLET_METAMASK, transactionData.value);
 
-const isValid = await verifyTransaction(
-  txHash,
-  account,
-  WALLET_METAMASK, 
-  transactionData.value
-);  //0xbe143897B70f343EeAc5D50BEe1A0e2708c6Ff07
-// 0xB57B61DB1E978158A0c18951687318C1CC19fB54
-console.log("FROM",account)
-console.log(isValid);
       if (isValid) {
+        console.log("Transacción validada. Confirmando reserva...");
+        const orderId = await handleConfirmReserve(CONFIRM_RESERVE, reserveId);
+        console.log("Reserva confirmada con ID:", orderId);
+
         setTransactionEnd(true);
         setError(null);
-        console.log("Transacción validada exitosamente.");
+
+        navigate("/paymentConfirmation", { state: { status: "success", orderId } });
       } else {
         throw new Error("La transacción no es válida.");
       }
-    } catch (error) {
-      console.error("Error al procesar la transacción:", error);
-      setError("Error al procesar la transacción. Por favor, inténtalo de nuevo.");
+    } catch (err) {
+      setError(`Error al completar la transacción: ${err.message}`);
     } finally {
+      setTransactionProcessing(false);
       setLoading(false);
     }
   }
@@ -86,13 +126,8 @@ console.log(isValid);
     try {
       const response = await fetch(BLOCKCHAIN_TRANSACTION, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          networkUrl: "https://otter.bordel.wtf/erigon", 
-          euros: total,
-        }),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ networkUrl: "https://otter.bordel.wtf/erigon", euros }),
       });
 
       if (!response.ok) {
@@ -100,15 +135,13 @@ console.log(isValid);
       }
 
       return await response.json();
-    } catch (error) {
-      console.error("Error en fetchTransactionData:", error);
-      throw error;
+    } catch (err) {
+      throw new Error(`Error al obtener los datos de la transacción: ${err.message}`);
     }
   }
 
   async function verifyTransaction(txHash, from, to, value) {
     try {
-      console.log(from)
       const response = await fetch(BLOCKCHAIN_CHECK, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -120,33 +153,66 @@ console.log(isValid);
           value,
         }),
       });
-  
+
       if (!response.ok) {
         throw new Error("Error al verificar la transacción.");
       }
-  
-      
-      const data = await response.text(); 
-      const isValid = data.trim().toLowerCase() === "true"; //Convierte booleano 
-      console.log("Respuesta del backend para la validación:", data, "Booleano convertido:", isValid);
+
+      const isValid = (await response.text()).trim().toLowerCase() === "true";
       return isValid;
-    } catch (error) {
-      console.error("Error al verificar la transacción:", error);
-      throw error;
+    } catch (err) {
+      throw new Error(`Error al verificar la transacción: ${err.message}`);
     }
   }
-  
-  
+
+  useEffect(() => {
+    if (token && token.token) {
+      createPaymentSession();
+    } else {
+      setError("No se encontró el token de autenticación.");
+    }
+  }, [token]);
 
   return (
     <div className="App">
       <h1>Pagar con Ethereum</h1>
 
-      {!wallet && !loading && (
-        <button onClick={conectandoWallet}>Conectar MetaMask</button>
+      {cartTotalEuros > 0 && (
+        <>
+          <p>Total en Euros: {cartTotalEuros}€</p>
+          <p>Total en Ethereum: {cartTotalEth} ETH</p>
+        </>
+      )}
+
+      {!loading && (
+        <div>
+          <Button
+            variant="short"
+            color="azul"
+            onClick={conectandoWallet}
+            disabled={!!wallet}
+          >
+            {wallet ? "Wallet conectada" : "Conectar MetaMask"}
+          </Button>
+          <Button
+            variant="short"
+            color="morado"
+            onClick={handleComplete}
+            disabled={!wallet}
+          >
+            Confirmar Pago
+          </Button>
+        </div>
       )}
 
       {loading && <p>Procesando...</p>}
+
+      {transactionProcessing && (
+        <div>
+          <p>Procesando transacción...</p>
+          <div id="logo-container"></div>
+        </div>
+      )}
 
       {error && <p style={{ color: "red" }}>{error}</p>}
 
