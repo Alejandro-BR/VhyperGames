@@ -38,7 +38,7 @@ public class AdminGameService
         for (int i = 0; i < images.Count; i++)
         {
 
-            string altText = images[i].Name;
+            string altText = images[i].Name + "_" + i;
 
             if (alt != null && alt[i] != null)
             {
@@ -107,7 +107,65 @@ public class AdminGameService
             throw new KeyNotFoundException($"No se encontró un juego con el ID {adminFormGameDto.Id}.");
         }
 
-        if (adminFormGameDto.Title != null && adminFormGameDto.Title != "" && adminFormGameDto.Title != game.Title) {
+        UpdateGameData(game, adminFormGameDto);
+
+        if (images != null && adminFormGameDto.ImagesId != null)
+        {
+            for (int i = 0; i < adminFormGameDto.ImagesId.Count; i++)
+            {
+                IFormFile file = images[i];
+
+                string text = file.Name + i;
+
+                if (alt != null && alt[i] != null)
+                {
+                   text = alt[i];
+                }
+
+                int id = adminFormGameDto.ImagesId[i];
+
+                await _imageService.UpdateAsync2(file, text, id);
+            }
+        }
+
+        await _unitOfWork.SaveAsync();
+    }
+
+    public async Task<List<AdminGameDto>> GetGameBySearch(string search)
+    {
+        List<Game> games = new List<Game>();
+
+        if (string.IsNullOrWhiteSpace(search))
+        {
+            throw new ArgumentException("La búsqueda no puede estar vacía.");
+        }
+
+        Game game = await _unitOfWork.GameRepository.GetGameByTitle(search);
+
+        if (game != null && game.Title == search)
+        {
+            games.Add(game);
+
+        } else
+        {
+            IEnumerable<string> matchedTitles = _smartSearchService.Search(search);
+
+            if (matchedTitles != null && matchedTitles.Any())
+            {
+                games = await _unitOfWork.GameRepository.GetGamesByTitles(matchedTitles);
+            }
+
+        }
+
+        List<AdminGameDto> adminGames = _adminMapper.ToListAdminGameDto(games);
+
+        return adminGames;
+    }
+
+    private static void UpdateGameData(Game game, AdminFormGameDto adminFormGameDto)
+    {
+        if (adminFormGameDto.Title != null && adminFormGameDto.Title != "" && adminFormGameDto.Title != game.Title)
+        {
             game.Title = adminFormGameDto.Title;
         }
 
@@ -150,56 +208,7 @@ public class AdminGameService
         {
             game.ReleaseDate = adminFormGameDto.ReleaseDate;
         }
-
-        if (images != null && alt != null)
-        {
-            List<ImageGame> imagesBack = await _imageService.GetImagesByGameIdAsync(game.Id);
-
-            if ((images.Count == imagesBack.Count) && (images.Count == alt.Count))
-            {
-                for (int i = 0; i < images.Count; i++)
-                {
-                    IFormFile file = images[i];
-                    ImageGame existingImage = imagesBack[i];
-                    string text = alt[i];
-
-                    await _imageService.UpdateAsync2(file, text, existingImage.Id);
-                }
-            }
-        }
-
-        await _unitOfWork.SaveAsync();
     }
 
-    public async Task<List<AdminGameDto>> GetGameBySearch(string search)
-    {
-        List<Game> games = new List<Game>();
-
-        if (string.IsNullOrWhiteSpace(search))
-        {
-            throw new ArgumentException("La búsqueda no puede estar vacía.");
-        }
-
-        Game game = await _unitOfWork.GameRepository.GetGameByTitle(search);
-
-        if (game != null && game.Title == search)
-        {
-            games.Add(game);
-
-        } else
-        {
-            IEnumerable<string> matchedTitles = _smartSearchService.Search(search);
-
-            if (matchedTitles != null && matchedTitles.Any())
-            {
-                games = await _unitOfWork.GameRepository.GetGamesByTitles(matchedTitles);
-            }
-
-        }
-
-        List<AdminGameDto> adminGames = _adminMapper.ToListAdminGameDto(games);
-
-        return adminGames;
-    }
 
 }

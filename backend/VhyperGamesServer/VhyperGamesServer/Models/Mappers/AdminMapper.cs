@@ -98,7 +98,11 @@ public class AdminMapper
 
     public AdminFormGameDto ToAdminFormGameDto(Game game)
     {
-        List<ImageRequestDto> imageRequestDtos = ToListImageRequestDto(game.ImageGames);
+        List<int> imagesId = new List<int>();
+
+        foreach (ImageGame image in game.ImageGames) { 
+            imagesId.Add(image.Id);
+        }
 
         return new AdminFormGameDto
         {
@@ -112,7 +116,7 @@ public class AdminMapper
             Genre = game.Genre,
             DrmFree = game.DrmFree,
             ReleaseDate = game.ReleaseDate,
-            //ImageRequests = imageRequestDtos,
+            ImagesId = imagesId
         };
     }
 }
