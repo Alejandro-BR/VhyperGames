@@ -7,7 +7,7 @@ namespace VhyperGamesServer.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-[Authorize(Roles = "Admin")]
+//[Authorize(Roles = "Admin")]
 public class AdminGameController : ControllerBase
 {
     private readonly AdminGameService _adminGameService;
@@ -54,10 +54,15 @@ public class AdminGameController : ControllerBase
     }
 
     [HttpGet("search")]
-    public async Task<IActionResult> GetGameBySearch(string search)
+    public async Task<ActionResult<List<AdminGameDto>>> GetGameBySearch(string search)
     {
         return Ok(await _adminGameService.GetGameBySearch(search));
     }
 
+    [HttpGet("get-form")]
+    public async Task<ActionResult<AdminFormGameDto>> GetFormGame(int gameId)
+    {
+        return Ok(await _adminGameService.GetFormGame(gameId));
+    }
 
 }
