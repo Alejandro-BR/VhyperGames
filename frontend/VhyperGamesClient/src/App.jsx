@@ -7,7 +7,7 @@ import Checkout from './pages/Checkout';
 import Cart from './pages/Cart';
 import DetailsView from './pages/DetailsView';
 import PaymentConfirmation from './pages/PaymentConfirmation';
-import { AuthProvider } from '../src/context/authcontext';
+import { AuthProvider } from '../src/context/AuthContext';
 import { CartProvider } from './context/CartContext';
 import { CheckoutProvider } from './context/CheckoutContext';
 import UserPage from './pages/UserPage';
