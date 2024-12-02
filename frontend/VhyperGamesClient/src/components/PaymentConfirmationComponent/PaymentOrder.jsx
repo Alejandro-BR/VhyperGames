@@ -1,9 +1,10 @@
-import React, { useEffect, useState, useContext } from "react";
+import { useEffect, useState, useContext } from "react";
 import classes from "./PaymentOrder.module.css";
 import { orderById } from "../../helpers/orderHelper";
 import { useAuth } from "../../context/authcontext";
 import { ORDER_BY_ID, BASE_URL } from "../../config";
 import { CheckoutContext } from "../../context/CheckoutContext";
+import { Link } from "react-router-dom";
 
 const paymentModes = {
   0: "Ethereum",
@@ -23,6 +24,7 @@ function PaymentOrder() {
         const data = await orderById(ORDER_BY_ID, orderId, token);
         setOrderData(data);
       } catch (error) {
+        console.error(error);
       }
     };
     fetchOrder();
@@ -41,13 +43,15 @@ function PaymentOrder() {
       <div className={classes.gameList}>
         {orderData.orderGames?.map((game) => (
           <div key={game.gameId} className={classes.gameItem}>
-            <div className={classes.gameListImg}>
-              <img
-                src={`${BASE_URL}${game.imageGame.imageUrl}`}
-                alt={game.imageGame.altText}
-                className={classes.listImg}
-              />
-            </div>
+            <Link to={`/juego/${game.gameId}`}>
+              <div className={classes.gameListImg}>
+                <img
+                  src={`${BASE_URL}${game.imageGame.imageUrl}`}
+                  alt={game.imageGame.altText}
+                  className={classes.listImg}
+                />
+              </div>
+            </Link>
             <div className={classes.gameListData}>
               <p>{game.title}</p>
               <p>{(game.price / 100).toFixed(2)} €</p>
