@@ -151,20 +151,22 @@ public class AdminGameService
             game.ReleaseDate = adminFormGameDto.ReleaseDate;
         }
 
-        if (images != null && alt != null)
+        if (images != null && adminFormGameDto.ImagesId != null)
         {
-            List<ImageGame> imagesBack = await _imageService.GetImagesByGameIdAsync(game.Id);
-
-            if ((images.Count == imagesBack.Count) && (images.Count == alt.Count))
+            for (int i = 0; i < adminFormGameDto.ImagesId.Count; i++)
             {
-                for (int i = 0; i < images.Count; i++)
-                {
-                    IFormFile file = images[i];
-                    ImageGame existingImage = imagesBack[i];
-                    string text = alt[i];
+                IFormFile file = images[i];
 
-                    await _imageService.UpdateAsync2(file, text, existingImage.Id);
+                string text = file.Name + i;
+
+                if (alt != null && alt[i] != null)
+                {
+                   text = alt[i];
                 }
+
+                int id = adminFormGameDto.ImagesId[i];
+
+                await _imageService.UpdateAsync2(file, text, id);
             }
         }
 
