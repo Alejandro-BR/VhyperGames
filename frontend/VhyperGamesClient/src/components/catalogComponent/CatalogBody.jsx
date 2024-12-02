@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
 import CatalogFilters from "./CatalogFilters";
 import classes from "./CatalogStyle.module.css";
 import BlockGame from "../blockgameComponent/BlockGame";
@@ -21,7 +20,10 @@ function CatalogBody({ initialSearchText = "", initialDrmFree = -1 }) {
         page: 1
     });
 
+    console.log("CatalogBody render", { searchFilter, searchText }); // Log render
+
     useEffect(() => {
+        console.log("useEffect: initialSearchText or initialDrmFree changed", { initialSearchText, initialDrmFree });
         if (initialSearchText || initialDrmFree !== null) {
             setSearchFilter(prevFilter => ({
                 ...prevFilter,
@@ -30,7 +32,6 @@ function CatalogBody({ initialSearchText = "", initialDrmFree = -1 }) {
             }));
         }
     }, [initialSearchText, initialDrmFree]);
-    
 
     const CLAVE = "filter";
     const [filtersLoaded, setFiltersLoaded] = useState(false);
@@ -46,10 +47,18 @@ function CatalogBody({ initialSearchText = "", initialDrmFree = -1 }) {
         }
     }, [filtersLoaded]);
 
+    useEffect(() => {
+        setSearchText(initialSearchText || "");
+    }, [initialSearchText]);
+
+    useEffect(() => {
+        fetchJuegos(searchFilter);
+    }, [searchFilter]);
+
     const fetchJuegos = async (filter) => {
         setLoading(true);
         try {
-            console.log("fetchJuegos filter:", filter);
+            console.log("fetchJuegos called with filter:", filter);
 
             let queryParams = new URLSearchParams({
                 searchText: filter.searchText || "",
@@ -72,9 +81,9 @@ function CatalogBody({ initialSearchText = "", initialDrmFree = -1 }) {
             }
 
             const data = await response.json();
+            console.log("fetchJuegos response:", data);
             setJuegos(Array.isArray(data.games) ? data.games : []);
             setTotalPages(data.totalPages);
-            // Actualizar el Session Storage
             updateSessionStorage(filter, CLAVE);
         } catch (error) {
             console.error('Error al cargar los juegos:', error);
@@ -84,25 +93,29 @@ function CatalogBody({ initialSearchText = "", initialDrmFree = -1 }) {
         }
     };
 
-    // Debounce para searchText
     useEffect(() => {
-        const delayDebounceFn = setTimeout(() => {
-            setSearchFilter(prevFilter => ({
-                ...prevFilter,
-                searchText: searchText
-            }));
-        }, 1000);
-
-        return () => clearTimeout(delayDebounceFn);
-    }, [searchText]);
-
-    useEffect(() => {
+        console.log("useEffect: searchFilter changed", searchFilter);
         fetchJuegos(searchFilter);
     }, [searchFilter]);
 
+    // Debounce para searchText
+    useEffect(() => {
+        const delayDebounceFn = setTimeout(() => {
+            if (searchText !== searchFilter.searchText) {
+                console.log("Debounce: searchText updated", searchText);
+                setSearchFilter(prevFilter => ({
+                    ...prevFilter,
+                    searchText: searchText
+                }));
+            }
+        }, 1000);
+    
+        return () => clearTimeout(delayDebounceFn);
+    }, [searchText]);
+
     const handleSearchFilterChange = (newFilter) => {
+        console.log("handleSearchFilterChange called", newFilter);
         if (newFilter.searchText !== undefined && newFilter.sortCriteria !== undefined) {
-            // Si todos los valores están presentes en `newFilter`, es un reinicio
             setSearchText("");
             setSearchFilter({
                 searchText: "",
@@ -127,8 +140,8 @@ function CatalogBody({ initialSearchText = "", initialDrmFree = -1 }) {
         }
     };
 
-
     const handlePageChange = (newPage) => {
+        console.log("handlePageChange called", newPage);
         setSearchFilter(prevFilter => ({
             ...prevFilter,
             page: newPage
@@ -139,7 +152,7 @@ function CatalogBody({ initialSearchText = "", initialDrmFree = -1 }) {
         <>
             <CatalogFilters filters={{ ...searchFilter, searchText }} onFilterChange={handleSearchFilterChange} />
             <div className={classes.juegardos}>
-                {juegos.length != 0 ? (<BlockGame games={juegos} variant="catalogo" />) : (<p>No se encontraron resultados con esa búsqueda.</p>)}
+                {juegos.length !== 0 ? (<BlockGame games={juegos} variant="catalogo" />) : (<p>No se encontraron resultados con esa búsqueda.</p>)}
             </div>
             <Pagination
                 currentPage={searchFilter.page}
