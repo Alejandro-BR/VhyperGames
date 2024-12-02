@@ -1,13 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using VhyperGamesServer.Models.Database.Entities;
 using VhyperGamesServer.Models.Dtos;
-using VhyperGamesServer.Models.Mappers;
 using VhyperGamesServer.Services;
 
 namespace VhyperGamesServer.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
+[Authorize(Roles = "Admin")]
 public class ImagesController : ControllerBase
 {
     private readonly ImageService _service;
