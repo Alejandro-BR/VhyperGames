@@ -86,6 +86,7 @@ namespace VhyperGamesServer.Services
                 {
                     GameId = detail.GameId,
                     Quantity = detail.Quantity,
+                    Price = detail.Game.Price
                 }).ToList()
             };
 

@@ -6,6 +6,7 @@ public class OrderDetail
     public int OrderId { get; set; }
     public int GameId { get; set; }
     public int Quantity { get; set; }
+    public int Price { get; set; }
 
     public Order Order { get; set; }
 
