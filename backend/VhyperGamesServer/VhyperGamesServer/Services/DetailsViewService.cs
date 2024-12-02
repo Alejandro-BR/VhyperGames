@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.SignalR;
-using VhyperGamesServer.Models.Database.Entities;
+﻿using VhyperGamesServer.Models.Database.Entities;
 using VhyperGamesServer.Models.Database.Repositories;
 using VhyperGamesServer.Models.Dtos;
 using VhyperGamesServer.Models.IA;
