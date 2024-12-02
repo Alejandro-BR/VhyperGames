@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Nethereum.ABI.CompilationMetadata;
+using VhyperGamesServer.Controllers;
 using VhyperGamesServer.Models.Database.Repositories;
 using VhyperGamesServer.Models.Dtos;
 using VhyperGamesServer.Services;
@@ -9,7 +10,7 @@ namespace VhyperGamesServer.Controller;
 
 [Route("api/[controller]")]
 [ApiController]
-public class UserController : ControllerBase
+public class UserController : BaseController
 {
     private readonly UserService _userService;
     private readonly UnitOfWork _unitOfWork;
@@ -26,13 +27,7 @@ public class UserController : ControllerBase
         {
         try
         {
-            var userIdClaim = User.FindFirst("id");
-            if (userIdClaim == null)
-            {
-                return Unauthorized(new { message = "Usuario no autenticado." });
-            }
-
-            int userId = int.Parse(userIdClaim.Value);
+            int userId = GetUserId();
 
             return await _userService.GetUserDtoById(userId);
 
@@ -49,13 +44,7 @@ public class UserController : ControllerBase
     {
         try
         {
-            var userIdClaim = User.FindFirst("id");
-            if (userIdClaim == null)
-            {
-                return Unauthorized(new { message = "Usuario no autenticado." });
-            }
-
-            int userId = int.Parse(userIdClaim.Value);
+            int userId = GetUserId();
 
             await _userService.UpdateUserBD(userId, userDto);
 

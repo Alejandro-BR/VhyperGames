@@ -13,7 +13,7 @@ namespace VhyperGamesServer.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class ReserveController : ControllerBase
+public class ReserveController : BaseController
 {
     private readonly ReserveService _reserveService;
     private readonly StripeService _stripeService;
@@ -33,14 +33,7 @@ public class ReserveController : ControllerBase
     {
         try
         {
-            var userIdClaim = User.FindFirst("id");
-            if (userIdClaim == null)
-            {
-                return Unauthorized(new { message = "Usuario no autenticado." });
-            }
-
-            
-            int userId = int.Parse(userIdClaim.Value);
+            int userId = GetUserId();
 
             int reserveId = await _reserveService.CreateReserve(userId, cart, modeOfPay);
             return Ok(reserveId);
@@ -62,14 +55,7 @@ public class ReserveController : ControllerBase
     {
         try
         {
-            var userIdClaim = User.FindFirst("id");
-            if (userIdClaim == null)
-            {
-                return Unauthorized(new { message = "Usuario no autenticado." });
-            }
-
-
-            int userId = int.Parse(userIdClaim.Value);
+            int userId = GetUserId();
 
             List<OrderDetailDto> orderDetailDto = await _reserveService.GetReserveDetails(reserveId);
             return Ok(orderDetailDto);
@@ -90,13 +76,7 @@ public class ReserveController : ControllerBase
     {
         try
         {
-            var userIdClaim = User.FindFirst("id");
-            if (userIdClaim == null)
-            {
-                return Unauthorized(new { message = "Usuario no autenticado." });
-            }
-
-            int userId = int.Parse(userIdClaim.Value);
+            int userId = GetUserId();
 
             int orderId = await _reserveService.ConfirmReserve(reserveId);
             return Ok(new
@@ -125,13 +105,7 @@ public class ReserveController : ControllerBase
     {
         try
         {
-            var userIdClaim = User.FindFirst("id");
-            if (userIdClaim == null)
-            {
-                return Unauthorized(new { message = "Usuario no autenticado." });
-            }
-
-            int userId = int.Parse(userIdClaim.Value);
+            int userId = GetUserId();
 
             await _reserveService.CancelReserve(userId);
             return Ok(new { message = "Reserva cancelada exitosamente." });
@@ -152,13 +126,7 @@ public class ReserveController : ControllerBase
     {
         try
         {
-            var userIdClaim = User.FindFirst("id");
-            if (userIdClaim == null)
-            {
-                return Unauthorized(new { message = "Usuario no autenticado." });
-            }
-
-            int userId = int.Parse(userIdClaim.Value);
+            int userId = GetUserId();
 
             SessionCreateOptions options = await _stripeService.EmbededCheckout(userId, reserveId);
 
