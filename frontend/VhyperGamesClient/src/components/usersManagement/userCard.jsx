@@ -1,4 +1,6 @@
 import classes from "./UserCard.module.css"
+import DeleteModal from "./DeleteModal";
+import { useState } from "react";
 
 function UserCard(
     // imgUrl, name, email, rol
@@ -26,6 +28,7 @@ function UserCard(
         </svg>
     );
 
+    const [deleteModal, setDeleteModal] = useState(false);
 
     let imgUrl = "/img/sekiro.png"
     let user = "degollaCreepers69420"
@@ -33,34 +36,46 @@ function UserCard(
     let rol = "user"
 
     return (
-        <article className={classes.card}>
-            <img src={imgUrl} alt={user} className={classes.userImg} />
+        <>
+            <article className={classes.card}>
+                <img src={imgUrl} alt={user} className={classes.userImg} />
 
-            <div className={classes.container}>
-                <h2 className={classes.containerTitle}>Usuario</h2>
-                <p className={classes.user}>{user}</p>
-            </div>
+                <div className={classes.container}>
+                    <h2 className={classes.containerTitle}>Usuario</h2>
+                    <p className={classes.user}>{user}</p>
+                </div>
 
-            <div className={classes.container}>
-                <h2 className={classes.containerTitle}>Email</h2>
-                <p className={classes.email}>{email}</p>
-            </div>
+                <div className={classes.container}>
+                    <h2 className={classes.containerTitle}>Email</h2>
+                    <p className={classes.email}>{email}</p>
+                </div>
 
-            <div className={classes.container}>
-                <h2 className={classes.containerTitle}>Rol</h2>
-                <p className={classes.rol}>{rol}</p>
-            </div>
+                <div className={classes.container}>
+                    <h2 className={classes.containerTitle}>Rol</h2>
+                    <p className={classes.rol}>{rol}</p>
+                </div>
 
-            <div className={classes.buttonContainer}>
-                <button className={classes.editUser}>
-                    <Icon />
-                </button>
-                <button className={classes.deleteUser}>
-                    <img src="/icon/icono-bin.svg" alt="eliminar usuario" />
-                </button>
-            </div>
-        </article>
+                <div className={classes.buttonContainer}>
+                    <button className={classes.editUser}>
+                        <Icon />
+                    </button>
+                    <button className={classes.deleteUser} onClick={() => setDeleteModal(true)}>
+                        <img src="/icon/icono-bin.svg" alt="eliminar usuario" />
+                    </button>
+                </div>
+            </article>
 
+
+            {
+                deleteModal && (
+                    <DeleteModal
+                        onClose={() => setDeleteModal(false)}
+                    />
+                )
+            }
+
+
+        </>
     );
 
 }
