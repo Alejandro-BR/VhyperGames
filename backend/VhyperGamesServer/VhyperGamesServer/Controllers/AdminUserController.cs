@@ -17,7 +17,7 @@ public class AdminUserController : ControllerBase
         _adminUserService = adminUserService;
     }
 
-    [HttpGet("get-user")]
+    [HttpGet("get-users")]
     public async Task<List<AdminUserDto>> GetListUser()
     {
        return await _adminUserService.GetListUser();

@@ -1,5 +1,6 @@
 using Examples.WebApi.Services.Blockchain;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.ML;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -18,6 +19,8 @@ public class Program
 {
     public static void Main(string[] args)
     {
+        Directory.SetCurrentDirectory(AppContext.BaseDirectory);
+
         var builder = WebApplication.CreateBuilder(args);
 
         // Configuración de servicios
@@ -48,9 +51,9 @@ public class Program
         builder.Services.AddScoped<UnitOfWork>();
 
         // Inyección de servicios
-        builder.Services.AddTransient<UserService>();
-        builder.Services.AddTransient<CatalogService>();
-        builder.Services.AddTransient<DetailsViewService>();
+        builder.Services.AddScoped<UserService>();
+        builder.Services.AddScoped<CatalogService>();
+        builder.Services.AddScoped<DetailsViewService>();
         builder.Services.AddScoped<SmartSearchService>();
         builder.Services.AddScoped<IAService>();
         builder.Services.AddScoped<CartService>();
@@ -73,6 +76,7 @@ public class Program
         builder.Services.AddScoped<CartMapper>();
         builder.Services.AddScoped<ReserveAndOrderMapper>();
         builder.Services.AddScoped<AdminMapper>();
+        builder.Services.AddScoped<UserMapper>();
 
         // Stripe
         builder.Services.AddTransient<StripeService>();
@@ -82,6 +86,8 @@ public class Program
             .FromFile("IA.mlnet");
 
         // Configuración de CORS
+
+#if DEBUG
         if (builder.Environment.IsDevelopment())
         {
             builder.Services.AddCors(options =>
@@ -95,6 +101,16 @@ public class Program
                 });
             });
         }
+#else
+        builder.Services.AddCors(options =>
+        {
+            options.AddDefaultPolicy(builder =>
+            {
+                builder.AllowAnyOrigin().AllowAnyOrigin().AllowAnyMethod();
+            });
+        });
+#endif
+
 
         // Configuración de autenticación JWT
         string key = Environment.GetEnvironmentVariable("JWT_KEY");
@@ -152,7 +168,16 @@ public class Program
     private static void ConfigureMiddleware(WebApplication app)
     {
         // Habilitar el uso de archivos estáticos
+#if DEBUG
         app.UseStaticFiles();
+#else
+        app.UseStaticFiles(new StaticFileOptions
+        {
+            FileProvider = new PhysicalFileProvider(
+                Path.Combine(Directory.GetCurrentDirectory(), "wwwroot"))
+        });
+#endif
+
 
         // Creación de la base de datos y el Seeder
         SeedDatabase(app.Services);

@@ -1,11 +1,12 @@
-import Footer from "../components/footerComponent/Footer";
-import GameData from "../components/detailsViewComponents/gameDataComponent/GameData";
-import GamePrice from "../components/detailsViewComponents/gamePriceComponent/GamePrice";
-import classes from "../styles/DetailsView.module.css";
 import { useParams } from "react-router-dom";
-import ReviewEntry from "../components/detailsViewComponents/reviewEntryComponents/ReviewEntry";
-import Reviews from "../components/detailsViewComponents/revewComponent/Reviews";
-import GameRequeriments from "../components/detailsViewComponents/gameRequirements/GameRequirements";
+import classes from "../styles/DetailsView.module.css";
+
+import Footer from "../components/Footer/Footer";
+import GameData from "../components/DetailsView/GameData/GameData";
+import GamePrice from "../components/DetailsView/GamePrice/GamePrice";
+import ReviewEntry from "../components/DetailsView/Reviews/ReviewEntry";
+import Reviews from "../components/DetailsView/Reviews/Reviews";
+import GameRequeriments from "../components/DetailsView/GameRequeriments/GameRequirements";
 
 function DetailsView() {
   const params = useParams();

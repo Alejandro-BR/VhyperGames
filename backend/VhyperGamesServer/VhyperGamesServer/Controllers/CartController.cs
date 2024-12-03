@@ -7,7 +7,7 @@ namespace VhyperGamesServer.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class CartController : ControllerBase
+public class CartController : BaseController
 {
     private readonly CartService _cartService;
 
@@ -22,13 +22,8 @@ public class CartController : ControllerBase
     {
         try
         {
-            var userIdClaim = User.FindFirst("id");
-            if (userIdClaim == null)
-            {
-                return Unauthorized(new { message = "Usuario no autenticado." });
-            }
+            int userId = GetUserId();
 
-            int userId = int.Parse(userIdClaim.Value);
             int cartId = userId;
 
             return await _cartService.UpdateCart(cartResponseDtos, cartId);
@@ -49,13 +44,8 @@ public class CartController : ControllerBase
     {
         try
         {
-            var userIdClaim = User.FindFirst("id");
-            if (userIdClaim == null)
-            {
-                return Unauthorized(new { message = "Usuario no autenticado." });
-            }
+            int userId = GetUserId();
 
-            int userId = int.Parse(userIdClaim.Value);
             int cartId = userId;
 
             return await _cartService.GetCartById(cartId);
@@ -84,13 +74,8 @@ public class CartController : ControllerBase
     {
         try
         {
-            var userIdClaim = User.FindFirst("id");
-            if (userIdClaim == null)
-            {
-                return Unauthorized(new { message = "Usuario no autenticado." });
-            }
+            int userId = GetUserId();
 
-            int userId = int.Parse(userIdClaim.Value);
             int cartId = userId;
 
             return await _cartService.MergeCart(cartResponseDtos, cartId);
@@ -111,14 +96,9 @@ public class CartController : ControllerBase
     {
         try
         {
-     
-            var userIdClaim = User.FindFirst("id");
-            if (userIdClaim == null)
-            {
-                return Unauthorized(new { message = "Usuario no autenticado." });
-            }
 
-            int userId = int.Parse(userIdClaim.Value);
+            int userId = GetUserId();
+
             int cartId = userId; 
 
             await _cartService.DeleteCartDetailAsync(gameId, cartId);

@@ -37,7 +37,7 @@ public class ReserveAndOrderMapper
             GameId = orderGame.GameId,
             Title = orderGame.Game.Title,
             Quantity = orderGame.Quantity,
-            Price = orderGame.Game.Price * orderGame.Quantity,
+            Price = orderGame.Price * orderGame.Quantity,
             ImageGame = orderGame.Game.ImageGames.FirstOrDefault()
         };
     }

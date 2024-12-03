@@ -10,7 +10,7 @@ namespace VhyperGamesServer.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class DetailsViewController : ControllerBase
+public class DetailsViewController : BaseController
 {
     private readonly UnitOfWork _unitOfWork;
     private readonly DetailsViewService _detailsViewService;
@@ -57,18 +57,10 @@ public class DetailsViewController : ControllerBase
     {
         try
         {
-            //Obtener en ID del usuario autenticado y asignarlo
-            var userIdClaim = User.FindFirst("id");
-            if (userIdClaim == null)
-            {
-                return Unauthorized(new { message = "Usuario no autenticado." });
-            }
+            int userId = GetUserId();
 
-            int userId = int.Parse(userIdClaim.Value);
             newReviewDto.UserId = userId;
 
-
-            //Llamar al servicio para crear la nueva reseña
             ReviewDto reviewDto = await _detailsViewService.NewReview(newReviewDto);
 
             if (reviewDto == null)
@@ -92,14 +84,7 @@ public class DetailsViewController : ControllerBase
     [Authorize]
     public async Task<ActionResult> GetReviewByUserAndGameAsync(int gameId)
     {
-        // Verificar si el usuario está autenticado
-        var userIdClaim = User.FindFirst("id");
-        if (userIdClaim == null)
-            return Unauthorized(new { message = "Usuario no autenticado." });
-
-        if (!int.TryParse(userIdClaim.Value, out int userId))
-            return BadRequest(new { message = "ID de usuario no válido." });
-
+        int userId = GetUserId();
 
         bool userOwnsGame = await _unitOfWork.ReviewRepository.UserOwnsGameAsync(userId, gameId);
 

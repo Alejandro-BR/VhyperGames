@@ -59,13 +59,6 @@ public abstract class Repository<TEntity, TId> : IRepository<TEntity, TEntity> w
         Context.Set<TEntity>().Update(entity);
     }
 
-    public TEntity Update2(TEntity entity)
-    {
-        EntityEntry<TEntity> entry = Context.Set<TEntity>().Update(entity);
-
-        return entry.Entity;
-    }
-
     public void Delete(TEntity entity)
     {
         Context.Set<TEntity>().Remove(entity);

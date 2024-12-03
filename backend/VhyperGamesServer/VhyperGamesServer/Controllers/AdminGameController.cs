@@ -17,7 +17,7 @@ public class AdminGameController : ControllerBase
         _adminGameService = adminGameService;
     }
 
-    [HttpGet("get-game")]
+    [HttpGet("get-games")]
     public async Task<ActionResult<List<AdminGameDto>>> GetListGame()
     {
         try
@@ -46,7 +46,7 @@ public class AdminGameController : ControllerBase
         return Ok();
     }
 
-    [HttpPost]
+    [HttpPost("newGame")]
     public async Task PostNewGame([FromForm] AdminFormGameDto adminFormGameDto, [FromForm] List<IFormFile> images, [FromForm] List<string> alt)
     {
         string title = await _adminGameService.PostNewGame(adminFormGameDto);
@@ -54,10 +54,15 @@ public class AdminGameController : ControllerBase
     }
 
     [HttpGet("search")]
-    public async Task<IActionResult> GetGameBySearch(string search)
+    public async Task<ActionResult<List<AdminGameDto>>> GetGameBySearch(string search)
     {
         return Ok(await _adminGameService.GetGameBySearch(search));
     }
 
+    [HttpGet("get-form")]
+    public async Task<ActionResult<AdminFormGameDto>> GetFormGame(int gameId)
+    {
+        return Ok(await _adminGameService.GetFormGame(gameId));
+    }
 
 }

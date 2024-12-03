@@ -2,16 +2,20 @@ import RootLayout from './pages/RootLayout';
 import Home from './pages/Home';
 import Catalogo from './pages/Catalogo';
 import Error from './pages/Error';
-import SobreNosotros from './pages/SobreNosotros';
+import SobreNosotros from './pages/AboutUs';
 import Checkout from './pages/Checkout';
 import Cart from './pages/Cart';
 import DetailsView from './pages/DetailsView';
 import PaymentConfirmation from './pages/PaymentConfirmation';
-import { AuthProvider } from '../src/context/authcontext';
+import { AuthProvider } from './context/AuthContext';
 import { CartProvider } from './context/CartContext';
 import { CheckoutProvider } from './context/CheckoutContext';
 import UserPage from './pages/UserPage';
 import Ethereum from './components/Ethereum/Ethereum';
+import ProductManagement from './pages/ProductManagement';
+import UsersManagement from './pages/UsersManagement';
+import { AdminProvider } from './context/AdminContext';
+import PrivateRoute from './PrivateRoute'
 
 import {
   createBrowserRouter,
@@ -19,7 +23,6 @@ import {
   createRoutesFromElements,
   Route,
 } from "react-router-dom";
-
 
 
 const routeDefinition = createRoutesFromElements(
@@ -34,6 +37,14 @@ const routeDefinition = createRoutesFromElements(
     <Route path="paymentConfirmation" element={<PaymentConfirmation />} />
     <Route path="user" element={<UserPage />} />
     <Route path="EthereumCheckout" element={<Ethereum />} />
+    <Route
+      path="products-management"
+      element={<PrivateRoute><ProductManagement /></PrivateRoute>}
+    />
+    <Route
+      path="users-management"
+      element={<PrivateRoute><UsersManagement /></PrivateRoute>}
+    />
   </Route>
 );
 
@@ -44,7 +55,9 @@ function App() {
     <AuthProvider>
       <CartProvider>
         <CheckoutProvider>
-          <RouterProvider router={router}></RouterProvider>
+          <AdminProvider>
+            <RouterProvider router={router}></RouterProvider>
+          </AdminProvider>
         </CheckoutProvider>
       </CartProvider>
     </AuthProvider>
