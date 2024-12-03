@@ -27,12 +27,22 @@ export const updateRol = async (url, userId, token) => {
     });
 
     if (!response.ok) {
-        const error = await response.json();
-        throw new Error(error.message || 'Error al crear la reserva.');
-    }
+        let errorMessage = 'Error al actualizar el rol.';
+        try {
+            const error = await response.json();
+            errorMessage = error.message || errorMessage;
+        } catch {
 
-    return await response.json();
+        }
+        throw new Error(errorMessage);
+    }
+    try {
+        return await response.json();
+    } catch {
+        return null; 
+    }
 };
+
 
 export const deleteUser = async (url, userId, token) => {
     const fullUrl = `${url}?userId=${userId}`;

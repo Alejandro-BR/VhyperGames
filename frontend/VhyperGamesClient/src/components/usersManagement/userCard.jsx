@@ -1,16 +1,21 @@
-import classes from "./UserCard.module.css"
+import classes from "./UserCard.module.css";
 import DeleteModal from "./DeleteModal";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { AdminContext } from "../../context/AdminContext";
 
 function UserCard({ id, name, email, rol }) {
+  const { fetchUsers, updateUserRole, deleteUserById } = useContext(AdminContext);
+  const [deleteModal, setDeleteModal] = useState(false);
 
-  const Icon = () => (
+  const Icon = ({ onClick }) => (
     <svg
+      onClick={onClick}
       width="24"
       height="24"
       viewBox="0 0 20 20"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      style={{ cursor: "pointer" }}
     >
       <g clipPath="url(#clip0_17_822)">
         <path
@@ -26,7 +31,15 @@ function UserCard({ id, name, email, rol }) {
     </svg>
   );
 
-  const [deleteModal, setDeleteModal] = useState(false);
+  const handleDeleteUser = async () => {
+    try {
+      await deleteUserById(id); 
+      setDeleteModal(false); 
+      fetchUsers();
+    } catch (error) {
+      console.error("Error al eliminar el usuario:", error.message);
+    }
+  };
 
   return (
     <>
@@ -50,7 +63,7 @@ function UserCard({ id, name, email, rol }) {
 
         <div className={classes.buttonContainer}>
           <button className={classes.editUser}>
-            <Icon />
+            <Icon onClick={() => updateUserRole(id)} />
           </button>
           <button className={classes.deleteUser} onClick={() => setDeleteModal(true)}>
             <img src="/icon/icono-bin.svg" alt="eliminar usuario" />
@@ -58,17 +71,14 @@ function UserCard({ id, name, email, rol }) {
         </div>
       </article>
 
-      {
-        deleteModal && (
-          <DeleteModal
-            onClose={() => setDeleteModal(false)}
-          />
-        )
-      }
-
+      {deleteModal && (
+        <DeleteModal
+          onClose={() => setDeleteModal(false)} 
+          onConfirm={handleDeleteUser} 
+        />
+      )}
     </>
   );
-
 }
 
-export default UserCard
+export default UserCard;

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import classes from "./DeleteModal.module.css";
 
 const CloseIcon = () => (
@@ -22,21 +23,41 @@ const CloseIcon = () => (
             </linearGradient>
         </defs>
     </svg>
+);
 
-)
+function DeleteModal({ onClose, onConfirm }) {
+    const [confirmationText, setConfirmationText] = useState("");
 
-function DeleteModal({ onClose }) {
+    const handleInputChange = (e) => {
+        setConfirmationText(e.target.value);
+    };
+
+    const isValid = confirmationText === "Eliminar";
+
     return (
         <div className={classes.confirmation}>
             <div className={classes.overlay}>
-
                 <div className={classes.modalContent}>
                     <button className={classes.logoCerrar} onClick={onClose}>
                         <CloseIcon />
                     </button>
 
-                    <p>Si desea eliminar a este usuario escriba "Eliminar" </p> {/* Se suele hacer una palabra aleatoria o el nombre del user para evitar confirmar por inercia */}
-                    <input type="text" className={classes.confirmationInput} />
+                    <p>Si desea eliminar a este usuario escriba "Eliminar"</p>
+                    <input
+                        type="text"
+                        className={classes.confirmationInput}
+                        value={confirmationText}
+                        onChange={handleInputChange}
+                        placeholder="Escribe 'Eliminar'"
+                    />
+
+                    <button
+                        className={classes.confirmButton}
+                        onClick={onConfirm}
+                        disabled={!isValid} 
+                    >
+                        Confirmar
+                    </button>
                 </div>
             </div>
         </div>
