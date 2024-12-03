@@ -1,5 +1,6 @@
 using Examples.WebApi.Services.Blockchain;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.ML;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -18,6 +19,8 @@ public class Program
 {
     public static void Main(string[] args)
     {
+        Directory.SetCurrentDirectory(AppContext.BaseDirectory);
+
         var builder = WebApplication.CreateBuilder(args);
 
         // Configuración de servicios
@@ -83,19 +86,13 @@ public class Program
             .FromFile("IA.mlnet");
 
         // Configuración de CORS
-        if (builder.Environment.IsDevelopment())
+        builder.Services.AddCors(options =>
         {
-            builder.Services.AddCors(options =>
+            options.AddDefaultPolicy(builder =>
             {
-                options.AddPolicy("AllowSpecificOrigin", builder =>
-                {
-                    builder.WithOrigins("http://localhost:5173")
-                           .AllowAnyHeader()
-                           .AllowAnyMethod()
-                           .AllowCredentials();
-                });
+                builder.AllowAnyOrigin().AllowAnyOrigin().AllowAnyMethod();
             });
-        }
+        });
 
         // Configuración de autenticación JWT
         string key = Environment.GetEnvironmentVariable("JWT_KEY");
@@ -153,7 +150,16 @@ public class Program
     private static void ConfigureMiddleware(WebApplication app)
     {
         // Habilitar el uso de archivos estáticos
+#if DEBUG
         app.UseStaticFiles();
+#else
+        app.UseStaticFiles(new StaticFileOptions
+        {
+            FileProvider = new PhysicalFileProvider(
+                Path.Combine(Directory.GetCurrentDirectory(), "wwwroot"))
+        });
+#endif
+
 
         // Creación de la base de datos y el Seeder
         SeedDatabase(app.Services);
