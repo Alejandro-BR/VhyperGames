@@ -134,7 +134,8 @@
 
 .logoutContainer {
   position: absolute;
-
+  top: 120%;
+  left: 50%;
   display: flex;
   align-items: center;
   transform: translateX(-50%);
@@ -149,8 +150,7 @@
   position: absolute;
   display: flex;
   flex-direction: column; 
-  top: 80%; 
-  left: 80%;
+  top: 90%;
   background-color: var(--header-footer-color);
   width: 100px;  
   font-size: small;

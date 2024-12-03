@@ -12,6 +12,8 @@
 
 .container:hover {
   box-shadow: 0px 0px 50px var(--led-purple);
+  
+  transition: box-shadow 0.2s ease;
 }
 
 .cardTitle {
