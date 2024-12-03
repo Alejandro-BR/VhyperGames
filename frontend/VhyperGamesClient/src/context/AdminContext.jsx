@@ -9,7 +9,7 @@ export const AdminContext = createContext();
 
 // Proveedor del contexto
 export const AdminProvider = ({ children }) => {
-  const { token, admin } = useAuth();
+  const { token, decodedToken } = useAuth();
   const [users, setUsers] = useState([]);
   const [games, setGames] = useState([]);
   const [dataForm, setDataForm] = useState([]);
@@ -21,8 +21,7 @@ export const AdminProvider = ({ children }) => {
       const response = await getUsersAdmin(GET_USERS_ADMIN, token);
 
       if (response.ok) {
-        const data = await response.json();
-        setUsers(data);
+        setUsers(response);
       } else {
         console.error("Error al obtener los usuarios");
       }
@@ -62,18 +61,18 @@ export const AdminProvider = ({ children }) => {
   // ----- ADMIN GAME -----
 
   const fetchGames = async () => {
+  
     try {
       const response = await getGamesAdmin(GET_GAMES_ADMIN, token);
+  
       if (response.ok) {
-        const data = await response.json();
-        setGames(data);
-      } else {
-        console.error("Error al obtener los juegos");
-      }
+        setGames(response);
+      } 
     } catch (error) {
       console.error("Error en fetchGames:", error);
     }
   };
+  
 
   const updateGameById = async (data) => {
     try {
@@ -136,11 +135,11 @@ export const AdminProvider = ({ children }) => {
   // ----- useEffect -----
 
   useEffect(() => {
-    if (token && admin) {
+    if (token && decodedToken?.Role === "Admin") {
       fetchUsers();
       fetchGames();
     }
-  }, [token, users]);
+  }, [token, decodedToken]);
 
   const contextValue = {
     users,
