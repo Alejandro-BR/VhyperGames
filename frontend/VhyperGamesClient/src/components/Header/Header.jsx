@@ -17,11 +17,11 @@ function Header() {
   const [searchText, setSearchText] = useState("");
   const [drmFilter, setDrmFilter] = useState(-1);
 
-  const { token, username, logout } = useAuth();
+  const { token, username, logout, admin } = useAuth();
   const navigate = useNavigate();
   const timerRef = useRef(null);
 
-
+  console.log(admin)
   // Manejar clic en el ícono de usuario
   const handleUserClick = () => {
     if (!token) {
@@ -144,6 +144,10 @@ function Header() {
       </div>
 
       <div className={classes.icons}>
+        {token && admin &&(
+          <img src="/icon/admin.svg" alt="admin" />
+        )}
+
         <CartIcon onClick={() => navigate("/cart")} />
 
         <div
