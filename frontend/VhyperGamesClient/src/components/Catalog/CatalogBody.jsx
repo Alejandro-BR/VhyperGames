@@ -20,10 +20,7 @@ function CatalogBody({ initialSearchText = "", initialDrmFree = -1, initialBit =
         page: 1
     });
 
-    console.log("CatalogBody render", { initialSearchText, searchFilter, searchText }); // Log render
-
     useEffect(() => {
-        console.log("useEffect: initialSearchText or initialDrmFree changed", { initialSearchText, initialDrmFree });
         if (initialSearchText || initialDrmFree !== null) {
             setSearchFilter(prevFilter => ({
                 ...prevFilter,
