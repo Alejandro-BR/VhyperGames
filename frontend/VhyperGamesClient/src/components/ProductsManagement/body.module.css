@@ -1,7 +1,6 @@
 .utilities {
     display: flex;
-    width: 70%;
-    margin: 0 5vw 30px 5vw;
+    margin: 0 0 30px 5vw;
     justify-items: space-around;
     align-items: center;
     gap: 30px;
