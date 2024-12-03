@@ -1,7 +1,7 @@
 
-import Title from "../components/titleComponent/Title";
-import Body from "../components/productManagement/Body";
-import ProductCardBlock from "../components/productManagement/ProductCardBlock";
+import Title from "../components/Titles/Title";
+import Body from "../components/ProductsManagement/Body";
+import ProductCardBlock from "../components/ProductsManagement/productCardBlock";
 
 function ProductManagement() {
     return (

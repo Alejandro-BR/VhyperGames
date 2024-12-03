@@ -8,9 +8,9 @@ import {
   CONFIRM_RESERVE,
 } from "../../config";
 export const WALLET_METAMASK = import.meta.env.VITE_WALLET_METAMASK;
-import { useAuth } from "../../context/authcontext";
+import { useAuth } from "../../context/AuthContext";
 import { CheckoutContext } from "../../context/CheckoutContext";
-import Button from "../buttonComponent/Button";
+import Button from "../Buttons/Button";
 
 function Ethereum() {
   const [wallet, setWallet] = useState(null);

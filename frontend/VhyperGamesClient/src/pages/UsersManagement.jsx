@@ -1,6 +1,6 @@
-import Title from "../components/titleComponent/Title";
-import SearchBarUsers from "../components/usersManagement/SearchBarUsers";
-import UserCardBlock from "../components/usersManagement/UserCardBlock";
+import Title from "../components/Titles/Title";
+import SearchBarUsers from "../components/UsersManagement/searchBarUsers";
+import UserCardBlock from "../components/UsersManagement/userCardBlock";
 
 function UsersManagement() {
 

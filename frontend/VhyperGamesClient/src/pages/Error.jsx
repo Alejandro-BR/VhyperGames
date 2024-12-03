@@ -1,5 +1,5 @@
-import Error404Message from "../components/errorComponent/Error404Message";
-import Title from "../components/titleComponent/Title";
+import Error404Message from "../components/Error/Error404Message";
+import Title from "../components/Titles/Title";
 
 
 function Error() {

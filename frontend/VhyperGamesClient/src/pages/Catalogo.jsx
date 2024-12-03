@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import Footer from "../components/footerComponent/Footer";
-import Title from "../components/titleComponent/Title";
-import CatalogBody from "../components/catalogComponent/CatalogBody";
+import Footer from "../components/Footer/Footer";
+import Title from "../components/Titles/Title";
+import CatalogBody from "../components/Catalog/CatalogBody";
 import { useLocation } from "react-router-dom";
 
 function Catalogo() {
