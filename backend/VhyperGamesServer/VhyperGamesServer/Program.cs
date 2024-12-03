@@ -90,12 +90,9 @@ public class Program
         {
             builder.Services.AddCors(options =>
             {
-                options.AddPolicy("AllowSpecificOrigin", builder =>
+                options.AddDefaultPolicy(builder =>
                 {
-                    builder.WithOrigins("http://localhost:5173")
-                           .AllowAnyHeader()
-                           .AllowAnyMethod()
-                           .AllowCredentials();
+                    builder.AllowAnyOrigin().AllowAnyOrigin().AllowAnyMethod();
                 });
             });
         }
