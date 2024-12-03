@@ -134,8 +134,7 @@
 
 .logoutContainer {
   position: absolute;
-  top: 120%;
-  left: 50%;
+
   display: flex;
   align-items: center;
   transform: translateX(-50%);
@@ -146,4 +145,27 @@
   cursor: pointer;
 }
 
+.adminContainer {
+  position: absolute;
+  display: flex;
+  flex-direction: column; 
+  top: 80%; 
+  left: 80%;
+  background-color: var(--header-footer-color);
+  width: 100px;  
+  font-size: small;
+}
+
+.adminConfiguration{
+  padding: 4px;
+  cursor: pointer;
+  color: white;
+  text-align: center;
+  border: 1px solid #fff;
+  transition: background-color 0.3s ease;
+
+  &:hover{
+    background-color: var(--principal-blue); 
+  }
+}
 

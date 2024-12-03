@@ -12,6 +12,7 @@ function Header() {
   const [mostrarLogin, setMostrarLogin] = useState(false);
   const [mostrarRegister, setMostrarRegister] = useState(false);
   const [showLogout, setShowLogout] = useState(false);
+  const [showAdmin, setShowAdmin] = useState(false);
 
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchText, setSearchText] = useState("");
@@ -45,6 +46,21 @@ function Header() {
   const handleMouseLeave = () => {
     timerRef.current = setTimeout(() => {
       setShowLogout(false);
+    }, 500);
+  };
+
+  const handleMouseEnterAdmin = () => {
+    if (timerRef.current) {
+      clearTimeout(timerRef.current);
+      timerRef.current = null;
+    }
+    setShowAdmin(true);
+  };
+
+
+  const handleMouseLeaveAdmin = () => {
+    timerRef.current = setTimeout(() => {
+      setShowAdmin(false);
     }, 500);
   };
 
@@ -145,8 +161,29 @@ function Header() {
       </div>
 
       <div className={classes.icons}>
-        {token && (decodedToken?.role ==="Admin") &&(
-          <img src="/icon/admin.svg" alt="admin" />
+
+        {token && (decodedToken?.role === "Admin") && (
+          <div className={classes.admin} onMouseEnter={handleMouseEnterAdmin} onMouseLeave={handleMouseLeaveAdmin}>
+            <img src="/icon/admin.svg" alt="admin" />
+          </div>
+
+        )}
+
+        {token && showAdmin && (
+          <div className={classes.adminContainer}>
+            <div className={classes.adminConfiguration} 
+            onMouseEnter={handleMouseEnterAdmin} 
+            onMouseLeave={handleMouseLeaveAdmin}
+            onClick={() => navigate("/users-management")}>
+              Gestionar Usuario
+            </div>
+            <div className={classes.adminConfiguration} 
+            onMouseEnter={handleMouseEnterAdmin} 
+            onMouseLeave={handleMouseLeaveAdmin}
+            onClick={() => navigate("/products-management")}>
+              Gestionar Productos
+            </div>
+          </div>
         )}
 
         <CartIcon onClick={() => navigate("/cart")} />
