@@ -38,7 +38,7 @@ const routeDefinition = createRoutesFromElements(
     <Route path="user" element={<UserPage />} />
     <Route path="EthereumCheckout" element={<Ethereum />} />
     <Route
-      path="product-management"
+      path="products-management"
       element={<PrivateRoute><ProductManagement /></PrivateRoute>}
     />
     <Route
