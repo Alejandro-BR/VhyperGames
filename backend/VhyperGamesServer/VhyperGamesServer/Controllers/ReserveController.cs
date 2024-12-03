@@ -186,5 +186,36 @@ public class ReserveController : ControllerBase
 
         return Ok(new { status = session.Status, customerEmail = session.CustomerEmail, paymentStatus });
     }
+
+
+    [HttpGet("total")]
+    [Authorize]
+    public async Task<ActionResult> GetTotalByReserveId([FromQuery] int reserveId)
+    {
+        try
+        {
+            var userIdClaim = User.FindFirst("id");
+            if (userIdClaim == null)
+            {
+                return Unauthorized(new { message = "Usuario no autenticado." });
+            }
+
+            int userId = int.Parse(userIdClaim.Value);
+
+            // Llamar al servicio para obtener el total
+            decimal total = await _reserveService.CalculateTotalByReserveId(reserveId);
+
+            return Ok(new { ReserveId = reserveId, Total = total });
+        }
+        catch (KeyNotFoundException ex)
+        {
+            return NotFound(new { message = ex.Message });
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, new { message = "Error inesperado", detail = ex.Message });
+        }
+    }
+
 }
 

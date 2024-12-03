@@ -171,4 +171,21 @@ public class ReserveService
         _unitOfWork.ReserveRepository.Delete(reserve);
         await _unitOfWork.SaveAsync();
     }
+
+
+    public async Task<decimal> CalculateTotalByReserveId(int reserveId)
+    {
+        Reserve reserve = await _unitOfWork.ReserveRepository.GetReserveByIdCount(reserveId);
+
+        if (reserve == null)
+        {
+            throw new KeyNotFoundException($"La reserva con ID {reserveId} no existe.");
+        }
+
+        decimal total = reserve.ReserveDetails
+            .Sum(detail => detail.Quantity * detail.Game.Price);
+
+        return total;
+    }
+
 }
