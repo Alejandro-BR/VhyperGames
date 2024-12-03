@@ -9,12 +9,11 @@ public class StripeService
 {
     private readonly UnitOfWork _unitOfWork;
     private readonly ReserveAndOrderMapper _gameOrderMapper;
-    private string URL_CLIENT;
+
 
     public StripeService(UnitOfWork unitOfWork, ReserveAndOrderMapper gameOrderMapper) { 
         _unitOfWork = unitOfWork;
         _gameOrderMapper = gameOrderMapper;
-        URL_CLIENT = Environment.GetEnvironmentVariable("CLIENT_URL");
     }
 
     public async Task<SessionCreateOptions> EmbededCheckout(int userId, int reserveId)
