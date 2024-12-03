@@ -1,5 +1,6 @@
 using Examples.WebApi.Services.Blockchain;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.ML;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -18,6 +19,8 @@ public class Program
 {
     public static void Main(string[] args)
     {
+        Directory.SetCurrentDirectory(AppContext.BaseDirectory);
+
         var builder = WebApplication.CreateBuilder(args);
 
         // Configuración de servicios
@@ -153,7 +156,11 @@ public class Program
     private static void ConfigureMiddleware(WebApplication app)
     {
         // Habilitar el uso de archivos estáticos
-        app.UseStaticFiles();
+        app.UseStaticFiles(new StaticFileOptions
+        {
+            FileProvider = new PhysicalFileProvider(
+                Path.Combine(Directory.GetCurrentDirectory(), "wwwroot"))
+        });
 
         // Creación de la base de datos y el Seeder
         SeedDatabase(app.Services);
