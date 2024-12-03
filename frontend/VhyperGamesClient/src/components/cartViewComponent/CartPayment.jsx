@@ -21,6 +21,7 @@ function CartPayment() {
   const [isPaymentInitiated, setIsPaymentInitiated] = useState(false);
   const [paymentRoute, setPaymentRoute] = useState("");
   const [paymentMode, setPaymentMode] = useState(null);
+  const [priceEthereum, setPriceEthereum] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -35,12 +36,13 @@ function CartPayment() {
   }, [token, isPaymentInitiated]);
   
 
-  const handlePaymentClick = async (useLocalReserve, modeOfPay, route) => {
+  const handlePaymentClick = async (useLocalReserve, modeOfPay, route, priceEthereum) => {
     if (!token) {
       setIsLoginModalOpen(true); 
       setIsPaymentInitiated(true); 
       setPaymentRoute(route); 
       setPaymentMode(modeOfPay);
+      setPriceEthereum(precio);
       return;
     }
 
@@ -122,7 +124,7 @@ function CartPayment() {
           variant={"medium"}
           color={"azul-morado"}
           onClick={() => {
-            handlePaymentClick(false, 0, "/checkout/EthereumCheckout");
+            handlePaymentClick(false, 0, "/checkout/EthereumCheckout", priceEthereum);
           }}
         >
           PAGAR EN ETHEREUM

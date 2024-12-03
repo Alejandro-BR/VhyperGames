@@ -1,10 +1,12 @@
 import { useState, useContext, useEffect } from "react";
 import Web3 from "web3";
 import { useNavigate } from "react-router-dom";
+import { CreateData } from '../../utils/dataCart';
+import { CartContext } from '../../context/CartContext';
+import { ConvertToDecimal, TotalPrice } from "../../utils/price";
 import {
   BLOCKCHAIN_TRANSACTION,
   BLOCKCHAIN_CHECK,
-  CREATE_PAYMENT_SESSION,
   CONFIRM_RESERVE,
 } from "../../config";
 export const WALLET_METAMASK = import.meta.env.VITE_WALLET_METAMASK;
@@ -13,6 +15,7 @@ import { CheckoutContext } from "../../context/CheckoutContext";
 import Button from "../buttonComponent/Button";
 
 function Ethereum() {
+  const [data, setData] = useState([]);
   const [wallet, setWallet] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -20,37 +23,43 @@ function Ethereum() {
   const [transactionEnd, setTransactionEnd] = useState(false);
   const [cartTotalEuros, setCartTotalEuros] = useState(0);
   const [cartTotalEth, setCartTotalEth] = useState(0);
+  const [reserveData, setReserveData] = useState(null);
+  const [orderId, setOrderId] = useState(null);
+
   const token = useAuth();
   const { reserveId, handleConfirmReserve } = useContext(CheckoutContext);
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
+  const { gameDetails, items } = useContext(CartContext);
 
-  async function createPaymentSession() {
-    try {
-      setLoading(true);
-      const response = await fetch(CREATE_PAYMENT_SESSION, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token.token}`,
-        },
-        body: JSON.stringify(reserveId),
-      });
+  // Actualiza los datos del carrito
+  useEffect(() => {
+    const updatedData = CreateData(items, gameDetails);
+    setData(updatedData);
+  }, [gameDetails, items]);
 
-      if (!response.ok) {
-        throw new Error(`Error: ${response.status} - ${response.statusText}`);
-      }
+  // Calcula el total en Euros y ETH
+  useEffect(() => {
+    if (data.length > 0) {
+      const totalEuros = ConvertToDecimal(TotalPrice(data));
+      setCartTotalEuros(totalEuros);
 
-      const data = await response.json();
-      setCartTotalEuros(data.totalEuros);
-      setCartTotalEth(data.totalEth);
-      setError(null);
-    } catch (err) {
-      setError(`Error al crear la sesión de pago: ${err.message}`);
-    } finally {
-      setLoading(false);
+      (async () => {
+        try {
+          const transactionData = await fetchTransactionData(totalEuros);
+          if (transactionData) {
+            const valueInWei = BigInt(transactionData.value);
+            const valueInEth = Number(valueInWei) / 10 ** 18;
+            setCartTotalEth(parseFloat(valueInEth));
+          }
+        } catch (err) {
+          console.error("Error al convertir Euros a ETH:", err.message);
+          setError(err.message);
+        }
+      })();
     }
-  }
+  }, [data]);
 
+  // Conecta la billetera MetaMask
   async function conectandoWallet() {
     try {
       if (!window.ethereum?.isMetaMask) {
@@ -74,15 +83,52 @@ function Ethereum() {
     }
   }
 
+  const fetchTransactionData = async (euros) => {
+    try {
+      const eurosFormatted = parseFloat(euros.toString().replace(",", "."));
+      const response = await fetch(BLOCKCHAIN_TRANSACTION, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ networkUrl: "https://otter.bordel.wtf/erigon", euros: eurosFormatted }),
+      });
+  
+      const contentType = response.headers.get("Content-Type") || "";
+      if (!response.ok) {
+        const errorText = await response.text(); // Lee el texto completo para el mensaje de error.
+        throw new Error(`Error en la API (${response.status}): ${errorText}`);
+      }
+  
+      if (contentType.includes("application/json")) {
+        const data = await response.json();
+        if (!data || typeof data.value === "undefined") {
+          throw new Error("La API devolvió datos incompletos o inválidos.");
+        }
+        return data;
+      } else {
+        const text = await response.text();
+        throw new Error(`Respuesta inesperada de la API: ${text}`);
+      }
+    } catch (err) {
+      console.error("Error en fetchTransactionData:", err.message);
+      setError(`Error al convertir Euros a Ethereum: ${err.message}`);
+      throw err;
+    }
+  };
+
+  // Manejo del pago
   async function handleComplete() {
     try {
       if (!wallet) {
         throw new Error("Debes conectar tu wallet antes de completar la transacción.");
       }
 
-      const transactionData = await fetchTransactionData(cartTotalEuros);
-
       setTransactionProcessing(true);
+
+      const transactionData = await fetchTransactionData(cartTotalEuros);
+      if (!transactionData || !transactionData.value) {
+        throw new Error("Datos de transacción inválidos o incompletos.");
+      }
+
       const txHash = await window.ethereum.request({
         method: "eth_sendTransaction",
         params: [
@@ -98,23 +144,20 @@ function Ethereum() {
 
       console.log("Transacción enviada, hash:", txHash);
 
-      await new Promise((resolve) => setTimeout(resolve, 10000));
+      await new Promise(resolve => setTimeout(resolve, 10000));
 
       const isValid = await verifyTransaction(txHash, wallet, WALLET_METAMASK, transactionData.value);
-
       if (isValid) {
-        console.log("Transacción validada. Confirmando reserva...");
         const orderId = await handleConfirmReserve(CONFIRM_RESERVE, reserveId);
-        console.log("Reserva confirmada con ID:", orderId);
-
+        setOrderId(orderId);
         setTransactionEnd(true);
         setError(null);
-
         navigate("/paymentConfirmation", { state: { status: "success", orderId } });
       } else {
         throw new Error("La transacción no es válida.");
       }
     } catch (err) {
+      console.error("Error al completar la transacción:", err.message);
       setError(`Error al completar la transacción: ${err.message}`);
     } finally {
       setTransactionProcessing(false);
@@ -122,24 +165,7 @@ function Ethereum() {
     }
   }
 
-  async function fetchTransactionData(euros) {
-    try {
-      const response = await fetch(BLOCKCHAIN_TRANSACTION, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ networkUrl: "https://otter.bordel.wtf/erigon", euros }),
-      });
-
-      if (!response.ok) {
-        throw new Error("Error al obtener los datos de la transacción.");
-      }
-
-      return await response.json();
-    } catch (err) {
-      throw new Error(`Error al obtener los datos de la transacción: ${err.message}`);
-    }
-  }
-
+  // Verifica la transacción
   async function verifyTransaction(txHash, from, to, value) {
     try {
       const response = await fetch(BLOCKCHAIN_CHECK, {
@@ -158,31 +184,24 @@ function Ethereum() {
         throw new Error("Error al verificar la transacción.");
       }
 
-      const isValid = (await response.text()).trim().toLowerCase() === "true";
-      return isValid;
+      return (await response.text()).trim().toLowerCase() === "true";
     } catch (err) {
-      throw new Error(`Error al verificar la transacción: ${err.message}`);
+      console.error("Error al verificar la transacción:", err.message);
+      throw err;
     }
   }
 
-  useEffect(() => {
-    if (token && token.token) {
-      createPaymentSession();
-    } else {
-      setError("No se encontró el token de autenticación.");
-    }
-  }, [token]);
+
+  
 
   return (
     <div className="App">
       <h1>Pagar con Ethereum</h1>
 
-      {cartTotalEuros > 0 && (
-        <>
-          <p>Total en Euros: {cartTotalEuros}€</p>
-          <p>Total en Ethereum: {cartTotalEth} ETH</p>
-        </>
-      )}
+      <div>
+        <p>Total en Euros: {cartTotalEuros}€</p>
+        <p>Total en Ethereum: {cartTotalEth.toFixed(6)} ETH</p>
+      </div>
 
       {!loading && (
         <div>
@@ -206,19 +225,9 @@ function Ethereum() {
       )}
 
       {loading && <p>Procesando...</p>}
-
-      {transactionProcessing && (
-        <div>
-          <p>Procesando transacción...</p>
-          <div id="logo-container"></div>
-        </div>
-      )}
-
+      {transactionProcessing && <p>Procesando transacción...</p>}
       {error && <p style={{ color: "red" }}>{error}</p>}
-
-      {transactionEnd && (
-        <p style={{ color: "green" }}>Transacción completada con éxito</p>
-      )}
+      {transactionEnd && <p style={{ color: "green" }}>Transacción completada con éxito</p>}
     </div>
   );
 }
