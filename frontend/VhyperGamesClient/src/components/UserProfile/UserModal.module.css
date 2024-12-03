@@ -14,7 +14,7 @@
 .userModal{
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 16px;
     background-color: var(--body-color);
     padding: 30px;
     border: 1px solid transparent;
@@ -35,6 +35,7 @@
     min-height: 40px;
     color: black;
     width: 100%;
+    padding-left: 10px;
 }
 
 .buttons{
