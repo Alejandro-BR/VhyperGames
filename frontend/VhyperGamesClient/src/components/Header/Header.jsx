@@ -17,11 +17,12 @@ function Header() {
   const [searchText, setSearchText] = useState("");
   const [drmFilter, setDrmFilter] = useState(-1);
 
-  const { token, username, logout, admin } = useAuth();
+  const { token, username, logout, decodedToken } = useAuth();
   const navigate = useNavigate();
   const timerRef = useRef(null);
 
-  console.log(admin)
+  console.log(decodedToken?.role);
+
   // Manejar clic en el ícono de usuario
   const handleUserClick = () => {
     if (!token) {
@@ -144,7 +145,7 @@ function Header() {
       </div>
 
       <div className={classes.icons}>
-        {token && admin &&(
+        {token && (decodedToken?.role ==="Admin") &&(
           <img src="/icon/admin.svg" alt="admin" />
         )}
 

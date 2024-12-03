@@ -81,7 +81,7 @@ export const AuthProvider = ({ children }) => {
 
     const username = decodedToken?.name || null;
     const userId = decodedToken?.id || null;
-    const admin = decodedToken?.rol?.admin || null;
+    const userRol = decodedToken?.role || null;
 
 
     const contextValue = {
@@ -89,7 +89,7 @@ export const AuthProvider = ({ children }) => {
         decodedToken,
         username,
         userId,
-        admin,
+        userRol,
         saveToken,
         logout,
     };
