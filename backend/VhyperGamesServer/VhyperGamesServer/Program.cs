@@ -150,11 +150,16 @@ public class Program
     private static void ConfigureMiddleware(WebApplication app)
     {
         // Habilitar el uso de archivos estáticos
+#if DEBUG
+        app.UseStaticFiles();
+#else
         app.UseStaticFiles(new StaticFileOptions
         {
             FileProvider = new PhysicalFileProvider(
                 Path.Combine(Directory.GetCurrentDirectory(), "wwwroot"))
         });
+#endif
+
 
         // Creación de la base de datos y el Seeder
         SeedDatabase(app.Services);
