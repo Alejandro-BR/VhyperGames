@@ -1,5 +1,5 @@
 import { createContext, useState } from "react";
-import { useAuth } from "./authcontext";
+import { useAuth } from "./AuthContext";
 import { createReserve, getReserveDetails, confirmReserve } from "../endpoints/ReserveEndpoints";
 import { getVarLS, updateLocalStorage } from "../utils/keep";
 

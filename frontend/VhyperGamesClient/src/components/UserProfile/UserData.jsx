@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { GET_USER } from "../../config";
 import classes from "./UserData.module.css"
-import { useAuth } from "../../context/authcontext";
+import { useAuth } from "../../context/AuthContext";
 
 function UserData({ }) {
     const [loading, setLoading] = useState(true);
