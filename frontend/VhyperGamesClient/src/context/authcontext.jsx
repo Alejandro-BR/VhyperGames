@@ -81,8 +81,12 @@ export const AuthProvider = ({ children }) => {
 
     const username = decodedToken?.name || null;
     const userId = decodedToken?.id || null;
+<<<<<<< HEAD
     const timer = decodedToken?.exp || null;
     const role= decodedToken?.role || null;
+=======
+    const userRol = decodedToken?.role || null;
+>>>>>>> fernando
 
 
     const contextValue = {
@@ -90,7 +94,11 @@ export const AuthProvider = ({ children }) => {
         decodedToken,
         username,
         userId,
+<<<<<<< HEAD
         role,
+=======
+        userRol,
+>>>>>>> fernando
         saveToken,
         logout,
     };
