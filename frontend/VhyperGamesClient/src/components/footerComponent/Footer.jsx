@@ -28,7 +28,7 @@ function Footer() {
 
           <div className={classes.onlyButtons}>
             <Button variant="large" color="morado" onClick={messageCompany}>
-              Empresa
+              DRM FREE
             </Button>
 
             <Button variant="large" color="morado" onClick={() => navigate("/sobre-nosotros")}>
