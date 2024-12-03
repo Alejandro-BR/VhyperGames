@@ -45,3 +45,5 @@ export const GET_USERS =  `${API_BASE_URL}User/GetUsers`;
 export const BLOCKCHAIN = `${API_BASE_URL}Blockchain`;
 export const BLOCKCHAIN_TRANSACTION = `${API_BASE_URL}Blockchain/transaction`;
 export const BLOCKCHAIN_CHECK = `${API_BASE_URL}Blockchain/check`;
+/* RESERVE ETHEREUM */
+export const BLOCKCHAIN_TOTAL_RESERVE = `${API_BASE_URL}Reserve/total`;

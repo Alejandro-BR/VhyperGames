@@ -202,7 +202,6 @@ public class ReserveController : ControllerBase
 
             int userId = int.Parse(userIdClaim.Value);
 
-            // Llamar al servicio para obtener el total
             decimal total = await _reserveService.CalculateTotalByReserveId(reserveId);
 
             return Ok(new { ReserveId = reserveId, Total = total });
