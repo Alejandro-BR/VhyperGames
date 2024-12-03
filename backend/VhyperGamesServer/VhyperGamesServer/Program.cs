@@ -86,16 +86,13 @@ public class Program
             .FromFile("IA.mlnet");
 
         // Configuración de CORS
-        if (builder.Environment.IsDevelopment())
+        builder.Services.AddCors(options =>
         {
-            builder.Services.AddCors(options =>
+            options.AddDefaultPolicy(builder =>
             {
-                options.AddDefaultPolicy(builder =>
-                {
-                    builder.AllowAnyOrigin().AllowAnyOrigin().AllowAnyMethod();
-                });
+                builder.AllowAnyOrigin().AllowAnyOrigin().AllowAnyMethod();
             });
-        }
+        });
 
         // Configuración de autenticación JWT
         string key = Environment.GetEnvironmentVariable("JWT_KEY");
