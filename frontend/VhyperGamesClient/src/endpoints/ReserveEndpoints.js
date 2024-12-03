@@ -1,5 +1,3 @@
-import {CONFIRM_RESERVE} from "../config"
-
 export const createReserve = async (url, reserveData, token) => {
     const fullUrl = `${url}?modeOfPay=${reserveData.modeOfPay}`
 
