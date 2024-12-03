@@ -40,8 +40,21 @@ export const ORDER_BY_ID = `${API_BASE_URL}Order/get-by-id`;
 
 /* ENDPOINTS DE USUARIO*/
 export const GET_USER =  `${API_BASE_URL}User/get-user`;
+export const UPDATE_USER =  `${API_BASE_URL}User/update-user`;
 
 /* ETHEREUM */
 export const BLOCKCHAIN = `${API_BASE_URL}Blockchain`;
 export const BLOCKCHAIN_TRANSACTION = `${API_BASE_URL}Blockchain/transaction`;
 export const BLOCKCHAIN_CHECK = `${API_BASE_URL}Blockchain/check`;
+
+/* ENDPOINTS ADMIN USERS */
+export const GET_USERS_ADMIN = `${API_BASE_URL}AdminUser/get-users`;
+export const UPDATE_USER_ROL = `${API_BASE_URL}AdminUser/update-rol`;
+export const DELETE_USER = `${API_BASE_URL}AdminUser/delete`;
+
+/* ENDPOINTS ADMIN GAME */
+export const GET_GAMES_ADMIN = `${API_BASE_URL}AdminGame/get-games`;
+export const UPDATE_GAME = `${API_BASE_URL}AdminGame/update`;
+export const NEW_GAME = `${API_BASE_URL}AdminGame/newGame`;
+export const GET_SEARCH_GAMES_ADMIN = `${API_BASE_URL}AdminGame/search`;
+export const GET_FORM_GAME = `${API_BASE_URL}AdminGame/get-form`;
