@@ -42,7 +42,7 @@ const routeDefinition = createRoutesFromElements(
       element={<PrivateRoute><ProductManagement /></PrivateRoute>}
     />
     <Route
-      path="product-management"
+      path="users-management"
       element={<PrivateRoute><UsersManagement /></PrivateRoute>}
     />
   </Route>

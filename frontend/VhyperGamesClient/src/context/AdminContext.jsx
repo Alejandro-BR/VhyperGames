@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect } from "react";
-import { useAuth } from "./authcontext";
+import { useAuth } from "./AuthContext";
 import { getUsersAdmin, updateRol, deleteUser } from "../endpoints/AdminUsers";
 import { getGamesAdmin, updateGames, newGame, searchGame, getFormGame } from "../endpoints/AdminGames";
 import { GET_USERS_ADMIN, UPDATE_USER_ROL, DELETE_USER, GET_GAMES_ADMIN, UPDATE_GAME, NEW_GAME, GET_FORM_GAME, GET_SEARCH_GAMES_ADMIN } from "../config";
@@ -9,7 +9,7 @@ export const AdminContext = createContext();
 
 // Proveedor del contexto
 export const AdminProvider = ({ children }) => {
-  const { token } = useAuth();
+  const { token, admin } = useAuth();
   const [users, setUsers] = useState([]);
   const [games, setGames] = useState([]);
   
@@ -133,7 +133,7 @@ export const AdminProvider = ({ children }) => {
   // ----- useEffect -----
 
   useEffect(() => {
-    if (token) {
+    if (token && admin) {
       fetchUsers();
       fetchGames();
     }
