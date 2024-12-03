@@ -14,6 +14,7 @@ import UserPage from './pages/UserPage';
 import Ethereum from './components/Ethereum/Ethereum';
 import ProductManagement from './pages/ProductManagement';
 import UsersManagement from './pages/UsersManagement';
+import { AdminContext } from './context/AdminContext';
 
 import {
   createBrowserRouter,
@@ -21,8 +22,6 @@ import {
   createRoutesFromElements,
   Route,
 } from "react-router-dom";
-
-
 
 const routeDefinition = createRoutesFromElements(
   <Route path="/" element={<RootLayout />} errorElement={<Error />}>
@@ -48,7 +47,9 @@ function App() {
     <AuthProvider>
       <CartProvider>
         <CheckoutProvider>
-          <RouterProvider router={router}></RouterProvider>
+          <AdminContext>
+            <RouterProvider router={router}></RouterProvider>
+          </AdminContext>
         </CheckoutProvider>
       </CartProvider>
     </AuthProvider>
