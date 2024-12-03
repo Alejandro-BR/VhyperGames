@@ -81,7 +81,6 @@ export const AuthProvider = ({ children }) => {
 
     const username = decodedToken?.name || null;
     const userId = decodedToken?.id || null;
-    const timer = decodedToken?.exp || null;
     const admin = decodedToken?.rol?.admin || null;
 
 
