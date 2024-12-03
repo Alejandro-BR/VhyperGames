@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import ProductCard from "./ProductCard";
-import { CATALOG_FILTER } from "../../config";
+import ProductCard from "../ProductCard/ProductCard";
+import { CATALOG_FILTER } from "../../../config";
 import classes from "./ProductCardBlock.module.css";
 
 // function ProductCardBlock() {

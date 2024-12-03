@@ -1,9 +1,9 @@
 import classes from "./ProductCard.module.css";
 import { Link } from "react-router-dom";
-import { ConvertToDecimal } from "../../utils/price";
+import { ConvertToDecimal } from "../../../utils/price";
 import { useContext, useEffect, useState } from "react";
-import { AdminContext } from "../../context/AdminContext";
-import { useAuth } from "../../context/AuthContext";
+import { AdminContext } from "../../../context/AdminContext";
+import { useAuth } from "../../../context/AuthContext";
 import GameFormModal from "../GameFormModal/GameFormModal";
 
 
