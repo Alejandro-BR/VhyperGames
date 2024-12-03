@@ -30,6 +30,7 @@ function UserData({ }) {
                 }
                 const data = await response.json();
                 setUserInfo(data)
+                
             } catch (error) {
                 setError(error.message);
             } finally {
@@ -38,7 +39,8 @@ function UserData({ }) {
         };
 
         fetchUsers();
-    }, []);
+        console.log(userInfo)
+    }, [token]);
 
 
     if (loading) {
