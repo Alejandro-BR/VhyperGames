@@ -1,11 +1,11 @@
-import UserData from "../components/UserPageComponents/UserData";
+import UserData from "../components/UserProfile/UserData";
 import classes from '../styles/UserPage.module.css'
-import Title from "../components/titleComponent/Title";
-import PaymentOrder from "../components/PaymentConfirmationComponent/PaymentOrder";
-import Button from "../components/buttonComponent/Button";
-import Footer from "../components/footerComponent/Footer";
+import Title from "../components/Titles/Title";
+import PaymentOrder from "../components/PaymentConfirmation/PaymentOrder";
+import Button from "../components/Buttons/Button";
+import Footer from "../components/Footer/Footer";
 import { useState } from "react";
-import UserModal from "../components/UserPageComponents/UserModal";
+import UserModal from "../components/UserProfile/UserModal";
 
 function UserPage() {
     const [editData, setEditData] = useState(false);

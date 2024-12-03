@@ -1,5 +1,5 @@
-import Footer from "../components/footerComponent/Footer";
-import BodyHome from "../components/homeComponents/BodyHome";
+import Footer from "../components/Footer/Footer";
+import BodyHome from "../components/Home/BodyHome";
 
 function Home() {
   return (

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import CartListGames from "../components/cartViewComponent/CartListGames";
-import CartPayment from "../components/cartViewComponent/CartPayment";
-import Footer from "../components/footerComponent/Footer";
+import CartListGames from "../components/Cart/CartListGames";
+import CartPayment from "../components/Cart/CartPayment";
+import Footer from "../components/Footer/Footer";
 import { getVarLS } from "../utils/keep";
 import classes from "../styles/Cart.module.css";
 

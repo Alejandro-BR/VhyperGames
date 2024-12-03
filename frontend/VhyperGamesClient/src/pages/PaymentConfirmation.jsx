@@ -1,6 +1,6 @@
-import Footer from "../components/footerComponent/Footer";
-import PaymentOrder from "../components/PaymentConfirmationComponent/PaymentOrder";
-import ConfirmationMsg from "../components/PaymentConfirmationComponent/ConfirmationMsg";
+import Footer from "../components/Footer/Footer";
+import PaymentOrder from "../components/PaymentConfirmation/PaymentOrder";
+import ConfirmationMsg from "../components/PaymentConfirmation/ConfirmationMsg";
 import classes from "../styles/PaymentConfirmation.module.css"
 
 
