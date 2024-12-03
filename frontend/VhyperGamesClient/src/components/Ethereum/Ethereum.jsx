@@ -13,7 +13,7 @@ import {
 export const WALLET_METAMASK = import.meta.env.VITE_WALLET_METAMASK;
 import { useAuth } from "../../context/AuthContext";
 import { CheckoutContext } from "../../context/CheckoutContext";
-import Button from "../buttonComponent/Button";
+import Button from "../Buttons/Button";
 import { fetchReserveTotal } from "../../helpers/ethereumHelper";
 
 
