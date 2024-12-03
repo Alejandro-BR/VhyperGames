@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using VhyperGamesServer.Models.Database.Entities;
-using VhyperGamesServer.Models.Database.Entities.Enum;
 
 namespace VhyperGamesServer.Models.Database;
 
@@ -37,7 +36,11 @@ public class MyDbContext : DbContext
         string baseDir = AppDomain.CurrentDomain.BaseDirectory;
 
         // Se configura Sqlite como proveedor de BD pasando la ruta de archivo ("vhypergames.db) en el directorio base de la aplicacion
+#if DEBUG
         options.UseSqlite($"DataSource={baseDir}{DATABASE_PATH}");
+#elif RELEASE
+        options.UseSqlServer($"Server=YOUR_SERVER_NAME;Database=YOUR_DATABASE_NAME;User Id=YOUR_USER_ID;Password=YOUR_PASSWORD;"");
+#endif
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -321,10 +324,10 @@ public class MyDbContext : DbContext
                 .HasColumnName("quantity")
                 .IsRequired();
 
-            entity.HasOne(cd => cd.Cart)              
-                .WithMany(c => c.CartDetails)        
-                .HasForeignKey(cd => cd.CartId)       
-                .OnDelete(DeleteBehavior.Cascade)     
+            entity.HasOne(cd => cd.Cart)
+                .WithMany(c => c.CartDetails)
+                .HasForeignKey(cd => cd.CartId)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_CartDetail_Cart");
         });
 
@@ -344,7 +347,7 @@ public class MyDbContext : DbContext
                 .IsRequired();
 
             entity.Property(e => e.ExpirationTime)
-             .HasColumnName("expirationtime") 
+             .HasColumnName("expirationtime")
              .IsRequired();
         });
 
