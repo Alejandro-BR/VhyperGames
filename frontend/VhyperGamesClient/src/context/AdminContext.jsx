@@ -1,15 +1,19 @@
 import { createContext, useState, useEffect } from "react";
 import { useAuth } from "./authcontext";
 import { getUsersAdmin, updateRol, deleteUser } from "../endpoints/AdminUsers";
-import { GET_USERS_ADMIN, UPDATE_USER_ROL, DELETE_USER } from "../config";
+import { getGamesAdmin, updateGames, newGame, searchGame, getFormGame } from "../endpoints/AdminGames";
+import { GET_USERS_ADMIN, UPDATE_USER_ROL, DELETE_USER, GET_GAMES_ADMIN, UPDATE_GAME, NEW_GAME, GET_FORM_GAME, GET_SEARCH_GAMES_ADMIN } from "../config";
 
 // Crear el contexto
 export const AdminContext = createContext();
 
 // Proveedor del contexto
 export const AdminProvider = ({ children }) => {
-  const { token } = useAuth(); 
+  const { token } = useAuth();
   const [users, setUsers] = useState([]);
+  const [games, setGames] = useState([]);
+  
+  // ----- ADMIN USER -----
 
   const fetchUsers = async () => {
     try {
@@ -17,7 +21,7 @@ export const AdminProvider = ({ children }) => {
 
       if (response.ok) {
         const data = await response.json();
-        setUsers(data); 
+        setUsers(data);
       } else {
         console.error("Error al obtener los usuarios");
       }
@@ -54,17 +58,99 @@ export const AdminProvider = ({ children }) => {
     }
   };
 
+  // ----- ADMIN GAME -----
+
+  const fetchGames = async () => {
+    try {
+      const response = await getGamesAdmin(GET_GAMES_ADMIN, token);
+      if (response.ok) {
+        const data = await response.json();
+        setGames(data);
+      } else {
+        console.error("Error al obtener los juegos");
+      }
+    } catch (error) {
+      console.error("Error en fetchGames:", error);
+    }
+  };
+
+  const updateGameById = async (data) => {
+    try {
+      const response = await updateGames(UPDATE_GAME, data, token);
+      if (response.ok) {
+        fetchGames();
+      } else {
+        console.error("Error al actualizar el juego");
+      }
+    } catch (error) {
+      console.error("Error en updateGameById:", error);
+    }
+  };
+
+  const postGame = async (data) => {
+    try {
+      const response = await newGame(NEW_GAME, data, token);
+      if (response.ok) {
+        fetchGames();
+      } else {
+        console.error("Error al crear el juego");
+      }
+    } catch (error) {
+      console.error("Error en postGame:", error);
+    }
+  };
+
+  const GetSearchGame = async (data) => {
+    try {
+      const response = await searchGame(GET_SEARCH_GAMES_ADMIN, data, token);
+      if (response.ok) {
+        setGames(response);
+      } else {
+        console.error("Error al buscar el juego");
+      }
+    } catch (error) {
+      console.error("Error en GetSearchGame:", error);
+    }
+  };
+
+  const GetFormGame = async (gameId) => {
+    try {
+      const response = await getFormGame(GET_FORM_GAME, gameId, token);
+      if (response.ok) {
+        fetchGames();
+      } else {
+        console.error("Error al pedir el formulario el juego");
+      }
+    } catch (error) {
+      console.error("Error en GetFormGame:", error);
+    }
+  };
+
+  const ResetSearchGame = async () => {
+    await fetchGames();
+  }
+
+  // ----- useEffect -----
+
   useEffect(() => {
     if (token) {
       fetchUsers();
+      fetchGames();
     }
   }, [token, users]);
 
   const contextValue = {
     users,
+    games,
     fetchUsers,
     updateUserRole,
     deleteUserById,
+    fetchGames,
+    updateGameById,
+    postGame,
+    GetSearchGame,
+    GetFormGame,
+    ResetSearchGame
   };
 
   return (
