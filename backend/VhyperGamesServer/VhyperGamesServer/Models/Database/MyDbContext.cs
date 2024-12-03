@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Hosting.Server;
+using Microsoft.EntityFrameworkCore;
+using System.Configuration;
 using VhyperGamesServer.Models.Database.Entities;
 
 namespace VhyperGamesServer.Models.Database;
@@ -34,12 +36,13 @@ public class MyDbContext : DbContext
     {
         //AppDomain obtiene el directorio donde se ejecuta la aplicación
         string baseDir = AppDomain.CurrentDomain.BaseDirectory;
+        string connectionString = "Server=db10878.databaseasp.net; Database=db10878; Uid=db10878; Pwd=jA=5-y4R3Qm?;";
 
         // Se configura Sqlite como proveedor de BD pasando la ruta de archivo ("vhypergames.db) en el directorio base de la aplicacion
 #if DEBUG
         options.UseSqlite($"DataSource={baseDir}{DATABASE_PATH}");
 #elif RELEASE
-        options.UseSqlServer($"Server=YOUR_SERVER_NAME;Database=YOUR_DATABASE_NAME;User Id=YOUR_USER_ID;Password=YOUR_PASSWORD;"");
+        options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
 #endif
     }
 
