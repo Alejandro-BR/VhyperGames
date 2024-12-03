@@ -48,5 +48,13 @@ public class ReserveRepository : Repository<Reserve, int>
             .ToListAsync();
     }
 
+    public async Task<Reserve> GetReserveByIdCount(int id)
+    {
+        return await Context.Set<Reserve>()
+            .Include(r => r.ReserveDetails)
+                .ThenInclude(rd => rd.Game) 
+            .FirstOrDefaultAsync(r => r.Id == id);
+    }
+
 
 }
