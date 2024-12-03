@@ -6,7 +6,7 @@ import Pagination from "./Pagination.jsx";
 import { CATALOG_FILTER } from "../../config.js";
 import { getVarSessionStorage, updateSessionStorage } from "../../utils/keep.js";
 
-function CatalogBody({ initialSearchText = "", initialDrmFree = -1 }) {
+function CatalogBody({ initialSearchText = "", initialDrmFree = -1, initialBit = 0 }) {
     const [juegos, setJuegos] = useState([]);
     const [totalPages, setTotalPages] = useState(0);
     const [loading, setLoading] = useState(true);
@@ -20,7 +20,7 @@ function CatalogBody({ initialSearchText = "", initialDrmFree = -1 }) {
         page: 1
     });
 
-    console.log("CatalogBody render", { searchFilter, searchText }); // Log render
+    console.log("CatalogBody render", { initialSearchText, searchFilter, searchText }); // Log render
 
     useEffect(() => {
         console.log("useEffect: initialSearchText or initialDrmFree changed", { initialSearchText, initialDrmFree });
@@ -31,7 +31,7 @@ function CatalogBody({ initialSearchText = "", initialDrmFree = -1 }) {
                 drmFree: initialDrmFree !== null ? initialDrmFree : prevFilter.drmFree,
             }));
         }
-    }, [initialSearchText, initialDrmFree]);
+    }, [initialSearchText, initialDrmFree, initialBit]);
 
     const CLAVE = "filter";
     const [filtersLoaded, setFiltersLoaded] = useState(false);

@@ -16,6 +16,7 @@ function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchText, setSearchText] = useState("");
   const [drmFilter, setDrmFilter] = useState(-1);
+  const [bit, setBit] = useState(0);
 
   const { token, username, logout } = useAuth();
   const navigate = useNavigate();
@@ -56,8 +57,13 @@ function Header() {
     setMenuOpen(false);
   };
 
+  const toggleBit = () => {
+    setBit(previousState => !previousState)
+  }
+
   const handleSearch = () => {
-    navigate(`/catalogo?SearchText=${encodeURIComponent(searchText)}&DrmFree=${drmFilter}`);
+    toggleBit();
+    navigate(`/catalogo?SearchText=${encodeURIComponent(searchText)}&DrmFree=${drmFilter}&Bit=${bit}`);
   };
 
 
@@ -69,6 +75,8 @@ function Header() {
     deleteLocalStorage("cart");
     navigate("/");
   };
+
+ 
 
   return (
     <div className={classes.header}>
