@@ -86,6 +86,22 @@ public class Program
             .FromFile("IA.mlnet");
 
         // Configuración de CORS
+
+#if DEBUG
+        if (builder.Environment.IsDevelopment())
+        {
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowSpecificOrigin", builder =>
+                {
+                    builder.WithOrigins("http://localhost:5173")
+                           .AllowAnyHeader()
+                           .AllowAnyMethod()
+                           .AllowCredentials();
+                });
+            });
+        }
+#else
         builder.Services.AddCors(options =>
         {
             options.AddDefaultPolicy(builder =>
@@ -93,6 +109,8 @@ public class Program
                 builder.AllowAnyOrigin().AllowAnyOrigin().AllowAnyMethod();
             });
         });
+#endif
+
 
         // Configuración de autenticación JWT
         string key = Environment.GetEnvironmentVariable("JWT_KEY");
