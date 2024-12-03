@@ -62,7 +62,7 @@ function UserModal({ onClose }) {
                 </div>
 
                 <div className={classes.inputGroup}>
-                    <p>confirmar Contraseña:</p>
+                    <p>Confirmar Contraseña:</p>
                     <input
                         id="passwordConfirm"
                         name="passworConfirm"

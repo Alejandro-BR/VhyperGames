@@ -58,7 +58,6 @@ function UserData({ }) {
                 <div>Nombre de usuario: {userInfo.name + " " + userInfo.surname}</div>
                 <div>Correo electronico: {userInfo.email}</div>
                 <div>Direccion: {userInfo.address}</div>
-                <div>Rol: {userInfo.rol}</div>
             </div>
 
         </div>
