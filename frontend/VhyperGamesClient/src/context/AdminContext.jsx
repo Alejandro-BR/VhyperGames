@@ -13,18 +13,20 @@ export const AdminProvider = ({ children }) => {
   const [users, setUsers] = useState([]);
   const [games, setGames] = useState([]);
   const [dataForm, setDataForm] = useState([]);
-  
+
   // ----- ADMIN USER -----
 
   const fetchUsers = async () => {
     try {
       const response = await getUsersAdmin(GET_USERS_ADMIN, token);
+      console.log(response);
+      // if (!response.ok) {
+      //   console.error("Error al obtener los usuarios");
+      //   return;
+      // }
 
-      if (response.ok) {
-        setUsers(response);
-      } else {
-        console.error("Error al obtener los usuarios");
-      }
+      setUsers(response);
+      console.log(response);
     } catch (error) {
       console.error("Error en fetchUsers:", error);
     }
@@ -61,18 +63,18 @@ export const AdminProvider = ({ children }) => {
   // ----- ADMIN GAME -----
 
   const fetchGames = async () => {
-  
+
     try {
       const response = await getGamesAdmin(GET_GAMES_ADMIN, token);
-  
+
       if (response.ok) {
         setGames(response);
-      } 
+      }
     } catch (error) {
       console.error("Error en fetchGames:", error);
     }
   };
-  
+
 
   const updateGameById = async (data) => {
     try {

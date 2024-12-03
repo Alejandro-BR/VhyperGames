@@ -14,7 +14,7 @@ function UserCardBlock() {
     if (token && decodedToken?.role === "Admin") {
       fetchUsers();
     };
-  }, [users, token, decodedToken?.role]);
+  }, [token, decodedToken?.role]);
 
   return (
     <section className={classes.productsList}>
