@@ -12,6 +12,7 @@ export const AdminProvider = ({ children }) => {
   const { token, admin } = useAuth();
   const [users, setUsers] = useState([]);
   const [games, setGames] = useState([]);
+  const [dataForm, setDataForm] = useState([]);
   
   // ----- ADMIN USER -----
 
@@ -79,6 +80,7 @@ export const AdminProvider = ({ children }) => {
       const response = await updateGames(UPDATE_GAME, data, token);
       if (response.ok) {
         fetchGames();
+        setDataForm([]);
       } else {
         console.error("Error al actualizar el juego");
       }
@@ -117,6 +119,7 @@ export const AdminProvider = ({ children }) => {
     try {
       const response = await getFormGame(GET_FORM_GAME, gameId, token);
       if (response.ok) {
+        setDataForm(response);
         fetchGames();
       } else {
         console.error("Error al pedir el formulario el juego");
@@ -142,6 +145,7 @@ export const AdminProvider = ({ children }) => {
   const contextValue = {
     users,
     games,
+    dataForm,
     fetchUsers,
     updateUserRole,
     deleteUserById,
