@@ -1,3 +1,8 @@
+.container {
+    display: flex;
+    gap: 10px;
+}
+
 .searchBar {
     height: 30px;
     width: fit-content;
