@@ -21,7 +21,10 @@
 
 .modalContent {
     position: relative;
-    height: 5vh;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
     width: 20vw;
     margin: 45vh 0 0 40vw;
     background-color: var(--body-color);
@@ -32,8 +35,11 @@
 }
 
 .confirmationInput {
+    width: 100%;
     margin-top: 10px;
+    padding-left: 10px;
     color:rgb(24, 24, 24);
+
 }
 
 .logoCerrar {
@@ -44,3 +50,13 @@
     background: none;
     border: none;
 }
+
+.confirmButton{
+    background-color: var(--principal-red);
+    width:30%;
+    height: 30px;
+    &:disabled{
+        background-color: var(--principal-grey);
+    }
+}
+
