@@ -29,26 +29,27 @@ public class ImageService
 
     public async Task<ImageGame> InsertAsync(ImageRequestDto image, int gameId)
     {
-
         Game game = await _unitOfWork.GameRepository.GetByIdAsync(gameId, false, true);
 
-        if (game == null) {
+        if (game == null)
+        {
             throw new InvalidOperationException($"El juego con ID {gameId} no existe.");
         }
 
+        string imagesDirectory = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images");
+        string gameDirectory = Path.Combine(imagesDirectory, game.Title);
 
-        string relativePath = $"{IMAGES_FOLDER}/{game.Title}/{Guid.NewGuid()}_{image.File.FileName}";
-
-        string fullDirectoryPath = Path.Combine(AppContext.BaseDirectory, Path.GetDirectoryName(relativePath));
-        if (!Directory.Exists(fullDirectoryPath))
+        if (!Directory.Exists(gameDirectory))
         {
-            Directory.CreateDirectory(fullDirectoryPath);
+            Directory.CreateDirectory(gameDirectory);
         }
+
+        string relativePath = Path.Combine(gameDirectory, $"{Guid.NewGuid()}_{image.File.FileName}");
 
         ImageGame newImage = new ImageGame
         {
             AltText = image.AltText,
-            ImageUrl = relativePath,
+            ImageUrl = Path.Combine("images", game.Title, $"{Guid.NewGuid()}_{image.File.FileName}"),
             GameId = gameId,
             Game = game
         };
@@ -64,6 +65,7 @@ public class ImageService
 
         return newImage;
     }
+
 
     public async Task<ImageGame> UpdateAsync2(IFormFile image, string alt, int id)
     {

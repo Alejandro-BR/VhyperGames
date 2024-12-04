@@ -28,7 +28,7 @@ public class AdminGameService
         return _adminMapper.ToListAdminGameDto(games);
     }
 
-    public async Task PostNewImages(List<IFormFile> images, List<string> alt, string title)
+    public async Task PostNewImages(List<IFormFile> images, string title)
     {
         ArgumentNullException.ThrowIfNull(images);
         ArgumentNullException.ThrowIfNull(title);
@@ -39,11 +39,6 @@ public class AdminGameService
         {
 
             string altText = images[i].Name + "_" + i;
-
-            if (alt != null && alt[i] != null)
-            {
-                altText = alt[i];
-            }
 
             ImageRequestDto imageRequestDto = new ImageRequestDto()
             {
