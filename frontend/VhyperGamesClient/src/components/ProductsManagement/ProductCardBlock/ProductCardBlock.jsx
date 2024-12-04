@@ -10,7 +10,7 @@ function ProductCardBlock() {
 
     useEffect(() => {
         fetchGames();
-    }, []);
+    }, [games]);
 
     return (
         <section className={classes.productsList}>
