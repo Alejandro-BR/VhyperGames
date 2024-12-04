@@ -58,3 +58,5 @@ export const UPDATE_GAME = `${API_BASE_URL}AdminGame/update`;
 export const NEW_GAME = `${API_BASE_URL}AdminGame/newGame`;
 export const GET_SEARCH_GAMES_ADMIN = `${API_BASE_URL}AdminGame/search`;
 export const GET_FORM_GAME = `${API_BASE_URL}AdminGame/get-form`;
+/* RESERVE ETHEREUM */
+export const BLOCKCHAIN_TOTAL_RESERVE = `${API_BASE_URL}Reserve/total`;

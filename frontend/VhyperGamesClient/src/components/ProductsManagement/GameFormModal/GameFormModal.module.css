@@ -1,0 +1,101 @@
+/* Contenedor principal del modal */
+.modalForm {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+/* Fondo semitransparente detrás del modal */
+.modalOverlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* Contenedor del contenido del modal */
+.productForm {
+    position: relative;
+    height: fit-content;
+    width: fit-content;
+    background-color: var(--body-color, #131529);
+    padding: 50px 50px 25px 50px;
+    margin: 5vh 0 0 5vw;
+    /*ESTOS MÁRGENES SON PARA QUE LA DESCRIPCION TENGA SITIO PARA EXTENDERSE A LA DCHA Y NO HACIA ABAJO*/
+    border-radius: 8px;
+    z-index: 1001;
+    border: 2px outset var(--principal-blue, #6a00f4);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    gap: 18px;
+    color: rgb(24, 24, 24);
+}
+
+/* Botón para cerrar el modal */
+.logoCerrar {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    cursor: pointer;
+    background: none;
+    border: none;
+}
+
+.formGroup {
+    display: flex;
+    gap: 10px;
+}
+
+.verticalFormGroup {
+    display: flex;
+    flex-direction: column;
+    justify-content: baseline;
+    gap: 10px;
+    margin: -10px 20px 0 0;
+}
+
+.horizontalFormGroup {
+    display: flex;
+    gap: 10px;
+}
+
+/* Inputs del formulario */
+.productForm input,
+.productForm textarea {
+    width: 100%;
+    background-color: #1c1e3a;
+    color: #e4e4e4;
+    border: 1px solid var(--principal-blue, #6a00f4);
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 14px;
+    outline: none;
+}
+
+.productForm input {
+    height: 1rem;
+}
+
+.productForm textarea {
+    height: 3rem;
+}
+
+.productForm input::placeholder,
+.productForm textarea::placeholder {
+    color: #a3a3a3;
+}
+
+/* Botón para subir archivos */
+.productForm input[type="file"] {
+    padding: 8px;
+}
