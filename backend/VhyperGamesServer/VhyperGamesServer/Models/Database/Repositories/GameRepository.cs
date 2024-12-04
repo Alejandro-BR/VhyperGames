@@ -79,6 +79,7 @@ public class GameRepository : Repository<Game, int>
 
         return await Context.Games
             .Where(g => titles.Contains(g.Title))
+            .Include(g => g.ImageGames)
             .ToListAsync();
     }
 
