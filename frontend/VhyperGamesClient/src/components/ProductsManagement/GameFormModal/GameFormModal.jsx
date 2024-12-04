@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import classes from "./GameFormModal.module.css";
 import Button from "../../Buttons/Button"
+import { AdminContext } from "../../../context/AdminContext";
 
 // TENIENDO EN CUENTA QUE EL FORMULARIO ES IDÉNTICO PARA AÑADIR Y EDITAR
 // CREO QUE LO IDEAL ES HACER UN SOLO COMPONENTE Y METERLE LA LOGICA COMO PARAMETRO
@@ -155,6 +156,7 @@ function GameFormModal({modalPurpose, initialData, onSubmit, onClose}) {
 
                     <Button variant={"large"} color={"morado-azul"} type="submit">
                         {modalPurpose} producto
+
                     </Button>
                 </form>
             </div>

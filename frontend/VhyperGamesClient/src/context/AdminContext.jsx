@@ -13,7 +13,7 @@ export const AdminProvider = ({ children }) => {
   const [users, setUsers] = useState([]);
   const [games, setGames] = useState([]);
   const [dataForm, setDataForm] = useState([]);
-  
+
   // ----- ADMIN USER -----
 
   const fetchUsers = async () => {
@@ -69,7 +69,7 @@ export const AdminProvider = ({ children }) => {
 };
   
 
-  const updateGameById = async (data) => {
+  const updateGameByData = async (data) => {
     try {
       const response = await updateGames(UPDATE_GAME, data, token);
       if (response.ok) {
@@ -144,7 +144,7 @@ export const AdminProvider = ({ children }) => {
     updateUserRole,
     deleteUserById,
     fetchGames,
-    updateGameById,
+    updateGameById: updateGameByData,
     postGame,
     GetSearchGame,
     GetFormGame,
