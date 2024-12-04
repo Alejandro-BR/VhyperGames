@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { ConvertToDecimal } from "../../../utils/price";
 import { useContext, useEffect, useState } from "react";
 import { AdminContext } from "../../../context/AdminContext";
-import { useAuth } from "../../../context/AuthContext";
 import GameFormModal from "../GameFormModal/GameFormModal";
 import { BASE_URL } from "../../../config";
 
@@ -11,6 +10,15 @@ import { BASE_URL } from "../../../config";
 
 function ProductCard({ id, imgUrl, altText, title, price, stock }) {
   const [gameFormModal, setGameFormModal] = useState(false);
+  const { GetFormGame, updateGames, dataForm } = useContext(AdminContext);
+
+  const handleSubmit = async (formData) => {
+    const data = await GetFormGame(id);
+    console.log("este es el id", id)
+    console.log("este es data", data)
+    console.log("esto es dataform", dataForm);
+    setGameFormModal(false);
+  };
 
   function precio() {
     return ConvertToDecimal(price);
@@ -48,6 +56,7 @@ function ProductCard({ id, imgUrl, altText, title, price, stock }) {
         gameFormModal && (
           <GameFormModal
             modalPurpose="Editar"
+            onSubmit={handleSubmit}
             onClose={() => setGameFormModal(false)}
           />
         )
