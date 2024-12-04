@@ -1,5 +1,6 @@
 import { useState } from "react";
 import classes from "./DeleteModal.module.css";
+import Button from "../Buttons/Button";
 
 const CloseIcon = () => (
     <svg width="15" height="15" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -53,13 +54,18 @@ function DeleteModal({ onClose, onConfirm }) {
                         placeholder="Escribe 'Eliminar'"
                     />
 
-                    <button
+                    {/* <button
                         className={classes.confirmButton}
                         onClick={onConfirm}
                         disabled={!isValid}
                     >
-                        Confirmar
-                    </button>
+                        ¡¡ELIMINAR!!
+                    </button> */}
+                    {isValid && (
+                        <Button className={classes.confirmButton} onClick={onConfirm} variant="short" color="red" children="Eliminar" />
+                    )
+                    }
+
                 </div>
             </div>
         </div>
