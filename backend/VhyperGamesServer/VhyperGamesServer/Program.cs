@@ -54,7 +54,6 @@ public class Program
         builder.Services.AddScoped<UserService>();
         builder.Services.AddScoped<CatalogService>();
         builder.Services.AddScoped<DetailsViewService>();
-        builder.Services.AddScoped<SmartSearchService>();
         builder.Services.AddScoped<IAService>();
         builder.Services.AddScoped<CartService>();
         builder.Services.AddScoped<ReserveService>();

@@ -12,14 +12,14 @@ public class AdminGameService
 
     private readonly ImageService _imageService;
 
-    private readonly SmartSearchService _smartSearchService;
+    private SmartSearchService smartSearchService;
 
-    public AdminGameService(AdminMapper adminMapper, UnitOfWork unitOfWork, ImageService imageService, SmartSearchService smartSearchService)    
+    public AdminGameService(AdminMapper adminMapper, UnitOfWork unitOfWork, ImageService imageService)    
     {
         _adminMapper = adminMapper;
         _unitOfWork = unitOfWork;
         _imageService = imageService;
-        _smartSearchService = smartSearchService;
+        smartSearchService = new SmartSearchService();
     }
 
     public async Task<List<AdminGameDto>> GetListGame()
@@ -139,7 +139,8 @@ public class AdminGameService
 
         } else
         {
-            IEnumerable<string> matchedTitles = _smartSearchService.Search(search);
+            List<string> gameTitles = await _unitOfWork.GameRepository.GetAllTitles();
+            IEnumerable<string> matchedTitles = smartSearchService.Search(search, gameTitles);
 
             if (matchedTitles != null && matchedTitles.Any())
             {
