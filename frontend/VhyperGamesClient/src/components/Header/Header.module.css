@@ -146,11 +146,16 @@
   cursor: pointer;
 }
 
+.adminIconWrapper{
+  position: relative;
+  display: inline-block;
+}
+
 .adminContainer {
   position: absolute;
   display: flex;
   flex-direction: column; 
-  top: 90%;
+  top: 120%;
   background-color: var(--header-footer-color);
   width: 100px;  
   font-size: small;

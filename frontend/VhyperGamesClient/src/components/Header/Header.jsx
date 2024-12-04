@@ -170,6 +170,7 @@ function Header() {
 
       <div className={classes.icons}>
 
+        <div className={classes.adminIconWrapper}>
         {token && (decodedToken?.role === "Admin") && (
           <div className={classes.admin} onMouseEnter={handleMouseEnterAdmin} onMouseLeave={handleMouseLeaveAdmin}>
             <img src="/icon/admin.svg" alt="admin" />
@@ -193,6 +194,8 @@ function Header() {
             </div>
           </div>
         )}
+        </div>
+       
 
         <CartIcon onClick={() => navigate("/cart")} />
 
