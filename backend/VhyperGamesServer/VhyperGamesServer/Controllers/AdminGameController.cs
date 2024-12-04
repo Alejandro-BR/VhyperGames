@@ -7,7 +7,7 @@ namespace VhyperGamesServer.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-[Authorize(Roles = "Admin")]
+//[Authorize(Roles = "Admin")]
 public class AdminGameController : ControllerBase
 {
     private readonly AdminGameService _adminGameService;
