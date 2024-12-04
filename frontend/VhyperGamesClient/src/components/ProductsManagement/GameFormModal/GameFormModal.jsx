@@ -36,12 +36,12 @@ function GameFormModal({modalPurpose, initialData, onSubmit, onClose}) {
         title: "",
         description: "",
         sinopsis: "",
-        genre: "0",
-        gameRequirementsId: "1",
-        drmFree: "0",
-        releaseDate: "",
-        price: "",
-        stock: "",
+        genre: 0,
+        gameRequirementsId: 1,
+        drmFree: 0,
+        releaseDate: new Date().toISOString().split("T")[0],
+        price: 0,
+        stock: 0,
         img1: null,
         img1Alt: "",
         images: [],
@@ -55,12 +55,26 @@ function GameFormModal({modalPurpose, initialData, onSubmit, onClose}) {
 
     const handleChange = (e) => {
         const { id, value } = e.target;
-        setFormData({ ...formData, [id]: value });
+        const parsedValue = ["genre", "gameRequirementsId", "drmFree", "price", "stock"].includes(id)
+            ? parseInt(value, 10)
+            : value;
+        setFormData({ ...formData, [id]: parsedValue });
     };
 
     const handleFileChange = (e) => {
         const { id, files } = e.target;
-        setFormData({ ...formData, [id]: files });
+    
+        if (id === "images") {
+            setFormData({
+                ...formData,
+                images: Array.from(files),
+            });
+        } else if (id === "img1") {
+            setFormData({
+                ...formData,
+                img1: files[0], 
+            });
+        }
     };
 
     const handleSubmit = (e) => {
