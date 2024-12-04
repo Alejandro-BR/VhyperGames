@@ -30,7 +30,7 @@ const CloseIcon = () => (
     </svg>
 );
 
-function GameFormModal({modalPurpose, initialData, onSubmit, onClose}) {
+function GameFormModal({ modalPurpose, initialData, onSubmit, onClose }) {
 
     const [formData, setFormData] = useState({
         title: "",
@@ -63,7 +63,7 @@ function GameFormModal({modalPurpose, initialData, onSubmit, onClose}) {
 
     const handleFileChange = (e) => {
         const { id, files } = e.target;
-    
+
         if (id === "images") {
             setFormData({
                 ...formData,
@@ -72,7 +72,7 @@ function GameFormModal({modalPurpose, initialData, onSubmit, onClose}) {
         } else if (id === "img1") {
             setFormData({
                 ...formData,
-                img1: files[0], 
+                img1: files[0],
             });
         }
     };
@@ -83,7 +83,7 @@ function GameFormModal({modalPurpose, initialData, onSubmit, onClose}) {
     };
 
     console.log(formData);
-    
+
     return (
         <div className={classes.modalForm}>
             <div className={classes.modalOverlay}>
@@ -94,7 +94,7 @@ function GameFormModal({modalPurpose, initialData, onSubmit, onClose}) {
 
                     <div className={classes.formGroup}>
                         <label htmlFor="title">Título:</label>
-                        <input type="text" id="title" placeholder="Título" value={formData.title} onChange={handleChange}/>
+                        <input type="text" id="title" placeholder="Título" value={formData.title} onChange={handleChange} />
                     </div>
 
                     <div className={classes.formGroup}>
@@ -110,14 +110,14 @@ function GameFormModal({modalPurpose, initialData, onSubmit, onClose}) {
                     <div className={classes.formGroup}>
                         <label htmlFor="genre">Género:</label>
                         <select id="genre">
-                        <option value="0">RPG de Acción</option>
-                        <option value="1">Survival Horror</option>
-                        <option value="2">Aventura-Acción</option>
-                        <option value="3">Estrategia</option>
-                        <option value="4">Sandbox</option>
-                        <option value="5">Simulación</option>
-                        <option value="6">Plataforma</option>
-                           
+                            <option value="0">RPG de Acción</option>
+                            <option value="1">Survival Horror</option>
+                            <option value="2">Aventura-Acción</option>
+                            <option value="3">Estrategia</option>
+                            <option value="4">Sandbox</option>
+                            <option value="5">Simulación</option>
+                            <option value="6">Plataforma</option>
+
                         </select>
                     </div>
 
@@ -145,22 +145,22 @@ function GameFormModal({modalPurpose, initialData, onSubmit, onClose}) {
 
                     <div className={classes.formGroup}>
                         <label htmlFor="price">Precio:</label>
-                        <input type="number" id="price" placeholder="Precio" onChange={handleChange}/>
+                        <input type="number" id="price" placeholder="Precio" onChange={handleChange} />
                     </div>
 
                     <div className={classes.formGroup}>
                         <label htmlFor="stock">Stock:</label>
-                        <input type="number" id="stock" placeholder="Stock" onChange={handleChange}/>
+                        <input type="number" id="stock" placeholder="Stock" onChange={handleChange} />
                     </div>
 
                     <div className={classes.formGroup}>
                         <label htmlFor="img1">Carátula:</label>
-                        <input type="file" id="img1" onChange={handleFileChange}/>
+                        <input type="file" id="img1" onChange={handleFileChange} />
                     </div>
 
                     <div className={classes.formGroup}>
                         <label htmlFor="images">Imágenes:</label>
-                        <input type="file" id="images" multiple onChange={handleFileChange}/>
+                        <input type="file" id="images" multiple onChange={handleFileChange} />
                     </div>
 
                     <Button variant={"large"} color={"morado-azul"} type="submit">
@@ -168,11 +168,9 @@ function GameFormModal({modalPurpose, initialData, onSubmit, onClose}) {
 
                     </Button>
                 </form>
-            </div>
-        </div>
+            </div >
+        </div >
     );
 };
-
-
 
 export default GameFormModal;

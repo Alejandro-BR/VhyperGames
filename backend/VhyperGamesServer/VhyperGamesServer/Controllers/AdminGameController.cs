@@ -7,7 +7,7 @@ namespace VhyperGamesServer.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-[Authorize(Roles = "Admin")]
+//[Authorize(Roles = "Admin")]
 public class AdminGameController : ControllerBase
 {
     private readonly AdminGameService _adminGameService;
@@ -35,14 +35,14 @@ public class AdminGameController : ControllerBase
     }
 
     [HttpPut("update")]
-    public async Task<IActionResult> PutGame([FromForm] AdminFormGameDto adminFormGameDto, [FromForm] List<IFormFile> images, [FromForm] List<string> alt)
+    public async Task<IActionResult> PutGame([FromForm] AdminFormGameDto adminFormGameDto, [FromForm] List<IFormFile> images)
     {
         if (adminFormGameDto == null)
         {
             return BadRequest("El objeto AdminFormGameDto no puede ser nulo.");
         }
 
-        await _adminGameService.PutGame(adminFormGameDto, images, alt);
+        await _adminGameService.PutGame(adminFormGameDto, images);
         return Ok();
     }
 

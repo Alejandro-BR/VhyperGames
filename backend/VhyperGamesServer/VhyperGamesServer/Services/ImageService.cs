@@ -36,20 +36,12 @@ public class ImageService
             throw new InvalidOperationException($"El juego con ID {gameId} no existe.");
         }
 
-        string imagesDirectory = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images");
-        string gameDirectory = Path.Combine(imagesDirectory, game.Title);
-
-        if (!Directory.Exists(gameDirectory))
-        {
-            Directory.CreateDirectory(gameDirectory);
-        }
-
-        string relativePath = Path.Combine(gameDirectory, $"{Guid.NewGuid()}_{image.File.FileName}");
+        string relativePath = $"{IMAGES_FOLDER}/{Guid.NewGuid()}_{image.File.FileName}";
 
         ImageGame newImage = new ImageGame
         {
             AltText = image.AltText,
-            ImageUrl = Path.Combine("images", game.Title, $"{Guid.NewGuid()}_{image.File.FileName}"),
+            ImageUrl = relativePath,
             GameId = gameId,
             Game = game
         };
@@ -61,11 +53,11 @@ public class ImageService
         if (await _unitOfWork.SaveAsync())
         {
             await StoreImageAsync(relativePath, image.File);
+            Console.WriteLine($"Imagen guardada en: {relativePath}"); 
         }
 
         return newImage;
     }
-
 
     public async Task<ImageGame> UpdateAsync2(IFormFile image, string alt, int id)
     {

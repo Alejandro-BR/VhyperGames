@@ -88,7 +88,7 @@ public class AdminGameService
         return _adminMapper.ToAdminFormGameDto(game);
     }
 
-    public async Task PutGame(AdminFormGameDto adminFormGameDto, List<IFormFile> images, List<string> alt)
+    public async Task PutGame(AdminFormGameDto adminFormGameDto, List<IFormFile> images)
     {
         if (adminFormGameDto == null)
         {
@@ -112,10 +112,6 @@ public class AdminGameService
 
                 string text = file.Name + i;
 
-                if (alt != null && alt[i] != null)
-                {
-                   text = alt[i];
-                }
 
                 int id = adminFormGameDto.ImagesId[i];
 
