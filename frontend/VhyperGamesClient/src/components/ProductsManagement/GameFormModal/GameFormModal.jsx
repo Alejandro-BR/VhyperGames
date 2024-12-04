@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import classes from "./GameFormModal.module.css";
 import Button from "../../Buttons/Button"
+import { AdminContext } from "../../../context/AdminContext";
 
 // TENIENDO EN CUENTA QUE EL FORMULARIO ES IDÉNTICO PARA AÑADIR Y EDITAR
 // CREO QUE LO IDEAL ES HACER UN SOLO COMPONENTE Y METERLE LA LOGICA COMO PARAMETRO
@@ -37,11 +38,19 @@ function GameFormModal(
     }
 ) {
 
+    const [title, setTitle] = useState('');
+    const [price, setPrice] = useState(0);
+    const [stock, setStock] = useState(0);
+    const [img1, setImg1] = useState(null);
+
+
+
+    // const { game, postGame } = useContext(AdminContext);
+
     return (
         <div className={classes.modalForm}>
             <div className={classes.modalOverlay}>
                 <form className={classes.productForm}
-                // onClick={funcion} 
                 >
                     <button className={classes.logoCerrar} onClick={onClose}>
                         <CloseIcon />
@@ -82,7 +91,7 @@ function GameFormModal(
 
                     <div className={classes.formGroup}>
                         <label for="img2">Imágenes:</label>
-                        <input type="file" id="img2" />
+                        <input type="file" id="img2" multiple="true" />
                     </div>
 
 
@@ -92,25 +101,36 @@ function GameFormModal(
                     </div>
 
                     <div className={classes.formGroup}>
-                        <textarea
-                            name="recommendedRequirements"
-                            placeholder="Requisitos recomendados"
-                        />
-                        <textarea
-                            name="minimumRequirements"
-                            placeholder="Requisitos mínimos"
-                        />
+                        <div className={classes.formGroup}>
+                            <label for="recommendedRequirements">Requisitos recomendados:</label>
+                            <textarea
+                                id="recommendedRequirements"
+                                placeholder="Requisitos recomendados"
+                            />
+                        </div>
+
+                        <div className={classes.formGroup}>
+                            <label for="minimumRequirements">Requisitos mínimos:</label>
+                            <textarea
+                                id="minimumRequirements"
+                                placeholder="Requisitos mínimos"
+                            />
+                        </div>
                     </div>
 
-                    <textarea
-                        name="description"
-                        placeholder="Descripción"
-                    />
+                    <div className={classes.formGroup}>
+                        <label for="description">Descripción:</label>
+                        <textarea
+                            id="description"
+                            placeholder="Descripción"
+                        />
+                    </div>
 
                     <Button
                         variant={"large"}
                         color={"morado-azul"}>
                         {modalPurpose} producto
+
                     </Button>
 
                 </form>

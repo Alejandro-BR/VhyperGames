@@ -28,7 +28,8 @@
     width: fit-content;
     background-color: var(--body-color, #131529);
     padding: 50px 50px 25px 50px;
-    margin: 5vh 0 0 5vw;    /*ESTOS MÁRGENES SON PARA QUE LA DESCRIPCION TENGA SITIO PARA EXTENDERSE A LA DCHA Y NO HACIA ABAJO*/
+    margin: 5vh 0 0 5vw;
+    /*ESTOS MÁRGENES SON PARA QUE LA DESCRIPCION TENGA SITIO PARA EXTENDERSE A LA DCHA Y NO HACIA ABAJO*/
     border-radius: 8px;
     z-index: 1001;
     border: 2px outset var(--principal-blue, #6a00f4);
@@ -52,6 +53,12 @@
 
 .formGroup {
     display: flex;
+    gap: 10px;
+}
+
+.verticalFormGroup {
+    display: flex;
+    flex-direction: column;
     gap: 10px;
 }
 
