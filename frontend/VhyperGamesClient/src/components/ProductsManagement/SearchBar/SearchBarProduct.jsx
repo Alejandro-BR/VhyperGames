@@ -25,6 +25,12 @@ function SearchBarProduct() {
     ResetSearchGame();
   };
 
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter") {
+      handleSearch();
+    }
+  };
+
   return (
     <div className={classes.container}>
       <input
@@ -35,17 +41,18 @@ function SearchBarProduct() {
         placeholder="Busca un producto"
         value={searchTerm}
         onChange={handleInputChange}
+        onKeyDown={handleKeyDown}
       />
       <Button
         variant={"short"}
-        color={"morado-azul"}
+        color={"azul"}
         onClick={handleSearch}
       >
         Buscar
       </Button>
       <Button
         variant={"short"}
-        color={"morado-azul"}
+        color={"azul"}
         onClick={handleCancel}
       >
         Cancelar
