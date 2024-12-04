@@ -21,7 +21,7 @@ export const updateGames = async (url, data, token) => {
     const response = await fetch(url, {
         method: 'PUT',
         headers: {
-            'Content-Type': 'application/json',
+
             Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(data)
@@ -37,7 +37,6 @@ export const updateGames = async (url, data, token) => {
 
 
 export const newGame = async (url, data, token) => {
-
     const formData = new FormData();
 
     // Agregar los datos al FormData
@@ -45,23 +44,19 @@ export const newGame = async (url, data, token) => {
     formData.append("description", data.description);
     formData.append("sinopsis", data.sinopsis);
     formData.append("genre", parseInt(data.genre, 10));
-    formData.append("gameRequirementsId", parseInt(data.gameRequirementsId, 10)); 
-    formData.append("drmFree", data.drmFree); 
-    formData.append("releaseDate", data.releaseDate); 
+    formData.append("gameRequirementsId", parseInt(data.gameRequirementsId, 10));
+    formData.append("drmFree", data.drmFree);
+    formData.append("releaseDate", data.releaseDate);
     formData.append("price", parseInt(data.price, 10));
-    formData.append("stock", parseInt(data.stock, 10)); 
-
-    for (let pair of formData.entries()) {
-        console.log(`${pair[0]}: ${pair[1]}`);
-    }
+    formData.append("stock", parseInt(data.stock, 10));
 
     if (data.img1) {
-        formData.append("images", data.img1); 
+        formData.append("images", data.img1);
     }
-    
+
     if (Array.isArray(data.images)) {
         data.images.forEach((image) => {
-            formData.append("images", image); // Agregar las demás imágenes
+            formData.append("images", image);
         });
     } else {
         console.error("El campo 'images' no es un arreglo:", data.images);
@@ -78,17 +73,18 @@ export const newGame = async (url, data, token) => {
         headers: {
             Authorization: `Bearer ${token}`,
         },
-        body: formData
+        body: formData,
     });
 
     if (!response.ok) {
-        const error = await response.json().catch(() => ({ message: "Error desconocido" })); // Manejo de error genérico
-        throw new Error(error.message || "Error al crear la reserva.");
+        const error = await response.json().catch(() => ({ message: "Error desconocido" }));
+        throw new Error(error.message || "Error al crear el juego.");
     }
 
     const contentType = response.headers.get("Content-Type");
     if (contentType && contentType.includes("application/json")) {
-        return await response.json();
+        const data = await response.json();
+        return data;
     }
 
     return { message: "Operación completada con éxito." };
