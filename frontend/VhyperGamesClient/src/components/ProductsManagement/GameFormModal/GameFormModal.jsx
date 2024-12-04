@@ -49,10 +49,16 @@ function GameFormModal({ modalPurpose, initialData, onSubmit, onClose }) {
 
     useEffect(() => {
         if (initialData) {
-            setFormData({ ...formData, ...initialData });
+            setFormData((prevFormData) => ({
+                ...prevFormData,
+                ...initialData,
+                releaseDate: initialData.releaseDate
+                    ? initialData.releaseDate.split("T")[0] // Convertir a 'YYYY-MM-DD'
+                    : prevFormData.releaseDate,
+            }));
         }
     }, [initialData]);
-
+    
     const handleChange = (e) => {
         const { id, value } = e.target;
         const parsedValue = ["genre", "gameRequirementsId", "drmFree", "price", "stock"].includes(id)
@@ -99,17 +105,17 @@ function GameFormModal({ modalPurpose, initialData, onSubmit, onClose }) {
 
                     <div className={classes.formGroup}>
                         <label htmlFor="description">Descripción:</label>
-                        <textarea id="description" placeholder="Descripción" onChange={handleChange}></textarea>
+                        <textarea id="description" placeholder="Descripción" value={formData.description} onChange={handleChange}></textarea>
                     </div>
 
                     <div className={classes.formGroup}>
                         <label htmlFor="sinopsis">Sinopsis:</label>
-                        <textarea id="sinopsis" placeholder="Sinopsis" onChange={handleChange}></textarea>
+                        <textarea id="sinopsis" placeholder="Sinopsis" value={formData.sinopsis} onChange={handleChange}></textarea>
                     </div>
 
                     <div className={classes.formGroup}>
                         <label htmlFor="genre">Género:</label>
-                        <select id="genre">
+                        <select id="genre" value={formData.genre} onChange={handleChange}>
                             <option value="0">RPG de Acción</option>
                             <option value="1">Survival Horror</option>
                             <option value="2">Aventura-Acción</option>
@@ -123,7 +129,7 @@ function GameFormModal({ modalPurpose, initialData, onSubmit, onClose }) {
 
                     <div className={classes.formGroup}>
                         <label htmlFor="gameRequirementsId">Requerimientos del juego</label>
-                        <select id="gameRequirementsId">
+                        <select id="gameRequirementsId" value={formData.releasgameRequirementsId} onChange={handleChange}>
                             <option value="1">Bajos</option>
                             <option value="2">Medios</option>
                             <option value="3">Altos</option>
@@ -132,7 +138,7 @@ function GameFormModal({ modalPurpose, initialData, onSubmit, onClose }) {
 
                     <div className={classes.formGroup}>
                         <label htmlFor="drmFree">DRM Free:</label>
-                        <select id="drmFree">
+                        <select id="drmFree" value={formData.drmFree} onChange={handleChange}>
                             <option value="0">No</option>
                             <option value="1">Sí</option>
                         </select>
@@ -140,17 +146,17 @@ function GameFormModal({ modalPurpose, initialData, onSubmit, onClose }) {
 
                     <div className={classes.formGroup}>
                         <label htmlFor="releaseDate">Fecha de Lanzamiento:</label>
-                        <input type="date" id="releaseDate" />
+                        <input type="date" id="releaseDate" value={formData.releaseDate} onChange={handleChange}/>
                     </div>
 
                     <div className={classes.formGroup}>
                         <label htmlFor="price">Precio:</label>
-                        <input type="number" id="price" placeholder="Precio" onChange={handleChange} />
+                        <input type="number" id="price" placeholder="Precio" value={formData.price} onChange={handleChange} />
                     </div>
 
                     <div className={classes.formGroup}>
                         <label htmlFor="stock">Stock:</label>
-                        <input type="number" id="stock" placeholder="Stock" onChange={handleChange} />
+                        <input type="number" id="stock" placeholder="Stock" value={formData.stock} onChange={handleChange} />
                     </div>
 
                     <div className={classes.formGroup}>
