@@ -117,7 +117,10 @@ function LoginModal({ onClose, onRegisterClick, onSuccess }) {
                             {isLoading ? "Cargando..." : "Iniciar Sesión"}
                         </Button>
 
-                        <Button variant="large" color="azul" onClick={onRegisterClick}>
+                        <Button variant="large" color="azul" onClick={() => {
+                            onRegisterClick();
+                            onClose();
+                        }}>
                             Nuevo Usuario
                         </Button>
                     </div>
