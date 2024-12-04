@@ -53,7 +53,7 @@ function GameFormModal({ modalPurpose, initialData, onSubmit, onClose }) {
                 ...prevFormData,
                 ...initialData,
                 releaseDate: initialData.releaseDate
-                    ? initialData.releaseDate.split("T")[0] // Convertir a 'YYYY-MM-DD'
+                    ? initialData.releaseDate.split("T")[0]
                     : prevFormData.releaseDate,
             }));
         }
@@ -87,8 +87,6 @@ function GameFormModal({ modalPurpose, initialData, onSubmit, onClose }) {
         e.preventDefault();
         onSubmit(formData);
     };
-
-    console.log(formData);
 
     return (
         <div className={classes.modalForm}>

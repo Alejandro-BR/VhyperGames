@@ -10,31 +10,26 @@ import { BASE_URL } from "../../../config";
 
 function ProductCard({ id, imgUrl, altText, title, price, stock }) {
   const [gameFormModal, setGameFormModal] = useState(false);
-  const { GetFormGame, updateGames, setDataForm, dataForm } = useContext(AdminContext);
+  const { GetFormGame, updateGameById, dataForm } = useContext(AdminContext);
 
   useEffect(() => {
     if (dataForm && dataForm.id === id) {
       console.log("Datos cargados desde el contexto:", dataForm);
-      // Aquí puedes hacer algo con los datos actualizados si es necesario
     }
   }, [dataForm, id]);
 
   const handleEditClick = async () => {
     try {
-      console.log("Haciendo GET para el ID:", id);
-      await GetFormGame(id); // Llama a la función para obtener los datos
-      setGameFormModal(true); // Abre el modal después de cargar los datos
+      await GetFormGame(id); 
+      setGameFormModal(true); 
     } catch (error) {
       console.error("Error al obtener los datos del juego:", error);
     }
   };
 
-  const handleSubmit = async () => {
-    try {
-      console.log("data", data)
-    } catch (error) {
-      console.error("Error en handleSubmit:", error);
-    }
+  const handleSubmit = async (formData) => {
+      await updateGameById(formData);
+      setGameFormModal(false);
   };
 
   function precio() {

@@ -18,7 +18,9 @@ export const getGamesAdmin = async (url, token) => {
 
 export const updateGames = async (url, data, token) => {
 
-    // Agregar los datos al FormData
+    const formData = new FormData();
+    
+    formData.append("id", data.id);
     formData.append("title", data.title);
     formData.append("description", data.description);
     formData.append("sinopsis", data.sinopsis);
@@ -57,11 +59,6 @@ export const updateGames = async (url, data, token) => {
     });
 
     if (!response.ok) {
-        const error = await response.json();
-        throw new Error(error.message || 'Error al crear la reserva.');
-    }
-
-    if (!response.ok) {
         const error = await response.json().catch(() => ({ message: "Error desconocido" }));
         throw new Error(error.message || "Error al crear el juego.");
     }
@@ -79,7 +76,6 @@ export const updateGames = async (url, data, token) => {
 export const newGame = async (url, data, token) => {
     const formData = new FormData();
 
-    // Agregar los datos al FormData
     formData.append("title", data.title);
     formData.append("description", data.description);
     formData.append("sinopsis", data.sinopsis);
