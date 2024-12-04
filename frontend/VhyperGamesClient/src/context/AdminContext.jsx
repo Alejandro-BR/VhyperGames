@@ -99,7 +99,7 @@ export const AdminProvider = ({ children }) => {
   const GetSearchGame = async (data) => {
     try {
       const response = await searchGame(GET_SEARCH_GAMES_ADMIN, data, token);
-      if (response.ok) {
+      if (response) {
         setGames(response);
       } else {
         console.error("Error al buscar el juego");
