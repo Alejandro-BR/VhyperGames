@@ -18,9 +18,9 @@ public class AdminUserController : ControllerBase
     }
 
     [HttpGet("get-users")]
-    public async Task<List<AdminUserDto>> GetListUser()
+    public async Task<ActionResult<List<AdminUserDto>>> GetListUser()
     {
-       return await _adminUserService.GetListUser();
+       return Ok(await _adminUserService.GetListUser());
     }
 
     [HttpPut("update-rol")]

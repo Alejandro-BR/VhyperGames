@@ -13,7 +13,7 @@ export const AdminProvider = ({ children }) => {
   const [users, setUsers] = useState([]);
   const [games, setGames] = useState([]);
   const [dataForm, setDataForm] = useState([]);
-  
+
   // ----- ADMIN USER -----
 
   const fetchUsers = async () => {
