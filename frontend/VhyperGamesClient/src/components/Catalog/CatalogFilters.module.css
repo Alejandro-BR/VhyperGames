@@ -4,8 +4,10 @@
 
 .filters {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 30px;
+  margin:0 30px 60px 30px;
   justify-content: center;
 }
 
