@@ -113,7 +113,6 @@ export const AdminProvider = ({ children }) => {
     try {
       const response = await getFormGame(GET_FORM_GAME, gameId, token);
       if (response) {
-
         setDataForm(response);
         fetchGames();
         return response;

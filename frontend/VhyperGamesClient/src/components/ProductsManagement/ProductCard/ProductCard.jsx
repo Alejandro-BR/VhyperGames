@@ -10,23 +10,32 @@ import { BASE_URL } from "../../../config";
 
 function ProductCard({ id, imgUrl, altText, title, price, stock }) {
   const [gameFormModal, setGameFormModal] = useState(false);
-  const { GetFormGame, updateGames, dataForm } = useContext(AdminContext);
+  const { GetFormGame, updateGames, setDataForm, dataForm } = useContext(AdminContext);
 
   useEffect(() => {
     if (dataForm && dataForm.id === id) {
-        console.log("Datos cargados desde el contexto:", dataForm);
-        // Aquí puedes hacer algo con los datos actualizados si es necesario
+      console.log("Datos cargados desde el contexto:", dataForm);
+      // Aquí puedes hacer algo con los datos actualizados si es necesario
     }
-}, [dataForm, id]);
+  }, [dataForm, id]);
 
-const handleSubmit = async () => {
-  try {
-      const data = await GetFormGame(id);
-      setGameFormModal(false);
-  } catch (error) {
+  const handleEditClick = async () => {
+    try {
+      console.log("Haciendo GET para el ID:", id);
+      await GetFormGame(id); // Llama a la función para obtener los datos
+      setGameFormModal(true); // Abre el modal después de cargar los datos
+    } catch (error) {
+      console.error("Error al obtener los datos del juego:", error);
+    }
+  };
+
+  const handleSubmit = async () => {
+    try {
+      console.log("data", data)
+    } catch (error) {
       console.error("Error en handleSubmit:", error);
-  }
-};
+    }
+  };
 
   function precio() {
     return ConvertToDecimal(price);
@@ -54,7 +63,7 @@ const handleSubmit = async () => {
           <p className={classes.stock}>{stock}</p>
         </div>
 
-        <button className={classes.editGame} onClick={() => setGameFormModal(true)}>
+        <button className={classes.editGame} onClick={handleEditClick}>
           <img src="/icon/edit-icon.svg" alt="editar producto" />
         </button>
 
@@ -64,6 +73,7 @@ const handleSubmit = async () => {
         gameFormModal && (
           <GameFormModal
             modalPurpose="Editar"
+            initialData={dataForm}
             onSubmit={handleSubmit}
             onClose={() => setGameFormModal(false)}
           />
