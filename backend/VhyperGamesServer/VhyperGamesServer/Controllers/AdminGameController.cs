@@ -47,10 +47,12 @@ public class AdminGameController : ControllerBase
     }
 
     [HttpPost("newGame")]
-    public async Task PostNewGame([FromForm] AdminFormGameDto adminFormGameDto, [FromForm] List<IFormFile> images)
+    public async Task<IActionResult> PostNewGame([FromForm] AdminFormGameDto adminFormGameDto, [FromForm] List<IFormFile> images)
     {
         string title = await _adminGameService.PostNewGame(adminFormGameDto);
         await _adminGameService.PostNewImages(images, title);
+
+        return StatusCode(201, new { message = "Juego creado con éxito" });
     }
 
     [HttpGet("search")]
