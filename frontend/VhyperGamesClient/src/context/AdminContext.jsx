@@ -113,8 +113,10 @@ export const AdminProvider = ({ children }) => {
     try {
       const response = await getFormGame(GET_FORM_GAME, gameId, token);
       if (response) {
+
         setDataForm(response);
         fetchGames();
+        return response;
       } else {
         console.error("Error al pedir el formulario el juego");
       }

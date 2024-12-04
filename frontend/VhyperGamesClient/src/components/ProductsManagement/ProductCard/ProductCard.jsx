@@ -12,13 +12,21 @@ function ProductCard({ id, imgUrl, altText, title, price, stock }) {
   const [gameFormModal, setGameFormModal] = useState(false);
   const { GetFormGame, updateGames, dataForm } = useContext(AdminContext);
 
-  const handleSubmit = async (formData) => {
-    const data = await GetFormGame(id);
-    console.log("este es el id", id)
-    console.log("este es data", data)
-    console.log("esto es dataform", dataForm);
-    setGameFormModal(false);
-  };
+  useEffect(() => {
+    if (dataForm && dataForm.id === id) {
+        console.log("Datos cargados desde el contexto:", dataForm);
+        // Aquí puedes hacer algo con los datos actualizados si es necesario
+    }
+}, [dataForm, id]);
+
+const handleSubmit = async () => {
+  try {
+      const data = await GetFormGame(id);
+      setGameFormModal(false);
+  } catch (error) {
+      console.error("Error en handleSubmit:", error);
+  }
+};
 
   function precio() {
     return ConvertToDecimal(price);
