@@ -12,8 +12,6 @@ import { BASE_URL } from "../../../config";
 function ProductCard({ id, imgUrl, altText, title, price, stock }) {
   const [gameFormModal, setGameFormModal] = useState(false);
 
-  // NO ENTIENDO POR QUÉ NO FUNCIONA EL FETCH NI EL MAP
-
   function precio() {
     return ConvertToDecimal(price);
   }
