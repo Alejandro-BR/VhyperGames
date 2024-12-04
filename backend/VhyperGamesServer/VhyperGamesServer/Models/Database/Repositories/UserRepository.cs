@@ -55,4 +55,25 @@ public class UserRepository : Repository<User, int>
             .FirstOrDefaultAsync(u => u.Id == id);
     }
 
+    public async Task<List<string>> GetAllName()
+    {
+        ICollection<User> users = await GetAllAsync();
+
+        List<string> names = users.Select(u => u.Name).ToList();
+
+        return names;
+    }
+
+    public async Task<List<User>> GetGamesByTitles(IEnumerable<string> names)
+    {
+        if (names == null || !names.Any())
+        {
+            return new List<User>();
+        }
+
+        return await Context.Users
+            .Where(u => names.Contains(u.Name))
+            .ToListAsync();
+    }
+
 }
