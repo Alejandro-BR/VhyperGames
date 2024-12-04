@@ -101,7 +101,7 @@ function GameFormModal(
                     </div>
 
                     <div className={classes.formGroup}>
-                        <div className={classes.formGroup}>
+                        <div className={classes.verticalFormGroup}>
                             <label for="recommendedRequirements">Requisitos recomendados:</label>
                             <textarea
                                 id="recommendedRequirements"
@@ -109,7 +109,7 @@ function GameFormModal(
                             />
                         </div>
 
-                        <div className={classes.formGroup}>
+                        <div className={classes.verticalFormGroup}>
                             <label for="minimumRequirements">Requisitos mínimos:</label>
                             <textarea
                                 id="minimumRequirements"
@@ -118,7 +118,7 @@ function GameFormModal(
                         </div>
                     </div>
 
-                    <div className={classes.formGroup}>
+                    <div className={classes.verticalFormGroup}>
                         <label for="description">Descripción:</label>
                         <textarea
                             id="description"
