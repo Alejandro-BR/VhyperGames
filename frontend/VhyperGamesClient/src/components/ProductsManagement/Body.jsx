@@ -1,6 +1,6 @@
 import classes from "./body.module.css";
 import AddProductButton from "./AddProductButton";
-import SearchBarProduct from "./searchBarProduct";
+import SearchBarProduct from "./SearchBar/SearchBarProduct";
 
 // igual habría que cambiar el nombre del componente
 function Body() {

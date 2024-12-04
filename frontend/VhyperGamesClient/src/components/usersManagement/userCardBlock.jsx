@@ -11,10 +11,8 @@ function UserCardBlock() {
   const { token, decodedToken } = useAuth();
 
   useEffect(() => {
-    if (token && decodedToken?.role === "Admin") {
-      fetchUsers();
-    };
-  }, [token, decodedToken?.role]);
+    fetchUsers();
+  }, []);
 
   return (
     <section className={classes.productsList}>

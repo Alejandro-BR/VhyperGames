@@ -19,24 +19,21 @@ export const AdminProvider = ({ children }) => {
   const fetchUsers = async () => {
     try {
       const response = await getUsersAdmin(GET_USERS_ADMIN, token);
-      console.log(response);
-      // if (!response.ok) {
-      //   console.error("Error al obtener los usuarios");
-      //   return;
-      // }
-
-      setUsers(response);
-      console.log(response);
+      if (response) {
+        setUsers(response);
+      } else {
+        console.error("Error al obtener los usuarios");
+      }
     } catch (error) {
       console.error("Error en fetchUsers:", error);
     }
   };
 
+
   const deleteUserById = async (userId) => {
     try {
       const response = await deleteUser(DELETE_USER, userId, token);
-
-      if (response.ok) {
+      if (response) {
         fetchUsers();
       } else {
         console.error("Error al eliminar el usuario");
@@ -48,33 +45,29 @@ export const AdminProvider = ({ children }) => {
 
   const updateUserRole = async (userId) => {
     try {
-      const response = await updateRol(UPDATE_USER_ROL, userId, token);
-
-      if (response.ok) {
-        fetchUsers();
-      } else {
-        console.error("Error al actualizar el rol del usuario");
-      }
+        const response = await updateRol(UPDATE_USER_ROL, userId, token);
+        console.log("Rol actualizado con éxito:", response); 
+        fetchUsers(); 
     } catch (error) {
-      console.error("Error en updateUserRole:", error);
+        console.error("Error en updateUserRole:", error.message);
     }
-  };
+};
+
 
   // ----- ADMIN GAME -----
-
   const fetchGames = async () => {
-
     try {
-      const response = await getGamesAdmin(GET_GAMES_ADMIN, token);
-
-      if (response.ok) {
-        setGames(response);
-      }
+        const response = await getGamesAdmin(GET_GAMES_ADMIN, token);
+        if (response) {
+          setGames(response); 
+        } else {
+            console.error("Error al obtener los juegos"); 
+        }
     } catch (error) {
-      console.error("Error en fetchGames:", error);
+        console.error("Error en fetchGames:", error);
     }
-  };
-
+};
+  
 
   const updateGameById = async (data) => {
     try {

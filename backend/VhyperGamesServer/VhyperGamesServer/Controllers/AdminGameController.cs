@@ -22,7 +22,7 @@ public class AdminGameController : ControllerBase
     {
         try
         {
-            return await _adminGameService.GetListGame();
+            return Ok(await _adminGameService.GetListGame());
         }
         catch (KeyNotFoundException ex)
         {
