@@ -144,7 +144,7 @@ export const AdminProvider = ({ children }) => {
     updateUserRole,
     deleteUserById,
     fetchGames,
-    updateGameById,
+    updateGameById: updateGameByData,
     postGame,
     GetSearchGame,
     GetFormGame,
