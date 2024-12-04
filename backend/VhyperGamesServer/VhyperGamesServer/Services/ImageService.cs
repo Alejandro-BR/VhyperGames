@@ -36,56 +36,43 @@ public class ImageService
             throw new InvalidOperationException($"El juego con ID {gameId} no existe.");
         }
 
-        // Usamos Directory.GetCurrentDirectory() para obtener la ruta base del proyecto.
-        string rootDirectory = Directory.GetCurrentDirectory(); // Esto devuelve la ruta al directorio donde se ejecuta el código (debería ser la raíz de tu proyecto).
+        string rootDirectory = Directory.GetCurrentDirectory(); 
 
-        // Confirmamos que estamos obteniendo la ruta correcta (se debe imprimir la ruta base del proyecto)
         Console.WriteLine("Ruta base del proyecto: " + rootDirectory);
 
-        // Ruta a 'wwwroot/images'
         string imagesDirectory = Path.Combine(rootDirectory, "wwwroot", "images");
 
-        // Verificamos si la ruta construida es la esperada
         Console.WriteLine("Ruta de imágenes: " + imagesDirectory);
 
-        // Creamos la carpeta del juego dentro de 'wwwroot/images' si no existe
         string gameDirectory = Path.Combine(imagesDirectory, game.Title);
 
         string relativePath = $"{IMAGES_FOLDER}/{Guid.NewGuid()}_{image.File.FileName}";
         if (!Directory.Exists(gameDirectory))
         {
             Directory.CreateDirectory(gameDirectory);
-            Console.WriteLine($"Directorio creado: {gameDirectory}"); // Verificamos si la carpeta se creó correctamente
+            Console.WriteLine($"Directorio creado: {gameDirectory}"); 
         }
 
-        // Ruta del archivo de imagen con GUID único
         string fileName = $"{Guid.NewGuid()}_{image.File.FileName}";
-        //string relativePath = Path.Combine(gameDirectory, fileName);
 
-        // Verificamos la ruta del archivo
         Console.WriteLine("Ruta final del archivo de imagen: " + relativePath);
 
-        // Crear el objeto de la imagen
         ImageGame newImage = new ImageGame
         {
             AltText = image.AltText,
-            //ImageUrl = Path.Combine("images", game.Title, fileName), // URL relativa para la base de datos
             ImageUrl = fileName,
             GameId = gameId,
             Game = game
         };
 
-        // Agregar la imagen al juego
         game.ImageGames.Add(newImage);
 
-        // Insertar la imagen en la base de datos
         await _unitOfWork.ImageGameRepository.InsertAsync(newImage);
 
-        // Guardar cambios en la base de datos y almacenar la imagen físicamente
         if (await _unitOfWork.SaveAsync())
         {
             await StoreImageAsync(relativePath, image.File);
-            Console.WriteLine($"Imagen guardada en: {relativePath}"); // Verificamos si se guardó correctamente
+            Console.WriteLine($"Imagen guardada en: {relativePath}"); 
         }
 
         return newImage;
