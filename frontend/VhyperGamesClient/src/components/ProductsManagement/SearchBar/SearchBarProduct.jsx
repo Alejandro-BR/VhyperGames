@@ -1,29 +1,29 @@
-import { useContext, useState, useEffect } from "react";
+import { useContext, useState } from "react";
 import classes from "./SearchBarProduct.module.css";
 import { AdminContext } from "../../../context/AdminContext";
 import Button from "../../Buttons/Button";
 
 function SearchBarProduct() {
-  const { GetSearchGame } = useContext(AdminContext); // Obtén la función del contexto
-  const [searchTerm, setSearchTerm] = useState(""); // Estado local para el valor del input
+  const { GetSearchGame, ResetSearchGame } = useContext(AdminContext); 
+  const [searchTerm, setSearchTerm] = useState("");
 
-  const handleInputChange = async (event) => {
+  const handleInputChange = (event) => {
     const value = event.target.value;
-    setSearchTerm(value);
+    setSearchTerm(value); 
+  };
 
+  const handleSearch = async () => {
     try {
-      await GetSearchGame(value); // Espera a que se complete la búsqueda
+      await GetSearchGame(searchTerm);
     } catch (error) {
       console.error("Error al ejecutar GetSearchGame:", error);
     }
   };
 
-
-  useEffect(() => {
-    // Si quieres realizar algo cuando el componente se monta
-    // Ejemplo: inicializar la búsqueda
-    GetSearchGame(searchTerm);
-  }, []);
+  const handleCancel = () => {
+    setSearchTerm(""); 
+    ResetSearchGame();
+  };
 
   return (
     <div className={classes.container}>
@@ -33,19 +33,21 @@ function SearchBarProduct() {
         id="product-search"
         name="product-search"
         placeholder="Busca un producto"
-        value={searchTerm} 
+        value={searchTerm}
         onChange={handleInputChange}
       />
       <Button
         variant={"short"}
         color={"morado-azul"}
-        onClick={() => alert("Hola")}>
+        onClick={handleSearch}
+      >
         Buscar
       </Button>
       <Button
         variant={"short"}
         color={"morado-azul"}
-        onClick={() => alert("Hola")}>
+        onClick={handleCancel}
+      >
         Cancelar
       </Button>
     </div>
