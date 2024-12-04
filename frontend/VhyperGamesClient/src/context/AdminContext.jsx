@@ -46,7 +46,7 @@ export const AdminProvider = ({ children }) => {
   const updateUserRole = async (userId) => {
     try {
         const response = await updateRol(UPDATE_USER_ROL, userId, token);
-        console.log("Rol actualizado con éxito:", response); // Response viene NULL pero cambia rol
+        console.log("Rol actualizado con éxito:", response); 
         fetchUsers(); 
     } catch (error) {
         console.error("Error en updateUserRole:", error.message);
@@ -55,19 +55,18 @@ export const AdminProvider = ({ children }) => {
 
 
   // ----- ADMIN GAME -----
-
   const fetchGames = async () => {
-  
     try {
-      const response = await getGamesAdmin(GET_GAMES_ADMIN, token);
-  
-      if (response.ok) {
-        setGames(response);
-      } 
+        const response = await getGamesAdmin(GET_GAMES_ADMIN, token);
+        if (response) {
+          setGames(response); 
+        } else {
+            console.error("Error al obtener los juegos"); 
+        }
     } catch (error) {
-      console.error("Error en fetchGames:", error);
+        console.error("Error en fetchGames:", error);
     }
-  };
+};
   
 
   const updateGameById = async (data) => {

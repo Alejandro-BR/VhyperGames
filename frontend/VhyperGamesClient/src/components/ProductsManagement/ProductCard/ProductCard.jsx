@@ -5,36 +5,14 @@ import { useContext, useEffect, useState } from "react";
 import { AdminContext } from "../../../context/AdminContext";
 import { useAuth } from "../../../context/AuthContext";
 import GameFormModal from "../GameFormModal/GameFormModal";
+import { BASE_URL } from "../../../config";
 
 
 
-function ProductCard() {
-  const { token, decodedToken } = useAuth();
-  const { games, fetchGames } = useContext(AdminContext);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+function ProductCard({ id, imgUrl, altText, title, price, stock }) {
   const [gameFormModal, setGameFormModal] = useState(false);
 
-  // Verificar si el usuario tiene el rol de admin antes de cargar los juegos
-  useEffect(() => {
-    console.log("Token en AdminProvider:", token);
-    console.log("decodedToken en AdminProvider:", decodedToken);
-
-    if (token && decodedToken?.role === "Admin") {
-      console.log("Llamando a fetchGames...");
-      fetchGames();
-    }
-  }, [token, decodedToken]);
-
-
   // NO ENTIENDO POR QUÉ NO FUNCIONA EL FETCH NI EL MAP
-
-  let imgUrl = "/img/sekiro.png";
-  let title =
-    "El brujero 38 ahora es personal se vienen ,ertymetmetm ety jtdryjm";
-  let price = 1999;
-  let stock = 30;
-  let id = 0;
 
   function precio() {
     return ConvertToDecimal(price);
@@ -44,7 +22,7 @@ function ProductCard() {
     <>
       <article className={classes.card}>
         <Link to={`/juego/${id}`}>
-          <img src={imgUrl} alt={title} className={classes.gameImg} />
+          <img src={`${BASE_URL}${imgUrl}`} alt={altText} className={classes.gameImg} />
         </Link>
 
         <div className={classes.container}>
