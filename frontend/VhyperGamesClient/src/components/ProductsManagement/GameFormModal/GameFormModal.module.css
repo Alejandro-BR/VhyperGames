@@ -25,19 +25,18 @@
 .productForm {
     position: relative;
     height: fit-content;
-    width: 90%;
-    max-width: 400px;
+    width: 30%;
     background-color: var(--body-color, #131529);
-    padding: 30px 40px 20px 40px;
-    margin: 30vh 0 0 40vw;
+    padding: 50px 50px 25px 50px;
+    margin: 5vh 0 0 40vw;
     border-radius: 8px;
     z-index: 1001;
     border: 2px outset var(--principal-blue, #6a00f4);
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
     display: flex;
     flex-direction: column;
-    gap: 15px;
-    color:rgb(24, 24, 24);
+    gap: 18px;
+    color: rgb(24, 24, 24);
 }
 
 /* Botón para cerrar el modal */
@@ -48,14 +47,22 @@
     cursor: pointer;
     background: none;
     border: none;
-    color: white;
-    font-size: 18px;
+}
+
+.verticalFormGroup {
+    display: flex;
+    gap: 10px;
+}
+
+.horizontalFormGroup {
+    display: flex;
+    gap: 10px;
 }
 
 /* Inputs del formulario */
-.modalContent input,
-.modalContent textarea {
-    width: 100%;
+.productForm input,
+.productForm textarea {
+    width: 50%;
     background-color: #1c1e3a;
     color: #e4e4e4;
     border: 1px solid var(--principal-blue, #6a00f4);
@@ -65,28 +72,16 @@
     outline: none;
 }
 
-.modalContent input::placeholder,
-.modalContent textarea::placeholder {
+.productForm input[type="file"] {
+    width: fill;
+}
+
+.productForm input::placeholder,
+.productForm textarea::placeholder {
     color: #a3a3a3;
 }
 
 /* Botón para subir archivos */
-.modalContent input[type="file"] {
+.productForm input[type="file"] {
     padding: 5px;
-}
-
-/* Botón principal */
-.modalContent button {
-    background: linear-gradient(90deg, #6a00f4, #c400f4);
-    color: white;
-    border: none;
-    padding: 10px;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.modalContent button:hover {
-    background: linear-gradient(90deg, #4a00d4, #a400d4);
 }

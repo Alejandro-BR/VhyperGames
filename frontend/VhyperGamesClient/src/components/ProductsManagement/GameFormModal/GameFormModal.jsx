@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import classes from "./GameFormModal.module.css";
+import Button from "../../Buttons/Button"
 
 // TENIENDO EN CUENTA QUE EL FORMULARIO ES IDÉNTICO PARA AÑADIR Y EDITAR
 // CREO QUE LO IDEAL ES HACER UN SOLO COMPONENTE Y METERLE LA LOGICA COMO PARAMETRO
@@ -26,65 +27,125 @@ const CloseIcon = () => (
             </linearGradient>
         </defs>
     </svg>
-
-)
+);
 
 function GameFormModal(
-    { onClose }
-    // funcion, // ALGO ASÍ. EL COLEGA CERTIFICA QUE PUEDE HACERSE
-    // tipoDeFormulario // EDITAR O AÑADIR
+    {
+        modalPurpose,   // Propósito del modal. Es decir, Añadir o Editar. Igual puede usarse en un condicional para la lógica?
+
+        onClose         // Permite cerrar el modal
+    }
 ) {
 
     return (
         <div className={classes.modalForm}>
             <div className={classes.modalOverlay}>
                 <form className={classes.productForm}
-                // onClick={funcion}
+                // onClick={funcion} 
                 >
                     <button className={classes.logoCerrar} onClick={onClose}>
                         <CloseIcon />
                     </button>
-                    <h2>
-                        Añadir/Editar producto
-                        {/* {tipoDeFormulario} */}
-                    </h2>
-                    <input
-                        type="text"
-                        name="title"
-                        placeholder="Título"
-                    />
-                    <input
-                        type="number"
-                        name="price"
-                        placeholder="Precio"
-                    />
-                    <input
-                        type="number"
-                        name="stock"
-                        placeholder="Stock"
-                    />
-                    <input
-                        type="file"
-                        name="urlImg"
-                        multiple="true"
-                    />
-                    <textarea
-                        name="recommendedRequirements"
-                        placeholder="Requisitos recomendados"
-                    />
-                    <textarea
-                        name="minimumRequirements"
-                        placeholder="Requisitos mínimos"
-                    />
+
+
+                    <div className={classes.verticalFormGroup}>
+                        <label htmlFor="title">Título: </label>
+                        <input
+                            type="text"
+                            id="title"
+                            placeholder="Título"
+                        />
+                    </div>
+
+                    <div className={classes.verticalFormGroup}>
+                        <label htmlFor="price">Precio: </label>
+                        <input
+                            type="number"
+                            id="price"
+                            placeholder="Precio"
+                        />
+                    </div>
+
+                    <div className={classes.verticalFormGroup}>
+                        <label htmlFor="stock">Stock: </label>
+                        <input
+                            type="number"
+                            id="stock"
+                            placeholder="Stock"
+                        />
+                    </div>
+
+                    <div className={classes.horizontalFormGroup} >
+                        <div className={classes.verticalFormGroup}>
+                            <label htmlFor="img1">Imagen 1:</label>
+                            <input type="file" id="img1" />
+                        </div>
+                        <div className={classes.verticalFormGroup}>
+                            <label for="img2">Imagen 2:</label>
+                            <input type="file" id="img2" />
+                        </div>
+                    </div>
+
+
+                    <div className={classes.verticalFormGroup}>
+                        <label for="img1Alt">Texto alternativo imagen 1:</label>
+                        <input type="text" id="img1Alt" />
+
+                    </div>
+
+                    <div className={classes.verticalFormGroup}>
+                        <label for="img2Alt">Texto alternativo imagen 2:</label>
+                        <input type="text" id="img2Alt" />
+
+                    </div>
+
+                    <div className={classes.horizontalFormGroup} >
+                        <div className={classes.verticalFormGroup}>
+                            <label for="img3">Imagen 3:</label>
+                            <input type="file" id="img3" />
+                        </div>
+                        <div className={classes.verticalFormGroup}>
+                            <label for="img4">Imagen 4:</label>
+                            <input type="file" id="img4" />
+                        </div>
+                    </div>
+
+                    <div className={classes.verticalFormGroup}>
+                        <label for="img3Alt">Texto alternativo imagen 3:</label>
+                        <input type="text" id="img3Alt" />
+
+                    </div>
+
+                    <div className={classes.verticalFormGroup}>
+                        <label for="img4Alt">Texto alternativo imagen 4:</label>
+                        <input type="text" id="img4Alt" />
+
+                    </div>
+
+                    <div className={classes.verticalFormGroup}>
+                        <textarea
+                            name="recommendedRequirements"
+                            placeholder="Requisitos recomendados"
+                        />
+                        <textarea
+                            name="minimumRequirements"
+                            placeholder="Requisitos mínimos"
+                        />
+                    </div>
+
                     <textarea
                         name="description"
                         placeholder="Descripción"
                     />
-                    <button type="submit">
-                        Añadir/Editar producto
-                        {/* {tipoDeFormulario} */}
-                    </button>
+
+                    <Button
+                        variant={"large"}
+                        color={"morado-azul"}>
+                        {modalPurpose} producto
+                    </Button>
+
                 </form>
+
             </div>
 
         </div>

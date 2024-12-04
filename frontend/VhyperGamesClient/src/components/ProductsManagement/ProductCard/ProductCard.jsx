@@ -71,6 +71,7 @@ function ProductCard() {
       {
         gameFormModal && (
           <GameFormModal
+            modalPurpose="Editar"
             onClose={() => setGameFormModal(false)}
           />
         )
