@@ -48,7 +48,7 @@ function GameFormModal(
                     </button>
 
 
-                    <div className={classes.verticalFormGroup}>
+                    <div className={classes.formGroup}>
                         <label htmlFor="title">Título: </label>
                         <input
                             type="text"
@@ -57,7 +57,7 @@ function GameFormModal(
                         />
                     </div>
 
-                    <div className={classes.verticalFormGroup}>
+                    <div className={classes.formGroup}>
                         <label htmlFor="price">Precio: </label>
                         <input
                             type="number"
@@ -66,7 +66,7 @@ function GameFormModal(
                         />
                     </div>
 
-                    <div className={classes.verticalFormGroup}>
+                    <div className={classes.formGroup}>
                         <label htmlFor="stock">Stock: </label>
                         <input
                             type="number"
@@ -75,54 +75,23 @@ function GameFormModal(
                         />
                     </div>
 
-                    <div className={classes.horizontalFormGroup} >
-                        <div className={classes.verticalFormGroup}>
-                            <label htmlFor="img1">Imagen 1:</label>
-                            <input type="file" id="img1" />
-                        </div>
-                        <div className={classes.verticalFormGroup}>
-                            <label for="img2">Imagen 2:</label>
-                            <input type="file" id="img2" />
-                        </div>
+                    <div className={classes.formGroup}>
+                        <label htmlFor="img1">Carátula:</label>
+                        <input type="file" id="img1" />
+                    </div>
+
+                    <div className={classes.formGroup}>
+                        <label for="img2">Imágenes:</label>
+                        <input type="file" id="img2" />
                     </div>
 
 
-                    <div className={classes.verticalFormGroup}>
-                        <label for="img1Alt">Texto alternativo imagen 1:</label>
+                    <div className={classes.formGroup}>
+                        <label for="img1Alt">Texto alternativo carátula:</label>
                         <input type="text" id="img1Alt" />
-
                     </div>
 
-                    <div className={classes.verticalFormGroup}>
-                        <label for="img2Alt">Texto alternativo imagen 2:</label>
-                        <input type="text" id="img2Alt" />
-
-                    </div>
-
-                    <div className={classes.horizontalFormGroup} >
-                        <div className={classes.verticalFormGroup}>
-                            <label for="img3">Imagen 3:</label>
-                            <input type="file" id="img3" />
-                        </div>
-                        <div className={classes.verticalFormGroup}>
-                            <label for="img4">Imagen 4:</label>
-                            <input type="file" id="img4" />
-                        </div>
-                    </div>
-
-                    <div className={classes.verticalFormGroup}>
-                        <label for="img3Alt">Texto alternativo imagen 3:</label>
-                        <input type="text" id="img3Alt" />
-
-                    </div>
-
-                    <div className={classes.verticalFormGroup}>
-                        <label for="img4Alt">Texto alternativo imagen 4:</label>
-                        <input type="text" id="img4Alt" />
-
-                    </div>
-
-                    <div className={classes.verticalFormGroup}>
+                    <div className={classes.formGroup}>
                         <textarea
                             name="recommendedRequirements"
                             placeholder="Requisitos recomendados"

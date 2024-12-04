@@ -25,15 +25,16 @@
 .productForm {
     position: relative;
     height: fit-content;
-    width: 30%;
+    width: fit-content;
     background-color: var(--body-color, #131529);
     padding: 50px 50px 25px 50px;
-    margin: 5vh 0 0 40vw;
+    margin: 5vh 0 0 5vw;    /*ESTOS MÁRGENES SON PARA QUE LA DESCRIPCION TENGA SITIO PARA EXTENDERSE A LA DCHA Y NO HACIA ABAJO*/
     border-radius: 8px;
     z-index: 1001;
     border: 2px outset var(--principal-blue, #6a00f4);
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
     display: flex;
+    flex-wrap: wrap;
     flex-direction: column;
     gap: 18px;
     color: rgb(24, 24, 24);
@@ -49,7 +50,7 @@
     border: none;
 }
 
-.verticalFormGroup {
+.formGroup {
     display: flex;
     gap: 10px;
 }
@@ -62,7 +63,7 @@
 /* Inputs del formulario */
 .productForm input,
 .productForm textarea {
-    width: 50%;
+    width: 100%;
     background-color: #1c1e3a;
     color: #e4e4e4;
     border: 1px solid var(--principal-blue, #6a00f4);
@@ -72,8 +73,12 @@
     outline: none;
 }
 
-.productForm input[type="file"] {
-    width: fill;
+.productForm input {
+    height: 1rem;
+}
+
+.productForm textarea {
+    height: 3rem;
 }
 
 .productForm input::placeholder,
@@ -83,5 +88,5 @@
 
 /* Botón para subir archivos */
 .productForm input[type="file"] {
-    padding: 5px;
+    padding: 8px;
 }
