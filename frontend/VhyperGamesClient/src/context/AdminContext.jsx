@@ -69,7 +69,7 @@ export const AdminProvider = ({ children }) => {
 };
   
 
-  const updateGameById = async (data) => {
+  const updateGameByData = async (data) => {
     try {
       const response = await updateGames(UPDATE_GAME, data, token);
       if (response.ok) {

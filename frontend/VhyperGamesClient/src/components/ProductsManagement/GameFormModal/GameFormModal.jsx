@@ -33,17 +33,29 @@ const CloseIcon = () => (
 function GameFormModal(
     {
         modalPurpose,   // Propósito del modal. Es decir, Añadir o Editar. Igual puede usarse en un condicional para la lógica?
-
         onClose         // Permite cerrar el modal
     }
 ) {
+
+    if (modalPurpose === "Añadir") {
+
+    } if (modalPurpose === "Editar") {
+
+    }
 
     const [title, setTitle] = useState('');
     const [price, setPrice] = useState(0);
     const [stock, setStock] = useState(0);
     const [img1, setImg1] = useState(null);
 
+    // Estado para almacenar los archivos
+    const [files, setFiles] = useState([]);
 
+    // Manejar cambios en el input file
+    const handleFileChange = (event) => {
+        const selectedFiles = event.target.files;
+        setFiles(selectedFiles); // Guardar en el estado
+    };
 
     // const { game, postGame } = useContext(AdminContext);
 
@@ -91,7 +103,11 @@ function GameFormModal(
 
                     <div className={classes.formGroup}>
                         <label for="img2">Imágenes:</label>
-                        <input type="file" id="img2" multiple="true" />
+                        <input
+                            type="file"
+                            id="img2"
+                            multiple="true"
+                            onChange={handleFileChange} />
                     </div>
 
 
@@ -142,4 +158,4 @@ function GameFormModal(
     );
 };
 
-export default GameFormModal;
+export default GameFormModal
