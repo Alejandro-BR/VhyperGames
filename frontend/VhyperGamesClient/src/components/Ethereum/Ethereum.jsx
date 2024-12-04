@@ -43,7 +43,7 @@ function Ethereum() {
   }, [gameDetails, items]);
 
   
-  // Calcula el total en Euros y ETH
+
 // Calcula el total en Euros y ETH
 useEffect(() => {
   const calculateTotal = async () => {
@@ -66,7 +66,7 @@ useEffect(() => {
       } else {
         console.log("No se detectó reserva. Calculando el total del carrito...");
 
-        // Calcula el total del carrito en centavos
+        // Calcula el total del carrito 
         const totalEurosCent = TotalPrice(data);
         const totalEurosFormatted = ConvertToDecimal(totalEurosCent);
         setCartTotalEuros(totalEurosFormatted);

@@ -21,11 +21,6 @@ public class BlockchainController : ControllerBase
         _blockchainService = blockchainService;
     }
 
-    [HttpGet]
-    public Task<Erc20ContractDto> GetContractInfoAsync([FromQuery] ContractInfoRequest data)
-    {
-        return _blockchainService.GetContractInfoAsync(data.NetworkUrl, data.ContractAddress);
-    }
 
     [HttpPost("transaction")]
     public Task<EthereumTransaction> CreateTransaction([FromBody] CreateTransactionRequest data)
