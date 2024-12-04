@@ -50,6 +50,8 @@ public class ImageService
 
         // Creamos la carpeta del juego dentro de 'wwwroot/images' si no existe
         string gameDirectory = Path.Combine(imagesDirectory, game.Title);
+
+        string relativePath = $"{IMAGES_FOLDER}/{Guid.NewGuid()}_{image.File.FileName}";
         if (!Directory.Exists(gameDirectory))
         {
             Directory.CreateDirectory(gameDirectory);
@@ -58,7 +60,7 @@ public class ImageService
 
         // Ruta del archivo de imagen con GUID único
         string fileName = $"{Guid.NewGuid()}_{image.File.FileName}";
-        string relativePath = Path.Combine(gameDirectory, fileName);
+        //string relativePath = Path.Combine(gameDirectory, fileName);
 
         // Verificamos la ruta del archivo
         Console.WriteLine("Ruta final del archivo de imagen: " + relativePath);
@@ -67,7 +69,8 @@ public class ImageService
         ImageGame newImage = new ImageGame
         {
             AltText = image.AltText,
-            ImageUrl = Path.Combine("images", game.Title, fileName), // URL relativa para la base de datos
+            //ImageUrl = Path.Combine("images", game.Title, fileName), // URL relativa para la base de datos
+            ImageUrl = fileName,
             GameId = gameId,
             Game = game
         };
