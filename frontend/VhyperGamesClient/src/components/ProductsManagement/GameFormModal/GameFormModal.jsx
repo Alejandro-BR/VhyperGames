@@ -159,11 +159,6 @@ function GameFormModal({modalPurpose, initialData, onSubmit, onClose}) {
                     </div>
 
                     <div className={classes.formGroup}>
-                        <label for="img1Alt">Texto alternativo carátula:</label>
-                        <input type="text" id="img1Alt" onChange={handleChange}/>
-                    </div>
-
-                    <div className={classes.formGroup}>
                         <label htmlFor="images">Imágenes:</label>
                         <input type="file" id="images" multiple onChange={handleFileChange}/>
                     </div>

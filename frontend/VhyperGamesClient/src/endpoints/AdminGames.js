@@ -44,12 +44,16 @@ export const newGame = async (url, data, token) => {
     formData.append("title", data.title);
     formData.append("description", data.description);
     formData.append("sinopsis", data.sinopsis);
-    formData.append("genre", data.genre); 
-    formData.append("gameRequirementsId", data.gameRequirementsId); 
+    formData.append("genre", parseInt(data.genre, 10));
+    formData.append("gameRequirementsId", parseInt(data.gameRequirementsId, 10)); 
     formData.append("drmFree", data.drmFree); 
     formData.append("releaseDate", data.releaseDate); 
-    formData.append("price", data.price); 
-    formData.append("stock", data.stock); 
+    formData.append("price", parseInt(data.price, 10));
+    formData.append("stock", parseInt(data.stock, 10)); 
+
+    for (let pair of formData.entries()) {
+        console.log(`${pair[0]}: ${pair[1]}`);
+    }
 
     if (data.img1) {
         formData.append("images", data.img1); 
@@ -72,18 +76,22 @@ export const newGame = async (url, data, token) => {
     const response = await fetch(url, {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json',
             Authorization: `Bearer ${token}`,
         },
         body: formData
     });
 
     if (!response.ok) {
-        const error = await response.json();
-        throw new Error(error.message || 'Error al crear la reserva.');
+        const error = await response.json().catch(() => ({ message: "Error desconocido" })); // Manejo de error genérico
+        throw new Error(error.message || "Error al crear la reserva.");
     }
 
-    return await response.json();
+    const contentType = response.headers.get("Content-Type");
+    if (contentType && contentType.includes("application/json")) {
+        return await response.json();
+    }
+
+    return { message: "Operación completada con éxito." };
 };
 
 export const searchGame = async (url, data, token) => {
