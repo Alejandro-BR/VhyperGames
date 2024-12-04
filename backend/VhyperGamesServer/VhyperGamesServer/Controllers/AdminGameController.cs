@@ -47,10 +47,10 @@ public class AdminGameController : ControllerBase
     }
 
     [HttpPost("newGame")]
-    public async Task PostNewGame([FromForm] AdminFormGameDto adminFormGameDto, [FromForm] List<IFormFile> images, [FromForm] List<string> alt)
+    public async Task PostNewGame([FromForm] AdminFormGameDto adminFormGameDto, [FromForm] List<IFormFile> images)
     {
         string title = await _adminGameService.PostNewGame(adminFormGameDto);
-        await _adminGameService.PostNewImages(images, alt, title);
+        await _adminGameService.PostNewImages(images, title);
     }
 
     [HttpGet("search")]
