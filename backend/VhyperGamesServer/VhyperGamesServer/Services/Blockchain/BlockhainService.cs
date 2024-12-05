@@ -27,9 +27,16 @@ public class BlockhainService
             throw new ArgumentNullException(nameof(data.NetworkUrl), "La URL de la red es nula o está vacía.");
         }
 
+        string walletAddress = Environment.GetEnvironmentVariable("METAMASK_WALLET");
+        if (string.IsNullOrEmpty(walletAddress))
+        {
+            throw new InvalidOperationException("La variable de entorno 'METAMASK_WALLET' no está configurada.");
+        }
+
         Web3 web3 = new Web3(data.NetworkUrl);
         return new EthereumTransaction
         {
+            To = walletAddress,
             Value = new HexBigInteger(value).HexValue,
             Gas = gas.HexValue,
             GasPrice = gasPrice.HexValue,
