@@ -90,7 +90,6 @@ function Ethereum() {
         body: JSON.stringify({
           hash: txHash,
           from: wallet,
-          to: WALLET_METAMASK,
           value: transactionData.value,
         }),
       });
