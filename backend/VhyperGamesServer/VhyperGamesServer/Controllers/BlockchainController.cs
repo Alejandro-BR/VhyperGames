@@ -58,8 +58,8 @@ public class BlockchainController : ControllerBase
     }
 
     [HttpPost("check")]
-    public Task<bool> CheckTransactionAsync([FromBody] CheckTransactionRequest data)
+    public async Task<bool> CheckTransactionAsync([FromBody] CheckTransactionRequest data)
     {
-        return _blockchainService.CheckTransactionAsync(data);
+        return await _blockchainService.CheckTransactionAsync(data);
     }
 }

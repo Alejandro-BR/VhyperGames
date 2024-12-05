@@ -50,6 +50,13 @@ public class BlockhainService
             throw new InvalidOperationException("La variable de entorno 'NetworkUrl' no está configurada.");
         }
 
+        string walletAddress = Environment.GetEnvironmentVariable("METAMASK_WALLET");
+        if (string.IsNullOrEmpty(walletAddress))
+        {
+            throw new InvalidOperationException("La variable de entorno 'METAMASK_WALLET' no está configurada.");
+        }
+        data.To = walletAddress;
+
         EthereumService ethereumService = new EthereumService(ethNetworkUrl);
 
         return ethereumService.CheckTransactionAsync(data.Hash, data.From, data.To, data.Value); 
