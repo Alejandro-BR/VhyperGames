@@ -40,12 +40,10 @@ public class AdminUserService
 
         if (matchedTitles != null && matchedTitles.Any())
         {
-            //users = await _unitOfWork.UserRepository.;
+            users = await _unitOfWork.UserRepository.GetGamesByNames(matchedTitles);
         }
 
-        //users = await _unitOfWork.GameRepository.GetGameByTitle(search);
-
-        List<AdminUserDto> adminUsers = null;
+        List<AdminUserDto> adminUsers = _adminMapper.ToListAdminUser(users);
 
         return adminUsers;
 

@@ -64,7 +64,7 @@ public class UserRepository : Repository<User, int>
         return names;
     }
 
-    public async Task<List<User>> GetGamesByTitles(IEnumerable<string> names)
+    public async Task<List<User>> GetGamesByNames(IEnumerable<string> names)
     {
         if (names == null || !names.Any())
         {
