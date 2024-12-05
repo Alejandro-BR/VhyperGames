@@ -1,7 +1,7 @@
 import classes from "./UserModal.module.css"
 import Button from "../Buttons/Button";
 
-function UserModal({ onClose }) {
+function UserModal({ onClose }, name, surname, email, address) {
     return (
         <div className={classes.modalOverlay}>
             <div className={classes.userModal}>
@@ -11,7 +11,7 @@ function UserModal({ onClose }) {
                     <input
                         id="nombre"
                         name="nombre"
-                        placeholder="Nombre"
+                        defaultValue={name}
                         type="text"
                         required
                     />
@@ -46,28 +46,6 @@ function UserModal({ onClose }) {
                         name="address"
                         placeholder="Dierccion"
                         type="text"
-                        required
-                    />
-                </div>
-
-                <div className={classes.inputGroup}>
-                    <p>Contraseña:</p>
-                    <input
-                        id="password"
-                        name="password"
-                        placeholder="Contraseña"
-                        type="password"
-                        required
-                    />
-                </div>
-
-                <div className={classes.inputGroup}>
-                    <p>Confirmar Contraseña:</p>
-                    <input
-                        id="passwordConfirm"
-                        name="passworConfirm"
-                        placeholder="Confirme la contraseña"
-                        type="password"
                         required
                     />
                 </div>

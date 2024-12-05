@@ -23,3 +23,8 @@
     background: var(--gradient-purple-blue);
     align-self: center;
 }
+
+.buttons{
+    display: flex;
+    gap: 10px;
+}

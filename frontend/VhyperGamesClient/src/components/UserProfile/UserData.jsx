@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 import { GET_USER } from "../../config";
 import classes from "./UserData.module.css"
 import { useAuth } from "../../context/AuthContext";
+import Button from "../Buttons/Button";
+import UserModal from "./UserModal";
+import PasswordModal from "./PasswordModal";
 
 function UserData({ }) {
     const [loading, setLoading] = useState(true);
@@ -9,7 +12,8 @@ function UserData({ }) {
     const [userInfo, setUserInfo] = useState(null);
     const { token } = useAuth();
 
-
+    const [editData, setEditData] = useState(false);
+    const [editPassword, setEditPassword] = useState(false);
     useEffect(() => {
 
         const fetchUsers = async () => {
@@ -23,14 +27,14 @@ function UserData({ }) {
                         'Content-Type': 'application/json',
                         'Authorization': `Bearer ${token}`
                     }
-                    });
+                });
 
                 if (!response.ok) {
                     throw new Error("Ha habido un error al obtener los usuarios.");
                 }
                 const data = await response.json();
                 setUserInfo(data)
-                
+
             } catch (error) {
                 setError(error.message);
             } finally {
@@ -39,7 +43,6 @@ function UserData({ }) {
         };
 
         fetchUsers();
-        console.log(userInfo)
     }, [token]);
 
 
@@ -60,6 +63,23 @@ function UserData({ }) {
                 <div>Direccion: {userInfo.address}</div>
             </div>
 
+            <div className={classes.buttons}>
+                <Button onClick={() => setEditData(true)} children="Modificar datos" variant="large" color="morado-azul" />
+                <Button onClick={() => setEditPassword(true)} children="Contraseña" variant="large" color="azul-morado" />
+            </div>
+
+            {editData && (
+                <UserModal
+                    onClose={() => setEditData(false)}
+                    name={userInfo.name}
+                />
+            )}
+
+            {editPassword && (
+                <PasswordModal
+                    onClose={() => setEditPassword(false)}
+                />
+            )}
         </div>
     );
 }
