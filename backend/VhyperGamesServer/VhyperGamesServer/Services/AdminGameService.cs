@@ -115,7 +115,7 @@ public class AdminGameService
 
                 int id = adminFormGameDto.ImagesId[i];
 
-                await _imageService.UpdateAsync2(file, text, id);
+                await _imageService.UpdateFormFileAsync(file, text, id);
             }
         }
 

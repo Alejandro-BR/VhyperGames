@@ -22,4 +22,18 @@ public class FileHelper
 
         await SaveAsync(bytes, relativePath);
     }
+
+    public static async Task DeleteAsync(string relativePath)
+    {
+        string absolutePath = Path.Combine(WWWROOT_FOLDER, relativePath);
+
+        if (File.Exists(absolutePath))
+        {
+            await Task.Run(() => File.Delete(absolutePath));
+        }
+        else
+        {
+            throw new FileNotFoundException($"El archivo {relativePath} no existe.");
+        }
+    }
 }

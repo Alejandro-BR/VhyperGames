@@ -48,4 +48,17 @@ public class ImagesController : ControllerBase
         return Ok(imageUpdated);
     }
 
+    [HttpGet("images-byGame")]
+    public async Task<ActionResult<List<ImageGame>>> GetImagesByGameIdAsync(int gameId)
+    {
+        return Ok(await _service.GetImagesByGameIdAsync(gameId));
+    }
+
+    [HttpDelete("delete")]
+    public async Task<ActionResult> DeleteAsync(int imageId)
+    {
+       await _service.DeleteAsync(imageId);
+       return NoContent();
+    }
+
 }
