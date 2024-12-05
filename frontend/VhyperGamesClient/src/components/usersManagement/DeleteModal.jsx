@@ -54,13 +54,6 @@ function DeleteModal({ onClose, onConfirm }) {
                         placeholder="Escribe 'Eliminar'"
                     />
 
-                    {/* <button
-                        className={classes.confirmButton}
-                        onClick={onConfirm}
-                        disabled={!isValid}
-                    >
-                        ¡¡ELIMINAR!!
-                    </button> */}
                     {isValid && (
                         <Button className={classes.confirmButton} onClick={onConfirm} variant="short" color="red" children="Eliminar" />
                     )
