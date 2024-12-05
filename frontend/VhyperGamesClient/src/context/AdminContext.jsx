@@ -92,7 +92,7 @@ export const AdminProvider = ({ children }) => {
   const updateGameByData = async (data) => {
     try {
       const response = await updateGames(UPDATE_GAME, data, token);
-      if (response.ok) {
+      if (response) {
         fetchGames();
         setDataForm([]);
       } else {
@@ -106,7 +106,8 @@ export const AdminProvider = ({ children }) => {
   const postGame = async (data) => {
     try {
       const response = await newGame(NEW_GAME, data, token);
-      if (response.ok) {
+      console.log(response);
+      if (response) {
         fetchGames();
       } else {
         console.error("Error al crear el juego");
