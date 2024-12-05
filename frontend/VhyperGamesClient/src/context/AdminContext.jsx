@@ -1,8 +1,8 @@
 import { createContext, useState, useEffect } from "react";
 import { useAuth } from "./AuthContext";
-import { getUsersAdmin, updateRol, deleteUser } from "../endpoints/AdminUsers";
+import { getUsersAdmin, updateRol, deleteUser, searchUser } from "../endpoints/AdminUsers";
 import { getGamesAdmin, updateGames, newGame, searchGame, getFormGame } from "../endpoints/AdminGames";
-import { GET_USERS_ADMIN, UPDATE_USER_ROL, DELETE_USER, GET_GAMES_ADMIN, UPDATE_GAME, NEW_GAME, GET_FORM_GAME, GET_SEARCH_GAMES_ADMIN } from "../config";
+import { GET_USERS_ADMIN, GET_SEARCH_USERS_ADMIN, UPDATE_USER_ROL, DELETE_USER, GET_GAMES_ADMIN, UPDATE_GAME, NEW_GAME, GET_FORM_GAME, GET_SEARCH_GAMES_ADMIN } from "../config";
 
 // Crear el contexto
 export const AdminContext = createContext();
@@ -45,29 +45,49 @@ export const AdminProvider = ({ children }) => {
 
   const updateUserRole = async (userId) => {
     try {
-        const response = await updateRol(UPDATE_USER_ROL, userId, token);
-        console.log("Rol actualizado con éxito:", response); 
-        fetchUsers(); 
+      const response = await updateRol(UPDATE_USER_ROL, userId, token);
+      console.log("Rol actualizado con éxito:", response);
+      fetchUsers();
     } catch (error) {
-        console.error("Error en updateUserRole:", error.message);
+      console.error("Error en updateUserRole:", error.message);
     }
-};
+  };
+
+  const GetSearchUsers = async (data) => {
+    try {
+      if(data == "" || data == null) {
+        ResetSearchUsers();
+      }
+      const response = await searchUser(GET_SEARCH_USERS_ADMIN, data, token);
+      if (response) {
+        setUsers(response);
+      } else {
+        console.error("Error al buscar el usuario");
+      }
+    } catch (error) {
+      console.error("Error en GetSearchUser:", error);
+    }
+  };
+
+  const ResetSearchUsers = async () => {
+    await fetchUsers();
+  }
 
 
   // ----- ADMIN GAME -----
   const fetchGames = async () => {
     try {
-        const response = await getGamesAdmin(GET_GAMES_ADMIN, token);
-        if (response) {
-          setGames(response); 
-        } else {
-            console.error("Error al obtener los juegos"); 
-        }
+      const response = await getGamesAdmin(GET_GAMES_ADMIN, token);
+      if (response) {
+        setGames(response);
+      } else {
+        console.error("Error al obtener los juegos");
+      }
     } catch (error) {
-        console.error("Error en fetchGames:", error);
+      console.error("Error en fetchGames:", error);
     }
-};
-  
+  };
+
 
   const updateGameByData = async (data) => {
     try {
@@ -98,6 +118,9 @@ export const AdminProvider = ({ children }) => {
 
   const GetSearchGame = async (data) => {
     try {
+      if(data == "" || data == null) {
+        ResetSearchGame();
+      }
       const response = await searchGame(GET_SEARCH_GAMES_ADMIN, data, token);
       if (response) {
         setGames(response);
@@ -149,7 +172,9 @@ export const AdminProvider = ({ children }) => {
     postGame,
     GetSearchGame,
     GetFormGame,
-    ResetSearchGame
+    ResetSearchGame,
+    GetSearchUsers,
+    ResetSearchUsers
   };
 
   return (
