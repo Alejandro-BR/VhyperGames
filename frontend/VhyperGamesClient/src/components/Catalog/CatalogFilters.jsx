@@ -1,7 +1,7 @@
 import classes from "./CatalogFilters.module.css";
 
 function CatalogFilters({ filters, onFilterChange }) {
-    const { searchText, sortCriteria, drmFree, genre, resultsPerPage} = filters;
+    const { searchText, sortCriteria, drmFree, genre, resultsPerPage } = filters;
 
     const handleInputChange = (key, value) => {
         onFilterChange({ [key]: value });
@@ -28,15 +28,16 @@ function CatalogFilters({ filters, onFilterChange }) {
                         onChange={(e) => handleInputChange("sortCriteria", e.target.value)}
                         className={classes.filter}
                     >
-                        <option value="" disabled defaultValue>Ordenar por:</option>
-                        <option value="3">Precio Asc.</option>
-                        <option value="2">Precio Desc.</option>
-                        <option value="0">Alfabetico A-Z.</option>
-                        <option value="1">Alfabetico Z-A.</option>
+                        {/* <option value="" disabled defaultValue>Ordenar por:</option> */}
+                        <option value="0" defaultValue>Alfabetico A-Z</option>
+                        <option value="1">Alfabetico Z-A</option>
+                        <option value="3" >Precio Ascendente</option>
+                        <option value="2">Precio Descendente</option>
                     </select>
                 </div>
 
                 <div className={classes.filterItem}>
+                    <label htmlFor="license">Tipo de licencia: </label>
                     <select
                         id="license"
                         value={drmFree || ""}
@@ -68,7 +69,9 @@ function CatalogFilters({ filters, onFilterChange }) {
                 </div>
 
                 <div className={classes.filterItem}>
+                    <label htmlFor="productsPerPage">Elementos por página: </label>
                     <select
+                        id="productsPerPage"
                         value={resultsPerPage || 10} // Usa 10 como valor predeterminado si resultsPerPage es null o undefined
                         onChange={(e) => handleInputChange("resultsPerPage", parseInt(e.target.value, 10))}
                         className={classes.filter}

@@ -14,16 +14,15 @@ namespace VhyperGamesServer.Controllers
         private readonly CatalogService _gameService;
         private readonly SmartSearchService _smartSearchService;
 
-        public CatalogController(CatalogService gameService, SmartSearchService smartSearchService)
+        public CatalogController(CatalogService gameService)
         {
             _gameService = gameService;
-            _smartSearchService = smartSearchService;
         }
 
         [HttpGet("catalog-search")]
         public async Task<ActionResult<CatalogDto>> Filter([FromQuery] GameFilterDto filter)
         {
-            CatalogDto games = await _gameService.FilterAndSortGamesAsync(filter, _smartSearchService);
+            CatalogDto games = await _gameService.FilterAndSortGamesAsync(filter);
             return Ok(games);
         }
 

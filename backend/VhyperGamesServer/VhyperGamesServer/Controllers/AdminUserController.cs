@@ -23,6 +23,12 @@ public class AdminUserController : ControllerBase
        return Ok(await _adminUserService.GetListUser());
     }
 
+    [HttpGet("search")]
+    public async Task<ActionResult<List<AdminUserDto>>> GetGameBySearch(string search)
+    {
+        return Ok(await _adminUserService.GetGameBySearch(search));
+    }
+
     [HttpPut("update-rol")]
     public async Task PutRolUserById(int userId)
     {

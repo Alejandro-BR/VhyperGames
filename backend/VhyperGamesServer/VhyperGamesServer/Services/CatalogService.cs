@@ -11,21 +11,24 @@ namespace VhyperGamesServer.Services
     {
         private readonly UnitOfWork _unitOfWork;
         private readonly GameCardMapper _gameCardMapper;
+        private SmartSearchService smartSearchService;
 
         public CatalogService(UnitOfWork unitOfWork, GameCardMapper gameCardMapper)
         {
             _unitOfWork = unitOfWork;
             _gameCardMapper = gameCardMapper;
+            smartSearchService = new SmartSearchService();
         }
 
-        public async Task<CatalogDto> FilterAndSortGamesAsync(GameFilterDto filter, SmartSearchService smartSearchService)
+        public async Task<CatalogDto> FilterAndSortGamesAsync(GameFilterDto filter)
         {
             IQueryable<Game> query = _unitOfWork.GameRepository.GetIncludingImages();
 
             if (!string.IsNullOrEmpty(filter.SearchText))
             {
+                List<string> gameTitles = await _unitOfWork.GameRepository.GetAllTitles();
                 // Usar SmartSearchService para realizar la búsqueda inteligente ???????? MODIFICAR
-                var matchedTitles = smartSearchService.Search(filter.SearchText);
+                var matchedTitles = smartSearchService.Search(filter.SearchText, gameTitles);
 
                 // Si hay coincidencias, aplicamos un filtro sobre el título de los juegos ???????? MODIFICAR
                 if (matchedTitles != null && matchedTitles.Any())

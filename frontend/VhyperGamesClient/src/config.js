@@ -49,6 +49,7 @@ export const BLOCKCHAIN_CHECK = `${API_BASE_URL}Blockchain/check`;
 
 /* ENDPOINTS ADMIN USERS */
 export const GET_USERS_ADMIN = `${API_BASE_URL}AdminUser/get-users`;
+export const GET_SEARCH_USERS_ADMIN = `${API_BASE_URL}AdminUser/search`;
 export const UPDATE_USER_ROL = `${API_BASE_URL}AdminUser/update-rol`;
 export const DELETE_USER = `${API_BASE_URL}AdminUser/delete`;
 

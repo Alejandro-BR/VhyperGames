@@ -54,7 +54,6 @@ public class Program
         builder.Services.AddScoped<UserService>();
         builder.Services.AddScoped<CatalogService>();
         builder.Services.AddScoped<DetailsViewService>();
-        builder.Services.AddScoped<SmartSearchService>();
         builder.Services.AddScoped<IAService>();
         builder.Services.AddScoped<CartService>();
         builder.Services.AddScoped<ReserveService>();
@@ -87,29 +86,13 @@ public class Program
 
         // Configuración de CORS
 
-#if DEBUG
-        if (builder.Environment.IsDevelopment())
-        {
-            builder.Services.AddCors(options =>
-            {
-                options.AddPolicy("AllowSpecificOrigin", builder =>
-                {
-                    builder.WithOrigins("http://localhost:5173")
-                           .AllowAnyHeader()
-                           .AllowAnyMethod()
-                           .AllowCredentials();
-                });
-            });
-        }
-#else
         builder.Services.AddCors(options =>
         {
             options.AddDefaultPolicy(builder =>
             {
-                builder.AllowAnyOrigin().AllowAnyOrigin().AllowAnyMethod();
+                builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
             });
         });
-#endif
 
 
         // Configuración de autenticación JWT
@@ -167,15 +150,11 @@ public class Program
 
     private static void ConfigureMiddleware(WebApplication app)
     {
-#if DEBUG
-        app.UseStaticFiles(); 
-#else
-    app.UseStaticFiles(new StaticFileOptions
-    {
-        FileProvider = new PhysicalFileProvider(
-            Path.Combine(Directory.GetCurrentDirectory(), "wwwroot"))
-    });
-#endif
+        app.UseStaticFiles(new StaticFileOptions
+        {
+            FileProvider = new PhysicalFileProvider(
+                    Path.Combine(Directory.GetCurrentDirectory(), "wwwroot"))
+        });
 
 
 
@@ -187,7 +166,7 @@ public class Program
         {
             app.UseSwagger();
             app.UseSwaggerUI();
-            app.UseCors("AllowSpecificOrigin");
+            app.UseCors();
         }
 
         // Redirigir HTTP a HTTPS

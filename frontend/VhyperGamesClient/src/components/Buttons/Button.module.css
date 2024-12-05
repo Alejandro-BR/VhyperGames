@@ -67,6 +67,11 @@ button.azul-morado {
   box-shadow: var(--shadow-gradient-blue-purple);
 }
 
+button.red {
+  background: var(--principal-red);
+  box-shadow: var(--shadow-gradient-blue-purple);
+}
+
 button.morado-azul:active,
 button.azul-morado:active {
   box-shadow: var(--shadow-gradient-blue-purple);

@@ -8,24 +8,15 @@ namespace VhyperGamesServer.Services;
 public class SmartSearchService
 {
     private readonly INormalizedStringSimilarity _stringSimilarityComparer;
-    private UnitOfWork _unitOfWork;
 
     private const double THRESHOLD = 0.75;
-    private List<string> GameTitles { get; set; }
 
-    public SmartSearchService(UnitOfWork unitOfWork)
+    public SmartSearchService()
     {
         _stringSimilarityComparer = new JaroWinkler();
-        _unitOfWork = unitOfWork;
-        InitializeGameTitlesAsync().Wait();
     }
 
-    private async Task InitializeGameTitlesAsync()
-    {
-        GameTitles = await _unitOfWork.GameRepository.GetAllTitles();
-    }
-
-    public IEnumerable<string> Search(string query)
+    public IEnumerable<string> Search(string query, List<string> data)
     {
         IEnumerable<string> result;
 
@@ -42,7 +33,7 @@ public class SmartSearchService
             // Aquí guardaremos los items que coincidan
             List<string> matches = new List<string>();
 
-            foreach (string item in GameTitles)
+            foreach (string item in data)
             {
                 // Limpiamos el item y lo separamos por espacios
                 string[] itemKeys = GetKeys(TextCleaner.Clear(item));
