@@ -8,24 +8,6 @@ namespace Examples.WebApi.Services.Blockchain;
 
 public class BlockhainService
 {
-    public async Task<Erc20ContractDto> GetContractInfoAsync(string nodeUrl, string contractAddress)
-    {
-        Web3 web3 = new Web3(nodeUrl);
-        Contract contract = web3.Eth.GetContract(ERC20ABI, contractAddress);
-
-        string name = await contract.GetFunction("name").CallAsync<string>();
-        string symbol = await contract.GetFunction("symbol").CallAsync<string>();
-        int decimals = await contract.GetFunction("decimals").CallAsync<int>();
-        BigInteger totalSupply = await contract.GetFunction("totalSupply").CallAsync<BigInteger>();
-
-        return new Erc20ContractDto
-        {
-            Name = name,
-            Symbol = symbol,
-            Decimals = decimals,
-            TotalSupply = totalSupply.ToString()
-        };
-    }
 
     public async Task<EthereumTransaction> GetEthereumInfoAsync(CreateTransactionRequest data)
     {
@@ -53,74 +35,24 @@ public class BlockhainService
             GasPrice = gasPrice.HexValue,
         };
     }
+    public async Task<decimal> GetEthereumPriceInEurosAsync()
+    {
+        CoinGeckoApi coinGeckoApi = new CoinGeckoApi();
+        return await coinGeckoApi.GetEthereumPriceAsync();
+    }
 
     public Task<bool> CheckTransactionAsync(CheckTransactionRequest data)
     {
-        EthereumService ethereumService = new EthereumService(data.NetworkUrl);
+
+        string ethNetworkUrl = Environment.GetEnvironmentVariable("NetworkUrl");
+        if (string.IsNullOrEmpty(ethNetworkUrl))
+        {
+            throw new InvalidOperationException("La variable de entorno 'NetworkUrl' no está configurada.");
+        }
+
+        EthereumService ethereumService = new EthereumService(ethNetworkUrl);
 
         return ethereumService.CheckTransactionAsync(data.Hash, data.From, data.To, data.Value); 
     }
-
-
-    // Definición del ABI de ERC-20
-    private static readonly string ERC20ABI = """
-    [
-        {
-            'constant': true,
-            'inputs': [],
-            'name': 'name',
-            'outputs': [
-                {
-                    'name': '',
-                    'type': 'string'
-                }
-            ],
-            'payable': false,
-            'stateMutability': 'view',
-            'type': 'function'
-        },
-        {
-            'constant': true,
-            'inputs': [],
-            'name': 'symbol',
-            'outputs': [
-                {
-                    'name': '',
-                    'type': 'string'
-                }
-            ],
-            'payable': false,
-            'stateMutability': 'view',
-            'type': 'function'
-        },
-        {
-            'constant': true,
-            'inputs': [],
-            'name': 'decimals',
-            'outputs': [
-                {
-                    'name': '',
-                    'type': 'uint8'
-                }
-            ],
-            'payable': false,
-            'stateMutability': 'view',
-            'type': 'function'
-        },
-        {
-            'constant': true,
-            'inputs': [],
-            'name': 'totalSupply',
-            'outputs': [
-                {
-                    'name': '',
-                    'type': 'uint256'
-                }
-            ],
-            'payable': false,
-            'stateMutability': 'view',
-            'type': 'function'
-        }
-    ]
-    """;
+   
 }
