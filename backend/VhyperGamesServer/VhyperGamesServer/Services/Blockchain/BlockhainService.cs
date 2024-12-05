@@ -35,10 +35,22 @@ public class BlockhainService
             GasPrice = gasPrice.HexValue,
         };
     }
+    public async Task<decimal> GetEthereumPriceInEurosAsync()
+    {
+        CoinGeckoApi coinGeckoApi = new CoinGeckoApi();
+        return await coinGeckoApi.GetEthereumPriceAsync();
+    }
 
     public Task<bool> CheckTransactionAsync(CheckTransactionRequest data)
     {
-        EthereumService ethereumService = new EthereumService(data.NetworkUrl);
+
+        string ethNetworkUrl = Environment.GetEnvironmentVariable("NetworkUrl");
+        if (string.IsNullOrEmpty(ethNetworkUrl))
+        {
+            throw new InvalidOperationException("La variable de entorno 'NetworkUrl' no está configurada.");
+        }
+
+        EthereumService ethereumService = new EthereumService(ethNetworkUrl);
 
         return ethereumService.CheckTransactionAsync(data.Hash, data.From, data.To, data.Value); 
     }
