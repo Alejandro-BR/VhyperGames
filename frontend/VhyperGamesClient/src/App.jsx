@@ -16,6 +16,7 @@ import ProductManagement from './pages/ProductManagement';
 import UsersManagement from './pages/UsersManagement';
 import { AdminProvider } from './context/AdminContext';
 import PrivateRoute from './PrivateRoute'
+import EditProductManagement from "./pages/EditProductManagement";
 
 import {
   createBrowserRouter,
@@ -40,6 +41,10 @@ const routeDefinition = createRoutesFromElements(
     <Route
       path="products-management"
       element={<PrivateRoute><ProductManagement /></PrivateRoute>}
+    />
+    <Route
+      path="edit-product-management"
+      element={<PrivateRoute><EditProductManagement /></PrivateRoute>}
     />
     <Route
       path="users-management"
