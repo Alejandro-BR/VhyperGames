@@ -3,6 +3,7 @@ import classes from '../styles/UserPage.module.css'
 import Title from "../components/Titles/Title";
 import PaymentOrder from "../components/PaymentConfirmation/PaymentOrder";
 import Footer from "../components/Footer/Footer";
+import UserOrders from "../components/UserProfile/UserOrders";
 
 function UserPage() {
 
@@ -10,11 +11,10 @@ function UserPage() {
         <>
             <div className={classes.pageContainer}>
                 <UserData />
-                
-
                 <hr className={classes.line} />
                 <Title text={"TUS PEDIDOS REALIZADOS"} />
-                <PaymentOrder />
+                <UserOrders/>
+                
             </div>
             <Footer />
 
