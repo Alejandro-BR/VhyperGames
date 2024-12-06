@@ -2,7 +2,7 @@
 
 Proyecto de creación de E-Commerce de una tienda de videojuegos.
 
-Este es el [Backend](https://vhypergames.runasp.net/api/) de la aplicación.
+[Backend](https://vhypergames.runasp.net/api/)
 
 ## Tecnología:
 
