@@ -19,7 +19,7 @@ export const getImages = async (url, gameId, token) => {
 };
 
 export const newImage = async (url, gameId, altText, data, token) => {
-    const fullUrl = `${url}/${gameId}?AltText=${altText}&gameId=${gameId}`
+    const fullUrl = `${url}?AltText=${altText}&gameId=${gameId}`
 
     const formData = new FormData();
     if (data.image) {
@@ -49,7 +49,7 @@ export const newImage = async (url, gameId, altText, data, token) => {
 };
 
 export const updateImages = async (url, gameId, altText, imageId, data, token) => {
-    const fullUrl = `${url}/${gameId}?AltText=${altText}&imageId=${imageId}`
+    const fullUrl = `${url}/updateImage/${gameId}?AltText=${altText}&imageId=${imageId}`
 
     const formData = new FormData();
     if (data.img1) {
@@ -76,4 +76,26 @@ export const updateImages = async (url, gameId, altText, imageId, data, token) =
     }
 
     return { message: "Operación completada con éxito." };
+};
+
+export const deleteImages = async (url, imageId, token) => {
+    const fullUrl = `${url}?imageId=${imageId}`
+
+    const response = await fetch(fullUrl, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+        },
+    });
+
+
+    if (response.status === 204) {
+        console.log("Imagen eliminada");
+      } else if (response.status === 404) {
+        const error = await response.json();
+        console.error('Error:', error.Message);
+      } else {
+        console.error('Error al eliminar el producto.');
+      }
 };
