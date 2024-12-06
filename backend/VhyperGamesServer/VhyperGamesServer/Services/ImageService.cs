@@ -18,8 +18,8 @@ public class ImageService
 
     public async Task<List<ImageGame>> GetAllAsync()
     {
-        return  await _unitOfWork.ImageGameRepository.GetAllImagesGamesAsync();
-   
+        return await _unitOfWork.ImageGameRepository.GetAllImagesGamesAsync();
+
     }
 
     public Task<ImageGame> GetAsync(int id)
@@ -53,13 +53,13 @@ public class ImageService
         if (await _unitOfWork.SaveAsync())
         {
             await StoreImageAsync(relativePath, image.File);
-            Console.WriteLine($"Imagen guardada en: {relativePath}"); 
+            Console.WriteLine($"Imagen guardada en: {relativePath}");
         }
 
         return newImage;
     }
 
-    public async Task<ImageGame> UpdateAsync2(IFormFile image, string alt, int id)
+    public async Task<ImageGame> UpdateFormFileAsync(IFormFile image, string alt, int id)
     {
         ImageGame entity = await _unitOfWork.ImageGameRepository.GetByIdAsync(id);
         entity.AltText = alt;
@@ -99,6 +99,29 @@ public class ImageService
     public async Task<List<ImageGame>> GetImagesByGameIdAsync(int gameId)
     {
         return await _unitOfWork.ImageGameRepository.GetImagesByGameIdAsync(gameId);
+    }
+
+    public async Task DeleteAsync(int imageId)
+    {
+        ImageGame image = await _unitOfWork.ImageGameRepository.GetByIdAsync(imageId);
+
+        if (image == null)
+        {
+            throw new ArgumentException($"No se encontró ninguna imagen con ID {imageId}");
+        }
+
+        try
+        {
+            await FileHelper.DeleteAsync(image.ImageUrl);
+        }
+        catch (FileNotFoundException)
+        {
+            Console.WriteLine($"El archivo {image.ImageUrl} no se encontró en el sistema.");
+        }
+
+        _unitOfWork.ImageGameRepository.Delete(image);
+
+        await _unitOfWork.SaveAsync();
     }
 
 }

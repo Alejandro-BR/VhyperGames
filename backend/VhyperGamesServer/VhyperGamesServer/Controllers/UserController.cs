@@ -60,4 +60,35 @@ public class UserController : BaseController
             return StatusCode(500, new { message = "Error al actualizar el usuario.", detail = ex.Message });
         }
     }
+
+    [HttpPut("update-password")]
+    [Authorize]
+    public async Task<ActionResult> UpdatePassword(string password)
+    {
+        try
+        {
+            if (string.IsNullOrWhiteSpace(password))
+            {
+                return BadRequest(new { error = "La contraseña no puede ser nula o vacía." });
+            }
+
+            int userId = GetUserId();
+
+            await _userService.UpdatePassword(password, userId);
+            return NoContent();
+        }
+        catch (KeyNotFoundException ex)
+        {
+            return NotFound(new { error = ex.Message });
+        }
+        catch (ArgumentException ex)
+        {
+            return BadRequest(new { error = ex.Message });
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, new { error = "Ocurrió un error interno.", details = ex.Message });
+        }
+    }
+
 }

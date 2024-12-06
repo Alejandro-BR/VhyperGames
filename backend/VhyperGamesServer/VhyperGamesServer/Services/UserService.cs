@@ -40,6 +40,32 @@ public class UserService
         await _unitOfWork.SaveAsync();
     }
 
+    public async Task UpdatePassword(string password, int userId)
+    {
+        if (string.IsNullOrEmpty(password))
+        {
+            throw new ArgumentException("La contraseña no puede ser nula o vacía.");
+        }
+
+        User user = await _unitOfWork.UserRepository.GetByIdAsync(userId);
+
+        if (user == null)
+        {
+            throw new KeyNotFoundException("No existe usuario con ese ID.");
+        }
+
+        string newHashPassword = PasswordHelper.Hash(password);
+
+        if (user.HashPassword != newHashPassword)
+        {
+            user.HashPassword = newHashPassword;
+        }
+
+        await _unitOfWork.SaveAsync();
+    }
+
+
+
     private static void UpdateUserProperties(User existingUser, UserDto userDto)
     {
         if (!string.IsNullOrEmpty(userDto.Name) && userDto.Name != existingUser.Name)
@@ -60,11 +86,6 @@ public class UserService
         if (!string.IsNullOrEmpty(userDto.Address) && userDto.Address != existingUser.Address)
         {
             existingUser.Address = userDto.Address;
-        }
-
-        if (!string.IsNullOrEmpty(userDto.Password) && userDto.Password != existingUser.HashPassword)
-        {
-            existingUser.HashPassword = PasswordHelper.Hash(userDto.Password);
         }
     }
 }

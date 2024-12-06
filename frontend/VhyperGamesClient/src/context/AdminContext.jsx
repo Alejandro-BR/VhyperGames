@@ -78,6 +78,7 @@ export const AdminProvider = ({ children }) => {
   const fetchGames = async () => {
     try {
       const response = await getGamesAdmin(GET_GAMES_ADMIN, token);
+      console.log(response)
       if (response) {
         setGames(response);
       } else {
@@ -156,6 +157,7 @@ export const AdminProvider = ({ children }) => {
 
   useEffect(() => {
     if (token && decodedToken?.Role === "Admin") {
+      console.log("HSDFGFGFHGHFHGFH")
       fetchUsers();
       fetchGames();
     }

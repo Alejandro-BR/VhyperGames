@@ -40,12 +40,25 @@ public class ImagesController : ControllerBase
         return Ok(newImage);
     }
 
-    [HttpPut("{id}")]
+    [HttpPut("updateImage/{id}")]
     public async Task<ActionResult<ImageGame>> UpdateAsync(ImageRequestDto updateImage, int imageId)
     {
         ImageGame imageUpdated = await _service.UpdateAsync(updateImage, imageId);
 
         return Ok(imageUpdated);
+    }
+
+    [HttpGet("images-byGame")]
+    public async Task<ActionResult<List<ImageGame>>> GetImagesByGameIdAsync(int gameId)
+    {
+        return Ok(await _service.GetImagesByGameIdAsync(gameId));
+    }
+
+    [HttpDelete("delete")]
+    public async Task<ActionResult> DeleteAsync(int imageId)
+    {
+       await _service.DeleteAsync(imageId);
+       return NoContent();
     }
 
 }

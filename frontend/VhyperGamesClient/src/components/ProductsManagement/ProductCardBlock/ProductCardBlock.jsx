@@ -6,10 +6,11 @@ import { AdminContext } from "../../../context/AdminContext";
 
 function ProductCardBlock() {
 
-  const { games, fetchGames, postGame, updateGameByData } = useContext(AdminContext);
+  const { games, fetchGames } = useContext(AdminContext);
 
   useEffect(() => {
-  }, [games]);
+    fetchGames();
+  }, []);
 
   return (
     <section className={classes.productsList}>

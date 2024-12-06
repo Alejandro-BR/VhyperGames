@@ -15,3 +15,25 @@ export const orderById = async (url, orderId ,token) => {
 
   return await response.json();
 };
+
+// export const ORDER_BY_USER = `${API_BASE_URL}Order/all-user-orders`; Este es el que tienes que usar igual que te puse en el otro archivo
+
+export const getUserOrders = async (url, token) => {
+
+  const response = await fetch(url, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  if (!response.ok) {
+    const errorText = await response.text();
+    throw new Error(`Error al obtener las órdenes: ${response.status} - ${errorText}`);
+  }
+
+  const data = await response.json();
+  return data;
+};
+

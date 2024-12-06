@@ -1,0 +1,63 @@
+.productForm {
+    height: fit-content;
+    min-width: 45vw;
+    margin: 5vh 5vw 5vh 5vw;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    color: rgb(24, 24, 24);
+}
+
+.formGroup {
+    display: flex;
+    flex-direction: column;
+    justify-items: space-between;
+    gap: 10px;
+}
+
+.horizontalFormGroup {
+    width: 100%;
+    display: flex;
+    gap: 30px;
+}
+
+.productForm input,
+.productForm textarea,
+.productForm select {
+    width: 40%;
+    background-color: #1c1e3a;
+    color: #e4e4e4;
+    border: 1px solid var(--principal-blue, #6a00f4);
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 14px;
+    outline: none;
+}
+
+.productForm textarea {
+    max-width: 40%;
+    min-width: 40%;
+    resize: vertical;
+    overflow: hidden;
+}
+
+.productForm input {
+    height: 1rem;
+}
+
+.productForm textarea {
+    height: 3rem;
+}
+
+.productForm input::placeholder,
+.productForm textarea::placeholder {
+    color: #a3a3a3;
+}
+
+.date{
+    min-width: fit-content;
+}
+
+.numInput{
+    width: 30%;
+}
