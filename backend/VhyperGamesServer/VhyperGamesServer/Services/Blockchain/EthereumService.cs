@@ -2,6 +2,7 @@
 using Nethereum.Hex.HexTypes;
 using Nethereum.RPC.Eth.DTOs;
 using Nethereum.Web3;
+using static TorchSharp.torch.utils;
 
 namespace Examples.WebApi.Services.Blockchain;
 
@@ -43,6 +44,11 @@ public class EthereumService
     {
         bool result;
 
+        string ethNetworkUrl = Environment.GetEnvironmentVariable("NetworkUrl");
+        if (string.IsNullOrEmpty(ethNetworkUrl))
+        {
+            throw new InvalidOperationException("La variable de entorno 'NetworkUrl' no está configurada.");
+        }
         try
         {
             Transaction transaction = await _web3.Eth.Transactions.GetTransactionByHash.SendRequestAsync(txHash);
