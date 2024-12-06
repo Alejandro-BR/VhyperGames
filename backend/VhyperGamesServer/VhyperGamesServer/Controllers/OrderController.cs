@@ -65,7 +65,7 @@ namespace VhyperGamesServer.Controllers
 
         [HttpGet("all-user-orders")]
         [Authorize]
-        public async Task<IActionResult> GetOrdersByUserId()
+        public async Task<ActionResult<List<OrderDto>>> GetOrdersByUserId()
         {
             try
             {
