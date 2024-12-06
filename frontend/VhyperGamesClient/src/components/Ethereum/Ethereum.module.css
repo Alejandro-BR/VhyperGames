@@ -1,0 +1,43 @@
+.paymentContainer {
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 20px;
+  border: 2px solid transparent;
+  border-image: var(--gradient-purple-blue) 1;
+  text-align: center;
+}
+
+.logoContainer {
+  margin: 20px auto;
+}
+
+.transactionInfo {
+  margin: 20px 0;
+  font-size: 1.8rem;
+  color: white;
+}
+
+.equivalentEthereum{
+  display: flex;
+  align-items: center;
+}
+
+.ethereumLogo{
+  width: 24px;
+  height: 24px;
+}
+
+.buttonPayment{
+  display: flex;
+  justify-content: center;
+}
+
+.errorMessage {
+  color: red;
+  margin-top: 10px;
+}
+
+.successMessage {
+  color: green;
+  margin-top: 10px;
+}
