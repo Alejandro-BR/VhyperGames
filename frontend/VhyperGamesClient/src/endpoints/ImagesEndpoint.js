@@ -18,7 +18,7 @@ export const getImages = async (url, gameId, token) => {
     return data;
 };
 
-export const newImage = async (url, gameId, altText, data, token) => {
+export const newImages = async (url, gameId, altText, data, token) => {
     const fullUrl = `${url}?AltText=${altText}&gameId=${gameId}`
 
     const formData = new FormData();
