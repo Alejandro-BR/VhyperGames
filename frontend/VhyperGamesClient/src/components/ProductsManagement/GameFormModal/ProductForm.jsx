@@ -46,7 +46,7 @@ function ProductForm({ modalPurpose, initialData, onSubmit, onClose }) {
     });
 
     document.addEventListener("input", (e) => {
-        if (e.target.tagName === "TEXTAREA" ) {
+        if (e.target.tagName === "TEXTAREA") {
             e.target.style.height = "auto"; // Reinicia la altura
             e.target.style.height = e.target.scrollHeight + "px"; // Ajusta la altura al contenido
         }
@@ -143,20 +143,22 @@ function ProductForm({ modalPurpose, initialData, onSubmit, onClose }) {
                 </select>
             </div>
 
-            <div className={classes.formGroup}>
-                <label htmlFor="releaseDate">Fecha de Lanzamiento:</label>
-                <input type="date" id="releaseDate" value={formData.releaseDate} onChange={handleChange} />
-            </div>
+            <section className={classes.horizontalFormGroup}>
+                <div className={classes.formGroup}>
+                    <label htmlFor="releaseDate">Fecha de Lanzamiento:</label>
+                    <input type="date" id="releaseDate" value={formData.releaseDate} className={classes.date} onChange={handleChange} />
+                </div>
 
-            <div className={classes.formGroup}>
-                <label htmlFor="price">Precio:</label>
-                <input type="number" id="price" placeholder="Precio" value={formData.price} onChange={handleChange} />
-            </div>
+                <div className={classes.formGroup}>
+                    <label htmlFor="price">Precio:</label>
+                    <input type="number" id="price" placeholder="Precio" value={formData.price} className={classes.numInput} onChange={handleChange} />
+                </div>
 
-            <div className={classes.formGroup}>
-                <label htmlFor="stock">Stock:</label>
-                <input type="number" id="stock" placeholder="Stock" value={formData.stock} onChange={handleChange} />
-            </div>
+                <div className={classes.formGroup}>
+                    <label htmlFor="stock">Stock:</label>
+                    <input type="number" id="stock" placeholder="Stock" value={formData.stock} className={classes.numInput} onChange={handleChange} />
+                </div>
+            </section>
 
             <Button variant={"large"} color={"morado-azul"} type="submit">
                 {modalPurpose} producto

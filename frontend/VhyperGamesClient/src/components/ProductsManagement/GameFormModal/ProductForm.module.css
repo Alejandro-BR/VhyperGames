@@ -11,13 +11,20 @@
 .formGroup {
     display: flex;
     flex-direction: column;
+    justify-items: space-between;
     gap: 10px;
+}
+
+.horizontalFormGroup {
+    width: 100%;
+    display: flex;
+    gap: 30px;
 }
 
 .productForm input,
 .productForm textarea,
 .productForm select {
-    width: 50%;
+    width: 40%;
     background-color: #1c1e3a;
     color: #e4e4e4;
     border: 1px solid var(--principal-blue, #6a00f4);
@@ -28,7 +35,6 @@
 }
 
 .productForm textarea {
-    width: 40%;
     max-width: 40%;
     min-width: 40%;
     resize: vertical;
@@ -46,4 +52,12 @@
 .productForm input::placeholder,
 .productForm textarea::placeholder {
     color: #a3a3a3;
+}
+
+.date{
+    min-width: fit-content;
+}
+
+.numInput{
+    width: 30%;
 }
