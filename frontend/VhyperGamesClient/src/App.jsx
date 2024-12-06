@@ -17,7 +17,7 @@ import Ethereum from "./components/Ethereum/Ethereum";
 import ProductManagement from "./pages/ProductManagement";
 import UsersManagement from "./pages/UsersManagement";
 import PrivateRoute from "./PrivateRoute";
-import EditProductManagement from "./pages/EditProductManagement";
+import ProductManagementForm from "./pages/ProductManagementForm";
 
 import {
   createBrowserRouter,
@@ -47,10 +47,10 @@ const routeDefinition = createRoutesFromElements(
       }
     />
     <Route
-      path="edit-product-management"
+      path="product-management-form"
       element={
         <PrivateRoute>
-          <EditProductManagement />
+          <ProductManagementForm />
         </PrivateRoute>
       }
     />

@@ -5,12 +5,14 @@ import { useContext, useEffect, useState } from "react";
 import { AdminContext } from "../../../context/AdminContext";
 import GameFormModal from "../GameFormModal/GameFormModal";
 import { BASE_URL } from "../../../config";
-
+import { useNavigate } from "react-router-dom";
 
 
 function ProductCard({ id, imgUrl, altText, title, price, stock }) {
+
   const [gameFormModal, setGameFormModal] = useState(false);
   const { GetFormGame, updateGameById, dataForm } = useContext(AdminContext);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (dataForm && dataForm.id === id) {
@@ -20,16 +22,16 @@ function ProductCard({ id, imgUrl, altText, title, price, stock }) {
 
   const handleEditClick = async () => {
     try {
-      await GetFormGame(id); 
-      setGameFormModal(true); 
+      await GetFormGame(id);
+      setGameFormModal(true);
     } catch (error) {
       console.error("Error al obtener los datos del juego:", error);
     }
   };
 
   const handleSubmit = async (formData) => {
-      await updateGameById(formData);
-      setGameFormModal(false);
+    await updateGameById(formData);
+    setGameFormModal(false);
   };
 
   function precio() {
@@ -58,7 +60,7 @@ function ProductCard({ id, imgUrl, altText, title, price, stock }) {
           <p className={classes.stock}>{stock}</p>
         </div>
 
-        <button className={classes.editGame} onClick={handleEditClick}>
+        <button className={classes.editGame} onClick={() => navigate("/product-management-form")}>
           <img src="/icon/edit-icon.svg" alt="editar producto" />
         </button>
 
