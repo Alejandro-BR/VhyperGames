@@ -51,8 +51,9 @@ function UserModal({ onClose }, name, surname, email, address) {
                 </div>
 
                 <div className={classes.buttons}>
-                    <Button children="Actualizar datos" variant="large" color="azul" />
+                    
                     <Button children="Cancelar" variant="large" color="morado" onClick={onClose} />
+                    <Button children="Actualizar datos" variant="large" color="azul" />
                 </div>
 
             </div>
