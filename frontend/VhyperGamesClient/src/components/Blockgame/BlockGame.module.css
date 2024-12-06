@@ -1,7 +1,8 @@
 .container {
   display: flex;
-  gap: 40px;
-  align-items: left;
+  flex-wrap: wrap;
+  gap: 4vw;
+ justify-content: left;
 }
 
 .catalogo {

@@ -1,9 +1,8 @@
 .contenedor {
   display: flex;
   flex-direction: column;
-  gap: 40px;
-  
-  width: 90%;
+  gap: 20px;
+  width: 100%;
 }
 
 .buttons {
