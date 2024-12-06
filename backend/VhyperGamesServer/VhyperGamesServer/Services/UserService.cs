@@ -87,10 +87,5 @@ public class UserService
         {
             existingUser.Address = userDto.Address;
         }
-
-        if (!string.IsNullOrEmpty(userDto.Password) && userDto.Password != existingUser.HashPassword)
-        {
-            existingUser.HashPassword = PasswordHelper.Hash(userDto.Password);
-        }
     }
 }
