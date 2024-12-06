@@ -45,6 +45,14 @@ function ProductForm({ modalPurpose, initialData, onSubmit, onClose }) {
         images: [],
     });
 
+    document.addEventListener("input", (e) => {
+        if (e.target.tagName === "TEXTAREA" ) {
+            e.target.style.height = "auto"; // Reinicia la altura
+            e.target.style.height = e.target.scrollHeight + "px"; // Ajusta la altura al contenido
+        }
+    });
+
+
     useEffect(() => {
         if (initialData) {
             setFormData((prevFormData) => ({
