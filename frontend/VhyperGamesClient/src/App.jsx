@@ -74,7 +74,7 @@ function App() {
         <CheckoutProvider>
           <AdminProvider>
             <ImageProvider>
-              <RouterProvider router={router}></RouterProvider>ç
+              <RouterProvider router={router}></RouterProvider>
             </ImageProvider>
           </AdminProvider>
         </CheckoutProvider>
