@@ -1,4 +1,3 @@
-//estp lo trabsaje borracho :3
 
 import { useRef, useState } from "react";
 import classes from "./UserModal.module.css";

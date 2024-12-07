@@ -6,7 +6,7 @@ import Button from "../Buttons/Button";
 import UserModal from "./UserModal";
 import PasswordModal from "./PasswordModal";
 
-function UserData({ }) {
+function UserData() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [userInfo, setUserInfo] = useState(null);
@@ -15,7 +15,7 @@ function UserData({ }) {
     const [editData, setEditData] = useState(false);
     const [editPassword, setEditPassword] = useState(false);
     useEffect(() => {
-
+      
         const fetchUsers = async () => {
 
             setLoading(true);
@@ -44,7 +44,7 @@ function UserData({ }) {
         };
 
         fetchUsers();
-    }, [token]);
+    }, [token, editData]);
 
 
     if (loading) {
@@ -76,7 +76,7 @@ function UserData({ }) {
             {editData && (
                 <UserModal
                     onClose={() => setEditData(false)}
-                    name={userInfo.name}
+                    userInfo={userInfo}
                 />
             )}
 

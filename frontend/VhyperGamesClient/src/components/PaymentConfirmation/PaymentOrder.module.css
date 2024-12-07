@@ -1,29 +1,30 @@
-.container{
+.container {
   display: flex;
   flex-direction: column;
   gap: 10px;
   border: 1px solid;
   border-image: var(--gradient-purple-blue) 1;
-  width: 86vw;
+  width: 88vw;
   padding: 30px;
   font-size: 1.2em;
 }
 
-.gameItem{
+.gameItem {
   display: flex;
   align-items: center;
   gap: 10px;
   width: 280px;
 }
 
-.gameList{
+.gameList {
   display: grid;
-  grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(250px, 250px));
   gap: 40px;
+  justify-items: start;
 }
 
 
-.listImg{
+.listImg {
   max-width: 130px;
   max-height: 250px;
 }
@@ -36,7 +37,7 @@
   margin: 10px 0;
 }
 
-.gameListData{
+.gameListData {
   display: flex;
   flex-direction: column;
   gap: 20px;
