@@ -1,21 +1,21 @@
 import { useEffect, useState } from "react";
 import { GET_USER } from "../../config";
 import classes from "./UserData.module.css"
-import { useAuth } from "../../context/AuthContext";
+import { useAuth, } from "../../context/AuthContext";
 import Button from "../Buttons/Button";
 import UserModal from "./UserModal";
 import PasswordModal from "./PasswordModal";
 
-function UserData({ }) {
+function UserData() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [userInfo, setUserInfo] = useState(null);
-    const { token } = useAuth();
+    const { token, decodedToken } = useAuth();
 
     const [editData, setEditData] = useState(false);
     const [editPassword, setEditPassword] = useState(false);
     useEffect(() => {
-
+      
         const fetchUsers = async () => {
 
             setLoading(true);
@@ -35,6 +35,7 @@ function UserData({ }) {
                 const data = await response.json();
                 setUserInfo(data)
 
+
             } catch (error) {
                 setError(error.message);
             } finally {
@@ -43,7 +44,7 @@ function UserData({ }) {
         };
 
         fetchUsers();
-    }, [token]);
+    }, [token, editData]);
 
 
     if (loading) {
@@ -61,6 +62,10 @@ function UserData({ }) {
                 <div>Nombre de usuario: {userInfo.name + " " + userInfo.surname}</div>
                 <div>Correo electronico: {userInfo.email}</div>
                 <div>Direccion: {userInfo.address}</div>
+                {token && (decodedToken?.role === "Admin") && (
+                    <div>Rol: Admin</div>
+
+                )}
             </div>
 
             <div className={classes.buttons}>
@@ -71,7 +76,7 @@ function UserData({ }) {
             {editData && (
                 <UserModal
                     onClose={() => setEditData(false)}
-                    name={userInfo.name}
+                    userInfo={userInfo}
                 />
             )}
 

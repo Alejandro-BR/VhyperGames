@@ -1,8 +1,8 @@
 .container {
   display: flex;
   flex-wrap: wrap;
-  gap: 4rem;
-  justify-content: center;
+  gap: 8rem;
+  justify-content: left;
   overflow: visible;
 }
 
@@ -15,7 +15,7 @@
 }
 
 
-@media (max-width: 1280px) {
+/* @media (max-width: 1280px) {
   .catalogo {
     grid-template-columns: repeat(4, 1fr);
   }
@@ -37,4 +37,4 @@
   .catalogo {
     grid-template-columns: 1fr;
   }
-}
+} */
