@@ -16,9 +16,7 @@ public class Review
 
     public int Rating { get; set; }
 
-    [JsonIgnore] 
     public Game Game { get; set; }
 
-    [JsonIgnore]
     public User User { get; set; }
 }

@@ -17,9 +17,7 @@ public class Game
     public int Stock {  get; set; }
     public int? AvgRating { get; set; }
     public List<ImageGame> ImageGames { get; set; }
-    [JsonIgnore]
     public GameRequirements GameRequirements { get; set; }
-
     public List<Review> Reviews { get; set; }
 
     public Game()
