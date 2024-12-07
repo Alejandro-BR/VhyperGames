@@ -6,12 +6,13 @@ import classes from "./ImagesManager.module.css";
 
 function ImagesManager({ gameId }) {
 
-  const { images, fetchImages, updateImage } = useContext(ImageContext);
+  const { images, fetchImages} = useContext(ImageContext);
 
   useEffect(() => {
-    fetchImages(gameId);
-    console.log(images);
+    console.log("Entra al useEffect de ImagesManager con id " + gameId)
+    fetchImages(gameId); 
   }, [gameId]);
+  
 
   const [updatePromise, setUpdatePromise] = useState(null);
 
