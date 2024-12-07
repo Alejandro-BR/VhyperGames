@@ -21,7 +21,7 @@
     "react-responsive-carousel": "^3.2.23",
     "react-router-dom": "^7.0.2",
     "vhypergamesclient": "file:",
-    "web3": "^4.15.0"
+    "web3": "^4.16.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.13.0",

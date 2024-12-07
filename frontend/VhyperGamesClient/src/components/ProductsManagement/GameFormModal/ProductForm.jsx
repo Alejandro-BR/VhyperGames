@@ -29,27 +29,27 @@ function ProductForm({ gameId }) {
         if (data) {
           setFormData({
             ...data,
-            releaseDate: data.releaseDate.split("T")[0], 
+            releaseDate: data.releaseDate.split("T")[0],
           });
           setDataLoaded(true);
         }
       };
       fetchGameData();
     }
-  }, [gameId, GetFormGame, dataLoaded]); 
+  }, [gameId, GetFormGame, dataLoaded]);
 
   const handleChange = (e) => {
     const { id, value } = e.target;
     const parsedValue = ["genre", "gameRequirementsId", "drmFree", "price", "stock"].includes(id)
-      ? value === "" ? 0 : parseInt(value, 10)  
+      ? value === "" ? 0 : parseInt(value, 10)
       : value;
     setFormData({ ...formData, [id]: parsedValue });
   };
-  
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await updateGameById(formData); 
+      await updateGameById(formData);
       alert("Juego actualizado con éxito");
     } catch (error) {
       console.error("Error al actualizar el juego:", error);
@@ -77,6 +77,7 @@ function ProductForm({ gameId }) {
           placeholder="Descripción"
           value={formData.description}
           onChange={handleChange}
+          className="autoExpand"
         ></textarea>
       </div>
 
@@ -141,6 +142,7 @@ function ProductForm({ gameId }) {
           <input
             type="number"
             id="price"
+            min="0"
             placeholder="Precio"
             value={formData.price}
             className={classes.numInput}
@@ -153,6 +155,7 @@ function ProductForm({ gameId }) {
           <input
             type="number"
             id="stock"
+            min="0"
             placeholder="Stock"
             value={formData.stock}
             className={classes.numInput}
