@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { GET_USER } from "../../config";
 import classes from "./UserData.module.css"
-import { useAuth } from "../../context/AuthContext";
+import { useAuth, } from "../../context/AuthContext";
 import Button from "../Buttons/Button";
 import UserModal from "./UserModal";
 import PasswordModal from "./PasswordModal";
@@ -10,7 +10,7 @@ function UserData({ }) {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [userInfo, setUserInfo] = useState(null);
-    const { token } = useAuth();
+    const { token, decodedToken } = useAuth();
 
     const [editData, setEditData] = useState(false);
     const [editPassword, setEditPassword] = useState(false);
@@ -34,6 +34,7 @@ function UserData({ }) {
                 }
                 const data = await response.json();
                 setUserInfo(data)
+
 
             } catch (error) {
                 setError(error.message);
@@ -61,6 +62,10 @@ function UserData({ }) {
                 <div>Nombre de usuario: {userInfo.name + " " + userInfo.surname}</div>
                 <div>Correo electronico: {userInfo.email}</div>
                 <div>Direccion: {userInfo.address}</div>
+                {token && (decodedToken?.role === "Admin") && (
+                    <div>Rol: Admin</div>
+
+                )}
             </div>
 
             <div className={classes.buttons}>

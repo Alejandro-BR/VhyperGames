@@ -9,7 +9,7 @@ export const updatePassword = async (url, password, token) => {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify({ password }),
+    body: JSON.stringify(password),
     
   });
 

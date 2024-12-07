@@ -10,7 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@metamask/logo": "^3.1.2",
+    "@metamask/logo": "github:metamask/logo",
     "@stripe/react-stripe-js": "^3.0.0",
     "@stripe/stripe-js": "^5.2.0",
     "jwt-decode": "^4.0.0",

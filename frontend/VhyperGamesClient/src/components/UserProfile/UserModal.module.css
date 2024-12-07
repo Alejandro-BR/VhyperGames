@@ -41,4 +41,6 @@
 .buttons{
     display: flex;
     justify-content: space-around;
+    gap: 2rem;
+    padding: 1rem;
 }

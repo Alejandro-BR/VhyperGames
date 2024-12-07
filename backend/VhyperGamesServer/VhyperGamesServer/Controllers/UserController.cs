@@ -63,7 +63,7 @@ public class UserController : BaseController
 
     [HttpPut("update-password")]
     [Authorize]
-    public async Task<ActionResult> UpdatePassword(string password)
+    public async Task<ActionResult> UpdatePassword([FromBody] string password)
     {
         try
         {
@@ -75,7 +75,7 @@ public class UserController : BaseController
             int userId = GetUserId();
 
             await _userService.UpdatePassword(password, userId);
-            return NoContent();
+            return Ok(new { message = "Contraseña actualizada exitosamente." });
         }
         catch (KeyNotFoundException ex)
         {

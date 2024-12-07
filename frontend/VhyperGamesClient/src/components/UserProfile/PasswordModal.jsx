@@ -28,7 +28,6 @@ function PasswordModal({ onClose }) {
     try {
       setIsLoading(true);
       await updatePassword(UPDATE_PASSWORD, passwordValue, token);
-      alert("Contraseña actualizada exitosamente");
       onClose(); 
     } catch (error) {
       console.error("Error al actualizar la contraseña:", error);
