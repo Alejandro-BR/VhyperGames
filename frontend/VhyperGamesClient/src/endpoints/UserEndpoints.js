@@ -2,6 +2,7 @@
 
 export const updatePassword = async (url, password, token) => {
 
+
   const response = await fetch(url, {
     method: "PUT",
     headers: {
@@ -9,6 +10,7 @@ export const updatePassword = async (url, password, token) => {
       Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify({ password }),
+    
   });
 
   if (!response.ok) {
@@ -17,5 +19,7 @@ export const updatePassword = async (url, password, token) => {
   }
 
   const data = await response.json();
+  
   return data;
+  
 };
