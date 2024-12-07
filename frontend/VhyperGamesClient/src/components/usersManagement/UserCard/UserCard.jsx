@@ -1,7 +1,7 @@
 import classes from "./UserCard.module.css";
-import DeleteModal from "./DeleteModal";
+import DeleteModal from "../DeleteModal/DeleteModal";
 import { useState, useContext } from "react";
-import { AdminContext } from "../../context/AdminContext";
+import { AdminContext } from "../../../context/AdminContext";
 
 function UserCard({ id, name, email, rol }) {
   const { fetchUsers, updateUserRole, deleteUserById } = useContext(AdminContext);
@@ -33,8 +33,8 @@ function UserCard({ id, name, email, rol }) {
 
   const handleDeleteUser = async () => {
     try {
-      await deleteUserById(id); 
-      setDeleteModal(false); 
+      await deleteUserById(id);
+      setDeleteModal(false);
       fetchUsers();
     } catch (error) {
       console.error("Error al eliminar el usuario:", error.message);
@@ -73,8 +73,8 @@ function UserCard({ id, name, email, rol }) {
 
       {deleteModal && (
         <DeleteModal
-          onClose={() => setDeleteModal(false)} 
-          onConfirm={handleDeleteUser} 
+          onClose={() => setDeleteModal(false)}
+          onConfirm={handleDeleteUser}
         />
       )}
     </>

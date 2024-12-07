@@ -1,8 +1,9 @@
 .container {
   display: flex;
+  flex-wrap: wrap;
   gap: 4rem;
-  align-items: left;
-  overflow: scroll;
+  justify-content: center;
+  overflow: visible;
 }
 
 .catalogo {

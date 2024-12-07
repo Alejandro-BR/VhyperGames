@@ -1,6 +1,6 @@
 import classes from "./SearchBarUsers.module.css"
-import Button from "../Buttons/Button"
-import { AdminContext } from "../../context/AdminContext";
+import Button from "../../Buttons/Button"
+import { AdminContext } from "../../../context/AdminContext";
 import { useContext, useState } from "react";
 
 function SearchBarProduct() {

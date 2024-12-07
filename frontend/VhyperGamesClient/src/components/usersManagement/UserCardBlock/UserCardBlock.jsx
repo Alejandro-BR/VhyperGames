@@ -1,9 +1,9 @@
 import { useContext } from "react";
-import UserCard from "./UserCard";
+import UserCard from "../UserCard/UserCard";
 import classes from "./UserCardBlock.module.css";
-import { AdminContext } from "../../context/AdminContext"
+import { AdminContext } from "../../../context/AdminContext"
 import { useEffect } from "react";
-import { useAuth } from "../../context/authcontext";
+import { useAuth } from "../../../context/authcontext";
 
 function UserCardBlock() {
 
