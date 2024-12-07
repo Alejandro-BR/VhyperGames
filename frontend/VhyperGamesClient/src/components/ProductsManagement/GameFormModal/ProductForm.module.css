@@ -38,8 +38,8 @@
     max-width: 40%;
     min-width: 40%;
     resize: vertical;
-    overflow:visible;
-    
+    overflow: visible;
+
 }
 
 .productForm input {
@@ -55,10 +55,14 @@
     color: #a3a3a3;
 }
 
-.date{
+.date {
     min-width: fit-content;
 }
 
-.numInput{
+.numInput {
     width: 30%;
+}
+
+.updateMsg {
+
 }

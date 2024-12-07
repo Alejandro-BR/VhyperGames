@@ -21,6 +21,7 @@ function ProductForm({ gameId }) {
   });
 
   const [dataLoaded, setDataLoaded] = useState(false);
+  const [updatePromise, setUpdatePromise] = useState(null);
 
   useEffect(() => {
     if (gameId && !dataLoaded) {
@@ -50,10 +51,10 @@ function ProductForm({ gameId }) {
     e.preventDefault();
     try {
       await updateGameById(formData);
-      alert("Juego actualizado con éxito");
+      setUpdatePromise("Juego actualizado con éxito");
     } catch (error) {
       console.error("Error al actualizar el juego:", error);
-      alert("Hubo un error al actualizar el juego.");
+      setUpdatePromise("Hubo un error al actualizar el juego.");
     }
   };
 
@@ -167,6 +168,7 @@ function ProductForm({ gameId }) {
       <Button variant={"large"} color={"morado-azul"} type="submit">
         Actualizar
       </Button>
+      {updatePromise && <div className={classes.updateMsg}>{updatePromise}</div>}
     </form>
   );
 }
