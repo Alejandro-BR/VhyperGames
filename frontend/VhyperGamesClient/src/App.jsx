@@ -47,7 +47,7 @@ const routeDefinition = createRoutesFromElements(
       }
     />
     <Route
-      path="product-management-form"
+      path="product-management-form/:id"  
       element={
         <PrivateRoute>
           <ProductManagementForm />

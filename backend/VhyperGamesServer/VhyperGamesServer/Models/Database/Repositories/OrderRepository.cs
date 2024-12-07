@@ -40,8 +40,10 @@ public class OrderRepository : Repository<Order, int>
                 .ThenInclude(og => og.Game)
                     .ThenInclude(g => g.ImageGames)
             .Where(o => o.UserId == userId)
+            .OrderByDescending(o => o.Id) 
             .ToListAsync();
     }
+
 
     public async Task<Order> GetRecentOrderByUserId(int userId)
     {
