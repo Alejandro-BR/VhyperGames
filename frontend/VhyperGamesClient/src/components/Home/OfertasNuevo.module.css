@@ -1,7 +1,11 @@
 .contenedor {
   display: flex;
   flex-direction: column;
+<<<<<<< HEAD
   gap: 20px;
+=======
+  gap: 40px;
+>>>>>>> develop
   width: 100%;
 }
 

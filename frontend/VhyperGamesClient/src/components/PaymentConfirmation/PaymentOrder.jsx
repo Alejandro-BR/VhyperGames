@@ -5,6 +5,7 @@ import { useAuth } from "../../context/AuthContext";
 import { ORDER_BY_ID, BASE_URL } from "../../config";
 import { CheckoutContext } from "../../context/CheckoutContext";
 import { Link } from "react-router-dom";
+import { getVarLS, updateLocalStorage } from "../../utils/keep";
 
 const paymentModes = {
   0: "Ethereum",
@@ -15,9 +16,9 @@ function PaymentOrder() {
   const { token } = useAuth();
   const { orderId } = useContext(CheckoutContext);
   const [orderData, setOrderData] = useState(null);
-
+  const equivalentEthereum = getVarLS("equivalentEthereum");
   useEffect(() => {
-    if (orderId) localStorage.setItem("orderId", orderId);
+    if (orderId) updateLocalStorage(orderId, "orderId");
 
     const fetchOrder = async () => {
       try {
@@ -64,7 +65,8 @@ function PaymentOrder() {
       <div className={classes.payment}>
         <hr className={classes.line} />
         <p>Pagado con: {paymentModes[orderData.modeOfPay]}</p>
-        <p>Total pagado: {(orderData.totalPrice / 100).toFixed(2)} €</p>
+        <p>Total pagado: {(orderData.totalPrice / 100).toFixed(2).replace(".",",")} €</p>
+        {orderData.modeOfPay === 0 && <p>Total Ethereum: {equivalentEthereum} ETH</p>}
       </div>
     </div>
   );

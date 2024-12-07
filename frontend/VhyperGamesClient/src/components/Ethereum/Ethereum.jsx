@@ -8,6 +8,7 @@ import { fetchTransactionData, verifyTransaction } from "../../endpoints/Ethereu
 import MetaMaskLogo from "@metamask/logo"; 
 import classes from "./ethereum.module.css";
 import Button from "../Buttons/Button";
+import { updateLocalStorage } from "../../utils/keep";
 
 function Ethereum() {
   const [wallet, setWallet] = useState(null);
@@ -21,7 +22,7 @@ function Ethereum() {
   const { reserveId, handleConfirmReserve } = useContext(CheckoutContext);
   const navigate = useNavigate();
 
-  // Inicia el logo dinmico de MetaMask
+  // Logo de MetaMask
   useEffect(() => {
     const viewer = MetaMaskLogo({
       pxNotRatio: true,
@@ -50,6 +51,10 @@ function Ethereum() {
           setLoading(true);
           const data = await fetchTransactionData(reserveId, token.token);
           setTransactionData(data);
+
+          if (data?.equivalentEthereum) {
+            updateLocalStorage(data.equivalentEthereum, "equivalentEthereum");
+          }
         }
       } catch (err) {
         setError(err.message);
@@ -65,7 +70,9 @@ function Ethereum() {
   async function handleComplete() {
     try {
       if (!window.ethereum?.isMetaMask) {
-        throw new Error("MetaMask no está instalado en tu navegador.");
+        setError("MetaMask no está instalado en tu navegador. Redirigiendo al carrito...");
+        setTimeout(() => navigate("/cart"), 3000); 
+      return;
       }
 
       setLoading(true);
@@ -75,14 +82,18 @@ function Ethereum() {
       const accounts = await web3Instance.eth.requestAccounts();
 
       if (accounts.length === 0) {
-        throw new Error("No tienes ninguna cuenta activa en MetaMask.");
+        setError("No tienes cuenta en Metamask. Redirigiendo al carrito...");
+        setTimeout(() => navigate("/cart"), 3000); 
+      return;
       }
 
       const connectedWallet = accounts[0];
       setWallet(connectedWallet);
 
       if (!transactionData) {
-        throw new Error("Los datos de la transacción no están disponibles.");
+        setError("Datos de transacción no disponibles. Redirigiendo al carrito...");
+        setTimeout(() => navigate("/cart"), 3000); 
+      return;
       }
 
       // Realizar la transacción
@@ -109,8 +120,9 @@ function Ethereum() {
         throw new Error("La transacción no es válida.");
       }
     } catch (err) {
-      console.error(err.message);
-      setError(`${err.message}`);
+      setError("Ha ocurrido un error en el proceso de pago. Redirigiendo al carrito...");
+      setTimeout(() => navigate("/cart"), 3000); 
+      return;
     } finally {
       setLoading(false);
       setTransactionProcessing(false);

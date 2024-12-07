@@ -1,7 +1,7 @@
 import { createContext, useEffect, useState} from "react";
 import { useAuth } from "./AuthContext";
 import { getImages, newImages, deleteImages, updateImages } from "../endpoints/ImagesEndpoint";
-import { DELETE_IMAGE, GET_IMAGES, NEW_IMAGE, UPDATE_IMAGE } from "../config";
+import { DELETE_IMAGE, GET_IMAGES_BY_GAME, NEW_IMAGE, UPDATE_IMAGE } from "../config";
 
 // Crear el contexto
 export const ImageContext = createContext();
@@ -9,15 +9,18 @@ export const ImageContext = createContext();
 // Proveedor del contexto
 export const ImageProvider = ({ children }) => {
   const { token, decodedToken } = useAuth();
-  const { images, setImages } = useState();
+  const { images, setImages } = useState([]);
 
   // ----- Images -----
 
   const fetchImages = async (gameId) => {
     try {
-      const response = await getImages(GET_IMAGES, gameId, token);
-      if (response) {
+      const response = await getImages(GET_IMAGES_BY_GAME, gameId, token);
+      console.log(response);
+      if (response && Array.isArray(response)) {
+        console.log("setImages entra ?")
         setImages(response);
+        console.log("Estado después de setImages:", response);
       } else {
         console.error("Error al obtener las imágenes");
       }
@@ -69,11 +72,10 @@ export const ImageProvider = ({ children }) => {
 
   useEffect(() => {
     if (token && decodedToken?.Role === "Admin") {
-      fetchImages();
+      // fetchImages();
     }
   }, [token, decodedToken]);
 
- 
   const contextValue = {
     fetchImages,
     createImage,

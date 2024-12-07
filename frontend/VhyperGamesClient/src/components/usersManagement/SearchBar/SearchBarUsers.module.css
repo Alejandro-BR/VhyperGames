@@ -1,0 +1,16 @@
+.container {
+  display: flex;
+  gap: 10px;
+}
+
+.searchBar {
+  height: 30px;
+  width: fit-content;
+  border-radius: 14px;
+  padding: 0 10px;
+  gap: 10px;
+  background-color: var(--header-footer-color);
+  border: 2px outset var(--principal-blue);
+  color: white;
+  margin: 0 0 30px 5vw;
+}

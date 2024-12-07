@@ -35,6 +35,9 @@ public class Program
         // Configura stripe
         ConfigureStripe(app.Services);
 
+        // Endpoint saludo
+        app.MapGet("/api/", () => "VhyperGames!");
+
         // Ejecutar la aplicación web y escuchar las solicitudes entrantes
         app.Run();
     }
