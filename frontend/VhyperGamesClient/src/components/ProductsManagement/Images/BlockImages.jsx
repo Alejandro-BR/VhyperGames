@@ -1,9 +1,9 @@
 import Button from "../../Buttons/Button";
 import classes from "./BlockImages.module.css";
 
-function BlockImages() {
+function BlockImages({ gameId, images }) {
   // Constante temporal con datos de imágenes.
-  const images = [
+  images = [
     { id: 1, url: "/img/cyberpunk.png", alt: "Imagen 1" },
     { id: 2, url: "/img/cyberpunk.png", alt: "Imagen 2" },
     { id: 3, url: "/img/cyberpunk.png", alt: "Imagen 3" },
