@@ -20,20 +20,25 @@ function ProductForm({ gameId }) {
     images: [],
   });
 
+  // Estado para controlar si los datos ya han sido cargados
+  const [dataLoaded, setDataLoaded] = useState(false);
+
+  // UseEffect que solo carga los datos una vez
   useEffect(() => {
-    if (gameId) {
+    if (gameId && !dataLoaded) { // Solo cargar los datos si no han sido cargados aún
       const fetchGameData = async () => {
         const data = await GetFormGame(gameId);
         if (data) {
           setFormData({
             ...data,
-            releaseDate: data.releaseDate.split("T")[0],
+            releaseDate: data.releaseDate.split("T")[0], // Aseguramos que la fecha esté en el formato correcto
           });
+          setDataLoaded(true); // Indicamos que los datos ya fueron cargados
         }
       };
       fetchGameData();
     }
-  }, [gameId, GetFormGame]);
+  }, [gameId, GetFormGame, dataLoaded]); // Solo ejecutamos este efecto si gameId cambia o si los datos no han sido cargados
 
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -45,25 +50,46 @@ function ProductForm({ gameId }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await updateGameById(formData);
-    alert("Juego actualizado con éxito");
+    try {
+      await updateGameById(formData); // Actualizamos el juego con los datos del formulario
+      alert("Juego actualizado con éxito");
+    } catch (error) {
+      console.error("Error al actualizar el juego:", error);
+      alert("Hubo un error al actualizar el juego.");
+    }
   };
 
   return (
     <form className={classes.productForm} onSubmit={handleSubmit}>
       <div className={classes.formGroup}>
         <label htmlFor="title">Título:</label>
-        <input type="text" id="title" placeholder="Título" value={formData.title} onChange={handleChange} />
+        <input
+          type="text"
+          id="title"
+          placeholder="Título"
+          value={formData.title}
+          onChange={handleChange}
+        />
       </div>
 
       <div className={classes.formGroup}>
         <label htmlFor="description">Descripción:</label>
-        <textarea id="description" placeholder="Descripción" value={formData.description} onChange={handleChange}></textarea>
+        <textarea
+          id="description"
+          placeholder="Descripción"
+          value={formData.description}
+          onChange={handleChange}
+        ></textarea>
       </div>
 
       <div className={classes.formGroup}>
         <label htmlFor="sinopsis">Sinopsis:</label>
-        <textarea id="sinopsis" placeholder="Sinopsis" value={formData.sinopsis} onChange={handleChange}></textarea>
+        <textarea
+          id="sinopsis"
+          placeholder="Sinopsis"
+          value={formData.sinopsis}
+          onChange={handleChange}
+        ></textarea>
       </div>
 
       <div className={classes.formGroup}>
@@ -81,7 +107,11 @@ function ProductForm({ gameId }) {
 
       <div className={classes.formGroup}>
         <label htmlFor="gameRequirementsId">Requerimientos del juego:</label>
-        <select id="gameRequirementsId" value={formData.gameRequirementsId} onChange={handleChange}>
+        <select
+          id="gameRequirementsId"
+          value={formData.gameRequirementsId}
+          onChange={handleChange}
+        >
           <option value="1">Bajos</option>
           <option value="2">Medios</option>
           <option value="3">Altos</option>
@@ -99,22 +129,42 @@ function ProductForm({ gameId }) {
       <section className={classes.horizontalFormGroup}>
         <div className={classes.formGroup}>
           <label htmlFor="releaseDate">Fecha de Lanzamiento:</label>
-          <input type="date" id="releaseDate" value={formData.releaseDate} className={classes.date} onChange={handleChange} />
+          <input
+            type="date"
+            id="releaseDate"
+            value={formData.releaseDate}
+            className={classes.date}
+            onChange={handleChange}
+          />
         </div>
 
         <div className={classes.formGroup}>
           <label htmlFor="price">Precio:</label>
-          <input type="number" id="price" placeholder="Precio" value={formData.price} className={classes.numInput} onChange={handleChange} />
+          <input
+            type="number"
+            id="price"
+            placeholder="Precio"
+            value={formData.price}
+            className={classes.numInput}
+            onChange={handleChange}
+          />
         </div>
 
         <div className={classes.formGroup}>
           <label htmlFor="stock">Stock:</label>
-          <input type="number" id="stock" placeholder="Stock" value={formData.stock} className={classes.numInput} onChange={handleChange} />
+          <input
+            type="number"
+            id="stock"
+            placeholder="Stock"
+            value={formData.stock}
+            className={classes.numInput}
+            onChange={handleChange}
+          />
         </div>
       </section>
 
       <Button variant={"large"} color={"morado-azul"} type="submit">
-        Actualizar producto
+        Actualizar
       </Button>
     </form>
   );
