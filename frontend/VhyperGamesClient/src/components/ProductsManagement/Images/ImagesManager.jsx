@@ -9,10 +9,10 @@ function ImagesManager() {
       <img src="/img/cyberpunk.png" alt="Imagen portada"></img>
       <Button
         variant={"large"}
-        color={"red"}
+        color={"azul"}
         onClick={console.log("Hola")}
       >
-        Modificar imagen
+        Modificar Carátula
       </Button>
     </div>
     <BlockImages/>

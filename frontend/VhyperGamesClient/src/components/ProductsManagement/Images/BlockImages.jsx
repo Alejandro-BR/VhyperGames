@@ -1,4 +1,5 @@
 import Button from "../../Buttons/Button";
+import classes from "./BlockImages.module.css";
 
 function BlockImages() {
   // Constante temporal con datos de imágenes.
@@ -10,9 +11,17 @@ function BlockImages() {
 
   return (
     <div>
-      <h2>Aquí van todas las imágenes</h2>
+      <h2>Imágenes adicionales: </h2>
+      <Button
+        variant={"large"}
+        color={"morado"}
+        // onClick={() => console.log(`Modificar imagen con ID: ${image.id}`)}
+      >
+        Añadir imagen
+      </Button>
+
       {images.map((image) => (
-        <div key={image.id} style={{ marginBottom: "20px" }}>
+        <div key={image.id} style={{ marginBottom: "20px" }} className={classes.imgBlock}>
           <img
             src={image.url}
             alt={image.alt}
@@ -23,7 +32,8 @@ function BlockImages() {
             color={"azul"}
             onClick={() => console.log(`Modificar imagen con ID: ${image.id}`)}
           >
-            Modificar
+            Modificar 
+            {/*MANTENGO EL BOTON DE MODIFICAR PORQUE CREO QUE SI QUEREMOS METER UNA IMAGEN EN EL LUGAR x ES MAS FACIL ASI. SI VEIS QUE DA IGUAL BORRAD Y LISTO */}
           </Button>
           <Button
             variant={"large"}
