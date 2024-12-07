@@ -105,11 +105,6 @@ function LoginModal({ onClose, onRegisterClick, onSuccess }) {
                         />
                     </div>
 
-                    <div className={`${classes.rememberMe} ${classes.rememberGroup}`}>
-                        <input type="checkbox" id="rememberMe" />
-                        <label htmlFor="rememberMe">Recuérdame</label>
-                    </div>
-
                     {promesaError && <div className={classes.error}>{promesaError}</div>}
 
                     <div className={classes.buttonContainer}>
