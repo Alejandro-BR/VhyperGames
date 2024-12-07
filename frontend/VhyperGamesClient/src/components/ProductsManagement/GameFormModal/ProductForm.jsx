@@ -20,38 +20,36 @@ function ProductForm({ gameId }) {
     images: [],
   });
 
-  // Estado para controlar si los datos ya han sido cargados
   const [dataLoaded, setDataLoaded] = useState(false);
 
-  // UseEffect que solo carga los datos una vez
   useEffect(() => {
-    if (gameId && !dataLoaded) { // Solo cargar los datos si no han sido cargados aún
+    if (gameId && !dataLoaded) {
       const fetchGameData = async () => {
         const data = await GetFormGame(gameId);
         if (data) {
           setFormData({
             ...data,
-            releaseDate: data.releaseDate.split("T")[0], // Aseguramos que la fecha esté en el formato correcto
+            releaseDate: data.releaseDate.split("T")[0], 
           });
-          setDataLoaded(true); // Indicamos que los datos ya fueron cargados
+          setDataLoaded(true);
         }
       };
       fetchGameData();
     }
-  }, [gameId, GetFormGame, dataLoaded]); // Solo ejecutamos este efecto si gameId cambia o si los datos no han sido cargados
+  }, [gameId, GetFormGame, dataLoaded]); 
 
   const handleChange = (e) => {
     const { id, value } = e.target;
     const parsedValue = ["genre", "gameRequirementsId", "drmFree", "price", "stock"].includes(id)
-      ? parseInt(value, 10)
+      ? value === "" ? 0 : parseInt(value, 10)  
       : value;
     setFormData({ ...formData, [id]: parsedValue });
   };
-
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await updateGameById(formData); // Actualizamos el juego con los datos del formulario
+      await updateGameById(formData); 
       alert("Juego actualizado con éxito");
     } catch (error) {
       console.error("Error al actualizar el juego:", error);

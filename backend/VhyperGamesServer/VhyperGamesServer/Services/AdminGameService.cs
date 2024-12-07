@@ -161,12 +161,12 @@ public class AdminGameService
             game.Title = adminFormGameDto.Title;
         }
 
-        if (adminFormGameDto.Price != 0 && adminFormGameDto.Price != game.Price)
+        if (adminFormGameDto.Price != 0 && adminFormGameDto.Price != game.Price && adminFormGameDto.Price > 0)
         {
             game.Price = adminFormGameDto.Price;
         }
 
-        if (adminFormGameDto.Stock != 0 && adminFormGameDto.Stock != game.Stock)
+        if (adminFormGameDto.Stock != game.Stock && adminFormGameDto.Stock >= 0)
         {
             game.Stock = adminFormGameDto.Stock;
         }
