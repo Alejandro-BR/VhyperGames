@@ -8,6 +8,7 @@ import { fetchTransactionData, verifyTransaction } from "../../endpoints/Ethereu
 import MetaMaskLogo from "@metamask/logo"; 
 import classes from "./ethereum.module.css";
 import Button from "../Buttons/Button";
+import { updateLocalStorage } from "../../utils/keep";
 
 function Ethereum() {
   const [wallet, setWallet] = useState(null);
@@ -50,6 +51,11 @@ function Ethereum() {
           setLoading(true);
           const data = await fetchTransactionData(reserveId, token.token);
           setTransactionData(data);
+
+          if (data?.equivalentEthereum) {
+            updateLocalStorage(data.equivalentEthereum, "equivalentEthereum");
+            //localStorage.setItem("equivalentEthereum", data.equivalentEthereum);
+          }
         }
       } catch (err) {
         setError(err.message);
