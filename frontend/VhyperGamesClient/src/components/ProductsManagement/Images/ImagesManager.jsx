@@ -7,6 +7,7 @@ function ImagesManager({ gameId }) {
     <div>
       {/* Portada */}
       <img src="/img/cyberpunk.png" alt="Imagen portada"></img>
+      <input type="file" />
       <Button
         variant={"large"}
         color={"azul"}

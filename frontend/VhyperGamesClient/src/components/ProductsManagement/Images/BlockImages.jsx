@@ -15,7 +15,7 @@ function BlockImages() {
       <Button
         variant={"large"}
         color={"morado"}
-        // onClick={() => console.log(`Modificar imagen con ID: ${image.id}`)}
+      // onClick={() => console.log(`Modificar imagen con ID: ${image.id}`)}
       >
         Añadir imagen
       </Button>
@@ -27,12 +27,13 @@ function BlockImages() {
             alt={image.alt}
             style={{ width: "150px", height: "150px", display: "block" }}
           />
+          <input type="file" />
           <Button
             variant={"large"}
             color={"azul"}
             onClick={() => console.log(`Modificar imagen con ID: ${image.id}`)}
           >
-            Modificar 
+            Modificar
             {/*MANTENGO EL BOTON DE MODIFICAR PORQUE CREO QUE SI QUEREMOS METER UNA IMAGEN EN EL LUGAR x ES MAS FACIL ASI. SI VEIS QUE DA IGUAL BORRAD Y LISTO */}
           </Button>
           <Button
