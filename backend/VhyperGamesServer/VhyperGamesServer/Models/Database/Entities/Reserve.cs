@@ -16,7 +16,6 @@ public class Reserve
 
     public DateTime ExpirationTime { get; set; }
 
-    [JsonIgnore]
     public List<ReserveDetail> ReserveDetails { get; set; }
 
     public Reserve()
