@@ -55,15 +55,11 @@
 
 .title {
     font-size: 0.9rem;
-    /* Tamaño reducido para acomodar texto largo */
     font-weight: 400;
     color: var(--text-color);
     word-wrap: break-word;
-    /* Permite cortes naturales de palabras */
     white-space: normal;
-    /* Permite que el texto ocupe varias líneas */
     margin: 0;
-    /* Elimina márgenes innecesarios */
 }
 
 .price,

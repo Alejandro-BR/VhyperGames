@@ -5,5 +5,5 @@
     justify-items: center;
     grid-row-gap: 32px;
     grid-column-gap: 50px;
-    margin-left: 5vw;
+    margin:0 0 5vh 5vw ;
 }
