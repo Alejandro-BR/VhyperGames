@@ -1,6 +1,6 @@
 .container {
   display: flex;
-  gap: 40px;
+  gap: 4rem;
   align-items: left;
   overflow: scroll;
 }
@@ -20,7 +20,7 @@
   }
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 977px) {
   .catalogo {
     grid-template-columns: repeat(3, 1fr);
   }
