@@ -64,7 +64,7 @@ function PaymentOrder() {
       <div className={classes.payment}>
         <hr className={classes.line} />
         <p>Pagado con: {paymentModes[orderData.modeOfPay]}</p>
-        <p>Total pagado: {(orderData.totalPrice / 100).toFixed(2)} €</p>
+        <p>Total pagado: {(orderData.totalPrice / 100).toFixed(2).replace(".",",")} €</p>
       </div>
     </div>
   );
