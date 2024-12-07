@@ -1,7 +1,7 @@
 import Button from "../../Buttons/Button"
 import BlockImages from "./BlockImages";
 
-function ImagesManager() {
+function ImagesManager({ gameId }) {
 
   return (<div >
     <div>
