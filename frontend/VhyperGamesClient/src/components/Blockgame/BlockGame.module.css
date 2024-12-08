@@ -13,28 +13,3 @@
   justify-content: center;
   overflow: visible;
 }
-
-
-/* @media (max-width: 1280px) {
-  .catalogo {
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
-
-@media (max-width: 977px) {
-  .catalogo {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-@media (max-width: 800px) {
-  .catalogo {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 550px) {
-  .catalogo {
-    grid-template-columns: 1fr;
-  }
-} */

@@ -3,11 +3,13 @@
     flex-direction: column;
     align-items: center;
     gap: 4vh;
-    
+    border: 4px solid;
+    border-image: var(--gradient-purple-blue) 1;
+    padding: 2rem;
 }
 
 .userIcon{
-    max-width: 10vh;
+    max-width: 20vh;
     min-width: 96px;
 }
 

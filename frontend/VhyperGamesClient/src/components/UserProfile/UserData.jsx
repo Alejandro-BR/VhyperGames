@@ -15,7 +15,7 @@ function UserData() {
     const [editData, setEditData] = useState(false);
     const [editPassword, setEditPassword] = useState(false);
     useEffect(() => {
-      
+
         const fetchUsers = async () => {
 
             setLoading(true);
@@ -58,7 +58,9 @@ function UserData() {
     return (
         <div className={classes.container}>
             <img src="/icon/user-grande-icon.svg" alt="user icon" className={classes.userIcon} />
+
             <div className={classes.userInfo}>
+                <h2>Tus Datos:</h2>
                 <div>Nombre de usuario: {userInfo.name + " " + userInfo.surname}</div>
                 <div>Correo electronico: {userInfo.email}</div>
                 <div>Direccion: {userInfo.address}</div>
