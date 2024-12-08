@@ -1,14 +1,12 @@
 export const getImages = async (url, gameId, token) => {
-  // Asegúrate de que gameId esté correctamente añadido a la URL como un query parameter
   const fullUrl = `${url}?gameId=${gameId}`;
-  console.log("URL construida:", fullUrl); // Verifica la URL antes de la llamada
 
   try {
       const response = await fetch(fullUrl, {
           method: 'GET',
           headers: {
               'Content-Type': 'application/json',
-              Authorization: `Bearer ${token}`, // Asegúrate de que el token sea válido
+              Authorization: `Bearer ${token}`,
           },
       });
 
@@ -18,10 +16,10 @@ export const getImages = async (url, gameId, token) => {
       }
 
       const data = await response.json();
-      return data; // Regresa las imágenes obtenidas
+      return data; 
   } catch (error) {
       console.error("Error en getImages:", error);
-      throw error; // Lanza el error para manejarlo en otra parte
+      throw error; 
   }
 };
 
@@ -57,12 +55,16 @@ export const newImages = async (url, gameId, altText, data, token) => {
 };
 
 export const updateImages = async (url, gameId, altText, imageId, data, token) => {
-  const fullUrl = `${url}/updateImage/${gameId}?AltText=${altText}&imageId=${imageId}`
+  const fullUrl = `${url}/${gameId}?AltText=${altText}&imageId=${imageId}`
 
   const formData = new FormData();
   if (data.img1) {
-    formData.append("images", data.img1);
+    formData.append("file", data.img1);
   }
+
+  formData.append("altText", altText);
+
+  console.log("FormData antes de enviar:", Array.from(formData.entries()));
 
   const response = await fetch(fullUrl, {
     method: 'PUT',
@@ -70,6 +72,7 @@ export const updateImages = async (url, gameId, altText, imageId, data, token) =
       Authorization: `Bearer ${token}`,
     },
     body: formData
+    
   });
 
   if (!response.ok) {

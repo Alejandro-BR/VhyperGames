@@ -1,14 +1,9 @@
 import Button from "../../Buttons/Button";
 import classes from "./BlockImages.module.css";
 import { useState, useEffect, useContext } from "react";
+import { BASE_URL } from "../../../config";
 
 function BlockImages({ gameId, images }) {
-  // Constante temporal con datos de imágenes.
-  images = [
-    { id: 1, url: "/img/cyberpunk.png", alt: "Imagen 1" },
-    { id: 2, url: "/img/cyberpunk.png", alt: "Imagen 2" },
-    { id: 3, url: "/img/cyberpunk.png", alt: "Imagen 3" },
-  ];
 
   const [updatePromise, setUpdatePromise] = useState(null);
 
@@ -22,6 +17,7 @@ function BlockImages({ gameId, images }) {
       setUpdatePromise("Hubo un error al actualizar el juego.");
     }
   };
+
 
   return (
     <div>
@@ -37,10 +33,10 @@ function BlockImages({ gameId, images }) {
       {updatePromise && <div className={classes.updateMsg}>{updatePromise}</div>}
 
       {
-        images.map((image) => (
+        images.slice(1).map((image) => (
           <div key={image.id} style={{ marginBottom: "20px" }} className={classes.imgBlock}>
             <img
-              src={image.url}
+              src={`${BASE_URL}${image.imageUrl}`}
               alt={image.alt}
               style={{ width: "150px", height: "150px", display: "block" }}
             />
