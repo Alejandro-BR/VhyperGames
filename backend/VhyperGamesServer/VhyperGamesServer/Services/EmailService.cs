@@ -2,16 +2,21 @@
 using VhyperGamesServer.Utilities;
 using VhyperGamesServer.Models.Database.Entities;
 using VhyperGamesServer.Models.Database.Repositories;
+using Examples.WebApi.Services.Blockchain;
+
 
 namespace VhyperGamesServer.Services;
 
 public class EmailService
 {
     private readonly UnitOfWork _unitOfWork;
+    private readonly BlockhainService _blockchainService;
 
-    public EmailService(UnitOfWork unitOfWork)
+
+    public EmailService(UnitOfWork unitOfWork,BlockhainService blockhainService)
     {
         _unitOfWork = unitOfWork;
+        _blockchainService = blockhainService;
     }
 
     private async Task SendInvoiceAsync(Order order)
@@ -67,7 +72,10 @@ public class EmailService
 
         if (order.ModeOfPay == 0)
         {
+            decimal ethPriceEuros = await _blockchainService.GetEthereumPriceInEurosAsync();
+            decimal equivalentEth = (decimal)order.TotalPrice / 100 / ethPriceEuros;
             emailContent.AppendLine("<p>Pagado con: Ethereum</p>");
+            emailContent.AppendLine($"<p>Precio total Ethereum: <b>{equivalentEth.ToString("0.000000")} ETH</b></p>");
         }
         else
         {
