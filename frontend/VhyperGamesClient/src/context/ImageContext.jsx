@@ -9,7 +9,7 @@ export const ImageContext = createContext();
 // Proveedor del contexto
 export const ImageProvider = ({ children }) => {
   const { token, decodedToken } = useAuth();
-  const { images, setImages } = useState([]);
+  const [ images, setImages ] = useState([]);
 
   // ----- Images -----
 

@@ -3,7 +3,7 @@ import { GET_REVIEW } from "../../../config";
 import classes from "./Reviews.module.css";
 import Rating from '../../GameCard/Rating';
 
-function Reviews({ id }) {
+function Reviews({ id, reviewUpdated }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [reviews, setReviews] = useState([]);
@@ -17,6 +17,7 @@ function Reviews({ id }) {
       return;
     }
 
+    
     const fetchReviews = async () => {
       setLoading(true);
       setError(null);
@@ -37,7 +38,7 @@ function Reviews({ id }) {
     };
 
     fetchReviews();
-  }, [id]);
+  }, [id, reviewUpdated]);
 
   const getPlaneCount = (avgRating) => {
     if (avgRating < 0) return 1;

@@ -1,25 +1,41 @@
-import { useState, useEffect, useContext } from "react";  // Solo importa una vez los hooks necesarios
+import { useState, useEffect, useContext } from "react"; // Solo importa una vez los hooks necesarios
 import Button from "../../Buttons/Button";
 import BlockImages from "./BlockImages";
 import { ImageContext } from "../../../context/ImageContext";
 import classes from "./ImagesManager.module.css";
+import { useAuth } from "../../../context/AuthContext";
+import { BASE_URL, UPDATE_IMAGE } from "../../../config";
+import { updateImages } from "../../../endpoints/ImagesEndpoint"
 
 function ImagesManager({ gameId }) {
-
-  const { images, fetchImages} = useContext(ImageContext);
+  const { token } = useAuth();
+  const { images, fetchImages } = useContext(ImageContext);
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [updatePromise, setUpdatePromise] = useState(null);
+  const [updateCounter, setUpdateCounter] = useState(0);
 
   useEffect(() => {
-    console.log("Entra al useEffect de ImagesManager con id " + gameId)
-    fetchImages(gameId); 
-  }, [gameId]);
-  
+    fetchImages(gameId);
+  }, [gameId, updateCounter]);
 
-  const [updatePromise, setUpdatePromise] = useState(null);
+  const handleFileChange = (e) => {
+    const file = e.target.files[0]; 
+    setSelectedFile(file);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // await updateGameById(formData);
+      const imageId = images[0].id;
+      const altText = images[0].altText;
+      const data = { img1: selectedFile };
+      
+    const formData = new FormData();
+    formData.append("file", selectedFile); 
+    formData.append("altText", altText);
+
+      await updateImages(UPDATE_IMAGE, gameId, altText, imageId, data, token);
+      setUpdateCounter((prev) => prev + 1);
       setUpdatePromise("Juego actualizado con éxito");
     } catch (error) {
       console.error("Error al actualizar el juego:", error);
@@ -29,18 +45,32 @@ function ImagesManager({ gameId }) {
 
   return (
     <div>
-      {/* Portada */}
-      <input type="file" />
-      <Button
-        variant={"large"}
-        color={"azul"}
-        onClick={handleSubmit}
-      >
-        Modificar Carátula
-      </Button>
-      {updatePromise && <div className={classes.updateMsg}>{updatePromise}</div>}
-      <BlockImages />
-    </div>
+    {/* Portada */}
+    {images.length > 0 ? (
+      <>
+        <img
+          src={`${BASE_URL}${images[0].imageUrl}?timestamp=${Date.now()}`}
+          alt={images[0].altText}
+          style={{
+            maxWidth: "200px",
+            maxHeight: "233px",
+            objectFit: "contain"
+          }}
+        />
+        <br />
+        <input type="file" onChange={handleFileChange} />
+        <Button variant={"large"} color={"azul"} onClick={handleSubmit}>
+          Modificar Carátula
+        </Button>
+      </>
+    ) : (
+      <p>Cargando imagen...</p>
+    )}
+    {updatePromise && (
+      <div className={classes.updateMsg}>{updatePromise}</div>
+    )}
+    <BlockImages gameId={gameId} images={images} />
+  </div>
   );
 }
 

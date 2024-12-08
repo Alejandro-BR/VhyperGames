@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useParams } from "react-router-dom";
 import classes from "../styles/DetailsView.module.css";
 
@@ -10,6 +11,12 @@ import GameRequeriments from "../components/DetailsView/GameRequeriments/GameReq
 
 function DetailsView() {
   const params = useParams();
+  const [reviewUpdated, setReviewUpdated] = useState(false);
+
+  const handleReviewAdded = () => {
+    setReviewUpdated((prev) => !prev); // Cambiar el estado para forzar el refetch
+  };
+
 
   return (
     <>
@@ -24,10 +31,10 @@ function DetailsView() {
           <GameRequeriments id={params.gameId} />
         </section>
         <section className={classes["details-view__review-entry"]}>
-          <ReviewEntry gameId={params.gameId} />
+          <ReviewEntry gameId={params.gameId} onReviewAdded={handleReviewAdded}/>
         </section>
         <section className={classes["details-view__reviews"]}>
-          <Reviews id={params.gameId} />
+          <Reviews id={params.gameId} reviewUpdated={reviewUpdated}/>
         </section>
       </div>
       <Footer />

@@ -4,7 +4,7 @@ import Button from '../../Buttons/Button.jsx';
 import classes from './ReviewEntry.module.css';
 import { useAuth } from '../../../context/AuthContext.jsx'
 
-const ReviewEntry = ({ gameId }) => {
+const ReviewEntry = ({ gameId, onReviewAdded }) => {
   const { token, decodedToken } = useAuth();
   const [reviewText, setReviewText] = useState('');
   const [existingReview, setExistingReview] = useState(null);
@@ -51,7 +51,7 @@ const ReviewEntry = ({ gameId }) => {
     if (isAuthenticated) {
       fetchUserReview();
     }
-  }, [gameId, isAuthenticated, token]);
+  }, [gameId, isAuthenticated, token, reviewText]);
 
   const handleInputChange = (e) => {
     setReviewText(e.target.value);
@@ -75,9 +75,10 @@ const ReviewEntry = ({ gameId }) => {
       });
 
       if (response.ok) {
-
         setReviewText('');
-        window.location.reload();
+        if (onReviewAdded) {
+          onReviewAdded();
+        }
 
       } else {
         const error = await response.json();

@@ -157,7 +157,6 @@ export const AdminProvider = ({ children }) => {
 
   useEffect(() => {
     if (token && decodedToken?.Role === "Admin") {
-      console.log("HSDFGFGFHGHFHGFH")
       fetchUsers();
       fetchGames();
     }
@@ -177,7 +176,7 @@ export const AdminProvider = ({ children }) => {
     GetFormGame,
     ResetSearchGame,
     GetSearchUsers,
-    ResetSearchUsers
+    ResetSearchUsers,
   };
 
   return (
