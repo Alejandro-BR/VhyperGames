@@ -1,7 +1,6 @@
 .container {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   color: white;
   max-width: 20rem;
   gap: 10px;
@@ -21,6 +20,12 @@
 
 .gameCardImg {
   border-radius: 2px 2px 0 0;
+}
+.info{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
 }
 
 .cardTitle {
@@ -55,8 +60,8 @@
 
 @media (max-width: 1280px) {
   .container{
-    max-width: 16rem;
-    max-height: fit-content;
+    max-width: 14rem;
+    max-height: 25rem;
   }  
 }
 
@@ -80,6 +85,7 @@
     flex-direction: column;
     justify-content: space-around;
     width: 100%;
+    height: auto;
   }
   .cardTitle{
    font-size: 1.5rem;

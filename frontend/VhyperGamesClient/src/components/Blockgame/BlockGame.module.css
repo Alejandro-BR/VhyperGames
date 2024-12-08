@@ -1,13 +1,12 @@
 .container {
   display: flex;
-  gap: 6vw;
-  justify-content: left;
+  justify-content: space-between;
 
 }
 
 @media (max-width: 1280px) {
   .container{
-    gap: 4vw;
+    justify-content: space-between;
   }  
 }
 
@@ -15,6 +14,7 @@
   .container{
     display: flex;
     flex-direction: column;
+    gap: 2rem;
    
   }  
 }

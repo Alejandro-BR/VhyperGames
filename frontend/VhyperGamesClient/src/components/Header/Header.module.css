@@ -38,6 +38,7 @@
   border-radius: 20px;
   padding: 0 10px;
   gap: 10px;
+  border: 2px outset var(--principal-purple);
 }
 
 
@@ -173,4 +174,34 @@
     background-color: var(--principal-blue); 
   }
 }
+
+/* responsive para movil*/
+
+@media (max-width: 720px) {
+  .header {
+    flex-wrap: wrap;
+    height: auto; 
+  }
+
+  .left {
+    order: 1; /* Logo y botón van primero */
+    justify-content: center; 
+    margin-bottom: 10px; 
+    gap: 10px;
+  }
+
+  .searchBar {
+    order: 3; /* Barra de búsqueda irá de última */
+    width: 100%; 
+    
+  }
+
+  .icons {
+    order: 2; /* Íconos estarán debajo de `left`, pero encima de `searchBar` */
+    justify-content: center; 
+    margin-bottom: 10px;
+    gap: 20px;
+  }
+}
+
 
