@@ -1,9 +1,22 @@
 .container {
   display: flex;
-  flex-wrap: wrap;
-  gap: 8rem;
+  gap: 6vw;
   justify-content: left;
-  overflow: visible;
+
+}
+
+@media (max-width: 1280px) {
+  .container{
+    gap: 4vw;
+  }  
+}
+
+@media (max-width: 720px) {
+  .container{
+    display: flex;
+    flex-direction: column;
+   
+  }  
 }
 
 .catalogo {
