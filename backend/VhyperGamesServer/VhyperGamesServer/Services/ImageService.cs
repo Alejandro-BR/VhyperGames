@@ -91,6 +91,11 @@ public class ImageService
 
     private async Task StoreImageAsync(string relativePath, IFormFile file)
     {
+        if (file == null)
+        {
+            throw new ArgumentNullException(nameof(file), "El archivo no puede ser nulo.");
+        }
+
         using Stream stream = file.OpenReadStream();
 
         await FileHelper.SaveAsync(stream, relativePath);
