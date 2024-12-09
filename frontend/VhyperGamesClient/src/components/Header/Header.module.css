@@ -176,6 +176,11 @@
 }
 
 /* responsive para movil*/
+@media (max-width: 1280px){
+  .left{
+    gap: 5rem;
+  }
+}
 
 @media (max-width: 780px) {
   .header {

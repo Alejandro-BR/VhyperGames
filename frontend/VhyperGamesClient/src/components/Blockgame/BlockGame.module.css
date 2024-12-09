@@ -10,7 +10,7 @@
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   width: fit-content;
-  gap: 5vw;
+  gap: clamp(8px, 2vw, 32px);
   
 }
 
