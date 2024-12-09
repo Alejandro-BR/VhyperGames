@@ -21,6 +21,7 @@
 .gameCardImg {
   border-radius: 2px 2px 0 0;
 }
+
 .info{
   display: flex;
   flex-direction: column;
@@ -33,6 +34,7 @@
   justify-content: space-between;
   width: auto;
   margin: 0 10px 0 10px;
+  /* font-size: 1.05rem; */
 }
 
 
@@ -42,15 +44,18 @@
   justify-content: space-between;
   width: auto;
   margin: 0 10px 0 10px;
+  font-size: 1.05rem;
 }
 
 .rating {
-  min-width: 27px;
-  min-height: 22px;
+  max-width: 25px;
+  max-height: 20px;
+  margin-left: 4px;
 }
 
 .stock {
   color: var(--principal-green);
+  font-size: 1.1rem;
 }
 
 .noStock {

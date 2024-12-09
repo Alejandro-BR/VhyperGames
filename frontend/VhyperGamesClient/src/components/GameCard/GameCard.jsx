@@ -33,7 +33,7 @@ function GameCard({ id, title, stock, price, imgUrl, avgRating }) {
 
           </div>
           <div className={classes.cardPrice}>
-            <p>{precio()} €</p>
+            <h2>{precio()} €</h2>
             <p className={isStock ? classes.stock : classes.noStock}>
               {isStock ? "EN STOCK" : "SIN STOCK"}
             </p>
