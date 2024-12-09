@@ -4,6 +4,7 @@
   align-items: center;
   color: white;
   margin: 16px;
+  font-size: 1.6rem;
 }
 
 .content{
@@ -50,4 +51,13 @@
 .text p{
   margin: 4px 0 0;
   color: white;
+}
+
+@media  (max-width: 720px){
+  .content{
+    flex-direction: column;
+  }
+  .imageContainer img{
+    width: 86vw;
+  }
 }

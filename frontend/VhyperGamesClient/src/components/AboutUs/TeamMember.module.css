@@ -6,7 +6,7 @@
   padding: 14px;
   text-align: center;
   color: white;
-  width: 90%;
+  width: 22rem;
   height: 270px;
   border: 1px solid transparent;
   border-image: var(--gradient-purple-blue) 1;
@@ -23,4 +23,16 @@
 .cardText {
   font-family: var(--font-univers);
   font-size: 1.25em;
+}
+
+@media (max-width: 1280px){
+  .cardMember{
+      width: 16rem;
+      height: 22rem;
+  }
+
+  .cardImage{
+    width: 8rem;
+    height: 8rem;
+  }
 }

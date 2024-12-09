@@ -44,4 +44,8 @@
   .gameCard__line{
     width: 100%;
   }
+
+  .gameCard__right{
+    width: 100%;
+  }
 }
