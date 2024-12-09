@@ -1,7 +1,7 @@
 import { createContext, useState } from "react";
 import { useAuth } from "./AuthContext";
 import { createReserve, getReserveDetails, confirmReserve } from "../endpoints/ReserveEndpoints";
-import { getVarLS, updateLocalStorage } from "../utils/keep";
+import { getVarLS, deleteLocalStorage } from "../utils/keep";
 
 import { CREATE_RESERVE } from "../config";
 
@@ -94,7 +94,7 @@ export const CheckoutProvider = ({ children }) => {
 
     try {
       const orderId = await confirmReserve(url ,reserveId, token);
-      console.log(orderId + " Esto es el order id");
+      // console.log(orderId + " Esto es el order id");
       setOrderId(orderId);
       return orderId;
     } catch (error) {
@@ -102,6 +102,12 @@ export const CheckoutProvider = ({ children }) => {
       return -1;
     }
   };
+
+  const clearOrderId = () => {
+    setOrderId(null);
+    deleteLocalStorage("orderId");
+  };
+  
 
   const contextValue = {
     setModeOfPay,
@@ -114,6 +120,7 @@ export const CheckoutProvider = ({ children }) => {
     handleConfirmReserve,
     orderId,
     setOrderId,
+    clearOrderId
   };
 
   return (

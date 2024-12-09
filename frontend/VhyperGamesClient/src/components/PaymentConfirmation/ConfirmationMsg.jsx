@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import { useEffect, useState, useContext } from "react";
 import classes from "./ConfirmationMsg.module.css";
 import { useAuth } from "../../context/AuthContext";
 import { CartContext } from "../../context/CartContext";
@@ -6,16 +6,18 @@ import { CheckoutContext } from "../../context/CheckoutContext";
 import { orderById } from "../../endpoints/OrderEndpoints";
 import { ORDER_BY_ID } from "../../config";
 import Title from "../Titles/Title";
+import { useNavigate } from "react-router-dom";
+
 
 function ConfirmationMsg() {
   const { token } = useAuth();
-  const { orderId } = useContext(CheckoutContext);
+  const { orderId, clearOrderId } = useContext(CheckoutContext);
   const [status, setStatus] = useState("");
   const [orderData, setOrderData] = useState(null);
   const [error, setError] = useState(null);
   const { refreshCart } = useContext(CartContext);
+  const { navigate } = useNavigate();
 
-  // Fetch data on component mount
   useEffect(() => {
     const fetchOrderData = async () => {
       if (!token || !orderId) {
@@ -30,6 +32,7 @@ function ConfirmationMsg() {
       } catch (err) {
         console.error("Error al obtener los datos del pedido:", err.message);
         setStatus("failure");
+        clearOrderId();
         setError(err.message);
       }
     };
@@ -38,19 +41,26 @@ function ConfirmationMsg() {
   }, [token, orderId]);
 
   useEffect(() => {
-   refreshCart();
+    refreshCart();
   }, [refreshCart]);
 
-  // Redirect timer if payment fails
+
   useEffect(() => {
     if (status === "failure") {
       const timer = setTimeout(() => {
-        //window.location.href = "/cart";
-      }, 3000);
+        navigate("/");
+        clearOrderId();
+      }, 1500);
 
       return () => clearTimeout(timer);
     }
   }, [status]);
+
+  useEffect(() => {
+    return () => {
+      clearOrderId();
+    };
+  }, [clearOrderId]);
 
   // Render content based on status
   if (status === "success" && orderData) {
