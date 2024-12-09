@@ -57,14 +57,8 @@ export const ImageProvider = ({ children }) => {
 
   const deleteImage = async (imageId) => {
     try {
-      const response = await deleteImages(DELETE_IMAGE, imageId, token);
-      console.log(response);
+      await deleteImages(DELETE_IMAGE, imageId, token);
       fetchImages();
-      // if (response) {
-      //   fetchImages();
-      // } else {
-      //   console.error("Error al borrar una imagen");
-      // }
     } catch (error) {
       console.error("Error en deleteImages:", error);
     }

@@ -92,26 +92,22 @@ export const updateImages = async (url, gameId, altText, imageId, data, token) =
 };
 
 export const deleteImages = async (url, imageId, token) => {
-  // Asegurándonos de que la URL esté bien construida
   const fullUrl = `${url}?imageId=${imageId}`;
 
   const response = await fetch(fullUrl, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`, // Asegúrate de que el token esté incluido
+      Authorization: `Bearer ${token}`, 
     },
   });
 
-  // Verificamos si la respuesta es exitosa (204 No Content)
   if (response.status === 204) {
     console.log("Imagen eliminada");
   } else if (response.status === 404) {
-    // Si la imagen no se encuentra
     const error = await response.json();
     console.error('Error:', error.Message);
   } else {
-    // En caso de cualquier otro error
     const errorText = await response.text();
     console.error('Error al eliminar la imagen:', errorText);
   }
