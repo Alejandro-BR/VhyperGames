@@ -32,7 +32,7 @@ function Timer({ route, time }) {
   return (
     <div className={classes["timer"]}>
       <p className={classes["timer__text"]}>
-        Tiempo restante antes de que expire tu sesión de pago: {minutes}:{seconds < 10 ? `0${seconds}` : seconds}
+        Tiempo restante antes de que expire tu pago: {minutes}:{seconds < 10 ? `0${seconds}` : seconds}
       </p>
       <hr className={classes["timer__separator"]} />
     </div>

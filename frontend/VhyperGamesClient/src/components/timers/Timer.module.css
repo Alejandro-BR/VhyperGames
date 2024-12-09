@@ -11,3 +11,12 @@
   background: var(--gradient-purple-blue);
 }
 
+@media (max-width: 780px){
+  .timer{
+    padding-top: 10px;
+    gap: 10px;
+  }
+  .timer__separator{
+    width: 100%;
+  }
+}
