@@ -72,10 +72,10 @@ function ConfirmationMsg() {
     );
   } else if (status === "failure") {
     return (
-      <div className={classes.msg}>
+      <>
         <Title text="Algo salió mal en el pago :(" size="3em" color="#fff" align="center" />
-        <p>Te estamos redirigiendo al carrito...</p>
-      </div>
+        <p className={classes.msg}>Te estamos redirigiendo al carrito...</p>
+      </>
     );
   } else {
     return <p>Cargando estado del pago...</p>;

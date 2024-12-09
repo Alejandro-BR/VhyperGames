@@ -27,7 +27,10 @@ td {
 
 @media (max-width:45rem){
   table {
-    font-size: 1rem;
+    font-size: 1.6rem;
   }
+
+  th {
+    font-size: 1.4em;}
 }
 

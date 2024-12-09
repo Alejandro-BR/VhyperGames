@@ -4,21 +4,23 @@
   gap: 10px;
   border: 1px solid;
   border-image: var(--gradient-purple-blue) 1;
-  width: 88vw;
+  width: 80vw;
   padding: 30px;
-  font-size: 1.2em;
+  font-size: 1.5rem;
 }
 
 .gameItem {
+  background-color: var(--header-footer-color);
   display: flex;
   align-items: center;
   gap: 10px;
+  height: fit-content;
   width: 280px;
 }
 
 .gameList {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 250px));
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 40px;
   justify-items: start;
 }

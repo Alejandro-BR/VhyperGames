@@ -38,7 +38,7 @@ function GameData({ id }) {
         <Carousel imgGames={juego.imageGames} />
       )}
       {juego && (
-        <p className={classes.gamedata__description}>{juego.description}</p>
+        <h2 className={classes.gamedata__description}>{juego.description}</h2>
       )}
       {juego && <p className={classes.gamedata__sinopsis}>{juego.sinopsis}</p>}
     </div>

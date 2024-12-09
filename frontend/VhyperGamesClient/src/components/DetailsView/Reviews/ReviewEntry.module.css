@@ -18,11 +18,17 @@
 
 .review-box__button {
     display: flex;
-    align-items: center; 
+    align-items: center;
     width: 100%;
 }
 
 .review-box__existing-text {
     display: flex;
     font-size: 1em;
+}
+
+@media (max-width:800px) {
+    .review-box__textarea {
+        width: 100%;
+    }
 }
