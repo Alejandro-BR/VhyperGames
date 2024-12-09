@@ -16,12 +16,12 @@ export const fetchTransactionData = async (reserveId, token) => {
 
     if (!response.ok) {
       const errorText = await response.text();
-      throw new Error(`Error en la API (${response.status}): ${errorText}`);
+      throw new Error(`Error en la API`);
     }
 
     return await response.json();
   } catch (err) {
-    console.error("Error al obtener datos de transacción:", err.message);
+    console.error("Error al obtener datos de transacción:");
     throw err;
   }
 };
