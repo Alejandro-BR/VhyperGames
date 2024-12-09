@@ -24,12 +24,6 @@
     
 }
 
-.logoCerrar {
-    cursor: pointer;
-    background: none;
-    border: none;
-}
-
 .inputGroup input{
     border-radius: 6px;;
     min-height: 40px;
@@ -43,4 +37,16 @@
     justify-content: space-around;
     gap: 2rem;
     padding: 1rem;
+}
+
+@media  (max-width: 720px){
+    .userModal{
+        width: 80vw;
+        
+    }
+    .form{
+        display: flex;
+        flex-direction: column;
+        gap: 3rem;
+    }
 }

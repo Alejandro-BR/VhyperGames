@@ -64,7 +64,7 @@ function PasswordModal({ onClose }) {
     <div className={classes.modalOverlay}>
       <div className={classes.userModal}>
 
-        <form className={classes.formContainer} onSubmit={handleSubmit}>
+        <form className={classes.form} onSubmit={handleSubmit} >
 
           {errorMessage && <div className={classes.error}>{errorMessage}</div>}
           {passwordError && (

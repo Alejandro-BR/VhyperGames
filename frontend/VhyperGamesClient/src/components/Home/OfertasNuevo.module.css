@@ -3,6 +3,7 @@
   flex-direction: column;
   gap: 40px;
   width: 100%;
+  
 }
 
 .buttons {
@@ -11,6 +12,7 @@
   width: auto;
   justify-content: center;
   gap: 30px;
+  font-size: 1.6rem;
 }
 
 .title {

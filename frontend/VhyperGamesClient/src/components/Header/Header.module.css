@@ -200,7 +200,7 @@
     order: 2; /* Íconos estarán debajo de `left`, pero encima de `searchBar` */
     justify-content: center; 
     margin-bottom: 10px;
-    gap: 20px;
+    gap: 10px;
   }
 }
 
