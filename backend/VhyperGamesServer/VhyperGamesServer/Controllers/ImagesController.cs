@@ -41,7 +41,7 @@ public class ImagesController : ControllerBase
     }
 
     [HttpPut("updateImage/{id}")]
-    public async Task<ActionResult<ImageGame>> UpdateAsync(ImageRequestDto updateImage, int imageId)
+    public async Task<ActionResult<ImageGame>> UpdateAsync([FromForm] ImageRequestDto updateImage, int imageId)
     {
         ImageGame imageUpdated = await _service.UpdateAsync(updateImage, imageId);
 

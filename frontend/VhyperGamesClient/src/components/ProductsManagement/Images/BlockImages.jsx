@@ -1,29 +1,39 @@
 import Button from "../../Buttons/Button";
 import classes from "./BlockImages.module.css";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { BASE_URL } from "../../../config";
 import { ImageContext } from "../../../context/ImageContext";
 import { AdminContext } from "../../../context/AdminContext";
+import { updateImages } from "../../../endpoints/ImagesEndpoint"
+import { UPDATE_IMAGE } from "../../../config";
+import { useAuth } from "../../../context/AuthContext";
 
 function BlockImages({ gameId, images }) {
   console.log("gameId recibido en BlockImages:", gameId);
 
-  const [selectedFiles, setSelectedFiles] = useState(null);
-  const { createImage } = useContext(ImageContext);
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [updatePromise, setUpdatePromise] = useState(null);
+  const [updateCounter, setUpdateCounter] = useState(0);
+  const { token } = useAuth();
+
+  const { createImage, deleteImage, updateImage, fetchImages } =
+    useContext(ImageContext);
   const { games } = useContext(AdminContext);
 
-  const [updatePromise, setUpdatePromise] = useState(null);
+  useEffect(() => {
+    fetchImages(gameId);
+  }, [gameId, updateCounter]);
 
   const handleFileChange = (e) => {
-    const file = e.target.files[0]; // Tomar el primer archivo seleccionado
-    console.log("Archivo seleccionado:", file); // Log para verificar el archivo
-    setSelectedFiles(file); // Asignar el archivo directamente
+    const file = e.target.files[0];
+    console.log("Archivo seleccionado:", file);
+    setSelectedFile(file);
   };
 
   const handleNewImage = async (e) => {
     e.preventDefault();
 
-    if (!selectedFiles) {
+    if (!selectedFile) {
       console.error("No se ha seleccionado un archivo.");
       setUpdatePromise("Por favor, selecciona un archivo.");
       return;
@@ -31,29 +41,58 @@ function BlockImages({ gameId, images }) {
 
     try {
       console.log("Iniciando creación de nueva imagen...");
-      console.log("Archivo seleccionado:", selectedFiles);
-
-
       const game = games.find((game) => game.id === Number(gameId));
-      console.log("Juego encontrado:", game);
-
       const gameName = game ? game.title : "Juego desconocido";
       const newPosition = images.length + 1;
       const altText = `${gameName} - Imagen ${newPosition}`;
 
-      const data = { image: selectedFiles };
+      const data = { image: selectedFile };
 
       await createImage(Number(gameId), altText, data);
-  
 
+      setUpdateCounter((prev) => prev + 1);
       setUpdatePromise("Nueva imagen agregada con éxito.");
-      setSelectedFiles(null); // Reiniciar el archivo seleccionado
+      setSelectedFile(null);
     } catch (error) {
       console.error("Error al agregar la nueva imagen:", error);
       setUpdatePromise("Hubo un error al agregar la nueva imagen.");
     }
   };
 
+  const handleModifyImage = async (id) => {
+    // e.preventDefault();
+    // try {
+    //   const imageId = images[iId].id;
+    //   const altText = images[iId].altText;
+    //   const data = { img1: selectedFile };
+      
+    // const formData = new FormData();
+    // formData.append("file", selectedFile); 
+    // formData.append("altText", altText);
+
+    //   await updateImages(UPDATE_IMAGE, gameId, altText, imageId, data, token);
+    //   setUpdateCounter((prev) => prev + 1);
+    //   setUpdatePromise("Juego actualizado con éxito");
+    // } catch (error) {
+    //   console.error("Error al actualizar el juego:", error);
+    //   setUpdatePromise("Hubo un error al actualizar el juego.");
+    // }
+    console.log(id);
+  };
+
+
+  const handleDeleteImage = async (imageId) => {
+    console.log(`Eliminar imagen con ID: ${imageId}`);
+    try {
+      await deleteImage(imageId );
+      setUpdateCounter((prev) => prev + 1);
+      setUpdatePromise("Imagen eliminada con éxito.");
+    } catch (error) {
+      console.error("Error al eliminar la imagen:", error);
+      setUpdatePromise("Hubo un error al eliminar la imagen.");
+    }
+  };
+  
   return (
     <div>
       <h2>Imágenes adicionales:</h2>
@@ -81,22 +120,21 @@ function BlockImages({ gameId, images }) {
             alt={image.alt}
             style={{ width: "150px", height: "150px", display: "block" }}
           />
-          <input type="file" />
+          <input type="file" onChange={handleFileChange} />
           <Button
             variant={"large"}
             color={"azul"}
-            onClick={handleNewImage}
+            onClick={() => handleModifyImage(image.id)}
           >
             Modificar
           </Button>
           <Button
             variant={"large"}
             color={"red"}
-            onClick={handleNewImage}
+            onClick={() => handleDeleteImage(image.id)}
           >
             Borrar Imagen
           </Button>
-          {updatePromise && <div className={classes.updateMsg}>{updatePromise}</div>}
         </div>
       ))}
     </div>
