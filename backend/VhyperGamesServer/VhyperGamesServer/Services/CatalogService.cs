@@ -131,7 +131,10 @@ namespace VhyperGamesServer.Services
             foreach (var title in titles)
             {
                 Game game = await _unitOfWork.GameRepository.GetGameByTitle(title);
-                games.Add(game);
+                if(game != null)
+                {
+                    games.Add(game);
+                }
             }
 
             return _gameCardMapper.ListToDto(games).ToList();
