@@ -29,8 +29,10 @@ export const newImages = async (url, gameId, altText, data, token) => {
 
   const formData = new FormData();
   if (data.image) {
-    formData.append("images", data.image);
+    formData.append("file", data.image);
   }
+
+  formData.append("altText", altText);
 
   const response = await fetch(fullUrl, {
     method: 'POST',
