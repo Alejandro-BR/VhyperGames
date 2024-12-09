@@ -58,7 +58,7 @@ function BlockImages({ gameId, images }) {
   const handleDeleteImage = async (imageId) => {
     console.log(`Eliminar imagen con ID: ${imageId}`);
     try {
-      await deleteImage(imageId);
+      await deleteImage(imageId, Number(gameId));
       setUpdateCounter((prev) => prev + 1);
       setUpdatePromise("Imagen eliminada con éxito.");
     } catch (error) {

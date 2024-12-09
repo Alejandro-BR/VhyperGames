@@ -18,9 +18,7 @@ export const ImageProvider = ({ children }) => {
       const response = await getImages(GET_IMAGES_BY_GAME, gameId, token);
       console.log(response);
       if (response && Array.isArray(response)) {
-        console.log("setImages entra ?")
         setImages(response);
-        console.log("Estado después de setImages:", response);
       } else {
         console.error("Error al obtener las imágenes");
       }
@@ -31,12 +29,8 @@ export const ImageProvider = ({ children }) => {
 
   const createImage = async (gameId, altText, data) => {
     try {
-      const response = await newImages(NEW_IMAGE, gameId, altText, data, token);
-      if (response) {
-        fetchImages();
-      } else {
-        console.error("Error al crear una imagen");
-      }
+      await newImages(NEW_IMAGE, gameId, altText, data, token);
+      fetchImages(gameId);
     } catch (error) {
       console.error("Error en newImages:", error);
     }
@@ -45,16 +39,16 @@ export const ImageProvider = ({ children }) => {
   const updateImage = async (gameId, altText, imageId, data) => {
     try {
       await updateImages(UPDATE_IMAGE, gameId, altText, data, imageId, token);
-      fetchImages();
+      fetchImages(gameId);
     } catch (error) {
       console.error("Error en updateImages:", error);
     }
   };
 
-  const deleteImage = async (imageId) => {
+  const deleteImage = async (imageId, gameId) => {
     try {
       await deleteImages(DELETE_IMAGE, imageId, token);
-      fetchImages();
+      fetchImages(gameId);
     } catch (error) {
       console.error("Error en deleteImages:", error);
     }
