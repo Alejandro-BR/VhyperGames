@@ -4,6 +4,8 @@ table {
   border-radius: 8px;
   border: 4px ridge var(--led-purple);
   text-align: left;
+  color: rgb(230, 230, 230);
+  font-size: 1.5rem;
 }
 
 th {
@@ -13,7 +15,6 @@ th {
 }
 
 td {
-  color: white;
   padding: 6px;
   padding-right: 24px;
   padding-left: 10px;
@@ -21,5 +22,12 @@ td {
 
 .line{
   color: var(--led-purple);
+}
+
+
+@media (max-width:45rem){
+  table {
+    font-size: 1rem;
+  }
 }
 

@@ -1,10 +1,11 @@
 .price-card {
   display: flex;
-  width: 360px;
+  width: 36rem;
   color: white;
   padding: 20px;
   border-radius: 8px;
   gap: 20px;
+  font-size: 1.2rem;
 }
 
 .price-card__left-plane {
@@ -117,4 +118,28 @@
   font-size: 1.25em;
   cursor: pointer;
   border-radius: 4px;
+}
+
+
+@media (max-width: 1080px) {
+
+  .price-card {
+    position: relative;
+    width: 30rem;
+  }
+
+  .price-card__left-plane {
+    display: flex;
+    width: 1rem;
+    height: 32rem;
+    position: absolute;
+    top: -200px;
+    right: 17rem;
+    transform: translateX(-50%) rotate(90deg);
+  }
+
+  .price-card__plane-icon {
+    width: auto;
+    height: 100%;
+  }
 }

@@ -52,3 +52,9 @@
 .rotation {
     transform: rotate(180deg);
 }
+
+@media (max-width:800px){
+    .container {
+        width: 100%;
+    }
+}

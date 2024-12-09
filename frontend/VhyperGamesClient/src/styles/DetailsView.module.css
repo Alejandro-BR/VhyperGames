@@ -6,6 +6,8 @@
   gap: 30px;
   padding-left: 40px;
   padding-right: 20px;
+  font-size: 1.2rem;
+  color: rgb(230, 230, 230);
 }
 
 .details-view__game-data {
@@ -29,9 +31,43 @@
   grid-column: 2;
   grid-row: 3;
   padding-right: 44px;
+  font-size: 1.5rem;
 }
 
 .details-view__reviews {
   grid-column: 1;
   grid-row: 3;
+  font-size: 1.5rem;
+}
+
+@media (max-width:108rem) {
+  .details-view__info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-left: 20px;
+  }
+
+  .details-view__game-data {
+    grid-area: data;
+  }
+
+  .details-view__game-price {
+    grid-area: price;
+  }
+
+  .details-view__game-requirements {
+    padding-left: 0;
+    grid-area: requirements;
+  }
+
+  .details-view__review-entry {
+    grid-area: review-entry;
+  }
+
+  .details-view__reviews {
+    grid-area: reviews;
+  }
+
+
 }

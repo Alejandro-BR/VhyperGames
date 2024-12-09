@@ -5,13 +5,27 @@
 }
 
 .gamedata__description {
+  color: rgb(230, 230, 230);
   text-align: left; 
-  font-size: 30px;
+  font-size: 3rem;
   width: 90%;
 }
 
 .gamedata__sinopsis{
+  color: rgb(230, 230, 230);
   text-align: left;
-  font-size: 20px;
+  font-size: 1.9rem;
   width: 90%;
+}
+
+@media (max-width:45rem){
+  .gamedata__description {
+    font-size: 1.5rem;
+    width: 100%;
+  }
+  
+  .gamedata__sinopsis{
+    font-size: 1.2rem;
+    width: 100%;
+  }
 }
