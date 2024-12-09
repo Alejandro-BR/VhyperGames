@@ -4,6 +4,7 @@
   background-color: var(--header-footer-color);
   color: white;
   padding: 10px;
+  overflow-x: hidden;
 }
 
 .leftFooter {
