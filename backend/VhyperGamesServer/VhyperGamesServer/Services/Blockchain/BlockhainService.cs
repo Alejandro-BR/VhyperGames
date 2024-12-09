@@ -18,9 +18,6 @@ public class BlockhainService
         BigInteger value = ethereumService.ToWei(data.Euros / ethEurPrice);
         HexBigInteger gas = ethereumService.GetGas();
         HexBigInteger gasPrice = await ethereumService.GetGasPriceAsync();
-        Console.WriteLine("Recibiendo datos en GetEthereumInfoAsync...");
-        Console.WriteLine($"NetworkUrl: {data.NetworkUrl}");
-        Console.WriteLine($"Euros: {data.Euros}");
 
         if (string.IsNullOrEmpty(data.NetworkUrl))
         {
