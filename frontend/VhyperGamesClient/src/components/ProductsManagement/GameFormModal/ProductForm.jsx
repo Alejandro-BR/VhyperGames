@@ -4,6 +4,7 @@ import Button from "../../Buttons/Button";
 import { AdminContext } from "../../../context/AdminContext";
 
 function ProductForm({ gameId }) {
+
   const { GetFormGame, updateGameById } = useContext(AdminContext);
   const [formData, setFormData] = useState({
     title: "",
@@ -22,6 +23,7 @@ function ProductForm({ gameId }) {
 
   const [dataLoaded, setDataLoaded] = useState(false);
   const [updatePromise, setUpdatePromise] = useState(null);
+  const [msgColor, setMsgColor] = useState("");
 
   useEffect(() => {
     if (gameId && !dataLoaded) {
@@ -30,6 +32,7 @@ function ProductForm({ gameId }) {
         if (data) {
           setFormData({
             ...data,
+            images: data.images || [],
             releaseDate: data.releaseDate.split("T")[0],
           });
           setDataLoaded(true);
@@ -52,9 +55,11 @@ function ProductForm({ gameId }) {
     try {
       await updateGameById(formData);
       setUpdatePromise("Juego actualizado con éxito");
+      setMsgColor("Success");
     } catch (error) {
       console.error("Error al actualizar el juego:", error);
       setUpdatePromise("Hubo un error al actualizar el juego.");
+      setMsgColor("Error");
     }
   };
 
@@ -168,7 +173,12 @@ function ProductForm({ gameId }) {
       <Button variant={"large"} color={"morado-azul"} type="submit">
         Actualizar
       </Button>
-      {updatePromise && <div className={classes.updateMsg}>{updatePromise}</div>}
+      {updatePromise && (
+        <div className={msgColor === "Success" ? classes.updateMsgSuccess : classes.updateMsgError}>
+          {updatePromise}
+        </div>
+      )}
+
     </form>
   );
 }
