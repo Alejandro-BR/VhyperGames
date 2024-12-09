@@ -22,7 +22,6 @@ function BlockImages({ gameId, images }) {
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
-    console.log("Archivo seleccionado:", file);
     setSelectedFile(file);
   };
 
@@ -36,7 +35,6 @@ function BlockImages({ gameId, images }) {
     }
 
     try {
-      console.log("Iniciando creación de nueva imagen...");
       const game = games.find((game) => game.id === Number(gameId));
       const gameName = game ? game.title : "Juego desconocido";
       const newPosition = images.length + 1;
@@ -56,7 +54,6 @@ function BlockImages({ gameId, images }) {
   };
 
   const handleDeleteImage = async (imageId) => {
-    console.log(`Eliminar imagen con ID: ${imageId}`);
     try {
       await deleteImage(imageId, Number(gameId));
       setUpdateCounter((prev) => prev + 1);
