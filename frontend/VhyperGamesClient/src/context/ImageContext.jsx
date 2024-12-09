@@ -44,12 +44,8 @@ export const ImageProvider = ({ children }) => {
 
   const updateImage = async (gameId, altText, imageId, data) => {
     try {
-      const response = await updateImages(UPDATE_IMAGE, gameId, altText, data, imageId, token);
-      if (response) {
-        fetchImages();
-      } else {
-        console.error("Error al actualizar una imagen");
-      }
+      await updateImages(UPDATE_IMAGE, gameId, altText, data, imageId, token);
+      fetchImages();
     } catch (error) {
       console.error("Error en updateImages:", error);
     }

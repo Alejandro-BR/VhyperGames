@@ -4,9 +4,6 @@ import { useState, useContext, useEffect } from "react";
 import { BASE_URL } from "../../../config";
 import { ImageContext } from "../../../context/ImageContext";
 import { AdminContext } from "../../../context/AdminContext";
-import { updateImages } from "../../../endpoints/ImagesEndpoint"
-import { UPDATE_IMAGE } from "../../../config";
-import { useAuth } from "../../../context/AuthContext";
 
 function BlockImages({ gameId, images }) {
   console.log("gameId recibido en BlockImages:", gameId);
@@ -14,9 +11,8 @@ function BlockImages({ gameId, images }) {
   const [selectedFile, setSelectedFile] = useState(null);
   const [updatePromise, setUpdatePromise] = useState(null);
   const [updateCounter, setUpdateCounter] = useState(0);
-  const { token } = useAuth();
 
-  const { createImage, deleteImage, updateImage, fetchImages } =
+  const { createImage, deleteImage, fetchImages } =
     useContext(ImageContext);
   const { games } = useContext(AdminContext);
 
@@ -59,32 +55,10 @@ function BlockImages({ gameId, images }) {
     }
   };
 
-  const handleModifyImage = async (id) => {
-    // e.preventDefault();
-    // try {
-    //   const imageId = images[iId].id;
-    //   const altText = images[iId].altText;
-    //   const data = { img1: selectedFile };
-      
-    // const formData = new FormData();
-    // formData.append("file", selectedFile); 
-    // formData.append("altText", altText);
-
-    //   await updateImages(UPDATE_IMAGE, gameId, altText, imageId, data, token);
-    //   setUpdateCounter((prev) => prev + 1);
-    //   setUpdatePromise("Juego actualizado con éxito");
-    // } catch (error) {
-    //   console.error("Error al actualizar el juego:", error);
-    //   setUpdatePromise("Hubo un error al actualizar el juego.");
-    // }
-    console.log(id);
-  };
-
-
   const handleDeleteImage = async (imageId) => {
     console.log(`Eliminar imagen con ID: ${imageId}`);
     try {
-      await deleteImage(imageId );
+      await deleteImage(imageId);
       setUpdateCounter((prev) => prev + 1);
       setUpdatePromise("Imagen eliminada con éxito.");
     } catch (error) {
@@ -92,7 +66,7 @@ function BlockImages({ gameId, images }) {
       setUpdatePromise("Hubo un error al eliminar la imagen.");
     }
   };
-  
+
   return (
     <div>
       <h2>Imágenes adicionales:</h2>
@@ -120,14 +94,6 @@ function BlockImages({ gameId, images }) {
             alt={image.alt}
             style={{ width: "150px", height: "150px", display: "block" }}
           />
-          <input type="file" onChange={handleFileChange} />
-          <Button
-            variant={"large"}
-            color={"azul"}
-            onClick={() => handleModifyImage(image.id)}
-          >
-            Modificar
-          </Button>
           <Button
             variant={"large"}
             color={"red"}
