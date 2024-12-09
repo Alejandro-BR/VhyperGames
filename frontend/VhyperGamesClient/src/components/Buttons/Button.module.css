@@ -12,29 +12,30 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
+  margin: 2px;
 }
 
 button:active {
-  transform: translateY(4px);
+  transform: translateY(2px);
 }
 
 /* Variantes de tamaños */
 
 button.short {
-  width: 100px; 
-  height: 30px;
-  font-size: 1em; 
-}
-
-button.large {
-  width: 160px; 
-  height: 40px;   
-  font-size: 1.25em;
+  width: 10rem; 
+  height: 3rem;
+  font-size: 1.2rem; 
 }
 
 button.medium {
-  width: 100px; 
-  height: 52px;  
+  width: 10rem; 
+  height: 5rem;  
+}
+
+button.large {
+  width: 16rem; 
+  height: 4rem;   
+  font-size: 1.3rem;
 }
 
 /* Variantes de Colores */

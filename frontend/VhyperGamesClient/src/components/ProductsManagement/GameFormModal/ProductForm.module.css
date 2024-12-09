@@ -6,25 +6,29 @@
     flex-direction: column;
     gap: 20px;
     color: rgb(24, 24, 24);
+    font-size: 1.5rem;
 }
 
 .formGroup {
     display: flex;
     flex-direction: column;
-    justify-items: space-between;
+    justify-content: space-between;
     gap: 10px;
 }
 
 .horizontalFormGroup {
-    width: 100%;
-    display: flex;
-    gap: 30px;
+    width: 30vw;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    justify-content: baseline;
+    align-items: baseline;
+    gap: 10px;
 }
 
 .productForm input,
 .productForm textarea,
 .productForm select {
-    width: 40%;
+    width: 60%;
     background-color: #1c1e3a;
     color: #e4e4e4;
     border: 1px solid var(--principal-blue, #6a00f4);
@@ -35,8 +39,6 @@
 }
 
 .productForm textarea {
-    max-width: 40%;
-    min-width: 40%;
     resize: vertical;
     overflow: visible;
 
@@ -47,7 +49,7 @@
 }
 
 .productForm textarea {
-    height: 3rem;
+    height: 5rem;
 }
 
 .productForm input::placeholder,
@@ -59,10 +61,14 @@
     min-width: fit-content;
 }
 
-.numInput {
-    width: 30%;
+.productForm .numInput {
+    width: 6rem;
 }
 
-.updateMsg {
+.updateMsgSuccess {
+    color: rgb(181, 253, 203);
+}
 
+.updateMsgError {
+    color: rgb(172, 56, 41);
 }

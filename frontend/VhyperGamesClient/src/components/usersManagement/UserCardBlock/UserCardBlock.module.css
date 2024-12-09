@@ -7,3 +7,7 @@
     grid-column-gap: 50px;
     margin-left: 5vw;
 }
+
+@media (max-width:93rem) {
+    .productsList {}
+}
