@@ -32,7 +32,6 @@
   display: flex;
   justify-content: space-between;
   width: auto;
-  font-size: 1rem;
   margin: 0 10px 0 10px;
 }
 
@@ -65,7 +64,7 @@
   }  
 }
 
-@media (max-width: 720px) {
+@media (max-width: 780px) {
   .container{
     display: flex;
     flex-direction: row;
