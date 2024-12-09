@@ -177,7 +177,7 @@
 
 /* responsive para movil*/
 
-@media (max-width: 720px) {
+@media (max-width: 780px) {
   .header {
     flex-wrap: wrap;
     height: auto; 
@@ -187,7 +187,12 @@
     order: 1; /* Logo y botón van primero */
     justify-content: center; 
     margin-bottom: 10px; 
-    gap: 10px;
+    gap: 6px;
+  }
+
+  .logoImg{
+    width: 7rem;
+    height: auto;
   }
 
   .searchBar {
@@ -200,7 +205,7 @@
     order: 2; /* Íconos estarán debajo de `left`, pero encima de `searchBar` */
     justify-content: center; 
     margin-bottom: 10px;
-    gap: 10px;
+    gap: 6px;
   }
 }
 
