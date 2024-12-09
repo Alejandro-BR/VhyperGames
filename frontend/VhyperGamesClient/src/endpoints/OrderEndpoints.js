@@ -26,10 +26,6 @@ export const getUserOrders = async (url, token) => {
     },
   });
 
-  if (!response.ok) {
-    const errorText = await response.text();
-    throw new Error(`Error al obtener las órdenes: ${response.status} - ${errorText}`);
-  }
 
   const data = await response.json();
   return data;

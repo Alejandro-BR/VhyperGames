@@ -12,3 +12,20 @@
     margin-bottom: -6px;
     width: 100%;
 }
+
+@media (max-width: 720px) {
+    .carrouselContainer{
+      margin-top: 0;
+    
+    }  
+
+    .carrousel{
+        border-radius: 0%;
+        box-shadow: none;
+        height: 20rem;
+    }
+    .bannerImg{
+        height: 20rem;
+
+    }
+}

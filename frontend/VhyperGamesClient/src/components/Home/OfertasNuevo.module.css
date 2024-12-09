@@ -33,3 +33,17 @@
 .text {
   color: white;
 }
+
+@media (max-width: 720px) {
+  .contenedor{
+    gap: 10px;
+  }
+  .buttons{
+    margin: 0%;
+    padding: 2rem;
+  }
+
+  .title{
+    font-size: 1.4rem;
+  }
+}

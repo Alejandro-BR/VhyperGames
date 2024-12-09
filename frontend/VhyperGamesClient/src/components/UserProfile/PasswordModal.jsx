@@ -5,13 +5,16 @@ import Button from "../Buttons/Button";
 import { updatePassword } from "../../endpoints/UserEndpoints";
 import { useAuth } from "../../context/AuthContext";
 import { UPDATE_PASSWORD } from "../../config";
+import { validation } from "../../utils/validationForm";
 
 function PasswordModal({ onClose }) {
-  const { token } = useAuth(); 
-  const passwordRef = useRef(null); 
-  const passwordConfirmRef = useRef(null); 
-  const [promesaError, setPromesaError] = useState(null); 
-  const [isLoading, setIsLoading] = useState(false); 
+  const { token } = useAuth();
+  const passwordRef = useRef(null);
+  const passwordConfirmRef = useRef(null);
+  const [promesaError, setPromesaError] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [passwordError, setPasswordError] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -24,13 +27,34 @@ function PasswordModal({ onClose }) {
       return;
     }
 
+    if (!validation.isValidPassword(passwordValue)) {
+      setPasswordError(
+        <div>
+          <p style={{ fontWeight: "bold", color: "#a440d2" }}>
+            La contraseña debe incluir:
+          </p>
+          <ul style={{ paddingLeft: "20px" }}>
+            <li style={{ color: "#a440d2" }}>Al menos 8 caracteres.</li>
+            <li style={{ color: "#a440d2" }}>Al menos una letra mayúscula.</li>
+            <li style={{ color: "#a440d2" }}>Al menos una letra minúscula.</li>
+            <li style={{ color: "#a440d2" }}>Al menos un número.</li>
+            <li style={{ color: "#a440d2" }}>
+              Al menos un carácter especial (@, \, /, =, etc).
+            </li>
+          </ul>
+        </div>
+      );
+      return;
+    }
+
     try {
       setIsLoading(true);
       await updatePassword(UPDATE_PASSWORD, passwordValue, token);
-      onClose(); 
+      onClose();
     } catch (error) {
       console.error("Error al actualizar la contraseña:", error);
       setPromesaError("Error al actualizar la contraseña");
+      setErrorMessage(error.message);
     } finally {
       setIsLoading(false);
     }
@@ -41,6 +65,11 @@ function PasswordModal({ onClose }) {
       <div className={classes.userModal}>
 
         <form className={classes.formContainer} onSubmit={handleSubmit}>
+
+          {errorMessage && <div className={classes.error}>{errorMessage}</div>}
+          {passwordError && (
+            <div className={classes.error}>{passwordError}</div>
+          )}
           <div className={classes.inputGroup}>
             <p>Contraseña:</p>
             <input

@@ -1,7 +1,6 @@
 .container {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   color: white;
   max-width: 20rem;
   gap: 10px;
@@ -22,12 +21,18 @@
 .gameCardImg {
   border-radius: 2px 2px 0 0;
 }
+.info{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
 
 .cardTitle {
   display: flex;
   justify-content: space-between;
   width: auto;
-  font-size: 10px;
+  font-size: 1rem;
   margin: 0 10px 0 10px;
 }
 
@@ -51,4 +56,39 @@
 
 .noStock {
   color: var(--principal-red);
+}
+
+@media (max-width: 1280px) {
+  .container{
+    max-width: 14rem;
+    max-height: 25rem;
+  }  
+}
+
+@media (max-width: 720px) {
+  .container{
+    display: flex;
+    flex-direction: row;
+    max-width: 100%;
+    font-size: 2rem;
+    height: auto;
+    padding: 0%;
+    justify-content: start;
+  }  
+
+  .gameCardImg{
+    max-width: 16rem;
+    height: 20rem;
+  }
+  .info{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 100%;
+    height: auto;
+  }
+  .cardTitle{
+   font-size: 1.5rem;
+   justify-content: space-between;
+  }
 }

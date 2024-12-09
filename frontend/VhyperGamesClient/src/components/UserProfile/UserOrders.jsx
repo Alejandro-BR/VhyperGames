@@ -85,7 +85,7 @@ function UserOrders() {
                     ))}
                 </ul>
             ) : (
-                <p>No hay órdenes disponibles.</p>
+                <p>No has realizado ningun pedido todavia.</p>
             )}
         </div>
     );
