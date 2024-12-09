@@ -40,7 +40,7 @@ function UserModal({ onClose, userInfo }) {
         <div className={classes.modalOverlay}>
             <div className={classes.userModal}>
 
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit} className={classes.form}>
                     <div className={classes.inputGroup}>
                         <p>Nombre:</p>
                         <input
