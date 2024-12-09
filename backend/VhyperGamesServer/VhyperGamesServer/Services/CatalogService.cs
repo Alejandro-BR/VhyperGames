@@ -125,13 +125,13 @@ namespace VhyperGamesServer.Services
 
         public async Task<List<GameCardDto>> GetSaleGames()
         {
-            string[] titles = { "The Witcher III", "Minecraft", "Hollow Knight", "Spore", "GRIS" };
+            int[] ids = { 1, 30, 29, 7, 8 };
             List<Game> games = new List<Game>();
 
-            foreach (var title in titles)
+            foreach (int id in ids)
             {
-                Game game = await _unitOfWork.GameRepository.GetGameByTitle(title);
-                if(game != null)
+                Game game = await _unitOfWork.GameRepository.GetByIdAsync(id, false, true);
+                if (game != null)
                 {
                     games.Add(game);
                 }
