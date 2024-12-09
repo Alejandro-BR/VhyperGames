@@ -38,6 +38,14 @@ button.large {
   font-size: 1.3rem;
 }
 
+@media (max-width: 45rem) {
+  button.large {
+    width: 10rem; 
+    height: 4rem;   
+    font-size: 1.3rem;
+  }
+}
+
 /* Variantes de Colores */
 
 button.morado {

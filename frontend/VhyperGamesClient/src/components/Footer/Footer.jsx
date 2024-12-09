@@ -24,9 +24,7 @@ function Footer() {
 
       <div className={classes.rightFooter}>
 
-        <div className={classes.buttons}>
-
-          <div className={classes.onlyButtons}>
+          <div className={classes.buttons}>
             <Button variant="large" color="morado" onClick={messageCompany}>
               DRM FREE
             </Button>
@@ -41,8 +39,6 @@ function Footer() {
               </Button>
             </a>
           </div>
-
-        </div>
 
         <div className={classes.iconsFooter}>
           <p>Síguenos </p>
