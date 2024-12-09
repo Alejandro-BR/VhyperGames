@@ -66,9 +66,9 @@
 }
 
 .updateMsgSuccess {
-    color: rgb(181, 253, 203);
+    color: var(--principal-green);
 }
 
 .updateMsgError {
-    color: rgb(172, 56, 41);
+    color: var(--principal-red);
 }
