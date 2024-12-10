@@ -6,9 +6,9 @@ import { useAuth } from "../../context/AuthContext";
 import { CONFIRM_RESERVE } from "../../config";
 import { fetchTransactionData, verifyTransaction } from "../../endpoints/EthereumEndpoints";
 import MetaMaskLogo from "@metamask/logo"; 
-import classes from "./ethereum.module.css";
+import classes from "./Ethereum.module.css";
 import Button from "../Buttons/Button";
-import { updateLocalStorage, deleteLocalStorage } from "../../utils/keep";
+import { updateLocalStorage } from "../../utils/keep";
 
 function Ethereum() {
   const [wallet, setWallet] = useState(null);
