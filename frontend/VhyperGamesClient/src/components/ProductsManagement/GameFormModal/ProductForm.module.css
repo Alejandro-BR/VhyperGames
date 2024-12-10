@@ -6,7 +6,7 @@
     flex-direction: column;
     gap: 20px;
     color: rgb(24, 24, 24);
-    font-size: 1.5rem;
+    font-size: 1.8rem;
 }
 
 .formGroup {
@@ -21,7 +21,7 @@
     display: grid;
     grid-template-columns: 2fr 1fr 1fr;
     justify-content: baseline;
-    align-items: baseline;
+    align-items: end;
     gap: 10px;
 }
 
@@ -34,7 +34,6 @@
     border: 1px solid var(--principal-blue, #6a00f4);
     border-radius: 5px;
     padding: 10px;
-    font-size: 14px;
     outline: none;
 }
 
@@ -71,4 +70,10 @@
 
 .updateMsgError {
     color: var(--principal-red);
+}
+
+@media (max-width:45rem) {
+    .productForm input[type="text"] {
+        width: 80vw;   
+    }
 }

@@ -44,18 +44,14 @@ function ImagesManager({ gameId }) {
   };
 
   return (
-    <div>
+    <div className={classes.container}>
     {/* Portada */}
     {images.length > 0 ? (
       <>
         <img
           src={`${BASE_URL}${images[0].imageUrl}?timestamp=${Date.now()}`}
           alt={images[0].altText}
-          style={{
-            maxWidth: "200px",
-            maxHeight: "233px",
-            objectFit: "contain"
-          }}
+          className={classes.img}
         />
         <br />
         <input type="file" onChange={handleFileChange} />

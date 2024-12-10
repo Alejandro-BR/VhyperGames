@@ -64,9 +64,9 @@ function BlockImages({ gameId, images }) {
   };
 
   return (
-    <div>
-      <h2>Imágenes adicionales:</h2>
+    <div className={classes.additionalImgs}>
 
+      <p>Imágenes adicionales:</p>
       <input type="file" onChange={handleFileChange} />
 
       <Button
@@ -79,26 +79,28 @@ function BlockImages({ gameId, images }) {
 
       {updatePromise && <div className={classes.updateMsg}>{updatePromise}</div>}
 
-      {images.slice(1).map((image) => (
-        <div
-          key={image.id}
-          style={{ marginBottom: "20px" }}
-          className={classes.imgBlock}
-        >
-          <img
-            src={`${BASE_URL}${image.imageUrl}`}
-            alt={image.alt}
-            style={{ width: "150px", height: "150px", display: "block" }}
-          />
-          <Button
-            variant={"large"}
-            color={"red"}
-            onClick={() => handleDeleteImage(image.id)}
+      <div className={classes.imgList}>
+        {images.slice(1).map((image) => (
+          <div
+            key={image.id}
+            className={classes.imgContainer}
           >
-            Borrar Imagen
-          </Button>
-        </div>
-      ))}
+            <img
+              src={`${BASE_URL}${image.imageUrl}`}
+              alt={image.alt}
+              className={classes.img}
+            />
+            <Button
+              variant={"large"}
+              color={"red"}
+              onClick={() => handleDeleteImage(image.id)}
+            >
+              Borrar Imagen
+            </Button>
+          </div>
+        ))}
+      </div>
+
     </div>
   );
 }
