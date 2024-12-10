@@ -40,10 +40,28 @@
     align-self: center;
 }
 
-@media (max-width:1300px){
+@media (max-width:1300px) {
     .gamesList {
         display: flex;
         flex-direction: column;
         gap: 20px;
+    }
+
+    .gameCard {
+        max-width: 300px;
+    }
+}
+
+@media (max-width:400px) {
+    .gameCard {
+        max-width: 250px;
+    }
+
+    .img{
+        max-width: 150px;
+    }
+
+    .gameCard__line {
+        width: 90vw;
     }
 }

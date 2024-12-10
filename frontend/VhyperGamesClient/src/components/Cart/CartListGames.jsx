@@ -34,7 +34,7 @@ const CartListGames = () => {
           return (
             <article key={game.idGame} className={classes.gameCard}>
               <div className={classes.gameCard__left}>
-                <img src={`${BASE_URL}${game.imageGame.imageUrl}`} alt={game.imageGame.altText} />
+                <img className={classes.img} src={`${BASE_URL}${game.imageGame.imageUrl}`} alt={game.imageGame.altText} />
               </div>
 
               <div className={classes.gameCard__right}>
