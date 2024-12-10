@@ -1,7 +1,7 @@
 import { createContext, useState } from "react";
 import { useAuth } from "./AuthContext";
 import { createReserve, getReserveDetails, confirmReserve } from "../endpoints/ReserveEndpoints";
-import { getVarLS, updateLocalStorage } from "../utils/keep";
+import { getVarLS, deleteLocalStorage } from "../utils/keep";
 
 import { CREATE_RESERVE } from "../config";
 
@@ -94,8 +94,9 @@ export const CheckoutProvider = ({ children }) => {
 
     try {
       const orderId = await confirmReserve(url ,reserveId, token);
-      console.log(orderId + " Esto es el order id");
       setOrderId(orderId);
+      setReserve([]);
+      deleteLocalStorage("reserve");
       return orderId;
     } catch (error) {
       console.error("Error al confirmar la reserva:", error.message);
