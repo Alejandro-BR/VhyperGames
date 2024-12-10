@@ -36,7 +36,7 @@ public class MyDbContext : DbContext
     {
         //AppDomain obtiene el directorio donde se ejecuta la aplicación
         string baseDir = AppDomain.CurrentDomain.BaseDirectory;
-        string connectionString = "Server=db10878.databaseasp.net; Database=db10878; Uid=db10878; Pwd=jA=5-y4R3Qm?;";
+        string conectionString = Environment.GetEnvironmentVariable("DB_CONFIG");
 
         // Se configura Sqlite como proveedor de BD pasando la ruta de archivo ("vhypergames.db) en el directorio base de la aplicacion
 #if DEBUG
