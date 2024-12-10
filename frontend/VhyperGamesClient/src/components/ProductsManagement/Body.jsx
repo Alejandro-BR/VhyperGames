@@ -1,4 +1,4 @@
-import classes from "./body.module.css";
+import classes from "./Body.module.css";
 import AddProductButton from "./AddProductButton";
 import SearchBarProduct from "./SearchBar/SearchBarProduct";
 
