@@ -1,4 +1,4 @@
-table {
+.tableInfo {
   width: fit-content;
   background-color: var(--header-footer-color);
   border-radius: 8px;
@@ -8,29 +8,26 @@ table {
   font-size: 1.5rem;
 }
 
-th {
+.ths {
   font-size: 1.25em;
   padding: 6px;
   padding-left: 10px;
 }
 
-td {
+.tds {
   padding: 6px;
   padding-right: 24px;
   padding-left: 10px;
 }
 
-.line{
-  color: var(--led-purple);
-}
 
 
 @media (max-width:45rem){
-  table {
+  .tableInfo {
     font-size: 1.6rem;
   }
 
-  th {
+  .ths {
     font-size: 1.4em;}
 }
 
