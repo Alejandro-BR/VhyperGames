@@ -1,7 +1,7 @@
 import { createContext, useState } from "react";
 import { useAuth } from "./AuthContext";
 import { createReserve, getReserveDetails, confirmReserve } from "../endpoints/ReserveEndpoints";
-import { getVarLS, deleteLocalStorage } from "../utils/keep";
+import { getVarLS, updateLocalStorage } from "../utils/keep";
 
 import { CREATE_RESERVE } from "../config";
 
@@ -38,7 +38,6 @@ export const CheckoutProvider = ({ children }) => {
       if (!reserve || !reserve.items || reserve.items.length === 0) {
         setMessage("No se encontró una reserva válida.");
         console.error("No se encontró una reserva válida.", reserve);
-        clear();
         return null;
       }
 
@@ -95,7 +94,7 @@ export const CheckoutProvider = ({ children }) => {
 
     try {
       const orderId = await confirmReserve(url ,reserveId, token);
-      // console.log(orderId + " Esto es el order id");
+      console.log(orderId + " Esto es el order id");
       setOrderId(orderId);
       return orderId;
     } catch (error) {
@@ -103,13 +102,6 @@ export const CheckoutProvider = ({ children }) => {
       return -1;
     }
   };
-
-  const clear = () => {
-    setReserve([]);
-    setOrderId(null);
-    deleteLocalStorage("orderId");
-  };
-  
 
   const contextValue = {
     setModeOfPay,
@@ -122,7 +114,6 @@ export const CheckoutProvider = ({ children }) => {
     handleConfirmReserve,
     orderId,
     setOrderId,
-    clear
   };
 
   return (

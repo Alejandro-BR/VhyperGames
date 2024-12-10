@@ -11,12 +11,12 @@ import { useNavigate } from "react-router-dom";
 
 function ConfirmationMsg() {
   const { token } = useAuth();
-  const { orderId, clear } = useContext(CheckoutContext);
+  const { orderId } = useContext(CheckoutContext);
   const [status, setStatus] = useState("");
   const [orderData, setOrderData] = useState(null);
   const [error, setError] = useState(null);
   const { refreshCart } = useContext(CartContext);
-  // const { navigate } = useNavigate();
+  const { navigate } = useNavigate();
 
   useEffect(() => {
     const fetchOrderData = async () => {
@@ -32,7 +32,7 @@ function ConfirmationMsg() {
       } catch (err) {
         console.error("Error al obtener los datos del pedido:", err.message);
         setStatus("failure");
-        clear();
+        // clear();
         setError(err.message);
       }
     };
@@ -48,19 +48,19 @@ function ConfirmationMsg() {
   useEffect(() => {
     if (status === "failure") {
       const timer = setTimeout(() => {
-        // navigate("/");
-        clear();
+        navigate("/");
+        // clear();
       }, 1500);
 
       return () => clearTimeout(timer);
     }
   }, [status]);
 
-  useEffect(() => {
-    return () => {
-      clear();
-    };
-  }, [clear]);
+  // useEffect(() => {
+  //   return () => {
+  //     clear();
+  //   };
+  // }, [clear]);
 
   if (status === "success" && orderData) {
     return (
