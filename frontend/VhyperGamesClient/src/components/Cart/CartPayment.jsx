@@ -77,10 +77,8 @@ function CartPayment() {
             }
 
             const reserveId = await handleCreateReserve(paymentMode, true);
-            console.log("ID de la reserva ANTES DEL ERROR:", reserveId)
             
             if (!reserveId) {
-                console.log("ID de la reserva:", reserveId)
                 console.error("No se pudo crear la reserva después del login.");
                 return;
             }

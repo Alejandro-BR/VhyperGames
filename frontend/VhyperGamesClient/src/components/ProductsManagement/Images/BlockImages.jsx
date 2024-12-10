@@ -6,7 +6,6 @@ import { ImageContext } from "../../../context/ImageContext";
 import { AdminContext } from "../../../context/AdminContext";
 
 function BlockImages({ gameId, images }) {
-  console.log("gameId recibido en BlockImages:", gameId);
 
   const [selectedFile, setSelectedFile] = useState(null);
   const [updatePromise, setUpdatePromise] = useState(null);

@@ -65,7 +65,6 @@ function CheckoutForm() {
   const handleComplete = async () => {
     try {
       const status = await getSessionStripe (PAYMENT_STATUS, reserveId, token);
-      console.log("Pagado o no:", status.paymentStatus)
       if (status.paymentStatus === "paid") {
         const orderId = await handleConfirmReserve(CONFIRM_RESERVE, reserveId);
         navigate("/paymentConfirmation", { state: { status: "success", orderId } });

@@ -22,9 +22,6 @@ function Header() {
   const { token, username, logout, decodedToken } = useAuth();
   const navigate = useNavigate();
   const timerRef = useRef(null);
-
-  console.log(decodedToken?.role);
-
   // Manejar clic en el ícono de usuario
   const handleUserClick = () => {
     if (!token) {

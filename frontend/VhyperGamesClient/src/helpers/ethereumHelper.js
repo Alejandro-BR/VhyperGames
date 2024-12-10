@@ -6,10 +6,7 @@ export async function fetchReserveTotal(url, reserveId, token) {
     throw new Error("Token no proporcionado. Verifica tu autenticación.");
   }
 
-  console.log("Token utilizado en la solicitud:", authToken);
-
   const fullUrl = `${url}?reserveId=${reserveId}`;
-  console.log("Enviando solicitud a:", fullUrl);
 
   try {
     const response = await fetch(fullUrl, {
