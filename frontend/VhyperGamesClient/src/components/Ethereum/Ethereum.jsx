@@ -139,7 +139,7 @@ function Ethereum() {
 
 
           <p>{transactionData.equivalentEthereum} ETH
-            <img src="./icon/ethereum.svg" className={classes.ethereumLogo}></img>
+            <img src="/icon/ethereum.svg" className={classes.ethereumLogo}></img>
           </p>
         </div>
       ) : (
