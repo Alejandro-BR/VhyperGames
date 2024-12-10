@@ -24,21 +24,26 @@ function Footer() {
 
       <div className={classes.rightFooter}>
 
-          <div className={classes.buttons}>
-            <Button variant="large" color="morado" onClick={messageCompany}>
-              DRM FREE
-            </Button>
+        <div className={classes.buttons}>
+          <Button variant="large" color="morado" onClick={() => navigate("/sobre-nosotros")}>
+            Sobre nosotros
+          </Button>
 
-            <Button variant="large" color="morado" onClick={() => navigate("/sobre-nosotros")}>
-              Sobre nosotros
+          <a href="https://bookflix-daw.vercel.app/" target="_blank" rel="noopener noreferrer">
+            <Button variant="large" color="gradient-green" >
+              BOOKFLIX
             </Button>
+          </a>
 
-            <a href="https://github.com/VhyperGames" target="_blank" rel="noopener noreferrer">
-              <Button variant="large" color="azul">
-                <span className={classes.logoGit}>< img src="/icon/cib_github.svg" alt="GitHub" /></span>‎ ‎ ‎ GitHub
-              </Button>
-            </a>
-          </div>
+
+
+
+          <a href="https://github.com/VhyperGames" target="_blank" rel="noopener noreferrer">
+            <Button variant="large" color="azul">
+              <span className={classes.logoGit}>< img src="/icon/cib_github.svg" alt="GitHub" /></span>‎ ‎ ‎ GitHub
+            </Button>
+          </a>
+        </div>
 
         <div className={classes.iconsFooter}>
           <p>Síguenos </p>
