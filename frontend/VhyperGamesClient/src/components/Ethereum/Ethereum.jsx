@@ -1,4 +1,4 @@
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext, useEffect, useRef } from "react";
 import Web3 from "web3";
 import { useNavigate } from "react-router-dom";
 import { CheckoutContext } from "../../context/CheckoutContext";
@@ -21,6 +21,7 @@ function Ethereum() {
   const token = useAuth();
   const { reserveId, handleConfirmReserve } = useContext(CheckoutContext);
   const navigate = useNavigate();
+  const logoRef = useRef(null);
 
   // Logo de MetaMask
   useEffect(() => {
@@ -32,12 +33,9 @@ function Ethereum() {
       slowDrift: true,
     });
 
-    const logoContainer = document.getElementById("metamask-logo");
-    if (logoContainer) {
-      logoContainer.appendChild(viewer.container);
+    if (logoRef.current) {
+      logoRef.current.appendChild(viewer.container);
     }
-    
-
     return () => {
       viewer.stopAnimation();
     };
@@ -133,9 +131,7 @@ function Ethereum() {
     <div className={classes.paymentContainer}>
       <h1>Pagar con Ethereum</h1>
 
-      <div className={classes.logoContainer}>
-        <div id="metamask-logo"></div>
-      </div>
+      <div className={classes.logoContainer} ref={logoRef}></div>
 
       {transactionData ? (
         <div className={classes.transactionInfo}>
