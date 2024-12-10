@@ -126,7 +126,6 @@ function Ethereum() {
     } finally {
       setLoading(false);
       setTransactionProcessing(false);
-      deleteLocalStorage("equivalentEthereum");
     }
   }
 

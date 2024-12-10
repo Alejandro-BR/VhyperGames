@@ -11,6 +11,7 @@ function PaymentConfirmation() {
   useEffect(() => {
     return () => {
       deleteLocalStorage("orderId");
+      deleteLocalStorage("equivalentEthereum");
     };
   }, []);
   
