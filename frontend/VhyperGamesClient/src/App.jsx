@@ -14,7 +14,7 @@ import { AdminProvider } from "./context/AdminContext";
 import { ImageProvider } from "./context/ImageContext";
 import UserPage from "./pages/UserPage";
 import Ethereum from "./components/Ethereum/Ethereum";
-// import ProductManagement from "./pages/ProductManagement";
+import ProductManagement from "./pages/ProductManagement";
 import UsersManagement from "./pages/UsersManagement";
 import PrivateRoute from "./PrivateRoute";
 import ProductManagementForm from "./pages/ProductManagementForm";
@@ -38,14 +38,14 @@ const routeDefinition = createRoutesFromElements(
     <Route path="paymentConfirmation" element={<PaymentConfirmation />} />
     <Route path="user" element={<UserPage />} />
     <Route path="EthereumCheckout" element={<Ethereum />} />
-    {/* <Route
+    <Route
       path="products-management"
       element={
         <PrivateRoute>
           <ProductManagement />
         </PrivateRoute>
       }
-    /> */}
+    />
     <Route
       path="product-management-form/:id"  
       element={
