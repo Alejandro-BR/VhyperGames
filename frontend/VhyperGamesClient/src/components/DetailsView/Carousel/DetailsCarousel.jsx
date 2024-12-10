@@ -1,6 +1,6 @@
 import { useState } from "react";
 import classes from "./DetailsCarousel.module.css";
-import { API_BASE_URL } from "../../../config";
+import { BASE_URL } from "../../../config";
 
 function DetailsCarousel({ imgGames }) {
   const imgSource = imgGames;
@@ -47,7 +47,7 @@ function DetailsCarousel({ imgGames }) {
         <article className={classes.img}>
           {imgSource && imgSource.length > 0 ? (
             <img
-              src={`${API_BASE_URL}${imgSource[currentIndex]?.imageUrl}`}
+              src={`${BASE_URL}${imgSource[currentIndex]?.imageUrl}`}
               alt={imgSource[currentIndex]?.altText || "Imagen no disponible"}
             />
           ) : (
