@@ -8,7 +8,7 @@ import { fetchTransactionData, verifyTransaction } from "../../endpoints/Ethereu
 import MetaMaskLogo from "@metamask/logo"; 
 import classes from "./ethereum.module.css";
 import Button from "../Buttons/Button";
-import { updateLocalStorage } from "../../utils/keep";
+import { updateLocalStorage, deleteLocalStorage } from "../../utils/keep";
 
 function Ethereum() {
   const [wallet, setWallet] = useState(null);
@@ -126,6 +126,7 @@ function Ethereum() {
     } finally {
       setLoading(false);
       setTransactionProcessing(false);
+      deleteLocalStorage("equivalentEthereum");
     }
   }
 

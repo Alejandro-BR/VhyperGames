@@ -38,6 +38,7 @@ export const CheckoutProvider = ({ children }) => {
       if (!reserve || !reserve.items || reserve.items.length === 0) {
         setMessage("No se encontró una reserva válida.");
         console.error("No se encontró una reserva válida.", reserve);
+        clear();
         return null;
       }
 
@@ -103,7 +104,8 @@ export const CheckoutProvider = ({ children }) => {
     }
   };
 
-  const clearOrderId = () => {
+  const clear = () => {
+    setReserve([]);
     setOrderId(null);
     deleteLocalStorage("orderId");
   };
@@ -120,7 +122,7 @@ export const CheckoutProvider = ({ children }) => {
     handleConfirmReserve,
     orderId,
     setOrderId,
-    clearOrderId
+    clear
   };
 
   return (
