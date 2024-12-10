@@ -14,8 +14,8 @@
 /* Contenedor del logo y botón de catálogo */
 .left {
   display: flex;
-  align-items: center;
-  gap: 100px;
+  justify-content: space-around;
+  width: 20%;
 }
 
 .logoImg {
@@ -106,7 +106,8 @@
 .icons {
   display: flex;
   align-items: center;
-  gap: 50px;
+  justify-content: space-around;
+  width: 20%;
 }
 
 
@@ -176,11 +177,7 @@
 }
 
 /* responsive para movil*/
-@media (max-width: 1280px){
-  .left{
-    gap: 5rem;
-  }
-}
+
 
 @media (max-width: 780px) {
   .header {
@@ -190,9 +187,9 @@
 
   .left {
     order: 1; /* Logo y botón van primero */
-    justify-content: center; 
+    
     margin-bottom: 10px; 
-    gap: 6px;
+    width: 50%;
   }
 
   .logoImg{
@@ -208,9 +205,9 @@
 
   .icons {
     order: 2; /* Íconos estarán debajo de `left`, pero encima de `searchBar` */
-    justify-content: center; 
+    
     margin-bottom: 10px;
-    gap: 6px;
+    width: 50%;
   }
 }
 
