@@ -16,7 +16,6 @@ export const ImageProvider = ({ children }) => {
   const fetchImages = async (gameId) => {
     try {
       const response = await getImages(GET_IMAGES_BY_GAME, gameId, token);
-      console.log(response);
       if (response && Array.isArray(response)) {
         setImages(response);
       } else {

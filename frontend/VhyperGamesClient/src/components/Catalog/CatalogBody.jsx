@@ -55,8 +55,6 @@ function CatalogBody({ initialSearchText = "", initialDrmFree = -1, initialBit =
     const fetchJuegos = async (filter) => {
         setLoading(true);
         try {
-            console.log("fetchJuegos called with filter:", filter);
-
             let queryParams = new URLSearchParams({
                 searchText: filter.searchText || "",
                 sortCriteria: filter.sortCriteria || 0,
@@ -78,7 +76,6 @@ function CatalogBody({ initialSearchText = "", initialDrmFree = -1, initialBit =
             }
 
             const data = await response.json();
-            console.log("fetchJuegos response:", data);
             setJuegos(Array.isArray(data.games) ? data.games : []);
             setTotalPages(data.totalPages);
             updateSessionStorage(filter, CLAVE);
@@ -91,7 +88,6 @@ function CatalogBody({ initialSearchText = "", initialDrmFree = -1, initialBit =
     };
 
     useEffect(() => {
-        console.log("useEffect: searchFilter changed", searchFilter);
         fetchJuegos(searchFilter);
     }, [searchFilter]);
 
@@ -99,7 +95,6 @@ function CatalogBody({ initialSearchText = "", initialDrmFree = -1, initialBit =
     useEffect(() => {
         const delayDebounceFn = setTimeout(() => {
             if (searchText !== searchFilter.searchText) {
-                console.log("Debounce: searchText updated", searchText);
                 setSearchFilter(prevFilter => ({
                     ...prevFilter,
                     searchText: searchText
@@ -111,7 +106,6 @@ function CatalogBody({ initialSearchText = "", initialDrmFree = -1, initialBit =
     }, [searchText]);
 
     const handleSearchFilterChange = (newFilter) => {
-        console.log("handleSearchFilterChange called", newFilter);
         if (newFilter.searchText !== undefined && newFilter.sortCriteria !== undefined) {
             setSearchText("");
             setSearchFilter({
@@ -138,7 +132,6 @@ function CatalogBody({ initialSearchText = "", initialDrmFree = -1, initialBit =
     };
 
     const handlePageChange = (newPage) => {
-        console.log("handlePageChange called", newPage);
         setSearchFilter(prevFilter => ({
             ...prevFilter,
             page: newPage

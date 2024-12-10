@@ -51,7 +51,6 @@ export async function confirmReserve(url, reserveId, token) {
 
     if (response.ok) {
       const data = await response.json();
-      console.log("Reserva confirmada exitosamente. Id de la Orden:", data.message);
       return data.orderId;
     } else {
       console.error("Error al confirmar la reserva.");
@@ -65,7 +64,6 @@ export async function confirmReserve(url, reserveId, token) {
 
 export const getSessionStripe = async (url, sessionId, token) => {
   const fullUrl = `${url}/${sessionId}`
-  console.log(fullUrl);
   const response = await fetch(fullUrl, {
       method: 'GET',
       headers: {
