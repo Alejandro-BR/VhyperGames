@@ -1,4 +1,4 @@
-import { useRef, useState, useContext } from 'react';
+import { useRef, useState } from 'react';
 import classes from './Login.module.css';
 import Button from '../Buttons/Button';
 import RegisterModal from '../Register/RegisterModal';

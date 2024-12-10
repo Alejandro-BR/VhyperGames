@@ -53,14 +53,6 @@ export const ImageProvider = ({ children }) => {
     }
   };
 
-  // ----- useEffect -----
-
-  useEffect(() => {
-    if (token && decodedToken?.Role === "Admin") {
-      // fetchImages();
-    }
-  }, [token, decodedToken]);
-
   const contextValue = {
     fetchImages,
     createImage,
