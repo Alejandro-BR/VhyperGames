@@ -45,7 +45,6 @@ export const UPDATE_USER =  `${API_BASE_URL}User/update-user`;
 export const UPDATE_PASSWORD = `${API_BASE_URL}User/update-password`
 
 /* ETHEREUM */
-export const BLOCKCHAIN = `${API_BASE_URL}Blockchain`;
 export const BLOCKCHAIN_TRANSACTION = `${API_BASE_URL}Blockchain/transaction`;
 export const BLOCKCHAIN_CHECK = `${API_BASE_URL}Blockchain/check`;
 
