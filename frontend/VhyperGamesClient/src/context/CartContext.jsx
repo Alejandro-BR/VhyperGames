@@ -18,49 +18,40 @@ const CartContext = createContext({
 
 // Crear el provider
 const CartProvider = ({ children }) => {
-  const { token, userId } = useAuth();
+  const { token, userId, isLoggedIn } = useAuth();
   const [cart, setCart] = useState({ items: [] });
-  const [gameDetails, setGameDetails] = useState([]); //Se almacenan los juegos usados en CartListGames
-  const [mergeCompleted, setMergeCompleted] = useState(false);
+  const [gameDetails, setGameDetails] = useState([]); 
 
   useEffect(() => {
-    const syncOrMergeCart = async () => {
-      const storedCart = getVarLS("cart");
-      if (token && userId) {
-        try {
-          if (storedCart) {
-            if (Array.isArray(storedCart.items) && storedCart.items.length > 0 ) {
-              // Si hay elementos en el carrito local, realizar un merge
-              await mergeCartWithDB();
-              setMergeCompleted(true);
-            } else {
-              // Si el carrito esta vacio, obtener datos de la base de datos
-              await getCartFromDB();
-              setMergeCompleted(true);
-            }
-          } else {
-            // Si no hay carrito en localStorage, obtener datos desde la base de datos
-            await getCartFromDB();
-            setMergeCompleted(true);
-          }
-        } catch (error) {
-          console.error("Error durante la sincronización o el merge:", error);
-        }
-      } else {
-        if (storedCart != []) {
-          //setCart(storedCart);
-        } 
+    const performMerge = async () => {
+      if (isLoggedIn && token && userId) {
+        console.log("Usuario logueado. Ejecutando mergeCartWithDB...");
+        await mergeCartWithDB();
       }
     };
-    syncOrMergeCart();
-  }, [token, userId]);
 
-  useEffect(()=> { if (!token){
-    const storedCart = getVarLS("cart");
-    if (storedCart != []) {
-      //setCart(storedCart);
-    } 
-  }},[token]);
+    performMerge();
+  }, [isLoggedIn, token, userId]);
+
+  useEffect(() => {
+    const syncCartIfNeeded = async () => {
+        const storedCart = getVarLS("cart");
+        if (token && userId) {
+            try {
+                if (!storedCart || storedCart.items.length === 0) {
+                    await getCartFromDB();
+                }
+            } catch (error) {
+                console.error("Error al sincronizar el carrito:", error);
+            }
+        }
+    };
+    syncCartIfNeeded();
+}, [token, userId]);
+
+  useEffect(()=> {
+    refreshCart();
+  },[token]);
 
   const refreshCart = async () => {
     if (token) {
@@ -72,22 +63,6 @@ const CartProvider = ({ children }) => {
       }
     }
   };
-
-  useEffect(() => {
-    function handleVisibilityChange() {
-      if (document.visibilityState === "visible") {
-        refreshCart(); // Refresca el carrito solo si la pestaña está visible
-        console.log("funciona");
-      }
-    }
-  
-    document.addEventListener("visibilitychange", handleVisibilityChange);
-  
-    // Limpia el evento cuando el componente se desmonta
-    return () => {
-      document.removeEventListener("visibilitychange", handleVisibilityChange);
-    };
-  }, [refreshCart]);
 
   // Guardar carrito en LocalStorage cada vez que cambia
   const updateLocalStorageCart = (cart) => {
@@ -141,14 +116,21 @@ const CartProvider = ({ children }) => {
   // ENDPOINT - PUT_MERGE - Sincronizar carrito local con la base de datos
   const mergeCartWithDB = async () => {
     if (token && userId) {
-
+      console.log("Inicio de mergeCartWithDB");
+  
       const cartCopy = { ...cart };
+      console.log("Cart actual desde el estado:", cartCopy);
+  
+      // Guardamos una copia en localStorage para depurar
       updateLocalStorage(cartCopy, "reserve");
-
+  
+      // Preparar los elementos del carrito local
       const localItems = cart.items.map((item) => ({
         gameId: item.gameId,
         quantity: item.quantity || 0,
       }));
+      console.log("Elementos del carrito local que se enviarán al backend:", localItems);
+  
       try {
         const response = await fetch(PUT_MERGE, {
           method: "PUT",
@@ -158,23 +140,37 @@ const CartProvider = ({ children }) => {
           },
           body: JSON.stringify(localItems),
         });
+  
+        console.log("Respuesta del servidor al merge:", response);
+  
         if (!response.ok) {
+          const errorText = await response.text();
+          console.error("Error al hacer merge del carrito. Respuesta del servidor:", errorText);
           throw new Error("Error al hacer merge del carrito");
         }
+  
+        // Procesar el carrito combinado que devuelve el backend
         const mergedCart = await response.json();
+        console.log("Carrito combinado devuelto por el backend:", mergedCart);
+  
+        // Formatear los datos recibidos para actualizar el estado
         const formattedItems = mergedCart.map((item) => ({
           gameId: item.gameId,
           quantity: item.quantity,
         }));
-
+        console.log("Carrito formateado para el estado:", formattedItems);
+  
+        // Actualizar el estado del carrito y el localStorage
         setCart({ items: formattedItems });
         updateLocalStorageCart({ items: formattedItems });
       } catch (error) {
         console.error("Error al sincronizar el carrito (merge):", error.message);
       }
+    } else {
+      console.warn("mergeCartWithDB fue llamado sin un token o userId válido");
     }
   };
-
+  
   // ENDPOINT - GET_CART - Obtener el carrito desde la base de datos
   const getCartFromDB = async () => {
     if (token && userId) {

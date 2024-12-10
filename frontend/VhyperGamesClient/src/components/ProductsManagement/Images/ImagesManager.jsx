@@ -69,6 +69,7 @@ function ImagesManager({ gameId }) {
     {updatePromise && (
       <div className={classes.updateMsg}>{updatePromise}</div>
     )}
+    
     <BlockImages gameId={gameId} images={images} />
   </div>
   );

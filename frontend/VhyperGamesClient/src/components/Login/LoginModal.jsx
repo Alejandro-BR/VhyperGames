@@ -4,18 +4,16 @@ import Button from '../Buttons/Button';
 import RegisterModal from '../Register/RegisterModal';
 import { LOGIN_ENDPOINT } from '../../config';
 import { useAuth } from '../../context/AuthContext';
-//import { CartContext } from '../../context/CartContext';
-
 
 function LoginModal({ onClose, onRegisterClick, onSuccess }) {
     const { saveToken } = useAuth();
+
     const emailRef = useRef(null);
     const passwordRef = useRef(null);
     const [promesaError, setPromesaError] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     const [mostrarRegister, setMostrarRegister] = useState(false);
 
-    //const { setJustLoggedIn  } = useContext(CartContext);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -47,8 +45,7 @@ function LoginModal({ onClose, onRegisterClick, onSuccess }) {
                 const token = datosPromesa.accessToken;
                 
                 saveToken(token);
-                //setJustLoggedIn(true);
-                
+
                 if (onSuccess) {
                     console.log("Ejecutando onSuccess...");
                     onSuccess(); // Notifica al componente padre que el login fue exitoso

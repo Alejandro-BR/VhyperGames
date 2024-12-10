@@ -18,6 +18,7 @@ export const AuthProvider = ({ children }) => {
     const [decodedToken, setDecodedToken] = useState(null);
     const inactivityTimer = useRef(null); 
     const inactivityTimeLimit = useRef(null);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
 
     useEffect(() => {
@@ -67,6 +68,7 @@ export const AuthProvider = ({ children }) => {
         updateSessionStorage(newToken, 'accessToken');
         setToken(newToken);
         setDecodedToken(jwtDecode(newToken));
+        setIsLoggedIn(true);
     };
 
     // Función para eliminar el token
@@ -76,6 +78,7 @@ export const AuthProvider = ({ children }) => {
         deleteLocalStorage('reserve');
         setToken(null);
         setDecodedToken(null);
+        setIsLoggedIn(false);
         window.location.href = "/";
     };
 
@@ -90,6 +93,7 @@ export const AuthProvider = ({ children }) => {
         username,
         userId,
         saveToken,
+        isLoggedIn,
         logout,
     };
 
