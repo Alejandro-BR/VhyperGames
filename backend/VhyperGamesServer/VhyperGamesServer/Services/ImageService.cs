@@ -16,17 +16,6 @@ public class ImageService
         _unitOfWork = unitOfWork;
     }
 
-    public async Task<List<ImageGame>> GetAllAsync()
-    {
-        return await _unitOfWork.ImageGameRepository.GetAllImagesGamesAsync();
-
-    }
-
-    public Task<ImageGame> GetAsync(int id)
-    {
-        return _unitOfWork.ImageGameRepository.GetByIdAsync(id);
-    }
-
     public async Task<ImageGame> InsertAsync(ImageRequestDto image, int gameId)
     {
         Game game = await _unitOfWork.GameRepository.GetByIdAsync(gameId, false, true);

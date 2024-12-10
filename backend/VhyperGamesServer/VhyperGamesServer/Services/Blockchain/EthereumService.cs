@@ -20,11 +20,6 @@ public class EthereumService
         _web3.TransactionReceiptPolling.SetPollingRetryIntervalInMilliseconds(POLLY_INTERVAL_MS);
     }
 
-    public BigInteger ToWei(double amount)
-    {
-        return Web3.Convert.ToWei(amount);
-    }
-
     public BigInteger ToWei(decimal amount)
     {
         return Web3.Convert.ToWei(amount);

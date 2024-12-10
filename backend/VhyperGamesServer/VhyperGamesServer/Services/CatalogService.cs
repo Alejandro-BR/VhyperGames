@@ -140,9 +140,5 @@ namespace VhyperGamesServer.Services
             return _gameCardMapper.ListToDto(games).ToList();
         }
 
-        public async Task<List<string>> FilterAndSortGamesAsync()
-        {
-            return await _unitOfWork.GameRepository.GetAllTitles();
-        }
     }
 }
