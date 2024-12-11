@@ -11,22 +11,29 @@ function CheckoutList() {
 
 
   useEffect(() => {
+    if (!reserveId) {
+      console.log("Skipping fetchReserveDetails as reserveId is null or undefined.");
+      return;
+    }
+
     const fetchReserveDetails = async () => {
-      if (reserveId) {
-        const fetchUrl = GET_RESERVE_DETAILS;
-        await loadReserveDetails(fetchUrl, reserveId);
+      try {
+        const details = await loadReserveDetails(GET_RESERVE_DETAILS, reserveId); 
+        if (details) {
+          setReserveDetails(details); 
+        }
+      } catch (error) {
+        console.error("Error fetching reserve details:", error);
       }
     };
 
-    fetchReserveDetails();
-  }, [reserveId, loadReserveDetails]); 
+    const delay = 500;
+    const timeout = setTimeout(() => {
+      fetchReserveDetails();
+    }, delay);
 
-
-  useEffect(() => {
-    if (Array.isArray(reserve) && JSON.stringify(reserve) !== JSON.stringify(reserveDetails)) {
-      setReserveDetails(reserve);
-    }
-  }, [reserve, reserveDetails]);
+    return () => clearTimeout(timeout);
+  }, [reserveId, loadReserveDetails]);
 
 
   return (
