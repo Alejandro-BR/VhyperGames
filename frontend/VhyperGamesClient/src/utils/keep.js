@@ -25,7 +25,8 @@ export function updateSessionStorage(item, clave) {
  * @returns {object[]} - El objeto o array recuperado del almacenamiento local, o un array vacío.
  */
 export function getVarLS(clave) {
-  return JSON.parse(localStorage.getItem(clave)) || [];
+  const item = localStorage.getItem(clave);
+  return item ? JSON.parse(item) : null;
 }
 
 /**
