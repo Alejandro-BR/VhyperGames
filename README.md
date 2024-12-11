@@ -5,12 +5,37 @@ Proyecto de creación de E-Commerce de una tienda de videojuegos.
 
 ## Indice
 
-<!-- - [Visualización](#Visualización) -->
+- [Enlace a la Página](#Enlace-a-la-Página)
+- [Visualización](#Visualización)
 - [Tecnologías](#tecnologías)
 - [Herramientas de Desarrollo](#herramientas-de-desarrollo)
 - [Herramientas de Diseño](#herramientas-de-diseño)
 - [Ramas Git](#ramas-git)
 - [Créditos](#créditos)
+
+<br>
+
+## Enlace a la Página
+
+[Acceder a la página aquí](https://vhyper-games.vercel.app/)
+
+<br>
+
+## Visualización
+
+<br>
+
+![Home](/doc/img/Home.png)
+
+<br>
+
+![Carrito](doc/img/Carrito.png)
+
+<br>
+
+![Catalogo](doc/img/Catalogo.png)
+
+<br>
 
 ## Tecnologías
 
