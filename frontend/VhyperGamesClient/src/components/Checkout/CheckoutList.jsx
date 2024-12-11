@@ -15,18 +15,23 @@ function CheckoutList() {
       console.log("Skipping fetchReserveDetails as reserveId is null or undefined.");
       return;
     }
-  
-    const fetchReserveDetails = async () => {
 
-      const fetchUrl = GET_RESERVE_DETAILS;
-      await loadReserveDetails(fetchUrl, reserveId);
+    const fetchReserveDetails = async () => {
+      try {
+        const details = await loadReserveDetails(GET_RESERVE_DETAILS, reserveId); 
+        if (details) {
+          setReserveDetails(details); 
+        }
+      } catch (error) {
+        console.error("Error fetching reserve details:", error);
+      }
     };
-  
-    const delay = 500; 
+
+    const delay = 500;
     const timeout = setTimeout(() => {
       fetchReserveDetails();
     }, delay);
-  
+
     return () => clearTimeout(timeout);
   }, [reserveId, loadReserveDetails]);
 
