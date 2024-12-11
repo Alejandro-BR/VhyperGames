@@ -186,7 +186,7 @@
   }
 
   .left {
-    order: 1; /* Logo y botón van primero */
+    order: 1;
     
     margin-bottom: 10px; 
     width: 50%;
@@ -198,13 +198,13 @@
   }
 
   .searchBar {
-    order: 3; /* Barra de búsqueda irá de última */
+    order: 3;
     width: 100%; 
     
   }
 
   .icons {
-    order: 2; /* Íconos estarán debajo de `left`, pero encima de `searchBar` */
+    order: 2;
     
     margin-bottom: 10px;
     width: 50%;

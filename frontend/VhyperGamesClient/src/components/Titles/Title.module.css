@@ -15,7 +15,7 @@
 }
 
 .paymentSuccessful {
-    background-image: var(--gradient-purple-blue); /*Creo que queda mejor en blanco, pero lo puse acuerdo a figma*/
+    background-image: var(--gradient-purple-blue); 
 
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
