@@ -8,6 +8,7 @@
   padding-right: 20px;
   font-size: 1.2rem;
   color: rgb(230, 230, 230);
+  margin-right: 20px;
 }
 
 .details-view__game-data {
@@ -25,6 +26,7 @@
   grid-column: 2;
   grid-row: 2;
   padding-left: 30px;
+  justify-self: baseline;
 }
 
 .details-view__review-entry {
@@ -40,7 +42,7 @@
   font-size: 1.5rem;
 }
 
-@media (max-width:780px) {
+@media (max-width:1110px) {
   .details-view__info {
     display: flex;
     flex-direction: column;
@@ -68,6 +70,4 @@
   .details-view__reviews {
     grid-area: reviews;
   }
-
-
 }
