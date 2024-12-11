@@ -48,6 +48,10 @@ const CartProvider = ({ children }) => {
     syncCartIfNeeded();
 }, [token, userId]);
 
+useEffect(() => {
+  refreshCart();
+},[]);
+
   const refreshCart = async () => {
     if (token) {
       await getCartFromDB();
