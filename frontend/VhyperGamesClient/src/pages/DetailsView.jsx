@@ -14,7 +14,7 @@ function DetailsView() {
   const [reviewUpdated, setReviewUpdated] = useState(false);
 
   const handleReviewAdded = () => {
-    setReviewUpdated((prev) => !prev); // Cambiar el estado para forzar el refetch
+    setReviewUpdated((prev) => !prev); 
   };
 
 

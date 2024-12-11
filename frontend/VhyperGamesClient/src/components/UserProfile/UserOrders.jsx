@@ -7,10 +7,10 @@ import { Link } from "react-router-dom";
 import { BASE_URL } from "../../config";
 
 function UserOrders() {
-    const token = useAuth(); // Obtén el token del contexto
-    const [orders, setOrders] = useState([]); // Estado para guardar las órdenes
-    const [error, setError] = useState(null); // Estado para manejar errores
-    const [loading, setLoading] = useState(true); // Estado para manejar la carga
+    const token = useAuth(); 
+    const [orders, setOrders] = useState([]); 
+    const [error, setError] = useState(null); 
+    const [loading, setLoading] = useState(true); 
 
 
     const paymentModes = {
@@ -22,18 +22,18 @@ function UserOrders() {
         const fetchOrders = async () => {
             try {
                 const data = await getUserOrders(ORDER_BY_USER, token.token);
-                setOrders(data); // Guarda las órdenes en el estado
+                setOrders(data); 
             } catch (err) {
-                setError(err.message); // Guarda el mensaje de error
+                setError(err.message); 
             } finally {
-                setLoading(false); // Detén el indicador de carga
+                setLoading(false); 
             }
         };
 
         if (token) {
             fetchOrders();
         }
-    }, [token]); // Ejecuta el efecto cuando el token cambie
+    }, [token]); 
 
     if (loading) return <p>Cargando órdenes...</p>;
     if (error) return <p>Error: {error}</p>;

@@ -45,7 +45,7 @@ function RegisterModal({ onClose, onSuccess }) {
       return;
     }
 
-    // Verificar si las contraseñas coinciden
+    
     if (password1 !== password2) {
       setPasswordError("Las contraseñas no coinciden.");
       return;
@@ -53,7 +53,7 @@ function RegisterModal({ onClose, onSuccess }) {
       setPasswordError("");
     }
 
-    // Crear objeto de datos
+    
     const data = {
       name,
       surname,
@@ -62,7 +62,7 @@ function RegisterModal({ onClose, onSuccess }) {
       address,
     };
 
-    // Llamar a la función fetchingData
+   
     await fetchingData(REGISTER_ENDPOINT, data);
   };
 

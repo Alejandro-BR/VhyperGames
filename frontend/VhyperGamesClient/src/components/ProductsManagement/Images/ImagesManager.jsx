@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext, useRef } from "react"; // Solo importa una vez los hooks necesarios
+import { useState, useEffect, useContext, useRef } from "react"; 
 import Button from "../../Buttons/Button";
 import BlockImages from "./BlockImages";
 import { ImageContext } from "../../../context/ImageContext";
@@ -17,7 +17,6 @@ function ImagesManager({ gameId }) {
   const [showMsg, setShowMsg] = useState(false);
   const timerRef = useRef(null);
 
-  // Mostrar el mensaje
   useEffect(() => {
     if (updatePromise) {
       setShowMsg(true);
@@ -63,7 +62,6 @@ function ImagesManager({ gameId }) {
 
   return (
     <div className={classes.container}>
-      {/* Portada */}
       {images.length > 0 ? (
         <>
           <img

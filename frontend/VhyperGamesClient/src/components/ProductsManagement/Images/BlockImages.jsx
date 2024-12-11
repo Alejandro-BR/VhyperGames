@@ -21,8 +21,7 @@ function BlockImages({ gameId, images }) {
   useEffect(() => {
     fetchImages(gameId);
   }, [gameId, updateCounter]);
-
-  // Mostrar el mensaje
+  
   useEffect(() => {
     if (updatePromise) {
       setShowMsg(true);
