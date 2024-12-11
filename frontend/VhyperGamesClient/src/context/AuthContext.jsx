@@ -1,5 +1,5 @@
 import { createContext, useState, useContext, useEffect, useRef } from 'react';
-import { getVarSessionStorage, updateSessionStorage, deleteSessionStorage, deleteLocalStorage } from "../utils/keep.js";
+import { updateLocalStorage, deleteSessionStorage, deleteLocalStorage, getVarLS } from "../utils/keep.js";
 import { jwtDecode } from 'jwt-decode'; 
 
 
@@ -55,16 +55,17 @@ export const AuthProvider = ({ children }) => {
 
     // Cargar el token desde sessionStorage al inicio
     useEffect(() => {
-        const storedToken = getVarSessionStorage('accessToken');
+        const storedToken = getVarLS('accessToken');
         if (storedToken) {
             setToken(storedToken);
             setDecodedToken(jwtDecode(storedToken));
         }
     }, []);
 
+
     // Función para almacenar el token
     const saveToken = (newToken) => {
-        updateSessionStorage(newToken, 'accessToken');
+        updateLocalStorage(newToken, 'accessToken');
         setToken(newToken);
         setDecodedToken(jwtDecode(newToken));
         setIsLoggedIn(true);
@@ -80,6 +81,8 @@ export const AuthProvider = ({ children }) => {
         setIsLoggedIn(false);
         window.location.href = "/";
     };
+
+    
 
     const username = decodedToken?.name || null;
     const userId = decodedToken?.id || null;
