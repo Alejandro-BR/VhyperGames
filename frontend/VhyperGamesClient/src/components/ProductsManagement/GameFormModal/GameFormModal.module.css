@@ -10,6 +10,7 @@
     align-items: center;
     z-index: 1000;
     overflow: scroll;
+    font-size: 1.3rem;
 }
 
 /* Fondo semitransparente detrás del modal */
@@ -99,5 +100,6 @@
 
 /* Botón para subir archivos */
 .productForm input[type="file"] {
-    padding: 8px;
+    padding: 4px;
+    height: fit-content;
 }
