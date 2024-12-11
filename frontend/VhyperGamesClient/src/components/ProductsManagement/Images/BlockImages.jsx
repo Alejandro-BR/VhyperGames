@@ -10,6 +10,7 @@ function BlockImages({ gameId, images }) {
   const [selectedFile, setSelectedFile] = useState(null);
   const [updatePromise, setUpdatePromise] = useState(null);
   const [updateCounter, setUpdateCounter] = useState(0);
+  const [msgColor, setMsgColor] = useState("");
 
   const { createImage, deleteImage, fetchImages } =
     useContext(ImageContext);
@@ -45,10 +46,12 @@ function BlockImages({ gameId, images }) {
 
       setUpdateCounter((prev) => prev + 1);
       setUpdatePromise("Nueva imagen agregada con éxito.");
+      setMsgColor("Success");
       setSelectedFile(null);
     } catch (error) {
       console.error("Error al agregar la nueva imagen:", error);
       setUpdatePromise("Hubo un error al agregar la nueva imagen.");
+      setMsgColor("Error");
     }
   };
 
@@ -77,7 +80,11 @@ function BlockImages({ gameId, images }) {
         Añadir imagen
       </Button>
 
-      {updatePromise && <div className={classes.updateMsg}>{updatePromise}</div>}
+      {updatePromise && (
+        <div className={msgColor === "Success" ? classes.updateMsgSuccess : classes.updateMsgError}>
+          {updatePromise}
+        </div>
+      )}
 
       <div className={classes.imgList}>
         {images.slice(1).map((image) => (

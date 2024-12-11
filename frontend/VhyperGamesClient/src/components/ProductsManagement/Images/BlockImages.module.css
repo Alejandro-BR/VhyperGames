@@ -37,3 +37,13 @@
     max-width: 75vw;
     border-radius: 10px;
 }
+
+.updateMsgSuccess {
+    font-size: 1.8rem;
+    color: var(--principal-green);
+}
+
+.updateMsgError {
+    font-size: 1.8rem;
+    color: var(--principal-red);
+}
