@@ -146,17 +146,17 @@ function GameFormModal({ modalPurpose, initialData, onSubmit, onClose }) {
 
           <div className={classes.formGroup}>
             <label htmlFor="price">Precio:</label>
-            <input type="number" id="price" placeholder="Precio" value={formData.price} onChange={handleChange} required/>
+            <input type="number" id="price" placeholder="Precio" value={formData.price} onChange={handleChange} required min="1"/>
           </div>
 
           <div className={classes.formGroup}>
             <label htmlFor="stock">Stock:</label>
-            <input type="number" id="stock" placeholder="Stock" value={formData.stock} onChange={handleChange} required/>
+            <input type="number" id="stock" placeholder="Stock" value={formData.stock} onChange={handleChange} required min="0"/>
           </div>
 
           <div className={classes.formGroup}>
             <label htmlFor="img1">Carátula:</label>
-            <input type="file" id="img1" onChange={handleFileChange} required/>
+            <input type="file" id="img1" onChange={handleFileChange} required />
           </div>
 
           <div className={classes.formGroup}>

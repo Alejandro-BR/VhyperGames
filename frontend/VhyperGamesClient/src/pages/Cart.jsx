@@ -25,7 +25,7 @@ function Cart() {
   }, []);
 
   return (
-    <>
+    <div>
       <div className="generalContainer">
         {isCartEmpty ? (
           <div className={classes.emptyCartContainer}>
@@ -44,7 +44,7 @@ function Cart() {
         )}
       </div>
       <Footer />
-    </>
+    </div>
   );
 }
 
