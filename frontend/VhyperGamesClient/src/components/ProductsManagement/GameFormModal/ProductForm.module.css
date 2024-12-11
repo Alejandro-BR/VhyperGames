@@ -28,13 +28,17 @@
 .productForm input,
 .productForm textarea,
 .productForm select {
-    width: 60%;
+    width: 80%;
     background-color: #1c1e3a;
     color: #e4e4e4;
     border: 1px solid var(--principal-blue, #6a00f4);
     border-radius: 5px;
     padding: 10px;
     outline: none;
+}
+
+.productForm input[type="date"] {
+    width: fit-content;
 }
 
 .productForm textarea {
@@ -72,8 +76,12 @@
     color: var(--principal-red);
 }
 
-@media (max-width:45rem) {
-    .productForm input[type="text"] {
-        width: 80vw;   
+@media (max-width:795px) {
+
+
+    .productForm input,
+    .productForm textarea,
+    .productForm select {
+        width: 80vw;
     }
 }
