@@ -270,7 +270,7 @@ const CartProvider = ({ children }) => {
         const updatedCart = { items: [...updatedItems, newItem] };
 
         updateLocalStorageCart(updatedCart); 
-        syncCartWithDB(updatedCart); // Sincroniza el carrito actualizado con el endpoint
+        syncCartWithDB(updatedCart); 
 
         return updatedCart;
       }
@@ -292,7 +292,7 @@ const CartProvider = ({ children }) => {
           syncCartWithDB(updatedCart);
 
           return updatedCart;
-        } else { //Si es mayor a 0
+        } else { 
           updatedItems[productIndex] = { ...product, quantity: newQuantity };
           const updatedCart = { items: updatedItems };
 

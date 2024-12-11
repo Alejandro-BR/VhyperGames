@@ -6,6 +6,7 @@ const CartIcon = ({ onClick }) => {
   const { items } = useContext(CartContext); 
   const [cartCount, setCartCount] = useState(0);
 
+ 
   useEffect(() => {
     const totalQuantity = items.reduce((total, product) => total + product.quantity, 0);
     setCartCount(totalQuantity);
