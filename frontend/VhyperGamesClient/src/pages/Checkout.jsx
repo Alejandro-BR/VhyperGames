@@ -9,7 +9,7 @@ import Ethereum from "../components/Ethereum/Ethereum";
 function Checkout() {
   const params = useParams();
   const route = "/cart";
-  const time = 180000; // 3 Minutos
+  const time = 180000; 
 
   return (
     <div className={classes["checkout"]}>
