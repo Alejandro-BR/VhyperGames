@@ -1,0 +1,28 @@
+.container > * {
+    margin: 0 0 6px 5vw;
+}
+
+.container input {
+    width: 60%;
+    background-color: #1c1e3a;
+    color: #e4e4e4;
+    border: 1px solid var(--principal-blue, #6a00f4);
+    border-radius: 10px;
+    padding: 10px;
+    outline: none;
+}
+
+.img {
+    max-width: 75vw;
+    border-radius: 10px;
+}
+
+.updateMsgSuccess {
+    font-size: 1.8rem;
+    color: var(--principal-green);
+}
+
+.updateMsgError {
+    font-size: 1.8rem;
+    color: var(--principal-red);
+}

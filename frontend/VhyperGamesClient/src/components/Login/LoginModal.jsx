@@ -1,4 +1,4 @@
-import { useRef, useState, useContext } from 'react';
+import { useRef, useState } from 'react';
 import classes from './Login.module.css';
 import Button from '../Buttons/Button';
 import RegisterModal from '../Register/RegisterModal';
@@ -47,8 +47,7 @@ function LoginModal({ onClose, onRegisterClick, onSuccess }) {
                 saveToken(token);
 
                 if (onSuccess) {
-                    console.log("Ejecutando onSuccess...");
-                    onSuccess(); // Notifica al componente padre que el login fue exitoso
+                    onSuccess(); 
                 }
 
                 onClose();
@@ -57,7 +56,6 @@ function LoginModal({ onClose, onRegisterClick, onSuccess }) {
                 setPromesaError("Email o contraseña inválidos");
             }
         } catch (error) {
-            console.log(error);
             setPromesaError(`${error.message}`);
 
         } finally {

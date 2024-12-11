@@ -19,17 +19,6 @@ namespace VhyperGamesServer.Services
             _emailService = emailService;
         }
 
-        public async Task<Order> GetOrderByIdAsync(int id)
-        {
-            Order order = await _unitOfWork.OrderRepository.GetOrderById(id);
-            if (order == null)
-            {
-                throw new KeyNotFoundException($"No hay orders con este ID = {id}");
-            }
-
-            return order;
-        }
-
         public async Task<OrderDto> GetOrderByUserIdAndOrderIdAsync(int userId, int orderId)
         {
             Order order = await _unitOfWork.OrderRepository.GetOrderByUserIdAndOrderIdAsync(userId, orderId);
@@ -58,18 +47,6 @@ namespace VhyperGamesServer.Services
             }
 
             return orderDtos;
-        }
-
-        public async Task<OrderDto> GetRecentOrderByUserIdAsync(int userId)
-        {
-            Order order = await _unitOfWork.OrderRepository.GetRecentOrderByUserId(userId);
-
-            if (order == null)
-            {
-                throw new KeyNotFoundException($"No hay orders con este ID de user = {userId}");
-            }
-
-            return _mapper.ToOrderDto(order);
         }
 
         public async Task<int> CreateOrderFromReserve(Reserve reserve, PayMode modeOfPay)

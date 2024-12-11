@@ -6,7 +6,7 @@
     flex-direction: column;
     gap: 20px;
     color: rgb(24, 24, 24);
-    font-size: 1.5rem;
+    font-size: 1.8rem;
 }
 
 .formGroup {
@@ -21,21 +21,24 @@
     display: grid;
     grid-template-columns: 2fr 1fr 1fr;
     justify-content: baseline;
-    align-items: baseline;
+    align-items: end;
     gap: 10px;
 }
 
 .productForm input,
 .productForm textarea,
 .productForm select {
-    width: 60%;
+    width: 80%;
     background-color: #1c1e3a;
     color: #e4e4e4;
     border: 1px solid var(--principal-blue, #6a00f4);
     border-radius: 5px;
     padding: 10px;
-    font-size: 14px;
     outline: none;
+}
+
+.productForm input[type="date"] {
+    width: fit-content;
 }
 
 .productForm textarea {
@@ -71,4 +74,14 @@
 
 .updateMsgError {
     color: var(--principal-red);
+}
+
+@media (max-width:795px) {
+
+
+    .productForm input,
+    .productForm textarea,
+    .productForm select {
+        width: 80vw;
+    }
 }

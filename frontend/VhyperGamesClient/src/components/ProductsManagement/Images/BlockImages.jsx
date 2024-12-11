@@ -1,16 +1,18 @@
 import Button from "../../Buttons/Button";
 import classes from "./BlockImages.module.css";
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext, useEffect, useRef } from "react";
 import { BASE_URL } from "../../../config";
 import { ImageContext } from "../../../context/ImageContext";
 import { AdminContext } from "../../../context/AdminContext";
 
 function BlockImages({ gameId, images }) {
-  console.log("gameId recibido en BlockImages:", gameId);
 
   const [selectedFile, setSelectedFile] = useState(null);
   const [updatePromise, setUpdatePromise] = useState(null);
   const [updateCounter, setUpdateCounter] = useState(0);
+  const [msgColor, setMsgColor] = useState("");
+  const [showMsg, setShowMsg] = useState(false);
+  const timerRef = useRef(null);
 
   const { createImage, deleteImage, fetchImages } =
     useContext(ImageContext);
@@ -19,6 +21,19 @@ function BlockImages({ gameId, images }) {
   useEffect(() => {
     fetchImages(gameId);
   }, [gameId, updateCounter]);
+  
+  useEffect(() => {
+    if (updatePromise) {
+      setShowMsg(true);
+      if (timerRef.current) {
+        clearTimeout(timerRef.current);
+      }
+      timerRef.current = setTimeout(() => {
+        setShowMsg(false);
+      }, 2500);
+    }
+  }, [updatePromise]);
+
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
@@ -46,10 +61,12 @@ function BlockImages({ gameId, images }) {
 
       setUpdateCounter((prev) => prev + 1);
       setUpdatePromise("Nueva imagen agregada con éxito.");
+      setMsgColor("Success");
       setSelectedFile(null);
     } catch (error) {
       console.error("Error al agregar la nueva imagen:", error);
       setUpdatePromise("Hubo un error al agregar la nueva imagen.");
+      setMsgColor("Error");
     }
   };
 
@@ -65,9 +82,9 @@ function BlockImages({ gameId, images }) {
   };
 
   return (
-    <div>
-      <h2>Imágenes adicionales:</h2>
+    <div className={classes.additionalImgs}>
 
+      <p>Imágenes adicionales:</p>
       <input type="file" onChange={handleFileChange} />
 
       <Button
@@ -78,28 +95,34 @@ function BlockImages({ gameId, images }) {
         Añadir imagen
       </Button>
 
-      {updatePromise && <div className={classes.updateMsg}>{updatePromise}</div>}
-
-      {images.slice(1).map((image) => (
-        <div
-          key={image.id}
-          style={{ marginBottom: "20px" }}
-          className={classes.imgBlock}
-        >
-          <img
-            src={`${BASE_URL}${image.imageUrl}`}
-            alt={image.alt}
-            style={{ width: "150px", height: "150px", display: "block" }}
-          />
-          <Button
-            variant={"large"}
-            color={"red"}
-            onClick={() => handleDeleteImage(image.id)}
-          >
-            Borrar Imagen
-          </Button>
+      {updatePromise && showMsg && (
+        <div className={msgColor === "Success" ? classes.updateMsgSuccess : classes.updateMsgError}>
+          {updatePromise}
         </div>
-      ))}
+      )}
+
+      <div className={classes.imgList}>
+        {images.slice(1).map((image) => (
+          <div
+            key={image.id}
+            className={classes.imgContainer}
+          >
+            <img
+              src={`${BASE_URL}${image.imageUrl}`}
+              alt={image.alt}
+              className={classes.img}
+            />
+            <Button
+              variant={"large"}
+              color={"red"}
+              onClick={() => handleDeleteImage(image.id)}
+            >
+              Borrar Imagen
+            </Button>
+          </div>
+        ))}
+      </div>
+
     </div>
   );
 }

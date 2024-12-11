@@ -51,12 +51,9 @@ public class ReserveService
             {
                 throw new InvalidOperationException($"No hay suficiente stock para el juego '{game.Title}'.");
             }
-            Console.WriteLine($"Stock antes: {game.Stock}");
 
             // Reducir stock temporalmente
             game.Stock -= cartItem.Quantity;
-
-            Console.WriteLine($"Stock después: {game.Stock}");
 
             _unitOfWork.GameRepository.Update(game);
 
@@ -143,10 +140,6 @@ public class ReserveService
 
         return orderId;
     }
-
-
-
-
 
     public async Task CancelReserve(int reserveId)
     {

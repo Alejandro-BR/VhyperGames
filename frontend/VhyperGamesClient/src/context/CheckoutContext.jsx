@@ -94,20 +94,15 @@ export const CheckoutProvider = ({ children }) => {
 
     try {
       const orderId = await confirmReserve(url ,reserveId, token);
-      // console.log(orderId + " Esto es el order id");
       setOrderId(orderId);
+      setReserve([]);
+      deleteLocalStorage("reserve");
       return orderId;
     } catch (error) {
       console.error("Error al confirmar la reserva:", error.message);
       return -1;
     }
   };
-
-  const clearOrderId = () => {
-    setOrderId(null);
-    deleteLocalStorage("orderId");
-  };
-  
 
   const contextValue = {
     setModeOfPay,
@@ -120,7 +115,6 @@ export const CheckoutProvider = ({ children }) => {
     handleConfirmReserve,
     orderId,
     setOrderId,
-    clearOrderId
   };
 
   return (

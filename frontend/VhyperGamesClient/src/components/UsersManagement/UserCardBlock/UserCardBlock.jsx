@@ -3,12 +3,10 @@ import UserCard from "../UserCard/UserCard";
 import classes from "./UserCardBlock.module.css";
 import { AdminContext } from "../../../context/AdminContext"
 import { useEffect } from "react";
-import { useAuth } from "../../../context/authcontext";
 
 function UserCardBlock() {
 
   const { users, fetchUsers } = useContext(AdminContext);
-  const { token, decodedToken } = useAuth();
 
   useEffect(() => {
     fetchUsers();

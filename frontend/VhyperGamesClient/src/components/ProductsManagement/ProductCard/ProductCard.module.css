@@ -1,5 +1,5 @@
 .card {
-    width: fit-content;
+    width: 40rem;
     height: 14rem;
     display: grid;
     grid-template-columns: repeat(2, 1.5fr) repeat(2, 1fr);
@@ -92,8 +92,7 @@
 @media (max-width: 45rem) {
 
     .card {
-        padding-top: -100px;
-        height: 14rem;
+        width: 30rem;
     }
 
     .editProduct {

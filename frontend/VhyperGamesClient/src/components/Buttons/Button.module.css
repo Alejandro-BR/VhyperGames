@@ -30,6 +30,7 @@ button.short {
 button.medium {
   width: 10rem; 
   height: 5rem;  
+  font-size: 1.3rem;
 }
 
 button.large {
@@ -40,9 +41,8 @@ button.large {
 
 @media (max-width: 45rem) {
   button.large {
-    width: 10rem; 
+    width: 11rem; 
     height: 4rem;   
-    font-size: 1.3rem;
   }
 }
 
@@ -78,7 +78,12 @@ button.azul-morado {
 
 button.red {
   background: var(--principal-red);
-  box-shadow: var(--shadow-gradient-blue-purple);
+  box-shadow: var(--principal-red);
+}
+
+button.gradient-green {
+  background: var(--gradient-green);
+  box-shadow: var(--gradient-green);
 }
 
 button.morado-azul:active,

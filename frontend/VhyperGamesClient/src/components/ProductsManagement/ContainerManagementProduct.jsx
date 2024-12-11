@@ -1,11 +1,9 @@
-import classes from "./body.module.css";
+import classes from "./ContainerManagementProduct.module.css";
 import AddProductButton from "./AddProductButton";
 import SearchBarProduct from "./SearchBar/SearchBarProduct";
 
-// igual habría que cambiar el nombre del componente
-function Body() {
+function ContainerManagementProduct() {
     return (
-        // No es el mejor classname pero no se me ocurre que poner
         <div className={classes.utilities}>
             <AddProductButton className={classes.button} />
             <SearchBarProduct className={classes.searchBar} />
@@ -13,4 +11,4 @@ function Body() {
     )
 }
 
-export default Body
+export default ContainerManagementProduct
