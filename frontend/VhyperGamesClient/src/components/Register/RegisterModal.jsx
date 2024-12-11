@@ -36,17 +36,9 @@ function RegisterModal({ onClose, onSuccess }) {
     if (!validation.isValidPassword(password1)) {
       setPasswordError(
         <div>
-          <p style={{ fontWeight: "bold", color: "#a440d2" }}>
-            La contraseña debe incluir:
-          </p>
           <ul style={{ paddingLeft: "20px" }}>
-            <li style={{ color: "#a440d2" }}>Al menos 8 caracteres.</li>
-            <li style={{ color: "#a440d2" }}>Al menos una letra mayúscula.</li>
-            <li style={{ color: "#a440d2" }}>Al menos una letra minúscula.</li>
-            <li style={{ color: "#a440d2" }}>Al menos un número.</li>
             <li style={{ color: "#a440d2" }}>
-              Al menos un carácter especial (@, \, /, =, etc).
-            </li>
+            La contraseña debe tener al menos 8 caracteres, incluyendo una mayúscula, una minúscula, un número y un carácter especial (@, , /, =, etc.).</li>
           </ul>
         </div>
       );
