@@ -7,7 +7,7 @@
     background-color: #1c1e3a;
     color: #e4e4e4;
     border: 1px solid var(--principal-blue, #6a00f4);
-    border-radius: 10px; /*ESTO AFECTA TAMBIÉN A LAS IMÁGENES ADICIONALES*/
+    border-radius: 10px;
     padding: 10px;
     outline: none;
 }

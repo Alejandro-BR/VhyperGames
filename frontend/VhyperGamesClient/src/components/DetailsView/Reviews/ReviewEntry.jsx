@@ -29,14 +29,10 @@ const ReviewEntry = ({ gameId, onReviewAdded }) => {
         const data = await response.json();
 
         setOwnsGame(data.ownsGame);
-
-        // Si no hay reseña, simplemente salir
         if (!data || !data.hasReview) {
           return;
         }
 
-        
-        // Si hay una reseña, cargarla en el estado
         setReviewText(data.review.reviewText);
         setExistingReview(data.review);
       }
@@ -97,10 +93,8 @@ const ReviewEntry = ({ gameId, onReviewAdded }) => {
     <div className={classes.reviewbox}>
       {isAuthenticated ? (
         <>
-          {/* Verificar si el usuario posee el juego */}
           {ownsGame ? (
             <>
-              {/* Mostrar el botón adecuado */}
               {existingReview ? (
                 <p className={classes['review-box__existing-text']}>
                   Reseña enviada el {new Date(existingReview.reviewDate).toLocaleDateString()}

@@ -32,7 +32,6 @@ function ConfirmationMsg() {
       } catch (err) {
         console.error("Error al obtener los datos del pedido:", err.message);
         setStatus("failure");
-        // clear();
         setError(err.message);
       }
     };
@@ -49,18 +48,11 @@ function ConfirmationMsg() {
     if (status === "failure") {
       const timer = setTimeout(() => {
         navigate("/");
-        // clear();
       }, 1500);
 
       return () => clearTimeout(timer);
     }
   }, [status]);
-
-  // useEffect(() => {
-  //   return () => {
-  //     clear();
-  //   };
-  // }, [clear]);
 
   if (status === "success" && orderData) {
     return (

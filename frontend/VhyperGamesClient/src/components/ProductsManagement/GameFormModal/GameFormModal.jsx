@@ -1,10 +1,6 @@
 import { useState, useEffect } from "react";
 import classes from "./GameFormModal.module.css";
 import Button from "../../Buttons/Button"
-import { AdminContext } from "../../../context/AdminContext";
-
-// TENIENDO EN CUENTA QUE EL FORMULARIO ES IDÉNTICO PARA AÑADIR Y EDITAR
-// CREO QUE LO IDEAL ES HACER UN SOLO COMPONENTE Y METERLE LA LOGICA COMO PARAMETRO
 
 const CloseIcon = () => (
   <svg width="15" height="15" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -62,11 +58,11 @@ function GameFormModal({ modalPurpose, initialData, onSubmit, onClose }) {
   const handleChange = (e) => {
     const { id, value } = e.target;
     const parsedValue = ["genre", "gameRequirementsId", "drmFree", "price", "stock"].includes(id)
-      ? value === "" ? null : parseInt(value, 10) 
+      ? value === "" ? null : parseInt(value, 10)
       : value;
     setFormData({ ...formData, [id]: parsedValue });
   };
-  
+
 
   const handleFileChange = (e) => {
     const { id, files } = e.target;
@@ -99,17 +95,17 @@ function GameFormModal({ modalPurpose, initialData, onSubmit, onClose }) {
 
           <div className={classes.formGroup}>
             <label htmlFor="title">Título:</label>
-            <input type="text" id="title" placeholder="Título" value={formData.title} onChange={handleChange} />
+            <input type="text" id="title" placeholder="Título" value={formData.title} onChange={handleChange} required/>
           </div>
 
           <div className={classes.formGroup}>
             <label htmlFor="description">Descripción:</label>
-            <textarea id="description" placeholder="Descripción" value={formData.description} onChange={handleChange}></textarea>
+            <textarea id="description" placeholder="Descripción" value={formData.description} onChange={handleChange} required></textarea>
           </div>
 
           <div className={classes.formGroup}>
             <label htmlFor="sinopsis">Sinopsis:</label>
-            <textarea id="sinopsis" placeholder="Sinopsis" value={formData.sinopsis} onChange={handleChange}></textarea>
+            <textarea id="sinopsis" placeholder="Sinopsis" value={formData.sinopsis} onChange={handleChange} required></textarea>
           </div>
 
           <div className={classes.formGroup}>
@@ -145,22 +141,22 @@ function GameFormModal({ modalPurpose, initialData, onSubmit, onClose }) {
 
           <div className={classes.formGroup}>
             <label htmlFor="releaseDate">Fecha de Lanzamiento:</label>
-            <input type="date" id="releaseDate" value={formData.releaseDate} onChange={handleChange} />
+            <input type="date" id="releaseDate" value={formData.releaseDate} onChange={handleChange} required/>
           </div>
 
           <div className={classes.formGroup}>
             <label htmlFor="price">Precio:</label>
-            <input type="number" id="price" placeholder="Precio" value={formData.price} onChange={handleChange} />
+            <input type="number" id="price" placeholder="Precio" value={formData.price} onChange={handleChange} required/>
           </div>
 
           <div className={classes.formGroup}>
             <label htmlFor="stock">Stock:</label>
-            <input type="number" id="stock" placeholder="Stock" value={formData.stock} onChange={handleChange} />
+            <input type="number" id="stock" placeholder="Stock" value={formData.stock} onChange={handleChange} required/>
           </div>
 
           <div className={classes.formGroup}>
             <label htmlFor="img1">Carátula:</label>
-            <input type="file" id="img1" onChange={handleFileChange} />
+            <input type="file" id="img1" onChange={handleFileChange} required/>
           </div>
 
           <div className={classes.formGroup}>

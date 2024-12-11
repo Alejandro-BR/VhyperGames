@@ -2,12 +2,12 @@
     font-size: 1.8rem;
 }
 
-.additionalImgs > * {
+.additionalImgs>* {
     margin-top: 20px;
 }
 
 
-.additionalImgs input{
+.additionalImgs input {
     width: 60%;
     background-color: #1c1e3a;
     color: #e4e4e4;
@@ -16,9 +16,7 @@
     outline: none;
 }
 
-
-
-.imgList{
+.imgList {
     display: flex;
     flex-direction: column;
     align-items: baseline;
@@ -26,7 +24,7 @@
     margin-top: 50px;
 }
 
-.imgContainer{
+.imgContainer {
     display: flex;
     flex-direction: column;
     align-items: end;
@@ -34,8 +32,7 @@
 }
 
 .img {
-    max-width: 75vw;
-    border-radius: 10px;
+    max-width: 30vw;
 }
 
 .updateMsgSuccess {
@@ -46,4 +43,10 @@
 .updateMsgError {
     font-size: 1.8rem;
     color: var(--principal-red);
+}
+
+@media (max-width:795px) {
+    .img {
+        max-width: 75vw;
+    }
 }

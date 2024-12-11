@@ -1,8 +1,8 @@
-import classes from "./ContainerManagementPorduct.module.css";
+import classes from "./ContainerManagementProduct.module.css";
 import AddProductButton from "./AddProductButton";
 import SearchBarProduct from "./SearchBar/SearchBarProduct";
 
-function ContainerManagementPorduct() {
+function ContainerManagementProduct() {
     return (
         <div className={classes.utilities}>
             <AddProductButton className={classes.button} />
@@ -11,4 +11,4 @@ function ContainerManagementPorduct() {
     )
 }
 
-export default ContainerManagementPorduct
+export default ContainerManagementProduct

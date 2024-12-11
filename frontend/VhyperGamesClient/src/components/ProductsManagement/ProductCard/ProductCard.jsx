@@ -1,13 +1,10 @@
 import classes from "./ProductCard.module.css";
 import { Link, useNavigate } from "react-router-dom";
 import { ConvertToDecimal } from "../../../utils/price";
-import { useContext } from "react";
-import { AdminContext } from "../../../context/AdminContext";
 import { BASE_URL } from "../../../config";
 import Button from "../../Buttons/Button"
 
-function ProductCard({ id, imgUrl, altText, title, price, stock }) {
-  const { GetFormGame } = useContext(AdminContext);
+function ProductCard({ id, imgUrl, altText, title, price, stock }) {  
   const navigate = useNavigate();
 
   function precio() {
