@@ -67,6 +67,20 @@ function ProductForm({ gameId }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+  
+    // Validaciones
+    if (formData.price <= 0) {
+      setUpdatePromise("El precio debe ser mayor a 0 (en céntimos).");
+      setMsgColor("Error");
+      return;
+    }
+  
+    if (formData.stock < 0) {
+      setUpdatePromise("El stock no puede ser menor a 0.");
+      setMsgColor("Error");
+      return;
+    }
+  
     try {
       await updateGameById(formData);
       setUpdatePromise("Juego actualizado con éxito");
