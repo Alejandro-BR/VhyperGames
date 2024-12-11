@@ -6,32 +6,59 @@ import classes from './CheckoutList.module.css';
 import { GET_RESERVE_DETAILS } from '../../config';
 
 function CheckoutList() {
-  const { reserve, reserveId, loadReserveDetails } = useContext(CheckoutContext);
+  const { reserve, reserveId, loadReserveDetails, clearReserve } = useContext(CheckoutContext); // Agrega `clearReserve` desde el contexto
   const [reserveDetails, setReserveDetails] = useState([]);
-
+  const [isPaid, setIsPaid] = useState(false);
 
   useEffect(() => {
     const fetchReserveDetails = async () => {
-      if (reserveId) {
-        const fetchUrl = GET_RESERVE_DETAILS;
-        await loadReserveDetails(fetchUrl, reserveId);
+      console.log('fetchReserveDetails triggered');
+      console.log('reserveId:', reserveId);
+      console.log('isPaid:', isPaid);
+
+      if (reserveId && !isPaid) {
+        try {
+          const fetchUrl = GET_RESERVE_DETAILS;
+          console.log('Fetching reserve details from:', fetchUrl, 'with reserveId:', reserveId);
+          await loadReserveDetails(fetchUrl, reserveId);
+        } catch (error) {
+          console.error('Error fetching reserve details:', error.message);
+
+          if (error.message.includes('404')) {
+            console.error('Reserva no encontrada. Es posible que haya sido eliminada o pagada.');
+            setIsPaid(true); // Marcar como pagada
+            clearReserve(); // Limpia la reserva del contexto
+          }
+        }
       }
     };
 
     fetchReserveDetails();
-  }, [reserveId, loadReserveDetails]); 
-
+  }, [reserveId, loadReserveDetails, isPaid, clearReserve]);
 
   useEffect(() => {
-    if (Array.isArray(reserve) && JSON.stringify(reserve) !== JSON.stringify(reserveDetails)) {
+    console.log('Checking if reserve and reserveDetails are different');
+    console.log('Current reserve:', reserve);
+    console.log('Current reserveDetails:', reserveDetails);
+
+    if (Array.isArray(reserve) && reserve.length > 0) {
       setReserveDetails(reserve);
     }
   }, [reserve, reserveDetails]);
 
+  useEffect(() => {
+    console.log('reserveId changed:', reserveId);
+    if (reserveId) {
+      console.log('Resetting isPaid to false');
+      setIsPaid(false);
+    }
+  }, [reserveId]);
 
   return (
     <section className={classes.gamesList}>
-      {Array.isArray(reserveDetails) && reserveDetails.length > 0 ? (
+      {isPaid ? (
+        <p className={classes.emptyMessage}>La reserva ha sido pagada. Gracias por tu compra.</p>
+      ) : Array.isArray(reserveDetails) && reserveDetails.length > 0 ? (
         reserveDetails.map((cartItem) => (
           <div key={cartItem.gameId} className={classes.container}>
             <article className={classes.gameCard}>
@@ -44,8 +71,7 @@ function CheckoutList() {
               <div className={classes.gameCard__right}>
                 <p>{cartItem.title}</p>
                 <p>
-                  Precio total:{' '}
-                  {ConvertToDecimal(cartItem.price)} €
+                  Precio total: {ConvertToDecimal(cartItem.price)} €
                 </p>
                 <p>Cantidad: {cartItem.quantity}</p>
               </div>

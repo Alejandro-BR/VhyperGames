@@ -42,7 +42,7 @@ function ConfirmationMsg() {
 
   useEffect(() => {
     refreshCart();
-  }, [refreshCart]);
+  }, []);
 
 
   useEffect(() => {

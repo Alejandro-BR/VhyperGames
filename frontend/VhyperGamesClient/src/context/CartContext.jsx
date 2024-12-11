@@ -38,7 +38,7 @@ const CartProvider = ({ children }) => {
         const storedCart = getVarLS("cart");
         if (token && userId) {
             try {
-                if (!storedCart || storedCart.items.length === 0) {
+                if (!storedCart || storedCart.items.length > 0) {
                     await getCartFromDB();
                 }
             } catch (error) {
@@ -50,7 +50,7 @@ const CartProvider = ({ children }) => {
 }, [token, userId]);
 
   useEffect(()=> {
-    refreshCart();
+   // refreshCart();
   },[token]);
 
   const refreshCart = async () => {
