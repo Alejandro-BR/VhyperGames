@@ -12,7 +12,6 @@ public class MybackgroundService : BackgroundService
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
-        Console.WriteLine("Ejecuta Escaneo cada 30 segundos");
 
         while (!stoppingToken.IsCancellationRequested)
         {
@@ -49,9 +48,7 @@ public class MybackgroundService : BackgroundService
                     unitOfWork.GameRepository.Update(game);
                 }
             }
-
             unitOfWork.ReserveRepository.Delete(reserve);
-            Console.WriteLine($"Reserva eliminada: {reserve.Id}");
         }
         await unitOfWork.SaveAsync();
     }

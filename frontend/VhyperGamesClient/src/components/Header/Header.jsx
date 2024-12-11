@@ -230,7 +230,6 @@ function Header() {
         </div>
       </div>
 
-      {/* Renderizar el LoginModal si mostrarLogin es true */}
       {mostrarLogin && (
         <LoginModal
           onClose={() => setMostrarLogin(false)}

@@ -1,15 +1,15 @@
 .productsList {
     width: 90vw;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(40rem, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(42rem, 1fr));
     justify-items: center;
-    grid-row-gap: 3.2rem;
-    grid-column-gap: 3.2rem;
+    grid-row-gap: 32px;
+    grid-column-gap: 32px;
     margin:0 0 5vh 5vw ;
 }
 
-@media (max-width:90rem) {
+@media(max-width:450px) {
     .productsList {
-        grid-template-columns: repeat(auto-fill, minmax(30rem, 1fr));
+        margin:0 0 5vh -20px ;
     }
 }

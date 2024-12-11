@@ -7,7 +7,7 @@ import { ConvertToDecimal } from '../../../utils/price';
 import QuantityButton from "../../Buttons/QuantityButton";
 
 const ProductCard = ({ id }) => {
-  const { items = [], handleQuantityChange } = useContext(CartContext); // Importar el contexto del carrito
+  const { items = [], handleQuantityChange } = useContext(CartContext); 
   const [productPriceData, setProductPriceData] = useState({
     price: 0,
     avgRating: 0,
@@ -16,7 +16,7 @@ const ProductCard = ({ id }) => {
   });
   const [error, setError] = useState(null);
 
-  // Cargar los datos del producto desde el servidor
+ 
   useEffect(() => {
     if (!id) {
       setError("ID no válido");
@@ -31,8 +31,6 @@ const ProductCard = ({ id }) => {
           throw new Error("Error al obtener los datos del producto");
         }
         const data = await response.json();
-
-        // Obtener la cantidad del producto desde el carrito
         const productInCart = items.find((item) => item.gameId === Number(id)) || {};
         setProductPriceData({
           price: data.price,
