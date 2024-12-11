@@ -1,5 +1,5 @@
 import { createContext, useState, useContext, useEffect, useRef } from 'react';
-import { updateLocalStorage, deleteSessionStorage, deleteLocalStorage, getVarLS } from "../utils/keep.js";
+import { getVarLS, updateLocalStorage, deleteLocalStorage } from "../utils/keep.js";
 import { jwtDecode } from 'jwt-decode'; 
 
 
@@ -74,7 +74,7 @@ export const AuthProvider = ({ children }) => {
     // Función para eliminar el token
     const logout = () => {
         stopInactivityTimer()
-        deleteSessionStorage('accessToken');
+        deleteLocalStorage('accessToken');
         deleteLocalStorage('reserve');
         setToken(null);
         setDecodedToken(null);
