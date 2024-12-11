@@ -69,7 +69,7 @@ function CartPayment() {
           await new Promise(resolve => setTimeout(resolve, 500)); // Pequeño retardo
 
             // Recuperar el token directamente de localStorage
-            const storedToken = sessionStorage.getItem("accessToken");
+            const storedToken = localStorage.getItem("accessToken");
 
             if (!storedToken) {
                 console.error("Token aún no está disponible. Abortando reserva.");
