@@ -50,8 +50,8 @@ const CartProvider = ({ children }) => {
 }, [token, userId]);
 
   useEffect(()=> {
-   // refreshCart();
-  },[token]);
+   refreshCart();
+  },[]);
 
   const refreshCart = async () => {
     if (token) {
