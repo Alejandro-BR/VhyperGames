@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react"; // Solo importa una vez los hooks necesarios
+import { useState, useEffect, useContext, useRef } from "react"; // Solo importa una vez los hooks necesarios
 import Button from "../../Buttons/Button";
 import BlockImages from "./BlockImages";
 import { ImageContext } from "../../../context/ImageContext";
@@ -14,6 +14,21 @@ function ImagesManager({ gameId }) {
   const [updatePromise, setUpdatePromise] = useState(null);
   const [updateCounter, setUpdateCounter] = useState(0);
   const [msgColor, setMsgColor] = useState("");
+  const [showMsg, setShowMsg] = useState(false);
+  const timerRef = useRef(null);
+
+  // Mostrar el mensaje
+  useEffect(() => {
+    if (updatePromise) {
+      setShowMsg(true);
+      if (timerRef.current) {
+        clearTimeout(timerRef.current);
+      }
+      timerRef.current = setTimeout(() => {
+        setShowMsg(false);
+      }, 2500);
+    }
+  }, [updatePromise]);
 
   useEffect(() => {
     fetchImages(gameId);
@@ -65,7 +80,7 @@ function ImagesManager({ gameId }) {
       ) : (
         <p>Cargando imagen...</p>
       )}
-      {updatePromise && (
+      {updatePromise && showMsg && (
         <div className={msgColor === "Success" ? classes.updateMsgSuccess : classes.updateMsgError}>
           {updatePromise}
         </div>

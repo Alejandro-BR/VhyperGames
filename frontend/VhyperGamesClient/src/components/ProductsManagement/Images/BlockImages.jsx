@@ -1,6 +1,6 @@
 import Button from "../../Buttons/Button";
 import classes from "./BlockImages.module.css";
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext, useEffect, useRef } from "react";
 import { BASE_URL } from "../../../config";
 import { ImageContext } from "../../../context/ImageContext";
 import { AdminContext } from "../../../context/AdminContext";
@@ -11,6 +11,8 @@ function BlockImages({ gameId, images }) {
   const [updatePromise, setUpdatePromise] = useState(null);
   const [updateCounter, setUpdateCounter] = useState(0);
   const [msgColor, setMsgColor] = useState("");
+  const [showMsg, setShowMsg] = useState(false);
+  const timerRef = useRef(null);
 
   const { createImage, deleteImage, fetchImages } =
     useContext(ImageContext);
@@ -19,6 +21,20 @@ function BlockImages({ gameId, images }) {
   useEffect(() => {
     fetchImages(gameId);
   }, [gameId, updateCounter]);
+
+  // Mostrar el mensaje
+  useEffect(() => {
+    if (updatePromise) {
+      setShowMsg(true);
+      if (timerRef.current) {
+        clearTimeout(timerRef.current);
+      }
+      timerRef.current = setTimeout(() => {
+        setShowMsg(false);
+      }, 2500);
+    }
+  }, [updatePromise]);
+
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
@@ -80,7 +96,7 @@ function BlockImages({ gameId, images }) {
         Añadir imagen
       </Button>
 
-      {updatePromise && (
+      {updatePromise && showMsg && (
         <div className={msgColor === "Success" ? classes.updateMsgSuccess : classes.updateMsgError}>
           {updatePromise}
         </div>
