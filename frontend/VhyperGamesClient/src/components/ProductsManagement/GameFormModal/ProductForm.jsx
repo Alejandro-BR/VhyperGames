@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, useRef } from "react";
 import classes from "./ProductForm.module.css";
 import Button from "../../Buttons/Button";
 import { AdminContext } from "../../../context/AdminContext";
@@ -24,6 +24,21 @@ function ProductForm({ gameId }) {
   const [dataLoaded, setDataLoaded] = useState(false);
   const [updatePromise, setUpdatePromise] = useState(null);
   const [msgColor, setMsgColor] = useState("");
+  const [showMsg, setShowMsg] = useState(false);
+  const timerRef = useRef(null);
+
+  // Mostrar el mensaje
+  useEffect(() => {
+    if (updatePromise) {
+      setShowMsg(true);
+      if (timerRef.current) {
+        clearTimeout(timerRef.current);
+      }
+      timerRef.current = setTimeout(() => {
+        setShowMsg(false);
+      }, 2500);
+    }
+  }, [updatePromise]);
 
   useEffect(() => {
     if (gameId && !dataLoaded) {
@@ -170,10 +185,11 @@ function ProductForm({ gameId }) {
         </div>
       </section>
 
+
       <Button variant={"large"} color={"morado-azul"} type="submit">
         Actualizar
       </Button>
-      {updatePromise && (
+      {updatePromise && showMsg && (
         <div className={msgColor === "Success" ? classes.updateMsgSuccess : classes.updateMsgError}>
           {updatePromise}
         </div>

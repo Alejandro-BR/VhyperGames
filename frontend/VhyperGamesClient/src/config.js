@@ -45,7 +45,6 @@ export const UPDATE_USER =  `${API_BASE_URL}User/update-user`;
 export const UPDATE_PASSWORD = `${API_BASE_URL}User/update-password`
 
 /* ETHEREUM */
-export const BLOCKCHAIN = `${API_BASE_URL}Blockchain`;
 export const BLOCKCHAIN_TRANSACTION = `${API_BASE_URL}Blockchain/transaction`;
 export const BLOCKCHAIN_CHECK = `${API_BASE_URL}Blockchain/check`;
 
@@ -63,7 +62,6 @@ export const GET_SEARCH_GAMES_ADMIN = `${API_BASE_URL}AdminGame/search`;
 export const GET_FORM_GAME = `${API_BASE_URL}AdminGame/get-form`;
 
 /* ENDPOINTS DE IMÁGENES */
-export const GET_IMAGES = `${API_BASE_URL}Images`;
 export const GET_IMAGES_BY_GAME = `${API_BASE_URL}Images/images-byGame`
 export const UPDATE_IMAGE = `${API_BASE_URL}Images/updateImage`
 export const NEW_IMAGE = `${API_BASE_URL}Images`

@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 
 function ConfirmationMsg() {
   const { token } = useAuth();
-  const { orderId, clearOrderId } = useContext(CheckoutContext);
+  const { orderId } = useContext(CheckoutContext);
   const [status, setStatus] = useState("");
   const [orderData, setOrderData] = useState(null);
   const [error, setError] = useState(null);
@@ -32,7 +32,7 @@ function ConfirmationMsg() {
       } catch (err) {
         console.error("Error al obtener los datos del pedido:", err.message);
         setStatus("failure");
-        clearOrderId();
+        // clear();
         setError(err.message);
       }
     };
@@ -49,20 +49,19 @@ function ConfirmationMsg() {
     if (status === "failure") {
       const timer = setTimeout(() => {
         navigate("/");
-        clearOrderId();
+        // clear();
       }, 1500);
 
       return () => clearTimeout(timer);
     }
   }, [status]);
 
-  useEffect(() => {
-    return () => {
-      clearOrderId();
-    };
-  }, [clearOrderId]);
+  // useEffect(() => {
+  //   return () => {
+  //     clear();
+  //   };
+  // }, [clear]);
 
-  // Render content based on status
   if (status === "success" && orderData) {
     return (
       <div className={classes.msg}>

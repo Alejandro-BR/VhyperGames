@@ -30,7 +30,7 @@
   font-style: normal;
 }
 
-/* ROOT */
+/* ROOT2 */
 
 :root {
   --header-footer-color: #131A26;
@@ -43,6 +43,7 @@
   --gradient-purple: linear-gradient(90deg, #a440d2, #39164A);
   --gradient-purple-blue: linear-gradient(90deg, #a440d2, #5c74E1);
   --gradient-blue-purple: linear-gradient(90deg, #5c74E1, #a440d2);
+  --gradient-green: linear-gradient(90deg, #13C345, #084d1b);
 
   --led-purple: #a440d2a5;
 

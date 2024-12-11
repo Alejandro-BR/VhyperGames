@@ -10,7 +10,6 @@
 }
 
 .gameItem {
-  background-color: var(--header-footer-color);
   display: flex;
   align-items: center;
   gap: 10px;

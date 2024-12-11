@@ -1,7 +1,6 @@
-// src/context/AuthContext.js
 import { createContext, useState, useContext, useEffect, useRef } from 'react';
 import { getVarSessionStorage, updateSessionStorage, deleteSessionStorage, deleteLocalStorage } from "../utils/keep.js";
-import { jwtDecode } from 'jwt-decode'; // Importación corregida
+import { jwtDecode } from 'jwt-decode'; 
 
 
 // Crear el contexto de autenticación

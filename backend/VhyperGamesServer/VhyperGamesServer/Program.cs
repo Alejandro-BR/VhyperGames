@@ -164,13 +164,17 @@ public class Program
         // Creación de la base de datos y el Seeder
         SeedDatabase(app.Services);
 
+        
+
         // Middleware de desarrollo (Swagger y CORS)
         if (app.Environment.IsDevelopment())
         {
             app.UseSwagger();
             app.UseSwaggerUI();
-            app.UseCors();
+            
         }
+
+        app.UseCors();
 
         // Redirigir HTTP a HTTPS
         app.UseHttpsRedirection();

@@ -1,7 +1,7 @@
 import Footer from "../components/Footer/Footer";
 import { useParams} from "react-router-dom";
 import CheckoutForm from "../components/Stripe/StripeForm";
-import classes from "../styles/checkout.module.css"
+import classes from "../styles/Checkout.module.css"
 import CheckoutList from "../components/Checkout/CheckoutList";
 import Timer from "../components/Timers/Timer";
 import Ethereum from "../components/Ethereum/Ethereum";

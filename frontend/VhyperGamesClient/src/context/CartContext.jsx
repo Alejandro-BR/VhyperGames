@@ -25,7 +25,6 @@ const CartProvider = ({ children }) => {
   useEffect(() => {
     const performMerge = async () => {
       if (isLoggedIn && token && userId) {
-        console.log("Usuario logueado. Ejecutando mergeCartWithDB...");
         await mergeCartWithDB();
       }
     };
@@ -116,10 +115,8 @@ const CartProvider = ({ children }) => {
   // ENDPOINT - PUT_MERGE - Sincronizar carrito local con la base de datos
   const mergeCartWithDB = async () => {
     if (token && userId) {
-      console.log("Inicio de mergeCartWithDB");
   
       const cartCopy = { ...cart };
-      console.log("Cart actual desde el estado:", cartCopy);
   
       // Guardamos una copia en localStorage para depurar
       updateLocalStorage(cartCopy, "reserve");
@@ -129,7 +126,6 @@ const CartProvider = ({ children }) => {
         gameId: item.gameId,
         quantity: item.quantity || 0,
       }));
-      console.log("Elementos del carrito local que se enviarán al backend:", localItems);
   
       try {
         const response = await fetch(PUT_MERGE, {
@@ -141,8 +137,6 @@ const CartProvider = ({ children }) => {
           body: JSON.stringify(localItems),
         });
   
-        console.log("Respuesta del servidor al merge:", response);
-  
         if (!response.ok) {
           const errorText = await response.text();
           console.error("Error al hacer merge del carrito. Respuesta del servidor:", errorText);
@@ -151,14 +145,12 @@ const CartProvider = ({ children }) => {
   
         // Procesar el carrito combinado que devuelve el backend
         const mergedCart = await response.json();
-        console.log("Carrito combinado devuelto por el backend:", mergedCart);
   
         // Formatear los datos recibidos para actualizar el estado
         const formattedItems = mergedCart.map((item) => ({
           gameId: item.gameId,
           quantity: item.quantity,
         }));
-        console.log("Carrito formateado para el estado:", formattedItems);
   
         // Actualizar el estado del carrito y el localStorage
         setCart({ items: formattedItems });

@@ -55,9 +55,6 @@ public class DetailsViewService
 
         data.Quantity = quantity;
 
-        // Llamara al carrito para guardar la cantidad
-        // Esto hay que mirarlo.
-
         return data;
 
     }
@@ -122,7 +119,6 @@ public class DetailsViewService
 
         bool respuesta = await _unitOfWork.SaveAsync();
 
-        //Recalcular el rating medio cuando se añade una review nueva
         await UpdateGameAverageRating(game.Id);
 
         return _viewDetailsMapper.ReviewToDto(savedReview);

@@ -1,8 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using VhyperGamesServer.Models.Database.Entities;
 using VhyperGamesServer.Models.Dtos;
 using VhyperGamesServer.Services;
 
@@ -37,29 +34,6 @@ namespace VhyperGamesServer.Controllers
             catch (Exception ex)
             {
                 return StatusCode(500, new { message = "Ocurrió un error inesperado.", detail = ex.Message });
-            }
-        }
-
-        [HttpGet("most-recent-order")]
-        [Authorize]
-        public async Task<IActionResult> GetRecentOrderByUserId()
-        {
-            try
-            {
-                int userId = GetUserId();
-
-                // Llamar al servicio para obtener la orden más reciente
-                OrderDto orderDto = await _orderService.GetRecentOrderByUserIdAsync(userId);
-
-                return Ok(orderDto);
-            }
-            catch (KeyNotFoundException ex)
-            {
-                return NotFound(new { message = ex.Message });
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, new { message = "Error inesperado.", detail = ex.Message });
             }
         }
 

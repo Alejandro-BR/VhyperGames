@@ -18,20 +18,6 @@ public class ImagesController : ControllerBase
         _service = service;
     }
 
-    [HttpGet]
-    public async Task<List<ImageGame>> GetAllAsync()
-    {
-        List<ImageGame> images = await _service.GetAllAsync();
-
-        return images;
-    }
-
-    [HttpGet("{id}")]
-    public async Task<ImageGame> GetAsync(int id)
-    {
-        return await _service.GetAsync(id);
-    }
-
     [HttpPost]
     public async Task<ActionResult<ImageGame>> InsertAsync(ImageRequestDto createImage, int gameId)
     {

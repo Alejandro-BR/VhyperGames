@@ -53,37 +53,37 @@ function GameRequeriments({ id }) {
 
   return (
     <>
-      <table>
+      <table className={classes.tableInfo}>
         <thead>
           <tr>
-            <th>Requisitos mínimos:</th>
-            <th>Requisitos recomendados:</th>
+            <th className={classes.ths}>Requisitos mínimos:</th>
+            <th className={classes.ths} >Requisitos recomendados:</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td>CPU: {requeriments.minCPU}</td>
-            <td>CPU: {requeriments.cpu}</td>
+            <td className={classes.tds}>CPU: {requeriments.minCPU}</td>
+            <td className={classes.tds}>CPU: {requeriments.cpu}</td>
           </tr>
           <tr>
-            <td>GPU: {requeriments.minGPU}</td>
-            <td>GPU: {requeriments.gpu}</td>
+            <td className={classes.tds}>GPU: {requeriments.minGPU}</td>
+            <td className={classes.tds}>GPU: {requeriments.gpu}</td>
           </tr>
           <tr>
-            <td>Sistema operativo: {requeriments.minOS}</td>
-            <td>Sistema operativo: {requeriments.os}</td>
+            <td className={classes.tds}>Sistema operativo: {requeriments.minOS}</td>
+            <td className={classes.tds}>Sistema operativo: {requeriments.os}</td>
           </tr>
           <tr>
-            <td>RAM: {requeriments.minRAM}</td>
-            <td>RAM: {requeriments.ram}</td>
+            <td className={classes.tds}>RAM: {requeriments.minRAM}</td>
+            <td className={classes.tds}>RAM: {requeriments.ram}</td>
           </tr>
           <tr>
-            <td>DirectX: {requeriments.directX}</td>
-            <td>DirectX: {requeriments.directX}</td>
+            <td className={classes.tds}>DirectX: {requeriments.directX}</td>
+            <td className={classes.tds}>DirectX: {requeriments.directX}</td>
           </tr>
           <tr>
-            <td>Almacenamiento: {requeriments.storage}</td>
-            <td>Almacenamiento: {requeriments.storage}</td>
+            <td className={classes.tds}>Almacenamiento: {requeriments.storage}</td>
+            <td className={classes.tds}>Almacenamiento: {requeriments.storage}</td>
           </tr>
         </tbody>
       </table>

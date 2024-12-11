@@ -66,8 +66,6 @@ export const updateImages = async (url, gameId, altText, imageId, data, token) =
 
   formData.append("altText", altText);
 
-  console.log("FormData antes de enviar:", Array.from(formData.entries()));
-
   const response = await fetch(fullUrl, {
     method: 'PUT',
     headers: {
@@ -103,7 +101,6 @@ export const deleteImages = async (url, imageId, token) => {
   });
 
   if (response.status === 204) {
-    console.log("Imagen eliminada");
   } else if (response.status === 404) {
     const error = await response.json();
     console.error('Error:', error.Message);

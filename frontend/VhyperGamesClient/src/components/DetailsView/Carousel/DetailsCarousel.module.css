@@ -13,14 +13,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 100%; 
-    height: 100%; 
+    width: 100%;
+    height: 50rem; /*No se puede usar %, eso provoca que se mueva todo*/
     position: relative;
 }
 
 .carousel .img {
-    width: 100%;
     height: 100%;
+    width: 100%;
     position: relative;
     overflow: hidden; 
 }
@@ -28,8 +28,9 @@
 .carousel .img img {
     width: 100%;
     height: 100%;
-    object-fit: cover; 
+    object-fit: contain; /*SI PONES COVER CUBREN EL DIV ENTERO, PERO LA RESOLUCIÓN SE VA AL CARAJO. TAMPOCO SE VE LA IMAGEN ENTERA, NO ME GUSTA COMO QUEDA, SOBRE TODO AL PONER LA PANTALLA MÁS PEQUEÑA*/
     display: block;
+    background-color: var(--header-footer-color); /*SE PUEDE QUITAR. LAS IMAGENES CAMBIARÁN DE ALTURA PERO NO DEBERÍA DE AFECTAR AL RESTO DE ELEMENTOS*/
 }
 
 .arrow {
@@ -53,7 +54,7 @@
     transform: rotate(180deg);
 }
 
-@media (max-width:800px){
+@media (max-width:1080px) {
     .container {
         width: 100%;
     }
