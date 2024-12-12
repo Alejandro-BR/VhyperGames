@@ -1,8 +1,8 @@
 # VhyperGames Backend
 
-Proyecto de creación de E-Commerce de una tienda de videojuegos.
+Esta desarrolado en C#, en produccion utiliza una base de datos MySQL y en desarrolo utiliza una SQLite. Todo el backend esta desplegado en MonsterASP ademas de la base de datos.
 
-[Backend](https://vhypergames.runasp.net/api/)
+Este es el enlace al [Backend](https://vhypergames.runasp.net/api/) desplegado.
 
 ## Tecnología:
 
