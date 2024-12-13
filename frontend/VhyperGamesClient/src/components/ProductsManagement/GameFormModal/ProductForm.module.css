@@ -64,8 +64,13 @@
     min-width: fit-content;
 }
 
+.priceStock{
+display: flex;
+gap: 4rem;
+}
 .productForm .numInput {
-    width: 6rem;
+    width: 12rem;
+   
 }
 
 .updateMsgSuccess {
@@ -83,5 +88,11 @@
     .productForm textarea,
     .productForm select {
         width: 80vw;
+    }
+
+    .priceStock{
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2rem;
     }
 }

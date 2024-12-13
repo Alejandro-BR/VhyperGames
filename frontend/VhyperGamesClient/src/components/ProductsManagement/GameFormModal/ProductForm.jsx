@@ -67,20 +67,20 @@ function ProductForm({ gameId }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     // Validaciones
     if (formData.price <= 0) {
       setUpdatePromise("El precio debe ser mayor a 0 (en céntimos).");
       setMsgColor("Error");
       return;
     }
-  
+
     if (formData.stock < 0) {
       setUpdatePromise("El stock no puede ser menor a 0.");
       setMsgColor("Error");
       return;
     }
-  
+
     try {
       await updateGameById(formData);
       setUpdatePromise("Juego actualizado con éxito");
@@ -161,6 +161,8 @@ function ProductForm({ gameId }) {
       </div>
 
       <section className={classes.horizontalFormGroup}>
+        
+        <div className={classes.priceStock}>
         <div className={classes.formGroup}>
           <label htmlFor="releaseDate">Fecha de Lanzamiento:</label>
           <input
@@ -172,31 +174,33 @@ function ProductForm({ gameId }) {
           />
         </div>
 
-        <div className={classes.formGroup}>
-          <label htmlFor="price">Precio:</label>
-          <input
-            type="number"
-            id="price"
-            min="0"
-            placeholder="Precio"
-            value={formData.price}
-            className={classes.numInput}
-            onChange={handleChange}
-          />
+          <div className={classes.formGroup}>
+            <label htmlFor="price">Precio (Céntimos):</label>
+            <input
+              type="number"
+              id="price"
+              min="0"
+              placeholder="Precio"
+              value={formData.price}
+              className={classes.numInput}
+              onChange={handleChange}
+            />
+          </div>
+
+          <div className={classes.formGroup}>
+            <label htmlFor="stock">Stock:</label>
+            <input
+              type="number"
+              id="stock"
+              min="0"
+              placeholder="Stock"
+              value={formData.stock}
+              className={classes.numInput}
+              onChange={handleChange}
+            />
+          </div>
         </div>
 
-        <div className={classes.formGroup}>
-          <label htmlFor="stock">Stock:</label>
-          <input
-            type="number"
-            id="stock"
-            min="0"
-            placeholder="Stock"
-            value={formData.stock}
-            className={classes.numInput}
-            onChange={handleChange}
-          />
-        </div>
       </section>
 
 

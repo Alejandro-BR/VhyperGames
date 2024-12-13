@@ -145,7 +145,7 @@ function GameFormModal({ modalPurpose, initialData, onSubmit, onClose }) {
           </div>
 
           <div className={classes.formGroup}>
-            <label htmlFor="price">Precio:</label>
+            <label htmlFor="price">Precio (Céntimos): </label>
             <input type="number" id="price" placeholder="Precio" value={formData.price} onChange={handleChange} required min="1"/>
           </div>
 
