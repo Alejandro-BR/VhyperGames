@@ -1,8 +1,16 @@
 # VhyperGames Backend
 
-Esta desarrolado en C#, en produccion utiliza una base de datos MySQL y en desarrolo utiliza una SQLite. Todo el backend esta desplegado en MonsterASP ademas de la base de datos.
+El backend está desarrollado en **C#** utilizando el framework **.NET**. Para el manejo de datos, se utilizan diferentes motores de bases de datos según el entorno:
 
-Este es el enlace al [Backend](https://vhypergames.runasp.net/api/) desplegado.
+- En producción, se utiliza **MySQL**, lo que asegura un rendimiento óptimo para grandes volúmenes de datos.
+- En desarrollo, se emplea **SQLite**, una solución ligera y fácil de configurar para pruebas locales.
+
+## Infraestructura de Despliegue
+
+El backend, junto con la base de datos de producción, está desplegado en MonsterASP.
+
+Enlace al Backend en Producción
+Puedes acceder al backend desplegado a través del siguiente enlace: [Bakend](https://vhypergames.runasp.net/api/)
 
 ## Tecnología:
 

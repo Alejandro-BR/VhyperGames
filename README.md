@@ -51,6 +51,18 @@ Este conjunto de herramientas asegura una plataforma robusta y dinámica, adapta
 
 <br>
 
+![Admin Users](doc/img/Users-management.png)
+
+<br>
+
+![Admin Games](doc/img/Products-management.png)
+
+<br>
+
+![Admin Games](doc/img/Editar-productos.png)
+
+<br>
+
 ## Tecnologías
 
 <br>
@@ -142,7 +154,7 @@ Actualmente, está en modo de prueba, por lo que para realizar pagos se deben us
 
 ![Ethereum](https://img.shields.io/badge/Ethereum-3C3C3D?logo=ethereum&logoColor=fff&style=for-the-badge)
 
-Para realizar los pagos con Ethereum utilizamos la extensión de MetaMask y la red de prueba de[Ephemery](https://ephemery.dev/).
+Para realizar los pagos con Ethereum utilizamos la extensión de MetaMask y la red de prueba de [Ephemery](https://ephemery.dev/).
 
 <br>
 

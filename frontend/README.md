@@ -1,8 +1,6 @@
 # VhyperGames Frontend
 
-Esta desarrolado en React. La pagina entera es totalmente resposiva.
-
-El frontend esta desplegado en Vercel.
+El frontend del proyecto está desarrollado en **React**, ofreciendo una experiencia completamente responsiva que se adapta perfectamente a cualquier dispositivo. La aplicación está desplegada en **Vercel**, garantizando velocidad y disponibilidad.
 
 <br>
 
