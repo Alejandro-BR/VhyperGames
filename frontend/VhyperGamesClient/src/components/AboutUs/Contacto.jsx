@@ -36,13 +36,12 @@ function Contacto() {
           <h3>¿Quiénes somos?</h3>
         </div>
         <div className={classes.location}>
-          <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d25582.218531475766!2d-4.55213745!3d36.727909!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd72f02ca2c5b6a9%3A0x50f43244f6e8bb5!2sCESUR%20M%C3%A1laga%20PTA%20Formaci%C3%B3n%20Profesional!5e0!3m2!1ses!2ses!4v1730742795149!5m2!1ses!2ses"
-            width="600"
-            height="450"
-            style={{ border: 0 }}
-            allowFullScreen=""
-            loading="lazy">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3197.250350392296!2d-4.557037723622077!3d36.74056147105814!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd72f10963ce0f3d%3A0x310ae7d4bb2e8f7b!2sCPIFP%20Alan%20Turing!5e0!3m2!1ses!2ses!4v1734105991655!5m2!1ses!2ses" 
+          width="600" 
+          height="450" 
+          style={{ border: 0 }}
+          allowFullScreen=""
+          loading="lazy">
           </iframe>
         </div>
       </div>
