@@ -18,8 +18,9 @@
   border-image: var(--gradient-purple-blue) 1;
 }
 
-paginationButton:disabled {
+.paginationButton:disabled {
   cursor: not-allowed;
+  pointer-events: none;
 }
 
 .pageNumber {
