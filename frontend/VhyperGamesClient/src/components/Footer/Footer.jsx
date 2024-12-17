@@ -38,7 +38,7 @@ function Footer() {
 
 
 
-          <a href="https://github.com/VhyperGames" target="_blank" rel="noopener noreferrer">
+          <a href="https://github.com/VhyperGames/VhyperGames" target="_blank" rel="noopener noreferrer">
             <Button variant="large" color="azul">
               <span className={classes.logoGit}>< img src="/icon/cib_github.svg" alt="GitHub" /></span>‎ ‎ ‎ GitHub
             </Button>
