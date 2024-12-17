@@ -34,29 +34,29 @@ function Carousel() {
         arrows={false}
       > 
         <Link to={`/sobre-nosotros`}>
-          <img className={classes.bannerImg} src="/img/marca2.png" alt="Marca 2" />
+          <img className={classes.bannerImg} src="/img/marca2.webp" alt="Marca 2" />
         </Link>
         <Link to={`/juego/32`} >
           <img
             className={classes.bannerImg}
-            src="/img/dragon-ball.png"
+            src="/img/dragon-ball.webp"
             alt="Dragon Ball"
           />
         </Link>
         <Link to={`/juego/31`}>
-          <img className={classes.bannerImg} src="/img/gow.png" alt="GOW" />
+          <img className={classes.bannerImg} src="/img/gow.webp" alt="GOW" />
         </Link>
         <Link to={`/juego/30`}>
           <img
             className={classes.bannerImg}
-            src="/img/minecraft.png"
+            src="/img/minecraft.webp"
             alt="Minecraft"
           />
         </Link>
         <Link to={`/juego/1`}>
           <img
             className={classes.bannerImg}
-            src="/img/witcher3.png"
+            src="/img/witcher3.webp"
             alt="Witcher 3"
           />
         </Link>
