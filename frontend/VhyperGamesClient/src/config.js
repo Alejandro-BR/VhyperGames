@@ -64,7 +64,6 @@ export const GET_FORM_GAME = `${API_BASE_URL}AdminGame/get-form`;
 /* ENDPOINTS DE IMÁGENES */
 export const GET_IMAGES_BY_GAME = `${API_BASE_URL}Images/images-byGame`;
 export const UPDATE_IMAGE = `${API_BASE_URL}Images/updateImage`;
-// export const NEW_IMAGE = `${API_BASE_URL}Images`;
 export const DELETE_IMAGE = `${API_BASE_URL}Images/delete`;
 export const NEW_IMAGE = `${API_BASE_URL}Images/newImages`;
 

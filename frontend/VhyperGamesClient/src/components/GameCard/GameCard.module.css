@@ -11,8 +11,6 @@
   font-size: 1rem;
 }
 
-
-
 .container:hover {
   box-shadow: 0px 0px 30px var(--led-purple);
   transform: scale(1.02);
@@ -20,6 +18,10 @@
 }
 
 .gameCardImg {
+  max-width: 200px;
+  max-height: 233px;
+  min-width: 200px;
+  min-height: 233px;
   border-radius: 2px 2px 0 0;
 }
 
@@ -44,7 +46,6 @@
   justify-content: space-between;
   width: auto;
   margin: 0 10px 0 10px;
- 
 }
 
 .rating {

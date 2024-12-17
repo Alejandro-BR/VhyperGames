@@ -24,10 +24,11 @@
   justify-items: start;
 }
 
-
 .listImg {
-  max-width: 130px;
-  max-height: 250px;
+  max-width: 200px;
+  max-height: 233px;
+  min-width: 200px;
+  min-height: 233px;
 }
 
 .line {
