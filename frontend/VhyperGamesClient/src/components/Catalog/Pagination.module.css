@@ -18,6 +18,10 @@
   border-image: var(--gradient-purple-blue) 1;
 }
 
+paginationButton:disabled {
+  cursor: not-allowed;
+}
+
 .pageNumber {
   background-color: var(--body-color); 
   border: 1px solid;
