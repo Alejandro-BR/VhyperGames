@@ -26,6 +26,25 @@ public class ImagesController : ControllerBase
         return Ok(newImage);
     }
 
+    [HttpPost("newImages")]
+    public async Task<ActionResult<List<ImageGame>>> InsertsAsync([FromForm] List<IFormFile> images , int gameId)
+    {
+        if (images == null || images.Count == 0)
+        {
+            return BadRequest("Debe proporcionar al menos una imagen.");
+        }
+
+        try
+        {
+            List<ImageGame> newImages = await _service.InsertsAsync(images, gameId);
+            return Ok(newImages);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, new { message = ex.Message });
+        }
+    }
+
     [HttpPut("updateImage/{id}")]
     public async Task<ActionResult<ImageGame>> UpdateAsync([FromForm] ImageRequestDto updateImage, int imageId)
     {

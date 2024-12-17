@@ -23,28 +23,30 @@ export const getImages = async (url, gameId, token) => {
   }
 };
 
-
-export const newImages = async (url, gameId, altText, data, token) => {
-  const fullUrl = `${url}?AltText=${altText}&gameId=${gameId}`
+export const newImages = async (url, gameId, data, token) => {
+  const fullUrl = `${url}?gameId=${gameId}`;
 
   const formData = new FormData();
-  if (data.image) {
-    formData.append("file", data.image);
+
+  if (data.images && data.images.length > 0) {
+    data.images.forEach((image) => {
+      formData.append("images", image);
+    });
+  } else {
+    throw new Error("Debe proporcionar al menos una imagen.");
   }
 
-  formData.append("altText", altText);
-
   const response = await fetch(fullUrl, {
-    method: 'POST',
+    method: "POST",
     headers: {
       Authorization: `Bearer ${token}`,
     },
-    body: formData
+    body: formData,
   });
 
   if (!response.ok) {
     const error = await response.json().catch(() => ({ message: "Error desconocido" }));
-    throw new Error(error.message || "Error al crear el juego.");
+    throw new Error(error.message || "Error al agregar las imágenes.");
   }
 
   const contentType = response.headers.get("Content-Type");
@@ -55,6 +57,7 @@ export const newImages = async (url, gameId, altText, data, token) => {
 
   return { message: "Operación completada con éxito." };
 };
+
 
 export const updateImages = async (url, gameId, altText, imageId, data, token) => {
   const fullUrl = `${url}/${gameId}?AltText=${altText}&imageId=${imageId}`

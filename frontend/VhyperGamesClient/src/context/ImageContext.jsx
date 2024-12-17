@@ -26,14 +26,15 @@ export const ImageProvider = ({ children }) => {
     }
   };
 
-  const createImage = async (gameId, altText, data) => {
+  const createImage = async (gameId, data) => {
     try {
-      await newImages(NEW_IMAGE, gameId, altText, data, token);
+      await newImages(NEW_IMAGE, gameId, data, token); 
       fetchImages(gameId);
     } catch (error) {
       console.error("Error en newImages:", error);
     }
   };
+  
 
   const updateImage = async (gameId, altText, imageId, data) => {
     try {

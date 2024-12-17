@@ -48,6 +48,24 @@ public class ImageService
         return newImage;
     }
 
+    public async Task<List<ImageGame>> InsertsAsync(List<IFormFile> image, int gameId)
+    {
+        List<ImageGame> imageGames = new List<ImageGame>();
+        Game game = await _unitOfWork.GameRepository.GetByIdAsync(gameId, false, false);
+
+        foreach (IFormFile imageItem in image) {
+
+           ImageGame img = await InsertAsync(new ImageRequestDto() { File = imageItem, AltText = game.Title}, gameId);
+
+            if (img != null)
+            {
+                imageGames.Add(img);
+            }
+        }
+
+        return imageGames;
+    }
+
     public async Task<ImageGame> UpdateFormFileAsync(IFormFile image, string alt, int id)
     {
         ImageGame entity = await _unitOfWork.ImageGameRepository.GetByIdAsync(id);

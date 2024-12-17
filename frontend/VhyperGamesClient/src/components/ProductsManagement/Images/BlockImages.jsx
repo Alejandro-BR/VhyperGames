@@ -7,7 +7,7 @@ import { AdminContext } from "../../../context/AdminContext";
 
 function BlockImages({ gameId, images }) {
 
-  const [selectedFile, setSelectedFile] = useState(null);
+  const [selectedFiles, setSelectedFiles] = useState([]);
   const [updatePromise, setUpdatePromise] = useState(null);
   const [updateCounter, setUpdateCounter] = useState(0);
   const [msgColor, setMsgColor] = useState("");
@@ -36,40 +36,37 @@ function BlockImages({ gameId, images }) {
 
 
   const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    setSelectedFile(file);
+    const files = Array.from(e.target.files);
+    setSelectedFiles(files);
   };
+  
 
   const handleNewImage = async (e) => {
     e.preventDefault();
-
-    if (!selectedFile) {
-      console.error("No se ha seleccionado un archivo.");
-      setUpdatePromise("Por favor, selecciona un archivo.");
+  
+    if (selectedFiles.length === 0) {
+      console.error("No se han seleccionado archivos.");
+      setUpdatePromise("Por favor, selecciona al menos un archivo.");
       return;
     }
-
+  
     try {
-      const game = games.find((game) => game.id === Number(gameId));
-      const gameName = game ? game.title : "Juego desconocido";
-      const newPosition = images.length + 1;
-      const altText = `${gameName} - Imagen ${newPosition}`;
-
-      const data = { image: selectedFile };
-
-      await createImage(Number(gameId), altText, data);
-
+      const data = { images: selectedFiles };
+  
+      await createImage(Number(gameId), data); // Pasa todas las imágenes de una sola vez
+  
       setUpdateCounter((prev) => prev + 1);
-      setUpdatePromise("Nueva imagen agregada con éxito.");
+      setUpdatePromise("Nuevas imágenes agregadas con éxito.");
       setMsgColor("Success");
-      setSelectedFile(null);
+      setSelectedFiles([]);
     } catch (error) {
-      console.error("Error al agregar la nueva imagen:", error);
-      setUpdatePromise("Hubo un error al agregar la nueva imagen.");
+      console.error("Error al agregar las nuevas imágenes:", error);
+      setUpdatePromise("Hubo un error al agregar las nuevas imágenes.");
       setMsgColor("Error");
     }
   };
-
+  
+  
   const handleDeleteImage = async (imageId) => {
     try {
       await deleteImage(imageId, Number(gameId));
@@ -85,7 +82,7 @@ function BlockImages({ gameId, images }) {
     <div className={classes.additionalImgs}>
 
       <p>Imágenes adicionales:</p>
-      <input type="file" onChange={handleFileChange} />
+      <input type="file" onChange={handleFileChange} multiple />
 
       <Button
         variant={"large"}
