@@ -1,6 +1,5 @@
 import classes from './Footer.module.css';
 import Button from '../Buttons/Button';
-import { messageCompany } from '../../helpers/messages';
 import { useNavigate } from "react-router-dom";
 
 function Footer() {
