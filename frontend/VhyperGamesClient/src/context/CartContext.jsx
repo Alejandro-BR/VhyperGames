@@ -1,7 +1,7 @@
 import { createContext, useState, useEffect, useCallback } from "react";
 import { useAuth } from "./AuthContext";
 import { GET_CART, UPDATE_CART, GET_CART_BY_GAMES, PUT_MERGE, DELETE_CART_DETAIL } from "../config";
-import { getVarLS, updateLocalStorage } from "../utils/keep";
+import { getVarLS, getVarSessionStorage, updateLocalStorage } from "../utils/keep";
 
 // Crear el contexto
 const CartContext = createContext({
@@ -62,6 +62,7 @@ const CartProvider = ({ children }) => {
       }
     }
   };
+  
 
   // Guardar carrito en LocalStorage cada vez que cambia
   const updateLocalStorageCart = (cart) => {
@@ -72,6 +73,51 @@ const CartProvider = ({ children }) => {
     }
   };
 
+  useEffect(() => {
+    const clearCartIfSessionTokenMissing = () => {
+      const localToken = getVarLS("accesstoken");
+      const sessionToken = getVarSessionStorage("accesstoken");
+  
+      if (localToken) {
+        return;
+      }
+  
+      if (!sessionToken) {
+        setCart({ items: [] });
+        updateLocalStorageCart({ items: [] });
+      }
+    };
+  
+    const delayCheck = setTimeout(() => {
+      clearCartIfSessionTokenMissing();
+    }, 50);
+  
+    const handleStorageChange = (event) => {
+      if (event.key === "token" && event.storageArea === sessionStorage) {
+        const localToken = getVarLS("accesstoken");
+        const sessionToken = getVarSessionStorage("accesstoken");
+  
+        if (localToken) {
+          return;
+        }
+
+        if (!sessionToken) {
+          setCart({ items: [] });
+          updateLocalStorageCart({ items: [] });
+        }
+      }
+    };
+  
+    window.addEventListener("storage", handleStorageChange);
+  
+    return () => {
+      clearTimeout(delayCheck);
+      window.removeEventListener("storage", handleStorageChange);
+    };
+  }, []);
+  
+  
+  
   // ENDPOINT - GET_CART_BY_GAMES - Sincronizar carrito local con la base de datos
   const fetchCartByGames = useCallback(async (gameIds) => {
     try {

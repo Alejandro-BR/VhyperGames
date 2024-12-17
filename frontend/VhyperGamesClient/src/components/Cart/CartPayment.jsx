@@ -9,6 +9,7 @@ import LoginModal from '../Login/LoginModal';
 import RegisterModal from '../Register/RegisterModal';
 import classes from './CartPayment.module.css';
 import { useAuth } from '../../context/AuthContext';
+import { getVarLS, getVarSessionStorage } from '../../utils/keep'
 
 
 function CartPayment() {
@@ -69,7 +70,7 @@ function CartPayment() {
           await new Promise(resolve => setTimeout(resolve, 500)); // Pequeño retardo
 
             // Recuperar el token directamente de localStorage
-            const storedToken = localStorage.getItem("accessToken");
+            const storedToken = getVarLS("accessToken") || getVarSessionStorage("accessToken");
 
             if (!storedToken) {
                 console.error("Token aún no está disponible. Abortando reserva.");

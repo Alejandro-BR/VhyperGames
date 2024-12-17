@@ -112,7 +112,7 @@
 }
 
 
-@media (max-height: 750px){
+@media (max-height: 500px){
   .loginModule{
     max-width: 90vw;
     position: absolute;
