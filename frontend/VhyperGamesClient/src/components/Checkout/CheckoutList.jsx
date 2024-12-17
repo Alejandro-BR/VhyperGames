@@ -44,6 +44,7 @@ function CheckoutList() {
             <article className={classes.gameCard}>
               <div className={classes.gameCard__left}>
                 <img
+                  className={classes.gameCard__img}
                   src={`${BASE_URL}${cartItem.imageGame.imageUrl}`}
                   alt={cartItem.imageGame.altText || 'Imagen del juego'}
                 />

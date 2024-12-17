@@ -13,7 +13,10 @@
 }
 
 .img {
-    max-width: 75vw;
+    max-width: 200px;
+    max-height: 233px;
+    min-width: 200px;
+    min-height: 233px;
     border-radius: 10px;
 }
 
