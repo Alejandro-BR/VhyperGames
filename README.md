@@ -5,11 +5,13 @@ VhyperGames es un proyecto que trata sobre la creación de un E-Commerce basado 
 
 El proyecto incluye múltiples funcionalidades clave para garantizar una experiencia completa y eficiente:
 
-- **Modos de pago diversos:** Integra pagos tanto en euros como en Ethereum, permitiendo una mayor flexibilidad para los usuarios.
+- **Modos de pago diversos:** Integra pagos tanto en euros usando Stripe como en Ethereum, usando MetaMask en el navegador, permitiendo una mayor flexibilidad para los usuarios.
 
 - **Vista de administrador avanzada:** Ofrece un panel de control completo para la gestión de productos y usuarios.
 
 - **Inteligencia Artificial para análisis de reseñas:** Implementa un sistema de IA capaz de evaluar y clasificar las reseñas de los usuarios, proporcionando valoraciones útiles sobre los juegos y mejorando la experiencia del cliente.
+
+- **Autenticación y autorización con JWT:** Implementa un sistema seguro de inicio de sesión utilizando JSON Web Tokens (JWT). Los tokens permiten la autenticación de usuarios y el acceso controlado a diferentes funcionalidades, asegurando una experiencia fluida y protegida.
 
 Este conjunto de herramientas asegura una plataforma robusta y dinámica, adaptada a las necesidades actuales del mercado.
 
