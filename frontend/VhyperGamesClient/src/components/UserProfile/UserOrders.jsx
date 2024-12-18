@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import { BASE_URL } from "../../config";
 
 function UserOrders() {
-    const token = useAuth(); 
+    const {token} = useAuth(); 
     const [orders, setOrders] = useState([]); 
     const [error, setError] = useState(null); 
     const [loading, setLoading] = useState(true); 
@@ -21,7 +21,7 @@ function UserOrders() {
     useEffect(() => {
         const fetchOrders = async () => {
             try {
-                const data = await getUserOrders(ORDER_BY_USER, token.token);
+                const data = await getUserOrders(ORDER_BY_USER, token);
                 setOrders(data); 
             } catch (err) {
                 setError(err.message); 

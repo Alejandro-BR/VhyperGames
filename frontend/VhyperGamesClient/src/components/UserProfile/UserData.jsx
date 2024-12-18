@@ -15,6 +15,9 @@ function UserData() {
     const [editData, setEditData] = useState(false);
     const [editPassword, setEditPassword] = useState(false);
     useEffect(() => {
+        if (!token) {
+            return; 
+        }
 
         const fetchUsers = async () => {
 
