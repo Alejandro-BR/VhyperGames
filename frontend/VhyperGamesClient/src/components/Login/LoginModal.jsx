@@ -13,6 +13,8 @@ function LoginModal({ onClose, onRegisterClick, onSuccess }) {
     const [promesaError, setPromesaError] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     const [mostrarRegister, setMostrarRegister] = useState(false);
+    const [rememberSession, setRememberSession] = useState(false);
+
 
 
     const handleSubmit = async (event) => {
@@ -44,7 +46,7 @@ function LoginModal({ onClose, onRegisterClick, onSuccess }) {
                 const datosPromesa = await response.json();
                 const token = datosPromesa.accessToken;
                 
-                saveToken(token);
+                saveToken(token, rememberSession);
 
                 if (onSuccess) {
                     onSuccess(); 
@@ -98,6 +100,16 @@ function LoginModal({ onClose, onRegisterClick, onSuccess }) {
                             type="password"
                             required
                         />
+                    </div>
+
+                    <div className={`${classes.rememberMe} ${classes.rememberGroup}`}>
+                        <input 
+                            type="checkbox" 
+                            id="rememberMe" 
+                            checked={rememberSession}
+                            onChange={() => setRememberSession(!rememberSession)}/>
+                        <label htmlFor="rememberMe">Recuérdame</label>
+                        
                     </div>
 
                     {promesaError && <div className={classes.error}>{promesaError}</div>}
