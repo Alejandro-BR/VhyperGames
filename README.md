@@ -190,3 +190,11 @@ Este proyecto fue creado por el grupo formado por:
 Para la realización del proyecto intermodular del segundo año del ciclo formativo de grado superior en Desarrollo de Aplicaciones Web, en el centro C.P.I.F.P. Alan Turing.
 
 Curso 2024/2025
+
+### Licencia
+
+Copyright (2025) Alejandro-BR, Rlopber, Jmolmel, Fernandosanchez1609, pablo-r-d.
+
+**Todos los derechos reservados.** No se concede permiso para usar, copiar, modificar, distribuir o crear obras derivadas de este proyecto sin la autorización previa y por escrito de todos los titulares del copyright.
+
+Para consultas o permisos especiales, contáctanos en: [vhypergames24@gmail.com](mailto:vhypergames24@gmail.com).
