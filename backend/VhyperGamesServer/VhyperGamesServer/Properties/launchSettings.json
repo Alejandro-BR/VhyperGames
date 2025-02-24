@@ -18,7 +18,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development",
         "JWT_KEY": "aB3#fG8@jK2$mN6!pQ4^xY1&cD7*oR9%zW0",
         "STRIPE_KEY": "sk_test_51QOKYuCxS12Ptr4oJREmsyCwwYoynEEPFug0RhDXbcK5ngaOr1lTTrYPCh7gvK50LoatXmwCobBvzlqQEvYnkvXO00KydUgCm6",
-        "EMAIL_KEY": "qqvxwyqwkvwebpqi",
+        "EMAIL_KEY": "cbuidqacfmjkbpkg",
         "SERVER_URL": "https://localhost:7207/",
         "NetworkUrl": "https://otter.bordel.wtf/erigon",
         "METAMASK_WALLET": "0xB57B61DB1E978158A0c18951687318C1CC19fB54",
